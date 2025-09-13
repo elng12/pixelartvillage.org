@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -109,12 +108,12 @@ export default function Home() {
             
             <h3 className="text-xl font-semibold mt-8 mb-4">How to Download Pixel Art Image?</h3>
             <p>
-              To download your pixel art image, simply click the download button after you're satisfied with the result. The image will be saved to your device in PNG format, which preserves the pixel-perfect quality of your artwork.
+              To download your pixel art image, simply click the download button after you&apos;re satisfied with the result. The image will be saved to your device in PNG format, which preserves the pixel-perfect quality of your artwork.
             </p>
             
             <h3 className="text-xl font-semibold mt-8 mb-4">Suggestions and Feedback</h3>
             <p>
-              If you have any suggestions for improving this tool or feedback about your experience, please feel free to contact us. We're always looking to improve and add new features to make pixel art creation easier and more enjoyable.
+              If you have any suggestions for improving this tool or feedback about your experience, please feel free to contact us. We&apos;re always looking to improve and add new features to make pixel art creation easier and more enjoyable.
             </p>
           </div>
         </section>
