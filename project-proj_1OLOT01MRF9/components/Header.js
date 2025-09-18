@@ -14,7 +14,13 @@ function Header() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center space-x-2">
+              <a 
+                href="/examples.html"
+                className="btn-secondary"
+              >
+                Examples
+              </a>
               <a 
                 href="https://discord.gg/v2zgvbcnFs" 
                 target="_blank"

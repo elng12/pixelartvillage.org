@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Art Examples | Pixel Art Village</title>
+  <meta name="description" content="See curated examples of images converted to pixel art. Learn recommended settings for palette size, pixel density, and dithering to achieve crisp retro aesthetics.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://pixelartvillage.org/examples.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pixelartvillage.org/examples.html">
+  <meta property="og:site_name" content="Pixel Art Village">
+  <meta property="og:title" content="Pixel Art Examples">
+  <meta property="og:description" content="Curated before/after demos and recommended settings for high-quality pixel art conversions.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=630&fit=crop&crop=center">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pixel Art Examples">
+  <meta name="twitter:description" content="Curated demos and settings to convert images into crisp pixel art.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=630&fit=crop&crop=center">
+
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+
+  <style type="text/tailwindcss">
+    :root {
+      --primary-color: #3b82f6;
+      --secondary-color: #f8fafc;
+      --accent-color: #10b981;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --border-color: #e5e7eb;
+      --bg-light: #ffffff;
+      --bg-dark: #f9fafb;
+    }
+    @layer base {
+      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--text-primary); }
+    }
+    @layer components {
+      .demo-card { @apply bg-white rounded-lg shadow-sm border border-[var(--border-color)] overflow-hidden; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" src="components/Header.js"></script>
+  <script type="text/babel" src="components/Footer.js"></script>
+
+  <script type="text/babel">
+    function ExamplesSection() {
+      const examples = [
+        {
+          title: "Landscape to Pixel Art",
+          tip: "Palette 16–32, Pixel Size Medium, Floyd–Steinberg dithering",
+          img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&auto=format&fit=crop&q=60"
+        },
+        {
+          title: "Character Sprites",
+          tip: "Palette 8–16, High Pixel Size for bold outlines, No dithering",
+          img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format&fit=crop&q=60"
+        },
+        {
+          title: "Icons & UI",
+          tip: "Palette 4–8, Low Pixel Size, No dithering for sharp UI",
+          img: "https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?w=800&auto=format&fit=crop&q=60"
+        }
+      ];
+      return (
+        <main className="bg-white py-12" data-name="examples-page">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-4xl font-bold mb-4">Pixel Art Examples</h1>
+            <p className="text-[var(--text-secondary)] mb-8">
+              Explore curated before/after scenarios and recommended settings for converting photos and illustrations into crisp pixel art.
+              Adjust palette size, pixel density, and dithering to match your desired retro style. All processing runs locally in your browser.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {examples.map((ex, i) => (
+                <div key={i} className="demo-card">
+                  <img src={ex.img} alt={ex.title} className="w-full h-40 object-cover" />
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold mb-2">{ex.title}</h3>
+                    <p className="text-sm text-[var(--text-secondary)]">Tip: {ex.tip}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-10">
+              <a href="/" className="text-[var(--primary-color)] hover:underline">← Back to Home</a>
+            </div>
+          </div>
+        </main>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(
+      <>
+        {Header()}
+        <ExamplesSection />
+        {Footer()}
+      </>
+    );
+  </script>
+</body>
+</html>

@@ -6,8 +6,12 @@ function HeroSection() {
           <h1 className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] mb-6">
             Image to Pixel Art
           </h1>
-          <p className="text-xl text-[var(--text-secondary)] mb-8">
+          <p className="text-xl text-[var(--text-secondary)] mb-4">
             Easily transform any image into stunning pixel art!
+          </p>
+          <p className="text-base text-[var(--text-secondary)] mb-8">
+            Upload a photo or illustration and fine‑tune palette size, pixel density, and dithering to get crisp retro aesthetics. 
+            Works entirely in your browser, no signup required. Export PNG or sprite sheets for games, social media, or design mockups.
           </p>
           <div className="max-w-2xl mx-auto">
             <img 

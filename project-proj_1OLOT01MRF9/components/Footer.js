@@ -9,6 +9,12 @@ function Footer() {
             </div>
             <div className="flex items-center space-x-4">
               <a 
+                href="/examples.html"
+                className="text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors"
+              >
+                Examples
+              </a>
+              <a 
                 href="/blog/benefit-of-image-to-pixel-art"
                 className="text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors"
               >
