@@ -119,6 +119,13 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
+            <a href="https://turbo0.com/item/pixel-art-village" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
+              <img
+                src="/turbo0-badge.svg"
+                alt="Listed on Turbo0"
+                className="inline-block h-[54px] w-auto object-contain"
+              />
+            </a>
           </div>
         </div>
       </div>
