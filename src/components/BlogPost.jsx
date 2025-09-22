@@ -35,12 +35,12 @@ export default function BlogPost() {
         ]}
       />
 
-      <header className="text-center">
+      <header className="text-center md:text-left">
         <h1 className="text-2xl font-bold text-gray-900 text-center">{post.title}</h1>
-        <p className="text-xs text-gray-500 mt-1">{post.date}</p>
+        <p className="text-xs text-gray-500 mt-1 text-center md:text-left">{post.date}</p>
       </header>
 
-      <div className="prose prose-sm md:prose-base text-gray-800 mt-4 text-center">
+      <div className="prose prose-sm md:prose-base text-gray-800 mt-4 text-center md:text-left prose-pre:text-left prose-code:text-left prose-img:mx-0">
         {post.body.map((para, i) => (
           <p key={i}>{para}</p>
         ))}
