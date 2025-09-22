@@ -92,13 +92,21 @@ function Footer() {
               <Link to="/contact" className="hover:text-white">Contact</Link>
             </div>
           </div>
-          <div className="mt-6 text-center">
+          <div className="mt-6 text-center flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="https://twelve.tools" target="_blank" rel="noopener noreferrer">
               <img
                 src="/twelve-tools-badge.svg"
                 alt="Featured on Twelve Tools"
                 width="200"
                 height="54"
+                className="inline-block"
+              />
+            </a>
+            <a href="https://fazier.com/launches/pixelartvillage.org" target="_blank" rel="noopener noreferrer">
+              <img
+                src="/fazier-badge.svg"
+                alt="Fazier badge"
+                width="250"
                 className="inline-block"
               />
             </a>
