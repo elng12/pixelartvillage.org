@@ -135,6 +135,15 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
+            <a href="https://backlinkdirs.com" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
+              <img
+                src="/ai-dirs-badge.svg"
+                alt="Listed on AI Dirs"
+                width="180"
+                height="54"
+                className="inline-block h-[54px] w-auto object-contain"
+              />
+            </a>
           </div>
         </div>
       </div>
