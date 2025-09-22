@@ -79,7 +79,7 @@ export default function WplaceFeaturesSection() {
             </CircleIcon>
             <h3 className="mt-4 text-lg font-semibold text-gray-900">100% Free</h3>
             <p className="mt-2 text-gray-600 leading-relaxed">
-              Completely free for all Pixel Art Village users. No hidden costs or subscriptions — create unlimited pixel art.
+              Completely free for everyone. No hidden costs or subscriptions — create unlimited pixel art.
             </p>
           </div>
 
@@ -89,7 +89,7 @@ export default function WplaceFeaturesSection() {
             </CircleIcon>
             <h3 className="mt-4 text-lg font-semibold text-gray-900">Privacy First</h3>
             <p className="mt-2 text-gray-600 leading-relaxed">
-              All processing happens in your browser. Your images never leave your device — perfect for Pixel Art Village users who value privacy.
+              All processing happens in your browser. Your images never leave your device — a private, secure workflow by design.
             </p>
           </div>
 
@@ -99,7 +99,7 @@ export default function WplaceFeaturesSection() {
             </CircleIcon>
             <h3 className="mt-4 text-lg font-semibold text-gray-900">Easy for All Players</h3>
             <p className="mt-2 text-gray-600 leading-relaxed">
-              Intuitive interface tuned for Pixel Art Village workflows. Convert any image to paintable pixel art in just a few clicks.
+              Intuitive interface and fast feedback. Convert any image to paintable pixel art in just a few clicks.
             </p>
           </div>
 
@@ -109,7 +109,7 @@ export default function WplaceFeaturesSection() {
             </CircleIcon>
             <h3 className="mt-4 text-lg font-semibold text-gray-900">No Size Limits</h3>
             <p className="mt-2 text-gray-600 leading-relaxed">
-              Upload images of any size — from tiny icons to large artwork. Pixel Art Village handles scaling smoothly.
+              Upload images of any size — from tiny icons to large artwork — with smooth scaling and responsive previews.
             </p>
           </div>
         </div>

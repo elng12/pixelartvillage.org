@@ -11,7 +11,7 @@ export default function FeaturesSection() {
         {/* 将大段说明拆成两段，限制行宽并提高行距，缓解拥挤感 */}
         <div className="mt-4 md:mt-6 text-center">
           <p className="mx-auto max-w-3xl text-gray-600 leading-relaxed">
-            Pixel Art Village is the best place for a pixel art online experience. Use our pixel converter to quickly turn PNG to pixel art or JPG to pixel art with crisp, grid-friendly results. Pixel Art Village makes creating effortless—adjust pixels, preview instantly, and export clean images. Start crafting unique retro visuals with Pixel Art Village today.
+            Fine‑tune pixels with live controls, custom palettes, and a clear grid overlay. Preview changes instantly and export clean images ready for sprites, icons, and retro game graphics. Perfect whether you want to make 8‑bit art or convert a photo to pixel art for your next project.
           </p>
         </div>
 

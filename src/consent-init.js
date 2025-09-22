@@ -30,7 +30,7 @@ try {
       ad_personalization: granted ? 'granted' : 'denied',
     })
   }
-} catch {}
+} catch { void 0 }
 
 // GitHub Pages SPA fallback: if 404.html redirected here with ?p=/x&q=query#hash, fix the URL
 try {
@@ -42,4 +42,4 @@ try {
     const next = decodeURIComponent(p) + (q ? `?${decodeURIComponent(q)}` : '') + hash
     window.history.replaceState(null, '', next)
   }
-} catch {}
+} catch { void 0 }

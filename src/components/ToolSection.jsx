@@ -81,10 +81,10 @@ function ToolSection({ onImageUpload }) {
     <section id="tool" className="bg-gray-50 py-6">
       <div className="container mx-auto px-4 text-center">
         <h1 className={`${compact?'text-2xl md:text-4xl':'text-3xl md:text-5xl'} font-extrabold text-gray-800 mb-3`}>
-          Pixel Art Village: Your Ultimate Pixel Art Converter
+          Free Online Pixel Art Maker & Converter
         </h1>
         <p className={`${compact?'text-sm':'text-base'} text-gray-600 mb-6 max-w-4xl md:max-w-5xl mx-auto`}>
-          Pixel Art Village is the best place for a pixel art online experience. Use our pixel converter to quickly turn PNG to pixel art or JPG to pixel art with crisp, grid-friendly results. Pixel Art Village makes creating effortless—adjust pixels, preview instantly, and export clean images. Start crafting unique retro visuals with Pixel Art Village today.
+          Pixelate images online in your browser — turn any PNG or JPG into clean, grid‑friendly pixel art. Adjust pixel size and palettes with instant preview, then export crisp results for sprites, icons, or retro game graphics. Fast, private, and free with Pixel Art Village.
         </p>
         <div 
           className={`upload-zone max-w-3xl mx-auto bg-white ${compact?'p-6':'p-8'} border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50`}

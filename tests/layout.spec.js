@@ -3,7 +3,7 @@ import fs from 'node:fs';
 
 const __logs = { console: [], requests: [], responses: [], failed: [] };
 
-test.beforeEach(async ({ page }, testInfo) => {
+test.beforeEach(async ({ page }, _testInfo) => {
   page.on('console', (msg) => {
     __logs.console.push({
       type: msg.type(),
@@ -38,7 +38,7 @@ test.beforeEach(async ({ page }, testInfo) => {
   });
 });
 
-test.afterEach(async ({}, testInfo) => {
+test.afterEach(async (_ctx, testInfo) => {
   try {
     const outConsole = testInfo.outputPath('browser-console.json');
     const outRequests = testInfo.outputPath('network-requests.json');
@@ -48,7 +48,7 @@ test.afterEach(async ({}, testInfo) => {
     fs.writeFileSync(outRequests, JSON.stringify(__logs.requests, null, 2), 'utf8');
     fs.writeFileSync(outResponses, JSON.stringify(__logs.responses, null, 2), 'utf8');
     fs.writeFileSync(outFailed, JSON.stringify(__logs.failed, null, 2), 'utf8');
-  } catch {}
+  } catch { void 0 }
   // reset for next test
   __logs.console.length = 0;
   __logs.requests.length = 0;

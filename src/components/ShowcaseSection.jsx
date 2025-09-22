@@ -42,7 +42,7 @@ function ShowcaseSection() {
                 src="/showcase-after-w1200.jpg"
                 srcSet="/showcase-after-w480.jpg 480w, /showcase-after-w800.jpg 800w, /showcase-after-w1200.jpg 1200w"
                 sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 600px"
-                alt="An 8-bit style pixel art landscape, converted from a photo by the Pixel Art Village generator"
+                alt="A landscape photo converted into 8-bit style pixel art by the Pixel Art Village generator"
                 loading="lazy"
                 decoding="async"
                 className="w-full max-w-[440px] md:max-w-[480px] lg:max-w-[520px] mx-auto bg-white object-contain"

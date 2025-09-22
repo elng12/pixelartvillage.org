@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Seo from '@/components/Seo';
 import Header from './components/Header';
@@ -10,10 +10,11 @@ import FeaturesSection from './components/FeaturesSection';
 import HowItWorksSection from './components/HowItWorksSection';
 import FaqSection from './components/FaqSection';
 import Footer from './components/Footer';
-import PrivacyPolicy from './components/policy/PrivacyPolicy';
-import TermsOfService from './components/policy/TermsOfService';
-import About from './components/About';
-import Contact from './components/Contact';
+import ScrollManager from './components/ScrollManager';
+const PrivacyPolicy = lazy(() => import('./components/policy/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./components/policy/TermsOfService'));
+const About = lazy(() => import('./components/About'));
+const Contact = lazy(() => import('./components/Contact'));
 import ConsentBanner from './components/ConsentBanner';
 
 function App() {
@@ -33,7 +34,6 @@ function App() {
           canonical="https://pixelartvillage.org/"
         />
         
-        <h1 className="sr-only">Pixel Art Village — Online Pixel Art Maker & Converter</h1>
         <ToolSection onImageUpload={setUploadedImage} />
         {uploadedImage ? <Editor image={uploadedImage} /> : null}
         <ShowcaseSection />
@@ -48,14 +48,17 @@ function App() {
   return (
     <Fragment>
       <Header />
+      <ScrollManager />
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/terms" element={<TermsOfService />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <Suspense fallback={<div className="container mx-auto px-4 py-10 text-sm text-gray-600" role="status">Loading…</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </Suspense>
       </main>
       <ConsentBanner />
       <Footer />

@@ -7,7 +7,7 @@ function updateConsent(granted) {
   try {
     const payload = { granted: !!granted, t: Date.now() }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload))
-  } catch {}
+  } catch { void 0 }
   try {
     // gtag shim if present
     const gtag = window.gtag || (function(){ window.dataLayer = window.dataLayer || []; return function(){ window.dataLayer.push(arguments) } })()
@@ -17,7 +17,7 @@ function updateConsent(granted) {
       ad_user_data: granted ? 'granted' : 'denied',
       ad_personalization: granted ? 'granted' : 'denied',
     })
-  } catch {}
+  } catch { void 0 }
 }
 
 export default function ConsentBanner() {

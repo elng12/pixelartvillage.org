@@ -22,23 +22,23 @@ The project was found to be operating under a conflicting hybrid architecture th
 
 ## 2. Architectural Decision: Refactor to a Pure SPA
 
-**Status: Decided / To Be Implemented**
+**Status: Implemented**
 
 To resolve these fundamental issues, the following architectural decision has been made:
 
 **The project will be refactored into a pure Single-Page Application (SPA).**
 
-### Implementation Steps:
+### Implementation Summary:
 
-1.  **Adopt a Standard Router**: The `react-router-dom` library will be integrated to handle all client-side routing.
+1.  **Router**: Integrated `react-router-dom` and centralized page routing in `src/App.jsx` using `<BrowserRouter>`, `<Routes>`, `<Route>`. Route pages are lazy‑loaded.
 
-2.  **Consolidate to a Single Entry Point**: The `vite.config.js` file will be modified to have only one input entry point: `index.html`.
+2.  **Single Entry**: Simplified `vite.config.js` to a single input (`index.html`).
 
-3.  **Eliminate Redundant HTML Files**: All static page files (`about.html`, `contact.html`, `privacy.html`, `terms.html`) will be deleted from the root directory.
+3.  **Remove Redundant HTML**: Deleted legacy root HTML files (`about.html`, `contact.html`, `privacy.html`, `terms.html`).
 
-4.  **Centralize Routing Logic**: The `src/App.jsx` component will be refactored to use `react-router-dom`'s declarative components (`<BrowserRouter>`, `<Routes>`, `<Route>`) to define the application's page structure.
+4.  **Client Metadata**: Added a lightweight `Seo` component to set `title`, `canonical`, and OG/Twitter meta at runtime (React 19‑compatible alternative to Helmet). Homepage OG/Twitter remain static in `index.html`.
 
-5.  **Manage Page Metadata with React**: Page titles, meta tags, and canonical links will be dynamically managed within each page component, for example by using a library like `react-helmet-async`.
+5.  **Deep Link Support**: Added `public/404.html` and a small URL fixer in `src/consent-init.js` to support GitHub Pages SPA deep links.
 
 ## 3. Consequences & Benefits
 

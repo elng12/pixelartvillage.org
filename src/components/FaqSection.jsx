@@ -39,7 +39,7 @@ function FaqSection() {
   return (
     <section id="faq" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4 max-w-3xl">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Pixel Art Village: Frequently Asked Questions</h2>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <article key={index} className="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
