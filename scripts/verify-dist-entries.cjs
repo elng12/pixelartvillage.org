@@ -32,7 +32,20 @@ for (const p of PAGES) {
   if (!hasModuleScript) fail(`${p}.html missing built module script reference`);
   if (!hasCss) fail(`${p}.html missing built css reference`);
   if (hasModuleScript && hasCss) ok(`${p}.html includes assets`);
+  // Check OG/Twitter image references
+  const expected = `social-${p}.png`;
+  const hasOg = new RegExp(`<meta[^>]+property=\\"og:image\\"[^>]+${expected.replace('.', '\\.')}`, 'i').test(html);
+  const hasTw = new RegExp(`<meta[^>]+name=\\"twitter:image\\"[^>]+${expected.replace('.', '\\.')}`, 'i').test(html);
+  if (!hasOg) fail(`${p}.html missing og:image -> ${expected}`);
+  if (!hasTw) fail(`${p}.html missing twitter:image -> ${expected}`);
 }
+
+// Ensure social images exist in dist root
+;['social-privacy.png', 'social-terms.png', 'social-about.png', 'social-contact.png'].forEach((img) => {
+  const p = path.join(DIST, img);
+  if (!fs.existsSync(p)) fail(`missing ${img} in dist`);
+  else ok(`found ${img}`);
+});
 
 // Summarize
 if (process.exitCode) {
@@ -41,4 +54,3 @@ if (process.exitCode) {
 } else {
   console.log('[verify-dist] All checks passed.');
 }
-
