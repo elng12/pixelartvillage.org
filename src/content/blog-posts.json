@@ -1,0 +1,27 @@
+[
+  {
+    "slug": "getting-started-pixel-art-maker",
+    "title": "Getting Started with the Pixel Art Maker",
+    "date": "2025-09-20",
+    "excerpt": "A quick guide to turn any PNG/JPG into clean pixel art with instant preview and export.",
+    "tags": ["pixel art", "maker", "tutorial"],
+    "body": [
+      "Pixel Art Village lets you pixelate images online — fast, private, and free.",
+      "Upload a PNG/JPG, adjust pixel size and palettes with live preview, and export crisp results for sprites, icons, or retro graphics.",
+      "Tip: start from a high‑contrast source. Larger pixel sizes create a stronger 8‑bit look; smaller sizes preserve more detail."
+    ]
+  },
+  {
+    "slug": "photo-to-sprite-converter-tips",
+    "title": "Photo to Sprite Converter: Practical Tips",
+    "date": "2025-09-21",
+    "excerpt": "From photo to 8‑bit sprite: palette, contrast, and grid settings that work.",
+    "tags": ["sprite", "8-bit", "tips"],
+    "body": [
+      "For readable sprites, limit your palette and keep silhouettes clear.",
+      "Use the grid to inspect pixel clusters. Tweak contrast and brightness until edges stay crisp at your target size.",
+      "Export as PNG to preserve transparency and keep your game assets ready to drop in."
+    ]
+  }
+]
+

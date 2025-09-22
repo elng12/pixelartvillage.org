@@ -15,6 +15,8 @@ const PrivacyPolicy = lazy(() => import('./components/policy/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./components/policy/TermsOfService'));
 const About = lazy(() => import('./components/About'));
 const Contact = lazy(() => import('./components/Contact'));
+const Blog = lazy(() => import('./components/Blog'));
+const BlogPost = lazy(() => import('./components/BlogPost'));
 import ConsentBanner from './components/ConsentBanner';
 
 function App() {
@@ -57,6 +59,8 @@ function App() {
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
           </Routes>
         </Suspense>
       </main>

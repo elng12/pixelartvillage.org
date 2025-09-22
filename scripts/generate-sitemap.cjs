@@ -9,7 +9,16 @@ const outPath = path.resolve(process.cwd(), 'public', 'sitemap.xml');
 const today = new Date();
 const isoDate = today.toISOString().slice(0, 10);
 
-const PATHS = ['/', '/privacy', '/terms', '/about', '/contact'];
+const PATHS = ['/', '/privacy', '/terms', '/about', '/contact', '/blog'];
+// Include blog posts from content
+try {
+  const posts = require('../src/content/blog-posts.json');
+  for (const p of posts) {
+    if (p && p.slug) PATHS.push(`/blog/${p.slug}`);
+  }
+} catch (e) {
+  console.warn('[sitemap] warn: cannot load blog-posts.json', e && e.message);
+}
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

@@ -1,6 +1,9 @@
 #!/usr/bin/env node
-// Simple post-build verification for SPA: ensure index.html includes assets,
-// 404.html exists (for GitHub Pages SPA fallback), and social images are copied.
+// Post-build verification for SPA:
+// - index.html includes built assets
+// - 404.html exists (GitHub Pages SPA fallback)
+// - Social images exist
+// - Route pages (privacy/terms/about/contact/blog and blog posts) contain SEO-critical tags
 const fs = require('fs');
 const path = require('path');
 
@@ -45,10 +48,43 @@ for (const f of REQUIRED_FILES) {
   else ok(`found ${img}`);
 });
 
+// -------- Route SEO checks --------
+function readHtml(p) {
+  if (!fs.existsSync(p)) { fail(`route file missing: ${path.relative(DIST, p)}`); return null }
+  return fs.readFileSync(p, 'utf8');
+}
+
+function find(re, html) { const m = re.exec(html); return m && m[1] ? m[1] : null }
+
+function verifyRoute(routePath) {
+  const file = path.join(DIST, routePath.replace(/^\//, ''), 'index.html');
+  const html = readHtml(file);
+  if (!html) return;
+  const title = find(/<title>\s*([^<]+)\s<\/title>/i, html) || find(/<title>\s*([^<]+)<\/title>/i, html);
+  if (!title) fail(`${routePath}: missing <title>`); else ok(`${routePath}: title OK`);
+  const canonical = find(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["'][^>]*>/i, html);
+  if (!canonical) fail(`${routePath}: missing canonical`); else ok(`${routePath}: canonical OK`);
+  const ogTitle = find(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["'][^>]*>/i, html);
+  if (!ogTitle) fail(`${routePath}: missing og:title`); else ok(`${routePath}: og:title OK`);
+  const twTitle = find(/<meta[^>]+name=["']twitter:title["'][^>]+content=["']([^"']+)["'][^>]*>/i, html);
+  if (!twTitle) fail(`${routePath}: missing twitter:title`); else ok(`${routePath}: twitter:title OK`);
+}
+
+const ROUTES = ['/privacy', '/terms', '/about', '/contact', '/blog'];
+try {
+  const posts = require('../src/content/blog-posts.json');
+  for (const p of posts) {
+    if (p && p.slug) ROUTES.push(`/blog/${p.slug}`);
+  }
+} catch (e) {
+  console.warn('[verify-dist] warn: cannot load blog-posts.json', e && e.message);
+}
+
+ROUTES.forEach(verifyRoute);
+
 if (process.exitCode) {
   console.error('[verify-dist] Some checks failed.');
   process.exit(1);
 } else {
   console.log('[verify-dist] All checks passed.');
 }
-

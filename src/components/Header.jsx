@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Avatar from './Avatar';
 
 function Header() {
@@ -29,6 +29,9 @@ function Header() {
     return () => observer.disconnect();
   }, [NAV_LINKS]);
 
+  const location = useLocation();
+  const isBlog = location.pathname.startsWith('/blog');
+
   return (
     <header className="sticky top-0 bg-white/80 backdrop-blur-lg z-50 border-b border-gray-200">
       <div className="container mx-auto px-4">
@@ -50,6 +53,13 @@ function Header() {
                   {link.label}
                 </Link>
               ))}
+              <Link
+                to="/blog"
+                aria-current={isBlog ? 'page' : undefined}
+                className="text-gray-600 hover:text-blue-600 transition-colors"
+              >
+                Blog
+              </Link>
             </nav>
             <div className="hidden md:block">
               <Avatar size={40} userId="guest" title="User avatar" />
