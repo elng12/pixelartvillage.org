@@ -1,0 +1,50 @@
+<!-- Icon preview for Pixel Art Village -->
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Icons Preview</title>
+<style>
+  body{font-family:system-ui,Segoe UI,Arial,sans-serif;margin:24px;background:#f7fafc;color:#1f2937}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .title{font-weight:700;margin:8px 0 12px}
+  .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .chip{font-size:12px;background:#eef2ff;color:#3730a3;padding:2px 8px;border-radius:999px}
+  img,svg{width:128px;height:128px;border-radius:24px;border:1px solid #eee;background:#fff}
+  .sizes img{width:64px;height:64px;border-radius:12px}
+</style>
+</head><body>
+<h1>图标预览</h1>
+<div class="grid">
+  <div class="card">
+    <div class="title">A 简约线条</div>
+    <div class="row">
+      <img src="./icon-feedback-line.svg" alt="line svg"/>
+      <div class="sizes">
+        <div class="row"><span class="chip">PNG 64</span><img src="./png/icon-feedback-line-64.png"/></div>
+        <div class="row"><span class="chip">PNG 32</span><img src="./png/icon-feedback-line-32.png"/></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="title">B 扁平化</div>
+    <div class="row">
+      <img src="./icon-feedback-flat.svg" alt="flat svg"/>
+      <div class="sizes">
+        <div class="row"><span class="chip">PNG 64</span><img src="./png/icon-feedback-flat-64.png"/></div>
+        <div class="row"><span class="chip">PNG 32</span><img src="./png/icon-feedback-flat-32.png"/></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="title">C 微立体</div>
+    <div class="row">
+      <img src="./icon-feedback-neumorphic.svg" alt="neumorphic svg"/>
+      <div class="sizes">
+        <div class="row"><span class="chip">PNG 64</span><img src="./png/icon-feedback-neumorphic-64.png"/></div>
+        <div class="row"><span class="chip">PNG 32</span><img src="./png/icon-feedback-neumorphic-32.png"/></div>
+      </div>
+    </div>
+  </div>
+</div>
+<p>完整 PNG 尺寸也已导出：512、192、64、32。路径：/public/icons/png</p>
+</body></html>
