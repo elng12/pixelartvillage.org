@@ -21,7 +21,7 @@ export default function Blog() {
       />
 
       <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">Blog</h1>
-      <p className="text-gray-700 mb-6">Articles and updates about making pixel art, tutorials, and new features.</p>
+      <p className="text-gray-700 mb-6 max-w-2xl mx-auto text-center">Articles and updates about making pixel art, tutorials, and new features.</p>
 
       <ul className="space-y-4 max-w-2xl mx-auto">
         {posts.map((p) => (
