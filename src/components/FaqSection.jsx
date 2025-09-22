@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     question: 'How do I turn a picture into a game sprite?',
-    answer: 'Our pixel art maker is perfect for creating game sprites. Upload your character\\'s picture, adjust the pixel size to match your game\\'s art style, and use the palette controls to fit your engine\\'s color limits. You can then download the resulting sprite as a transparent PNG.'
+    answer: `Our pixel art maker is perfect for creating game sprites. Upload your character's picture, adjust the pixel size to match your game's art style, and use the palette controls to fit your engine's color limits. You can then download the resulting sprite as a transparent PNG.`
   },
   {
     question: 'Can I adjust the pixel grid on my image?',
