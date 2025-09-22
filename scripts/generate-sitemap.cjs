@@ -20,6 +20,16 @@ try {
   console.warn('[sitemap] warn: cannot load blog-posts.json', e && e.message);
 }
 
+// Include pSEO pages (converter/:slug)
+try {
+  const pseo = require('../src/content/pseo-pages.json');
+  for (const p of pseo) {
+    if (p && p.slug) PATHS.push(`/converter/${p.slug}`);
+  }
+} catch (e) {
+  console.warn('[sitemap] warn: cannot load pseo-pages.json', e && e.message);
+}
+
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${PATHS.map((p, i) => `  <url>\n    <loc>${DOMAIN.replace(/\/$/, '')}${p}</loc>\n    <lastmod>${isoDate}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${p === '/' ? '1.0' : '0.8'}</priority>\n  </url>`).join('\n')}

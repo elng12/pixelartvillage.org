@@ -68,6 +68,32 @@ function verifyRoute(routePath) {
   if (!ogTitle) fail(`${routePath}: missing og:title`); else ok(`${routePath}: og:title OK`);
   const twTitle = find(/<meta[^>]+name=["']twitter:title["'][^>]+content=["']([^"']+)["'][^>]*>/i, html);
   if (!twTitle) fail(`${routePath}: missing twitter:title`); else ok(`${routePath}: twitter:title OK`);
+
+  // For pSEO pages, ensure og:image/twitter:image exists and file is emitted
+  if (routePath.startsWith('/converter/')) {
+    const ogImage = find(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["'][^>]*>/i, html);
+    const twImage = find(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["'][^>]*>/i, html);
+    if (!ogImage) fail(`${routePath}: missing og:image`); else ok(`${routePath}: og:image OK`);
+    if (!twImage) fail(`${routePath}: missing twitter:image`); else ok(`${routePath}: twitter:image OK`);
+    const imgPath = (ogImage || twImage || '').replace(/^https?:\/\/[^/]+/, '');
+    if (imgPath) {
+      const disk = path.join(DIST, imgPath.replace(/^\//, ''));
+      if (!fs.existsSync(disk)) fail(`${routePath}: image not found in dist -> ${imgPath}`); else ok(`${routePath}: image found`);
+    }
+  }
+
+  // For Blog posts, ensure og:image/twitter:image exists and file is emitted
+  if (routePath.startsWith('/blog/') && routePath !== '/blog') {
+    const ogImage = find(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["'][^>]*>/i, html);
+    const twImage = find(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["'][^>]*>/i, html);
+    if (!ogImage) fail(`${routePath}: missing og:image`); else ok(`${routePath}: og:image OK`);
+    if (!twImage) fail(`${routePath}: missing twitter:image`); else ok(`${routePath}: twitter:image OK`);
+    const imgPath = (ogImage || twImage || '').replace(/^https?:\/\/[^/]+/, '');
+    if (imgPath) {
+      const disk = path.join(DIST, imgPath.replace(/^\//, ''));
+      if (!fs.existsSync(disk)) fail(`${routePath}: image not found in dist -> ${imgPath}`); else ok(`${routePath}: image found`);
+    }
+  }
 }
 
 const ROUTES = ['/privacy', '/terms', '/about', '/contact', '/blog'];
@@ -80,7 +106,36 @@ try {
   console.warn('[verify-dist] warn: cannot load blog-posts.json', e && e.message);
 }
 
+try {
+  const pseo = require('../src/content/pseo-pages.json');
+  for (const p of pseo) {
+    if (p && p.slug) ROUTES.push(`/converter/${p.slug}`);
+  }
+} catch (e) {
+  console.warn('[verify-dist] warn: cannot load pseo-pages.json', e && e.message);
+}
+
 ROUTES.forEach(verifyRoute);
+
+// Extra: verify blog index has image meta
+try {
+  verifyRoute('/blog');
+  const blogIndex = path.join(DIST, 'blog', 'index.html');
+  const html = readHtml(blogIndex);
+  if (html) {
+    const ogImage = /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["'][^>]*>/i.exec(html);
+    const twImage = /<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["'][^>]*>/i.exec(html);
+    if (!ogImage) fail('/blog: missing og:image'); else ok('/blog: og:image OK');
+    if (!twImage) fail('/blog: missing twitter:image'); else ok('/blog: twitter:image OK');
+    const imgPath = (ogImage && ogImage[1]) || (twImage && twImage[1]) || '';
+    if (imgPath) {
+      const disk = path.join(DIST, imgPath.replace(/^\//, ''));
+      if (!fs.existsSync(disk)) fail(`/blog: image not found in dist -> ${imgPath}`); else ok('/blog: image found');
+    }
+  }
+} catch (e) {
+  fail(`/blog: verification failed: ${e && e.message}`)
+}
 
 if (process.exitCode) {
   console.error('[verify-dist] Some checks failed.');

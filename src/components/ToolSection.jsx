@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { downscaleFileToBlob, loadImageFromFile } from '../utils/resizeImage';
 import { PREVIEW_LIMIT } from '../utils/constants';
 
-function ToolSection({ onImageUpload }) {
+function ToolSection({ onImageUpload, headingLevel = 'h1' }) {
   const fileInputRef = useRef(null);
   const [error, setError] = useState('');
   const [compact, setCompact] = useState(false);
@@ -80,9 +80,14 @@ function ToolSection({ onImageUpload }) {
   return (
     <section id="tool" className="bg-gray-50 py-6">
       <div className="container mx-auto px-4 text-center">
-        <h1 className={`${compact?'text-2xl md:text-4xl':'text-3xl md:text-5xl'} font-extrabold text-gray-800 mb-3`}>
-          Free Online Pixel Art Maker & Converter
-        </h1>
+        {(() => {
+          const HeadingTag = headingLevel === 'h2' ? 'h2' : 'h1';
+          return (
+            <HeadingTag className={`${compact?'text-2xl md:text-4xl':'text-3xl md:text-5xl'} font-extrabold text-gray-800 mb-3`}>
+              Free Online Pixel Art Maker & Converter
+            </HeadingTag>
+          );
+        })()}
         <p className={`${compact?'text-sm':'text-base'} text-gray-600 mb-6 max-w-4xl md:max-w-5xl mx-auto`}>
           Pixelate images online in your browser — turn any PNG or JPG into clean, grid‑friendly pixel art. Adjust pixel size and palettes with instant preview, then export crisp results for sprites, icons, or retro game graphics. Fast, private, and free with Pixel Art Village.
         </p>

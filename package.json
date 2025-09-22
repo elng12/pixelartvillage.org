@@ -6,7 +6,7 @@
   "scripts": {
     "predev": "node scripts/gen-social-preview.cjs && node scripts/gen-showcase.cjs",
     "dev": "node scripts/dev.cjs",
-    "prebuild": "node scripts/gen-social-preview.cjs && node scripts/gen-showcase.cjs && node scripts/generate-sitemap.cjs",
+    "prebuild": "node scripts/gen-social-preview.cjs && node scripts/gen-showcase.cjs && node scripts/generate-sitemap.cjs && node scripts/gen-pseo-og.cjs",
     "build": "vite build && node scripts/prerender-spa.cjs",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -40,5 +40,8 @@
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",
     "vite": "^7.1.6"
+  },
+  "engines": {
+    "node": ">=18 <22"
   }
 }

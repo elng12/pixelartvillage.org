@@ -17,6 +17,7 @@ const About = lazy(() => import('./components/About'));
 const Contact = lazy(() => import('./components/Contact'));
 const Blog = lazy(() => import('./components/Blog'));
 const BlogPost = lazy(() => import('./components/BlogPost'));
+const PseoPage = lazy(() => import('./components/PseoPage'));
 import ConsentBanner from './components/ConsentBanner';
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/converter/:slug" element={<PseoPage />} />
           </Routes>
         </Suspense>
       </main>

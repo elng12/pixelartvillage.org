@@ -91,3 +91,13 @@ Pixel Art Village 是一个免费、完全在浏览器中运行的在线工具�
 1. 遵循现有的代码风格。
 2. 通过所有的 Lint 和类型检查 (`npm run lint` & `npm run typecheck`)。
 3. 相关的测试用例已添加或更新。
+## Development Environment
+
+- Recommended Node.js: 18.x or 20.x (avoid Node 22 due to npm optional-deps issue with Rollup).
+- Use nvm to switch: `nvm use 20` (this repo ships `.nvmrc` with Node 20).
+- Fresh install if you switched Node: `rm -rf node_modules package-lock.json && npm ci`.
+
+### Build & Verify
+
+- Build (includes prerender + OG image generation): `npm run build`
+- Verify production artifacts (SEO checks): `npm run verify:dist`

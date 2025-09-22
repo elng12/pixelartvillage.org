@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 
 function upsertTag(tagName, attributes) {
   const selector = Object.entries(attributes)
@@ -14,6 +14,9 @@ function upsertTag(tagName, attributes) {
 }
 
 export default function Seo({ title, canonical, meta = [] }) {
+  const metas = useMemo(() => (Array.isArray(meta) ? meta : []), [meta])
+  const metaKey = useMemo(() => JSON.stringify(metas), [metas])
+
   useEffect(() => {
     if (title) document.title = title
     if (canonical) {
@@ -22,14 +25,13 @@ export default function Seo({ title, canonical, meta = [] }) {
       })()
       link.setAttribute('href', canonical)
     }
-    for (const m of meta) {
+    for (const m of metas) {
       if (m.name) {
         upsertTag('meta', { name: m.name, content: m.content })
       } else if (m.property) {
         upsertTag('meta', { property: m.property, content: m.content })
       }
     }
-  }, [title, canonical, JSON.stringify(meta)])
+  }, [title, canonical, metaKey, metas])
   return null
 }
-

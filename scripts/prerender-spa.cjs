@@ -102,11 +102,40 @@ function prerender() {
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: 'Blog | Pixel Art Village' },
       { property: 'og:description', content: 'Articles and updates about making pixel art, tips, and features.' },
+      { property: 'og:image', content: ABS('/blog-og/_index.png') },
       { name: 'twitter:card', content: 'summary' },
       { name: 'twitter:title', content: 'Blog | Pixel Art Village' },
       { name: 'twitter:description', content: 'Articles and updates about making pixel art, tips, and features.' },
+      { name: 'twitter:image', content: ABS('/blog-og/_index.png') },
     ]},
   ];
+
+  // pSEO pages (converter/:slug)
+  try {
+    const pseo = require('../src/content/pseo-pages.json');
+    for (const p of pseo) {
+      if (!p || !p.slug) continue;
+      const url = `/converter/${p.slug}`;
+      routes.push({
+        path: url,
+        title: p.title,
+        metas: [
+          { name: 'description', content: p.metaDescription || '' },
+          { property: 'og:url', content: ABS(url) },
+          { property: 'og:type', content: 'website' },
+          { property: 'og:title', content: p.title },
+          { property: 'og:description', content: p.metaDescription || '' },
+          { property: 'og:image', content: ABS(`/pseo-og/${p.slug}.png`) },
+          { name: 'twitter:card', content: 'summary' },
+          { name: 'twitter:title', content: p.title },
+          { name: 'twitter:description', content: p.metaDescription || '' },
+          { name: 'twitter:image', content: ABS(`/pseo-og/${p.slug}.png`) },
+        ],
+      });
+    }
+  } catch (e) {
+    console.warn('[prerender] warn: cannot load pseo-pages.json', e && e.message);
+  }
 
   // Blog posts
   let posts = [];
@@ -121,9 +150,11 @@ function prerender() {
         { property: 'og:type', content: 'article' },
         { property: 'og:title', content: `${p.title} | Pixel Art Village` },
         { property: 'og:description', content: p.excerpt || '' },
+        { property: 'og:image', content: ABS(`/blog-og/${p.slug}.png`) },
         { name: 'twitter:card', content: 'summary' },
         { name: 'twitter:title', content: `${p.title} | Pixel Art Village` },
         { name: 'twitter:description', content: p.excerpt || '' },
+        { name: 'twitter:image', content: ABS(`/blog-og/${p.slug}.png`) },
       ],
     });
   }
@@ -143,4 +174,3 @@ try {
   console.error('[prerender] failed:', e && e.stack || e);
   process.exit(1);
 }
-
