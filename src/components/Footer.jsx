@@ -126,6 +126,15 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
+            <a href="https://indie.deals?ref=https%3A%2F%2Fpixelartvillage.org%2F" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
+              <img
+                src="/indie-deals-badge.svg"
+                alt="Find us on Indie.Deals"
+                width="180"
+                height="54"
+                className="inline-block h-[54px] w-auto object-contain"
+              />
+            </a>
           </div>
         </div>
       </div>
