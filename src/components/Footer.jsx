@@ -110,6 +110,15 @@ function Footer() {
                 className="inline-block"
               />
             </a>
+            <a href="https://startupfa.me/s/pixel-art-village?utm_source=pixelartvillage.org" target="_blank" rel="noopener noreferrer">
+              <img
+                src="/startupfame-badge.webp"
+                alt="Featured on Startup Fame"
+                width="171"
+                height="54"
+                className="inline-block"
+              />
+            </a>
           </div>
         </div>
       </div>
