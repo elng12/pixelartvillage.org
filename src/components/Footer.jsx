@@ -92,31 +92,31 @@ function Footer() {
               <Link to="/contact" className="hover:text-white">Contact</Link>
             </div>
           </div>
-          <div className="mt-6 text-center flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="https://twelve.tools" target="_blank" rel="noopener noreferrer">
+          <div className="mt-6 text-center flex flex-wrap items-center justify-center gap-6">
+            <a href="https://twelve.tools" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
               <img
                 src="/twelve-tools-badge.svg"
                 alt="Featured on Twelve Tools"
                 width="200"
                 height="54"
-                className="inline-block"
+                className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
-            <a href="https://fazier.com/launches/pixelartvillage.org" target="_blank" rel="noopener noreferrer">
+            <a href="https://fazier.com/launches/pixelartvillage.org" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
               <img
                 src="/fazier-badge.svg"
                 alt="Fazier badge"
                 width="250"
-                className="inline-block"
+                className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
-            <a href="https://startupfa.me/s/pixel-art-village?utm_source=pixelartvillage.org" target="_blank" rel="noopener noreferrer">
+            <a href="https://startupfa.me/s/pixel-art-village?utm_source=pixelartvillage.org" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
               <img
                 src="/startupfame-badge.webp"
                 alt="Featured on Startup Fame"
                 width="171"
                 height="54"
-                className="inline-block"
+                className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
           </div>
