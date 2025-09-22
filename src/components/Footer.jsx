@@ -92,6 +92,17 @@ function Footer() {
               <Link to="/contact" className="hover:text-white">Contact</Link>
             </div>
           </div>
+          <div className="mt-6 text-center">
+            <a href="https://twelve.tools" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://twelve.tools/badge0-white.svg"
+                alt="Featured on Twelve Tools"
+                width="200"
+                height="54"
+                className="inline-block"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
