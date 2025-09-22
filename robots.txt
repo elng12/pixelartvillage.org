@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+# 屏蔽示例/临时页面的索引
+# 注意：为包含空格与全角字符的路径同时提供原始、URL 编码与通配符三种写法，确保各爬虫正确匹配
+Disallow: /Image To Pixel Art (2025_9_20 21：06：57).html
+Disallow: /Image%20To%20Pixel%20Art%20(2025_9_20%2021%EF%BC%9A06%EF%BC%9A57).html
+Disallow: /Image*Pixel*Art
+# 同时屏蔽示例模板页
+Disallow: /homepage_layout_seo_optimized.html
+Disallow: /homepage_layout_v2.html
+Disallow: /design_principles.html
+
+# 指定规范域名（canonical domain）
+Host: pixelartvillage.org
+
+# Sitemap
+Sitemap: https://pixelartvillage.org/sitemap.xml
