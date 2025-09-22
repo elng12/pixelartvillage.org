@@ -1,0 +1,94 @@
+[
+  {
+    "method": "GET",
+    "url": "http://localhost:5173/",
+    "headers": {
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "upgrade-insecure-requests": "1",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15",
+      "accept-language": "en-US"
+    },
+    "ts": 1758521964950
+  },
+  {
+    "method": "GET",
+    "url": "http://localhost:5173/assets/index-QQx5lUTo.js",
+    "headers": {
+      "origin": "http://localhost:5173",
+      "accept": "*/*",
+      "referer": "http://localhost:5173/",
+      "sec-fetch-dest": "script",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15",
+      "accept-language": "en-US"
+    },
+    "ts": 1758521964973
+  },
+  {
+    "method": "GET",
+    "url": "http://localhost:5173/assets/index-BGAHN9Ha.css",
+    "headers": {
+      "origin": "http://localhost:5173",
+      "accept": "text/css,*/*;q=0.1",
+      "referer": "http://localhost:5173/",
+      "sec-fetch-dest": "style",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15",
+      "accept-language": "en-US"
+    },
+    "ts": 1758521964974
+  },
+  {
+    "method": "GET",
+    "url": "http://localhost:5173/showcase-before-w1200.webp",
+    "headers": {
+      "accept": "image/webp,image/jxl,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
+      "referer": "http://localhost:5173/",
+      "sec-fetch-dest": "image",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-site": "same-origin",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15",
+      "accept-language": "en-US"
+    },
+    "ts": 1758521965090
+  },
+  {
+    "method": "GET",
+    "url": "http://localhost:5173/showcase-after-w1200.webp",
+    "headers": {
+      "accept": "image/webp,image/jxl,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
+      "referer": "http://localhost:5173/",
+      "sec-fetch-dest": "image",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-site": "same-origin",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15",
+      "accept-language": "en-US"
+    },
+    "ts": 1758521965091
+  },
+  {
+    "method": "GET",
+    "url": "blob:http://localhost:5173/a18e6b73-d604-426c-bbdf-9a5c773f3a37",
+    "headers": {
+      "accept": "image/webp,image/jxl,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15",
+      "accept-language": "en-US"
+    },
+    "ts": 1758521965534
+  },
+  {
+    "method": "GET",
+    "url": "blob:http://localhost:5173/9447c8a9-d6d5-44d0-9333-c85d0ac03e5e",
+    "headers": {
+      "accept": "image/webp,image/jxl,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15",
+      "accept-language": "en-US"
+    },
+    "ts": 1758521965565
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "method": "GET",
+    "url": "http://localhost:5173/",
+    "headers": {
+      "host": "localhost:5173",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "accept-language": "en-US",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "connection": "keep-alive",
+      "upgrade-insecure-requests": "1",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "none",
+      "sec-fetch-user": "?1"
+    },
+    "ts": 1758521966139
+  },
+  {
+    "method": "GET",
+    "url": "http://localhost:5173/assets/index-QQx5lUTo.js",
+    "headers": {
+      "host": "localhost:5173",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0",
+      "accept": "*/*",
+      "accept-language": "en-US",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "connection": "keep-alive",
+      "referer": "http://localhost:5173/",
+      "sec-fetch-dest": "script",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin"
+    },
+    "ts": 1758521968284
+  },
+  {
+    "method": "GET",
+    "url": "http://localhost:5173/assets/index-BGAHN9Ha.css",
+    "headers": {
+      "host": "localhost:5173",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0",
+      "accept": "text/css,*/*;q=0.1",
+      "accept-language": "en-US",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "connection": "keep-alive",
+      "referer": "http://localhost:5173/",
+      "sec-fetch-dest": "style",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin"
+    },
+    "ts": 1758521968288
+  },
+  {
+    "method": "GET",
+    "url": "http://localhost:5173/apple-touch-icon.png",
+    "headers": {
+      "host": "localhost:5173",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0",
+      "accept": "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
+      "accept-language": "en-US",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "connection": "keep-alive",
+      "referer": "http://localhost:5173/",
+      "sec-fetch-dest": "image",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-site": "same-origin"
+    },
+    "ts": 1758521968402
+  },
+  {
+    "method": "GET",
+    "url": "http://localhost:5173/vite.svg",
+    "headers": {
+      "host": "localhost:5173",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0",
+      "accept": "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
+      "accept-language": "en-US",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "connection": "keep-alive",
+      "referer": "http://localhost:5173/",
+      "sec-fetch-dest": "image",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-site": "same-origin"
+    },
+    "ts": 1758521968403
+  },
+  {
+    "method": "GET",
+    "url": "http://localhost:5173/showcase-before-w800.webp",
+    "headers": {
+      "host": "localhost:5173",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0",
+      "accept": "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
+      "accept-language": "en-US",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "connection": "keep-alive",
+      "referer": "http://localhost:5173/",
+      "sec-fetch-dest": "image",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-site": "same-origin"
+    },
+    "ts": 1758521968424
+  },
+  {
+    "method": "GET",
+    "url": "http://localhost:5173/showcase-after-w800.webp",
+    "headers": {
+      "host": "localhost:5173",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0",
+      "accept": "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5",
+      "accept-language": "en-US",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "connection": "keep-alive",
+      "referer": "http://localhost:5173/",
+      "sec-fetch-dest": "image",
+      "sec-fetch-mode": "no-cors",
+      "sec-fetch-site": "same-origin"
+    },
+    "ts": 1758521968426
+  }
+]

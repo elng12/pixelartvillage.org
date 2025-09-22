@@ -1,0 +1,32 @@
+[
+  {
+    "type": "warning",
+    "text": "[JavaScript Warning: \"Ignoring unsupported entryTypes: layout-shift.\" {file: \"http://localhost:5173/assets/index-QQx5lUTo.js\" line: 49}]",
+    "location": {
+      "url": "http://localhost:5173/assets/index-QQx5lUTo.js",
+      "lineNumber": 49,
+      "columnNumber": 99758
+    },
+    "ts": 1758521973197
+  },
+  {
+    "type": "error",
+    "text": "[JavaScript Error: \"Image corrupt or truncated.\" {file: \"blob:http://localhost:5173/215074fa-deab-445f-ae01-9d15adf18b43\" line: 0}]",
+    "location": {
+      "url": "blob:http://localhost:5173/215074fa-deab-445f-ae01-9d15adf18b43",
+      "lineNumber": 0,
+      "columnNumber": 0
+    },
+    "ts": 1758521973507
+  },
+  {
+    "type": "error",
+    "text": "[JavaScript Error: \"Image corrupt or truncated.\" {file: \"blob:http://localhost:5173/bc51792c-1cd4-47de-8acc-1c9ed6ab5188\" line: 0}]",
+    "location": {
+      "url": "blob:http://localhost:5173/bc51792c-1cd4-47de-8acc-1c9ed6ab5188",
+      "lineNumber": 0,
+      "columnNumber": 0
+    },
+    "ts": 1758521975567
+  }
+]

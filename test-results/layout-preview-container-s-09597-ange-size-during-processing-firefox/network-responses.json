@@ -1,0 +1,117 @@
+[
+  {
+    "url": "http://localhost:5173/",
+    "status": 200,
+    "headers": {
+      "vary": "Origin",
+      "content-type": "text/html",
+      "cache-control": "no-cache",
+      "etag": "W/\"14bf-r22Lf4vVdi4005zpKoZrkliwGtU\"",
+      "content-encoding": "gzip",
+      "date": "Mon, 22 Sep 2025 06:19:28 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "ts": 1758521968199
+  },
+  {
+    "url": "http://localhost:5173/assets/index-QQx5lUTo.js",
+    "status": 200,
+    "headers": {
+      "vary": "Origin",
+      "content-type": "text/javascript",
+      "last-modified": "Mon, 22 Sep 2025 06:19:23 GMT",
+      "etag": "W/\"253488-1758521963219\"",
+      "cache-control": "no-cache",
+      "content-encoding": "gzip",
+      "date": "Mon, 22 Sep 2025 06:19:28 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "ts": 1758521968311
+  },
+  {
+    "url": "http://localhost:5173/assets/index-BGAHN9Ha.css",
+    "status": 200,
+    "headers": {
+      "vary": "Origin",
+      "content-type": "text/css",
+      "last-modified": "Mon, 22 Sep 2025 06:19:23 GMT",
+      "etag": "W/\"52684-1758521963219\"",
+      "cache-control": "no-cache",
+      "content-encoding": "gzip",
+      "date": "Mon, 22 Sep 2025 06:19:28 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "ts": 1758521968314
+  },
+  {
+    "url": "http://localhost:5173/apple-touch-icon.png",
+    "status": 200,
+    "headers": {
+      "vary": "Origin",
+      "content-length": "987",
+      "content-type": "image/png",
+      "last-modified": "Mon, 22 Sep 2025 04:32:40 GMT",
+      "etag": "W/\"987-1758515560334\"",
+      "cache-control": "no-cache",
+      "date": "Mon, 22 Sep 2025 06:19:28 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5"
+    },
+    "ts": 1758521968429
+  },
+  {
+    "url": "http://localhost:5173/vite.svg",
+    "status": 200,
+    "headers": {
+      "vary": "Origin",
+      "content-type": "image/svg+xml",
+      "last-modified": "Sat, 20 Sep 2025 11:22:11 GMT",
+      "etag": "W/\"1497-1758367331245\"",
+      "cache-control": "no-cache",
+      "content-encoding": "gzip",
+      "date": "Mon, 22 Sep 2025 06:19:28 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "ts": 1758521968432
+  },
+  {
+    "url": "http://localhost:5173/showcase-before-w800.webp",
+    "status": 200,
+    "headers": {
+      "vary": "Origin",
+      "content-length": "158894",
+      "content-type": "image/webp",
+      "last-modified": "Mon, 22 Sep 2025 06:19:21 GMT",
+      "etag": "W/\"158894-1758521961378\"",
+      "cache-control": "no-cache",
+      "date": "Mon, 22 Sep 2025 06:19:28 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5"
+    },
+    "ts": 1758521968445
+  },
+  {
+    "url": "http://localhost:5173/showcase-after-w800.webp",
+    "status": 200,
+    "headers": {
+      "vary": "Origin",
+      "content-length": "97720",
+      "content-type": "image/webp",
+      "last-modified": "Mon, 22 Sep 2025 06:19:21 GMT",
+      "etag": "W/\"97720-1758521961735\"",
+      "cache-control": "no-cache",
+      "date": "Mon, 22 Sep 2025 06:19:28 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5"
+    },
+    "ts": 1758521968461
+  }
+]

@@ -10,14 +10,11 @@ const outPath = path.resolve(process.cwd(), 'public', 'sitemap.xml');
 const today = new Date();
 const isoDate = today.toISOString().slice(0, 10);
 
+const PATHS = ['/', '/privacy', '/terms', '/about', '/contact'];
+
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${DOMAIN}</loc>
-    <lastmod>${isoDate}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+${PATHS.map((p) => `  <url>\n    <loc>${DOMAIN.replace(/\/$/, '')}${p}</loc>\n    <lastmod>${isoDate}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${p === '/' ? '1.0' : '0.8'}</priority>\n  </url>`).join('\n')}
 </urlset>
 `;
 
