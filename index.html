@@ -83,11 +83,18 @@
     }
     </script>
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' ws:; object-src 'none'; base-uri 'self'" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://img.turbo0.com; font-src 'self' data:; connect-src 'self' ws:; object-src 'none'; base-uri 'self'" />
 
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Turbo0 listing badge (static in HTML for verification) -->
+    <div style="margin: 16px; text-align: center;">
+      <a href="https://turbo0.com/item/pixel-art-village" target="_blank" rel="noopener noreferrer">
+        <img src="https://img.turbo0.com/badge-listed-light.svg" alt="Listed on Turbo0" style="height: 54px; width: auto;" />
+      </a>
+    </div>
 
     <script type="module" src="/src/consent-init.js"></script>
     <script type="module" src="/src/main.jsx"></script>
