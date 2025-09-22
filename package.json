@@ -13,7 +13,8 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "playwright test",
-    "test:ui": "playwright test --ui"
+    "test:ui": "playwright test --ui",
+    "verify:dist": "node scripts/verify-dist-entries.cjs"
   },
   "dependencies": {
     "react": "^19.1.1",
