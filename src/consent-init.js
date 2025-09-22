@@ -32,3 +32,14 @@ try {
   }
 } catch {}
 
+// GitHub Pages SPA fallback: if 404.html redirected here with ?p=/x&q=query#hash, fix the URL
+try {
+  const u = new URL(window.location.href)
+  const p = u.searchParams.get('p')
+  if (p) {
+    const q = u.searchParams.get('q')
+    const hash = u.hash || ''
+    const next = decodeURIComponent(p) + (q ? `?${decodeURIComponent(q)}` : '') + hash
+    window.history.replaceState(null, '', next)
+  }
+} catch {}

@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import Seo from '@/components/Seo'
 
 function Section({ title, children, id }) {
   return (
@@ -12,14 +13,24 @@ function Section({ title, children, id }) {
 }
 
 export default function TermsOfService() {
-  useEffect(() => {
-    document.title = 'Terms of Service | Pixel Art Village'
-    const canonical = document.querySelector('link[rel="canonical"]')
-    if (canonical) canonical.setAttribute('href', 'https://pixelartvillage.org/terms')
-  }, [])
-
   return (
     <div className="container mx-auto px-4 py-10">
+      <Seo
+        title="Terms of Service | Pixel Art Village"
+        canonical="https://pixelartvillage.org/terms"
+        meta={[
+          { property: 'og:url', content: 'https://pixelartvillage.org/terms' },
+          { property: 'og:type', content: 'website' },
+          { property: 'og:title', content: 'Terms of Service | Pixel Art Village' },
+          { property: 'og:description', content: 'Pixel Art Village terms of service: usage rules, responsibilities, disclaimer, IP, governing law, contact info.' },
+          { property: 'og:image', content: 'https://pixelartvillage.org/social-terms.png' },
+          { property: 'og:site_name', content: 'Pixel Art Village' },
+          { name: 'twitter:card', content: 'summary_large_image' },
+          { name: 'twitter:title', content: 'Terms of Service | Pixel Art Village' },
+          { name: 'twitter:description', content: 'Pixel Art Village terms of service: usage rules, responsibilities, disclaimer, IP, governing law, contact info.' },
+          { name: 'twitter:image', content: 'https://pixelartvillage.org/social-terms.png' },
+        ]}
+      />
       <header className="max-w-3xl mx-auto mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Terms of Service</h1>
         <p className="text-sm text-gray-500 mt-2">Last updated: {new Date().toISOString().slice(0, 10)}</p>

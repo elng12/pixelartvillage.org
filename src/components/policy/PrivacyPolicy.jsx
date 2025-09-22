@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import Seo from '@/components/Seo'
 
 function Section({ title, children, id }) {
   return (
@@ -12,14 +13,24 @@ function Section({ title, children, id }) {
 }
 
 export default function PrivacyPolicy() {
-  useEffect(() => {
-    document.title = 'Privacy Policy | Pixel Art Village'
-    const canonical = document.querySelector('link[rel="canonical"]')
-    if (canonical) canonical.setAttribute('href', 'https://pixelartvillage.org/privacy')
-  }, [])
-
   return (
     <div className="container mx-auto px-4 py-10">
+      <Seo
+        title="Privacy Policy | Pixel Art Village"
+        canonical="https://pixelartvillage.org/privacy"
+        meta={[
+          { property: 'og:url', content: 'https://pixelartvillage.org/privacy' },
+          { property: 'og:type', content: 'website' },
+          { property: 'og:title', content: 'Privacy Policy | Pixel Art Village' },
+          { property: 'og:description', content: 'Pixel Art Village privacy policy: local image processing, AdSense cookies, third‑party partners, your choices and rights, contact info.' },
+          { property: 'og:image', content: 'https://pixelartvillage.org/social-privacy.png' },
+          { property: 'og:site_name', content: 'Pixel Art Village' },
+          { name: 'twitter:card', content: 'summary_large_image' },
+          { name: 'twitter:title', content: 'Privacy Policy | Pixel Art Village' },
+          { name: 'twitter:description', content: 'Pixel Art Village privacy policy: local image processing, AdSense cookies, third‑party partners, your choices and rights, contact info.' },
+          { name: 'twitter:image', content: 'https://pixelartvillage.org/social-privacy.png' },
+        ]}
+      />
       <header className="max-w-3xl mx-auto mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Privacy Policy</h1>
         <p className="text-sm text-gray-500 mt-2">Last updated: {new Date().toISOString().slice(0, 10)}</p>

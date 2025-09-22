@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirecting…</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <noscript>
+      <p>JavaScript required. Go to <a href="/">Home</a>.</p>
+    </noscript>
+    <script>
+      (function () {
+        var l = window.location;
+        var path = l.pathname;
+        var search = l.search || '';
+        var hash = l.hash || '';
+        var url = '/?p=' + encodeURIComponent(path) + (search ? '&q=' + encodeURIComponent(search.slice(1)) : '') + hash;
+        l.replace(url);
+      })();
+    </script>
+  </body>
+  </html>
+

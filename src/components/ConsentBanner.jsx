@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 
 const STORAGE_KEY = 'consent.choice.v1'
 
@@ -48,7 +49,7 @@ export default function ConsentBanner() {
           <p className="text-sm text-gray-800 font-medium">Privacy & Cookies</p>
           <p className="mt-1 text-sm text-gray-600">
             We use cookies to operate this site and, if enabled, to show Google AdSense ads. You can accept or reject non‑essential cookies at any time.
-            See our <a className="text-blue-600 underline" href="/privacy">Privacy Policy</a> and manage ad personalization at
+            See our <Link className="text-blue-600 underline" to="/privacy">Privacy Policy</Link> and manage ad personalization at
             {' '}<a className="text-blue-600 underline" href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">adssettings.google.com</a>.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -64,4 +65,3 @@ export default function ConsentBanner() {
     </div>
   )
 }
-

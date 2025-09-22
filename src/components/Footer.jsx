@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function GitHubIcon({ className }) {
   return (
@@ -28,9 +29,9 @@ function Footer() {
               <p className="text-sm text-gray-400 mt-1">Online pixel art generator • maker • converter</p>
             </div>
             <div>
-              <a href="#tool" className="inline-block px-4 py-2 rounded-md bg-violet-500 text-gray-900 font-semibold hover:opacity-90 transition" aria-label="Start Pixel Art in Pixel Art Village">
+              <Link to="/#tool" className="inline-block px-4 py-2 rounded-md bg-violet-500 text-gray-900 font-semibold hover:opacity-90 transition" aria-label="Start Pixel Art in Pixel Art Village">
                 Start now
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -39,28 +40,28 @@ function Footer() {
             <div>
               <p className="text-gray-200 font-semibold mb-3">Tools</p>
               <ul className="space-y-2 text-sm">
-                <li><a href="#tool" className="hover:text-white">Pixel art generator</a></li>
-                <li><a href="#tool" className="hover:text-white">Pixel art converter</a></li>
-                <li><a href="#showcase" className="hover:text-white">Image to pixel art</a></li>
-                <li><a href="#features" className="hover:text-white">Make / create pixel art</a></li>
+                <li><Link to="/#tool" className="hover:text-white">Pixel art generator</Link></li>
+                <li><Link to="/#tool" className="hover:text-white">Pixel art converter</Link></li>
+                <li><Link to="/#showcase" className="hover:text-white">Image to pixel art</Link></li>
+                <li><Link to="/#features" className="hover:text-white">Make / create pixel art</Link></li>
               </ul>
             </div>
             <div>
               <p className="text-gray-200 font-semibold mb-3">Formats</p>
               <ul className="space-y-2 text-sm">
-                <li><a href="#showcase" className="hover:text-white">PNG to pixel art</a></li>
-                <li><a href="#showcase" className="hover:text-white">JPG to pixel art</a></li>
-                <li><a href="#showcase" className="hover:text-white">IMG to pixel art</a></li>
-                <li><a href="#features" className="hover:text-white">Pixel grid preview</a></li>
+                <li><Link to="/#showcase" className="hover:text-white">PNG to pixel art</Link></li>
+                <li><Link to="/#showcase" className="hover:text-white">JPG to pixel art</Link></li>
+                <li><Link to="/#showcase" className="hover:text-white">IMG to pixel art</Link></li>
+                <li><Link to="/#features" className="hover:text-white">Pixel grid preview</Link></li>
               </ul>
             </div>
             <div>
               <p className="text-gray-200 font-semibold mb-3">Explore</p>
               <ul className="space-y-2 text-sm">
-                <li><a href="#showcase" className="hover:text-white">Examples</a></li>
-                <li><a href="#features" className="hover:text-white">Features</a></li>
-                <li><a href="#how-it-works" className="hover:text-white">How it works</a></li>
-                <li><a href="#faq" className="hover:text-white">FAQ</a></li>
+                <li><Link to="/#showcase" className="hover:text-white">Examples</Link></li>
+                <li><Link to="/#features" className="hover:text-white">Features</Link></li>
+                <li><Link to="/#how-it-works" className="hover:text-white">How it works</Link></li>
+                <li><Link to="/#faq" className="hover:text-white">FAQ</Link></li>
               </ul>
             </div>
             <div>
@@ -82,13 +83,13 @@ function Footer() {
           <div className="mt-10 pt-6 border-t border-gray-700/60 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <p className="text-xs text-gray-400">&copy; 2025 Pixel Art Village. All rights reserved.</p>
             <div className="flex items-center gap-4 text-xs text-gray-400">
-              <a href="/terms" className="hover:text-white">Terms</a>
+              <Link to="/terms" className="hover:text-white">Terms</Link>
               <span aria-hidden>•</span>
-              <a href="/privacy" className="hover:text-white">Privacy</a>
+              <Link to="/privacy" className="hover:text-white">Privacy</Link>
               <span aria-hidden>•</span>
-              <a href="/about" className="hover:text-white">About</a>
+              <Link to="/about" className="hover:text-white">About</Link>
               <span aria-hidden>•</span>
-              <a href="/contact" className="hover:text-white">Contact</a>
+              <Link to="/contact" className="hover:text-white">Contact</Link>
             </div>
           </div>
         </div>
