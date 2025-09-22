@@ -14,6 +14,15 @@
 - `npm run lint`: ESLint check.
 - E2E: `npx playwright install` then `npx playwright test` (uses `tests/`).
 
+### Node.js Version & Environment
+- Recommended Node.js: 18.x or 20.x (avoid Node 22 due to npm optional-deps issue with Rollup).
+- Use nvm to switch: `nvm use 20` (repo includes `.nvmrc`).
+- After switching Node versions, run a clean install: `rm -rf node_modules package-lock.json && npm ci`.
+
+### Build & Verify (Production)
+- `npm run build`: Builds, generates prerendered HTML for routes (including Blog and pSEO pages), and produces OG images.
+- `npm run verify:dist`: Verifies production artifacts, checking critical SEO tags and required assets exist.
+
 ## Coding Style & Naming Conventions
 - JavaScript/JSX, ES modules (use `import`/`export`, prefer named exports).
 - React 19 functional components; hooks prefixed with `use*`.
@@ -31,6 +40,11 @@
 ## Security & Configuration Tips
 - CSP (see `index.html`): images allowed from `self`, `data:`, and `blob:`. Avoid external image URLs in UI.
 - No secrets in repo; use environment variables for local services under `server/`.
+
+## SEO & Prerender Notes
+- SPA routing uses prerender to emit static HTML for key routes (Blog, pSEO `/converter/:slug`), ensuring title/canonical/OG/Twitter tags are present without JavaScript.
+- OG images are generated at build time for Blog and pSEO pages (`public/blog-og/*`, `public/pseo-og/*`).
+- The verification step enforces presence of critical meta tags and image assets.
 
 ## Preview Scaling Rule (Project‑Specific)
 - Scale by layout size, not transform: compute `width = originalWidth * zoom`, `height = originalHeight * zoom` on the `<img>`; keep `max-w-none`. Avoid CSS contain and avoid `transform: scale()` to prevent layout/visual mismatch in scrollable containers.
