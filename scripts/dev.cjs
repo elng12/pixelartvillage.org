@@ -4,7 +4,7 @@ const { spawn } = require('child_process');
 const path = require('path');
 
 function spawnProc(cmd, args, name) {
-  const p = spawn(cmd, args, { stdio: 'inherit', shell: true });
+  const p = spawn(cmd, args, { stdio: 'inherit', shell: false, windowsHide: true });
   p.on('exit', (code) => {
     // If vite exits, stop the whole dev
     if (name === 'vite') process.exit(code ?? 0);
@@ -13,7 +13,8 @@ function spawnProc(cmd, args, name) {
 }
 
 const watcher = spawnProc(process.execPath, [path.join(process.cwd(), 'scripts', 'watch-social-preview.cjs')], 'watch');
-const vite = spawnProc('vite', [], 'vite');
+const viteBin = path.join(process.cwd(), 'node_modules', 'vite', 'bin', 'vite.js');
+const vite = spawnProc(process.execPath, [viteBin], 'vite');
 
 function shutdown() {
   watcher && watcher.kill('SIGTERM');

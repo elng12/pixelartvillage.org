@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect width="24" height="24" fill="transparent"/>
+      <path d="M24 0H0V24" fill="none" stroke="#a78bfa" stroke-opacity="0.16"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="24" y="24" width="10" height="10" fill="#a78bfa"/>
+  <rect x="1166" y="24" width="10" height="10" fill="#60a5fa"/>
+  <rect x="24" y="596" width="10" height="10" fill="#60a5fa"/>
+  <rect x="1166" y="596" width="10" height="10" fill="#a78bfa"/>
+
+  <g filter="url(#shadow)">
+    <text x="80" y="200" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+          font-size="64" font-weight="900" fill="#ffffff">Privacy Policy</text>
+  </g>
+  <g>
+    <text x="84" y="244" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+          font-size="22" fill="#c7d2fe">Pixel Art Village — local processing, AdSense cookies, your choices</text>
+  </g>
+</svg>
+

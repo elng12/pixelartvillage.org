@@ -6,8 +6,9 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = process.cwd();
-const svgPath = path.join(ROOT, 'public', 'social-preview.svg');
-const pngPath = path.join(ROOT, 'public', 'social-preview.png');
+const PUBLIC = path.join(ROOT, 'public');
+const svgPath = path.join(PUBLIC, 'social-preview.svg');
+const pngPath = path.join(PUBLIC, 'social-preview.png');
 
 function log(msg) {
   console.log(`[social-preview] ${msg}`);
@@ -18,40 +19,49 @@ function exists(p) {
 }
 
 (async () => {
-  if (!exists(svgPath)) {
-    log('skip: public/social-preview.svg not found');
-    process.exit(0);
-  }
-  // Skip if PNG is newer than SVG
+  // Discover all public/social-*.svg files (including social-preview.svg)
+  let svgs = [];
   try {
-    const svgStat = fs.statSync(svgPath);
-    if (exists(pngPath)) {
-      const pngStat = fs.statSync(pngPath);
-      if (pngStat.mtimeMs >= svgStat.mtimeMs) {
-        log('ok: social-preview.png is up to date');
-        process.exit(0);
-      }
-    }
+    svgs = fs.readdirSync(PUBLIC)
+      .filter((f) => f.startsWith('social-') && f.endsWith('.svg'))
+      .map((f) => path.join(PUBLIC, f));
   } catch {}
 
-  let sharp;
-  try {
-    sharp = require('sharp');
-  } catch (e) {
-    log('warn: sharp not installed. Install with `npm i -D sharp` to auto-generate PNG.');
+  // Always include legacy social-preview.svg if present
+  if (exists(svgPath) && !svgs.includes(svgPath)) svgs.push(svgPath);
+
+  if (svgs.length === 0) {
+    log('skip: no social-*.svg found');
     process.exit(0);
   }
 
-  try {
-    const svg = fs.readFileSync(svgPath);
-    await sharp(svg)
-      .resize(1200, 630, { fit: 'inside', withoutEnlargement: false })
-      .png({ quality: 90 })
-      .toFile(pngPath);
-    log('generated public/social-preview.png');
-  } catch (err) {
-    log('error: failed to generate PNG: ' + (err?.message || String(err)));
-    process.exit(0);
+  let sharp;
+  try { sharp = require('sharp'); }
+  catch { log('warn: sharp not installed. Install with `npm i -D sharp`'); process.exit(0); }
+
+  for (const svgFile of svgs) {
+    const out = svgFile.replace(/\.svg$/, '.png');
+    try {
+      const svgStat = fs.statSync(svgFile);
+      if (exists(out)) {
+        const outStat = fs.statSync(out);
+        if (outStat.mtimeMs >= svgStat.mtimeMs) {
+          log(`ok: ${path.basename(out)} is up to date`);
+          continue;
+        }
+      }
+    } catch {}
+
+    try {
+      const svg = fs.readFileSync(svgFile);
+      await sharp(svg)
+        .resize(1200, 630, { fit: 'inside', withoutEnlargement: false })
+        .png({ quality: 90 })
+        .toFile(out);
+      log(`generated ${path.relative(PUBLIC, out)}`);
+    } catch (err) {
+      log('error: failed ' + path.basename(svgFile) + ': ' + (err?.message || String(err)));
+    }
   }
 })();
 

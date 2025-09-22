@@ -12,6 +12,7 @@ import PrivacyPolicy from './components/policy/PrivacyPolicy';
 import TermsOfService from './components/policy/TermsOfService';
 import About from './components/About';
 import Contact from './components/Contact';
+import ConsentBanner from './components/ConsentBanner';
 
 function App() {
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -32,6 +33,7 @@ function App() {
         <main>
           <PrivacyPolicy />
         </main>
+        <ConsentBanner />
         <Footer />
       </Fragment>
     );
@@ -43,6 +45,7 @@ function App() {
         <main>
           <TermsOfService />
         </main>
+        <ConsentBanner />
         <Footer />
       </Fragment>
     );
@@ -54,6 +57,7 @@ function App() {
         <main>
           <About />
         </main>
+        <ConsentBanner />
         <Footer />
       </Fragment>
     );
@@ -65,6 +69,7 @@ function App() {
         <main>
           <Contact />
         </main>
+        <ConsentBanner />
         <Footer />
       </Fragment>
     );
@@ -84,6 +89,7 @@ function App() {
         <HowItWorksSection />
         <FaqSection />
       </main>
+      <ConsentBanner />
       <Footer />
     </Fragment>
   );
