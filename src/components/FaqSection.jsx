@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     question: 'How do I turn a picture into a game sprite?',
-    answer: 'Our pixel art maker is perfect for creating game sprites. Upload your character\'s picture, adjust the pixel size to match your game\'s art style, and use the palette controls to fit your engine\'s color limits. You can then download the resulting sprite as a transparent PNG.'
+    answer: 'Our pixel art maker is perfect for creating game sprites. Upload your character\\'s picture, adjust the pixel size to match your game\\'s art style, and use the palette controls to fit your engine\\'s color limits. You can then download the resulting sprite as a transparent PNG.'
   },
   {
     question: 'Can I adjust the pixel grid on my image?',
@@ -42,17 +42,14 @@ function FaqSection() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Frequently Asked Questions</h2>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <details key={index} className="group p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
-              <summary className="font-semibold text-lg text-gray-800 cursor-pointer list-none flex justify-between items-center">
+            <article key={index} className="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
+              <h3 className="text-lg md:text-xl font-semibold text-gray-900">
                 {faq.question}
-                <span className="text-gray-400 transition-transform transform group-open:rotate-45" aria-hidden="true">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                  </svg>
-                </span>
-              </summary>
-              <p className="mt-4 text-gray-600">{faq.answer}</p>
-            </details>
+              </h3>
+              <p className="mt-3 md:mt-4 text-gray-700 leading-relaxed">
+                {faq.answer}
+              </p>
+            </article>
           ))}
         </div>
       </div>
