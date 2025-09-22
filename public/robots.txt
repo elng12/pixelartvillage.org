@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+# 屏蔽示例/临时页面的索引
+Disallow: /Image To Pixel Art (2025_9_20 21：06：57).html
 
 # 指定规范域名（canonical domain）
 Host: pixelartvillage.org
