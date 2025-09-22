@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect width="24" height="24" fill="transparent"/>
+      <path d="M24 0H0V24" fill="none" stroke="#a78bfa" stroke-opacity="0.16"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Pixel corner markers -->
+  <rect x="24" y="24" width="10" height="10" fill="#a78bfa"/>
+  <rect x="1166" y="24" width="10" height="10" fill="#60a5fa"/>
+  <rect x="24" y="596" width="10" height="10" fill="#60a5fa"/>
+  <rect x="1166" y="596" width="10" height="10" fill="#a78bfa"/>
+
+  <!-- Brand Title -->
+  <g filter="url(#shadow)">
+    <text x="80" y="220" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+          font-size="76" font-weight="900" fill="#ffffff">Pixel Art Village</text>
+  </g>
+  <g>
+    <text x="84" y="268" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+          font-size="20" fill="#c7d2fe">Online pixel art maker • converter • generator</text>
+  </g>
+
+  <!-- Tagline block -->
+  <g transform="translate(80, 320)" filter="url(#shadow)">
+    <rect x="0" y="-44" width="1040" height="180" rx="12" fill="#0b1020" fill-opacity="0.65" stroke="#334155"/>
+    <foreignObject x="24" y="-18" width="992" height="136">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="color:#e5e7eb;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.45;font-size:22px">
+        <strong style="color:#a78bfa">Pixel Art Village</strong> is the best place for a pixel art online experience. Use our pixel converter to quickly turn <strong>PNG to pixel art</strong> or <strong>JPG to pixel art</strong> with crisp, grid‑friendly results. <strong>Pixel Art Village</strong> makes creating effortless—adjust pixels, preview instantly, and export clean images. Start crafting unique retro visuals with <strong>Pixel Art Village</strong> today.
+      </div>
+    </foreignObject>
+  </g>
+
+  <!-- CTA badge -->
+  <g transform="translate(80, 520)" filter="url(#shadow)">
+    <rect x="0" y="-36" width="280" height="56" rx="10" fill="#a78bfa"/>
+    <text x="20" y="0" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+          font-size="24" font-weight="700" fill="#0b1020">Start now — it’s free</text>
+  </g>
+</svg>
+

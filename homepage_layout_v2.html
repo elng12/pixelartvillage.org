@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>布局方案 v2</title>
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-light: #f9fafb;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            font-size: 18px;
+            color: var(--text-primary);
+            background-color: #fff;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 3rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 4rem auto;
+        }
+
+        /* Header */
+        .main-header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .main-header nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            margin-left: 2rem;
+            font-weight: 500;
+        }
+        .main-header nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Tool Section */
+        #tool {
+            background-color: var(--bg-light);
+            padding-top: 4rem;
+        }
+        .upload-box {
+            border: 3px dashed var(--border-color);
+            border-radius: 16px;
+            padding: 4rem;
+            text-align: center;
+            background-color: #fff;
+            cursor: pointer;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        .upload-box:hover {
+            border-color: var(--primary-color);
+            background-color: #f0f6ff;
+        }
+        .upload-box h1 {
+            margin-top: 0;
+        }
+
+        /* Showcase Section */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .showcase-grid img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .showcase-grid h3 {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+        .feature-card .icon { font-size: 2.5rem; }
+
+        /* How-it-Works Section */
+        .how-it-works-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            text-align: center;
+        }
+        .step .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            background-color: #e0eaff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            margin: 0 auto 1rem auto;
+        }
+
+        /* FAQ Section */
+        details {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+        }
+        summary {
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: var(--text-primary);
+            color: #fff;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="logo"><strong>PixelTool</strong></div>
+            <nav>
+                <a href="#showcase">示例</a>
+                <a href="#features">功能</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="tool">
+            <div class="container">
+                <div class="upload-box">
+                    <h1>将任何图片转换为像素艺术</h1>
+                    <p class="section-subtitle" style="margin-bottom: 0;">拖拽图片到这里，或点击选择文件</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="showcase">
+            <div class="container">
+                <h2>效果一目了然</h2>
+                <p class="section-subtitle">强大的转换引擎，为你保留每一个细节。</p>
+                <div class="showcase-grid">
+                    <div>
+                        <h3>处理前</h3>
+                        <img src="https://placehold.co/600x400/a78bfa/ffffff?text=Original" alt="Original Image">
+                    </div>
+                    <div>
+                        <h3>处理后</h3>
+                        <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Pixel+Art" alt="Pixelated Image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" style="background-color: var(--bg-light);">
+            <div class="container">
+                <h2>核心功能</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">🎨</div>
+                        <h3>高级色彩控制</h3>
+                        <p>自由调整亮度、对比度、饱和度，并应用专业级调色板。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📏</div>
+                        <h3>可调像素大小</h3>
+                        <p>从精细到复古，随心所欲控制像素颗粒感，找到你的完美风格。</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h3>保护你的隐私</h3>
+                        <p>所有图像处理都在你的浏览器本地完成，我们绝不上传你的任何图片。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works">
+            <div class="container">
+                <h2>只需三步</h2>
+                <div class="how-it-works-grid">
+                    <div class="step">
+                        <div class="number">1</div>
+                        <h3>上传图片</h3>
+                        <p>从你的设备中选择任何图片，或直接拖拽到上方区域。</p>
+                    </div>
+                    <div class="step">
+                        <div class="number">2</div>
+                        <h3>调整参数</h3>
+                        <p>使用实时预览调整像素大小和颜色，直到获得你想要的效果。</p>
+                    </div>
+                    <div class="step">
+                        <div class="number">3</div>
+                        <h3>下载作品</h3>
+                        <p>一键下载处理完成的高清像素艺术作品，无需等待。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" style="background-color: var(--bg-light);">
+            <div class="container">
+                <h2>常见问题</h2>
+                <details>
+                    <summary>这个工具是免费的吗？</summary>
+                    <p>是的，本工具目前完全免费，没有任何功能限制。</p>
+                </details>
+                <details>
+                    <summary>我的图片会上传到服务器吗？</summary>
+                    <p>不会。为了保护你的隐私，所有的图像处理都在你的浏览器本地完成，你的图片永远不会离开你的电脑。</p>
+                </details>
+                <details>
+                    <summary>我可以商用生成的图片吗？</summary>
+                    <p>可以。你对自己上传的原始图片拥有一切权利，因此你对生成的图片也拥有一切权利，包括商业用途。</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2024 PixelTool. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

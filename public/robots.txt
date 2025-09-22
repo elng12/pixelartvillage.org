@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# 指定规范域名（canonical domain）
+Host: pixelartvillage.org
+
+# Sitemap
+Sitemap: https://pixelartvillage.org/sitemap.xml
