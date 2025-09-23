@@ -44,6 +44,7 @@ function Editor({ image }) {
 
   const [state, dispatch] = useReducer(reducer, initial);
   const previewRef = useRef(null);
+  const fileInputRef = useRef(null);
   const { palettes: customPalettes, upsertPalette, deletePalette } = usePaletteStorage();
 
   const imageSettings = useMemo(() => ({
@@ -78,7 +79,7 @@ function Editor({ image }) {
     const cw = Math.max(1, (container.clientWidth || 1) - px);
     const ch = Math.max(1, (container.clientHeight || 1) - py);
     const scale = Math.min(cw / iw, ch / ih);
-    const clamped = Math.max(0.25, Math.min(8, scale));
+    const clamped = Math.min(8, scale);
     dispatch({ type: 'SET', field: 'zoom', value: clamped });
   }, []);
 
@@ -124,6 +125,41 @@ function Editor({ image }) {
 
   // PaletteManager 现在内聚状态；通过 onPalettesChanged 回调同步 Editor 的 customPalettes
 
+  // 触发上传
+  const triggerUpload = () => {
+    fileInputRef.current?.click();
+  };
+
+  // 处理文件选择，仅接收 PNG/JPG，读取并更新预览
+  const onFileSelected = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!/^image\/(png|jpeg)$/.test(file.type)) {
+      alert('Please select a PNG or JPG image.');
+      e.target.value = '';
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const src = reader.result;
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = src;
+      const onReady = async () => {
+        try { await img.decode(); } catch (e) { if (import.meta?.env?.DEV) console.error(e); }
+        const iw = img.naturalWidth || 1;
+        const ih = img.naturalHeight || 1;
+        dispatch({ type: 'SET', field: 'imgDim', value: { w: iw, h: ih } });
+        fitToScreenDims(iw, ih);
+        dispatch({ type: 'SET', field: 'readySrc', value: src });
+      };
+      if (img.complete) onReady(); else img.onload = onReady;
+    };
+    reader.readAsDataURL(file);
+    // 重置 input 以便重复选择相同文件
+    e.target.value = '';
+  };
+
   const downloadImage = async () => {
     const blob = await exportProcessedBlob(processedImage, {
       format: state.exportFormat,
@@ -162,9 +198,27 @@ function Editor({ image }) {
           imgDim={state.imgDim}
         />
       </div>
-              <button onClick={downloadImage} className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors">
-                Download Pixel Art
-              </button>
+              <div className="flex gap-3">
+                <button
+                  onClick={downloadImage}
+                  className="flex-1 bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Download Pixel Art
+                </button>
+                <button
+                  onClick={triggerUpload}
+                  className="flex-1 bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Upload Image
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/png,image/jpeg"
+                  className="hidden"
+                  onChange={onFileSelected}
+                />
+              </div>
             </div>
 
             {/* 控制区域 */}

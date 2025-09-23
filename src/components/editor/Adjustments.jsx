@@ -92,7 +92,7 @@ function Adjustments({ state, dispatch, customPalettes }) {
 
         <div>
           <label htmlFor="zoom-slider" className="block text-sm font-medium mb-2">Zoom: {state.zoom}x</label>
-          <input id="zoom-slider" type="range" min="0.25" max="8" step="0.25" value={state.zoom} onChange={set('zoom')} className="w-full" />
+          <input id="zoom-slider" type="range" min="0.05" max="8" step="0.05" value={state.zoom} onChange={set('zoom')} className="w-full" />
           <div className="flex items-center gap-3 mt-2">
             <input id="grid-toggle" type="checkbox" className="h-4 w-4" checked={state.showGrid} onChange={setBool('showGrid')} />
             <label htmlFor="grid-toggle" className="text-sm">Show grid</label>
