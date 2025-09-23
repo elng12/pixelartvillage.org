@@ -9,6 +9,45 @@ export const imageProcessor = new ImageProcessor();
 const KMEANS_CACHE = new Map(); // key -> {value, tick}
 let KMEANS_TICK = 0;
 
+// Reusable singleton worker and request routing (avoid per-call creation/teardown)
+let KMEANS_WORKER = null;
+const KMEANS_HANDLERS = new Map(); // id -> { resolve, reject }
+
+function ensureKMeansWorker() {
+  if (KMEANS_WORKER) return KMEANS_WORKER;
+  const worker = new Worker(new URL('../workers/kmeansWorker.js', import.meta.url), { type: 'module' });
+  const onMessage = (e) => {
+    const { id, ok, centroids, error } = e.data || {};
+    if (!id) return; // ignore unknown messages
+    const handler = KMEANS_HANDLERS.get(id);
+    if (!handler) return; // possibly aborted; drop
+    KMEANS_HANDLERS.delete(id);
+    if (!ok || !centroids) {
+      handler.reject(new Error(error || 'KMeans worker failed'));
+      return;
+    }
+    try {
+      const result = centroids.map((c) => [clamp255(c[0]), clamp255(c[1]), clamp255(c[2])]);
+      handler.resolve(result);
+    } catch (err) {
+      handler.reject(err);
+    }
+  };
+  const onError = (err) => {
+    // reject all pending
+    for (const [, h] of KMEANS_HANDLERS) {
+      try { h.reject(err); } catch { /* ignore */ }
+    }
+    KMEANS_HANDLERS.clear();
+    try { worker.terminate(); } catch { /* ignore */ }
+    KMEANS_WORKER = null;
+  };
+  worker.addEventListener('message', onMessage);
+  worker.addEventListener('error', onError);
+  KMEANS_WORKER = worker;
+  return worker;
+}
+
 function kmeansCacheGet(key) {
   const hit = KMEANS_CACHE.get(key);
   if (hit) hit.tick = ++KMEANS_TICK;
@@ -184,32 +223,27 @@ async function getKMeansPalette(sourceCanvas, k, signal) {
   const cached = kmeansCacheGet(hash);
   if (cached) return cached;
 
-  const worker = new Worker(new URL('../workers/kmeansWorker.js', import.meta.url), { type: 'module' });
+  const worker = ensureKMeansWorker();
   const id = Math.random().toString(36).slice(2);
   const promise = new Promise((resolve, reject) => {
-    const onMessage = (e) => {
-      const { ok, centroids } = e.data || {};
-      worker.terminate();
-      if (signal) signal.removeEventListener('abort', onAbort);
-      if (!ok || !centroids) {
-        reject(new Error('KMeans worker failed'));
-        return;
+    KMEANS_HANDLERS.set(id, {
+      resolve: (res) => {
+        // cache successful result
+        try { kmeansCacheSet(hash, res); } catch { /* ignore */ }
+        if (signal) try { signal.removeEventListener('abort', onAbort); } catch { /* ignore */ }
+        resolve(res);
+      },
+      reject: (err) => {
+        if (signal) try { signal.removeEventListener('abort', onAbort); } catch { /* ignore */ }
+        reject(err);
       }
-      const result = centroids.map((c) => [clamp255(c[0]), clamp255(c[1]), clamp255(c[2])]);
-      kmeansCacheSet(hash, result);
-      resolve(result);
-    }
-    const onError = (err) => {
-      worker.terminate();
-      if (signal) signal.removeEventListener('abort', onAbort);
-      reject(err);
-    }
+    });
     const onAbort = () => {
-      worker.terminate();
+      // 仅移除处理器，结果到达时丢弃；避免销毁全局 worker
+      KMEANS_HANDLERS.delete(id);
+      try { KMEANS_WORKER?.postMessage({ type: 'cancel', id }); } catch { /* ignore */ }
       reject(new DOMException('Aborted', 'AbortError'));
-    }
-    worker.onmessage = onMessage;
-    worker.onerror = onError;
+    };
     if (signal) {
       if (signal.aborted) {
         onAbort();
@@ -219,7 +253,7 @@ async function getKMeansPalette(sourceCanvas, k, signal) {
     }
   });
   // transfer the buffer to avoid copy
-  worker.postMessage({ id, data: img.data.buffer, width: w, height: h, k }, [img.data.buffer]);
+  worker.postMessage({ type: 'run', id, data: img.data.buffer, width: w, height: h, k }, [img.data.buffer]);
   return promise;
 }
 

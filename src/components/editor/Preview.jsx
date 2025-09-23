@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Preview({ previewRef, imgRef, processedImage, zoom, pixelSize, showGrid, isProcessing, imgDim }) {
+function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, isProcessing, imgDim }) {
   const scaledW = imgDim?.w && imgDim?.h ? Math.max(1, Math.round(imgDim.w * zoom)) : undefined
   const scaledH = imgDim?.w && imgDim?.h ? Math.max(1, Math.round(imgDim.h * zoom)) : undefined
   return (
@@ -13,7 +13,6 @@ function Preview({ previewRef, imgRef, processedImage, zoom, pixelSize, showGrid
       <img
         src={processedImage || null}
         alt="Pixel art generator preview"
-        ref={imgRef}
         className={`transition-opacity ${isProcessing ? 'opacity-50' : 'opacity-100'} max-w-none`}
         style={{
           imageRendering: 'pixelated',

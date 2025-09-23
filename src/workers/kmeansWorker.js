@@ -1,4 +1,25 @@
-/* Dedicated worker: compute K-Means palette on small ImageData */
+/*
+ * Dedicated worker: compute K-Means palette on small ImageData
+ *
+ * Pipeline overview
+ * 1) Sampling: main thread downsamples to a small canvas and transfers the
+ *    Uint8ClampedArray buffer here to reduce compute.
+ * 2) Init: k-means++ (probability proportional to squared distance) to pick
+ *    good initial centroids.
+ * 3) Iterate: Lloyd's algorithm with early-stop tolerance (TOL) on total
+ *    centroid shift.
+ * 4) Restarts: run multiple times and keep the best (lowest intra-cluster sum).
+ *
+ * Messages
+ * - { type: 'run', id, data, width, height, k }
+ * - { type: 'cancel', id }
+ *
+ * Cancellation
+ * - The main thread may request cancellation; we check the flag between
+ *   phases/loops and abort early by returning without posting a result.
+ */
+
+const __cancel = new Set()
 
 function sqrDist(p, q) {
   const dr = p[0] - q[0];
@@ -72,14 +93,20 @@ function iterate(samples, centroids, iters) {
 }
 
 self.onmessage = (e) => {
+  const msg = e.data || {}
+  if (msg?.type === 'cancel' && msg.id) {
+    __cancel.add(msg.id)
+    return
+  }
   try {
-    const { id, data, /* width, height, */ k } = e.data;
+    const { id, data, /* width, height, */ k } = msg
     const arr = new Uint8ClampedArray(data);
     const samples = [];
     for (let i = 0; i < arr.length; i += 4) {
       const a = arr[i + 3];
       if (a === 0) continue;
       samples.push([arr[i], arr[i + 1], arr[i + 2]]);
+      if (__cancel.has(id)) return;
     }
     if (samples.length === 0) {
       self.postMessage({ id, ok: true, centroids: [[0, 0, 0]] });
@@ -90,6 +117,7 @@ self.onmessage = (e) => {
     let best = null;
     let bestScore = Infinity;
     for (let r = 0; r < restarts; r++) {
+      if (__cancel.has(id)) return;
       const init = initPlusPlus(samples, k);
       const cents = iterate(samples, init, iters);
       let score = 0;
@@ -98,6 +126,7 @@ self.onmessage = (e) => {
         let d = Infinity;
         for (let c = 0; c < cents.length; c++) d = Math.min(d, sqrDist(s, cents[c]));
         score += d;
+        if (__cancel.has(id)) return;
       }
       if (score < bestScore) {
         bestScore = score;

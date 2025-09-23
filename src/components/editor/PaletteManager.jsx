@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { loadCustomPalettes, saveCustomPalettes } from '../../utils/constants'
 
-function PaletteManager({ onPalettesChanged }) {
+function PaletteManager({ onSavePalette, onDeletePalette }) {
   const [pmName, setPmName] = useState('')
   const [pmColors, setPmColors] = useState([])
   const [pmInput, setPmInput] = useState('#000000')
@@ -10,12 +9,7 @@ function PaletteManager({ onPalettesChanged }) {
   const savePalette = () => {
     const name = pmName.trim()
     if (!name || pmColors.length === 0) return
-    const next = loadCustomPalettes()
-    const idx = next.findIndex((p) => p.name === name)
-    if (idx >= 0) next[idx] = { name, colors: pmColors }
-    else next.push({ name, colors: pmColors })
-    saveCustomPalettes(next)
-    onPalettesChanged?.(next)
+    onSavePalette?.(name, pmColors)
   }
 
   const resetPaletteForm = () => {
@@ -28,9 +22,7 @@ function PaletteManager({ onPalettesChanged }) {
   const deleteCurrentPalette = () => {
     const name = pmName.trim()
     if (!name) return
-    const next = loadCustomPalettes().filter((p) => p.name !== name)
-    saveCustomPalettes(next)
-    onPalettesChanged?.(next)
+    onDeletePalette?.(name)
   }
   return (
     <div className="border-t pt-6">

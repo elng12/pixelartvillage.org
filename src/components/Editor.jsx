@@ -1,12 +1,12 @@
-import React, { useState, useMemo, useEffect, useRef, useReducer, useCallback } from 'react';
+import React, { useMemo, useEffect, useRef, useReducer, useCallback } from 'react';
 import { useImageProcessor } from '../hooks/useImageProcessor';
-import { PALETTES, loadCustomPalettes } from '../utils/constants';
 import { exportProcessedBlob } from '../utils/imageProcessor';
 import { LAYOUT_TOKENS, COLORS } from '../constants/design-tokens';
 import Preview from './editor/Preview';
 import ExportPanel from './editor/ExportPanel';
 import PaletteManager from './editor/PaletteManager';
 import Adjustments from './editor/Adjustments';
+import { usePaletteStorage } from '../hooks/usePaletteStorage';
 
 function Editor({ image }) {
   const initial = {
@@ -43,9 +43,8 @@ function Editor({ image }) {
   }
 
   const [state, dispatch] = useReducer(reducer, initial);
-  const [customPalettes, setCustomPalettes] = useState([]);
   const previewRef = useRef(null);
-  const imgRef = useRef(null);
+  const { palettes: customPalettes, upsertPalette, deletePalette } = usePaletteStorage();
 
   const imageSettings = useMemo(() => ({
     pixelSize: state.pixelSize,
@@ -60,10 +59,6 @@ function Editor({ image }) {
   }), [state.pixelSize, state.brightness, state.contrast, state.saturation, state.palette, state.dither, state.autoPalette, state.paletteSize, state.colorDistance]);
 
   const { processedImage, isProcessing } = useImageProcessor(state.readySrc, imageSettings);
-
-  useEffect(() => {
-    setCustomPalettes(loadCustomPalettes());
-  }, []);
 
   // Auto-compact based on viewport height
   useEffect(() => {
@@ -87,28 +82,7 @@ function Editor({ image }) {
     dispatch({ type: 'SET', field: 'zoom', value: clamped });
   }, []);
 
-  // 基于 <img> 自身尺寸拟合
-  const fitToScreen = useCallback(() => {
-    const imgEl = imgRef.current;
-    if (!imgEl) return;
-    const iw = imgEl.naturalWidth || 1;
-    const ih = imgEl.naturalHeight || 1;
-    dispatch({ type: 'SET', field: 'imgDim', value: { w: iw, h: ih } });
-    fitToScreenDims(iw, ih);
-  }, [fitToScreenDims]);
-
-  // 仅挂载一次：监听 img load 与窗口尺寸变更
-  useEffect(() => {
-    const imgEl = imgRef.current;
-    if (!imgEl) return;
-    imgEl.addEventListener('load', fitToScreen);
-    window.addEventListener('resize', fitToScreen);
-    if (imgEl.naturalWidth) fitToScreen();
-    return () => {
-      imgEl.removeEventListener('load', fitToScreen);
-      window.removeEventListener('resize', fitToScreen);
-    };
-  }, [fitToScreen]);
+  // 不再依赖 <img> 的 onload 测量，统一使用解码得到的尺寸 + 容器尺寸自适应
 
   // 观察容器尺寸变化，保持始终完整展示
   useEffect(() => {
@@ -177,18 +151,17 @@ function Editor({ image }) {
           <div className={`grid grid-cols-1 lg:grid-cols-2 ${layout.gap}`}>
             {/* 预览区域 */}
             <div className="space-y-4">
-              <div className={`${layout.height}`}>
-                <Preview
-                  previewRef={previewRef}
-                  imgRef={imgRef}
-                  processedImage={processedImage || state.readySrc || ''}
-                  zoom={state.zoom}
-                  pixelSize={state.pixelSize}
-                  showGrid={state.showGrid}
-                  isProcessing={isProcessing || !state.readySrc}
-                  imgDim={state.imgDim}
-                />
-              </div>
+      <div className={`${layout.height}`}>
+        <Preview
+          previewRef={previewRef}
+          processedImage={processedImage || state.readySrc || ''}
+          zoom={state.zoom}
+          pixelSize={state.pixelSize}
+          showGrid={state.showGrid}
+          isProcessing={isProcessing || !state.readySrc}
+          imgDim={state.imgDim}
+        />
+      </div>
               <button onClick={downloadImage} className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors">
                 Download Pixel Art
               </button>
@@ -214,7 +187,7 @@ function Editor({ image }) {
                 quality={state.quality}
                 setQuality={(e)=>dispatch({type:'SET', field:'quality', value:Number(e.target.value)})}
               />
-              <PaletteManager onPalettesChanged={setCustomPalettes} />
+              <PaletteManager onSavePalette={upsertPalette} onDeletePalette={deletePalette} />
                 
               </div>
             </div>

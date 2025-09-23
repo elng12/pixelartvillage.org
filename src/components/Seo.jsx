@@ -1,37 +1,22 @@
-import { useEffect, useMemo } from 'react'
+import { createPortal } from 'react-dom'
 
-function upsertTag(tagName, attributes) {
-  const selector = Object.entries(attributes)
-    .map(([k, v]) => `[${k}="${CSS.escape(v)}"]`)
-    .join('')
-  let el = document.head.querySelector(`${tagName}${selector}`)
-  if (!el) {
-    el = document.createElement(tagName)
-    for (const [k, v] of Object.entries(attributes)) el.setAttribute(k, v)
-    document.head.appendChild(el)
-  }
-  return el
-}
-
+// 轻量声明式 Head 管理：通过 Portal 将标签渲染到 <head>
+// 避免直接使用 DOM API，保持 React 声明式模型
 export default function Seo({ title, canonical, meta = [] }) {
-  const metas = useMemo(() => (Array.isArray(meta) ? meta : []), [meta])
-  const metaKey = useMemo(() => JSON.stringify(metas), [metas])
-
-  useEffect(() => {
-    if (title) document.title = title
-    if (canonical) {
-      const link = document.head.querySelector('link[rel="canonical"]') || (() => {
-        const l = document.createElement('link'); l.setAttribute('rel', 'canonical'); document.head.appendChild(l); return l
-      })()
-      link.setAttribute('href', canonical)
-    }
-    for (const m of metas) {
-      if (m.name) {
-        upsertTag('meta', { name: m.name, content: m.content })
-      } else if (m.property) {
-        upsertTag('meta', { property: m.property, content: m.content })
-      }
-    }
-  }, [title, canonical, metaKey, metas])
-  return null
+  const metas = Array.isArray(meta) ? meta : []
+  if (typeof document === 'undefined') return null
+  return createPortal(
+    <>
+      {title ? <title>{title}</title> : null}
+      {canonical ? <link rel="canonical" href={canonical} /> : null}
+      {metas.map((m, i) =>
+        m?.name ? (
+          <meta key={`n-${i}`} name={m.name} content={m.content || ''} />
+        ) : m?.property ? (
+          <meta key={`p-${i}`} property={m.property} content={m.content || ''} />
+        ) : null,
+      )}
+    </>,
+    document.head,
+  )
 }

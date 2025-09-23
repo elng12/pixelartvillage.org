@@ -20,6 +20,25 @@ const BlogPost = lazy(() => import('./components/BlogPost'));
 const PseoPage = lazy(() => import('./components/PseoPage'));
 import ConsentBanner from './components/ConsentBanner';
 
+function Home({ uploadedImage, setUploadedImage }) {
+  return (
+    <Fragment>
+      <Seo
+        title="Pixel Art Village | Online Pixel Art Maker & Converter"
+        canonical="https://pixelartvillage.org/"
+      />
+      
+      <ToolSection onImageUpload={setUploadedImage} />
+      {uploadedImage ? <Editor image={uploadedImage} /> : null}
+      <ShowcaseSection />
+      <WplaceFeaturesSection />
+      <FeaturesSection />
+      <HowItWorksSection />
+      <FaqSection />
+    </Fragment>
+  );
+}
+
 function App() {
   const [uploadedImage, setUploadedImage] = useState(null);
 
@@ -29,25 +48,6 @@ function App() {
     return () => document.body.classList.remove('bg-white');
   }, []);
 
-  function Home() {
-    return (
-      <Fragment>
-        <Seo
-          title="Pixel Art Village | Online Pixel Art Maker & Converter"
-          canonical="https://pixelartvillage.org/"
-        />
-        
-        <ToolSection onImageUpload={setUploadedImage} />
-        {uploadedImage ? <Editor image={uploadedImage} /> : null}
-        <ShowcaseSection />
-        <WplaceFeaturesSection />
-        <FeaturesSection />
-        <HowItWorksSection />
-        <FaqSection />
-      </Fragment>
-    );
-  }
-
   return (
     <Fragment>
       <Header />
@@ -55,7 +55,7 @@ function App() {
       <main>
         <Suspense fallback={<div className="container mx-auto px-4 py-10 text-sm text-gray-600" role="status">Loading…</div>}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/about" element={<About />} />
