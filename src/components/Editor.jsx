@@ -47,6 +47,9 @@ function Editor({ image }) {
   const fileInputRef = useRef(null);
   const { palettes: customPalettes, upsertPalette, deletePalette } = usePaletteStorage();
 
+  // 限制最大文件大小（MB）
+  const MAX_FILE_MB = 10;
+
   const imageSettings = useMemo(() => ({
     pixelSize: state.pixelSize,
     brightness: state.brightness,
@@ -104,6 +107,20 @@ function Editor({ image }) {
     el.scrollTop = 0;
   }, [state.readySrc, processedImage]);
 
+  // 监听全局粘贴事件，支持从剪贴板导入图片
+  useEffect(() => {
+    const onPaste = (e) => {
+      const files = Array.from(e.clipboardData?.files || []);
+      if (files.length) {
+        e.preventDefault();
+        handleFiles(files);
+      }
+    };
+    window.addEventListener('paste', onPaste);
+    return () => window.removeEventListener('paste', onPaste);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // 等图片解码完成后再开始处理，避免“过早预览/拟合”的闪动
   useEffect(() => {
     dispatch({ type: 'SET', field: 'readySrc', value: null });
@@ -123,20 +140,17 @@ function Editor({ image }) {
     return () => { i.onload = null; };
   }, [image, fitToScreenDims]);
 
-  // PaletteManager 现在内聚状态；通过 onPalettesChanged 回调同步 Editor 的 customPalettes
-
-  // 触发上传
-  const triggerUpload = () => {
-    fileInputRef.current?.click();
-  };
-
-  // 处理文件选择，仅接收 PNG/JPG，读取并更新预览
-  const onFileSelected = (e) => {
-    const file = e.target.files?.[0];
+  // 统一处理文件列表（PNG/JPG，大小≤10MB）
+  const handleFiles = (fileList) => {
+    const file = fileList?.[0];
     if (!file) return;
     if (!/^image\/(png|jpeg)$/.test(file.type)) {
       alert('Please select a PNG or JPG image.');
-      e.target.value = '';
+      return;
+    }
+    const maxBytes = MAX_FILE_MB * 1024 * 1024;
+    if (file.size > maxBytes) {
+      alert(`File is too large. Max allowed size is ${MAX_FILE_MB}MB.`);
       return;
     }
     const reader = new FileReader();
@@ -156,6 +170,24 @@ function Editor({ image }) {
       if (img.complete) onReady(); else img.onload = onReady;
     };
     reader.readAsDataURL(file);
+  };
+
+  // 拖拽支持：阻止默认并读取文件
+  const onDragOver = (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; };
+  const onDrop = (e) => {
+    e.preventDefault();
+    const files = e.dataTransfer?.files;
+    if (files && files.length) handleFiles(files);
+  };
+
+  // 触发上传
+  const triggerUpload = () => {
+    fileInputRef.current?.click();
+  };
+
+  // 处理文件选择：复用 handleFiles
+  const onFileSelected = (e) => {
+    handleFiles(e.target.files);
     // 重置 input 以便重复选择相同文件
     e.target.value = '';
   };
@@ -187,17 +219,17 @@ function Editor({ image }) {
           <div className={`grid grid-cols-1 lg:grid-cols-2 ${layout.gap}`}>
             {/* 预览区域 */}
             <div className="space-y-4">
-      <div className={`${layout.height}`}>
-        <Preview
-          previewRef={previewRef}
-          processedImage={processedImage || state.readySrc || ''}
-          zoom={state.zoom}
-          pixelSize={state.pixelSize}
-          showGrid={state.showGrid}
-          isProcessing={isProcessing || !state.readySrc}
-          imgDim={state.imgDim}
-        />
-      </div>
+              <div className={`${layout.height}`} onDragOver={onDragOver} onDrop={onDrop}>
+                <Preview
+                  previewRef={previewRef}
+                  processedImage={processedImage || state.readySrc || ''}
+                  zoom={state.zoom}
+                  pixelSize={state.pixelSize}
+                  showGrid={state.showGrid}
+                  isProcessing={isProcessing || !state.readySrc}
+                  imgDim={state.imgDim}
+                />
+              </div>
               <div className="flex gap-3">
                 <button
                   onClick={downloadImage}
@@ -242,11 +274,10 @@ function Editor({ image }) {
                 setQuality={(e)=>dispatch({type:'SET', field:'quality', value:Number(e.target.value)})}
               />
               <PaletteManager onSavePalette={upsertPalette} onDeletePalette={deletePalette} />
-                
-              </div>
             </div>
           </div>
         </div>
+      </div>
     </section>
   );
 }

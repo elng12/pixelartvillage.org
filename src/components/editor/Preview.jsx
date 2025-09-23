@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, isProcessing, imgDim }) {
+function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, isProcessing, imgDim, onDropFiles }) {
   const scaledW = imgDim?.w && imgDim?.h ? Math.max(1, Math.round(imgDim.w * zoom)) : undefined
   const scaledH = imgDim?.w && imgDim?.h ? Math.max(1, Math.round(imgDim.h * zoom)) : undefined
   return (
@@ -9,6 +9,12 @@ function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, isProc
       data-testid="preview-container"
       aria-busy={isProcessing}
       className={"relative border rounded-lg p-2 bg-white h-[70vh] flex items-center justify-center shadow-sm overflow-auto"}
+      onDragOver={(e) => { e.preventDefault(); }}
+      onDrop={(e) => {
+        e.preventDefault();
+        const files = e.dataTransfer?.files;
+        if (files && files.length && onDropFiles) onDropFiles(files);
+      }}
     >
       <img
         src={processedImage || null}
