@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 # CodeBuddy
 .codebuddy/
+
+# Test reports
+playwright-report/
+test-results/
