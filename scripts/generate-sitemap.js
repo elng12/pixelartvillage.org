@@ -10,7 +10,27 @@ const outPath = path.resolve(process.cwd(), 'public', 'sitemap.xml');
 const today = new Date();
 const isoDate = today.toISOString().slice(0, 10);
 
-const PATHS = ['/', '/privacy', '/terms', '/about', '/contact'];
+const PATHS = [
+  '/',
+  '/privacy/',
+  '/terms/',
+  '/about/',
+  '/contact/',
+  '/blog/',
+  '/blog/getting-started-pixel-art-maker/',
+  '/blog/photo-to-sprite-converter-tips/',
+  '/converter/png-to-pixel-art/',
+  '/converter/jpg-to-pixel-art/',
+  '/converter/image-to-pixel-art/',
+  '/converter/gif-to-pixel-art/',
+  '/converter/webp-to-pixel-art/',
+  '/converter/bmp-to-pixel-art/',
+  '/converter/photo-to-pixel-art/',
+  '/converter/photo-to-sprite-converter/',
+  '/converter/pixelate-image-online/',
+  '/converter/8-bit-art-generator/',
+  '/converter/retro-game-graphics-maker/',
+];
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

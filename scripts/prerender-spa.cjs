@@ -28,6 +28,27 @@ function stripOgTwitter(html) {
     .replace(/\n?\s*<meta[^>]+name=["']twitter:[^>]*>\s*/ig, '');
 }
 
+// Remove all meta description(s) so each page injects at most one
+function stripMetaDescription(html) {
+  return html.replace(/\n?\s*<meta[^>]+name=["']description["'][^>]*>\s*/ig, '');
+}
+
+// Remove JSON-LD blocks by @type (e.g., FAQPage) to avoid rich result errors on pages without visible FAQ
+function stripJsonLdTypes(html, types = []) {
+  if (!types.length) return html;
+  return html.replace(/<script[^>]+type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/ig, (m) => {
+    try {
+      const jsonText = m.replace(/^[\s\S]*?<script[^>]*>/i, '').replace(/<\/script>[\s\S]*$/i, '');
+      const j = JSON.parse(jsonText);
+      const typesFound = Array.isArray(j) ? j.flatMap(x => x && x['@type']) : [j && j['@type']];
+      const has = (Array.isArray(typesFound) ? typesFound : [typesFound]).some(v => v && types.includes(v));
+      return has ? '' : m;
+    } catch {
+      return m;
+    }
+  });
+}
+
 function injectMeta(html, metas) {
   const tags = metas.map((m) => {
     if (m.property) return `<meta property="${m.property}" content="${m.content}">`;
@@ -42,8 +63,36 @@ function buildHtml(base, { title, canonical, metas }) {
   if (title) html = replaceTitle(html, title);
   if (canonical) html = upsertCanonical(html, canonical);
   html = stripOgTwitter(html);
+  html = stripMetaDescription(html);
+  // Remove site-wide FAQ JSON-LD on non-home routes
+  html = stripJsonLdTypes(html, ['FAQPage']);
+  // Remove any pre-existing hidden SEO snippet from base (to avoid duplicates)
+  html = html.replace(/\n?\s*<div[^>]+data-prerender-seo[\s\S]*?<\/div>\s*/i, '');
   if (metas && metas.length) html = injectMeta(html, metas);
   return html;
+}
+
+function ensureTrailingSlash(p) {
+  if (!p || p === '/') return '/';
+  return p.endsWith('/') ? p : p + '/';
+}
+
+function escapeHtml(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function injectHiddenH1AndNav(html, { h1, description, links = [] }) {
+  const navLinks = links.map((l) => `<li><a href="${l.href}">${escapeHtml(l.text)}</a></li>`).join('');
+  const snippet = `\n    <div data-prerender-seo aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">\n      <main>\n        ${h1 ? `<h1>${escapeHtml(h1)}</h1>` : ''}\n        ${description ? `<p>${escapeHtml(description)}</p>` : ''}\n        ${links.length ? `<nav><ul>${navLinks}</ul></nav>` : ''}\n      </main>\n    </div>\n  `;
+  if (html.includes('<div id="root"></div>')) {
+    return html.replace('<div id="root"></div>', `<div id="root"></div>${snippet}`);
+  }
+  return html.replace(/<\/body>/i, `${snippet}</body>`);
 }
 
 function prerender() {
@@ -54,7 +103,8 @@ function prerender() {
 
   const routes = [
     { path: '/privacy', title: 'Privacy Policy | Pixel Art Village', metas: [
-      { property: 'og:url', content: ABS('/privacy') },
+      { name: 'description', content: 'Pixel Art Village privacy policy: local image processing, AdSense cookies, partners, choices and rights.' },
+      { property: 'og:url', content: ABS(ensureTrailingSlash('/privacy')) },
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: 'Privacy Policy | Pixel Art Village' },
       { property: 'og:description', content: 'Pixel Art Village privacy policy: local image processing, AdSense cookies, partners, choices and rights.' },
@@ -65,7 +115,8 @@ function prerender() {
       { name: 'twitter:image', content: ABS('/social-privacy.png') },
     ]},
     { path: '/terms', title: 'Terms of Service | Pixel Art Village', metas: [
-      { property: 'og:url', content: ABS('/terms') },
+      { name: 'description', content: 'Usage rules, responsibilities, disclaimer, IP, governing law, contact info.' },
+      { property: 'og:url', content: ABS(ensureTrailingSlash('/terms')) },
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: 'Terms of Service | Pixel Art Village' },
       { property: 'og:description', content: 'Usage rules, responsibilities, disclaimer, IP, governing law, contact info.' },
@@ -76,7 +127,8 @@ function prerender() {
       { name: 'twitter:image', content: ABS('/social-terms.png') },
     ]},
     { path: '/about', title: 'About | Pixel Art Village', metas: [
-      { property: 'og:url', content: ABS('/about') },
+      { name: 'description', content: 'A free, browser‑based pixel art maker & converter. Privacy‑first, fast, and accessible.' },
+      { property: 'og:url', content: ABS(ensureTrailingSlash('/about')) },
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: 'About | Pixel Art Village' },
       { property: 'og:description', content: 'A free, browser‑based pixel art maker & converter. Privacy‑first, fast, and accessible.' },
@@ -87,7 +139,8 @@ function prerender() {
       { name: 'twitter:image', content: ABS('/social-about.png') },
     ]},
     { path: '/contact', title: 'Contact | Pixel Art Village', metas: [
-      { property: 'og:url', content: ABS('/contact') },
+      { name: 'description', content: 'Support, feedback, partnerships. Email 2296744453m@gmail.com.' },
+      { property: 'og:url', content: ABS(ensureTrailingSlash('/contact')) },
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: 'Contact | Pixel Art Village' },
       { property: 'og:description', content: 'Support, feedback, partnerships. Email 2296744453m@gmail.com.' },
@@ -98,7 +151,8 @@ function prerender() {
       { name: 'twitter:image', content: ABS('/social-contact.png') },
     ]},
     { path: '/blog', title: 'Blog | Pixel Art Village', metas: [
-      { property: 'og:url', content: ABS('/blog') },
+      { name: 'description', content: 'Articles and updates about making pixel art, tips, and features.' },
+      { property: 'og:url', content: ABS(ensureTrailingSlash('/blog')) },
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: 'Blog | Pixel Art Village' },
       { property: 'og:description', content: 'Articles and updates about making pixel art, tips, and features.' },
@@ -115,7 +169,7 @@ function prerender() {
     const pseo = require('../src/content/pseo-pages.json');
     for (const p of pseo) {
       if (!p || !p.slug) continue;
-      const url = `/converter/${p.slug}`;
+      const url = ensureTrailingSlash(`/converter/${p.slug}`);
       routes.push({
         path: url,
         title: p.title,
@@ -143,10 +197,11 @@ function prerender() {
   for (const p of posts) {
     if (!p || !p.slug) continue;
     routes.push({
-      path: `/blog/${p.slug}`,
+      path: ensureTrailingSlash(`/blog/${p.slug}`),
       title: `${p.title} | Pixel Art Village`,
       metas: [
-        { property: 'og:url', content: ABS(`/blog/${p.slug}`) },
+        { name: 'description', content: p.excerpt || '' },
+        { property: 'og:url', content: ABS(ensureTrailingSlash(`/blog/${p.slug}`)) },
         { property: 'og:type', content: 'article' },
         { property: 'og:title', content: `${p.title} | Pixel Art Village` },
         { property: 'og:description', content: p.excerpt || '' },
@@ -160,8 +215,22 @@ function prerender() {
   }
 
   for (const r of routes) {
-    const out = buildHtml(base, { title: r.title, canonical: ABS(r.path), metas: r.metas });
-    const file = path.join(DIST, r.path.replace(/^\//, ''), 'index.html');
+    let out = buildHtml(base, { title: r.title, canonical: ABS(ensureTrailingSlash(r.path)), metas: r.metas });
+
+    // Add hidden H1 + minimal internal links (offscreen) to satisfy crawlers without altering UI
+    const defaultLinks = [
+      { href: ABS('/'), text: 'Home' },
+      { href: ABS('/about/'), text: 'About' },
+      { href: ABS('/contact/'), text: 'Contact' },
+      { href: ABS('/privacy/'), text: 'Privacy' },
+      { href: ABS('/terms/'), text: 'Terms' },
+      { href: ABS('/blog/'), text: 'Blog' },
+    ];
+    const h1Text = r.title.replace(/\s*\|\s*Pixel Art Village$/, '');
+    const descMeta = (r.metas.find(m => m.name === 'description') || {}).content || '';
+    out = injectHiddenH1AndNav(out, { h1: h1Text, description: descMeta, links: defaultLinks });
+
+    const file = path.join(DIST, r.path.replace(/^\//, '').replace(/\/$/, ''), 'index.html');
     write(file, out);
     console.log('[prerender]', r.path, '→', path.relative(DIST, file));
   }
