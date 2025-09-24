@@ -1,0 +1,38 @@
+{
+  "nav": {"examples": "Exemplos", "features": "Recursos", "faq": "FAQ", "blog": "Blog"},
+  "cta": {"start": "Começar agora"},
+  "site": {"tagline": "Gerador de pixel art online • criador • conversor"},
+  "footer": {
+    "tools": "Ferramentas", "formats": "Formatos", "explore": "Explorar", "community": "Comunidade",
+    "terms": "Termos", "privacy": "Privacidade", "about": "Sobre", "contact": "Contato",
+    "links": {
+      "generator": "Gerador de pixel art",
+      "converter": "Conversor de pixel art",
+      "imageToPixel": "Imagem para pixel art",
+      "makePixelArt": "Criar pixel art",
+      "png2pixel": "PNG para pixel art",
+      "jpg2pixel": "JPG para pixel art",
+      "img2pixel": "IMG para pixel art",
+      "gridPreview": "Pré‑visualização de grade de pixels",
+      "how": "Como funciona",
+      "start": "Começar no Pixel Art Village",
+      "tips": "Dicas e paletas",
+      "privacyLocal": "Privacidade e processamento local"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Artigos e novidades sobre pixel art, tutoriais e novos recursos.",
+    "back": "Voltar ao Blog",
+    "notFound": {"title": "Publicação não encontrada", "desc": "O artigo que você procura não existe. Voltar ao"}
+  },
+  "consent": {
+    "title": "Privacidade e cookies",
+    "desc": "Usamos cookies para operar este site e, se ativado, exibir anúncios do Google AdSense. Você pode aceitar ou rejeitar cookies não essenciais a qualquer momento.",
+    "privacy": "Política de Privacidade",
+    "andManage": "e gerenciar a personalização de anúncios em",
+    "accept": "Aceitar tudo",
+    "reject": "Rejeitar não essenciais"
+  }
+}
+

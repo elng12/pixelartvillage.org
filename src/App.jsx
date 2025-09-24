@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment, lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Seo from '@/components/Seo';
 import Header from './components/Header';
 import ToolSection from './components/ToolSection';
@@ -11,6 +11,8 @@ import HowItWorksSection from './components/HowItWorksSection';
 import FaqSection from './components/FaqSection';
 import Footer from './components/Footer';
 import ScrollManager from './components/ScrollManager';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import i18n, { SUPPORTED_LANGS, getStoredLang, setStoredLang, detectBrowserLang } from '@/i18n';
 const PrivacyPolicy = lazy(() => import('./components/policy/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./components/policy/TermsOfService'));
 const About = lazy(() => import('./components/About'));
@@ -21,11 +23,13 @@ const PseoPage = lazy(() => import('./components/PseoPage'));
 import ConsentBanner from './components/ConsentBanner';
 
 function Home({ uploadedImage, setUploadedImage }) {
+  const { lang } = useParams();
+  const currentLang = (lang && SUPPORTED_LANGS.includes(lang)) ? lang : 'en';
   return (
     <Fragment>
       <Seo
         title="Pixel Art Village | Online Pixel Art Maker & Converter"
-        canonical="https://pixelartvillage.org/"
+        canonical={`https://pixelartvillage.org/${currentLang}/`}
       />
       
       <ToolSection onImageUpload={setUploadedImage} />
@@ -39,6 +43,28 @@ function Home({ uploadedImage, setUploadedImage }) {
   );
 }
 
+function useLangRouting() {
+  const { pathname, search, hash } = useLocation();
+  const navigate = useNavigate();
+
+  // Derive current language from URL or storage/detection
+  useEffect(() => {
+    const seg = (pathname.split('/')[1] || '').toLowerCase();
+    const hasLangInPath = SUPPORTED_LANGS.includes(seg);
+    if (hasLangInPath) {
+      if (i18n.language !== seg) i18n.changeLanguage(seg);
+      setStoredLang(seg);
+      return;
+    }
+    // No lang in path: pick persisted or browser, then redirect
+    const persisted = getStoredLang();
+    const auto = persisted || detectBrowserLang();
+    const suffix = pathname === '/' ? '/' : pathname;
+    navigate(`/${auto}${suffix}${search}${hash}`, { replace: true });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+}
+
 function App() {
   const [uploadedImage, setUploadedImage] = useState(null);
 
@@ -48,21 +74,29 @@ function App() {
     return () => document.body.classList.remove('bg-white');
   }, []);
 
+  useLangRouting();
+
   return (
     <Fragment>
-      <Header />
+      <Header rightSlot={<LanguageSwitcher />} />
       <ScrollManager />
       <main>
         <Suspense fallback={<div className="container mx-auto px-4 py-10 text-sm text-gray-600" role="status">Loading…</div>}>
           <Routes>
+            {/* Backward compatibility: still accept non-prefixed paths (will be redirected by useLangRouting) */}
             <Route path="/" element={<Home uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsOfService />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/converter/:slug" element={<PseoPage />} />
+            <Route path=":lang/">
+              <Route index element={<Home uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />} />
+              <Route path="privacy" element={<PrivacyPolicy />} />
+              <Route path="terms" element={<TermsOfService />} />
+              <Route path="about" element={<About />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="blog" element={<Blog />} />
+              <Route path="blog/:slug" element={<BlogPost />} />
+              <Route path="converter/:slug" element={<PseoPage />} />
+            </Route>
+            {/* Unknown paths go home (language redirect rules will handle server-side) */}
+            <Route path="*" element={<Navigate to="/en/" replace />} />
           </Routes>
         </Suspense>
       </main>

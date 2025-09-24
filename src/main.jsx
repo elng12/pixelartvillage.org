@@ -1,27 +1,31 @@
-import { StrictMode } from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
-import ErrorBoundary from './components/ErrorBoundary.jsx'
-import { initWebVitals } from './utils/initWebVitals.js'
+import LangRoot from './components/LangRoot.jsx'
 
 const rootEl = document.getElementById('root')
 if (!rootEl) {
   throw new Error('Root element #root not found')
 }
 
+// Initialize Web Vitals tracking
+import('./utils/initWebVitals.js').then(({ initWebVitals }) => {
+  if (typeof initWebVitals === 'function') {
+    initWebVitals()
+  }
+})
+
 createRoot(rootEl).render(
   <StrictMode>
-    <BrowserRouter>
-      <ErrorBoundary>
-        <App />
-      </ErrorBoundary>
-    </BrowserRouter>
-  </StrictMode>,
+    <LangRoot />
+  </StrictMode>
 )
 
 if (import.meta.env.PROD) {
   // 接入上报端点时替换为 sendBeacon 上报
-  initWebVitals(() => {})
+  import('./utils/initWebVitals.js').then(({ initWebVitals }) => {
+    if (typeof initWebVitals === 'function') {
+      initWebVitals(() => {})
+    }
+  })
 }

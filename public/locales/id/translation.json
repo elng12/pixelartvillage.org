@@ -1,0 +1,38 @@
+{
+  "nav": {"examples": "Contoh", "features": "Fitur", "faq": "FAQ", "blog": "Blog"},
+  "cta": {"start": "Mulai sekarang"},
+  "site": {"tagline": "Generator pixel art online • pembuat • konverter"},
+  "footer": {
+    "tools": "Alat", "formats": "Format", "explore": "Jelajahi", "community": "Komunitas",
+    "terms": "Ketentuan", "privacy": "Privasi", "about": "Tentang", "contact": "Kontak",
+    "links": {
+      "generator": "Generator pixel art",
+      "converter": "Konverter pixel art",
+      "imageToPixel": "Gambar ke pixel art",
+      "makePixelArt": "Buat pixel art",
+      "png2pixel": "PNG ke pixel art",
+      "jpg2pixel": "JPG ke pixel art",
+      "img2pixel": "IMG ke pixel art",
+      "gridPreview": "Pratinjau kisi piksel",
+      "how": "Cara kerja",
+      "start": "Mulai di Pixel Art Village",
+      "tips": "Tips & palet",
+      "privacyLocal": "Privasi & pemrosesan lokal"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Artikel dan pembaruan tentang membuat pixel art, tutorial, dan fitur baru.",
+    "back": "Kembali ke Blog",
+    "notFound": {"title": "Posting tidak ditemukan", "desc": "Artikel yang Anda cari tidak ada. Kembali ke"}
+  },
+  "consent": {
+    "title": "Privasi & Cookie",
+    "desc": "Kami menggunakan cookie untuk menjalankan situs ini dan, jika diaktifkan, menampilkan iklan Google AdSense. Anda dapat menerima atau menolak cookie non-esensial kapan saja.",
+    "privacy": "Kebijakan Privasi",
+    "andManage": "dan kelola personalisasi iklan di",
+    "accept": "Terima semua",
+    "reject": "Tolak non-esensial"
+  }
+}
+

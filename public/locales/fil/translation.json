@@ -1,0 +1,38 @@
+{
+  "nav": {"examples": "Mga Halimbawa", "features": "Mga Tampok", "faq": "FAQ", "blog": "Blog"},
+  "cta": {"start": "Simulan ngayon"},
+  "site": {"tagline": "Online na pixel art generator • tagalikha • converter"},
+  "footer": {
+    "tools": "Mga Tool", "formats": "Mga Format", "explore": "Tuklasin", "community": "Komunidad",
+    "terms": "Mga Tuntunin", "privacy": "Privacy", "about": "Tungkol", "contact": "Makipag-ugnay",
+    "links": {
+      "generator": "Pixel art generator",
+      "converter": "Pixel art converter",
+      "imageToPixel": "Larawan sa pixel art",
+      "makePixelArt": "Gumawa ng pixel art",
+      "png2pixel": "PNG sa pixel art",
+      "jpg2pixel": "JPG sa pixel art",
+      "img2pixel": "IMG sa pixel art",
+      "gridPreview": "Preview ng grid ng pixel",
+      "how": "Paano ito gumagana",
+      "start": "Magsimula sa Pixel Art Village",
+      "tips": "Mga tip at palette",
+      "privacyLocal": "Privacy at lokal na pagproseso"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Mga artikulo at balita tungkol sa pixel art, mga tutorial, at mga bagong tampok.",
+    "back": "Bumalik sa Blog",
+    "notFound": {"title": "Hindi natagpuan ang post", "desc": "Walang ganitong artikulo. Bumalik sa"}
+  },
+  "consent": {
+    "title": "Privacy at Cookies",
+    "desc": "Gumagamit kami ng cookies upang patakbuhin ang site na ito at, kung pinagana, magpakita ng mga ad ng Google AdSense. Maaari mong tanggapin o tanggihan ang mga hindi mahalagang cookies anumang oras.",
+    "privacy": "Patakaran sa Privacy",
+    "andManage": "at pamahalaan ang pag-personalize ng ad sa",
+    "accept": "Tanggapin lahat",
+    "reject": "Tanggihan ang hindi mahalaga"
+  }
+}
+

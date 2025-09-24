@@ -1,0 +1,38 @@
+{
+  "nav": {"examples": "Beispiele", "features": "Funktionen", "faq": "FAQ", "blog": "Blog"},
+  "cta": {"start": "Jetzt starten"},
+  "site": {"tagline": "Online‑Pixel‑Art‑Generator • Maker • Konverter"},
+  "footer": {
+    "tools": "Tools", "formats": "Formate", "explore": "Entdecken", "community": "Community",
+    "terms": "Nutzungsbedingungen", "privacy": "Datenschutz", "about": "Über uns", "contact": "Kontakt",
+    "links": {
+      "generator": "Pixel‑Art‑Generator",
+      "converter": "Pixel‑Art‑Konverter",
+      "imageToPixel": "Bild zu Pixel‑Art",
+      "makePixelArt": "Pixel‑Art erstellen",
+      "png2pixel": "PNG zu Pixel‑Art",
+      "jpg2pixel": "JPG zu Pixel‑Art",
+      "img2pixel": "IMG zu Pixel‑Art",
+      "gridPreview": "Pixelraster‑Vorschau",
+      "how": "So funktioniert’s",
+      "start": "Starten in Pixel Art Village",
+      "tips": "Tipps & Paletten",
+      "privacyLocal": "Datenschutz & lokale Verarbeitung"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Artikel und Updates über Pixel‑Art, Tutorials und neue Funktionen.",
+    "back": "Zurück zum Blog",
+    "notFound": {"title": "Beitrag nicht gefunden", "desc": "Der gesuchte Artikel existiert nicht. Zurück zum"}
+  },
+  "consent": {
+    "title": "Datenschutz & Cookies",
+    "desc": "Wir verwenden Cookies, um diese Website zu betreiben und – sofern aktiviert – Google AdSense‑Anzeigen anzuzeigen. Sie können nicht notwendige Cookies jederzeit akzeptieren oder ablehnen.",
+    "privacy": "Datenschutzerklärung",
+    "andManage": "und verwalten Sie die Anzeigenpersonalisierung unter",
+    "accept": "Alle akzeptieren",
+    "reject": "Nicht notwendige ablehnen"
+  }
+}
+

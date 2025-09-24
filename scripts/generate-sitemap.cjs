@@ -9,12 +9,21 @@ const outPath = path.resolve(process.cwd(), 'public', 'sitemap.xml');
 const today = new Date();
 const isoDate = today.toISOString().slice(0, 10);
 
-const PATHS = ['/', '/privacy', '/terms', '/about', '/contact', '/blog'];
+const BASE_PATHS = ['/', '/privacy', '/terms', '/about', '/contact', '/blog'];
+const LANGS = ['en','es','id','de','pl','it','pt','fr','ru','fil','vi'];
+const PATHS = [];
+for (const p of BASE_PATHS) {
+  for (const l of LANGS) {
+    PATHS.push(`/${l}${p === '/' ? '/' : p}`);
+  }
+}
 // Include blog posts from content
 try {
   const posts = require('../src/content/blog-posts.json');
   for (const p of posts) {
-    if (p && p.slug) PATHS.push(`/blog/${p.slug}`);
+    if (p && p.slug) {
+      for (const l of LANGS) PATHS.push(`/${l}/blog/${p.slug}`);
+    }
   }
 } catch (e) {
   console.warn('[sitemap] warn: cannot load blog-posts.json', e && e.message);
@@ -24,7 +33,9 @@ try {
 try {
   const pseo = require('../src/content/pseo-pages.json');
   for (const p of pseo) {
-    if (p && p.slug) PATHS.push(`/converter/${p.slug}`);
+    if (p && p.slug) {
+      for (const l of LANGS) PATHS.push(`/${l}/converter/${p.slug}`);
+    }
   }
 } catch (e) {
   console.warn('[sitemap] warn: cannot load pseo-pages.json', e && e.message);

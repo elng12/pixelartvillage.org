@@ -1,0 +1,38 @@
+{
+  "nav": {"examples": "Przykłady", "features": "Funkcje", "faq": "FAQ", "blog": "Blog"},
+  "cta": {"start": "Zacznij teraz"},
+  "site": {"tagline": "Generator piksel artu online • kreator • konwerter"},
+  "footer": {
+    "tools": "Narzędzia", "formats": "Formaty", "explore": "Odkrywaj", "community": "Społeczność",
+    "terms": "Regulamin", "privacy": "Prywatność", "about": "O nas", "contact": "Kontakt",
+    "links": {
+      "generator": "Generator piksel artu",
+      "converter": "Konwerter piksel artu",
+      "imageToPixel": "Obraz na piksel art",
+      "makePixelArt": "Twórz piksel art",
+      "png2pixel": "PNG na piksel art",
+      "jpg2pixel": "JPG na piksel art",
+      "img2pixel": "IMG na piksel art",
+      "gridPreview": "Podgląd siatki pikseli",
+      "how": "Jak to działa",
+      "start": "Rozpocznij w Pixel Art Village",
+      "tips": "Wskazówki i palety",
+      "privacyLocal": "Prywatność i przetwarzanie lokalne"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Artykuły i aktualizacje o tworzeniu piksel artu, poradniki i nowe funkcje.",
+    "back": "Wróć do bloga",
+    "notFound": {"title": "Nie znaleziono wpisu", "desc": "Szukany artykuł nie istnieje. Wróć do"}
+  },
+  "consent": {
+    "title": "Prywatność i pliki cookie",
+    "desc": "Używamy plików cookie do działania tej witryny oraz — jeśli włączone — do wyświetlania reklam Google AdSense. Możesz w każdej chwili zaakceptować lub odrzucić nieistotne pliki cookie.",
+    "privacy": "Polityka prywatności",
+    "andManage": "oraz zarządzaj personalizacją reklam na",
+    "accept": "Akceptuj wszystko",
+    "reject": "Odrzuć nieistotne"
+  }
+}
+

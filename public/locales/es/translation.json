@@ -1,0 +1,38 @@
+{
+  "nav": {"examples": "Ejemplos", "features": "Características", "faq": "Preguntas frecuentes", "blog": "Blog"},
+  "cta": {"start": "Empezar ahora"},
+  "site": {"tagline": "Generador de arte píxel en línea • creador • conversor"},
+  "footer": {
+    "tools": "Herramientas", "formats": "Formatos", "explore": "Explorar", "community": "Comunidad",
+    "terms": "Términos", "privacy": "Privacidad", "about": "Acerca de", "contact": "Contacto",
+    "links": {
+      "generator": "Generador de arte píxel",
+      "converter": "Conversor de arte píxel",
+      "imageToPixel": "Imagen a arte píxel",
+      "makePixelArt": "Crear arte píxel",
+      "png2pixel": "PNG a arte píxel",
+      "jpg2pixel": "JPG a arte píxel",
+      "img2pixel": "IMG a arte píxel",
+      "gridPreview": "Vista previa de cuadrícula de píxeles",
+      "how": "Cómo funciona",
+      "start": "Comenzar en Pixel Art Village",
+      "tips": "Consejos y paletas",
+      "privacyLocal": "Privacidad y procesamiento local"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Artículos y novedades sobre arte píxel, tutoriales y funciones nuevas.",
+    "back": "Volver al blog",
+    "notFound": {"title": "Entrada no encontrada", "desc": "El artículo que buscas no existe. Vuelve al"}
+  },
+  "consent": {
+    "title": "Privacidad y cookies",
+    "desc": "Usamos cookies para operar este sitio y, si están habilitadas, para mostrar anuncios de Google AdSense. Puedes aceptar o rechazar las cookies no esenciales en cualquier momento.",
+    "privacy": "Política de privacidad",
+    "andManage": "y administrar la personalización de anuncios en",
+    "accept": "Aceptar todo",
+    "reject": "Rechazar no esenciales"
+  }
+}
+

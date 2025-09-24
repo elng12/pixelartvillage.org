@@ -1,0 +1,38 @@
+{
+  "nav": {"examples": "Exemples", "features": "Fonctionnalités", "faq": "FAQ", "blog": "Blog"},
+  "cta": {"start": "Commencer"},
+  "site": {"tagline": "Générateur de pixel art en ligne • créateur • convertisseur"},
+  "footer": {
+    "tools": "Outils", "formats": "Formats", "explore": "Explorer", "community": "Communauté",
+    "terms": "Conditions", "privacy": "Confidentialité", "about": "À propos", "contact": "Contact",
+    "links": {
+      "generator": "Générateur de pixel art",
+      "converter": "Convertisseur de pixel art",
+      "imageToPixel": "Image en pixel art",
+      "makePixelArt": "Créer du pixel art",
+      "png2pixel": "PNG en pixel art",
+      "jpg2pixel": "JPG en pixel art",
+      "img2pixel": "IMG en pixel art",
+      "gridPreview": "Aperçu de la grille de pixels",
+      "how": "Comment ça marche",
+      "start": "Commencer sur Pixel Art Village",
+      "tips": "Astuces & palettes",
+      "privacyLocal": "Confidentialité & traitement local"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Articles et actualités sur le pixel art, tutoriels et nouvelles fonctionnalités.",
+    "back": "Retour au blog",
+    "notFound": {"title": "Article introuvable", "desc": "L’article recherché n’existe pas. Retour au"}
+  },
+  "consent": {
+    "title": "Confidentialité & cookies",
+    "desc": "Nous utilisons des cookies pour faire fonctionner ce site et, si activé, afficher des annonces Google AdSense. Vous pouvez accepter ou refuser les cookies non essentiels à tout moment.",
+    "privacy": "Politique de confidentialité",
+    "andManage": "et gérer la personnalisation des annonces sur",
+    "accept": "Tout accepter",
+    "reject": "Refuser les non essentiels"
+  }
+}
+

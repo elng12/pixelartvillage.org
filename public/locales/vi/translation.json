@@ -1,0 +1,38 @@
+{
+  "nav": {"examples": "Ví dụ", "features": "Tính năng", "faq": "FAQ", "blog": "Blog"},
+  "cta": {"start": "Bắt đầu ngay"},
+  "site": {"tagline": "Trình tạo pixel art trực tuyến • tạo • chuyển đổi"},
+  "footer": {
+    "tools": "Công cụ", "formats": "Định dạng", "explore": "Khám phá", "community": "Cộng đồng",
+    "terms": "Điều khoản", "privacy": "Quyền riêng tư", "about": "Giới thiệu", "contact": "Liên hệ",
+    "links": {
+      "generator": "Trình tạo pixel art",
+      "converter": "Trình chuyển đổi pixel art",
+      "imageToPixel": "Ảnh sang pixel art",
+      "makePixelArt": "Tạo pixel art",
+      "png2pixel": "PNG sang pixel art",
+      "jpg2pixel": "JPG sang pixel art",
+      "img2pixel": "IMG sang pixel art",
+      "gridPreview": "Xem trước lưới pixel",
+      "how": "Cách hoạt động",
+      "start": "Bắt đầu tại Pixel Art Village",
+      "tips": "Mẹo & bảng màu",
+      "privacyLocal": "Quyền riêng tư & xử lý cục bộ"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Bài viết và cập nhật về pixel art, hướng dẫn và tính năng mới.",
+    "back": "Quay lại Blog",
+    "notFound": {"title": "Không tìm thấy bài viết", "desc": "Bài viết bạn tìm không tồn tại. Quay lại"}
+  },
+  "consent": {
+    "title": "Quyền riêng tư & Cookies",
+    "desc": "Chúng tôi dùng cookie để vận hành trang web này và, nếu bật, hiển thị quảng cáo Google AdSense. Bạn có thể chấp nhận hoặc từ chối cookie không cần thiết bất cứ lúc nào.",
+    "privacy": "Chính sách quyền riêng tư",
+    "andManage": "và quản lý cá nhân hóa quảng cáo tại",
+    "accept": "Chấp nhận tất cả",
+    "reject": "Từ chối không cần thiết"
+  }
+}
+
