@@ -1,7 +1,9 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import Seo from '@/components/Seo'
 
 export default function Contact() {
+  const { t } = useTranslation()
   return (
     <div className="container mx-auto px-4 py-10 max-w-3xl">
       <Seo
@@ -20,15 +22,13 @@ export default function Contact() {
           { name: 'twitter:image', content: 'https://pixelartvillage.org/social-contact.png' },
         ]}
       />
-      <h1 className="text-2xl font-bold text-gray-900 mb-4">Contact</h1>
+      <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('contact.h1')}</h1>
       <div className="prose prose-sm text-gray-700">
-        <p>We’d love to hear from you. For support, feedback, or partnership inquiries, reach out via email.</p>
+        <p>{t('contact.p1')}</p>
         <ul>
-          <li>
-            Email: <a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com">2296744453m@gmail.com</a>
-          </li>
+          <li>{t('contact.emailLabel')} <a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com">2296744453m@gmail.com</a></li>
         </ul>
-        <p className="text-xs text-gray-500">Replace the email placeholder with your official contact address to meet AdSense review requirements.</p>
+        <p className="text-xs text-gray-500">{t('contact.note')}</p>
       </div>
     </div>
   )

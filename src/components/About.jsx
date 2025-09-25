@@ -1,7 +1,9 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import Seo from '@/components/Seo'
 
 export default function About() {
+  const { t } = useTranslation()
   return (
     <div className="container mx-auto px-4 py-10 max-w-3xl">
       <Seo
@@ -20,20 +22,18 @@ export default function About() {
           { name: 'twitter:image', content: 'https://pixelartvillage.org/social-about.png' },
         ]}
       />
-      <h1 className="text-2xl font-bold text-gray-900 mb-4">About Pixel Art Village</h1>
+      <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('about.h1')}</h1>
       <div className="prose prose-sm text-gray-700">
-        <p>
-          Pixel Art Village is a free, browser‑based pixel art maker & converter. Upload a PNG/JPG, tweak pixel size and palettes, preview instantly, and export crisp results.
-        </p>
-        <h2>Principles</h2>
+        <p>{t('about.p1')}</p>
+        <h2>{t('about.principles.title')}</h2>
         <ul>
-          <li><strong>Privacy‑first:</strong> Your images are processed locally in your browser — we do not upload files.</li>
-          <li><strong>Performance:</strong> Fast previews and clean exports without heavy dependencies.</li>
-          <li><strong>Accessibility:</strong> Keyboard‑friendly UI and visible focus states.</li>
+          <li><strong>{t('about.principles.privacy.title')}</strong> {t('about.principles.privacy.desc')}</li>
+          <li><strong>{t('about.principles.performance.title')}</strong> {t('about.principles.performance.desc')}</li>
+          <li><strong>{t('about.principles.accessibility.title')}</strong> {t('about.principles.accessibility.desc')}</li>
         </ul>
-        <h2>Contact</h2>
+        <h2>{t('about.contact.title')}</h2>
         <p>
-          See the Contact page for support and inquiries. You can also email us directly at
+          {t('about.contact.p1')}
           {' '}<a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com">2296744453m@gmail.com</a>.
         </p>
       </div>

@@ -17,17 +17,31 @@ function ensureKMeansWorker() {
   if (KMEANS_WORKER) return KMEANS_WORKER;
   const worker = new Worker(new URL('../workers/kmeansWorker.js', import.meta.url), { type: 'module' });
   const onMessage = (e) => {
-    const { id, ok, centroids, error } = e.data || {};
-    if (!id) return; // ignore unknown messages
+    const d = e && e.data;
+    if (!d || typeof d !== 'object') return;
+    const id = d.id;
+    if (typeof id !== 'string' || id.length > WORKER_ID_MAXLEN) return;
     const handler = KMEANS_HANDLERS.get(id);
     if (!handler) return; // possibly aborted; drop
     KMEANS_HANDLERS.delete(id);
-    if (!ok || !centroids) {
-      handler.reject(new Error(error || 'KMeans worker failed'));
+    if (typeof d.ok !== 'boolean') {
+      handler.reject(new Error('Invalid worker response'));
+      return;
+    }
+    if (!d.ok) {
+      handler.reject(new Error(d.error || 'KMeans worker failed'));
+      return;
+    }
+    const cents = d.centroids;
+    if (!Array.isArray(cents) || cents.length === 0) {
+      handler.reject(new Error('Invalid centroids'));
       return;
     }
     try {
-      const result = centroids.map((c) => [clamp255(c[0]), clamp255(c[1]), clamp255(c[2])]);
+      const result = cents.map((c) => {
+        if (!Array.isArray(c)) return [0, 0, 0];
+        return [clamp255(c[0]), clamp255(c[1]), clamp255(c[2])];
+      });
       handler.resolve(result);
     } catch (err) {
       handler.reject(err);
@@ -55,7 +69,7 @@ function kmeansCacheGet(key) {
 }
 function kmeansCacheSet(key, value) {
   KMEANS_CACHE.set(key, { value, tick: ++KMEANS_TICK });
-  if (KMEANS_CACHE.size > 20) {
+  if (KMEANS_CACHE.size > KMEANS_CACHE_MAX) {
     // evict least-recently used
     let oldestKey = null;
     let oldestTick = Infinity;
@@ -66,15 +80,31 @@ function kmeansCacheSet(key, value) {
   }
 }
 
-// Helper: load an image and resolve to the HTMLImageElement when ready
-const loadImage = (imageData) => {
+// Helper: robust image loader with decode() and timeout guard
+const loadImage = (imageData, { timeoutMs = LOAD_TIMEOUT_MS } = {}) => {
   return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => resolve(img);
-    img.onerror = () => reject(new Error('Failed to load image.'));
-    img.src = imageData;
-  });
-};
+    try {
+      const img = new Image()
+      img.decoding = 'async'
+      const timer = setTimeout(() => {
+        try { img.src = '' } catch { /* noop */ }
+        reject(new Error('Image loading timeout'))
+      }, timeoutMs)
+      img.onerror = () => {
+        clearTimeout(timer)
+        reject(new Error('Failed to load image.'))
+      }
+      img.onload = async () => {
+        try { if (typeof img.decode === 'function') await img.decode() } catch { /* ignore decode failure */ }
+        clearTimeout(timer)
+        resolve(img)
+      }
+      img.src = imageData
+    } catch (e) {
+      reject(e)
+    }
+  })
+}
 
 /**
  * Main processing function. All operations happen on a single canvas for efficiency.
@@ -82,7 +112,20 @@ const loadImage = (imageData) => {
  * @param {object} options - Processing options.
  * @returns {Promise<string>} - Result image as data URL.
  */
-import { PALETTE_MAP, getCustomPaletteByName, inferAutoPaletteSize } from './constants';
+import {
+  PALETTE_MAP,
+  getCustomPaletteByName,
+  inferAutoPaletteSize,
+  PREVIEW_LIMIT,
+} from './constants'
+import {
+  KMEANS_CACHE_MAX,
+  KMEANS_SAMPLE_PX,
+  WORKER_ID_MAXLEN,
+  LOAD_TIMEOUT_MS,
+  COLOR_SCIENCE,
+} from './constants'
+import { drawContainToCanvas } from './resizeImage'
 
 function buildFilterString(brightness, contrast, saturation) {
   const f = [];
@@ -126,20 +169,30 @@ export async function processPixelArt(imageData, options, signal) {
       colorDistance = 'rgb', // 'rgb' | 'lab'
     } = options || {};
 
-    const img = await loadImage(imageData);
-    const { width, height } = img;
+    const img = await loadImage(imageData)
+    // Enforce a hard cap on processing dimensions; contain-scale if oversized
+    const limit = PREVIEW_LIMIT?.maxEdge || 2200
+    let src = img
+    let width = img.naturalWidth || img.width
+    let height = img.naturalHeight || img.height
+    if (Math.max(width, height) > limit) {
+      const safe = drawContainToCanvas(img, limit, limit, { pixelated: false })
+      src = safe
+      width = safe.width
+      height = safe.height
+    }
     // 1) Build filter string (explicit 'none' to avoid stale state)
     const filterString = buildFilterString(brightness, contrast, saturation);
 
     // 2) Pixelation path
     // If pixel size is too big so scaled dimensions are <= 0, fall back to plain draw
-    const scaledWidth = Math.floor(width / pixelSize);
-    const scaledHeight = Math.floor(height / pixelSize);
+    const scaledWidth = Math.floor(width / pixelSize)
+    const scaledHeight = Math.floor(height / pixelSize)
     let outCanvas;
     if (pixelSize > 1 && scaledWidth > 0 && scaledHeight > 0) {
-      outCanvas = await processPixelatePath({ img, width, height, scaledWidth, scaledHeight, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal)
+      outCanvas = await processPixelatePath({ src, width, height, scaledWidth, scaledHeight, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal)
     } else {
-      outCanvas = await processDirectPath({ img, width, height, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal)
+      outCanvas = await processDirectPath({ src, width, height, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal)
     }
     imageProcessor.setLast(outCanvas);
     return outCanvas.toDataURL();
@@ -149,12 +202,12 @@ export async function processPixelArt(imageData, options, signal) {
   }
 }
 
-async function processPixelatePath({ img, width, height, scaledWidth, scaledHeight, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal) {
+async function processPixelatePath({ src, width, height, scaledWidth, scaledHeight, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal) {
   // Downscale to small canvas with filters, then quantize, then upscale without smoothing
   const tempCanvas = createCanvas(scaledWidth, scaledHeight)
   const tempCtx = tempCanvas.getContext('2d')
   tempCtx.filter = filterString
-  tempCtx.drawImage(img, 0, 0, scaledWidth, scaledHeight)
+  tempCtx.drawImage(src, 0, 0, scaledWidth, scaledHeight)
 
   const paletteColors = await resolvePalette({ autoPalette, palette, paletteSize }, tempCanvas, signal)
   if (paletteColors) {
@@ -171,12 +224,12 @@ async function processPixelatePath({ img, width, height, scaledWidth, scaledHeig
   return canvas
 }
 
-async function processDirectPath({ img, width, height, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal) {
+async function processDirectPath({ src, width, height, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal) {
   // Draw full-res with filters, then quantize on main canvas
   const canvas = createCanvas(width, height)
   const ctx = canvas.getContext('2d')
   ctx.filter = filterString
-  ctx.drawImage(img, 0, 0)
+  ctx.drawImage(src, 0, 0)
 
   const paletteColors = await resolvePalette({ autoPalette, palette, paletteSize }, canvas, signal)
   if (paletteColors) {
@@ -202,7 +255,7 @@ function getPaletteColors(name) {
 
 // Simple k-means palette extraction on a downsampled canvas
 async function getKMeansPalette(sourceCanvas, k, signal) {
-  const sampleSize = 64; // downsample to ~64px on the longest edge
+  const sampleSize = KMEANS_SAMPLE_PX; // downsample to ~64px on the longest edge
   const ratio = Math.max(sourceCanvas.width, sourceCanvas.height) / sampleSize;
   const w = Math.max(1, Math.round(sourceCanvas.width / ratio));
   const h = Math.max(1, Math.round(sourceCanvas.height / ratio));
@@ -340,46 +393,59 @@ function applyPaletteToCanvasDither(canvas, palette, useLab = false, paletteLab 
 }
 
 function applyPaletteToCtxDither(ctx, width, height, palette, useLab = false, paletteLab = null) {
-  const imageData = ctx.getImageData(0, 0, width, height);
-  const data = imageData.data;
-  const idx = (x, y) => (y * width + x) * 4;
+  const imageData = ctx.getImageData(0, 0, width, height)
+  const data = imageData.data
+  const width4 = width * 4
+  const F7 = 7 / 16, F5 = 5 / 16, F3 = 3 / 16, F1 = 1 / 16
+
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
-      const i = idx(x, y);
-      const r = data[i];
-      const g = data[i + 1];
-      const b = data[i + 2];
-      const a = data[i + 3];
-      if (a === 0) continue;
-      const ni = nearestColorIndex(r, g, b, palette, useLab, paletteLab);
-      const nr = palette[ni][0];
-      const ng = palette[ni][1];
-      const nb = palette[ni][2];
-      const er = r - nr;
-      const eg = g - ng;
-      const eb = b - nb;
-      data[i] = nr; data[i + 1] = ng; data[i + 2] = nb;
+      const i = y * width4 + x * 4
+      const r = data[i]
+      const g = data[i + 1]
+      const b = data[i + 2]
+      const a = data[i + 3]
+      if (a === 0) continue
+      const ni = nearestColorIndex(r, g, b, palette, useLab, paletteLab)
+      const nr = palette[ni][0]
+      const ng = palette[ni][1]
+      const nb = palette[ni][2]
+      const er = r - nr
+      const eg = g - ng
+      const eb = b - nb
+      data[i] = nr; data[i + 1] = ng; data[i + 2] = nb
 
-      // distribute error
-      // Right (x+1, y) 7/16
-      distribute(x + 1, y, er, eg, eb, 7 / 16);
-      // Down-left (x-1, y+1) 3/16
-      distribute(x - 1, y + 1, er, eg, eb, 3 / 16);
-      // Down (x, y+1) 5/16
-      distribute(x, y + 1, er, eg, eb, 5 / 16);
-      // Down-right (x+1, y+1) 1/16
-      distribute(x + 1, y + 1, er, eg, eb, 1 / 16);
+      // Inline error diffusion (avoid function call/idx recompute)
+      if (x < width - 1) {
+        const j = i + 4
+        data[j]     = clamp255(data[j]     + er * F7)
+        data[j + 1] = clamp255(data[j + 1] + eg * F7)
+        data[j + 2] = clamp255(data[j + 2] + eb * F7)
+      }
+      if (y < height - 1) {
+        const dj = i + width4
+        // Down
+        data[dj]     = clamp255(data[dj]     + er * F5)
+        data[dj + 1] = clamp255(data[dj + 1] + eg * F5)
+        data[dj + 2] = clamp255(data[dj + 2] + eb * F5)
+        // Down-left
+        if (x > 0) {
+          const dlj = dj - 4
+          data[dlj]     = clamp255(data[dlj]     + er * F3)
+          data[dlj + 1] = clamp255(data[dlj + 1] + eg * F3)
+          data[dlj + 2] = clamp255(data[dlj + 2] + eb * F3)
+        }
+        // Down-right
+        if (x < width - 1) {
+          const drj = dj + 4
+          data[drj]     = clamp255(data[drj]     + er * F1)
+          data[drj + 1] = clamp255(data[drj + 1] + eg * F1)
+          data[drj + 2] = clamp255(data[drj + 2] + eb * F1)
+        }
+      }
     }
   }
-  ctx.putImageData(imageData, 0, 0);
-
-  function distribute(x, y, er, eg, eb, factor) {
-    if (x < 0 || x >= width || y < 0 || y >= height) return;
-    const j = idx(x, y);
-    data[j] = clamp255(data[j] + er * factor);
-    data[j + 1] = clamp255(data[j + 1] + eg * factor);
-    data[j + 2] = clamp255(data[j + 2] + eb * factor);
-  }
+  ctx.putImageData(imageData, 0, 0)
 }
 
 function clamp255(v) {
@@ -394,10 +460,9 @@ function rgbToLab(r, g, b) {
   const X = R * 0.4124 + G * 0.3576 + B * 0.1805;
   const Y = R * 0.2126 + G * 0.7152 + B * 0.0722;
   const Z = R * 0.0193 + G * 0.1192 + B * 0.9505;
-  const Xn = 0.95047, Yn = 1.0, Zn = 1.08883;
-  const fx = labF(X / Xn);
-  const fy = labF(Y / Yn);
-  const fz = labF(Z / Zn);
+  const fx = labF(X / COLOR_SCIENCE.XN);
+  const fy = labF(Y / COLOR_SCIENCE.YN);
+  const fz = labF(Z / COLOR_SCIENCE.ZN);
   const L = 116 * fy - 16;
   const a = 500 * (fx - fy);
   const bb = 200 * (fy - fz);
@@ -406,12 +471,14 @@ function rgbToLab(r, g, b) {
 
 function srgbToLinear(u8) {
   const c = (u8 / 255);
-  return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  return c <= COLOR_SCIENCE.SRGB_THRESHOLD
+    ? c / COLOR_SCIENCE.SRGB_SLOPE
+    : Math.pow((c + COLOR_SCIENCE.SRGB_OFFSET) / 1.055, COLOR_SCIENCE.SRGB_GAMMA);
 }
 
 function labF(t) {
-  const e = 216 / 24389; // (6/29)^3
-  const k = 24389 / 27;  // (29/3)^3
+  const e = COLOR_SCIENCE.LAB_EPSILON;
+  const k = COLOR_SCIENCE.LAB_KAPPA;
   return t > e ? Math.cbrt(t) : (k * t + 16) / 116;
 }
 

@@ -1,5 +1,5 @@
 {
-  "nav": {"examples": "Beispiele", "features": "Funktionen", "faq": "FAQ", "blog": "Blog"},
+  "nav": {"examples": "Beispiele", "features": "Funktionen", "how": "So funktioniert’s", "faq": "FAQ", "blog": "Blog", "home": "Startseite", "about": "Über uns", "contact": "Kontakt"},
   "cta": {"start": "Jetzt starten"},
   "site": {"tagline": "Online‑Pixel‑Art‑Generator • Maker • Konverter"},
   "footer": {
@@ -34,5 +34,36 @@
     "accept": "Alle akzeptieren",
     "reject": "Nicht notwendige ablehnen"
   }
+  ,
+  "tool": {
+    "title": "Online‑Pixel‑Art‑Generator & Konverter",
+    "subtitle": "Pixeln Sie Bilder direkt im Browser – wandeln Sie PNG/JPG in sauberes, rasterfreundliches Pixel‑Art um. Passen Sie Pixelgröße und Paletten mit Sofort‑Vorschau an und exportieren Sie gestochen scharfe Ergebnisse für Sprites, Icons oder Retro‑Grafiken. Schnell, privat und kostenlos mit Pixel Art Village.",
+    "dragOrClick": "Ziehen Sie Ihr Bild hierher oder",
+    "clickToChoose": "klicken Sie zum Auswählen",
+    "supports": "Unterstützt PNG, JPG, GIF — bis 10MB",
+    "chooseFile": "Datei auswählen",
+    "ariaUpload": "Bild hochladen (ziehen & ablegen oder klicken, um auszuwählen)",
+    "ariaChoose": "Bilddatei auswählen"
+  },
+  "upload": {"selected": "Ausgewählte Datei: {{name}}"},
+  "errors": {
+    "fileTooLarge10": "Datei zu groß. Bitte ein Bild < 10MB hochladen.",
+    "prepareFail": "Bildvorbereitung fehlgeschlagen. Bitte andere Datei versuchen.",
+    "onlyPngJpg": "Bitte PNG‑ oder JPG‑Bild auswählen.",
+    "maxFile": "Datei zu groß. Maximal zulässig: {{mb}}MB."
+  },
+  "editor": {"title": "Pixel‑Art‑Generator online"}
+  ,
+  "how": {
+    "title": "So funktioniert Pixel Art Village",
+    "desc": "Erstellen Sie Pixel‑Art in drei einfachen Schritten.",
+    "steps": {
+      "upload": "Hochladen",
+      "adjust": "Anpassen",
+      "download": "Herunterladen",
+      "upload.desc": "Wählen Sie Ihr Bild (PNG, JPG) aus oder ziehen Sie es in den Bild‑Pixelizer.",
+      "adjust.desc": "Passen Sie Pixelgröße, Palette und Pixelraster live an.",
+      "download.desc": "Mit einem Klick aus dem Pixel‑Art‑Generator exportieren und teilen."
+    }
+  }
 }
-

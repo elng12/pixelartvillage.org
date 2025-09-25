@@ -11,7 +11,8 @@ import HowItWorksSection from './components/HowItWorksSection';
 import FaqSection from './components/FaqSection';
 import Footer from './components/Footer';
 import ScrollManager from './components/ScrollManager';
-import LanguageSwitcher from '@/components/LanguageSwitcher';
+import LanguageSwitcher from '@/components/LanguageSwitcherFixed';
+import CompatNotice from '@/components/CompatNotice.jsx';
 import i18n, { SUPPORTED_LANGS, getStoredLang, setStoredLang, detectBrowserLang } from '@/i18n';
 const PrivacyPolicy = lazy(() => import('./components/policy/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./components/policy/TermsOfService'));
@@ -61,8 +62,7 @@ function useLangRouting() {
     const auto = persisted || detectBrowserLang();
     const suffix = pathname === '/' ? '/' : pathname;
     navigate(`/${auto}${suffix}${search}${hash}`, { replace: true });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  }, [pathname, search, hash, navigate]);
 }
 
 function App() {
@@ -79,6 +79,7 @@ function App() {
   return (
     <Fragment>
       <Header rightSlot={<LanguageSwitcher />} />
+      <CompatNotice />
       <ScrollManager />
       <main>
         <Suspense fallback={<div className="container mx-auto px-4 py-10 text-sm text-gray-600" role="status">Loading…</div>}>
@@ -95,8 +96,8 @@ function App() {
               <Route path="blog/:slug" element={<BlogPost />} />
               <Route path="converter/:slug" element={<PseoPage />} />
             </Route>
-            {/* Unknown paths go home (language redirect rules will handle server-side) */}
-            <Route path="*" element={<Navigate to="/en/" replace />} />
+            {/* Unknown paths: redirect to current language home */}
+            <Route path="*" element={<Navigate to={`/${i18n.language || 'en'}/`} replace />} />
           </Routes>
         </Suspense>
       </main>

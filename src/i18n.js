@@ -4,9 +4,14 @@ import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import HttpBackend from 'i18next-http-backend'
 
-export const SUPPORTED_LANGS = [
-  'en', 'es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'fil', 'vi',
-]
+const BASE_LANGS = ['en', 'es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'fil', 'vi', 'ja']
+// 可选：在开发环境下通过 VITE_ENABLE_PSEUDO=1 启用伪本地化语言 'pseudo'
+export const SUPPORTED_LANGS = (() => {
+  try {
+    if (import.meta?.env?.VITE_ENABLE_PSEUDO) return [...BASE_LANGS, 'pseudo']
+  } catch { /* noop */ }
+  return BASE_LANGS
+})()
 
 const STORAGE_KEY = 'pv_lang'
 const STORAGE_TTL = 365 * 24 * 60 * 60 * 1000 // 1 year
@@ -52,7 +57,6 @@ i18n
   .use(HttpBackend)
   .use(initReactI18next)
   .init({
-    lng: 'en',
     fallbackLng: 'en',
     supportedLngs: SUPPORTED_LANGS,
     ns: ['translation'],
@@ -65,5 +69,20 @@ i18n
     react: { useSuspense: false },
   })
 
-export default i18n
+// 在开发环境中，缺失 key 立即报错并在控制台标红，防止漏补
+try {
+  i18n.on('missingKey', (lngs, ns, key) => {
+    const msg = `[i18n missing] key="${key}" ns="${ns}" langs=${Array.isArray(lngs)?lngs.join(','):lngs}`
+    if (import.meta?.env?.DEV) {
+      // 控制台显式报错，并抛出异常以便 ErrorBoundary 捕获
+      // 注意：仅当英文基线也缺失时才会触发此事件
+      // 若仅当前语言缺失、英文存在，将回退到英文，不触发此事件
+      // 因此不会影响正常的回退策略
+      // eslint-disable-next-line no-console
+      console.error(msg)
+      throw new Error(msg)
+    }
+  })
+} catch { /* noop */ }
 
+export default i18n

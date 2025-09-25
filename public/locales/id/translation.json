@@ -1,5 +1,5 @@
 {
-  "nav": {"examples": "Contoh", "features": "Fitur", "faq": "FAQ", "blog": "Blog"},
+  "nav": {"examples": "Contoh", "features": "Fitur", "how": "Cara kerja", "faq": "FAQ", "blog": "Blog", "home": "Beranda", "about": "Tentang", "contact": "Kontak"},
   "cta": {"start": "Mulai sekarang"},
   "site": {"tagline": "Generator pixel art online • pembuat • konverter"},
   "footer": {
@@ -34,5 +34,36 @@
     "accept": "Terima semua",
     "reject": "Tolak non-esensial"
   }
+  ,
+  "tool": {
+    "title": "Pembuat & konverter pixel art online",
+    "subtitle": "Pixelasikan gambar di browser — ubah PNG/JPG menjadi pixel art bersih ramah‑grid. Atur ukuran piksel dan palet dengan pratinjau instan, lalu ekspor hasil tajam untuk sprite, ikon, atau grafis retro. Cepat, privat, dan gratis dengan Pixel Art Village.",
+    "dragOrClick": "Seret gambar Anda ke sini atau",
+    "clickToChoose": "klik untuk memilih",
+    "supports": "Mendukung PNG, JPG, GIF — hingga 10MB",
+    "chooseFile": "Pilih berkas",
+    "ariaUpload": "Unggah gambar (seret & lepas atau klik untuk memilih)",
+    "ariaChoose": "Pilih berkas gambar"
+  },
+  "upload": {"selected": "Berkas dipilih: {{name}}"},
+  "errors": {
+    "fileTooLarge10": "Berkas terlalu besar. Unggah gambar < 10MB.",
+    "prepareFail": "Gagal menyiapkan gambar. Coba berkas lain.",
+    "onlyPngJpg": "Pilih gambar PNG atau JPG.",
+    "maxFile": "Berkas terlalu besar. Batas maksimum: {{mb}}MB."
+  },
+  "editor": {"title": "Pembuat pixel art online"}
+  ,
+  "how": {
+    "title": "Cara kerja Pixel Art Village",
+    "desc": "Buat pixel art dalam tiga langkah sederhana.",
+    "steps": {
+      "upload": "Unggah",
+      "adjust": "Sesuaikan",
+      "download": "Unduh",
+      "upload.desc": "Pilih atau seret gambar (PNG, JPG) ke pixelizer gambar.",
+      "adjust.desc": "Sesuaikan ukuran piksel, palet, dan kisi piksel secara langsung.",
+      "download.desc": "Ekspor dengan sekali klik dari generator pixel art dan bagikan."
+    }
+  }
 }
-

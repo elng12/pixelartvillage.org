@@ -1,17 +1,19 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function FeaturesSection() {
+  const { t } = useTranslation();
   return (
     <section id="features" className="py-16 md:py-20 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-extrabold text-center text-gray-900">
-          A Powerful Pixel Art Maker & Creator
+          {t('features.title')}
         </h2>
 
         {/* 将大段说明拆成两段，限制行宽并提高行距，缓解拥挤感 */}
         <div className="mt-4 md:mt-6 text-center">
           <p className="mx-auto max-w-3xl text-gray-600 leading-relaxed">
-            Fine‑tune pixels with live controls, custom palettes, and a clear grid overlay. Preview changes instantly and export clean images ready for sprites, icons, and retro game graphics. Perfect whether you want to make 8‑bit art or convert a photo to pixel art for your next project.
+            {t('features.desc')}
           </p>
         </div>
 

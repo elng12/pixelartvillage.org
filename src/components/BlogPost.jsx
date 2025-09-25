@@ -2,22 +2,24 @@ import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import Seo from '@/components/Seo'
 import posts from '@/content/blog-posts.json'
+import { useTranslation } from 'react-i18next'
 
 export default function BlogPost() {
-  const { slug } = useParams()
+  const { t } = useTranslation()
+  const { slug, lang } = useParams()
   const post = posts.find((p) => p.slug === slug)
 
   if (!post) {
     return (
       <div className="container mx-auto px-4 py-10 max-w-3xl">
-        <Seo title="Not Found | Pixel Art Village" canonical={`https://pixelartvillage.org/blog/${slug || ''}`} />
-        <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">Post not found</h1>
-        <p className="text-gray-700">The article you’re looking for does not exist. Go back to the <Link className="text-blue-600 underline" to="/blog">Blog</Link>.</p>
+        <Seo title="Not Found | Pixel Art Village" canonical={`https://pixelartvillage.org/${lang || 'en'}/blog/${slug || ''}`} />
+        <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">{t('blog.notFound.title')}</h1>
+        <p className="text-gray-700">{t('blog.notFound.desc')} <Link className="text-blue-600 underline" to={`/${lang || 'en'}/blog`}>{t('blog.back')}</Link>.</p>
       </div>
     )
   }
 
-  const canonical = `https://pixelartvillage.org/blog/${post.slug}`
+  const canonical = `https://pixelartvillage.org/${lang || 'en'}/blog/${post.slug}`
 
   return (
     <article className="container mx-auto px-4 py-10 max-w-3xl">
@@ -47,9 +49,8 @@ export default function BlogPost() {
       </div>
 
       <footer className="mt-8">
-        <Link className="text-blue-600 underline" to="/blog">← Back to Blog</Link>
+        <Link className="text-blue-600 underline" to={`/${lang || 'en'}/blog`}>← {t('blog.back')}</Link>
       </footer>
     </article>
   )
 }
-

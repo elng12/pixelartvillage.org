@@ -1,33 +1,37 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Seo from '@/components/Seo'
 import posts from '@/content/blog-posts.json'
+import { useTranslation } from 'react-i18next'
 
 export default function Blog() {
+  const { t } = useTranslation()
+  const params = useParams()
+  const lang = params.lang || 'en'
   return (
     <div className="container mx-auto px-4 py-10 max-w-3xl">
       <Seo
-        title="Blog | Pixel Art Village"
-        canonical="https://pixelartvillage.org/blog"
+        title={`${t('blog.title')} | Pixel Art Village`}
+        canonical={`https://pixelartvillage.org/${lang}/blog`}
         meta={[
-          { property: 'og:url', content: 'https://pixelartvillage.org/blog' },
+          { property: 'og:url', content: `https://pixelartvillage.org/${lang}/blog` },
           { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: 'Blog | Pixel Art Village' },
-          { property: 'og:description', content: 'Articles and updates about making pixel art, tips, and features from Pixel Art Village.' },
+          { property: 'og:title', content: `${t('blog.title')} | Pixel Art Village` },
+          { property: 'og:description', content: t('blog.subtitle') },
           { name: 'twitter:card', content: 'summary' },
-          { name: 'twitter:title', content: 'Blog | Pixel Art Village' },
-          { name: 'twitter:description', content: 'Articles and updates about making pixel art, tips, and features from Pixel Art Village.' },
+          { name: 'twitter:title', content: `${t('blog.title')} | Pixel Art Village` },
+          { name: 'twitter:description', content: t('blog.subtitle') },
         ]}
       />
 
-      <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">Blog</h1>
-      <p className="text-gray-700 mb-6 max-w-2xl mx-auto text-center">Articles and updates about making pixel art, tutorials, and new features.</p>
+      <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">{t('blog.title')}</h1>
+      <p className="text-gray-700 mb-6 max-w-2xl mx-auto text-center">{t('blog.subtitle')}</p>
 
       <ul className="space-y-4 max-w-2xl mx-auto">
         {posts.map((p) => (
           <li key={p.slug} className="p-4 rounded-lg border border-gray-200 bg-white shadow-sm">
             <h2 className="text-lg font-semibold text-gray-900 text-center">
-              <Link to={`/blog/${p.slug}`} className="hover:text-blue-600">
+              <Link to={`/${lang}/blog/${p.slug}`} className="hover:text-blue-600">
                 {p.title}
               </Link>
             </h2>

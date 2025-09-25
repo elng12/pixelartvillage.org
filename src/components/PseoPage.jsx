@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import Seo from '@/components/Seo'
 import ToolSection from '@/components/ToolSection'
@@ -11,22 +12,23 @@ import FaqSection from '@/components/FaqSection'
 import pages from '@/content/pseo-pages.json'
 
 export default function PseoPage() {
-  const { slug } = useParams()
+  const { t } = useTranslation()
+  const { slug, lang } = useParams()
   const [uploadedImage, setUploadedImage] = useState(null)
   const page = pages.find((p) => p.slug === slug)
 
   if (!page) {
-    const canonical = `https://pixelartvillage.org/converter/${slug || ''}`
+    const canonical = `https://pixelartvillage.org/${lang || 'en'}/converter/${slug || ''}`
     return (
       <div className="container mx-auto px-4 py-10 max-w-3xl">
-        <Seo title="Not Found | Pixel Art Village" canonical={canonical} />
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">Page not found</h1>
-        <p className="text-gray-700">The converter page you’re looking for does not exist.</p>
+        <Seo title={t('pseo.notFound.seoTitle')} canonical={canonical} />
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('pseo.notFound.title')}</h1>
+        <p className="text-gray-700">{t('pseo.notFound.desc')}</p>
       </div>
     )
   }
 
-  const canonical = `https://pixelartvillage.org/converter/${page.slug}`
+  const canonical = `https://pixelartvillage.org/${lang || 'en'}/converter/${page.slug}`
 
   return (
     <Fragment>

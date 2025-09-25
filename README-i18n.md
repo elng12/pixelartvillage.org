@@ -3,7 +3,7 @@
 本项目已集成 i18next + react-i18next + i18next-http-backend，实现 URL 前缀化语言、延迟加载翻译与 SEO 产物（hreflang、多语言站点地图）。
 
 ## 支持语言
-- en / es / id / de / pl / it / pt / fr / ru / fil / vi
+- en / es / id / de / pl / it / pt / fr / ru / fil / vi / ja
 
 ## 目录结构
 - public/locales/{lang}/translation.json —— 文案资源（按需加载，≤ 15 kB/语言）
@@ -41,6 +41,11 @@
 - Key 组织建议：
   - 导航：`nav.*`；CTA：`cta.*`；页脚：`footer.*`；页面：`blog.*`、`consent.*` 等。
 
+### 导航 key 规范
+- 固定键名（大小写与含义一致）：
+  - `nav.home`、`nav.examples`、`nav.features`、`nav.how`、`nav.faq`、`nav.blog`、`nav.about`、`nav.contact`
+- 适用范围：页眉导航与页脚相关链接统一引用上述键（Terms/Privacy 仍保持 `footer.*`）。
+
 ## 注意事项
 - 文案与代码分离：新增/修改文案仅需调整 JSON 文件，无需改动组件逻辑。
 - 性能：i18n 启用 HTTP Backend，按需拉取当前语言 JSON；切换时才 fetch 其它语言文件，FCP 增加 < 100 ms。
@@ -50,3 +55,10 @@
 
 如需接入 CMS / 众包翻译：可将 `public/locales/` 的生成下沉为构建前脚本（拉取远端资源或从 CMS 导出），保持前端只读与按需加载策略不变。
 
+## 伪本地化与一致性检查（开发辅助）
+- 伪本地化（Pseudo‑locale）：从英文自动生成 `public/locales/pseudo/translation.json`，用于在开发中显著标注未外化/未翻译文本。
+  - 生成：`npm run i18n:pseudo`
+  - 启用：`VITE_ENABLE_PSEUDO=1 npm run dev`，然后访问 `http://localhost:5173/pseudo/`
+- 键一致性检查：比较各语言与英文基线的 key 差异（忽略数组长度）。
+  - 运行：`npm run i18n:check`
+  - 输出：列出每种语言缺失或多余的 key，便于补齐与清理。

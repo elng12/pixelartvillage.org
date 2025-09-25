@@ -94,12 +94,13 @@ function iterate(samples, centroids, iters) {
 
 self.onmessage = (e) => {
   const msg = e.data || {}
+  const id = msg && msg.id
   if (msg?.type === 'cancel' && msg.id) {
     __cancel.add(msg.id)
     return
   }
   try {
-    const { id, data, /* width, height, */ k } = msg
+    const { data, /* width, height, */ k } = msg
     const arr = new Uint8ClampedArray(data);
     const samples = [];
     for (let i = 0; i < arr.length; i += 4) {
@@ -135,6 +136,6 @@ self.onmessage = (e) => {
     }
     self.postMessage({ id, ok: true, centroids: best });
   } catch (err) {
-    self.postMessage({ ok: false, error: err?.message || String(err) });
+    self.postMessage({ id, ok: false, error: err?.message || String(err) });
   }
 };

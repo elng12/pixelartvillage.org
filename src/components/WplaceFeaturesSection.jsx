@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 /**
  * WplaceFeaturesSection
@@ -60,15 +61,16 @@ const IconImage = ({ className = 'h-6 w-6 text-amber-600' }) => (
 );
 
 export default function WplaceFeaturesSection() {
+  const { t } = useTranslation();
   return (
     <section id="wplace-features" className="py-16 md:py-20 bg-white">
       <div className="container mx-auto px-4">
         {/* 标题与副标题：与当前站点层级一致 */}
         <h2 className="text-3xl md:text-4xl font-extrabold text-center text-gray-900">
-          Perfect Tool for Pixel Art Village Users
+          {t('wplace.title')}
         </h2>
         <p className="mt-2 text-center text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          The ultimate companion for Pixel Art Village — convert any image into clean pixel art with real‑time preview, smart palettes, and instant export.
+          {t('wplace.desc')}
         </p>
 
         {/* 四列特性：保持等间距与卡片风格一致 */}
@@ -77,9 +79,9 @@ export default function WplaceFeaturesSection() {
             <CircleIcon bg="rgba(16,185,129,0.12)" title="100% Free">
               <IconDollar />
             </CircleIcon>
-            <h3 className="mt-4 text-lg font-semibold text-gray-900">100% Free</h3>
+            <h3 className="mt-4 text-lg font-semibold text-gray-900">{t('wplace.features.free.title')}</h3>
             <p className="mt-2 text-gray-600 leading-relaxed">
-              Completely free for everyone. No hidden costs or subscriptions — create unlimited pixel art.
+              {t('wplace.features.free.desc')}
             </p>
           </div>
 
@@ -87,9 +89,9 @@ export default function WplaceFeaturesSection() {
             <CircleIcon bg="rgba(59,130,246,0.12)" title="Privacy First">
               <IconLock />
             </CircleIcon>
-            <h3 className="mt-4 text-lg font-semibold text-gray-900">Privacy First</h3>
+            <h3 className="mt-4 text-lg font-semibold text-gray-900">{t('wplace.features.privacy.title')}</h3>
             <p className="mt-2 text-gray-600 leading-relaxed">
-              All processing happens in your browser. Your images never leave your device — a private, secure workflow by design.
+              {t('wplace.features.privacy.desc')}
             </p>
           </div>
 
@@ -97,9 +99,9 @@ export default function WplaceFeaturesSection() {
             <CircleIcon bg="rgba(139,92,246,0.12)" title="Easy for All Players">
               <IconSmile />
             </CircleIcon>
-            <h3 className="mt-4 text-lg font-semibold text-gray-900">Easy for All Players</h3>
+            <h3 className="mt-4 text-lg font-semibold text-gray-900">{t('wplace.features.easy.title')}</h3>
             <p className="mt-2 text-gray-600 leading-relaxed">
-              Intuitive interface and fast feedback. Convert any image to paintable pixel art in just a few clicks.
+              {t('wplace.features.easy.desc')}
             </p>
           </div>
 
@@ -107,9 +109,9 @@ export default function WplaceFeaturesSection() {
             <CircleIcon bg="rgba(245,158,11,0.12)" title="No Size Limits">
               <IconImage />
             </CircleIcon>
-            <h3 className="mt-4 text-lg font-semibold text-gray-900">No Size Limits</h3>
+            <h3 className="mt-4 text-lg font-semibold text-gray-900">{t('wplace.features.size.title')}</h3>
             <p className="mt-2 text-gray-600 leading-relaxed">
-              Upload images of any size — from tiny icons to large artwork — with smooth scaling and responsive previews.
+              {t('wplace.features.size.desc')}
             </p>
           </div>
         </div>

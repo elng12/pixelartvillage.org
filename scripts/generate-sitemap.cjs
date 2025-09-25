@@ -10,7 +10,7 @@ const today = new Date();
 const isoDate = today.toISOString().slice(0, 10);
 
 const BASE_PATHS = ['/', '/privacy', '/terms', '/about', '/contact', '/blog'];
-const LANGS = ['en','es','id','de','pl','it','pt','fr','ru','fil','vi'];
+const LANGS = ['en','es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
 const PATHS = [];
 for (const p of BASE_PATHS) {
   for (const l of LANGS) {

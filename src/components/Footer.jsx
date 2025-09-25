@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function GitHubIcon({ className }) {
   return (
@@ -10,6 +11,9 @@ function GitHubIcon({ className }) {
 }
 
 function Footer() {
+  const { t } = useTranslation()
+  const params = useParams()
+  const lang = params.lang || 'en'
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="relative">
@@ -26,11 +30,11 @@ function Footer() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
             <div>
               <p className="font-extrabold text-2xl text-white">Pixel Art Village</p>
-              <p className="text-sm text-gray-400 mt-1">Online pixel art generator • maker • converter</p>
+              <p className="text-sm text-gray-400 mt-1">{t('site.tagline')}</p>
             </div>
             <div>
-              <Link to="/#tool" className="inline-block px-4 py-2 rounded-md bg-violet-500 text-gray-900 font-semibold hover:opacity-90 transition" aria-label="Start Pixel Art in Pixel Art Village">
-                Start now
+              <Link to={`/${lang}/#tool`} className="inline-block px-4 py-2 rounded-md bg-violet-500 text-gray-900 font-semibold hover:opacity-90 transition" aria-label={t('footer.cta.ariaStart')}>
+                {t('cta.start')}
               </Link>
             </div>
           </div>
@@ -38,41 +42,43 @@ function Footer() {
           {/* 链接分栏 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             <div>
-              <p className="text-gray-200 font-semibold mb-3">Tools</p>
+              <p className="text-gray-200 font-semibold mb-3">{t('footer.tools')}</p>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/#tool" className="hover:text-white">Pixel art generator</Link></li>
-                <li><Link to="/#tool" className="hover:text-white">Pixel art converter</Link></li>
-                <li><Link to="/#showcase" className="hover:text-white">Image to pixel art</Link></li>
-                <li><Link to="/#features" className="hover:text-white">Make / create pixel art</Link></li>
+                <li><Link to={`/${lang}/#tool`} className="hover:text-white">{t('footer.links.generator')}</Link></li>
+                <li><Link to={`/${lang}/#tool`} className="hover:text-white">{t('footer.links.converter')}</Link></li>
+                <li><Link to={`/${lang}/#showcase`} className="hover:text-white">{t('footer.links.imageToPixel')}</Link></li>
+                <li><Link to={`/${lang}/#features`} className="hover:text-white">{t('footer.links.makePixelArt')}</Link></li>
               </ul>
             </div>
             <div>
-              <p className="text-gray-200 font-semibold mb-3">Formats</p>
+              <p className="text-gray-200 font-semibold mb-3">{t('footer.formats')}</p>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/#showcase" className="hover:text-white">PNG to pixel art</Link></li>
-                <li><Link to="/#showcase" className="hover:text-white">JPG to pixel art</Link></li>
-                <li><Link to="/#showcase" className="hover:text-white">IMG to pixel art</Link></li>
-                <li><Link to="/#features" className="hover:text-white">Pixel grid preview</Link></li>
+                <li><Link to={`/${lang}/#showcase`} className="hover:text-white">{t('footer.links.png2pixel')}</Link></li>
+                <li><Link to={`/${lang}/#showcase`} className="hover:text-white">{t('footer.links.jpg2pixel')}</Link></li>
+                <li><Link to={`/${lang}/#showcase`} className="hover:text-white">{t('footer.links.img2pixel')}</Link></li>
+                <li><Link to={`/${lang}/#features`} className="hover:text-white">{t('footer.links.gridPreview')}</Link></li>
               </ul>
             </div>
             <div>
-              <p className="text-gray-200 font-semibold mb-3">Explore</p>
+              <p className="text-gray-200 font-semibold mb-3">{t('footer.explore')}</p>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/#showcase" className="hover:text-white">Examples</Link></li>
-                <li><Link to="/#features" className="hover:text-white">Features</Link></li>
-                <li><Link to="/#how-it-works" className="hover:text-white">How it works</Link></li>
-                <li><Link to="/#faq" className="hover:text-white">FAQ</Link></li>
+                <li><Link to={`/${lang}/#tool`} className="hover:text-white">{t('nav.home')}</Link></li>
+                <li><Link to={`/${lang}/#showcase`} className="hover:text-white">{t('nav.examples')}</Link></li>
+                <li><Link to={`/${lang}/#features`} className="hover:text-white">{t('nav.features')}</Link></li>
+                <li><Link to={`/${lang}/#how-it-works`} className="hover:text-white">{t('nav.how')}</Link></li>
+                <li><Link to={`/${lang}/#faq`} className="hover:text-white">{t('nav.faq')}</Link></li>
+                <li><Link to={`/${lang}/blog`} className="hover:text-white">{t('nav.blog')}</Link></li>
               </ul>
             </div>
             <div>
-              <p className="text-gray-200 font-semibold mb-3">Community</p>
+              <p className="text-gray-200 font-semibold mb-3">{t('footer.community')}</p>
               <ul className="space-y-2 text-sm">
-                <li><a href="#tool" className="hover:text-white">Start in Pixel Art Village</a></li>
-                <li><a href="#features" className="hover:text-white">Tips & palettes</a></li>
-                <li><a href="#faq" className="hover:text-white">Privacy & local processing</a></li>
+                <li><a href="#tool" className="hover:text-white">{t('footer.links.start')}</a></li>
+                <li><a href="#features" className="hover:text-white">{t('footer.links.tips')}</a></li>
+                <li><a href="#faq" className="hover:text-white">{t('footer.links.privacyLocal')}</a></li>
                 <li>
-                  <a href="#" className="inline-flex items-center gap-2 hover:text-white" aria-label="GitHub">
-                    <GitHubIcon className="w-4 h-4" /> GitHub
+                  <a href="#" className="inline-flex items-center gap-2 hover:text-white" aria-label={t('footer.github')}>
+                    <GitHubIcon className="w-4 h-4" /> {t('footer.github')}
                   </a>
                 </li>
               </ul>
@@ -81,15 +87,15 @@ function Footer() {
 
           {/* 底部信息栏 */}
           <div className="mt-10 pt-6 border-t border-gray-700/60 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <p className="text-xs text-gray-400">&copy; 2025 Pixel Art Village. All rights reserved.</p>
+            <p className="text-xs text-gray-400">{t('footer.copy', { year: new Date().getFullYear() })}</p>
             <div className="flex items-center gap-4 text-xs text-gray-400">
-              <Link to="/terms" className="hover:text-white">Terms</Link>
+              <Link to={`/${lang}/terms`} className="hover:text-white">{t('footer.terms')}</Link>
               <span aria-hidden>•</span>
-              <Link to="/privacy" className="hover:text-white">Privacy</Link>
+              <Link to={`/${lang}/privacy`} className="hover:text-white">{t('footer.privacy')}</Link>
               <span aria-hidden>•</span>
-              <Link to="/about" className="hover:text-white">About</Link>
+              <Link to={`/${lang}/about`} className="hover:text-white">{t('nav.about')}</Link>
               <span aria-hidden>•</span>
-              <Link to="/contact" className="hover:text-white">Contact</Link>
+              <Link to={`/${lang}/contact`} className="hover:text-white">{t('nav.contact')}</Link>
             </div>
           </div>
           <div className="mt-6 text-center flex flex-wrap items-center justify-center gap-6">

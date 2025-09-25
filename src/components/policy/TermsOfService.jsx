@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import Seo from '@/components/Seo'
 
 function Section({ title, children, id }) {
@@ -13,6 +14,7 @@ function Section({ title, children, id }) {
 }
 
 export default function TermsOfService() {
+  const { t } = useTranslation()
   return (
     <div className="container mx-auto px-4 py-10">
       <Seo
@@ -32,63 +34,63 @@ export default function TermsOfService() {
         ]}
       />
       <header className="max-w-3xl mx-auto mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Terms of Service</h1>
-        <p className="text-sm text-gray-500 mt-2">Last updated: {new Date().toISOString().slice(0, 10)}</p>
+        <h1 className="text-2xl font-bold text-gray-900">{t('terms.h1')}</h1>
+        <p className="text-sm text-gray-500 mt-2">{t('common.lastUpdated', { date: new Date().toISOString().slice(0, 10) })}</p>
       </header>
 
-      <Section title="Acceptance of Terms" id="acceptance">
+      <Section title={t('terms.sections.acceptance.title')} id="acceptance">
         <p>
-          By accessing or using Pixel Art Village (the “Service”), you agree to be bound by these Terms. If you do not agree, do not use the Service.
+          {t('terms.sections.acceptance.p1')}
         </p>
       </Section>
 
-      <Section title="Use of the Service" id="use">
+      <Section title={t('terms.sections.use.title')} id="use">
         <ul>
-          <li>Upload only content you have the rights to use. You are responsible for your content and compliance with applicable laws.</li>
-          <li>Do not abuse, interfere with, or disrupt the Service or other users.</li>
-          <li>Do not use the Service for illegal, harmful, or infringing activities.</li>
+          <li>{t('terms.sections.use.li1')}</li>
+          <li>{t('terms.sections.use.li2')}</li>
+          <li>{t('terms.sections.use.li3')}</li>
         </ul>
       </Section>
 
-      <Section title="Intellectual Property" id="ip">
+      <Section title={t('terms.sections.ip.title')} id="ip">
         <p>
-          We retain all rights to the Service and related materials. You retain rights to your original uploads and generated outputs, subject to your applicable rights and third‑party rights.
+          {t('terms.sections.ip.p1')}
         </p>
       </Section>
 
-      <Section title="Image Processing" id="processing">
+      <Section title={t('terms.sections.processing.title')} id="processing">
         <p>
-          Image processing is performed locally in your browser. We do not store your uploaded images on our servers.
+          {t('terms.sections.processing.p1')}
         </p>
       </Section>
 
-      <Section title="Disclaimer of Warranties" id="disclaimer">
+      <Section title={t('terms.sections.disclaimer.title')} id="disclaimer">
         <p>
-          The Service is provided “as is” and “as available” without warranties of any kind, express or implied. We do not warrant that the Service will be uninterrupted or error‑free.
+          {t('terms.sections.disclaimer.p1')}
         </p>
       </Section>
 
-      <Section title="Limitation of Liability" id="liability">
+      <Section title={t('terms.sections.liability.title')} id="liability">
         <p>
-          To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from or related to your use of the Service.
+          {t('terms.sections.liability.p1')}
         </p>
       </Section>
 
-      <Section title="Changes to the Service or Terms" id="changes">
+      <Section title={t('terms.sections.changes.title')} id="changes">
         <p>
-          We may modify or discontinue the Service and update these Terms at any time. Continued use of the Service constitutes acceptance of updated Terms.
+          {t('terms.sections.changes.p1')}
         </p>
       </Section>
 
-      <Section title="Governing Law" id="law">
+      <Section title={t('terms.sections.law.title')} id="law">
         <p>
-          These Terms are governed by applicable laws in your jurisdiction to the extent not preempted by other laws. Venue and jurisdiction will follow applicable conflict of laws rules.
+          {t('terms.sections.law.p1')}
         </p>
       </Section>
 
-      <Section title="Contact" id="contact">
+      <Section title={t('terms.sections.contact.title')} id="contact">
         <p>
-          For questions about these Terms, please see the Contact page. Email: <a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com">2296744453m@gmail.com</a>
+          {t('terms.sections.contact.p1')} Email: <a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com">2296744453m@gmail.com</a>
         </p>
       </Section>
     </div>

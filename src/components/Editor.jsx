@@ -1,4 +1,5 @@
 import React, { useMemo, useEffect, useRef, useReducer, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useImageProcessor } from '../hooks/useImageProcessor';
 import { exportProcessedBlob } from '../utils/imageProcessor';
 import { LAYOUT_TOKENS, COLORS } from '../constants/design-tokens';
@@ -9,6 +10,7 @@ import Adjustments from './editor/Adjustments';
 import { usePaletteStorage } from '../hooks/usePaletteStorage';
 
 function Editor({ image }) {
+  const { t } = useTranslation()
   const initial = {
     pixelSize: 1,
     brightness: 0,
@@ -145,12 +147,12 @@ function Editor({ image }) {
     const file = fileList?.[0];
     if (!file) return;
     if (!/^image\/(png|jpeg)$/.test(file.type)) {
-      alert('Please select a PNG or JPG image.');
+      alert(t('errors.onlyPngJpg'));
       return;
     }
     const maxBytes = MAX_FILE_MB * 1024 * 1024;
     if (file.size > maxBytes) {
-      alert(`File is too large. Max allowed size is ${MAX_FILE_MB}MB.`);
+      alert(t('errors.maxFile', { mb: MAX_FILE_MB }));
       return;
     }
     const reader = new FileReader();
@@ -215,7 +217,7 @@ function Editor({ image }) {
     <section id="editor" className="py-8 bg-white">
       <div className="container mx-auto px-4">
         <div className={`${COLORS.background} ${layout.padding} rounded-xl border ${COLORS.border}`}>
-          <h2 className={`${layout.titleSize} font-bold text-center ${layout.titleMargin}`}>Online Pixel Art Maker</h2>
+          <h2 className={`${layout.titleSize} font-bold text-center ${layout.titleMargin}`}>{t('editor.title')}</h2>
           <div className={`grid grid-cols-1 lg:grid-cols-2 ${layout.gap}`}>
             {/* 预览区域 */}
             <div className="space-y-4">
@@ -235,13 +237,13 @@ function Editor({ image }) {
                   onClick={downloadImage}
                   className="flex-1 bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  Download Pixel Art
+                  {t('editor.downloadBtn')}
                 </button>
                 <button
                   onClick={triggerUpload}
                   className="flex-1 bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  Upload Image
+                  {t('editor.uploadBtn')}
                 </button>
                 <input
                   ref={fileInputRef}
@@ -258,7 +260,7 @@ function Editor({ image }) {
               {/* Section header */}
               <div className="pb-2">
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center border rounded px-2 py-1 text-sm bg-white">General ▾</span>
+                  <span className="inline-flex items-center border rounded px-2 py-1 text-sm bg-white">{t('editor.section.general')}</span>
                 </div>
                 <div className="mt-2 h-[2px] w-full bg-gray-900/80" />
               </div>

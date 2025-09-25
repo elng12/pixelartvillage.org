@@ -1,5 +1,5 @@
 {
-  "nav": {"examples": "Esempi", "features": "Funzionalità", "faq": "FAQ", "blog": "Blog"},
+  "nav": {"examples": "Esempi", "features": "Funzionalità", "how": "Come funziona", "faq": "FAQ", "blog": "Blog", "home": "Home", "about": "Chi siamo", "contact": "Contatti"},
   "cta": {"start": "Inizia ora"},
   "site": {"tagline": "Generatore di pixel art online • maker • convertitore"},
   "footer": {
@@ -34,5 +34,36 @@
     "accept": "Accetta tutto",
     "reject": "Rifiuta non essenziali"
   }
+  ,
+  "tool": {
+    "title": "Generatore e convertitore di pixel art online",
+    "subtitle": "Piksela immagini nel browser: trasforma PNG/JPG in pixel art pulita e allineata alla griglia. Regola dimensione dei pixel e palette con anteprima immediata ed esporta risultati nitidi per sprite, icone o grafica retrò. Veloce, privato e gratuito con Pixel Art Village.",
+    "dragOrClick": "Trascina l’immagine qui oppure",
+    "clickToChoose": "fai clic per scegliere",
+    "supports": "Supporta PNG, JPG, GIF — fino a 10MB",
+    "chooseFile": "Scegli file",
+    "ariaUpload": "Carica immagine (trascina e rilascia o clicca per scegliere)",
+    "ariaChoose": "Scegli file immagine"
+  },
+  "upload": {"selected": "File selezionato: {{name}}"},
+  "errors": {
+    "fileTooLarge10": "File troppo grande. Carica un’immagine inferiore a 10MB.",
+    "prepareFail": "Impossibile preparare l’immagine. Prova un altro file.",
+    "onlyPngJpg": "Seleziona un’immagine PNG o JPG.",
+    "maxFile": "File troppo grande. Dimensione massima consentita: {{mb}}MB."
+  },
+  "editor": {"title": "Generatore di pixel art online"}
+  ,
+  "how": {
+    "title": "Come funziona Pixel Art Village",
+    "desc": "Crea pixel art in tre semplici passaggi.",
+    "steps": {
+      "upload": "Carica",
+      "adjust": "Regola",
+      "download": "Scarica",
+      "upload.desc": "Scegli o trascina la tua immagine (PNG, JPG) nel pixelizzatore di immagini.",
+      "adjust.desc": "Regola in tempo reale la dimensione dei pixel, la palette e la griglia dei pixel.",
+      "download.desc": "Esporta con un clic dal generatore di pixel art e condividi."
+    }
+  }
 }
-

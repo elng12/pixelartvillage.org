@@ -1,5 +1,5 @@
 {
-  "nav": {"examples": "Przykłady", "features": "Funkcje", "faq": "FAQ", "blog": "Blog"},
+  "nav": {"examples": "Przykłady", "features": "Funkcje", "how": "Jak to działa", "faq": "FAQ", "blog": "Blog", "home": "Strona główna", "about": "O nas", "contact": "Kontakt"},
   "cta": {"start": "Zacznij teraz"},
   "site": {"tagline": "Generator piksel artu online • kreator • konwerter"},
   "footer": {
@@ -34,5 +34,36 @@
     "accept": "Akceptuj wszystko",
     "reject": "Odrzuć nieistotne"
   }
+  ,
+  "tool": {
+    "title": "Generator i konwerter pixel art online",
+    "subtitle": "Pikselizuj obrazy w przeglądarce — zamieniaj PNG/JPG w czysty, przyjazny siatce pixel art. Dostosuj rozmiar pikseli i palety z podglądem na żywo, a następnie eksportuj ostre wyniki do sprite’ów, ikon lub grafiki retro. Szybko, prywatnie i za darmo z Pixel Art Village.",
+    "dragOrClick": "Przeciągnij obraz tutaj lub",
+    "clickToChoose": "kliknij, aby wybrać",
+    "supports": "Obsługuje PNG, JPG, GIF — do 10MB",
+    "chooseFile": "Wybierz plik",
+    "ariaUpload": "Prześlij obraz (przeciągnij i upuść lub kliknij, aby wybrać)",
+    "ariaChoose": "Wybierz plik obrazu"
+  },
+  "upload": {"selected": "Wybrano plik: {{name}}"},
+  "errors": {
+    "fileTooLarge10": "Plik jest zbyt duży. Prześlij obraz mniejszy niż 10MB.",
+    "prepareFail": "Nie udało się przygotować obrazu. Spróbuj innego pliku.",
+    "onlyPngJpg": "Wybierz obraz PNG lub JPG.",
+    "maxFile": "Plik jest zbyt duży. Maksymalny rozmiar: {{mb}}MB."
+  },
+  "editor": {"title": "Generator pixel art online"}
+  ,
+  "how": {
+    "title": "Jak działa Pixel Art Village",
+    "desc": "Twórz pixel art w trzech prostych krokach.",
+    "steps": {
+      "upload": "Prześlij",
+      "adjust": "Dostosuj",
+      "download": "Pobierz",
+      "upload.desc": "Wybierz lub przeciągnij obraz (PNG, JPG) do pixelizera.",
+      "adjust.desc": "Dostosuj na żywo rozmiar pikseli, paletę i siatkę pikseli.",
+      "download.desc": "Eksportuj jednym kliknięciem z generatora pixel art i udostępnij."
+    }
+  }
 }
-

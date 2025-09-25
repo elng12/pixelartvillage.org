@@ -13,6 +13,7 @@
 /ru/*    /index.html   200
 /fil/*   /index.html   200
 /vi/*    /index.html   200
+/ja/*    /index.html   200
 
 # Unknown language prefix hard-redirect to English equivalent
 /:lang/*   /en/:splat   301!

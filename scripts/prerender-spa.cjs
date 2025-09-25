@@ -7,6 +7,7 @@ const path = require('path');
 const ROOT = process.cwd();
 const DIST = path.join(ROOT, 'dist');
 const INDEX = path.join(DIST, 'index.html');
+const LANGS = ['en','es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
 
 function read(file) { return fs.readFileSync(file, 'utf8'); }
 function write(file, content) { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, content, 'utf8'); }
@@ -20,6 +21,14 @@ function upsertCanonical(html, href) {
     return html.replace(/<link[^>]+rel=["']canonical["'][^>]*>/i, `<link rel="canonical" href="${href}">`);
   }
   return html.replace(/<\/head>/i, `  <link rel="canonical" href="${href}">\n</head>`);
+}
+
+function setHtmlLang(html, lang) {
+  if (!lang) return html;
+  if (/<html[^>]*lang=/.test(html)) {
+    return html.replace(/<html([^>]*?)lang=["'][^"']*["']([^>]*)>/i, `<html$1lang="${lang}"$2>`);
+  }
+  return html.replace(/<html\b/i, `<html lang="${lang}"`);
 }
 
 function stripOgTwitter(html) {
@@ -58,17 +67,30 @@ function injectMeta(html, metas) {
   return html.replace(/<\/head>/i, `  ${tags}\n</head>`);
 }
 
-function buildHtml(base, { title, canonical, metas }) {
+function injectHreflang(html, routePath) {
+  const ABS = (p) => `https://pixelartvillage.org${p}`;
+  const ensure = (p) => (p.endsWith('/') ? p : p + '/');
+  const alt = LANGS.map(l => `<link rel="alternate" hreflang="${l}" href="${ABS(ensure(`/${l}${routePath}`))}">`).join('\n  ');
+  if (html.match(/<link[^>]+rel=["']alternate["'][^>]*hreflang/i)) {
+    // remove existing alternates first
+    html = html.replace(/\n?\s*<link[^>]+rel=["']alternate["'][^>]*hreflang=["'][^"']+["'][^>]*>\s*/ig, '');
+  }
+  return html.replace(/<\/head>/i, `  ${alt}\n</head>`);
+}
+
+function buildHtml(base, { title, canonical, metas, lang, routePath }) {
   let html = base;
   if (title) html = replaceTitle(html, title);
   if (canonical) html = upsertCanonical(html, canonical);
   html = stripOgTwitter(html);
   html = stripMetaDescription(html);
+  if (lang) html = setHtmlLang(html, lang);
   // Remove site-wide FAQ JSON-LD on non-home routes
   html = stripJsonLdTypes(html, ['FAQPage']);
   // Remove any pre-existing hidden SEO snippet from base (to avoid duplicates)
   html = html.replace(/\n?\s*<div[^>]+data-prerender-seo[\s\S]*?<\/div>\s*/i, '');
   if (metas && metas.length) html = injectMeta(html, metas);
+  if (routePath) html = injectHreflang(html, ensureTrailingSlash(routePath));
   return html;
 }
 
@@ -102,6 +124,18 @@ function prerender() {
   const ABS = (p) => `https://pixelartvillage.org${p}`;
 
   const routes = [
+    { path: '/', title: 'Pixel Art Village | Online Pixel Art Maker & Converter', metas: [
+      { name: 'description', content: 'Create pixel art from PNG or JPG in your browser, free. Adjust pixel size and palettes, preview instantly, and export clean images with Pixel Art Village.' },
+      { property: 'og:url', content: 'https://pixelartvillage.org/' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:title', content: 'Pixel Art Village | Online Pixel Art Maker & Converter' },
+      { property: 'og:description', content: 'Turn PNG/JPG into crisp, grid-friendly pixel art. Preview instantly and export clean images with Pixel Art Village.' },
+      { property: 'og:image', content: 'https://pixelartvillage.org/social-preview.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Pixel Art Village | Online Pixel Art Maker & Converter' },
+      { name: 'twitter:description', content: 'Turn PNG/JPG into crisp, grid-friendly pixel art. Preview instantly and export clean images with Pixel Art Village.' },
+      { name: 'twitter:image', content: 'https://pixelartvillage.org/social-preview.png' },
+    ]},
     { path: '/privacy', title: 'Privacy Policy | Pixel Art Village', metas: [
       { name: 'description', content: 'Pixel Art Village privacy policy: local image processing, AdSense cookies, partners, choices and rights.' },
       { property: 'og:url', content: ABS(ensureTrailingSlash('/privacy')) },
@@ -214,8 +248,65 @@ function prerender() {
     });
   }
 
+  // Expand into language-prefixed routes
+  const expanded = [];
   for (const r of routes) {
-    let out = buildHtml(base, { title: r.title, canonical: ABS(ensureTrailingSlash(r.path)), metas: r.metas });
+    for (const lang of LANGS) {
+      const lp = `/${lang}${ensureTrailingSlash(r.path)}`.replace(/\/$/, '/');
+      // localized title for a few known labels; default to original
+      let title = r.title;
+      const mapTitle = {
+        'Privacy Policy | Pixel Art Village': {
+          es: 'Política de Privacidad | Pixel Art Village', fr: 'Politique de confidentialité | Pixel Art Village',
+          de: 'Datenschutzerklärung | Pixel Art Village', it: 'Informativa sulla privacy | Pixel Art Village',
+          pt: 'Política de Privacidade | Pixel Art Village', pl: 'Polityka prywatności | Pixel Art Village',
+          id: 'Kebijakan Privasi | Pixel Art Village', vi: 'Chính sách quyền riêng tư | Pixel Art Village',
+          ru: 'Политика конфиденциальности | Pixel Art Village', fil: 'Patakaran sa Privacy | Pixel Art Village', ja: 'プライバシーポリシー | Pixel Art Village',
+          en: 'Privacy Policy | Pixel Art Village',
+        },
+        'Terms of Service | Pixel Art Village': {
+          es: 'Términos del servicio | Pixel Art Village', fr: 'Conditions d’utilisation | Pixel Art Village',
+          de: 'Nutzungsbedingungen | Pixel Art Village', it: 'Termini di servizio | Pixel Art Village',
+          pt: 'Termos de serviço | Pixel Art Village', pl: 'Regulamin | Pixel Art Village',
+          id: 'Ketentuan Layanan | Pixel Art Village', vi: 'Điều khoản dịch vụ | Pixel Art Village',
+          ru: 'Условия обслуживания | Pixel Art Village', fil: 'Mga Tuntunin ng Serbisyo | Pixel Art Village', ja: '利用規約 | Pixel Art Village',
+          en: 'Terms of Service | Pixel Art Village',
+        },
+        'About | Pixel Art Village': {
+          es: 'Acerca de | Pixel Art Village', fr: 'À propos | Pixel Art Village', de: 'Über | Pixel Art Village',
+          it: 'Informazioni | Pixel Art Village', pt: 'Sobre | Pixel Art Village', pl: 'O nas | Pixel Art Village',
+          id: 'Tentang | Pixel Art Village', vi: 'Giới thiệu | Pixel Art Village', ru: 'О нас | Pixel Art Village', fil: 'Tungkol | Pixel Art Village', ja: '概要 | Pixel Art Village',
+          en: 'About | Pixel Art Village',
+        },
+        'Contact | Pixel Art Village': {
+          es: 'Contacto | Pixel Art Village', fr: 'Contact | Pixel Art Village', de: 'Kontakt | Pixel Art Village',
+          it: 'Contatto | Pixel Art Village', pt: 'Contato | Pixel Art Village', pl: 'Kontakt | Pixel Art Village',
+          id: 'Kontak | Pixel Art Village', vi: 'Liên hệ | Pixel Art Village', ru: 'Контакты | Pixel Art Village', fil: 'Makipag-ugnay | Pixel Art Village', ja: 'お問い合わせ | Pixel Art Village',
+          en: 'Contact | Pixel Art Village',
+        },
+        'Blog | Pixel Art Village': {
+          es: 'Blog | Pixel Art Village', fr: 'Blog | Pixel Art Village', de: 'Blog | Pixel Art Village', it: 'Blog | Pixel Art Village', pt: 'Blog | Pixel Art Village', pl: 'Blog | Pixel Art Village', id: 'Blog | Pixel Art Village', vi: 'Blog | Pixel Art Village', ru: 'Блог | Pixel Art Village', fil: 'Blog | Pixel Art Village', ja: 'ブログ | Pixel Art Village', en: 'Blog | Pixel Art Village',
+        },
+      };
+      if (mapTitle[r.title] && mapTitle[r.title][lang]) title = mapTitle[r.title][lang];
+      expanded.push({
+        lang,
+        path: lp,
+        routePath: r.path, // without lang, for hreflang generation
+        title,
+        metas: r.metas,
+      });
+    }
+  }
+
+  for (const r of expanded) {
+    let out = buildHtml(base, {
+      title: r.title,
+      canonical: ABS(ensureTrailingSlash(r.path)),
+      metas: r.metas,
+      lang: r.lang,
+      routePath: r.routePath,
+    });
 
     // Add hidden H1 + minimal internal links (offscreen) to satisfy crawlers without altering UI
     const defaultLinks = [

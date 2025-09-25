@@ -18,7 +18,9 @@
     "test:ui": "playwright test --ui",
     "verify:dist": "node scripts/verify-dist-entries.cjs",
     "seo:check": "node scripts/seo-check.js",
-    "seo:sitemap": "node scripts/generate-sitemap.js"
+    "seo:sitemap": "node scripts/generate-sitemap.js",
+    "i18n:check": "node scripts/i18n-check.js",
+    "i18n:pseudo": "node scripts/gen-pseudo-locale.js"
   },
   "dependencies": {
     "i18next": "^25.5.2",

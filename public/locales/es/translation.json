@@ -1,5 +1,5 @@
 {
-  "nav": {"examples": "Ejemplos", "features": "Características", "faq": "Preguntas frecuentes", "blog": "Blog"},
+  "nav": {"examples": "Ejemplos", "features": "Características", "how": "Cómo funciona", "faq": "Preguntas frecuentes", "blog": "Blog", "home": "Inicio", "about": "Acerca de", "contact": "Contacto"},
   "cta": {"start": "Empezar ahora"},
   "site": {"tagline": "Generador de arte píxel en línea • creador • conversor"},
   "footer": {
@@ -34,5 +34,36 @@
     "accept": "Aceptar todo",
     "reject": "Rechazar no esenciales"
   }
+  ,
+  "tool": {
+    "title": "Creador y conversor de pixel art en línea",
+    "subtitle": "Pixeliza imágenes en tu navegador: convierte PNG o JPG en pixel art limpio y en cuadrícula. Ajusta tamaño de píxel y paletas con vista previa instantánea, y exporta resultados nítidos para sprites, iconos o gráficos retro. Rápido, privado y gratis con Pixel Art Village.",
+    "dragOrClick": "Arrastra tu imagen aquí o",
+    "clickToChoose": "haz clic para elegir",
+    "supports": "Compatible con PNG, JPG, GIF — hasta 10MB",
+    "chooseFile": "Elegir archivo",
+    "ariaUpload": "Subir imagen (arrastrar y soltar o hacer clic para elegir)",
+    "ariaChoose": "Elegir archivo de imagen"
+  },
+  "upload": {"selected": "Archivo seleccionado: {{name}}"},
+  "errors": {
+    "fileTooLarge10": "El archivo es demasiado grande. Sube una imagen menor de 10MB.",
+    "prepareFail": "Error al preparar la imagen. Prueba con otro archivo.",
+    "onlyPngJpg": "Selecciona una imagen PNG o JPG.",
+    "maxFile": "El archivo es demasiado grande. Tamaño máximo permitido: {{mb}}MB."
+  },
+  "editor": {"title": "Creador de pixel art en línea"}
+  ,
+  "how": {
+    "title": "Cómo funciona Pixel Art Village",
+    "desc": "Usa Pixel Art Village para crear pixel art en tres pasos sencillos.",
+    "steps": {
+      "upload": "Subir",
+      "adjust": "Ajustar",
+      "download": "Descargar",
+      "upload.desc": "Elige o arrastra tu imagen (PNG, JPG) al pixelador de imágenes.",
+      "adjust.desc": "Ajusta en vivo el tamaño de píxel, la paleta y la cuadrícula de píxeles.",
+      "download.desc": "Exporta con un clic desde el generador de pixel art y comparte."
+    }
+  }
 }
-

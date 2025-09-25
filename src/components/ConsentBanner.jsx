@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const STORAGE_KEY = 'consent.choice.v1'
 
@@ -22,6 +23,9 @@ function updateConsent(granted) {
 
 export default function ConsentBanner() {
   const [visible, setVisible] = useState(false)
+  const { t } = useTranslation()
+  const params = useParams()
+  const lang = params.lang || 'en'
 
   useEffect(() => {
     try {
@@ -46,18 +50,18 @@ export default function ConsentBanner() {
     <div role="dialog" aria-live="polite" aria-label="Cookie consent" className="fixed inset-x-0 bottom-0 z-[60]">
       <div className="mx-auto max-w-4xl m-4 rounded-lg border border-gray-200 bg-white shadow-lg">
         <div className="p-4 sm:p-5">
-          <p className="text-sm text-gray-800 font-medium">Privacy & Cookies</p>
+          <p className="text-sm text-gray-800 font-medium">{t('consent.title')}</p>
           <p className="mt-1 text-sm text-gray-600">
-            We use cookies to operate this site and, if enabled, to show Google AdSense ads. You can accept or reject non‑essential cookies at any time.
-            See our <Link className="text-blue-600 underline" to="/privacy">Privacy Policy</Link> and manage ad personalization at
+            {t('consent.desc')}
+            {' '}<Link className="text-blue-600 underline" to={`/${lang}/privacy`}>{t('consent.privacy')}</Link> {t('consent.andManage')}
             {' '}<a className="text-blue-600 underline" href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">adssettings.google.com</a>.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             <button type="button" onClick={acceptAll} className="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-white text-sm font-semibold hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
-              Accept all
+              {t('consent.accept')}
             </button>
             <button type="button" onClick={rejectAll} className="inline-flex items-center rounded-md bg-gray-100 px-3 py-1.5 text-gray-800 text-sm font-semibold hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400">
-              Reject non‑essential
+              {t('consent.reject')}
             </button>
           </div>
         </div>

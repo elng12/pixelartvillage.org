@@ -1,5 +1,5 @@
 {
-  "nav": {"examples": "Ví dụ", "features": "Tính năng", "faq": "FAQ", "blog": "Blog"},
+  "nav": {"examples": "Ví dụ", "features": "Tính năng", "how": "Cách hoạt động", "faq": "FAQ", "blog": "Blog", "home": "Trang chủ", "about": "Giới thiệu", "contact": "Liên hệ"},
   "cta": {"start": "Bắt đầu ngay"},
   "site": {"tagline": "Trình tạo pixel art trực tuyến • tạo • chuyển đổi"},
   "footer": {
@@ -34,5 +34,36 @@
     "accept": "Chấp nhận tất cả",
     "reject": "Từ chối không cần thiết"
   }
+  ,
+  "tool": {
+    "title": "Trình tạo & chuyển đổi pixel art trực tuyến",
+    "subtitle": "Tạo pixel art trong trình duyệt — chuyển PNG/JPG thành pixel art sạch, phù hợp lưới. Điều chỉnh kích thước pixel và bảng màu với xem trước tức thì, rồi xuất kết quả sắc nét cho sprite, icon hoặc đồ họa retro. Nhanh, riêng tư và miễn phí với Pixel Art Village.",
+    "dragOrClick": "Kéo ảnh của bạn vào đây hoặc",
+    "clickToChoose": "nhấp để chọn",
+    "supports": "Hỗ trợ PNG, JPG, GIF — tối đa 10MB",
+    "chooseFile": "Chọn tệp",
+    "ariaUpload": "Tải ảnh lên (kéo thả hoặc nhấp để chọn)",
+    "ariaChoose": "Chọn tệp ảnh"
+  },
+  "upload": {"selected": "Đã chọn tệp: {{name}}"},
+  "errors": {
+    "fileTooLarge10": "Tệp quá lớn. Vui lòng tải ảnh nhỏ hơn 10MB.",
+    "prepareFail": "Chuẩn bị ảnh thất bại. Hãy thử tệp khác.",
+    "onlyPngJpg": "Vui lòng chọn ảnh PNG hoặc JPG.",
+    "maxFile": "Tệp quá lớn. Kích thước tối đa: {{mb}}MB."
+  },
+  "editor": {"title": "Trình tạo pixel art trực tuyến"}
+  ,
+  "how": {
+    "title": "Cách hoạt động của Pixel Art Village",
+    "desc": "Tạo pixel art trong 3 bước đơn giản.",
+    "steps": {
+      "upload": "Tải lên",
+      "adjust": "Điều chỉnh",
+      "download": "Tải xuống",
+      "upload.desc": "Chọn hoặc kéo thả ảnh (PNG, JPG) vào bộ pixel hóa hình ảnh.",
+      "adjust.desc": "Điều chỉnh trực tiếp kích thước pixel, bảng màu và lưới pixel.",
+      "download.desc": "Xuất chỉ với một cú nhấp từ trình tạo pixel art và chia sẻ."
+    }
+  }
 }
-

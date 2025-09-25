@@ -82,13 +82,13 @@ function runSeoCheck() {
     // Check sitemap content
     () => checkFileContent(
       path.join(PUBLIC_DIR, 'sitemap.xml'),
-      /<loc>https:\/\/pixelartvillage\.org\/<\/loc>/,
-      'Homepage URL in sitemap'
+      /<loc>https:\/\/pixelartvillage\.org\/(en|es|id|de|pl|it|pt|fr|ru|fil|vi)\/<\/loc>/,
+      'Homepage URLs in sitemap (multilingual)'
     ),
     () => checkFileContent(
       path.join(PUBLIC_DIR, 'sitemap.xml'),
-      /<loc>https:\/\/pixelartvillage\.org\/converter\//,
-      'Converter pages in sitemap'
+      /<loc>https:\/\/pixelartvillage\.org\/(en|es|id|de|pl|it|pt|fr|ru|fil|vi)\/converter\//,
+      'Converter pages in sitemap (multilingual)'
     ),
     
     // Check robots.txt content

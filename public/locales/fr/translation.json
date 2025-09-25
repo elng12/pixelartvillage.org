@@ -1,5 +1,5 @@
 {
-  "nav": {"examples": "Exemples", "features": "Fonctionnalités", "faq": "FAQ", "blog": "Blog"},
+  "nav": {"examples": "Exemples", "features": "Fonctionnalités", "how": "Comment ça marche", "faq": "FAQ", "blog": "Blog", "home": "Accueil", "about": "À propos", "contact": "Contact"},
   "cta": {"start": "Commencer"},
   "site": {"tagline": "Générateur de pixel art en ligne • créateur • convertisseur"},
   "footer": {
@@ -34,5 +34,36 @@
     "accept": "Tout accepter",
     "reject": "Refuser les non essentiels"
   }
+  ,
+  "tool": {
+    "title": "Générateur et convertisseur de pixel art en ligne",
+    "subtitle": "Pixelisez des images dans votre navigateur — transformez PNG/JPG en pixel art propre et adapté à la grille. Ajustez la taille des pixels et les palettes avec prévisualisation instantanée, puis exportez des résultats nets pour sprites, icônes ou graphismes rétro. Rapide, privé et gratuit avec Pixel Art Village.",
+    "dragOrClick": "Glissez votre image ici ou",
+    "clickToChoose": "cliquez pour choisir",
+    "supports": "Prend en charge PNG, JPG, GIF — jusqu’à 10 Mo",
+    "chooseFile": "Choisir un fichier",
+    "ariaUpload": "Téléverser une image (glisser‑déposer ou cliquer pour choisir)",
+    "ariaChoose": "Choisir un fichier image"
+  },
+  "upload": {"selected": "Fichier sélectionné : {{name}}"},
+  "errors": {
+    "fileTooLarge10": "Fichier trop volumineux. Veuillez téléverser une image < 10 Mo.",
+    "prepareFail": "Échec de préparation de l’image. Essayez un autre fichier.",
+    "onlyPngJpg": "Veuillez sélectionner une image PNG ou JPG.",
+    "maxFile": "Fichier trop volumineux. Taille maximale autorisée : {{mb}} Mo."
+  },
+  "editor": {"title": "Générateur de pixel art en ligne"}
+  ,
+  "how": {
+    "title": "Comment fonctionne Pixel Art Village",
+    "desc": "Créez du pixel art en trois étapes simples avec Pixel Art Village.",
+    "steps": {
+      "upload": "Importer",
+      "adjust": "Ajuster",
+      "download": "Télécharger",
+      "upload.desc": "Choisissez ou faites glisser votre image (PNG, JPG) dans le pixeliseur d’images.",
+      "adjust.desc": "Ajustez en direct la taille des pixels, la palette et la grille de pixels.",
+      "download.desc": "Exportez en un clic depuis le générateur de pixel art et partagez."
+    }
+  }
 }
-
