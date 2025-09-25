@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-dupe-keys, no-unused-vars */
 
 import fs from 'fs';
 import path from 'path';
