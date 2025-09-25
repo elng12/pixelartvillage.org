@@ -1,28 +1,28 @@
 {
   "nav": {"examples": "Ejemplos", "features": "Características", "how": "Cómo funciona", "faq": "Preguntas frecuentes", "blog": "Blog", "home": "Inicio", "about": "Acerca de", "contact": "Contacto"},
   "cta": {"start": "Empezar ahora"},
-  "site": {"tagline": "Generador de arte píxel en línea • creador • conversor"},
+  "site": {"tagline": "Generador de gráficos píxel en línea • creador de imagen • conversor"},
   "footer": {
     "tools": "Herramientas", "formats": "Formatos", "explore": "Explorar", "community": "Comunidad",
     "terms": "Términos", "privacy": "Privacidad", "about": "Acerca de", "contact": "Contacto",
     "links": {
-      "generator": "Generador de arte píxel",
-      "converter": "Conversor de arte píxel",
-      "imageToPixel": "Imagen a arte píxel",
-      "makePixelArt": "Crear arte píxel",
-      "png2pixel": "PNG a arte píxel",
-      "jpg2pixel": "JPG a arte píxel",
-      "img2pixel": "IMG a arte píxel",
+      "generator": "Generador de gráficos píxel con paleta",
+      "converter": "Conversor de gráficos píxel con paleta personalizada",
+      "imageToPixel": "Imagen a gráficos píxel con paletas",
+      "makePixelArt": "Crear gráficos píxel con controles de paleta",
+      "png2pixel": "PNG a gráficos píxel con paleta",
+      "jpg2pixel": "JPG a gráficos píxel con paletas personalizadas",
+      "img2pixel": "IMG a gráficos píxel con opciones de paleta",
       "gridPreview": "Vista previa de cuadrícula de píxeles",
       "how": "Cómo funciona",
-      "start": "Comenzar en Pixel Art Village",
+      "start": "Comenzar en pixel graphics Village",
       "tips": "Consejos y paletas",
       "privacyLocal": "Privacidad y procesamiento local"
     }
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Artículos y novedades sobre arte píxel, tutoriales y funciones nuevas.",
+    "subtitle": "Artículos y novedades sobre gráficos de imagen, tutoriales y funciones nuevas.",
     "back": "Volver al blog",
     "notFound": {"title": "Entrada no encontrada", "desc": "El artículo que buscas no existe. Vuelve al"}
   },
@@ -36,8 +36,8 @@
   }
   ,
   "tool": {
-    "title": "Creador y conversor de pixel art en línea",
-    "subtitle": "Pixeliza imágenes en tu navegador: convierte PNG o JPG en pixel art limpio y en cuadrícula. Ajusta tamaño de píxel y paletas con vista previa instantánea, y exporta resultados nítidos para sprites, iconos o gráficos retro. Rápido, privado y gratis con Pixel Art Village.",
+    "title": "Creador y conversor de gráficos píxel en línea con paleta personalizada",
+    "subtitle": "Procesa imágenes en tu navegador: convierte PNG o JPG imagen en gráficos píxel limpios y en cuadrícula. Ajusta tamaño de píxel y paletas con vista previa instantánea, y exporta resultados nítidos para sprites, iconos o gráficos retro con opciones de paleta avanzadas. Rápido, privado y gratis con pixel graphics Village.",
     "dragOrClick": "Arrastra tu imagen aquí o",
     "clickToChoose": "haz clic para elegir",
     "supports": "Compatible con PNG, JPG, GIF — hasta 10MB",
@@ -52,18 +52,18 @@
     "onlyPngJpg": "Selecciona una imagen PNG o JPG.",
     "maxFile": "El archivo es demasiado grande. Tamaño máximo permitido: {{mb}}MB."
   },
-  "editor": {"title": "Creador de pixel art en línea"}
+  "editor": {"title": "Creador de pixel graphics en línea"}
   ,
   "how": {
-    "title": "Cómo funciona Pixel Art Village",
-    "desc": "Usa Pixel Art Village para crear pixel art en tres pasos sencillos.",
+    "title": "Cómo funciona pixel graphics Village",
+    "desc": "Usa pixel graphics Village para crear pixel graphics en tres pasos sencillos.",
     "steps": {
       "upload": "Subir",
       "adjust": "Ajustar",
       "download": "Descargar",
-      "upload.desc": "Elige o arrastra tu imagen (PNG, JPG) al pixelador de imágenes.",
+      "upload.desc": "Elige o arrastra tu imagen (PNG, JPG) al procesador de imágenes.",
       "adjust.desc": "Ajusta en vivo el tamaño de píxel, la paleta y la cuadrícula de píxeles.",
-      "download.desc": "Exporta con un clic desde el generador de pixel art y comparte."
+      "download.desc": "Exporta con un clic desde el generador de pixel graphics y comparte."
     }
   }
 }

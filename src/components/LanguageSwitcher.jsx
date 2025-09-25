@@ -41,9 +41,19 @@ export default function LanguageSwitcher() {
     if (!SUPPORTED_LANGS.includes(next)) return
     const suffix = stripLeadingLang(location.pathname)
     const search = location.search || ''
-    const hash = location.hash || ''
+    const keepHash = (() => {
+      try {
+        if (!import.meta?.env?.VITE_PRESERVE_HASH_ON_LANG_SWITCH) return false
+        const raw = (location.hash || '').slice(1)
+        if (!raw) return false
+        const id = decodeURIComponent(raw)
+        if (typeof document === 'undefined') return false
+        return !!document.getElementById(id)
+      } catch { return false }
+    })()
+    const nextUrl = `/${next}${suffix}${search}${keepHash ? location.hash : ''}`
     // 先同步 URL，再切换语言，避免竞态
-    navigate(`/${next}${suffix}${search}${hash}`, { replace: true })
+    navigate(nextUrl, { replace: true })
     setStoredLang(next)
     i18n.changeLanguage(next)
   }, [location.pathname, location.search, location.hash, navigate])

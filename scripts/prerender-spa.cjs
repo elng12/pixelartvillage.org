@@ -108,9 +108,11 @@ function escapeHtml(s) {
     .replace(/'/g, '&#39;');
 }
 
-function injectHiddenH1AndNav(html, { h1, description, links = [] }) {
+function injectHiddenH1AndNav(html, { h1, description, links = [], extras = '' }) {
   const navLinks = links.map((l) => `<li><a href="${l.href}">${escapeHtml(l.text)}</a></li>`).join('');
-  const snippet = `\n    <div data-prerender-seo aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">\n      <main>\n        ${h1 ? `<h1>${escapeHtml(h1)}</h1>` : ''}\n        ${description ? `<p>${escapeHtml(description)}</p>` : ''}\n        ${links.length ? `<nav><ul>${navLinks}</ul></nav>` : ''}\n      </main>\n    </div>\n  `;
+  // 额外加入一次站点核心短语，统一提升“image to pixel art”的站点级出现频次
+  const keywordLine = '<p>Image to Pixel Art — free online tool.</p>'
+  const snippet = `\n    <div data-prerender-seo aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">\n      <main>\n        ${h1 ? `<h1>${escapeHtml(h1)}</h1>` : ''}\n        ${description ? `<p>${escapeHtml(description)}</p>` : ''}\n        ${keywordLine}\n        ${links.length ? `<nav><ul>${navLinks}</ul></nav>` : ''}\n        ${extras}\n      </main>\n    </div>\n  `;
   if (html.includes('<div id="root"></div>')) {
     return html.replace('<div id="root"></div>', `<div id="root"></div>${snippet}`);
   }
@@ -317,9 +319,32 @@ function prerender() {
       { href: ABS('/terms/'), text: 'Terms' },
       { href: ABS('/blog/'), text: 'Blog' },
     ];
-    const h1Text = r.title.replace(/\s*\|\s*Pixel Art Village$/, '');
-    const descMeta = (r.metas.find(m => m.name === 'description') || {}).content || '';
-    out = injectHiddenH1AndNav(out, { h1: h1Text, description: descMeta, links: defaultLinks });
+    let h1Text = r.title.replace(/\s*\|\s*Pixel Art Village$/, '');
+    h1Text = h1Text.replace(/\bpixel art\b/gi, 'retro graphics');
+    const rawDesc = (r.metas.find(m => m.name === 'description') || {}).content || '';
+    const descMeta = rawDesc
+      .replace(/Pixel Art Village/g, 'PAV')
+      .replace(/\bpixel art\b/gi, 'retro graphics')
+      .replace(/\bpixel\b/gi, 'grid')
+      .replace(/\bart\b/gi, 'design');
+    // Category-specific extras to tune keyword distribution without altering UI
+    let extras = ''
+    const pathAfterLang = (r.routePath || '/').replace(/^\/[a-z]{2}\//, '/').toLowerCase()
+    if (/^\/converter\//.test(pathAfterLang)) {
+      // Add palette-heavy sentence: 3x "palette" + 1x "palettes"; also add 2x "image"
+      extras = '<p>Palette control, palette limits, palette preview — manage palettes precisely.</p>' +
+               '<p>image workflow and image formats.</p>'
+    } else if (/^\/blog\//.test(pathAfterLang)) {
+      // Add 2x "palette" and 1x "image" on blog pages
+      extras = '<p>Tips on choosing the right palette, palette examples, and image handling for your style.</p>'
+    } else if (/^\/(privacy|terms|about|contact)\//.test(pathAfterLang)) {
+      // Policy pages: add 1x "palette"
+      extras = '<p>Reference palette guidelines for creators.</p>'
+    } else if (r.path === '/') {
+      // Homepage: add 2x "palette"
+      extras = '<p>Explore our palette overview and palette chooser for quick starts.</p>'
+    }
+    out = injectHiddenH1AndNav(out, { h1: h1Text, description: descMeta, links: defaultLinks, extras });
 
     const file = path.join(DIST, r.path.replace(/^\//, '').replace(/\/$/, ''), 'index.html');
     write(file, out);

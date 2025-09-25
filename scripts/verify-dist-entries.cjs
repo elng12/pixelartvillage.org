@@ -56,8 +56,10 @@ function readHtml(p) {
 
 function find(re, html) { const m = re.exec(html); return m && m[1] ? m[1] : null }
 
-function verifyRoute(routePath) {
-  const file = path.join(DIST, routePath.replace(/^\//, ''), 'index.html');
+// 默认校验英文版路由（与 prerender 输出一致：dist/en/...）
+function verifyRoute(routePath, lang = 'en') {
+  const localized = path.join(lang, routePath.replace(/^\//, ''));
+  const file = path.join(DIST, localized, 'index.html');
   const html = readHtml(file);
   if (!html) return;
   const title = find(/<title>\s*([^<]+)\s<\/title>/i, html) || find(/<title>\s*([^<]+)<\/title>/i, html);
@@ -115,19 +117,20 @@ try {
   console.warn('[verify-dist] warn: cannot load pseo-pages.json', e && e.message);
 }
 
-ROUTES.forEach(verifyRoute);
+ROUTES.forEach((r) => verifyRoute(r, 'en'));
 
 // Extra: verify blog index has image meta
 try {
-  verifyRoute('/blog');
-  const blogIndex = path.join(DIST, 'blog', 'index.html');
+  verifyRoute('/blog', 'en');
+  const blogIndex = path.join(DIST, 'en', 'blog', 'index.html');
   const html = readHtml(blogIndex);
   if (html) {
     const ogImage = /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["'][^>]*>/i.exec(html);
     const twImage = /<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["'][^>]*>/i.exec(html);
     if (!ogImage) fail('/blog: missing og:image'); else ok('/blog: og:image OK');
     if (!twImage) fail('/blog: missing twitter:image'); else ok('/blog: twitter:image OK');
-    const imgPath = (ogImage && ogImage[1]) || (twImage && twImage[1]) || '';
+    let imgPath = (ogImage && ogImage[1]) || (twImage && twImage[1]) || '';
+    imgPath = imgPath.replace(/^https?:\/\/[^/]+/, '');
     if (imgPath) {
       const disk = path.join(DIST, imgPath.replace(/^\//, ''));
       if (!fs.existsSync(disk)) fail(`/blog: image not found in dist -> ${imgPath}`); else ok('/blog: image found');

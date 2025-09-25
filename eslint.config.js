@@ -15,7 +15,7 @@ export default defineConfig([
     ],
     languageOptions: {
       ecmaVersion: 'latest',
-      globals: globals.browser,
+      globals: { ...globals.browser, __BUILD_ID__: 'readonly' },
       parserOptions: {
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
@@ -24,6 +24,15 @@ export default defineConfig([
     rules: {
       // 在未引入 eslint-plugin-react 的情况下，为了避免 JSX 组件/标识符被误判未使用，放宽为忽略大写开头；同时忽略以 _ 开头的参数。
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }],
+    },
+  },
+  // Vite 配置文件（Node 环境）
+  {
+    files: ['vite.config.{js,ts}'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      globals: globals.node,
+      sourceType: 'module',
     },
   },
   // 针对 Node/Playwright 等非浏览器环境的覆盖

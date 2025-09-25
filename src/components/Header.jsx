@@ -1,24 +1,23 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import Avatar from './Avatar';
 import { useTranslation } from 'react-i18next';
 
 function Header({ rightSlot }) {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const [current, setCurrent] = useState('tool');
-  // 依赖语言变化，避免翻译值被缓存
-  // 同时支持锚点型（id）与路由型（to）链接
-  const NAV_LINKS = useMemo(() => ([
+  // 支持锚点型（id）与路由型（to）链接；直接在渲染期取文案，避免首次渲染时资源未就绪导致标签停留在 key
+  const NAV_LINKS = [
     { id: 'tool', label: t('nav.home') },
     { id: 'showcase', label: t('nav.examples') },
     { id: 'features', label: t('nav.features') },
     { id: 'how-it-works', label: t('nav.how') },
     { id: 'faq', label: t('nav.faq') },
     { to: 'blog', label: t('nav.blog') },
-  ]), [i18n.language]);
+  ]
 
   useEffect(() => {
-    const observeIds = ['tool', ...NAV_LINKS.map((l) => l.id).filter(Boolean)];
+    const observeIds = ['tool', 'showcase', 'features', 'how-it-works', 'faq'];
     const sections = observeIds
       .map((id) => document.querySelector(`#${id}`))
       .filter(Boolean);
@@ -34,7 +33,7 @@ function Header({ rightSlot }) {
     );
     sections.forEach((sec) => observer.observe(sec));
     return () => observer.disconnect();
-  }, [NAV_LINKS]);
+  }, []);
 
   const params = useParams();
   const lang = params.lang || 'en';

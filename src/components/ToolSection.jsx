@@ -85,14 +85,19 @@ function ToolSection({ onImageUpload, headingLevel = 'h1' }) {
         {(() => {
           const HeadingTag = headingLevel === 'h2' ? 'h2' : 'h1';
           return (
-            <HeadingTag className={`${compact?'text-2xl md:text-4xl':'text-3xl md:text-5xl'} font-extrabold text-gray-800 mb-3`}>
+            <HeadingTag className={`${compact?'text-2xl md:text-4xl':'text-3xl md:text-5xl'} font-extrabold text-gray-800 mb-3 text-center`}>
               {t('tool.title')}
             </HeadingTag>
           );
         })()}
-        <p className={`${compact?'text-sm':'text-base'} text-gray-600 mb-6 max-w-4xl md:max-w-5xl mx-auto`}>
-          {t('tool.subtitle')}
-        </p>
+        <div className="mb-6 max-w-4xl md:max-w-5xl mx-auto">
+          <p className={`${compact?'text-sm':'text-base'} text-gray-600 mb-2`}>
+            {t('tool.subtitle')}
+          </p>
+          <p className={`${compact?'text-sm':'text-base'} text-gray-600`}>
+            {t('tool.subtitle2')}
+          </p>
+        </div>
         <div 
           className={`upload-zone max-w-3xl mx-auto bg-white ${compact?'p-6':'p-8'} border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50`}
           role="button"

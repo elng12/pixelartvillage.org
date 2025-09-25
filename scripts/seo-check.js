@@ -75,7 +75,7 @@ function runSeoCheck() {
     ),
     () => checkFileContent(
       path.join(process.cwd(), 'index.html'),
-      /<h1[^>]*>.*Free Online Pixel Art Maker.*<\/h1>/,
+      /<h1[^>]*>.*Image to Pixel Art.*<\/h1>/,
       'H1 tag in hidden SEO content'
     ),
     

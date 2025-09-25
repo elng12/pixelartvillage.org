@@ -1,28 +1,28 @@
 {
   "nav": {"examples": "例", "features": "機能", "how": "使い方", "faq": "よくある質問", "blog": "ブログ", "home": "ホーム", "about": "概要", "contact": "お問い合わせ"},
   "cta": {"start": "今すぐ始める"},
-  "site": {"tagline": "オンライン ピクセルアート ジェネレーター・メーカー・コンバーター"},
+  "site": {"tagline": "オンライン ピクセルグラフィック ジェネレーター・メーカー・コンバーター"},
   "footer": {
     "tools": "ツール", "formats": "フォーマット", "explore": "探索", "community": "コミュニティ",
     "terms": "利用規約", "privacy": "プライバシー", "about": "概要", "contact": "お問い合わせ",
     "links": {
-      "generator": "ピクセルアート ジェネレーター",
-      "converter": "ピクセルアート コンバーター",
-      "imageToPixel": "画像をピクセルアートに",
-      "makePixelArt": "ピクセルアートを作る",
-      "png2pixel": "PNG からピクセルアート",
-      "jpg2pixel": "JPG からピクセルアート",
-      "img2pixel": "IMG からピクセルアート",
+      "generator": "ピクセルグラフィック ジェネレーター",
+      "converter": "ピクセルグラフィック コンバーター",
+      "imageToPixel": "画像をピクセルグラフィックに",
+      "makePixelArt": "ピクセルグラフィックを作る",
+      "png2pixel": "PNG からピクセルグラフィック",
+      "jpg2pixel": "JPG からピクセルグラフィック",
+      "img2pixel": "IMG からピクセルグラフィック",
       "gridPreview": "ピクセルグリッドのプレビュー",
       "how": "使い方",
-      "start": "Pixel Art Village で始める",
+      "start": "pixel graphics Village で始める",
       "tips": "ヒント & パレット",
       "privacyLocal": "プライバシー & ローカル処理"
     }
   },
   "blog": {
     "title": "ブログ",
-    "subtitle": "ピクセルアートの作り方、チュートリアル、機能紹介の記事。",
+    "subtitle": "ピクセルグラフィックの作り方、チュートリアル、機能紹介の記事。",
     "back": "ブログに戻る",
     "notFound": {"title": "記事が見つかりません", "desc": "お探しの記事は存在しません。戻る先:"}
   },
@@ -35,8 +35,8 @@
     "reject": "不要なものを拒否"
   },
   "tool": {
-    "title": "無料のオンライン ピクセルアート メーカー & コンバーター",
-    "subtitle": "ブラウザ上で画像をピクセル化 — PNG/JPG をクリーンでグリッドに優しいピクセルアートへ。ピクセルサイズやパレットを即時プレビューで調整し、スプライト、アイコン、レトログラフィック向けにシャープに書き出せます。高速・プライバシー重視・無料の Pixel Art Village。",
+    "title": "無料のオンライン ピクセルグラフィック メーカー & コンバーター",
+    "subtitle": "ブラウザ上で画像をピクセル化 — PNG/JPG をクリーンでグリッドに優しいピクセルグラフィックへ。ピクセルサイズやパレットを即時プレビューで調整し、スプライト、アイコン、レトログラフィック向けにシャープに書き出せます。高速・プライバシー重視・無料の pixel graphics Village。",
     "dragOrClick": "ここに画像をドラッグするか",
     "clickToChoose": "クリックして選択",
     "supports": "PNG / JPG / GIF 対応 — 最大 10MB",
@@ -51,18 +51,18 @@
     "onlyPngJpg": "PNG または JPG 画像を選択してください。",
     "maxFile": "ファイルサイズが大きすぎます。最大 {{mb}}MB までです。"
   },
-  "editor": {"title": "オンライン ピクセルアート メーカー"}
+  "editor": {"title": "オンライン ピクセルグラフィック メーカー"}
   ,
   "how": {
-    "title": "Pixel Art Village の使い方",
-    "desc": "3つの簡単なステップでピクセルアートを作成できます。",
+    "title": "pixel graphics Village の使い方",
+    "desc": "3つの簡単なステップでピクセルグラフィックを作成できます。",
     "steps": {
       "upload": "アップロード",
       "adjust": "調整",
       "download": "ダウンロード",
       "upload.desc": "画像（PNG・JPG）を画像ピクセライザーに選択またはドラッグします。",
       "adjust.desc": "ピクセルサイズ、パレット、ピクセルグリッドをライブで調整します。",
-      "download.desc": "ピクセルアート ジェネレーターからワンクリックで書き出して共有します。"
+      "download.desc": "ピクセルグラフィック ジェネレーターからワンクリックで書き出して共有します。"
     }
   }
 }

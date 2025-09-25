@@ -78,7 +78,6 @@ try {
       // 注意：仅当英文基线也缺失时才会触发此事件
       // 若仅当前语言缺失、英文存在，将回退到英文，不触发此事件
       // 因此不会影响正常的回退策略
-      // eslint-disable-next-line no-console
       console.error(msg)
       throw new Error(msg)
     }

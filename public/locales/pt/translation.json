@@ -1,28 +1,28 @@
 {
   "nav": {"examples": "Exemplos", "features": "Recursos", "how": "Como funciona", "faq": "FAQ", "blog": "Blog", "home": "Início", "about": "Sobre", "contact": "Contato"},
   "cta": {"start": "Começar agora"},
-  "site": {"tagline": "Gerador de pixel art online • criador • conversor"},
+  "site": {"tagline": "Gerador de pixel graphics online • criador • conversor"},
   "footer": {
     "tools": "Ferramentas", "formats": "Formatos", "explore": "Explorar", "community": "Comunidade",
     "terms": "Termos", "privacy": "Privacidade", "about": "Sobre", "contact": "Contato",
     "links": {
-      "generator": "Gerador de pixel art",
-      "converter": "Conversor de pixel art",
-      "imageToPixel": "Imagem para pixel art",
-      "makePixelArt": "Criar pixel art",
-      "png2pixel": "PNG para pixel art",
-      "jpg2pixel": "JPG para pixel art",
-      "img2pixel": "IMG para pixel art",
+      "generator": "Gerador de pixel graphics",
+      "converter": "Conversor de pixel graphics",
+      "imageToPixel": "Imagem para pixel graphics",
+      "makePixelArt": "Criar pixel graphics",
+      "png2pixel": "PNG para pixel graphics",
+      "jpg2pixel": "JPG para pixel graphics",
+      "img2pixel": "IMG para pixel graphics",
       "gridPreview": "Pré‑visualização de grade de pixels",
       "how": "Como funciona",
-      "start": "Começar no Pixel Art Village",
+      "start": "Começar no pixel graphics Village",
       "tips": "Dicas e paletas",
       "privacyLocal": "Privacidade e processamento local"
     }
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Artigos e novidades sobre pixel art, tutoriais e novos recursos.",
+    "subtitle": "Artigos e novidades sobre pixel graphics, tutoriais e novos recursos.",
     "back": "Voltar ao Blog",
     "notFound": {"title": "Publicação não encontrada", "desc": "O artigo que você procura não existe. Voltar ao"}
   },
@@ -36,8 +36,8 @@
   }
   ,
   "tool": {
-    "title": "Gerador e conversor de pixel art online",
-    "subtitle": "Pixelize imagens no navegador — transforme PNG/JPG em pixel art limpo e amigável à grade. Ajuste o tamanho do pixel e paletas com pré‑visualização instantânea e exporte resultados nítidos para sprites, ícones ou gráficos retrô. Rápido, privado e grátis com Pixel Art Village.",
+    "title": "Gerador e conversor de pixel graphics online",
+    "subtitle": "Pixelize imagens no navegador — transforme PNG/JPG em pixel graphics limpo e amigável à grade. Ajuste o tamanho do pixel e paletas com pré‑visualização instantânea e exporte resultados nítidos para sprites, ícones ou gráficos retrô. Rápido, privado e grátis com pixel graphics Village.",
     "dragOrClick": "Arraste sua imagem aqui ou",
     "clickToChoose": "clique para escolher",
     "supports": "Suporta PNG, JPG, GIF — até 10MB",
@@ -52,18 +52,18 @@
     "onlyPngJpg": "Selecione uma imagem PNG ou JPG.",
     "maxFile": "Arquivo muito grande. Tamanho máximo permitido: {{mb}}MB."
   },
-  "editor": {"title": "Gerador de pixel art online"}
+  "editor": {"title": "Gerador de pixel graphics online"}
   ,
   "how": {
-    "title": "Como funciona o Pixel Art Village",
-    "desc": "Crie pixel art em três passos simples.",
+    "title": "Como funciona o pixel graphics Village",
+    "desc": "Crie pixel graphics em três passos simples.",
     "steps": {
       "upload": "Enviar",
       "adjust": "Ajustar",
       "download": "Baixar",
       "upload.desc": "Escolha ou arraste sua imagem (PNG, JPG) para o pixelizador de imagens.",
       "adjust.desc": "Ajuste ao vivo o tamanho do pixel, a paleta e a grade de pixels.",
-      "download.desc": "Exporte com um clique do gerador de pixel art e compartilhe."
+      "download.desc": "Exporte com um clique do gerador de pixel graphics e compartilhe."
     }
   }
 }

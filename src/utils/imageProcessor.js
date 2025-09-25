@@ -117,15 +117,15 @@ import {
   getCustomPaletteByName,
   inferAutoPaletteSize,
   PREVIEW_LIMIT,
-} from './constants'
+} from './constants.js'
 import {
   KMEANS_CACHE_MAX,
   KMEANS_SAMPLE_PX,
   WORKER_ID_MAXLEN,
   LOAD_TIMEOUT_MS,
   COLOR_SCIENCE,
-} from './constants'
-import { drawContainToCanvas } from './resizeImage'
+} from './constants.js'
+import { drawContainToCanvas } from './resizeImage.js'
 
 function buildFilterString(brightness, contrast, saturation) {
   const f = [];
@@ -468,6 +468,9 @@ function rgbToLab(r, g, b) {
   const bb = 200 * (fy - fz);
   return [L, a, bb];
 }
+
+// 为可测试的纯函数提供命名导出（不破坏既有 API）
+export { hexToRgb, clamp255, rgbToLab }
 
 function srgbToLinear(u8) {
   const c = (u8 / 255);

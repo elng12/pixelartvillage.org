@@ -39,7 +39,7 @@ export default function CompatNotice() {
         <button
           type="button"
           className="ml-2 inline-flex items-center rounded border border-amber-300 px-2 py-0.5 hover:bg-amber-100"
-          onClick={() => { try { localStorage.setItem(STORAGE_KEY, '1') } catch {} ; setVisible(false) }}
+          onClick={() => { try { localStorage.setItem(STORAGE_KEY, '1') } catch { /* ignore */ void 0 } ; setVisible(false) }}
         >
           Dismiss
         </button>
@@ -47,4 +47,3 @@ export default function CompatNotice() {
     </div>
   )
 }
-

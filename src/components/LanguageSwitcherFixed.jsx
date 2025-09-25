@@ -60,10 +60,19 @@ export default function LanguageSwitcher() {
       
       const suffix = stripLeadingLang(location.pathname)
       const search = location.search || ''
-      const hash = location.hash || ''
-      
-      // 导航到新语言路径
-      navigate(`/${next}${suffix}${search}${hash}`, { replace: true })
+      // 可选：设置 VITE_PRESERVE_HASH_ON_LANG_SWITCH=1 时保留 hash（仅当当前页面存在该锚点）
+      const keepHash = (() => {
+        try {
+          if (!import.meta?.env?.VITE_PRESERVE_HASH_ON_LANG_SWITCH) return false
+          const raw = (location.hash || '').slice(1)
+          if (!raw) return false
+          const id = decodeURIComponent(raw)
+          if (typeof document === 'undefined') return false
+          return !!document.getElementById(id)
+        } catch { return false }
+      })()
+      const nextUrl = `/${next}${suffix}${search}${keepHash ? location.hash : ''}`
+      navigate(nextUrl, { replace: true })
     } catch (error) {
       console.error('Language switch error:', error)
     }

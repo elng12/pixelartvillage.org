@@ -15,12 +15,22 @@
     "format": "prettier --write .",
     "lint:ci": "eslint src scripts --max-warnings=0",
     "test": "playwright test",
+    "test:unit": "node scripts/unit-tests.js",
     "test:ui": "playwright test --ui",
     "verify:dist": "node scripts/verify-dist-entries.cjs",
     "seo:check": "node scripts/seo-check.js",
     "seo:sitemap": "node scripts/generate-sitemap.js",
+    "seo:keywords": "node scripts/keyword-frequency-analysis.js",
+    "seo:report": "node scripts/seo-keyword-report.js",
+    "seo:density": "node scripts/kw-density-check.js",
+    "seo:adjust": "node scripts/keyword-adjustment-strategy.js",
+    "seo:reduce-art": "node scripts/reduce-art-keyword.js",
     "i18n:check": "node scripts/i18n-check.js",
     "i18n:pseudo": "node scripts/gen-pseudo-locale.js"
+    ,
+    "seo:kw": "node scripts/kw-density-check.js",
+    "seo:kw:report": "node scripts/kw-density-report.js",
+    "seo:kw:words": "node scripts/kw-density-words.js"
   },
   "dependencies": {
     "i18next": "^25.5.2",

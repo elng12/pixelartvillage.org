@@ -6,7 +6,9 @@ import { execSync } from 'node:child_process'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   let gitHash = ''
-  try { gitHash = execSync('git rev-parse --short HEAD', { stdio: ['ignore','pipe','ignore'] }).toString().trim() } catch {}
+  try {
+    gitHash = execSync('git rev-parse --short HEAD', { stdio: ['ignore','pipe','ignore'] }).toString().trim()
+  } catch { /* ignore */ void 0 }
   const BUILD_ID = mode === 'production'
     ? (process.env.GIT_COMMIT || gitHash || new Date().toISOString().replace(/[:.]/g, '-'))
     : 'dev'
