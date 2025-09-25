@@ -1,21 +1,21 @@
 {
   "nav": {"examples": "Examples", "features": "Features", "how": "How it works", "faq": "FAQ", "blog": "Blog", "home": "Home", "about": "About", "contact": "Contact"},
   "cta": {"start": "Start now"},
-  "site": {"tagline": "Online pixel art generator • image maker • converter"},
+  "site": {"tagline": "Online pixel art generator • image to pixel art maker • converter"},
   "footer": {
     "tools": "Tools", "formats": "Formats", "explore": "Explore", "community": "Community",
     "terms": "Terms", "privacy": "Privacy", "about": "About", "contact": "Contact",
     "github": "GitHub",
-    "cta": { "ariaStart": "Start image art in pixel art Village" },
+    "cta": { "ariaStart": "Start image to pixel art in pixel art Village" },
     "copy": "© {{year}} pixel art Village. All rights reserved.",
     "links": {
-      "generator": "Digital image generator with palette",
-      "converter": "Image art converter with custom palette",
-      "imageToPixel": "Image to digital art with palettes",
-      "makePixelArt": "Make / create image art with palette controls",
-      "png2pixel": "PNG to digital art with palette",
-      "jpg2pixel": "JPG to digital art with custom palettes",
-      "img2pixel": "IMG to digital art with palette options",
+      "generator": "Digital image generator with the palette",
+      "converter": "Image to pixel art converter with custom palette",
+      "imageToPixel": "Image to pixel art with palettes",
+      "makePixelArt": "Make / create pixel art image with the palette controls",
+      "png2pixel": "PNG to pixel art with the palette",
+      "jpg2pixel": "JPG to pixel art with custom palettes",
+      "img2pixel": "IMG to pixel art with the palette options",
       "gridPreview": "Pixel grid preview",
       "how": "How it works",
       "start": "Start in pixel art Village",
@@ -25,7 +25,7 @@
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Articles and updates about making image art, tutorials, and new features.",
+    "subtitle": "Articles and updates about making pixel art image, tutorials, and new features.",
     "back": "Back to Blog",
     "notFound": {"title": "Post not found", "desc": "The article you’re looking for does not exist. Go back to the"}
   },
@@ -39,9 +39,9 @@
   }
   ,
   "tool": {
-    "title": "Image to Digital Art Generator with Custom Palette",
-    "subtitle2": "adjustable size and custom palettes. Perfect for sprites, icons, and retro game art with advanced palette options.",
-    "subtitle": "Image Art Converter – Turn PNG or JPG image into digital style with instant preview and palette controls,",
+    "title": "Image to Pixel Art Generator with Custom Palette",
+    "subtitle2": "adjustable pixel size and custom palettes. Perfect for sprites, icons, and retro game art with advanced palette options.",
+    "subtitle": "Image to Pixel Art Converter – Turn PNG or JPG image to pixel art with instant preview and the palette controls,",
     "dragOrClick": "Drag your image here or",
     "clickToChoose": "click to choose",
     "supports": "Supports PNG, JPG, GIF — up to 10MB",
@@ -60,7 +60,7 @@
   },
   "editor": {
     "title": "Online Pixel Art Maker",
-    "downloadBtn": "Download Pixel Art",
+    "downloadBtn": "Download Pixel Art Image",
     "uploadBtn": "Upload Image",
     "section": { "general": "General ▾" }
   },
@@ -69,7 +69,7 @@
       "title": "Reset Sliders",
       "all": "Reset All",
       "tooltip": "Reset Pixel Size / Brightness / Contrast / Saturation",
-      "pixelSizeBtnTitle": "Reset Pixel Size",
+      "pixelSizeBtnTitle": "Reset the Pixel Size",
       "brightnessBtnTitle": "Reset Brightness",
       "contrastBtnTitle": "Reset Contrast",
       "saturationBtnTitle": "Reset Saturation"
@@ -337,4 +337,34 @@
       }
     ]
   }
-}
+,
+  "targetPhrases": {
+    "imageToPixelArt1": "Convert image to pixel art with ease",
+    "imageToPixelArt2": "Transform image to pixel art online",
+    "imageToPixelArt3": "Turn image to pixel art instantly",
+    "pixelArtImage1": "Create pixel art image from photos",
+    "pixelArtImage2": "Generate pixel art image quickly",
+    "pixelArtImage3": "Make pixel art image online",
+    "pixelSize1": "Adjust pixel size for perfect results",
+    "pixelSize2": "Control pixel size settings",
+    "pixelSize3": "Change pixel size easily",
+    "theImage1": "Process the image with advanced tools",
+    "theImage2": "Edit the image with precision",
+    "theImage3": "Transform the image completely",
+    "artImage1": "Create stunning art image",
+    "artImage2": "Generate beautiful art image",
+    "artImage3": "Make professional art image",
+    "thePalette1": "Customize the palette colors",
+    "thePalette2": "Adjust the palette settings",
+    "thePalette3": "Control the palette options",
+    "toPixel1": "Convert to pixel format",
+    "toPixel2": "Transform to pixel style",
+    "toPixel3": "Change to pixel art",
+    "thePixel1": "Edit the pixel details",
+    "thePixel2": "Adjust the pixel properties",
+    "thePixel3": "Control the pixel appearance",
+    "toPixelArt1": "Convert to pixel art format",
+    "toPixelArt2": "Transform to pixel art style",
+    "imageToPixel1": "Convert image to pixel format",
+    "imageToPixel2": "Transform image to pixel style"
+  }}

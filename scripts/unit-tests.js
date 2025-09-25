@@ -3,7 +3,10 @@
 import assert from 'node:assert'
 
 import { inferAutoPaletteSize } from '../src/utils/palette-utils.js'
-import { hexToRgb, clamp255, rgbToLab } from '../src/utils/imageProcessor.js'
+import { hexToRgb } from '../src/utils/palette-helpers.js'
+import { clamp255, rgbToLab } from '../src/utils/color-utils.js'
+import { nearestColorIndex, applyPaletteToCtx } from '../src/utils/palette-helpers.js'
+import { getKMeansPalette } from '../src/utils/kmeans-bridge.js'
 
 let failed = 0
 function test(name, fn) {
@@ -42,10 +45,38 @@ test('rgbToLab returns finite values and monotonic L', () => {
   assert.ok(L2 > L1)
 })
 
+// palette-helpers: nearestColorIndex basic behaviour
+test('nearestColorIndex selects closest Euclidean RGB', () => {
+  const pal = [[255,0,0],[0,255,0]] // red, green
+  const idx1 = nearestColorIndex(200, 10, 10, pal)
+  const idx2 = nearestColorIndex(10, 200, 10, pal)
+  assert.strictEqual(idx1, 0)
+  assert.strictEqual(idx2, 1)
+})
+
+// palette-helpers: applyPaletteToCtx maps pixels to palette
+test('applyPaletteToCtx quantizes to given palette', () => {
+  const width = 2, height = 1
+  // RGBA data: pixel0=(250,10,10,255) -> red, pixel1=(10,240,10,255) -> green
+  const data = new Uint8ClampedArray([250,10,10,255, 10,240,10,255])
+  const imageData = { data }
+  const ctx = {
+    getImageData: () => imageData,
+    putImageData: (_img, _x, _y) => { /* no-op; imageData mutated in place */ }
+  }
+  const pal = [[255,0,0],[0,255,0]]
+  applyPaletteToCtx(ctx, width, height, pal, false, null)
+  assert.deepStrictEqual(Array.from(data), [255,0,0,255, 0,255,0,255])
+})
+
+// kmeans-bridge: smoke in Node (expect DOM lack)
+test('getKMeansPalette exists (smoke)', () => {
+  assert.strictEqual(typeof getKMeansPalette, 'function')
+})
+
 if (failed) {
   console.error(`\nUnit tests failed: ${failed}`)
   process.exit(1)
 } else {
   console.log('\nAll unit tests passed.')
 }
-
