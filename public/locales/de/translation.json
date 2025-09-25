@@ -15,7 +15,7 @@
       "img2pixel": "IMG zu Pixel‑Art",
       "gridPreview": "Pixelraster‑Vorschau",
       "how": "So funktioniert’s",
-      "start": "Starten in pixel graphics Village",
+      "start": "Starten in pixel art Village",
       "tips": "Tipps & Paletten",
       "privacyLocal": "Datenschutz & lokale Verarbeitung"
     }
@@ -37,7 +37,7 @@
   ,
   "tool": {
     "title": "Online‑Pixel‑Art‑Generator & Konverter",
-    "subtitle": "Pixeln Sie Bilder direkt im Browser – wandeln Sie PNG/JPG in sauberes, rasterfreundliches Pixel‑Art um. Passen Sie Pixelgröße und Paletten mit Sofort‑Vorschau an und exportieren Sie gestochen scharfe Ergebnisse für Sprites, Icons oder Retro‑Grafiken. Schnell, privat und kostenlos mit pixel graphics Village.",
+    "subtitle": "Pixeln Sie Bilder direkt im Browser – wandeln Sie PNG/JPG in sauberes, rasterfreundliches Pixel‑Art um. Passen Sie Pixelgröße und Paletten mit Sofort‑Vorschau an und exportieren Sie gestochen scharfe Ergebnisse für Sprites, Icons oder Retro‑Grafiken. Schnell, privat und kostenlos mit pixel art Village.",
     "dragOrClick": "Ziehen Sie Ihr Bild hierher oder",
     "clickToChoose": "klicken Sie zum Auswählen",
     "supports": "Unterstützt PNG, JPG, GIF — bis 10MB",
@@ -55,7 +55,7 @@
   "editor": {"title": "Pixel‑Art‑Generator online"}
   ,
   "how": {
-    "title": "So funktioniert pixel graphics Village",
+    "title": "So funktioniert pixel art Village",
     "desc": "Erstellen Sie Pixel‑Art in drei einfachen Schritten.",
     "steps": {
       "upload": "Hochladen",

@@ -1,28 +1,28 @@
 {
   "nav": {"examples": "Ví dụ", "features": "Tính năng", "how": "Cách hoạt động", "faq": "FAQ", "blog": "Blog", "home": "Trang chủ", "about": "Giới thiệu", "contact": "Liên hệ"},
   "cta": {"start": "Bắt đầu ngay"},
-  "site": {"tagline": "Trình tạo pixel graphics trực tuyến • tạo • chuyển đổi"},
+  "site": {"tagline": "Trình tạo pixel art trực tuyến • tạo • chuyển đổi"},
   "footer": {
     "tools": "Công cụ", "formats": "Định dạng", "explore": "Khám phá", "community": "Cộng đồng",
     "terms": "Điều khoản", "privacy": "Quyền riêng tư", "about": "Giới thiệu", "contact": "Liên hệ",
     "links": {
-      "generator": "Trình tạo pixel graphics",
-      "converter": "Trình chuyển đổi pixel graphics",
-      "imageToPixel": "Ảnh sang pixel graphics",
-      "makePixelArt": "Tạo pixel graphics",
-      "png2pixel": "PNG sang pixel graphics",
-      "jpg2pixel": "JPG sang pixel graphics",
-      "img2pixel": "IMG sang pixel graphics",
+      "generator": "Trình tạo pixel art",
+      "converter": "Trình chuyển đổi pixel art",
+      "imageToPixel": "Ảnh sang pixel art",
+      "makePixelArt": "Tạo pixel art",
+      "png2pixel": "PNG sang pixel art",
+      "jpg2pixel": "JPG sang pixel art",
+      "img2pixel": "IMG sang pixel art",
       "gridPreview": "Xem trước lưới pixel",
       "how": "Cách hoạt động",
-      "start": "Bắt đầu tại pixel graphics Village",
+      "start": "Bắt đầu tại pixel art Village",
       "tips": "Mẹo & bảng màu",
       "privacyLocal": "Quyền riêng tư & xử lý cục bộ"
     }
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Bài viết và cập nhật về pixel graphics, hướng dẫn và tính năng mới.",
+    "subtitle": "Bài viết và cập nhật về pixel art, hướng dẫn và tính năng mới.",
     "back": "Quay lại Blog",
     "notFound": {"title": "Không tìm thấy bài viết", "desc": "Bài viết bạn tìm không tồn tại. Quay lại"}
   },
@@ -36,8 +36,8 @@
   }
   ,
   "tool": {
-    "title": "Trình tạo & chuyển đổi pixel graphics trực tuyến",
-    "subtitle": "Tạo pixel graphics trong trình duyệt — chuyển PNG/JPG thành pixel graphics sạch, phù hợp lưới. Điều chỉnh kích thước pixel và bảng màu với xem trước tức thì, rồi xuất kết quả sắc nét cho sprite, icon hoặc đồ họa retro. Nhanh, riêng tư và miễn phí với pixel graphics Village.",
+    "title": "Trình tạo & chuyển đổi pixel art trực tuyến",
+    "subtitle": "Tạo pixel art trong trình duyệt — chuyển PNG/JPG thành pixel art sạch, phù hợp lưới. Điều chỉnh kích thước pixel và bảng màu với xem trước tức thì, rồi xuất kết quả sắc nét cho sprite, icon hoặc đồ họa retro. Nhanh, riêng tư và miễn phí với pixel art Village.",
     "dragOrClick": "Kéo ảnh của bạn vào đây hoặc",
     "clickToChoose": "nhấp để chọn",
     "supports": "Hỗ trợ PNG, JPG, GIF — tối đa 10MB",
@@ -52,18 +52,18 @@
     "onlyPngJpg": "Vui lòng chọn ảnh PNG hoặc JPG.",
     "maxFile": "Tệp quá lớn. Kích thước tối đa: {{mb}}MB."
   },
-  "editor": {"title": "Trình tạo pixel graphics trực tuyến"}
+  "editor": {"title": "Trình tạo pixel art trực tuyến"}
   ,
   "how": {
-    "title": "Cách hoạt động của pixel graphics Village",
-    "desc": "Tạo pixel graphics trong 3 bước đơn giản.",
+    "title": "Cách hoạt động của pixel art Village",
+    "desc": "Tạo pixel art trong 3 bước đơn giản.",
     "steps": {
       "upload": "Tải lên",
       "adjust": "Điều chỉnh",
       "download": "Tải xuống",
       "upload.desc": "Chọn hoặc kéo thả ảnh (PNG, JPG) vào bộ pixel hóa hình ảnh.",
       "adjust.desc": "Điều chỉnh trực tiếp kích thước pixel, bảng màu và lưới pixel.",
-      "download.desc": "Xuất chỉ với một cú nhấp từ trình tạo pixel graphics và chia sẻ."
+      "download.desc": "Xuất chỉ với một cú nhấp từ trình tạo pixel art và chia sẻ."
     }
   }
 }

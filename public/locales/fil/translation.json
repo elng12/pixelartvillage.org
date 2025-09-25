@@ -1,28 +1,28 @@
 {
   "nav": {"examples": "Mga Halimbawa", "features": "Mga Tampok", "how": "Paano ito gumagana", "faq": "FAQ", "blog": "Blog", "home": "Home", "about": "Tungkol", "contact": "Makipag-ugnay"},
   "cta": {"start": "Simulan ngayon"},
-  "site": {"tagline": "Online na pixel graphics generator • tagalikha • converter"},
+  "site": {"tagline": "Online na pixel art generator • tagalikha • converter"},
   "footer": {
     "tools": "Mga Tool", "formats": "Mga Format", "explore": "Tuklasin", "community": "Komunidad",
     "terms": "Mga Tuntunin", "privacy": "Privacy", "about": "Tungkol", "contact": "Makipag-ugnay",
     "links": {
-      "generator": "pixel graphics generator",
-      "converter": "pixel graphics converter",
-      "imageToPixel": "Larawan sa pixel graphics",
-      "makePixelArt": "Gumawa ng pixel graphics",
-      "png2pixel": "PNG sa pixel graphics",
-      "jpg2pixel": "JPG sa pixel graphics",
-      "img2pixel": "IMG sa pixel graphics",
+      "generator": "pixel art generator",
+      "converter": "pixel art converter",
+      "imageToPixel": "Larawan sa pixel art",
+      "makePixelArt": "Gumawa ng pixel art",
+      "png2pixel": "PNG sa pixel art",
+      "jpg2pixel": "JPG sa pixel art",
+      "img2pixel": "IMG sa pixel art",
       "gridPreview": "Preview ng grid ng pixel",
       "how": "Paano ito gumagana",
-      "start": "Magsimula sa pixel graphics Village",
+      "start": "Magsimula sa pixel art Village",
       "tips": "Mga tip at palette",
       "privacyLocal": "Privacy at lokal na pagproseso"
     }
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Mga artikulo at balita tungkol sa pixel graphics, mga tutorial, at mga bagong tampok.",
+    "subtitle": "Mga artikulo at balita tungkol sa pixel art, mga tutorial, at mga bagong tampok.",
     "back": "Bumalik sa Blog",
     "notFound": {"title": "Hindi natagpuan ang post", "desc": "Walang ganitong artikulo. Bumalik sa"}
   },
@@ -36,8 +36,8 @@
   }
   ,
   "tool": {
-    "title": "Online na tagalikha at converter ng pixel graphics",
-    "subtitle": "Gawing pixel graphics ang mga larawan sa browser — i‑convert ang PNG/JPG sa malinis, grid‑friendly na pixel graphics. Ayusin ang laki ng pixel at mga palette na may instant preview, at i‑export ang malinaw na resulta para sa sprites, icons, o retro graphics. Mabilis, pribado, at libre sa pixel graphics Village.",
+    "title": "Online na tagalikha at converter ng pixel art",
+    "subtitle": "Gawing pixel art ang mga larawan sa browser — i‑convert ang PNG/JPG sa malinis, grid‑friendly na pixel art. Ayusin ang laki ng pixel at mga palette na may instant preview, at i‑export ang malinaw na resulta para sa sprites, icons, o retro art. Mabilis, pribado, at libre sa pixel art Village.",
     "dragOrClick": "I‑drag ang iyong larawan dito o",
     "clickToChoose": "i‑click para pumili",
     "supports": "Sumusuporta sa PNG, JPG, GIF — hanggang 10MB",
@@ -52,18 +52,18 @@
     "onlyPngJpg": "Pumili ng PNG o JPG na larawan.",
     "maxFile": "Masyadong malaki ang file. Pinakamataas na sukat: {{mb}}MB."
   },
-  "editor": {"title": "Online na tagalikha ng pixel graphics"}
+  "editor": {"title": "Online na tagalikha ng pixel art"}
   ,
   "how": {
-    "title": "Paano gumagana ang pixel graphics Village",
-    "desc": "Gumawa ng pixel graphics sa tatlong simpleng hakbang.",
+    "title": "Paano gumagana ang pixel art Village",
+    "desc": "Gumawa ng pixel art sa tatlong simpleng hakbang.",
     "steps": {
       "upload": "I‑upload",
       "adjust": "Ayusin",
       "download": "I‑download",
       "upload.desc": "Pumili o i‑drag ang larawan (PNG, JPG) sa image pixelizer.",
       "adjust.desc": "Ayusin nang live ang laki ng pixel, palette at pixel grid.",
-      "download.desc": "Mag‑export sa isang click mula sa pixel graphics generator at i‑share."
+      "download.desc": "Mag‑export sa isang click mula sa pixel art generator at i‑share."
     }
   }
 }

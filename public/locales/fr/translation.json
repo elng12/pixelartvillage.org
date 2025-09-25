@@ -1,21 +1,21 @@
 {
   "nav": {"examples": "Exemples", "features": "Fonctionnalités", "how": "Comment ça marche", "faq": "FAQ", "blog": "Blog", "home": "Accueil", "about": "À propos", "contact": "Contact"},
   "cta": {"start": "Commencer"},
-  "site": {"tagline": "Générateur de pixel graphics en ligne • créateur d'image • convertisseur"},
+  "site": {"tagline": "Générateur de pixel art en ligne • créateur d'image • convertisseur"},
   "footer": {
     "tools": "Outils", "formats": "Formats", "explore": "Explorer", "community": "Communauté",
     "terms": "Conditions", "privacy": "Confidentialité", "about": "À propos", "contact": "Contact",
     "links": {
-      "generator": "Générateur de pixel graphics",
-      "converter": "Convertisseur de pixel graphics",
-      "imageToPixel": "Image en pixel graphics",
-      "makePixelArt": "Créer du pixel graphics",
-      "png2pixel": "PNG en pixel graphics",
-      "jpg2pixel": "JPG en pixel graphics",
-      "img2pixel": "IMG en pixel graphics",
+      "generator": "Générateur de pixel art",
+      "converter": "Convertisseur de pixel art",
+      "imageToPixel": "Image en pixel art",
+      "makePixelArt": "Créer du pixel art",
+      "png2pixel": "PNG en pixel art",
+      "jpg2pixel": "JPG en pixel art",
+      "img2pixel": "IMG en pixel art",
       "gridPreview": "Aperçu de la grille de pixels",
       "how": "Comment ça marche",
-      "start": "Commencer sur pixel graphics Village",
+      "start": "Commencer sur pixel art Village",
       "tips": "Astuces & palettes",
       "privacyLocal": "Confidentialité & traitement local"
     }
@@ -36,8 +36,8 @@
   }
   ,
   "tool": {
-    "title": "Générateur et convertisseur de pixel graphics en ligne",
-    "subtitle": "Pixelisez des images dans votre navigateur — transformez PNG/JPG en pixel graphics propre et adapté à la grille. Ajustez la taille des pixels et les palettes avec prévisualisation instantanée, puis exportez des résultats nets pour sprites, icônes ou graphismes rétro. Rapide, privé et gratuit avec pixel graphics Village.",
+    "title": "Générateur et convertisseur de pixel art en ligne",
+    "subtitle": "Pixelisez des images dans votre navigateur — transformez PNG/JPG en pixel art propre et adapté à la grille. Ajustez la taille des pixels et les palettes avec prévisualisation instantanée, puis exportez des résultats nets pour sprites, icônes ou graphismes rétro. Rapide, privé et gratuit avec pixel art Village.",
     "dragOrClick": "Glissez votre image ici ou",
     "clickToChoose": "cliquez pour choisir",
     "supports": "Prend en charge PNG, JPG, GIF — jusqu’à 10 Mo",
@@ -52,18 +52,18 @@
     "onlyPngJpg": "Veuillez sélectionner une image PNG ou JPG.",
     "maxFile": "Fichier trop volumineux. Taille maximale autorisée : {{mb}} Mo."
   },
-  "editor": {"title": "Générateur de pixel graphics en ligne"}
+  "editor": {"title": "Générateur de pixel art en ligne"}
   ,
   "how": {
-    "title": "Comment fonctionne pixel graphics Village",
-    "desc": "Créez du pixel graphics en trois étapes simples avec pixel graphics Village.",
+    "title": "Comment fonctionne pixel art Village",
+    "desc": "Créez du pixel art en trois étapes simples avec pixel art Village.",
     "steps": {
       "upload": "Importer",
       "adjust": "Ajuster",
       "download": "Télécharger",
       "upload.desc": "Choisissez ou faites glisser votre image (PNG, JPG) dans le pixeliseur d’images.",
       "adjust.desc": "Ajustez en direct la taille des pixels, la palette et la grille de pixels.",
-      "download.desc": "Exportez en un clic depuis le générateur de pixel graphics et partagez."
+      "download.desc": "Exportez en un clic depuis le générateur de pixel art et partagez."
     }
   }
 }

@@ -25,6 +25,9 @@
     "seo:density": "node scripts/kw-density-check.js",
     "seo:adjust": "node scripts/keyword-adjustment-strategy.js",
     "seo:reduce-art": "node scripts/reduce-art-keyword.js",
+    "seo:phrases": "node scripts/phrase-density-analysis.js",
+    "seo:optimize-phrases": "node scripts/phrase-density-optimizer.js",
+    "seo:boost-phrases": "node scripts/phrase-booster.js",
     "i18n:check": "node scripts/i18n-check.js",
     "i18n:pseudo": "node scripts/gen-pseudo-locale.js"
     ,
