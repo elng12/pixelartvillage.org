@@ -8,7 +8,7 @@
     "dev": "node scripts/dev.cjs",
     "prebuild": "node scripts/embed-en-locale.cjs && node scripts/gen-social-preview.cjs && node scripts/gen-showcase.cjs && node scripts/generate-sitemap.cjs && node scripts/gen-pseo-og.cjs",
     "build": "vite build && node scripts/prerender-spa.cjs",
-    "postbuild": "node scripts/seo-check.js",
+    "postbuild": "node scripts/inline-critical-css.cjs && node scripts/seo-check.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
@@ -32,8 +32,7 @@
     "seo:massive-inject": "node scripts/massive-phrase-injection.js",
     "seo:verify-ranking": "node scripts/verify-target-ranking.js",
     "i18n:check": "node scripts/i18n-check.js",
-    "i18n:pseudo": "node scripts/gen-pseudo-locale.js"
-    ,
+    "i18n:pseudo": "node scripts/gen-pseudo-locale.js",
     "seo:kw": "node scripts/kw-density-check.js",
     "seo:kw:report": "node scripts/kw-density-report.js",
     "seo:kw:words": "node scripts/kw-density-words.js",
@@ -42,11 +41,9 @@
     "seo:kw:en:meta": "node scripts/kw-density-single.js --route /en/ --include-meta --tsv",
     "seo:kw:en:meta:hyphen": "node scripts/kw-density-single.js --route /en/ --include-meta --split-hyphen --tsv",
     "seo:kw:en:full": "node scripts/kw-density-single.js --route /en/ --include-meta --include-jsonld --split-hyphen --tsv",
-    "seo:kw:site:full": "node scripts/kw-density-site-full.js"
-    ,
+    "seo:kw:site:full": "node scripts/kw-density-site-full.js",
     "seo:kw:root:full": "node scripts/kw-density-single.js --route / --include-meta --include-jsonld --include-attrs --split-hyphen --tsv",
-    "seo:kw:root:yourtool": "node scripts/kw-density-single.js --route / --include-meta --include-jsonld --include-attrs --split-hyphen --dupe-text --stem --token-letters-only --tsv --verbose"
-    ,
+    "seo:kw:root:yourtool": "node scripts/kw-density-single.js --route / --include-meta --include-jsonld --include-attrs --split-hyphen --dupe-text --stem --token-letters-only --tsv --verbose",
     "sitemap:verify": "node scripts/verify-sitemap-no-en.cjs"
   },
   "dependencies": {
@@ -65,6 +62,7 @@
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.2",
     "autoprefixer": "^10.4.21",
+    "critters": "^0.0.23",
     "eslint": "^9.35.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",

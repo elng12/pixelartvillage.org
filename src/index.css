@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --primary-color: #3b82f6;
+  /* 提升与白字对比度：从 blue-500 (#3b82f6) 调整到 blue-700 (#1d4ed8) */
+  --primary-color: #1d4ed8;
   --secondary-color: #f8fafc;
   --accent-color: #10b981;
   --text-primary: #1f2937;

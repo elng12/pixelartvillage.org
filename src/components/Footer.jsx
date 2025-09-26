@@ -35,7 +35,10 @@ function Footer() {
               <p className="text-sm text-gray-400 mt-1">{t('site.tagline')}</p>
             </div>
             <div>
-              <Link to={`${prefix}/#tool`} className="inline-block px-4 py-2 rounded-md bg-violet-500 text-gray-900 font-semibold hover:opacity-90 transition" aria-label={t('footer.cta.ariaStart')}>
+              <Link
+                to={`${prefix}/#tool`}
+                className="inline-block px-4 py-2 rounded-md bg-violet-700 text-white font-semibold hover:bg-violet-800 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              >
                 {t('cta.start')}
               </Link>
             </div>
@@ -115,6 +118,7 @@ function Footer() {
                 src="/fazier-badge.svg"
                 alt="Fazier badge"
                 width="250"
+                height="54"
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
@@ -131,6 +135,8 @@ function Footer() {
               <img
                 src="/turbo0-badge.svg"
                 alt="Listed on Turbo0"
+                width="180"
+                height="54"
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>

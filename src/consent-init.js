@@ -1,6 +1,9 @@
 // Consent Mode v2 lightweight initializer (no inline scripts; CSP-safe)
 // - Sets default denied
 // - Applies stored user choice if exists
+// - If已同意，延迟加载 AdSense 脚本，避免首屏未使用 JS
+
+import { ensureAdSenseLoaded } from './utils/loadAdSense.js'
 
 const STORAGE_KEY = 'consent.choice.v1'
 
@@ -29,6 +32,14 @@ try {
       ad_user_data: granted ? 'granted' : 'denied',
       ad_personalization: granted ? 'granted' : 'denied',
     })
+    if (granted) {
+      // 等待空闲后加载，避免争抢主线程/LCP
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => ensureAdSenseLoaded(), { timeout: 2000 })
+      } else {
+        setTimeout(() => ensureAdSenseLoaded(), 500)
+      }
+    }
   }
 } catch { void 0 }
 

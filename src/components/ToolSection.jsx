@@ -102,7 +102,7 @@ function ToolSection({ onImageUpload, headingLevel = 'h1' }) {
           className={`upload-zone max-w-3xl mx-auto bg-white ${compact?'p-6':'p-8'} border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50`}
           role="button"
           tabIndex={0}
-          aria-label={t('tool.ariaUpload')}
+          aria-labelledby="upload-instructions"
           onKeyDown={handleKeyDown}
           onClick={handleClick}
           onDragOver={(e) => e.preventDefault()}
@@ -121,9 +121,9 @@ function ToolSection({ onImageUpload, headingLevel = 'h1' }) {
           />
           <div className="text-center">
             <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 16a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v5a4 4 0 01-4 4H7z" /></svg>
-            <h3 className="mt-4 text-xl font-semibold text-gray-700">
+            <h2 id="upload-instructions" className="mt-4 text-xl font-semibold text-gray-700">
               {t('tool.dragOrClick')} <span className="text-blue-600">{t('tool.clickToChoose')}</span>
-            </h3>
+            </h2>
             <p className="mt-1 text-sm text-gray-500">
               {t('tool.supports')}
             </p>

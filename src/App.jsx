@@ -3,13 +3,13 @@ import { Routes, Route, Navigate, useLocation, useNavigate, useParams } from 're
 import Seo from '@/components/Seo';
 import Header from './components/Header';
 import ToolSection from './components/ToolSection';
-import Editor from './components/Editor';
-import ShowcaseSection from './components/ShowcaseSection';
-import WplaceFeaturesSection from './components/WplaceFeaturesSection';
-import FeaturesSection from './components/FeaturesSection';
-import HowItWorksSection from './components/HowItWorksSection';
-import FaqSection from './components/FaqSection';
-import Footer from './components/Footer';
+const Editor = lazy(() => import('./components/Editor'));
+const ShowcaseSection = lazy(() => import('./components/ShowcaseSection'));
+const WplaceFeaturesSection = lazy(() => import('./components/WplaceFeaturesSection'));
+const FeaturesSection = lazy(() => import('./components/FeaturesSection'));
+const HowItWorksSection = lazy(() => import('./components/HowItWorksSection'));
+const FaqSection = lazy(() => import('./components/FaqSection'));
+const Footer = lazy(() => import('./components/Footer'));
 import ScrollManager from './components/ScrollManager';
 import LanguageSwitcher from '@/components/LanguageSwitcherFixed';
 import CompatNotice from '@/components/CompatNotice.jsx';
@@ -21,7 +21,7 @@ const Contact = lazy(() => import('./components/Contact'));
 const Blog = lazy(() => import('./components/Blog'));
 const BlogPost = lazy(() => import('./components/BlogPost'));
 const PseoPage = lazy(() => import('./components/PseoPage'));
-import ConsentBanner from './components/ConsentBanner';
+const ConsentBanner = lazy(() => import('./components/ConsentBanner'));
 
 function Home({ uploadedImage, setUploadedImage }) {
   const { lang } = useParams();
@@ -111,8 +111,10 @@ function App() {
           </Routes>
         </Suspense>
       </main>
-      <ConsentBanner />
-      <Footer />
+      <Suspense fallback={null}>
+        <ConsentBanner />
+        <Footer />
+      </Suspense>
     </Fragment>
   );
 }
