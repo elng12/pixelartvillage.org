@@ -7,7 +7,9 @@ const path = require('path');
 const ROOT = process.cwd();
 const DIST = path.join(ROOT, 'dist');
 const INDEX = path.join(DIST, 'index.html');
-const LANGS = ['en','es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
+// 多语言列表：默认语言 en 不再生成 /en/ 路径；只生成其它语言前缀目录。
+const DEFAULT_LANG = 'en';
+const LANGS = ['es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
 
 function read(file) { return fs.readFileSync(file, 'utf8'); }
 function write(file, content) { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, content, 'utf8'); }
@@ -70,12 +72,16 @@ function injectMeta(html, metas) {
 function injectHreflang(html, routePath) {
   const ABS = (p) => `https://pixelartvillage.org${p}`;
   const ensure = (p) => (p.endsWith('/') ? p : p + '/');
-  const alt = LANGS.map(l => `<link rel="alternate" hreflang="${l}" href="${ABS(ensure(`/${l}${routePath}`))}">`).join('\n  ');
+  // 默认语言使用根路径，添加 x-default 指向根
+  const alternates = [
+    `<link rel="alternate" hreflang="${DEFAULT_LANG}" href="${ABS('/')}">`,
+    `<link rel="alternate" hreflang="x-default" href="${ABS('/')}">`,
+    ...LANGS.map(l => `<link rel="alternate" hreflang="${l}" href="${ABS(ensure(`/${l}${routePath}`))}">`)
+  ].join('\n  ');
   if (html.match(/<link[^>]+rel=["']alternate["'][^>]*hreflang/i)) {
-    // remove existing alternates first
     html = html.replace(/\n?\s*<link[^>]+rel=["']alternate["'][^>]*hreflang=["'][^"']+["'][^>]*>\s*/ig, '');
   }
-  return html.replace(/<\/head>/i, `  ${alt}\n</head>`);
+  return html.replace(/<\/head>/i, `  ${alternates}\n<\/head>`);
 }
 
 function buildHtml(base, { title, canonical, metas, lang, routePath }) {
@@ -256,10 +262,19 @@ function prerender() {
 
   // Expand into language-prefixed routes
   const expanded = [];
+  // 先推入默认语言（根路径）
+  for (const r of routes) {
+    expanded.push({
+      lang: DEFAULT_LANG,
+      path: ensureTrailingSlash(r.path),
+      routePath: r.path,
+      title: r.title,
+      metas: r.metas,
+    });
+  }
   for (const r of routes) {
     for (const lang of LANGS) {
       const lp = `/${lang}${ensureTrailingSlash(r.path)}`.replace(/\/$/, '/');
-      // localized title for a few known labels; default to original
       let title = r.title;
       const mapTitle = {
         'Privacy Policy | Pixel Art Village': {
@@ -298,7 +313,7 @@ function prerender() {
       expanded.push({
         lang,
         path: lp,
-        routePath: r.path, // without lang, for hreflang generation
+        routePath: r.path,
         title,
         metas: r.metas,
       });
@@ -306,10 +321,14 @@ function prerender() {
   }
 
   for (const r of expanded) {
-    // Canonical：英语首页指向根域名，其它语言保留前缀路径
-    let canonicalPath = ensureTrailingSlash(r.path)
-    if (r.lang === 'en' && (r.routePath === '/' || r.path === '/en/' || r.path === '/en')) {
-      canonicalPath = '/'
+    // Canonical：默认语言一律指向根 (针对首页)；其它页面 canonical 即自身路径；其它语言保留自身前缀路径
+    let canonicalPath = ensureTrailingSlash(r.path);
+    if (r.lang === DEFAULT_LANG) {
+      if (r.routePath === '/' || r.path === '/') {
+        canonicalPath = '/';
+      } else {
+        canonicalPath = ensureTrailingSlash(r.routePath); // /about, /blog 等
+      }
     }
     let out = buildHtml(base, {
       title: r.title,
