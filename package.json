@@ -46,6 +46,8 @@
     ,
     "seo:kw:root:full": "node scripts/kw-density-single.js --route / --include-meta --include-jsonld --include-attrs --split-hyphen --tsv",
     "seo:kw:root:yourtool": "node scripts/kw-density-single.js --route / --include-meta --include-jsonld --include-attrs --split-hyphen --dupe-text --stem --token-letters-only --tsv --verbose"
+    ,
+    "sitemap:verify": "node scripts/verify-sitemap-no-en.cjs"
   },
   "dependencies": {
     "i18next": "^25.5.2",
