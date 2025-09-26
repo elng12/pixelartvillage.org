@@ -3,6 +3,7 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import HttpBackend from 'i18next-http-backend'
+import enBundle from '@/locales/en.json'
 
 const BASE_LANGS = ['en', 'es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'fil', 'vi', 'ja']
 // 可选：在开发环境下通过 VITE_ENABLE_PSEUDO=1 启用伪本地化语言 'pseudo'
@@ -62,6 +63,8 @@ i18n
     ns: ['translation'],
     defaultNS: 'translation',
     load: 'languageOnly',
+    // 将英文资源内置进主包，其它语言仍经由 HttpBackend 按需加载
+    resources: { en: { translation: enBundle } },
     backend: {
       loadPath: '/locales/{{lng}}/translation.json',
     },

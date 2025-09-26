@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node scripts/gen-social-preview.cjs && node scripts/gen-showcase.cjs",
+    "predev": "node scripts/embed-en-locale.cjs && node scripts/gen-social-preview.cjs && node scripts/gen-showcase.cjs",
     "dev": "node scripts/dev.cjs",
-    "prebuild": "node scripts/gen-social-preview.cjs && node scripts/gen-showcase.cjs && node scripts/generate-sitemap.cjs && node scripts/gen-pseo-og.cjs",
+    "prebuild": "node scripts/embed-en-locale.cjs && node scripts/gen-social-preview.cjs && node scripts/gen-showcase.cjs && node scripts/generate-sitemap.cjs && node scripts/gen-pseo-og.cjs",
     "build": "vite build && node scripts/prerender-spa.cjs",
     "postbuild": "node scripts/seo-check.js",
     "lint": "eslint .",
