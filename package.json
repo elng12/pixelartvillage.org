@@ -36,7 +36,16 @@
     ,
     "seo:kw": "node scripts/kw-density-check.js",
     "seo:kw:report": "node scripts/kw-density-report.js",
-    "seo:kw:words": "node scripts/kw-density-words.js"
+    "seo:kw:words": "node scripts/kw-density-words.js",
+    "seo:kw:single": "node scripts/kw-density-single.js",
+    "seo:kw:en:text": "node scripts/kw-density-single.js --route /en/ --tsv",
+    "seo:kw:en:meta": "node scripts/kw-density-single.js --route /en/ --include-meta --tsv",
+    "seo:kw:en:meta:hyphen": "node scripts/kw-density-single.js --route /en/ --include-meta --split-hyphen --tsv",
+    "seo:kw:en:full": "node scripts/kw-density-single.js --route /en/ --include-meta --include-jsonld --split-hyphen --tsv",
+    "seo:kw:site:full": "node scripts/kw-density-site-full.js"
+    ,
+    "seo:kw:root:full": "node scripts/kw-density-single.js --route / --include-meta --include-jsonld --include-attrs --split-hyphen --tsv",
+    "seo:kw:root:yourtool": "node scripts/kw-density-single.js --route / --include-meta --include-jsonld --include-attrs --split-hyphen --dupe-text --stem --token-letters-only --tsv --verbose"
   },
   "dependencies": {
     "i18next": "^25.5.2",

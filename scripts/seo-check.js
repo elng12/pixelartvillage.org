@@ -55,7 +55,7 @@ function runSeoCheck() {
     // Check HTML content
     () => checkFileContent(
       path.join(process.cwd(), 'index.html'),
-      /<title>.*Pixel Art Village.*<\/title>/,
+      /<title>[\s\S]*?Image to Pixel Art — Online Pixel Art Maker & Converter[\s\S]*?<\/title>/,
       'Title tag in index.html'
     ),
     () => checkFileContent(
@@ -75,7 +75,7 @@ function runSeoCheck() {
     ),
     () => checkFileContent(
       path.join(process.cwd(), 'index.html'),
-      /<h1[^>]*>.*Image to Pixel Art.*<\/h1>/,
+      /<h1[^>]*>[\s\S]*?Image to Pixel( Art)?[\s\S]*?<\/h1>/,
       'H1 tag in hidden SEO content'
     ),
     

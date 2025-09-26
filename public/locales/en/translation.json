@@ -1,7 +1,7 @@
 {
   "nav": {"examples": "Examples", "features": "Features", "how": "How it works", "faq": "FAQ", "blog": "Blog", "home": "Home", "about": "About", "contact": "Contact"},
   "cta": {"start": "Start now"},
-  "site": {"tagline": "Online pixel art generator • image to pixel art maker • converter"},
+  "site": {"tagline": "Online image generator • image to pixel converter • image palette maker • image processor • image editor"},
   "footer": {
     "tools": "Tools", "formats": "Formats", "explore": "Explore", "community": "Community",
     "terms": "Terms", "privacy": "Privacy", "about": "About", "contact": "Contact",
@@ -9,10 +9,10 @@
     "cta": { "ariaStart": "Start image to pixel art in pixel art Village" },
     "copy": "© {{year}} pixel art Village. All rights reserved.",
     "links": {
-      "generator": "Digital image generator with the palette",
+      "generator": "Digital image converter and image generator with the palette",
       "converter": "Image to pixel art converter with custom palette",
       "imageToPixel": "Image to pixel art with palettes",
-      "makePixelArt": "Make / create pixel art image with the palette controls",
+      "makePixelArt": "Make / create pixel image visuals with the palette controls",
       "png2pixel": "PNG to pixel art with the palette",
       "jpg2pixel": "JPG to pixel art with custom palettes",
       "img2pixel": "IMG to pixel art with the palette options",
@@ -25,7 +25,7 @@
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Articles and updates about making pixel art image, tutorials, and new features.",
+    "subtitle": "Articles and updates about making pixel image visuals, tutorials, and new features.",
     "back": "Back to Blog",
     "notFound": {"title": "Post not found", "desc": "The article you’re looking for does not exist. Go back to the"}
   },
@@ -41,7 +41,7 @@
   "tool": {
     "title": "Image to Pixel Art Generator with Custom Palette",
     "subtitle2": "adjustable pixel size and custom palettes. Perfect for sprites, icons, and retro game art with advanced palette options.",
-    "subtitle": "Image to Pixel Art Converter – Turn PNG or JPG image to pixel art with instant preview and the palette controls,",
+    "subtitle": "Image to Pixel Art Converter – Turn PNG or JPG image to pixel art with instant preview and the palette controls, with image to pixel conversion.",
     "dragOrClick": "Drag your image here or",
     "clickToChoose": "click to choose",
     "supports": "Supports PNG, JPG, GIF — up to 10MB",
@@ -135,11 +135,11 @@
   "lang": { "label": "Language" },
   "wplace": {
     "title": "Perfect Tool for pixel art Village Users",
-    "desc": "The ultimate companion for pixel art Village — convert any image into clean pixel art with real‑time preview, smart palettes, and instant export.",
+    "desc": "The ultimate companion for pixel art Village — convert any image into clean pixel visuals with real‑time preview, smart palettes, and instant export. Create pixel art with our image tools.",
     "features": {
       "free": {
         "title": "100% Free",
-        "desc": "Completely free for everyone. No hidden costs or subscriptions — create unlimited pixel art."
+        "desc": "Completely free for everyone. No hidden costs or subscriptions — create unlimited pixel visuals from any image."
       },
       "privacy": {
         "title": "Privacy First",
@@ -147,28 +147,28 @@
       },
       "easy": {
         "title": "Easy for All Players",
-        "desc": "Intuitive interface and fast feedback. Convert any image to paintable pixel art in just a few clicks with custom palette options."
+        "desc": "Intuitive interface and fast feedback. Convert any image to paintable pixel visuals in just a few clicks with custom palette options."
       },
       "size": {
         "title": "No Size Limits",
-        "desc": "Upload images of any size — from tiny icons to large graphics — with smooth scaling and responsive previews using advanced palettes."
+        "desc": "Upload images of any size — from tiny icons to large graphics — with smooth scaling and responsive image previews using advanced palettes."
       }
     }
   },
   "features": {
-    "title": "A Powerful Digital Image Maker & Creator with Custom Palette",
-    "desc": "Fine‑tune image details with live controls, custom palette options, and advanced palettes management. Preview changes instantly and export clean images ready for sprites, icons, and retro game art. Perfect whether you want to make 8‑bit graphics or convert an image to digital visuals with palette controls for your next project."
+    "title": "Image to Pixel Converter with Custom Palette",
+    "desc": "Transform images into pixel‑perfect art. Live‑tune details with custom palettes and swatch control. Instant preview and sprite‑ready PNG export."
   },
   "how": {
     "title": "How pixel art Village works",
-    "desc": "Use pixel art Village to make/create image art in three simple steps.",
+    "desc": "Use pixel art Village to convert image to pixel art in three simple steps.",
     "steps": {
       "upload": "Upload",
       "adjust": "Adjust",
       "download": "Download",
-      "upload.desc": "Choose or drag your image (PNG, JPG) into the image processor.",
+      "upload.desc": "Choose or drag your image (PNG, JPG) into the image processor for image conversion.",
       "adjust.desc": "Use live controls to fine‑tune pixel size, palette, and the pixel grid with custom palettes.",
-      "download.desc": "One click to export from the image generator and share."
+      "download.desc": "One click to export from the image generator and share your image creation."
     }
   },
   "common": {
@@ -278,7 +278,7 @@
     "seoTitle": "About | pixel art Village",
     "seoDesc": "About pixel art Village: a free, browser‑based pixel art maker & converter. Privacy‑first, fast, and accessible.",
     "h1": "About pixel art Village",
-    "p1": "pixel art Village is a free, browser‑based pixel art maker & converter. Upload a PNG/JPG, tweak pixel size and palettes, preview instantly, and export crisp results.",
+    "p1": "pixel art Village is a free, browser‑based pixel image maker & converter. Upload a PNG/JPG image, tweak pixel size and palettes, preview instantly, and export crisp image results.",
     "principles": {
       "title": "Principles",
       "privacy": { "title": "Privacy‑first:", "desc": "Your images are processed locally in your browser — we do not upload files." },
@@ -305,15 +305,15 @@
       },
       {
         "question": "Is this digital image maker with palette controls free?",
-        "answer": "Yes. Image Art Village is a completely free online image tool for all users. Enjoy unlimited image conversions, custom palette controls, and high-resolution downloads with advanced palettes without any cost."
+        "answer": "Yes. Image Village is a completely free online image tool for all users. Enjoy unlimited image conversions, custom palette controls, and high-resolution downloads with advanced palettes without any cost."
       },
       {
         "question": "Is my image private? Do you upload image files?",
-        "answer": "Your image privacy is guaranteed. Your image files never leave your device as all image processing is done locally in your browser. Image Art Village cannot access your image files, making it a secure digital image creator from your images with palette options."
+        "answer": "Your image privacy is guaranteed. Your image files never leave your device as all image processing is done locally in your browser. Image Village cannot access your image files, making it a secure digital image creator from your images with palette options."
       },
       {
         "question": "How do I turn a image into a game sprite with custom palette?",
-        "answer": "Our digital image maker with palette controls is perfect for creating game sprites. Upload your character's image, adjust the size to match your game's art style, and use the custom palette controls to fit your engine's color limits. Advanced palettes help you create the perfect sprite as a transparent PNG."
+        "answer": "Our digital image maker with palette controls is perfect for creating game sprites. Upload your character's image, adjust the size to match your game's visual style, and use the custom palette controls to fit your engine's color limits. Create pixel art with advanced palettes to help you make the perfect sprite as a transparent PNG."
       },
       {
         "question": "Can I adjust the pixel grid on my image?",
@@ -321,170 +321,20 @@
       },
       {
         "question": "What is the best way to convert a image to pixel art?",
-        "answer": "For best results when you convert a image to pixel art, start with a high-contrast image. Use the pixel size slider to find a level of detail you like with custom palette settings. A larger pixel size creates a more abstract, 8-bit look, while a smaller size retains more detail from the original image with advanced palettes."
+        "answer": "For best results when you convert a image to pixel visuals, start with a high-contrast image. Use the pixel size slider to find a level of detail you like with custom palette settings. Create pixel art with larger sizes for a more abstract, 8-bit look, while smaller sizes retain more detail from the original image with advanced palettes."
       },
       {
         "question": "Can I use the generated pixel art commercially?",
-        "answer": "Yes. You own the rights to your original uploads and to the generated results. You can use graphics made with pixel art Village for any purpose, including commercial projects."
+        "answer": "Yes. You own the rights to your original uploads and to the generated results. You can use graphics made with pixel Village for any purpose, including commercial projects. Create pixel art with our tools for unlimited commercial use."
       },
       {
         "question": "Which formats can I use with this image pixelator?",
-        "answer": "This image pixelator supports all common browser formats like PNG, JPG, GIF, and WEBP. You can convert a PNG to pixel art or a JPG to pixel art with ease."
+        "answer": "This image pixelator supports all common browser formats like PNG, JPG, GIF, and WEBP. You can convert a PNG to pixel visuals or a JPG to pixel visuals with ease. Create pixel art with any image format."
       },
       {
         "question": "Why is this tool called pixel art Village?",
-        "answer": "We believe that creating graphics is a community activity, even when using a tool online. pixel art Village is a place where anyone, from beginner to pro, can gather to easily make pixel art with custom palettes. We aim to build a welcoming village for all pixel art enthusiasts."
+        "answer": "We believe that creating graphics is a community activity, even when using a tool online. pixel Village is a place where anyone, from beginner to pro, can gather to easily make pixel visuals with custom palettes. Create pixel art with our tools and join our welcoming village for all pixel enthusiasts."
       }
     ]
-  }
-,
-  "targetPhrases": {
-    "imageToPixelArt1": "Convert image to pixel art with ease",
-    "imageToPixelArt2": "Transform image to pixel art online",
-    "imageToPixelArt3": "Turn image to pixel art instantly",
-    "pixelArtImage1": "Create pixel art image from photos",
-    "pixelArtImage2": "Generate pixel art image quickly",
-    "pixelArtImage3": "Make pixel art image online",
-    "pixelSize1": "Adjust pixel size for perfect results",
-    "pixelSize2": "Control pixel size settings",
-    "pixelSize3": "Change pixel size easily",
-    "theImage1": "Process the image with advanced tools",
-    "theImage2": "Edit the image with precision",
-    "theImage3": "Transform the image completely",
-    "artImage1": "Create stunning art image",
-    "artImage2": "Generate beautiful art image",
-    "artImage3": "Make professional art image",
-    "thePalette1": "Customize the palette colors",
-    "thePalette2": "Adjust the palette settings",
-    "thePalette3": "Control the palette options",
-    "toPixel1": "Convert to pixel format",
-    "toPixel2": "Transform to pixel style",
-    "toPixel3": "Change to pixel art",
-    "thePixel1": "Edit the pixel details",
-    "thePixel2": "Adjust the pixel properties",
-    "thePixel3": "Control the pixel appearance",
-    "toPixelArt1": "Convert to pixel art format",
-    "toPixelArt2": "Transform to pixel art style",
-    "imageToPixel1": "Convert image to pixel format",
-    "imageToPixel2": "Transform image to pixel style"
-  },
-  "massivePhrases": {
-    "phrases1_1": "Convert image to pixel art online",
-    "phrases1_2": "Transform image to pixel art instantly",
-    "phrases1_3": "Turn image to pixel art with ease",
-    "phrases1_4": "Change image to pixel art format",
-    "phrases1_5": "Process image to pixel art style",
-    "phrases1_6": "Edit image to pixel art quickly",
-    "phrases1_7": "Make image to pixel art conversion",
-    "phrases1_8": "Create image to pixel art result",
-    "phrases1_9": "Generate image to pixel art output",
-    "phrases1_10": "Produce image to pixel art design",
-    "phrases2_1": "Create pixel art image from photo",
-    "phrases2_2": "Generate pixel art image online",
-    "phrases2_3": "Make pixel art image quickly",
-    "phrases2_4": "Build pixel art image easily",
-    "phrases2_5": "Design pixel art image professionally",
-    "phrases2_6": "Craft pixel art image perfectly",
-    "phrases2_7": "Produce pixel art image instantly",
-    "phrases2_8": "Develop pixel art image efficiently",
-    "phrases2_9": "Form pixel art image beautifully",
-    "phrases2_10": "Construct pixel art image smoothly",
-    "phrases3_1": "Convert image to format",
-    "phrases3_2": "Transform image to style",
-    "phrases3_3": "Turn image to design",
-    "phrases3_4": "Change image to type",
-    "phrases3_5": "Process image to result",
-    "phrases3_6": "Edit image to output",
-    "phrases3_7": "Make image to creation",
-    "phrases3_8": "Create image to artwork",
-    "phrases3_9": "Generate image to graphic",
-    "phrases3_10": "Produce image to visual",
-    "phrases3_11": "Develop image to picture",
-    "phrases3_12": "Form image to illustration",
-    "phrases3_13": "Build image to composition",
-    "phrases3_14": "Design image to masterpiece",
-    "phrases3_15": "Craft image to creation",
-    "phrases4_1": "Adjust pixel size setting",
-    "phrases4_2": "Control pixel size option",
-    "phrases4_3": "Change pixel size value",
-    "phrases4_4": "Set pixel size parameter",
-    "phrases4_5": "Modify pixel size dimension",
-    "phrases4_6": "Configure pixel size property",
-    "phrases4_7": "Customize pixel size feature",
-    "phrases4_8": "Define pixel size measurement",
-    "phrases4_9": "Specify pixel size requirement",
-    "phrases4_10": "Determine pixel size standard",
-    "phrases4_11": "Establish pixel size guideline",
-    "phrases4_12": "Fix pixel size resolution",
-    "phrases4_13": "Select pixel size preference",
-    "phrases4_14": "Choose pixel size configuration",
-    "phrases5_1": "Process the image file",
-    "phrases5_2": "Edit the image content",
-    "phrases5_3": "Transform the image data",
-    "phrases5_4": "Convert the image format",
-    "phrases5_5": "Modify the image properties",
-    "phrases5_6": "Adjust the image settings",
-    "phrases5_7": "Enhance the image quality",
-    "phrases5_8": "Improve the image appearance",
-    "phrases5_9": "Optimize the image output",
-    "phrases5_10": "Refine the image details",
-    "phrases5_11": "Perfect the image result",
-    "phrases5_12": "Polish the image finish",
-    "phrases5_13": "Upgrade the image standard",
-    "phrases5_14": "Boost the image performance",
-    "phrases6_1": "Create art image masterpiece",
-    "phrases6_2": "Generate art image design",
-    "phrases6_3": "Make art image creation",
-    "phrases6_4": "Build art image artwork",
-    "phrases6_5": "Produce art image visual",
-    "phrases6_6": "Develop art image graphic",
-    "phrases6_7": "Form art image illustration",
-    "phrases6_8": "Craft art image composition",
-    "phrases6_9": "Design art image project",
-    "phrases6_10": "Construct art image piece",
-    "phrases7_1": "Customize the palette colors",
-    "phrases7_2": "Adjust the palette settings",
-    "phrases7_3": "Control the palette options",
-    "phrases7_4": "Modify the palette configuration",
-    "phrases7_5": "Configure the palette properties",
-    "phrases7_6": "Set the palette parameters",
-    "phrases7_7": "Define the palette scheme",
-    "phrases7_8": "Choose the palette selection",
-    "phrases7_9": "Select the palette combination",
-    "phrases7_10": "Determine the palette arrangement",
-    "phrases8_1": "Convert to pixel format",
-    "phrases8_2": "Transform to pixel style",
-    "phrases8_3": "Change to pixel design",
-    "phrases8_4": "Turn to pixel art",
-    "phrases8_5": "Switch to pixel mode",
-    "phrases8_6": "Shift to pixel type",
-    "phrases8_7": "Move to pixel version",
-    "phrases8_8": "Adapt to pixel standard",
-    "phrases8_9": "Adjust to pixel specification",
-    "phrases8_10": "Modify to pixel requirement",
-    "phrases9_1": "Edit the pixel details",
-    "phrases9_2": "Adjust the pixel properties",
-    "phrases9_3": "Control the pixel settings",
-    "phrases9_4": "Modify the pixel attributes",
-    "phrases9_5": "Configure the pixel parameters",
-    "phrases9_6": "Set the pixel values",
-    "phrases9_7": "Define the pixel characteristics",
-    "phrases9_8": "Specify the pixel features",
-    "phrases9_9": "Determine the pixel qualities",
-    "phrases9_10": "Establish the pixel standards",
-    "phrases10_1": "Convert to pixel art style",
-    "phrases10_2": "Transform to pixel art format",
-    "phrases10_3": "Change to pixel art design",
-    "phrases10_4": "Turn to pixel art version",
-    "phrases10_5": "Switch to pixel art mode",
-    "phrases10_6": "Shift to pixel art type",
-    "phrases10_7": "Move to pixel art standard",
-    "phrases11_1": "Convert image to pixel format",
-    "phrases11_2": "Transform image to pixel style",
-    "phrases11_3": "Change image to pixel design",
-    "phrases11_4": "Turn image to pixel version",
-    "phrases11_5": "Process image to pixel mode",
-    "phrases11_6": "Edit image to pixel type",
-    "phrases11_7": "Make image to pixel standard"
   }
 }

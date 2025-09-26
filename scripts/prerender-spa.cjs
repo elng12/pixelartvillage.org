@@ -112,7 +112,11 @@ function injectHiddenH1AndNav(html, { h1, description, links = [], extras = '' }
   const navLinks = links.map((l) => `<li><a href="${l.href}">${escapeHtml(l.text)}</a></li>`).join('');
   // 额外加入一次站点核心短语，统一提升“image to pixel art”的站点级出现频次
   const keywordLine = '<p>Image to Pixel Art — free online tool.</p>'
-  const snippet = `\n    <div data-prerender-seo aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">\n      <main>\n        ${h1 ? `<h1>${escapeHtml(h1)}</h1>` : ''}\n        ${description ? `<p>${escapeHtml(description)}</p>` : ''}\n        ${keywordLine}\n        ${links.length ? `<nav><ul>${navLinks}</ul></nav>` : ''}\n        ${extras}\n      </main>\n    </div>\n  `;
+  // 移除隐藏 H1，避免与页面可见 H1 重复
+  const headingLine = h1 ? `<p><strong>${escapeHtml(h1)}</strong></p>` : ''
+  const descLine = description ? `<p>${escapeHtml(description)}</p>` : ''
+  const navBlock = links.length ? `<nav><ul>${navLinks}</ul></nav>` : ''
+  const snippet = `\n    <div data-prerender-seo aria-hidden=\"true\" style=\"position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;\">\n      <main>\n        ${headingLine}\n        ${descLine}\n        ${keywordLine}\n        ${navBlock}\n        ${extras}\n      </main>\n    </div>\n  `;
   if (html.includes('<div id="root"></div>')) {
     return html.replace('<div id="root"></div>', `<div id="root"></div>${snippet}`);
   }
@@ -126,15 +130,15 @@ function prerender() {
   const ABS = (p) => `https://pixelartvillage.org${p}`;
 
   const routes = [
-    { path: '/', title: 'Pixel Art Village | Online Pixel Art Maker & Converter', metas: [
+    { path: '/', title: 'Image to Pixel Art — Online Pixel Art Maker & Converter', metas: [
       { name: 'description', content: 'Create pixel art from PNG or JPG in your browser, free. Adjust pixel size and palettes, preview instantly, and export clean images with Pixel Art Village.' },
       { property: 'og:url', content: 'https://pixelartvillage.org/' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:title', content: 'Pixel Art Village | Online Pixel Art Maker & Converter' },
+      { property: 'og:title', content: 'Image to Pixel Art — Online Pixel Art Maker & Converter' },
       { property: 'og:description', content: 'Turn PNG/JPG into crisp, grid-friendly pixel art. Preview instantly and export clean images with Pixel Art Village.' },
       { property: 'og:image', content: 'https://pixelartvillage.org/social-preview.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Pixel Art Village | Online Pixel Art Maker & Converter' },
+      { name: 'twitter:title', content: 'Image to Pixel Art — Online Pixel Art Maker & Converter' },
       { name: 'twitter:description', content: 'Turn PNG/JPG into crisp, grid-friendly pixel art. Preview instantly and export clean images with Pixel Art Village.' },
       { name: 'twitter:image', content: 'https://pixelartvillage.org/social-preview.png' },
     ]},
@@ -302,9 +306,14 @@ function prerender() {
   }
 
   for (const r of expanded) {
+    // Canonical：英语首页指向根域名，其它语言保留前缀路径
+    let canonicalPath = ensureTrailingSlash(r.path)
+    if (r.lang === 'en' && (r.routePath === '/' || r.path === '/en/' || r.path === '/en')) {
+      canonicalPath = '/'
+    }
     let out = buildHtml(base, {
       title: r.title,
-      canonical: ABS(ensureTrailingSlash(r.path)),
+      canonical: ABS(canonicalPath),
       metas: r.metas,
       lang: r.lang,
       routePath: r.routePath,

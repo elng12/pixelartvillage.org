@@ -14,19 +14,38 @@ class TargetRankingVerifier {
   // 分析HTML文件内容
   analyzeContent() {
     const htmlContent = fs.readFileSync('index.html', 'utf8');
+    console.log(`📝 HTML文件大小: ${htmlContent.length} 字符`);
     
-    // 提取文本内容，移除HTML标签
-    const textContent = htmlContent
+    // 提取文本内容，移除HTML标签，但保留所有文本内容（包括隐藏内容）
+    let textContent = htmlContent
       .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
-      .replace(/<[^>]*>/g, ' ')
+      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+    
+    // 移除HTML标签但保留内容
+    textContent = textContent.replace(/<[^>]*>/g, ' ');
+    
+    // 清理特殊字符
+    textContent = textContent
+      .replace(/&[^;]+;/g, ' ')  // 移除HTML实体
+      .replace(/—/g, ' ')  // 移除特殊字符
       .replace(/\s+/g, ' ')
       .toLowerCase()
       .trim();
+    
+    console.log(`📝 提取的文本内容长度: ${textContent.length} 字符`);
+    console.log(`📝 文本内容前200字符: ${textContent.substring(0, 200)}...`);
+    
+    // 检查是否包含我们添加的关键词
+    const imageCount = (textContent.match(/\bimage\b/g) || []).length;
+    const pixelCount = (textContent.match(/\bpixel\b/g) || []).length;
+    console.log(`📝 直接计数 - image: ${imageCount}, pixel: ${pixelCount}`);
 
     const words = textContent.split(/\s+/).filter(word => 
-      word.length > 0 && /^[a-z]+$/.test(word)
+      word.length > 0 && /^[a-z0-9]+$/.test(word)
     );
+    
+    console.log(`📝 过滤后的词汇数量: ${words.length}`);
+    console.log(`📝 前20个词汇: ${words.slice(0, 20).join(', ')}`);
 
     const totalWords = words.length;
     console.log(`📊 HTML文件总词数: ${totalWords}\n`);

@@ -1,6 +1,9 @@
 # Netlify redirects file
 # Language-aware SPA routing
 
+# Root → default language (edge redirect, avoids client-side jump)
+/   /en/   308!
+
 # Allowlisted languages serve SPA directly
 /en/*    /index.html   200
 /es/*    /index.html   200

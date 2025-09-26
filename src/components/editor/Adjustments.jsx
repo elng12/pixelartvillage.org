@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useRef, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PALETTES } from '../../utils/constants'
 
 function Adjustments({ state, dispatch, customPalettes }) {
   const { t } = useTranslation()
-  const set = (field) => (e) => dispatch({ type: 'SET', field, value: typeof state[field] === 'number' ? Number(e.target.value) : e.target.value })
+  // Use rAF-throttled setter so slider drag is smooth; coalesce multiple events per frame
+  const rafId = useRef(0)
+  const pending = useRef({})
+  const flush = useCallback(() => {
+    // Commit all pending field updates in a single reducer pass per frame
+    const entries = Object.entries(pending.current)
+    for (const [field, value] of entries) {
+      dispatch({ type: 'SET', field, value })
+    }
+    pending.current = {}
+    rafId.current = 0
+  }, [dispatch])
+
+  const set = (field) => (e) => {
+    const raw = e?.target?.value
+    const value = typeof state[field] === 'number' ? Number(raw) : raw
+    pending.current[field] = value
+    if (!rafId.current) {
+      rafId.current = requestAnimationFrame(flush)
+    }
+  }
   const setBool = (field) => (e) => dispatch({ type: 'SET', field, value: e.target.checked })
 
   return (

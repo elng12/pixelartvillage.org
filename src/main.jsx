@@ -21,6 +21,8 @@ createRoot(rootEl).render(
   </StrictMode>
 )
 
+// 保持验证/外链块永久隐藏，不再在运行时显示，避免任何刷新闪屏
+
 if (import.meta.env.PROD) {
   // 接入上报端点时替换为 sendBeacon 上报
   import('./utils/initWebVitals.js').then(({ initWebVitals }) => {

@@ -14,7 +14,9 @@ function spawnProc(cmd, args, name) {
 
 const watcher = spawnProc(process.execPath, [path.join(process.cwd(), 'scripts', 'watch-social-preview.cjs')], 'watch');
 const viteBin = path.join(process.cwd(), 'node_modules', 'vite', 'bin', 'vite.js');
-const vite = spawnProc(process.execPath, [viteBin], 'vite');
+// Forward CLI args (e.g., --host, --port) to Vite so custom bindings take effect
+const extraArgs = process.argv.slice(2);
+const vite = spawnProc(process.execPath, [viteBin, ...extraArgs], 'vite');
 
 function shutdown() {
   watcher && watcher.kill('SIGTERM');
