@@ -54,15 +54,23 @@ function useLangRouting() {
     const seg = (pathname.split('/')[1] || '').toLowerCase();
     const hasLangInPath = SUPPORTED_LANGS.includes(seg);
     if (hasLangInPath) {
+      // 方案A：若路径带有非默认语言前缀，采用该语言；若为 en，则去前缀化
+      if (seg === 'en') {
+        const without = pathname.replace(/^\/en(\/|$)/, '/');
+        if (without !== pathname) navigate(`${without}${search}${hash}`, { replace: true });
+        if (i18n.language !== 'en') i18n.changeLanguage('en');
+        setStoredLang('en');
+        return;
+      }
       if (i18n.language !== seg) i18n.changeLanguage(seg);
       setStoredLang(seg);
       return;
     }
-    // No lang in path: pick persisted or browser, then redirect
+    // 无语言前缀：仅设置语言，不再跳转
     const persisted = getStoredLang();
     const auto = persisted || detectBrowserLang();
-    const suffix = pathname === '/' ? '/' : pathname;
-    navigate(`/${auto}${suffix}${search}${hash}`, { replace: true });
+    if (i18n.language !== auto) i18n.changeLanguage(auto);
+    setStoredLang(auto);
   }, [pathname, search, hash, navigate]);
 }
 
@@ -85,8 +93,17 @@ function App() {
       <main>
         <Suspense fallback={<div className="container mx-auto px-4 py-10 text-sm text-gray-600" role="status">Loading…</div>}>
           <Routes>
-            {/* Backward compatibility: still accept non-prefixed paths (will be redirected by useLangRouting) */}
+            {/* 根路径与无语言路径（规范路径） */}
             <Route path="/" element={<Home uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />} />
+            <Route path="privacy" element={<PrivacyPolicy />} />
+            <Route path="terms" element={<TermsOfService />} />
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="blog" element={<Blog />} />
+            <Route path="blog/:slug" element={<BlogPost />} />
+            <Route path="converter/:slug" element={<PseoPage />} />
+
+            {/* 保留语言前缀路径（非默认语言） */}
             <Route path=":lang/">
               <Route index element={<Home uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />} />
               <Route path="privacy" element={<PrivacyPolicy />} />
@@ -97,8 +114,8 @@ function App() {
               <Route path="blog/:slug" element={<BlogPost />} />
               <Route path="converter/:slug" element={<PseoPage />} />
             </Route>
-            {/* Unknown paths: redirect to current language home */}
-            <Route path="*" element={<Navigate to={`/${i18n.language || 'en'}/`} replace />} />
+            {/* 未匹配路由：回根路径 */}
+            <Route path="*" element={<Navigate to={`/`} replace />} />
           </Routes>
         </Suspense>
       </main>
