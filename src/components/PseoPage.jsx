@@ -18,7 +18,7 @@ export default function PseoPage() {
   const page = pages.find((p) => p.slug === slug)
 
   if (!page) {
-    const canonical = `https://pixelartvillage.org/${lang || 'en'}/converter/${slug || ''}`
+    const canonical = `https://pixelartvillage.org/converter/${slug || ''}`
     return (
       <div className="container mx-auto px-4 py-10 max-w-3xl">
         <Seo title={t('pseo.notFound.seoTitle')} canonical={canonical} />
@@ -28,7 +28,7 @@ export default function PseoPage() {
     )
   }
 
-  const canonical = `https://pixelartvillage.org/${lang || 'en'}/converter/${page.slug}`
+  const canonical = `https://pixelartvillage.org/converter/${page.slug}`
 
   return (
     <Fragment>

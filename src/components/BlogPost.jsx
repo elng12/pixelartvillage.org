@@ -14,14 +14,14 @@ export default function BlogPost() {
   if (!post) {
     return (
       <div className="container mx-auto px-4 py-10 max-w-3xl">
-  <Seo title="Not Found | Pixel Art Village" canonical={`https://pixelartvillage.org${prefix}/blog/${slug || ''}`} />
+        <Seo title="Not Found | Pixel Art Village" canonical={`https://pixelartvillage.org/blog/${slug || ''}`} />
         <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">{t('blog.notFound.title')}</h1>
-        <p className="text-gray-700">{t('blog.notFound.desc')} <Link className="text-blue-600 underline" to={`/${lang || 'en'}/blog`}>{t('blog.back')}</Link>.</p>
+        <p className="text-gray-700">{t('blog.notFound.desc')} <Link className="text-blue-600 underline" to={`${prefix}/blog`}>{t('blog.back')}</Link>.</p>
       </div>
     )
   }
 
-  const canonical = `https://pixelartvillage.org${prefix}/blog/${post.slug}`
+  const canonical = `https://pixelartvillage.org/blog/${post.slug}`
 
   return (
     <article className="container mx-auto px-4 py-10 max-w-3xl">

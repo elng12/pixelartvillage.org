@@ -137,15 +137,15 @@ function prerender() {
 
   const routes = [
     { path: '/', title: 'Image to Pixel Art — Online Pixel Art Maker & Converter', metas: [
-      { name: 'description', content: 'Create pixel art from PNG or JPG in your browser, free. Adjust pixel size and palettes, preview instantly, and export clean images with Pixel Art Village.' },
+      { name: 'description', content: 'Image to Pixel Art generator: drag & drop any photo, get live pixel preview, custom palettes, dithering control, and export crisp sprite-ready PNGs for 8-bit games or retro UI—no login required.' },
       { property: 'og:url', content: 'https://pixelartvillage.org/' },
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: 'Image to Pixel Art — Online Pixel Art Maker & Converter' },
-      { property: 'og:description', content: 'Turn PNG/JPG into crisp, grid-friendly pixel art. Preview instantly and export clean images with Pixel Art Village.' },
+      { property: 'og:description', content: 'Image to Pixel Art generator: drag & drop any photo, get live pixel preview, custom palettes, dithering control, and export crisp sprite-ready PNGs for 8-bit games or retro UI—no login required.' },
       { property: 'og:image', content: 'https://pixelartvillage.org/social-preview.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Image to Pixel Art — Online Pixel Art Maker & Converter' },
-      { name: 'twitter:description', content: 'Turn PNG/JPG into crisp, grid-friendly pixel art. Preview instantly and export clean images with Pixel Art Village.' },
+      { name: 'twitter:description', content: 'Image to Pixel Art generator: drag & drop any photo, get live pixel preview, custom palettes, dithering control, and export crisp sprite-ready PNGs for 8-bit games or retro UI—no login required.' },
       { name: 'twitter:image', content: 'https://pixelartvillage.org/social-preview.png' },
     ]},
     { path: '/privacy', title: 'Privacy Policy | Pixel Art Village', metas: [
@@ -321,15 +321,8 @@ function prerender() {
   }
 
   for (const r of expanded) {
-    // Canonical：默认语言一律指向根 (针对首页)；其它页面 canonical 即自身路径；其它语言保留自身前缀路径
-    let canonicalPath = ensureTrailingSlash(r.path);
-    if (r.lang === DEFAULT_LANG) {
-      if (r.routePath === '/' || r.path === '/') {
-        canonicalPath = '/';
-      } else {
-        canonicalPath = ensureTrailingSlash(r.routePath); // /about, /blog 等
-      }
-    }
+    // 方案A：全站 canonical 统一为无语言前缀路径（首页 → 根域名，其余 → /about、/blog 等）
+    let canonicalPath = (r.routePath === '/' ? '/' : ensureTrailingSlash(r.routePath));
     let out = buildHtml(base, {
       title: r.title,
       canonical: ABS(canonicalPath),
