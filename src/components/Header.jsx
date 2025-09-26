@@ -36,7 +36,10 @@ function Header({ rightSlot }) {
   }, []);
 
   const params = useParams();
-  const lang = params.lang || 'en';
+  const rawLang = params.lang || 'en';
+  // 默认语言不使用 /en/ 前缀，直接根路径
+  const lang = rawLang;
+  const prefix = rawLang === 'en' ? '' : `/${rawLang}`;
   const location = useLocation();
   const isBlog = location.pathname.includes('/blog');
 
@@ -45,22 +48,25 @@ function Header({ rightSlot }) {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <div className="text-2xl font-bold text-gray-800">
-            <Link to={`/${lang}/`} aria-label="Pixel Art Village home">
+            <Link to={`${prefix}/`} aria-label="Pixel Art Village home">
               Pixel Art Village
             </Link>
           </div>
           <div className="flex items-center gap-4">
             <nav className="hidden md:flex items-center space-x-8" aria-label="Main navigation">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.id || link.to}
-                  to={link.id ? `/${lang}/#${link.id}` : `/${lang}/${link.to}`}
-                  aria-current={link.id ? (current===link.id?'page':undefined) : (isBlog ? 'page' : undefined)}
-                  className="text-gray-600 hover:text-blue-600 transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const to = link.id ? `${prefix}/#${link.id}` : `${prefix}/${link.to}`
+                return (
+                  <Link
+                    key={link.id || link.to}
+                    to={to}
+                    aria-current={link.id ? (current===link.id?'page':undefined) : (isBlog ? 'page' : undefined)}
+                    className="text-gray-600 hover:text-blue-600 transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                )
+              })}
             </nav>
             {rightSlot ? <div className="flex items-center gap-2">{rightSlot}</div> : null}
             <div className="flex items-center">

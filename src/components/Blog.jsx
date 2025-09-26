@@ -7,14 +7,16 @@ import { useTranslation } from 'react-i18next'
 export default function Blog() {
   const { t } = useTranslation()
   const params = useParams()
-  const lang = params.lang || 'en'
+  const rawLang = params.lang || 'en'
+  const lang = rawLang
+  const prefix = rawLang === 'en' ? '' : `/${rawLang}`
   return (
     <div className="container mx-auto px-4 py-10 max-w-3xl">
       <Seo
         title={`${t('blog.title')} | Pixel Art Village`}
-        canonical={`https://pixelartvillage.org/${lang}/blog`}
+  canonical={`https://pixelartvillage.org${prefix}/blog`}
         meta={[
-          { property: 'og:url', content: `https://pixelartvillage.org/${lang}/blog` },
+          { property: 'og:url', content: `https://pixelartvillage.org${prefix}/blog` },
           { property: 'og:type', content: 'website' },
           { property: 'og:title', content: `${t('blog.title')} | Pixel Art Village` },
           { property: 'og:description', content: t('blog.subtitle') },
@@ -31,7 +33,7 @@ export default function Blog() {
         {posts.map((p) => (
           <li key={p.slug} className="p-4 rounded-lg border border-gray-200 bg-white shadow-sm">
             <h2 className="text-lg font-semibold text-gray-900 text-center">
-              <Link to={`/${lang}/blog/${p.slug}`} className="hover:text-blue-600">
+              <Link to={`${prefix}/blog/${p.slug}`} className="hover:text-blue-600">
                 {p.title}
               </Link>
             </h2>

@@ -13,7 +13,9 @@ function GitHubIcon({ className }) {
 function Footer() {
   const { t } = useTranslation()
   const params = useParams()
-  const lang = params.lang || 'en'
+  const rawLang = params.lang || 'en'
+  const lang = rawLang
+  const prefix = rawLang === 'en' ? '' : `/${rawLang}`
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="relative">
@@ -33,7 +35,7 @@ function Footer() {
               <p className="text-sm text-gray-400 mt-1">{t('site.tagline')}</p>
             </div>
             <div>
-              <Link to={`/${lang}/#tool`} className="inline-block px-4 py-2 rounded-md bg-violet-500 text-gray-900 font-semibold hover:opacity-90 transition" aria-label={t('footer.cta.ariaStart')}>
+              <Link to={`${prefix}/#tool`} className="inline-block px-4 py-2 rounded-md bg-violet-500 text-gray-900 font-semibold hover:opacity-90 transition" aria-label={t('footer.cta.ariaStart')}>
                 {t('cta.start')}
               </Link>
             </div>
@@ -44,30 +46,30 @@ function Footer() {
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.tools')}</p>
               <ul className="space-y-2 text-sm">
-                <li><Link to={`/${lang}/#tool`} className="hover:text-white">{t('footer.links.generator')}</Link></li>
-                <li><Link to={`/${lang}/#tool`} className="hover:text-white">{t('footer.links.converter')}</Link></li>
-                <li><Link to={`/${lang}/#showcase`} className="hover:text-white">{t('footer.links.imageToPixel')}</Link></li>
-                <li><Link to={`/${lang}/#features`} className="hover:text-white">{t('footer.links.makePixelArt')}</Link></li>
+                <li><Link to={`${prefix}/#tool`} className="hover:text-white">{t('footer.links.generator')}</Link></li>
+                <li><Link to={`${prefix}/#tool`} className="hover:text-white">{t('footer.links.converter')}</Link></li>
+                <li><Link to={`${prefix}/#showcase`} className="hover:text-white">{t('footer.links.imageToPixel')}</Link></li>
+                <li><Link to={`${prefix}/#features`} className="hover:text-white">{t('footer.links.makePixelArt')}</Link></li>
               </ul>
             </div>
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.formats')}</p>
               <ul className="space-y-2 text-sm">
-                <li><Link to={`/${lang}/#showcase`} className="hover:text-white">{t('footer.links.png2pixel')}</Link></li>
-                <li><Link to={`/${lang}/#showcase`} className="hover:text-white">{t('footer.links.jpg2pixel')}</Link></li>
-                <li><Link to={`/${lang}/#showcase`} className="hover:text-white">{t('footer.links.img2pixel')}</Link></li>
-                <li><Link to={`/${lang}/#features`} className="hover:text-white">{t('footer.links.gridPreview')}</Link></li>
+                <li><Link to={`${prefix}/#showcase`} className="hover:text-white">{t('footer.links.png2pixel')}</Link></li>
+                <li><Link to={`${prefix}/#showcase`} className="hover:text-white">{t('footer.links.jpg2pixel')}</Link></li>
+                <li><Link to={`${prefix}/#showcase`} className="hover:text-white">{t('footer.links.img2pixel')}</Link></li>
+                <li><Link to={`${prefix}/#features`} className="hover:text-white">{t('footer.links.gridPreview')}</Link></li>
               </ul>
             </div>
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.explore')}</p>
               <ul className="space-y-2 text-sm">
-                <li><Link to={`/${lang}/#tool`} className="hover:text-white">{t('nav.home')}</Link></li>
-                <li><Link to={`/${lang}/#showcase`} className="hover:text-white">{t('nav.examples')}</Link></li>
-                <li><Link to={`/${lang}/#features`} className="hover:text-white">{t('nav.features')}</Link></li>
-                <li><Link to={`/${lang}/#how-it-works`} className="hover:text-white">{t('nav.how')}</Link></li>
-                <li><Link to={`/${lang}/#faq`} className="hover:text-white">{t('nav.faq')}</Link></li>
-                <li><Link to={`/${lang}/blog`} className="hover:text-white">{t('nav.blog')}</Link></li>
+                <li><Link to={`${prefix}/#tool`} className="hover:text-white">{t('nav.home')}</Link></li>
+                <li><Link to={`${prefix}/#showcase`} className="hover:text-white">{t('nav.examples')}</Link></li>
+                <li><Link to={`${prefix}/#features`} className="hover:text-white">{t('nav.features')}</Link></li>
+                <li><Link to={`${prefix}/#how-it-works`} className="hover:text-white">{t('nav.how')}</Link></li>
+                <li><Link to={`${prefix}/#faq`} className="hover:text-white">{t('nav.faq')}</Link></li>
+                <li><Link to={`${prefix}/blog`} className="hover:text-white">{t('nav.blog')}</Link></li>
               </ul>
             </div>
             <div>
@@ -89,13 +91,13 @@ function Footer() {
           <div className="mt-10 pt-6 border-t border-gray-700/60 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <p className="text-xs text-gray-400">{t('footer.copy', { year: new Date().getFullYear() })}</p>
             <div className="flex items-center gap-4 text-xs text-gray-400">
-              <Link to={`/${lang}/terms`} className="hover:text-white">{t('footer.terms')}</Link>
+              <Link to={`${prefix}/terms`} className="hover:text-white">{t('footer.terms')}</Link>
               <span aria-hidden>•</span>
-              <Link to={`/${lang}/privacy`} className="hover:text-white">{t('footer.privacy')}</Link>
+              <Link to={`${prefix}/privacy`} className="hover:text-white">{t('footer.privacy')}</Link>
               <span aria-hidden>•</span>
-              <Link to={`/${lang}/about`} className="hover:text-white">{t('nav.about')}</Link>
+              <Link to={`${prefix}/about`} className="hover:text-white">{t('nav.about')}</Link>
               <span aria-hidden>•</span>
-              <Link to={`/${lang}/contact`} className="hover:text-white">{t('nav.contact')}</Link>
+              <Link to={`${prefix}/contact`} className="hover:text-white">{t('nav.contact')}</Link>
             </div>
           </div>
           <div className="mt-6 text-center flex flex-wrap items-center justify-center gap-6">
