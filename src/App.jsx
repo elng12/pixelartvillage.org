@@ -54,14 +54,6 @@ function useLangRouting() {
     const seg = (pathname.split('/')[1] || '').toLowerCase();
     const hasLangInPath = SUPPORTED_LANGS.includes(seg);
     if (hasLangInPath) {
-      // 方案A：若路径带有非默认语言前缀，采用该语言；若为 en，则去前缀化
-      if (seg === 'en') {
-        const without = pathname.replace(/^\/en(\/|$)/, '/');
-        if (without !== pathname) navigate(`${without}${search}${hash}`, { replace: true });
-        if (i18n.language !== 'en') i18n.changeLanguage('en');
-        setStoredLang('en');
-        return;
-      }
       if (i18n.language !== seg) i18n.changeLanguage(seg);
       setStoredLang(seg);
       return;

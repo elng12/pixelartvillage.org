@@ -7,9 +7,9 @@ const path = require('path');
 const ROOT = process.cwd();
 const DIST = path.join(ROOT, 'dist');
 const INDEX = path.join(DIST, 'index.html');
-// 多语言列表：默认语言 en 不再生成 /en/ 路径；只生成其它语言前缀目录。
+// 多语言列表：默认语言 en 同时生成“根路径”和“/en/”路径，兼容旧 URL
 const DEFAULT_LANG = 'en';
-const LANGS = ['es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
+const LANGS = ['en','es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
 
 function read(file) { return fs.readFileSync(file, 'utf8'); }
 function write(file, content) { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, content, 'utf8'); }
@@ -72,11 +72,10 @@ function injectMeta(html, metas) {
 function injectHreflang(html, routePath) {
   const ABS = (p) => `https://pixelartvillage.org${p}`;
   const ensure = (p) => (p.endsWith('/') ? p : p + '/');
-  // 默认语言使用根路径，添加 x-default 指向根
+  // 所有语言版本（含 en）输出 alternate；x-default 指向无前缀规范路径
   const alternates = [
-    `<link rel="alternate" hreflang="${DEFAULT_LANG}" href="${ABS('/')}">`,
-    `<link rel="alternate" hreflang="x-default" href="${ABS('/')}">`,
-    ...LANGS.map(l => `<link rel="alternate" hreflang="${l}" href="${ABS(ensure(`/${l}${routePath}`))}">`)
+    ...LANGS.map(l => `<link rel="alternate" hreflang="${l}" href="${ABS(ensure(`/${l}${routePath}`))}">`),
+    `<link rel="alternate" hreflang="x-default" href="${ABS(ensure(routePath))}">`
   ].join('\n  ');
   if (html.match(/<link[^>]+rel=["']alternate["'][^>]*hreflang/i)) {
     html = html.replace(/\n?\s*<link[^>]+rel=["']alternate["'][^>]*hreflang=["'][^"']+["'][^>]*>\s*/ig, '');

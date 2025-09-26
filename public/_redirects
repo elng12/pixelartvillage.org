@@ -1,11 +1,8 @@
 # Netlify redirects file
 # Language-aware SPA routing
 
-## Default language canonical root (strategy A): remove /en/ duplication
-# Redirect any /en variants back to root canonical
-/en      /   301!
-/en/     /   301!
-/en/*    /:splat 301!
+## Default language en：保留 /en 前缀路径直出（与其它语言一致），规范化由 canonical 处理
+/en/*    /index.html   200
 
 # Allowlisted languages (excluding default en) serve SPA directly
 /es/*    /index.html   200
@@ -20,7 +17,7 @@
 /vi/*    /index.html   200
 /ja/*    /index.html   200
 
-# Unknown language prefix → canonical root (was → en)
+# Unknown language prefix → canonical root
 /:lang/*   /:splat   301!
 
 # Legacy plain paths that previously redirected to /en/... now stay as is (no redirect) – keep for reference
