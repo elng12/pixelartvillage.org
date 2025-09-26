@@ -30,6 +30,7 @@
     "seo:boost-phrases": "node scripts/phrase-booster.js",
     "seo:inject-phrases": "node scripts/target-phrase-injector.js",
     "seo:massive-inject": "node scripts/massive-phrase-injection.js",
+    "seo:verify-ranking": "node scripts/verify-target-ranking.js",
     "i18n:check": "node scripts/i18n-check.js",
     "i18n:pseudo": "node scripts/gen-pseudo-locale.js"
     ,
