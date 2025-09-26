@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://pixelartvillage.org/en/</loc>
+    <loc>https://pixelartvillage.org/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/</loc>
@@ -73,7 +73,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/privacy/</loc>
+    <loc>https://pixelartvillage.org/privacy/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -145,7 +145,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/terms/</loc>
+    <loc>https://pixelartvillage.org/terms/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -217,7 +217,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/about/</loc>
+    <loc>https://pixelartvillage.org/about/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -289,7 +289,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/contact/</loc>
+    <loc>https://pixelartvillage.org/contact/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -361,7 +361,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/blog/</loc>
+    <loc>https://pixelartvillage.org/blog/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -433,7 +433,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/blog/image-to-pixel-art-converter-free/</loc>
+    <loc>https://pixelartvillage.org/blog/image-to-pixel-art-converter-free/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -505,7 +505,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/blog/turn-photo-into-pixel-art/</loc>
+    <loc>https://pixelartvillage.org/blog/turn-photo-into-pixel-art/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -577,7 +577,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/blog/getting-started-pixel-art-maker/</loc>
+    <loc>https://pixelartvillage.org/blog/getting-started-pixel-art-maker/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -649,7 +649,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/blog/photo-to-sprite-converter-tips/</loc>
+    <loc>https://pixelartvillage.org/blog/photo-to-sprite-converter-tips/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -721,7 +721,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/converter/png-to-pixel-art/</loc>
+    <loc>https://pixelartvillage.org/converter/png-to-pixel-art/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -793,7 +793,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/converter/jpg-to-pixel-art/</loc>
+    <loc>https://pixelartvillage.org/converter/jpg-to-pixel-art/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -865,7 +865,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/converter/image-to-pixel-art/</loc>
+    <loc>https://pixelartvillage.org/converter/image-to-pixel-art/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -937,7 +937,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/converter/gif-to-pixel-art/</loc>
+    <loc>https://pixelartvillage.org/converter/gif-to-pixel-art/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1009,7 +1009,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/converter/webp-to-pixel-art/</loc>
+    <loc>https://pixelartvillage.org/converter/webp-to-pixel-art/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1081,7 +1081,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/converter/bmp-to-pixel-art/</loc>
+    <loc>https://pixelartvillage.org/converter/bmp-to-pixel-art/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1153,7 +1153,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/converter/photo-to-pixel-art/</loc>
+    <loc>https://pixelartvillage.org/converter/photo-to-pixel-art/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1225,7 +1225,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/converter/photo-to-sprite-converter/</loc>
+    <loc>https://pixelartvillage.org/converter/photo-to-sprite-converter/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1297,7 +1297,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/converter/pixelate-image-online/</loc>
+    <loc>https://pixelartvillage.org/converter/pixelate-image-online/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1369,7 +1369,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/converter/8-bit-art-generator/</loc>
+    <loc>https://pixelartvillage.org/converter/8-bit-art-generator/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1441,7 +1441,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/en/converter/retro-game-graphics-maker/</loc>
+    <loc>https://pixelartvillage.org/converter/retro-game-graphics-maker/</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

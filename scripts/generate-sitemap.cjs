@@ -9,11 +9,15 @@ const outPath = path.resolve(process.cwd(), 'public', 'sitemap.xml');
 const today = new Date();
 const isoDate = today.toISOString().slice(0, 10);
 
+// 默认语言使用根路径；不再生成 /en/ 版本
 const BASE_PATHS = ['/', '/privacy', '/terms', '/about', '/contact', '/blog'];
-const LANGS = ['en','es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
+const DEFAULT_LANG = 'en';
+const OTHER_LANGS = ['es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
 const PATHS = [];
 for (const p of BASE_PATHS) {
-  for (const l of LANGS) {
+  // 默认语言根路径（或二级路径）
+  PATHS.push(p);
+  for (const l of OTHER_LANGS) {
     PATHS.push(`/${l}${p === '/' ? '/' : p}`);
   }
 }
@@ -22,7 +26,9 @@ try {
   const posts = require('../src/content/blog-posts.json');
   for (const p of posts) {
     if (p && p.slug) {
-      for (const l of LANGS) PATHS.push(`/${l}/blog/${p.slug}`);
+  // 默认语言：/blog/slug ；其它语言：/xx/blog/slug
+  PATHS.push(`/blog/${p.slug}`);
+  for (const l of OTHER_LANGS) PATHS.push(`/${l}/blog/${p.slug}`);
     }
   }
 } catch (e) {
@@ -34,7 +40,8 @@ try {
   const pseo = require('../src/content/pseo-pages.json');
   for (const p of pseo) {
     if (p && p.slug) {
-      for (const l of LANGS) PATHS.push(`/${l}/converter/${p.slug}`);
+  PATHS.push(`/converter/${p.slug}`);
+  for (const l of OTHER_LANGS) PATHS.push(`/${l}/converter/${p.slug}`);
     }
   }
 } catch (e) {
