@@ -66,7 +66,8 @@ i18n
       loadPath: '/locales/{{lng}}/translation.json',
     },
     interpolation: { escapeValue: false },
-    react: { useSuspense: false },
+    // 启用 Suspense：在资源未就绪时由 <Suspense> 兜底，避免闪现键名
+    react: { useSuspense: true },
   })
 
 // 在开发环境中，缺失 key 立即报错并在控制台标红，防止漏补

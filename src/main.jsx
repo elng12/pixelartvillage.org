@@ -2,6 +2,7 @@ import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import LangRoot from './components/LangRoot.jsx'
+import i18n from '@/i18n'
 
 const rootEl = document.getElementById('root')
 if (!rootEl) {
@@ -15,11 +16,17 @@ import('./utils/initWebVitals.js').then(({ initWebVitals }) => {
   }
 })
 
-createRoot(rootEl).render(
-  <StrictMode>
-    <LangRoot />
-  </StrictMode>
-)
+;(async () => {
+  try {
+    // 最小改动：在挂载前确保翻译命名空间已加载，避免键名闪现
+    await i18n.loadNamespaces('translation')
+  } catch {}
+  createRoot(rootEl).render(
+    <StrictMode>
+      <LangRoot />
+    </StrictMode>
+  )
+})()
 
 // 保持验证/外链块永久隐藏，不再在运行时显示，避免任何刷新闪屏
 
