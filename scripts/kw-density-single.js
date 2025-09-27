@@ -88,20 +88,20 @@ function readText(html, { includeMeta, includeJsonLd, includeAttrs, includeInlin
     const metas = []
     const title = /<title>([\s\s]*?)<\/title>/i.exec(html)
     if (title && title[1]) metas.push(title[1])
-    const metaContent = [...html.matchAll(/<meta[^>]+content=\"([^\"]+)\"[^>]*>/gi)].map(m => m[1])
+    const metaContent = [...html.matchAll(/<meta[^>]+content="([^"]+)"[^>]*>/gi)].map((m) => m[1])
     metas.push(...metaContent)
     parts.push(metas.join(' '))
   }
 
   if (includeJsonLd) {
-    const ld = [...html.matchAll(/<script[^>]+type=\"application\/ld\+json\"[^>]*>([\s\S]*?)<\/script>/gi)].map(m => m[1])
+    const ld = [...html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)].map(m => m[1])
     parts.push(ld.join(' '))
   }
 
   if (includeAttrs) {
     const attrs = []
     // alt, title, aria-label on any tag
-    for (const m of html.matchAll(/\s(?:alt|title|aria-label)=\"([^\"]+)\"/gi)) {
+    for (const m of html.matchAll(/\s(?:alt|title|aria-label)="([^"]+)"/gi)) {
       attrs.push(m[1])
     }
     parts.push(attrs.join(' '))
@@ -109,7 +109,7 @@ function readText(html, { includeMeta, includeJsonLd, includeAttrs, includeInlin
 
   if (includeInlineScripts) {
     // Include inline scripts except JSON-LD blocks (already handled)
-    const scr = [...html.matchAll(/<script(?![^>]*type=\"application\/ld\+json\")[^>]*>([\s\S]*?)<\/script>/gi)].map(m => m[1]).join(' ')
+    const scr = [...html.matchAll(/<script(?![^>]*type="application\/ld\+json")[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]).join(' ')
     parts.push(scr)
   }
 

@@ -19,7 +19,6 @@ function readUInt16LE(buf, off) { return buf.readUInt16LE(off) }
 
 function parseEOCD(zip) {
   // End of Central Directory: PK\x05\x06
-  const sig = Buffer.from([0x50, 0x4b, 0x05, 0x06])
   const maxBack = Math.min(65557, zip.length)
   for (let i = zip.length - 22; i >= zip.length - maxBack; i--) {
     if (i < 0) break
@@ -43,7 +42,6 @@ function extract(zip, outDir) {
   for (let entry = 0; entry < eocd.count; entry++) {
     const sig = readUInt32LE(zip, ptr)
     if (sig !== cdSig) throw new Error('Central dir signature mismatch at 0x' + ptr.toString(16))
-    const compMethod = readUInt16LE(zip, ptr + 10)
     const compSize = readUInt32LE(zip, ptr + 20)
     const uncompSize = readUInt32LE(zip, ptr + 24)
     const fnameLen = readUInt16LE(zip, ptr + 28)
@@ -93,4 +91,3 @@ function main() {
 }
 
 main()
-

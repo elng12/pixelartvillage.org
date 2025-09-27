@@ -38,7 +38,6 @@ function Header({ rightSlot }) {
   const params = useParams();
   const rawLang = params.lang || 'en';
   // 默认语言不使用 /en/ 前缀，直接根路径
-  const lang = rawLang;
   const prefix = rawLang === 'en' ? '' : `/${rawLang}`;
   const location = useLocation();
   const isBlog = location.pathname.includes('/blog');

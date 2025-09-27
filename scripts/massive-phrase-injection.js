@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import fs from 'fs';
-import path from 'path';
 
 // 大规模短语注入脚本
 class MassivePhraseInjection {
@@ -192,7 +191,7 @@ class MassivePhraseInjection {
     const langPhrases = phrases[language] || phrases.en;
     let content = '';
     
-    Object.entries(langPhrases).forEach(([key, phraseArray], index) => {
+    Object.entries(langPhrases).forEach(([key, phraseArray]) => {
       phraseArray.forEach((phrase, phraseIndex) => {
         content += `    "${key}_${phraseIndex + 1}": "${phrase}",\n`;
       });
@@ -210,7 +209,6 @@ class MassivePhraseInjection {
 
     try {
       let content = fs.readFileSync(filePath, 'utf8');
-      const originalContent = content;
 
       // 检查是否已经添加过大量短语
       if (content.includes('"massivePhrases"')) {

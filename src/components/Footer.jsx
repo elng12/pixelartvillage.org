@@ -13,9 +13,8 @@ function GitHubIcon({ className }) {
 function Footer() {
   const { t } = useTranslation()
   const params = useParams()
-  const rawLang = params.lang || 'en'
-  const lang = rawLang
-  const prefix = rawLang === 'en' ? '' : `/${rawLang}`
+  const currentLang = params.lang || 'en'
+  const prefix = currentLang === 'en' ? '' : `/${currentLang}`
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="relative">

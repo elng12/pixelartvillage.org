@@ -26,12 +26,14 @@ const ConsentBanner = lazy(() => import('./components/ConsentBanner'));
 function Home({ uploadedImage, setUploadedImage }) {
   const { lang } = useParams();
   const currentLang = (lang && SUPPORTED_LANGS.includes(lang)) ? lang : 'en';
+  const prefix = currentLang === 'en' ? '' : `/${currentLang}`;
+  const canonical = `https://pixelartvillage.org${prefix}/`;
   return (
     <Fragment>
       <Seo
-        title="Pixel Art Village — Online Pixel Art Maker & Converter"
-        description="Pixelate photos in your browser — convert PNG/JPG into crisp, grid‑friendly pixel art. Adjust pixel size and palettes with instant preview, then export clean results for sprites, icons, or retro game graphics. Fast, private, and free."
-        canonical={'https://pixelartvillage.org/'}
+        title="Pixel Art Village – Online Pixel Art Maker & Converter"
+        description="Pixelate photos in your browser – convert PNG/JPG into crisp, grid‑friendly pixel art. Adjust pixel size and palettes with instant preview, then export clean results for sprites, icons, or retro game graphics. Fast, private, and free."
+        canonical={canonical}
       />
       
       <ToolSection onImageUpload={setUploadedImage} />

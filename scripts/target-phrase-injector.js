@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import fs from 'fs';
-import path from 'path';
 
 // 专门注入目标短语的脚本
 class TargetPhraseInjector {

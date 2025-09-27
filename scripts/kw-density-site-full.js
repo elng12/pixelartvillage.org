@@ -42,13 +42,13 @@ function extractFullText(html) {
   })()
 
   // meta content
-  const metas = [...html.matchAll(/<meta[^>]+content=\"([^\"]+)\"[^>]*>/gi)].map(m => m[1]).join(' ')
+  const metas = [...html.matchAll(/<meta[^>]+content="([^"]+)"[^>]*>/gi)].map((m) => m[1]).join(' ')
 
   // JSON-LD
-  const ld = [...html.matchAll(/<script[^>]+type=\"application\/ld\+json\"[^>]*>([\s\S]*?)<\/script>/gi)].map(m => m[1]).join(' ')
+  const ld = [...html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]).join(' ')
 
   // Common attributes
-  const attrs = [...html.matchAll(/\s(?:alt|title|aria-label)=\"([^\"]+)\"/gi)].map(m => m[1]).join(' ')
+  const attrs = [...html.matchAll(/\s(?:alt|title|aria-label)="([^"]+)"/gi)].map((m) => m[1]).join(' ')
 
   // Combine, lowercase, compress spaces, split hyphen
   let text = (visible + ' ' + title + ' ' + metas + ' ' + ld + ' ' + attrs).toLowerCase()
@@ -89,4 +89,3 @@ function main() {
 }
 
 main()
-

@@ -4,8 +4,8 @@ import { test, expect } from '@playwright/test'
 async function waitForProcessing(page) {
   const container = page.getByTestId('preview-container')
   await container.waitFor({ state: 'attached', timeout: 10000 })
-  try { await expect(container).toHaveAttribute('aria-busy', 'true', { timeout: 2000 }) } catch {}
-  try { await expect(container).toHaveAttribute('aria-busy', 'false', { timeout: 10000 }) } catch {}
+  await expect(container).toHaveAttribute('aria-busy', 'true', { timeout: 2000 })
+  await expect(container).toHaveAttribute('aria-busy', 'false', { timeout: 10000 })
 }
 
 // 10x10 red PNG
@@ -51,4 +51,3 @@ test('auto palette triggers kmeans worker and reprocesses', async ({ page }) => 
   // Assert worker observed
   expect(await workerSeen).toBeTruthy()
 })
-

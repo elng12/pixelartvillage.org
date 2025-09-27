@@ -26,9 +26,8 @@ export default function ConsentBanner() {
   const [visible, setVisible] = useState(false)
   const { t } = useTranslation()
   const params = useParams()
-  const rawLang = params.lang || 'en'
-  const lang = rawLang
-  const prefix = rawLang === 'en' ? '' : `/${rawLang}`
+  const currentLang = params.lang || 'en'
+  const prefix = currentLang === 'en' ? '' : `/${currentLang}`
 
   useEffect(() => {
     try {

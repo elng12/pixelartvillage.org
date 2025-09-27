@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import fs from 'fs';
-import path from 'path';
 
 // 验证目标排名的脚本
 class TargetRankingVerifier {

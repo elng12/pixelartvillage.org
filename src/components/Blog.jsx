@@ -8,15 +8,15 @@ export default function Blog() {
   const { t } = useTranslation()
   const params = useParams()
   const rawLang = params.lang || 'en'
-  const lang = rawLang
   const prefix = rawLang === 'en' ? '' : `/${rawLang}`
+  const canonical = `https://pixelartvillage.org${prefix}/blog`
   return (
     <div className="container mx-auto px-4 py-10 max-w-3xl">
       <Seo
         title={`${t('blog.title')} | Pixel Art Village`}
-        canonical={`https://pixelartvillage.org/blog`}
+        canonical={canonical}
         meta={[
-          { property: 'og:url', content: `https://pixelartvillage.org/blog` },
+          { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
           { property: 'og:title', content: `${t('blog.title')} | Pixel Art Village` },
           { property: 'og:description', content: t('blog.subtitle') },

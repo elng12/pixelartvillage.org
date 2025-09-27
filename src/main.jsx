@@ -9,18 +9,32 @@ if (!rootEl) {
   throw new Error('Root element #root not found')
 }
 
-// Initialize Web Vitals tracking
-import('./utils/initWebVitals.js').then(({ initWebVitals }) => {
-  if (typeof initWebVitals === 'function') {
-    initWebVitals()
+async function bootstrapWebVitals(reportHandler) {
+  try {
+    const { initWebVitals } = await import('./utils/initWebVitals.js')
+    if (typeof initWebVitals === 'function') {
+      initWebVitals(reportHandler)
+    }
+  } catch (error) {
+    if (import.meta.env?.DEV) {
+      console.debug('initWebVitals bootstrap failed:', error?.message)
+    }
   }
-})
+}
+
+// Initialize Web Vitals tracking once，根据环境决定回调
+const reportWebVitals = import.meta.env.PROD ? () => {} : undefined
+bootstrapWebVitals(reportWebVitals)
 
 ;(async () => {
   try {
     // 最小改动：在挂载前确保翻译命名空间已加载，避免键名闪现
     await i18n.loadNamespaces('translation')
-  } catch {}
+  } catch (error) {
+    if (import.meta.env?.DEV) {
+      console.warn('i18n loadNamespaces failed:', error)
+    }
+  }
   createRoot(rootEl).render(
     <StrictMode>
       <LangRoot />
@@ -29,12 +43,3 @@ import('./utils/initWebVitals.js').then(({ initWebVitals }) => {
 })()
 
 // 保持验证/外链块永久隐藏，不再在运行时显示，避免任何刷新闪屏
-
-if (import.meta.env.PROD) {
-  // 接入上报端点时替换为 sendBeacon 上报
-  import('./utils/initWebVitals.js').then(({ initWebVitals }) => {
-    if (typeof initWebVitals === 'function') {
-      initWebVitals(() => {})
-    }
-  })
-}
