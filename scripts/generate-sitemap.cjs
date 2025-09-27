@@ -15,8 +15,9 @@ const DEFAULT_LANG = 'en';
 const OTHER_LANGS = ['es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
 const PATHS = [];
 for (const p of BASE_PATHS) {
-  // 默认语言根路径（或二级路径）
+  // 默认语言根路径（canonical）
   PATHS.push(p);
+  // 其他语言版本
   for (const l of OTHER_LANGS) {
     PATHS.push(`/${l}${p === '/' ? '/' : p}`);
   }
@@ -26,7 +27,7 @@ try {
   const posts = require('../src/content/blog-posts.json');
   for (const p of posts) {
     if (p && p.slug) {
-  // 默认语言：/blog/slug ；其它语言：/xx/blog/slug
+  // 默认语言：/blog/slug（canonical）；其它语言：/xx/blog/slug
   PATHS.push(`/blog/${p.slug}`);
   for (const l of OTHER_LANGS) PATHS.push(`/${l}/blog/${p.slug}`);
     }
@@ -40,6 +41,7 @@ try {
   const pseo = require('../src/content/pseo-pages.json');
   for (const p of pseo) {
     if (p && p.slug) {
+  // 默认语言：/converter/slug（canonical）；其它语言：/xx/converter/slug
   PATHS.push(`/converter/${p.slug}`);
   for (const l of OTHER_LANGS) PATHS.push(`/${l}/converter/${p.slug}`);
     }

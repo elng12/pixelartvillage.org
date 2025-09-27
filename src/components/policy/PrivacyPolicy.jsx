@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 import Seo from '@/components/Seo'
 
 function Section({ title, children, id }) {
@@ -15,13 +16,17 @@ function Section({ title, children, id }) {
 
 export default function PrivacyPolicy() {
   const { t } = useTranslation()
+  const params = useParams()
+  const currentLang = params.lang || 'en'
+  const prefix = currentLang === 'en' ? '' : `/${currentLang}`
+  const canonical = `https://pixelartvillage.org${prefix}/privacy`
   return (
     <div className="container mx-auto px-4 py-10">
       <Seo
         title="Privacy Policy | Pixel Art Village"
-        canonical="https://pixelartvillage.org/privacy"
+        canonical={canonical}
         meta={[
-          { property: 'og:url', content: 'https://pixelartvillage.org/privacy' },
+          { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
           { property: 'og:title', content: 'Privacy Policy | Pixel Art Village' },
           { property: 'og:description', content: 'Pixel Art Village privacy policy: local image processing, AdSense cookies, third‑party partners, your choices and rights, contact info.' },

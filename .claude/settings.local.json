@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(cat public/robots.txt)",
-      "Bash(cat public/sitemap.xml)"
+      "Bash(cat public/sitemap.xml)",
+      "Bash(node scripts/generate-sitemap.cjs)"
     ],
     "deny": [],
     "ask": []

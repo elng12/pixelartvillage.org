@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, useLocation, useNavigate, useParams } from 're
 import Seo from '@/components/Seo';
 import Header from './components/Header';
 import ToolSection from './components/ToolSection';
+import { generateHreflangLinks } from '@/utils/hreflang';
 const Editor = lazy(() => import('./components/Editor'));
 const ShowcaseSection = lazy(() => import('./components/ShowcaseSection'));
 const WplaceFeaturesSection = lazy(() => import('./components/WplaceFeaturesSection'));
@@ -28,12 +29,14 @@ function Home({ uploadedImage, setUploadedImage }) {
   const currentLang = (lang && SUPPORTED_LANGS.includes(lang)) ? lang : 'en';
   const prefix = currentLang === 'en' ? '' : `/${currentLang}`;
   const canonical = `https://pixelartvillage.org${prefix}/`;
+  const hreflangLinks = generateHreflangLinks('/');
   return (
     <Fragment>
       <Seo
         title="Pixel Art Village: Image to Pixel Art Place Color Converter"
         description="Pixelate photos in your browser – convert PNG/JPG into crisp, grid‑friendly pixel art. Adjust pixel size and palettes with instant preview, then export clean results for sprites, icons, or retro game graphics. Fast, private, and free."
         canonical={canonical}
+        hreflang={hreflangLinks}
       />
       
       <ToolSection onImageUpload={setUploadedImage} />
