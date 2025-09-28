@@ -2,8 +2,8 @@
 # Language-aware SPA routing
 
 # blog: 2024 → 2025 slug update (placed before all 200 rules)
-/blog/best-image-to-pixel-art-converters-2024      /blog/best-image-to-pixel-art-converters-2025      301!
-/en/blog/best-image-to-pixel-art-converters-2024   /en/blog/best-image-to-pixel-art-converters-2025   301!
+/blog/best-image-to-pixel-art-converters-2024      /blog/best-image-to-pixel-art-converters-2025      301
+/en/blog/best-image-to-pixel-art-converters-2024   /en/blog/best-image-to-pixel-art-converters-2025   301
 
 ## Pre-rendered language pages - serve directly (no SPA fallback)
 /en/    /en/index.html   200
