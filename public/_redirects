@@ -1,36 +1,46 @@
 # Netlify redirects file
 # Language-aware SPA routing
 
-## Default language en：保留 /en 前缀路径直出（与其它语言一致），规范化由 canonical 处理
-/en/*    /index.html   200
+## Pre-rendered language pages - serve directly (no SPA fallback)
+/en/    /en/index.html   200
+/es/    /es/index.html   200
+/id/    /id/index.html   200
+/de/    /de/index.html   200
+/pl/    /pl/index.html   200
+/it/    /it/index.html   200
+/pt/    /pt/index.html   200
+/fr/    /fr/index.html   200
+/ru/    /ru/index.html   200
+/fil/   /fil/index.html  200
+/vi/    /vi/index.html   200
+/ja/    /ja/index.html   200
 
-# Allowlisted languages (excluding default en) serve SPA directly
-/es/*    /index.html   200
-/id/*    /index.html   200
-/de/*    /index.html   200
-/pl/*    /index.html   200
-/it/*    /index.html   200
-/pt/*    /index.html   200
-/fr/*    /index.html   200
-/ru/*    /index.html   200
-/fil/*   /index.html   200
-/vi/*    /index.html   200
-/ja/*    /index.html   200
+## Pre-rendered sub-pages - serve directly
+/en/*    /en/:splat   200
+/es/*    /es/:splat   200
+/id/*    /id/:splat   200
+/de/*    /de/:splat   200
+/pl/*    /pl/:splat   200
+/it/*    /it/:splat   200
+/pt/*    /pt/:splat   200
+/fr/*    /fr/:splat   200
+/ru/*    /ru/:splat   200
+/fil/*   /fil/:splat  200
+/vi/*    /vi/:splat   200
+/ja/*    /ja/:splat   200
 
-# Unknown language prefix → canonical root
-/:lang/*   /:splat   301!
+## Root level pages - serve pre-rendered versions directly
+/    /index.html   200
+/privacy/    /privacy/index.html   200
+/terms/      /terms/index.html     200
+/about/      /about/index.html     200
+/contact/    /contact/index.html   200
+/blog/       /blog/index.html      200
 
-# Legacy plain paths that previously redirected to /en/... now stay as is (no redirect) – keep for reference
-# /privacy     /privacy   301!
-# /terms       /terms     301!
-# /about       /about     301!
-# /contact     /contact   301!
-# /blog        /blog      301!
-# /blog/*      /blog/:splat 301!
-# /converter/* /converter/:splat 301!
+## Converter pages - serve pre-rendered versions
+/converter/*    /converter/:splat/index.html   200
+/blog/*         /blog/:splat/index.html        200
 
-# Fallback SPA routing
+## Fallback for truly unmatched routes - SPA routing
+## This should be the LAST rule and only catch routes that don't exist
 /*    /index.html   200
-
-# Specific redirects (if needed)
-# /old-path    /new-path    301
