@@ -28,3 +28,7 @@ dist-ssr
 # Test reports
 playwright-report/
 test-results/
+
+# Auto-generated OG images
+public/blog-og/*.png
+public/pseo-og/*.png
