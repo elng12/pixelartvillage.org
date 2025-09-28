@@ -15,7 +15,7 @@ export default function BlogPost() {
     const canonical = `https://pixelartvillage.org${prefix}/blog/${slug || ''}`
     return (
       <div className="container mx-auto px-4 py-10 max-w-3xl">
-        <Seo title="Not Found | Pixel Art Village" canonical={canonical} />
+        <Seo title="Not Found | Image to Pixel Art" canonical={canonical} />
         <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">{t('blog.notFound.title')}</h1>
         <p className="text-gray-700">{t('blog.notFound.desc')} <Link className="text-blue-600 underline" to={`${prefix}/blog`}>{t('blog.back')}</Link>.</p>
       </div>
@@ -27,15 +27,15 @@ export default function BlogPost() {
   return (
     <article className="container mx-auto px-4 py-10 max-w-3xl">
       <Seo
-        title={`${post.title} | Pixel Art Village`}
+        title={`${post.title} | Image to Pixel Art`}
         canonical={canonical}
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'article' },
-          { property: 'og:title', content: `${post.title} | Pixel Art Village` },
+          { property: 'og:title', content: `${post.title} | Image to Pixel Art` },
           { property: 'og:description', content: post.excerpt },
           { name: 'twitter:card', content: 'summary' },
-          { name: 'twitter:title', content: `${post.title} | Pixel Art Village` },
+          { name: 'twitter:title', content: `${post.title} | Image to Pixel Art` },
           { name: 'twitter:description', content: post.excerpt },
         ]}
       />

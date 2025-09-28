@@ -13,15 +13,15 @@ export default function Blog() {
   return (
     <div className="container mx-auto px-4 py-10 max-w-3xl">
       <Seo
-        title={`${t('blog.title')} | Pixel Art Village`}
+        title={`${t('blog.title')} | Image to Pixel Art`}
         canonical={canonical}
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: `${t('blog.title')} | Pixel Art Village` },
+          { property: 'og:title', content: `${t('blog.title')} | Image to Pixel Art` },
           { property: 'og:description', content: t('blog.subtitle') },
           { name: 'twitter:card', content: 'summary' },
-          { name: 'twitter:title', content: `${t('blog.title')} | Pixel Art Village` },
+          { name: 'twitter:title', content: `${t('blog.title')} | Image to Pixel Art` },
           { name: 'twitter:description', content: t('blog.subtitle') },
         ]}
       />
