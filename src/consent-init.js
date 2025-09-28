@@ -4,6 +4,7 @@
 // - If已同意，延迟加载 AdSense 脚本，避免首屏未使用 JS
 
 import { ensureAdSenseLoaded } from './utils/loadAdSense.js'
+import { ensureClarityLoaded } from './clarity-init.js'
 
 const STORAGE_KEY = 'consent.choice.v1'
 
@@ -34,10 +35,11 @@ try {
     })
     if (granted) {
       // 等待空闲后加载，避免争抢主线程/LCP
+      const loadAll = () => { try { ensureAdSenseLoaded() } catch { /* ignore */ void 0 } try { ensureClarityLoaded() } catch { /* ignore */ void 0 } }
       if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => ensureAdSenseLoaded(), { timeout: 2000 })
+        requestIdleCallback(loadAll, { timeout: 2000 })
       } else {
-        setTimeout(() => ensureAdSenseLoaded(), 500)
+        setTimeout(loadAll, 500)
       }
     }
   }
