@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
+// 处理策略说明：尺寸上限（PREVIEW_LIMIT.maxEdge）在 utils/imageProcessor 的主处理链中统一执行：
+// 先等比 contain 缩放（避免内存/耗时极端），再执行像素化/调色板量化。
 import { processPixelArt } from '../utils/imageProcessor';
+import { PROCESS_DEBOUNCE_MS } from '../utils/processing-constants';
 
 export function useImageProcessor(image, settings) {
   const [processedImage, setProcessedImage] = useState(null);
@@ -16,7 +19,7 @@ export function useImageProcessor(image, settings) {
     }
   }, [image]);
 
-  // 依赖变化即刻取消上一次任务；300ms 后开始新处理
+  // 依赖变化即刻取消上一次任务；在 PROCESS_DEBOUNCE_MS 后开始新处理（避免频繁开销）
   useEffect(() => {
     // 立即取消上一次
     try { controllerRef.current?.abort(); } catch { /* ignore */ }
@@ -47,7 +50,7 @@ export function useImageProcessor(image, settings) {
       } finally {
         if (!signal.aborted) setIsProcessing(false);
       }
-    }, 300);
+    }, PROCESS_DEBOUNCE_MS);
 
     return () => {
       clearTimeout(timer);

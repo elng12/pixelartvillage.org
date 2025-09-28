@@ -8,6 +8,9 @@ export const WORKER_ID_MAXLEN = 100;      // Max acceptable id length from worke
 // Image loading
 export const LOAD_TIMEOUT_MS = 10_000;    // 10s timeout for image loading/decoding
 
+// Processing debounce window (ms) for useImageProcessor
+export const PROCESS_DEBOUNCE_MS = 300;
+
 // Color science constants (D65, sRGB)
 export const COLOR_SCIENCE = {
   // D65 reference white (CIE XYZ)
@@ -23,4 +26,3 @@ export const COLOR_SCIENCE = {
   SRGB_OFFSET: 0.055,
   SRGB_GAMMA: 2.4,
 }
-

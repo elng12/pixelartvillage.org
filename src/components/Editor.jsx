@@ -45,6 +45,7 @@ function Editor({ image }) {
   }
 
   const [state, dispatch] = useReducer(reducer, initial);
+  const [errorMsg, setErrorMsg] = React.useState('')
   const previewRef = useRef(null);
   const fileInputRef = useRef(null);
   const { palettes: customPalettes, upsertPalette, deletePalette } = usePaletteStorage();
@@ -109,8 +110,9 @@ function Editor({ image }) {
     el.scrollTop = 0;
   }, [state.readySrc, processedImage]);
 
-  // 监听全局粘贴事件，支持从剪贴板导入图片
+  // 监听全局粘贴事件（仅当已进入编辑器时，避免与首页 ToolSection 重复）
   useEffect(() => {
+    if (!image) return;
     const onPaste = (e) => {
       const files = Array.from(e.clipboardData?.files || []);
       if (files.length) {
@@ -121,7 +123,7 @@ function Editor({ image }) {
     window.addEventListener('paste', onPaste);
     return () => window.removeEventListener('paste', onPaste);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [image]);
 
   // 等图片解码完成后再开始处理，避免“过早预览/拟合”的闪动
   useEffect(() => {
@@ -146,13 +148,14 @@ function Editor({ image }) {
   const handleFiles = (fileList) => {
     const file = fileList?.[0];
     if (!file) return;
+    setErrorMsg('')
     if (!/^image\/(png|jpeg)$/.test(file.type)) {
-      alert(t('errors.onlyPngJpg'));
+      setErrorMsg(t('errors.onlyPngJpg'));
       return;
     }
     const maxBytes = MAX_FILE_MB * 1024 * 1024;
     if (file.size > maxBytes) {
-      alert(t('errors.maxFile', { mb: MAX_FILE_MB }));
+      setErrorMsg(t('errors.maxFile', { mb: MAX_FILE_MB }));
       return;
     }
     const reader = new FileReader();
@@ -218,6 +221,9 @@ function Editor({ image }) {
       <div className="container mx-auto px-4">
         <div className={`${COLORS.background} ${layout.padding} rounded-xl border ${COLORS.border}`}>
           <h2 className={`${layout.titleSize} font-bold text-center ${layout.titleMargin}`}>{t('editor.title')}</h2>
+          {errorMsg && (
+            <p className="mt-2 text-center text-sm text-red-600" role="alert" aria-live="polite">{errorMsg}</p>
+          )}
           <div className={`grid grid-cols-1 lg:grid-cols-2 ${layout.gap}`}>
             {/* 预览区域 */}
             <div className="space-y-4">

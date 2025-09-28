@@ -1,6 +1,8 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, isProcessing, imgDim, onDropFiles }) {
+  const { t } = useTranslation()
   const scaledW = imgDim?.w && imgDim?.h ? Math.max(1, Math.round(imgDim.w * zoom)) : undefined
   const scaledH = imgDim?.w && imgDim?.h ? Math.max(1, Math.round(imgDim.h * zoom)) : undefined
   return (
@@ -18,7 +20,7 @@ function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, isProc
     >
       <img
         src={processedImage || null}
-        alt="Pixel art generator preview"
+        alt={t('preview.alt')}
         className={`transition-opacity ${isProcessing ? 'opacity-50' : 'opacity-100'} max-w-none`}
         style={{
           imageRendering: 'pixelated',
@@ -27,7 +29,7 @@ function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, isProc
         }}
       />
       <div className="absolute -top-3 right-4 text-xs text-gray-500 bg-white/80 px-2 rounded">
-        {imgDim?.w && imgDim?.h ? `${imgDim.w} × ${imgDim.h} (${Math.round((imgDim.w * imgDim.h) / 1000000)}M px)` : ''}
+        {imgDim?.w && imgDim?.h ? t('preview.sizeBadge', { w: imgDim.w, h: imgDim.h, mp: Math.round((imgDim.w * imgDim.h) / 1000000) }) : ''}
       </div>
       {showGrid && (
         <div aria-hidden className="pointer-events-none absolute inset-2 rounded" style={{
@@ -44,7 +46,7 @@ function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, isProc
         >
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-2" />
-            <p className="text-gray-500">Processing...</p>
+            <p className="text-gray-500">{t('preview.processing')}</p>
           </div>
         </div>
       )}

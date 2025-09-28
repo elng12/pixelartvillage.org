@@ -74,6 +74,17 @@ function useLangRouting() {
 function App() {
   const [uploadedImage, setUploadedImage] = useState(null);
 
+  // 兜底释放通过 URL.createObjectURL 生成的临时资源
+  useEffect(() => {
+    return () => {
+      try {
+        if (uploadedImage && typeof uploadedImage === 'string' && uploadedImage.startsWith('blob:')) {
+          URL.revokeObjectURL(uploadedImage)
+        }
+      } catch { /* ignore */ }
+    }
+  }, [uploadedImage])
+
   // 将全局背景样式施加到 body，避免冗余 div 包装
   useEffect(() => {
     document.body.classList.add('bg-white');

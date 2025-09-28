@@ -9,6 +9,7 @@ function ToolSection({ onImageUpload, headingLevel = 'h1' }) {
   const [error, setError] = useState('');
   const [compact, setCompact] = useState(false);
   const lastUrlRef = useRef(null);
+  const pasteGuardRef = useRef(0);
 
   useEffect(() => {
     const evaluate = () => setCompact(window.innerHeight <= 900);
@@ -58,6 +59,23 @@ function ToolSection({ onImageUpload, headingLevel = 'h1' }) {
       handleFileSelect(e.dataTransfer.files[0]);
       e.dataTransfer.clearData();
     }
+  }, [handleFileSelect]);
+
+  // 覆盖首页的粘贴上传（避免与 Editor 重复：Editor 仅在 image 存在时监听）
+  useEffect(() => {
+    const onPaste = (e) => {
+      // 简单去重：1s 内只处理一次
+      const now = Date.now();
+      if (now - (pasteGuardRef.current || 0) < 1000) return;
+      const files = Array.from(e.clipboardData?.files || []);
+      if (files.length) {
+        e.preventDefault();
+        pasteGuardRef.current = now;
+        handleFileSelect(files[0]);
+      }
+    };
+    window.addEventListener('paste', onPaste);
+    return () => window.removeEventListener('paste', onPaste);
   }, [handleFileSelect]);
 
   const handleClick = useCallback(() => {
@@ -131,7 +149,7 @@ function ToolSection({ onImageUpload, headingLevel = 'h1' }) {
               <p className="mt-3 text-sm text-red-600" role="alert" aria-live="polite">{error}</p>
             )}
             <div className="mt-4">
-              <button type="button" className="btn-primary" data-testid="choose-file-btn">{t('tool.chooseFile')}</button>
+              <button type="button" className="btn-primary" data-testid="choose-file-btn" onClick={handleClick}>{t('tool.chooseFile')}</button>
             </div>
             <p id="upload-live" className="sr-only" aria-live="polite" />
           </div>
