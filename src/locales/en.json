@@ -64,11 +64,6 @@
     "uploadBtn": "Upload Image",
     "section": { "general": "General ▾" }
   },
-  "preview": {
-    "alt": "Pixel art generator preview",
-    "processing": "Processing...",
-    "sizeBadge": "{{w}} × {{h}} ({{mp}}M px)"
-  },
   "adjustments": {
     "reset": {
       "title": "Reset Sliders",
