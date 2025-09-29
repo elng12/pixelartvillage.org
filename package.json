@@ -13,6 +13,7 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint:ci": "eslint src scripts --max-warnings=0",
     "test": "playwright test",
     "test:unit": "node scripts/unit-tests.js",

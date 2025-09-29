@@ -48,17 +48,20 @@ async function main() {
     return;
   }
 
+  // Wrap critters logs to dedupe noisy repeated lines from underlying processor
   let ok = 0;
-  for (const file of htmlFiles) {
-    try {
-      const html = fs.readFileSync(file, 'utf8');
-      const inlined = await critters.process(html);
-      fs.writeFileSync(file, inlined);
-      ok++;
-    } catch (e) {
-      console.error(`[critters] failed: ${file}\n  ${e?.message || e}`);
+  await withCrittersLogsDedup(async () => {
+    for (const file of htmlFiles) {
+      try {
+        const html = fs.readFileSync(file, 'utf8');
+        const inlined = await critters.process(html);
+        fs.writeFileSync(file, inlined);
+        ok++;
+      } catch (e) {
+        console.error(`[critters] failed: ${file}\n  ${e?.message || e}`);
+      }
     }
-  }
+  });
   console.log(`[critters] processed ${ok}/${htmlFiles.length} HTML files.`);
 }
 
@@ -67,3 +70,47 @@ main().catch((e) => {
   process.exit(1);
 });
 
+// --- helpers ---
+function withCrittersLogsDedup(fn) {
+  const orig = { log: console.log, warn: console.warn, error: console.error };
+  const seen = new Map(); // text -> count
+  let suppressed = 0;
+  const PATTERNS = [
+    /Empty sub-selector/i,
+    /^Inlined .* of assets\//i,
+    /^Time\s+\d/i,
+    /rules skipped due to selector errors/i,
+  ];
+  const shouldDedup = (text) => PATTERNS.some((re) => re.test(text));
+  const wrap = (fn) => (...args) => {
+    const text = args.map((a) => (typeof a === 'string' ? a : String(a))).join(' ');
+    if (shouldDedup(text)) {
+      const c = seen.get(text) || 0;
+      if (c === 0) fn(text); // print first occurrence
+      else suppressed++;
+      seen.set(text, c + 1);
+      return;
+    }
+    fn(...args);
+  };
+  console.log = wrap(orig.log);
+  console.warn = wrap(orig.warn);
+  console.error = wrap(orig.error);
+  const finalize = () => {
+    console.log = orig.log;
+    console.warn = orig.warn;
+    console.error = orig.error;
+    if (suppressed > 0) {
+      orig.log(`[critters] log dedupe: suppressed ${suppressed} duplicate lines (${seen.size} unique).`);
+    }
+  };
+  try {
+    const r = fn();
+    if (r && typeof r.then === 'function') return r.finally(finalize);
+    finalize();
+    return r;
+  } catch (e) {
+    finalize();
+    throw e;
+  }
+}

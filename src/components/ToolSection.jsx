@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { downscaleFileToBlob, loadImageFromFile } from '../utils/resizeImage';
 import { PREVIEW_LIMIT } from '../utils/constants';
 
-function ToolSection({ onImageUpload, headingLevel = 'h1' }) {
+function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true }) {
   const { t } = useTranslation()
   const fileInputRef = useRef(null);
   const [error, setError] = useState('');
@@ -61,8 +61,9 @@ function ToolSection({ onImageUpload, headingLevel = 'h1' }) {
     }
   }, [handleFileSelect]);
 
-  // 覆盖首页的粘贴上传（避免与 Editor 重复：Editor 仅在 image 存在时监听）
+  // 覆盖首页的粘贴上传（当编辑器未激活时才监听，避免与 Editor 双重绑定）
   useEffect(() => {
+    if (!enablePaste) return;
     const onPaste = (e) => {
       // 简单去重：1s 内只处理一次
       const now = Date.now();
@@ -76,7 +77,7 @@ function ToolSection({ onImageUpload, headingLevel = 'h1' }) {
     };
     window.addEventListener('paste', onPaste);
     return () => window.removeEventListener('paste', onPaste);
-  }, [handleFileSelect]);
+  }, [handleFileSelect, enablePaste]);
 
   const handleClick = useCallback(() => {
     setError('');

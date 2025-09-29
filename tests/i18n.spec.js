@@ -1,5 +1,5 @@
-// Minimal i18n E2E checks (Playwright)
-const { test, expect } = require('@playwright/test')
+// Minimal i18n E2E checks (Playwright) — ESM style
+import { test, expect } from '@playwright/test'
 
 test.describe('i18n basic', () => {
   test('language switch updates UI without reload', async ({ page }) => {
@@ -13,4 +13,3 @@ test.describe('i18n basic', () => {
     await expect(cta).toBeVisible()
   })
 })
-

@@ -39,7 +39,7 @@ function Home({ uploadedImage, setUploadedImage }) {
         hreflang={hreflangLinks}
       />
       
-      <ToolSection onImageUpload={setUploadedImage} />
+      <ToolSection onImageUpload={setUploadedImage} enablePaste={!uploadedImage} />
       {uploadedImage ? <Editor image={uploadedImage} /> : null}
       <ShowcaseSection />
       <WplaceFeaturesSection />
