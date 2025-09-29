@@ -6,7 +6,7 @@
     <title>Page Not Found | Pixel Art Village</title>
     <meta name="robots" content="noindex" />
     <meta name="description" content="The page you're looking for doesn't exist. Return to Pixel Art Village to create pixel art online." />
-    <link rel="canonical" href="https://pixelartvillage.org/" />
+
     <style>
       body { font-family: system-ui, sans-serif; max-width: 600px; margin: 100px auto; padding: 20px; text-align: center; }
       h1 { color: #374151; margin-bottom: 16px; }
@@ -20,19 +20,6 @@
     <p>The page you're looking for doesn't exist or has been moved.</p>
     <a href="/">← Back to Pixel Art Village</a>
     
-    <!-- Fallback SPA redirect for dynamic routes -->
-    <script>
-      // Only redirect if this looks like a SPA route (not a file request)
-      if (!window.location.pathname.includes('.') && window.location.pathname !== '/') {
-        setTimeout(function() {
-          var l = window.location;
-          var path = l.pathname;
-          var search = l.search || '';
-          var hash = l.hash || '';
-          var url = '/?p=' + encodeURIComponent(path) + (search ? '&q=' + encodeURIComponent(search.slice(1)) : '') + hash;
-          l.replace(url);
-        }, 3000); // 3 second delay to show 404 content first
-      }
-    </script>
+
   </body>
 </html>
