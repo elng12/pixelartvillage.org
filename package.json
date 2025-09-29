@@ -42,9 +42,7 @@
     "seo:kw:en:meta:hyphen": "node scripts/kw-density-single.js --route /en/ --include-meta --split-hyphen --tsv",
     "seo:kw:en:full": "node scripts/kw-density-single.js --route /en/ --include-meta --include-jsonld --split-hyphen --tsv",
     "seo:kw:site:full": "node scripts/kw-density-site-full.js",
-    "seo:kw:root:full": "node scripts/kw-density-single.js --route / --include-meta --include-jsonld --include-attrs --split-hyphen --tsv",
 
-  "dependencies": {
     "i18next": "^25.5.2",
     "i18next-http-backend": "^3.0.2",
     "react": "^19.1.1",
