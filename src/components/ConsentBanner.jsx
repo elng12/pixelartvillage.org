@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ensureAdSenseLoaded } from '@/utils/loadAdSense.js'
-import { ensureClarityLoaded } from '@/clarity-init.js'
 
 const STORAGE_KEY = 'consent.choice.v1'
 
@@ -39,12 +38,11 @@ export default function ConsentBanner() {
 
   const acceptAll = useCallback(() => {
     updateConsent(true)
-    // 用户同意后再加载（AdSense + Clarity），无需刷新
-    const loadAll = () => { try { ensureAdSenseLoaded() } catch { /* ignore */ void 0 } try { ensureClarityLoaded() } catch { /* ignore */ void 0 } }
+    // 用户同意后再加载 AdSense
     if ('requestIdleCallback' in window) {
-      requestIdleCallback(loadAll, { timeout: 2000 })
+      requestIdleCallback(() => ensureAdSenseLoaded(), { timeout: 2000 })
     } else {
-      setTimeout(loadAll, 300)
+      setTimeout(() => ensureAdSenseLoaded(), 300)
     }
     setVisible(false)
   }, [])

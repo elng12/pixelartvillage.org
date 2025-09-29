@@ -32,3 +32,8 @@ test-results/
 # Auto-generated OG images
 public/blog-og/*.png
 public/pseo-og/*.png
+
+data/
+tmp/
+*.zip
+pixelartvillage.org-Coverage-*/

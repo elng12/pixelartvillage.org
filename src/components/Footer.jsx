@@ -157,15 +157,6 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
-            <a href="https://toolfame.com" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
-              <img
-                src="/toolfame-badge-dark.svg"
-                alt="Featured on toolfame.com"
-                width="200"
-                height="54"
-                className="inline-block h-[54px] w-auto object-contain"
-              />
-            </a>
           </div>
         </div>
       </div>

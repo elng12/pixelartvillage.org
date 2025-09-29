@@ -45,18 +45,31 @@ function readCsv(file) {
   // Try to detect header
   const header = lines[0].split(',').map(s => s.trim().replace(/^"|"$/g, ''));
   let urlIdx = -1;
+
+  // Case A: single cell and looks like URL
   if (header.length === 1 && /^https?:\/\//i.test(header[0])) {
-    // single URL line without header
-    return lines.map(l => l.trim().replace(/^"|"$/g, ''));
+    return lines
+      .map(l => l.trim().replace(/^"|"$/g, ''))
+      .filter(l => /^https?:\/\//i.test(l));
   }
+
+  // Case B: known english header names
   const keys = header.map(h => h.toLowerCase());
   urlIdx = keys.findIndex(k => ['url', 'link', 'address'].includes(k));
   const rows = lines.slice(1).map(l => l.split(','));
+
+  // Case C: unknown/locale header (e.g. 中文“网址” + extra date column)
   if (urlIdx === -1) {
-    // fallback: single-column CSV with headerless content
-    return lines.map(l => l.trim().replace(/^"|"$/g, '')).filter(l => /^https?:\/\//i.test(l));
+    return lines
+      .slice(1)
+      .map(l => l.split(',')[0] || '')
+      .map(s => s.trim().replace(/^"|"$/g, ''))
+      .filter(s => /^https?:\/\//i.test(s));
   }
-  return rows.map(cols => (cols[urlIdx] || '').trim().replace(/^"|"$/g, '')).filter(Boolean);
+
+  return rows
+    .map(cols => (cols[urlIdx] || '').trim().replace(/^"|"$/g, ''))
+    .filter(Boolean);
 }
 
 function loadKnownRoutes() {
@@ -109,6 +122,7 @@ function hasLangPrefix(p) {
 function generateRules(urls, known) {
   const rules = [];
   const seen = new Set();
+  const hostSignals = new Set(); // collect host/scheme issues to emit domain redirects
 
   function pushRule(from, to, code = 301) {
     if (!from || !to || from === to) return;
@@ -119,19 +133,29 @@ function generateRules(urls, known) {
   }
 
   for (const u of urls) {
+    // capture host/scheme signals
+    try {
+      const uo = new URL(u);
+      const host = (uo.hostname || '').toLowerCase();
+      const proto = (uo.protocol || '').toLowerCase();
+      if (host === 'www.pixelartvillage.org') hostSignals.add('WWW');
+      if (proto === 'http:') hostSignals.add('HTTP');
+    } catch {}
+
     const p = parsePath(u);
-    if (!p || p.includes('://')) continue; // we only handle same-site paths
+    if (!p) continue;
+
     const norm = p.replace(/\/+/g, '/');
     const normSlash = withSlash(norm);
-
-    // Skip known routes
-    if (known.has(normSlash)) continue;
 
     // Heuristic 1: missing trailing slash but route with slash exists
     if (!norm.endsWith('/') && known.has(normSlash)) {
       pushRule(norm, normSlash, 301);
       continue;
     }
+
+    // Skip known routes
+    if (known.has(normSlash)) continue;
 
     // Heuristic 2: year migration 2024 -> 2025 for the known post
     if (/best-image-to-pixel-art-converters-2024\/?$/.test(norm)) {
@@ -142,6 +166,15 @@ function generateRules(urls, known) {
 
     // Heuristic 3: nothing matched — keep as unresolved for manual review
     pushRule(withSlash(norm), withSlash(norm), 0); // code 0 marks unresolved
+  }
+
+  // Emit domain-level rules if signals detected
+  if (hostSignals.has('WWW')) {
+    pushRule('https://www.pixelartvillage.org/*', 'https://pixelartvillage.org/:splat', 301);
+    pushRule('http://www.pixelartvillage.org/*', 'https://pixelartvillage.org/:splat', 301);
+  }
+  if (hostSignals.has('HTTP')) {
+    pushRule('http://pixelartvillage.org/*', 'https://pixelartvillage.org/:splat', 301);
   }
 
   return rules;
