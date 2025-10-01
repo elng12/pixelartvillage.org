@@ -93,13 +93,13 @@ function Footer() {
           <div className="mt-10 pt-6 border-t border-gray-700/60 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <p className="text-xs text-gray-400">{t('footer.copy', { year: new Date().getFullYear() })}</p>
             <div className="flex items-center gap-4 text-xs text-gray-400">
-              <Link to={`${prefix}/terms`} className="hover:text-white">{t('footer.terms')}</Link>
+              <Link to={`${prefix}/terms/`} className="hover:text-white">{t('footer.terms')}</Link>
               <span aria-hidden>•</span>
-              <Link to={`${prefix}/privacy`} className="hover:text-white">{t('footer.privacy')}</Link>
+              <Link to={`${prefix}/privacy/`} className="hover:text-white">{t('footer.privacy')}</Link>
               <span aria-hidden>•</span>
-              <Link to={`${prefix}/about`} className="hover:text-white">{t('nav.about')}</Link>
+              <Link to={`${prefix}/about/`} className="hover:text-white">{t('nav.about')}</Link>
               <span aria-hidden>•</span>
-              <Link to={`${prefix}/contact`} className="hover:text-white">{t('nav.contact')}</Link>
+              <Link to={`${prefix}/contact/`} className="hover:text-white">{t('nav.contact')}</Link>
             </div>
           </div>
           <div className="mt-6 text-center flex flex-wrap items-center justify-center gap-6">

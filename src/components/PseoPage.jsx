@@ -30,7 +30,7 @@ export default function PseoPage() {
     )
   }
 
-  const canonical = `https://pixelartvillage.org${prefix}/converter/${page.slug}`
+  const canonical = `https://pixelartvillage.org${prefix}/converter/${page.slug}/`
 
   return (
     <Fragment>

@@ -72,13 +72,13 @@ function injectMeta(html, metas) {
 function injectHreflang(html, routePath) {
   const ABS = (p) => `https://pixelartvillage.org${p}`;
   const ensure = (p) => (p.endsWith('/') ? p : p + '/');
-  // 所有语言版本（含 en）输出 alternate；x-default 指向无前缀规范路径
+  // 仅输出规范集合（与站点 canonical 策略一致）：en 与 x-default 指向无语言前缀规范 URL
   const alternates = [
-    ...LANGS.map(l => `<link rel="alternate" hreflang="${l}" href="${ABS(ensure(`/${l}${routePath}`))}">`),
+    `<link rel="alternate" hreflang="en" href="${ABS(ensure(routePath))}">`,
     `<link rel="alternate" hreflang="x-default" href="${ABS(ensure(routePath))}">`
   ].join('\n  ');
-  if (html.match(/<link[^>]+rel=["']alternate["'][^>]*hreflang/i)) {
-    html = html.replace(/\n?\s*<link[^>]+rel=["']alternate["'][^>]*hreflang=["'][^"']+["'][^>]*>\s*/ig, '');
+  if (html.match(/<link[^>]+rel=['"]alternate['"][^>]*hreflang/i)) {
+    html = html.replace(/\n?\s*<link[^>]+rel=['"]alternate['"][^>]*hreflang=['"][^"']+['"][^>]*>\s*/ig, '');
   }
   return html.replace(/<\/head>/i, `  ${alternates}\n<\/head>`);
 }

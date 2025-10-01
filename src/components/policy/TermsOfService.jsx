@@ -19,7 +19,7 @@ export default function TermsOfService() {
   const params = useParams()
   const currentLang = params.lang || 'en'
   const prefix = currentLang === 'en' ? '' : `/${currentLang}`
-  const canonical = `https://pixelartvillage.org${prefix}/terms`
+  const canonical = `https://pixelartvillage.org${prefix}/terms/`
   return (
     <div className="container mx-auto px-4 py-10">
       <Seo

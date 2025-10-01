@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
   const params = useParams()
   const currentLang = params.lang || 'en'
   const prefix = currentLang === 'en' ? '' : `/${currentLang}`
-  const canonical = `https://pixelartvillage.org${prefix}/privacy`
+  const canonical = `https://pixelartvillage.org${prefix}/privacy/`
   return (
     <div className="container mx-auto px-4 py-10">
       <Seo

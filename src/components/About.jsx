@@ -9,7 +9,7 @@ export default function About() {
   const params = useParams()
   const currentLang = params.lang || 'en'
   const prefix = currentLang === 'en' ? '' : `/${currentLang}`
-  const canonical = `https://pixelartvillage.org${prefix}/about`
+  const canonical = `https://pixelartvillage.org${prefix}/about/`
   const hreflangLinks = generateHreflangLinks('/about')
   return (
     <div className="container mx-auto px-4 py-10 max-w-3xl">

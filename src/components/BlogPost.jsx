@@ -22,7 +22,7 @@ export default function BlogPost() {
     )
   }
 
-  const canonical = `https://pixelartvillage.org${prefix}/blog/${post.slug}`
+  const canonical = `https://pixelartvillage.org${prefix}/blog/${post.slug}/`
 
   return (
     <article className="container mx-auto px-4 py-10 max-w-3xl">
