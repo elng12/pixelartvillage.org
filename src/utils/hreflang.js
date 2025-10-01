@@ -1,20 +1,7 @@
 // Hreflang utilities for multi-language SEO
-const SUPPORTED_LANGS = ['en', 'es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'fil', 'vi', 'ja'];
-
-const LANG_REGION_MAP = {
-  'en': 'en-US',
-  'es': 'es-ES',
-  'id': 'id-ID',
-  'de': 'de-DE',
-  'pl': 'pl-PL',
-  'it': 'it-IT',
-  'pt': 'pt-PT',
-  'fr': 'fr-FR',
-  'ru': 'ru-RU',
-  'fil': 'fil-PH',
-  'vi': 'vi-VN',
-  'ja': 'ja-JP'
-};
+// 注意：为符合当前 canonical 策略（仅无语言前缀 URL 为规范版本），
+// 这里生成的 hreflang 仅包含 `en` 与 `x-default`，均指向规范 URL。
+// 保留多语言能力由路由与 i18n 负责，但不把各语言版本声明到 hreflang，避免“指向非规范”与工具告警。
 
 /**
  * Generate hreflang links for a given page path
@@ -22,35 +9,11 @@ const LANG_REGION_MAP = {
  * @returns {Array} Array of hreflang objects with hreflang and href properties
  */
 export function generateHreflangLinks(basePath) {
-  const hreflangs = [];
-
-  // Ensure basePath starts with /
   const cleanBasePath = basePath.startsWith('/') ? basePath : `/${basePath}`;
-
-  for (const lang of SUPPORTED_LANGS) {
-    const hreflangCode = LANG_REGION_MAP[lang] || lang;
-
-    if (lang === 'en') {
-      // English uses root path as canonical
-      hreflangs.push({
-        hreflang: hreflangCode,
-        href: `https://pixelartvillage.org${cleanBasePath === '/' ? '/' : cleanBasePath}`
-      });
-    } else {
-      // Other languages use language prefix
-      const langPath = cleanBasePath === '/' ? `/${lang}/` : `/${lang}${cleanBasePath}`;
-      hreflangs.push({
-        hreflang: hreflangCode,
-        href: `https://pixelartvillage.org${langPath}`
-      });
-    }
-  }
-
-  // Add x-default pointing to English version
-  hreflangs.push({
-    hreflang: 'x-default',
-    href: `https://pixelartvillage.org${cleanBasePath === '/' ? '/' : cleanBasePath}`
-  });
-
-  return hreflangs;
+  const canonicalPath = cleanBasePath === '/' ? '/' : cleanBasePath.replace(/\/$/, '/')
+  const href = `https://pixelartvillage.org${canonicalPath}`
+  return [
+    { hreflang: 'en', href },
+    { hreflang: 'x-default', href },
+  ]
 }

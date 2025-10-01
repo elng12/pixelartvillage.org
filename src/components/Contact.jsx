@@ -9,7 +9,7 @@ export default function Contact() {
   const params = useParams()
   const currentLang = params.lang || 'en'
   const prefix = currentLang === 'en' ? '' : `/${currentLang}`
-  const canonical = `https://pixelartvillage.org${prefix}/contact`
+  const canonical = `https://pixelartvillage.org${prefix}/contact/`
   const hreflangLinks = generateHreflangLinks('/contact')
   return (
     <div className="container mx-auto px-4 py-10 max-w-3xl">
