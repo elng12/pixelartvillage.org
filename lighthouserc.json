@@ -1,0 +1,17 @@
+{
+  "ci": {
+    "collect": {
+      "url": [
+        "http://localhost:4173/",
+        "http://localhost:4173/pvb/codes/2025/",
+        "http://localhost:4173/pvb/bosses/",
+        "http://localhost:4173/blog/",
+        "http://localhost:4173/pvb/codes/"
+      ],
+      "numberOfRuns": 2,
+      "settings": {
+        "preset": "desktop"
+      }
+    }
+  }
+}

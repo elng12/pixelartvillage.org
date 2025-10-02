@@ -1,5 +1,13 @@
 {
   "nav": {"examples": "Mga Halimbawa", "features": "Mga Tampok", "how": "Paano ito gumagana", "faq": "FAQ", "blog": "Blog", "home": "Home", "about": "Tungkol", "contact": "Makipag-ugnay"},
+  "navTitle": {
+    "hero": "Scroll to Home hero section",
+    "examples": "Scroll to Pixel Art Examples",
+    "features": "Scroll to Pixel Art Features",
+    "how": "Scroll to How Pixel Art Converter Works",
+    "faq": "Scroll to Pixel Art FAQ",
+    "blog": "Open Pixel Art Blog"
+  },
   "cta": {"start": "Simulan ngayon"},
   "site": {"tagline": "Online na pixel art generator • tagalikha • converter"},
   "footer": {

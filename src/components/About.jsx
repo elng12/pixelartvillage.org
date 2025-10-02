@@ -47,7 +47,7 @@ export default function About() {
         <h2>{t('about.contact.title')}</h2>
         <p>
           {t('about.contact.p1')}
-          {' '}<a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com">2296744453m@gmail.com</a>.
+          {' '}<a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com" title="Email Pixel Art Village">2296744453m@gmail.com</a>.
         </p>
         <p>
           For more information, see our <Link to={`${prefix}/privacy`} className="text-blue-600 underline">privacy policy</Link> and

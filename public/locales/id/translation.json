@@ -1,5 +1,13 @@
 {
   "nav": {"examples": "Contoh", "features": "Fitur", "how": "Cara kerja", "faq": "FAQ", "blog": "Blog", "home": "Beranda", "about": "Tentang", "contact": "Kontak"},
+  "navTitle": {
+    "hero": "Scroll to Home hero section",
+    "examples": "Scroll to Pixel Art Examples",
+    "features": "Scroll to Pixel Art Features",
+    "how": "Scroll to How Pixel Art Converter Works",
+    "faq": "Scroll to Pixel Art FAQ",
+    "blog": "Open Pixel Art Blog"
+  },
   "cta": {"start": "Mulai sekarang"},
   "site": {"tagline": "Generator pixel art online • pembuat • konverter"},
   "footer": {

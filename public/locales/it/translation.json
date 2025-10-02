@@ -1,5 +1,13 @@
 {
   "nav": {"examples": "Esempi", "features": "Funzionalità", "how": "Come funziona", "faq": "FAQ", "blog": "Blog", "home": "Home", "about": "Chi siamo", "contact": "Contatti"},
+  "navTitle": {
+    "hero": "Scroll to Home hero section",
+    "examples": "Scroll to Pixel Art Examples",
+    "features": "Scroll to Pixel Art Features",
+    "how": "Scroll to How Pixel Art Converter Works",
+    "faq": "Scroll to Pixel Art FAQ",
+    "blog": "Open Pixel Art Blog"
+  },
   "cta": {"start": "Inizia ora"},
   "site": {"tagline": "Generatore di pixel art online • maker • convertitore"},
   "footer": {

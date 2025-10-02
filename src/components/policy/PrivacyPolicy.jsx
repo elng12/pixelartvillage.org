@@ -73,15 +73,15 @@ export default function PrivacyPolicy() {
         <ul>
           <li>
             {t('privacy.sections.cookies.learn')}
-            {' '}<a className="text-blue-600 underline" href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">policies.google.com/technologies/partner-sites</a>
+            {' '}<a className="text-blue-600 underline" href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer nofollow" title="How Google uses information from partner sites">policies.google.com/technologies/partner-sites</a>
           </li>
           <li>
             {t('privacy.sections.cookies.manage')}
-            {' '}<a className="text-blue-600 underline" href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">adssettings.google.com</a>
+            {' '}<a className="text-blue-600 underline" href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer nofollow" title="Manage ad personalization">adssettings.google.com</a>
           </li>
           <li>
             {t('privacy.sections.cookies.more')}
-            {' '}<a className="text-blue-600 underline" href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">policies.google.com/technologies/ads</a>
+            {' '}<a className="text-blue-600 underline" href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer nofollow" title="More about Google ads and cookies">policies.google.com/technologies/ads</a>
           </li>
         </ul>
       </Section>
@@ -122,7 +122,7 @@ export default function PrivacyPolicy() {
 
       <Section title={t('privacy.sections.contact.title')} id="contact">
         <p>
-          {t('privacy.sections.contact.p1')} Email: <a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com">2296744453m@gmail.com</a>
+          {t('privacy.sections.contact.p1')} Email: <a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com" title="Email Pixel Art Village">2296744453m@gmail.com</a>
         </p>
       </Section>
     </div>

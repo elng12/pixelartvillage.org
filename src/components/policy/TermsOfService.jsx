@@ -95,7 +95,7 @@ export default function TermsOfService() {
 
       <Section title={t('terms.sections.contact.title')} id="contact">
         <p>
-          {t('terms.sections.contact.p1')} Email: <a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com">2296744453m@gmail.com</a>
+          {t('terms.sections.contact.p1')} Email: <a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com" title="Email Pixel Art Village">2296744453m@gmail.com</a>
         </p>
       </Section>
     </div>

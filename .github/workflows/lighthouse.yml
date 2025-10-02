@@ -1,0 +1,45 @@
+name: Lighthouse CI
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  lhci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Start preview server
+        run: |
+          nohup npm run preview -- --host 127.0.0.1 --port 4173 >/dev/null 2>&1 &
+          # wait until server is ready
+          timeout 30 bash -lc 'until curl -sSf http://127.0.0.1:4173 >/dev/null; do sleep 1; done'
+        shell: bash
+
+      - name: Run Lighthouse CI (accessibility assertions)
+        run: npx @lhci/cli@0.13.x autorun
+        env:
+          # 可选：若配置了 GitHub App，可自动在 PR 评论报告
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: Upload Lighthouse artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: .lighthouseci/
+          retention-days: 30

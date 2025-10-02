@@ -62,7 +62,7 @@ export default function ConsentBanner() {
           <p className="mt-1 text-sm text-gray-600">
             {t('consent.desc')}
             {' '}<Link className="text-blue-600 underline" to={`${prefix}/privacy`}>{t('consent.privacy')}</Link> {t('consent.andManage')}
-            {' '}<a className="text-blue-600 underline" href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">adssettings.google.com</a>.
+            {' '}<a className="text-blue-600 underline" href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer nofollow" title="Manage Google ad personalization">adssettings.google.com</a>.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             <button type="button" onClick={acceptAll} className="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-white text-sm font-semibold hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">

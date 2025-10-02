@@ -35,7 +35,7 @@ export default function Contact() {
       <div className="prose prose-sm text-gray-700">
         <p>{t('contact.p1')}</p>
         <ul>
-          <li>{t('contact.emailLabel')} <a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com">2296744453m@gmail.com</a></li>
+          <li>{t('contact.emailLabel')} <a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com" title="Email Pixel Art Village">2296744453m@gmail.com</a></li>
         </ul>
         <p>
           Before contacting us, you might find answers in our <Link to={`${prefix}/blog`} className="text-blue-600 underline">blog</Link> or

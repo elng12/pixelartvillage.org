@@ -1,5 +1,13 @@
 {
   "nav": {"examples": "例", "features": "機能", "how": "使い方", "faq": "よくある質問", "blog": "ブログ", "home": "ホーム", "about": "概要", "contact": "お問い合わせ"},
+  "navTitle": {
+    "hero": "Scroll to Home hero section",
+    "examples": "Scroll to Pixel Art Examples",
+    "features": "Scroll to Pixel Art Features",
+    "how": "Scroll to How Pixel Art Converter Works",
+    "faq": "Scroll to Pixel Art FAQ",
+    "blog": "Open Pixel Art Blog"
+  },
   "cta": {"start": "今すぐ始める"},
   "site": {"tagline": "オンライン ピクセルグラフィック ジェネレーター・メーカー・コンバーター"},
   "footer": {
