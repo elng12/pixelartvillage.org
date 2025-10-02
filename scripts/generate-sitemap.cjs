@@ -9,16 +9,27 @@ const outPath = path.resolve(process.cwd(), 'public', 'sitemap.xml');
 const today = new Date();
 const isoDate = today.toISOString().slice(0, 10);
 
-// 仅输出规范 URL：默认语言使用无前缀根路径；不在 sitemap 中列出各语言前缀页
+// 默认语言使用根路径；不再生成 /en/ 版本
 const BASE_PATHS = ['/', '/privacy', '/terms', '/about', '/contact', '/blog'];
-const PATHS = [...BASE_PATHS];
+const DEFAULT_LANG = 'en';
+const OTHER_LANGS = ['es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
+const PATHS = [];
+for (const p of BASE_PATHS) {
+  // 默认语言根路径（canonical）
+  PATHS.push(p);
+  // 其他语言版本
+  for (const l of OTHER_LANGS) {
+    PATHS.push(`/${l}${p === '/' ? '/' : p}`);
+  }
+}
 // Include blog posts from content
 try {
   const posts = require('../src/content/blog-posts.json');
   for (const p of posts) {
     if (p && p.slug) {
-      // 仅默认语言规范 URL
-      PATHS.push(`/blog/${p.slug}`);
+  // 默认语言：/blog/slug（canonical）；其它语言：/xx/blog/slug
+  PATHS.push(`/blog/${p.slug}`);
+  for (const l of OTHER_LANGS) PATHS.push(`/${l}/blog/${p.slug}`);
     }
   }
 } catch (e) {
@@ -30,8 +41,9 @@ try {
   const pseo = require('../src/content/pseo-pages.json');
   for (const p of pseo) {
     if (p && p.slug) {
-      // 仅默认语言规范 URL
-      PATHS.push(`/converter/${p.slug}`);
+  // 默认语言：/converter/slug（canonical）；其它语言：/xx/converter/slug
+  PATHS.push(`/converter/${p.slug}`);
+  for (const l of OTHER_LANGS) PATHS.push(`/${l}/converter/${p.slug}`);
     }
   }
 } catch (e) {

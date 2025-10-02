@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 function GitHubIcon({ className }) {
@@ -15,31 +15,6 @@ function Footer() {
   const params = useParams()
   const currentLang = params.lang || 'en'
   const prefix = currentLang === 'en' ? '' : `/${currentLang}`
-  const location = useLocation()
-  const navigate = useNavigate()
-  const homePath = `${prefix}/`
-  const onHome = location.pathname === homePath
-
-  function scrollToSection(id) {
-    if (onHome) {
-      requestAnimationFrame(() => {
-        const el = document.getElementById(id)
-        if (el && typeof el.scrollIntoView === 'function') {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }
-      })
-    } else {
-      navigate(`${prefix}/#${id}`)
-    }
-  }
-  const NAV_TITLES = {
-    tool: t('navTitle.hero'),
-    showcase: t('navTitle.examples'),
-    features: t('navTitle.features'),
-    'how-it-works': t('navTitle.how'),
-    faq: t('navTitle.faq'),
-    blog: t('navTitle.blog'),
-  }
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="relative">
@@ -59,15 +34,12 @@ function Footer() {
               <p className="text-sm text-gray-400 mt-1">{t('site.tagline')}</p>
             </div>
             <div>
-              <button
-                type="button"
-                onClick={() => scrollToSection('tool')}
-                aria-controls="tool"
+              <Link
+                to={`${prefix}/#tool`}
                 className="inline-block px-4 py-2 rounded-md bg-violet-700 text-white font-semibold hover:bg-violet-800 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-                title={t('footer.links.start')}
               >
                 {t('cta.start')}
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -76,42 +48,42 @@ function Footer() {
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.tools')}</p>
               <ul className="space-y-2 text-sm">
-                <li><button type="button" onClick={() => scrollToSection('tool')} aria-controls="tool" title={t('footer.links.generator')} className="hover:text-white text-left">{t('footer.links.generator')}</button></li>
-                <li><button type="button" onClick={() => scrollToSection('tool')} aria-controls="tool" title={t('footer.links.converter')} className="hover:text-white text-left">{t('footer.links.converter')}</button></li>
-                <li><button type="button" onClick={() => scrollToSection('showcase')} aria-controls="showcase" title={t('footer.links.imageToPixel')} className="hover:text-white text-left">{t('footer.links.imageToPixel')}</button></li>
-                <li><button type="button" onClick={() => scrollToSection('features')} aria-controls="features" title={t('footer.links.makePixelArt')} className="hover:text-white text-left">{t('footer.links.makePixelArt')}</button></li>
+                <li><Link to={`${prefix}/#tool`} className="hover:text-white">{t('footer.links.generator')}</Link></li>
+                <li><Link to={`${prefix}/#tool`} className="hover:text-white">{t('footer.links.converter')}</Link></li>
+                <li><Link to={`${prefix}/#showcase`} className="hover:text-white">{t('footer.links.imageToPixel')}</Link></li>
+                <li><Link to={`${prefix}/#features`} className="hover:text-white">{t('footer.links.makePixelArt')}</Link></li>
               </ul>
             </div>
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.formats')}</p>
               <ul className="space-y-2 text-sm">
-                <li><button type="button" onClick={() => scrollToSection('showcase')} aria-controls="showcase" title={t('footer.links.png2pixel')} className="hover:text-white text-left">{t('footer.links.png2pixel')}</button></li>
-                <li><button type="button" onClick={() => scrollToSection('showcase')} aria-controls="showcase" title={t('footer.links.jpg2pixel')} className="hover:text-white text-left">{t('footer.links.jpg2pixel')}</button></li>
-                <li><button type="button" onClick={() => scrollToSection('showcase')} aria-controls="showcase" title={t('footer.links.img2pixel')} className="hover:text-white text-left">{t('footer.links.img2pixel')}</button></li>
-                <li><button type="button" onClick={() => scrollToSection('features')} aria-controls="features" title={t('footer.links.gridPreview')} className="hover:text-white text-left">{t('footer.links.gridPreview')}</button></li>
+                <li><Link to={`${prefix}/#showcase`} className="hover:text-white">{t('footer.links.png2pixel')}</Link></li>
+                <li><Link to={`${prefix}/#showcase`} className="hover:text-white">{t('footer.links.jpg2pixel')}</Link></li>
+                <li><Link to={`${prefix}/#showcase`} className="hover:text-white">{t('footer.links.img2pixel')}</Link></li>
+                <li><Link to={`${prefix}/#features`} className="hover:text-white">{t('footer.links.gridPreview')}</Link></li>
               </ul>
             </div>
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.explore')}</p>
               <ul className="space-y-2 text-sm">
-                <li><button type="button" onClick={() => scrollToSection('tool')} aria-controls="tool" title={NAV_TITLES.tool} aria-label={NAV_TITLES.tool} className="hover:text-white text-left">{t('nav.home')}</button></li>
-                <li><button type="button" onClick={() => scrollToSection('showcase')} aria-controls="showcase" title={NAV_TITLES.showcase} aria-label={NAV_TITLES.showcase} className="hover:text-white text-left">{t('nav.examples')}</button></li>
-                <li><button type="button" onClick={() => scrollToSection('features')} aria-controls="features" title={NAV_TITLES.features} aria-label={NAV_TITLES.features} className="hover:text-white text-left">{t('nav.features')}</button></li>
-                <li><button type="button" onClick={() => scrollToSection('how-it-works')} aria-controls="how-it-works" title={NAV_TITLES['how-it-works']} aria-label={NAV_TITLES['how-it-works']} className="hover:text-white text-left">{t('nav.how')}</button></li>
-                <li><button type="button" onClick={() => scrollToSection('faq')} aria-controls="faq" title={NAV_TITLES.faq} aria-label={NAV_TITLES.faq} className="hover:text-white text-left">{t('nav.faq')}</button></li>
-                <li><Link to={`${prefix}/blog`} title={NAV_TITLES.blog} aria-label={NAV_TITLES.blog} className="hover:text-white">{t('nav.blog')}</Link></li>
+                <li><Link to={`${prefix}/#tool`} className="hover:text-white">{t('nav.home')}</Link></li>
+                <li><Link to={`${prefix}/#showcase`} className="hover:text-white">{t('nav.examples')}</Link></li>
+                <li><Link to={`${prefix}/#features`} className="hover:text-white">{t('nav.features')}</Link></li>
+                <li><Link to={`${prefix}/#how-it-works`} className="hover:text-white">{t('nav.how')}</Link></li>
+                <li><Link to={`${prefix}/#faq`} className="hover:text-white">{t('nav.faq')}</Link></li>
+                <li><Link to={`${prefix}/blog`} className="hover:text-white">{t('nav.blog')}</Link></li>
               </ul>
             </div>
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.community')}</p>
               <ul className="space-y-2 text-sm">
-                <li><button type="button" onClick={() => scrollToSection('tool')} aria-controls="tool" title={t('footer.links.start')} className="hover:text-white text-left">{t('footer.links.start')}</button></li>
-                <li><button type="button" onClick={() => scrollToSection('features')} aria-controls="features" title={t('footer.links.tips')} className="hover:text-white text-left">{t('footer.links.tips')}</button></li>
-                <li><button type="button" onClick={() => scrollToSection('faq')} aria-controls="faq" title={t('footer.links.privacyLocal')} className="hover:text-white text-left">{t('footer.links.privacyLocal')}</button></li>
+                <li><a href="#tool" className="hover:text-white">{t('footer.links.start')}</a></li>
+                <li><a href="#features" className="hover:text-white">{t('footer.links.tips')}</a></li>
+                <li><a href="#faq" className="hover:text-white">{t('footer.links.privacyLocal')}</a></li>
                 <li>
-                  <button type="button" className="inline-flex items-center gap-2 hover:text-white" aria-label={t('footer.github')} title={t('footer.github')}>
+                  <a href="#" className="inline-flex items-center gap-2 hover:text-white" aria-label={t('footer.github')}>
                     <GitHubIcon className="w-4 h-4" /> {t('footer.github')}
-                  </button>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -121,25 +93,17 @@ function Footer() {
           <div className="mt-10 pt-6 border-t border-gray-700/60 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <p className="text-xs text-gray-400">{t('footer.copy', { year: new Date().getFullYear() })}</p>
             <div className="flex items-center gap-4 text-xs text-gray-400">
-              <Link to={`${prefix}/terms/`} className="hover:text-white" title={t('footer.terms')} aria-label={t('footer.terms')}>{t('footer.terms')}</Link>
+              <Link to={`${prefix}/terms`} className="hover:text-white">{t('footer.terms')}</Link>
               <span aria-hidden>•</span>
-              <Link to={`${prefix}/privacy/`} className="hover:text-white" title={t('footer.privacy')} aria-label={t('footer.privacy')}>{t('footer.privacy')}</Link>
+              <Link to={`${prefix}/privacy`} className="hover:text-white">{t('footer.privacy')}</Link>
               <span aria-hidden>•</span>
-              <Link to={`${prefix}/about/`} className="hover:text-white" title={t('nav.about')} aria-label={t('nav.about')}>{t('nav.about')}</Link>
+              <Link to={`${prefix}/about`} className="hover:text-white">{t('nav.about')}</Link>
               <span aria-hidden>•</span>
-              <Link to={`${prefix}/contact/`} className="hover:text-white" title={t('nav.contact')} aria-label={t('nav.contact')}>{t('nav.contact')}</Link>
+              <Link to={`${prefix}/contact`} className="hover:text-white">{t('nav.contact')}</Link>
             </div>
           </div>
           <div className="mt-6 text-center flex flex-wrap items-center justify-center gap-6">
-            <a
-              href="https://twelve.tools"
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              title="Featured on Twelve Tools"
-              aria-label="Featured on Twelve Tools"
-              className="w-1/2 md:w-auto flex justify-center"
-            >
-              <span className="sr-only">Featured on Twelve Tools</span>
+            <a href="https://twelve.tools" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
               <img
                 src="/twelve-tools-badge.svg"
                 alt="Featured on Twelve Tools"
@@ -148,15 +112,7 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
-            <a
-              href="https://fazier.com/launches/pixelartvillage.org"
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              title="Fazier launch page"
-              aria-label="Fazier launch page"
-              className="w-1/2 md:w-auto flex justify-center"
-            >
-              <span className="sr-only">Fazier launch page</span>
+            <a href="https://fazier.com/launches/pixelartvillage.org" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
               <img
                 src="/fazier-badge.svg"
                 alt="Fazier badge"
@@ -165,15 +121,7 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
-            <a
-              href="https://startupfa.me/s/pixel-art-village?utm_source=pixelartvillage.org"
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              title="Featured on Startup Fame"
-              aria-label="Featured on Startup Fame"
-              className="w-1/2 md:w-auto flex justify-center"
-            >
-              <span className="sr-only">Featured on Startup Fame</span>
+            <a href="https://startupfa.me/s/pixel-art-village?utm_source=pixelartvillage.org" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
               <img
                 src="/startupfame-badge.webp"
                 alt="Featured on Startup Fame"
@@ -182,15 +130,7 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
-            <a
-              href="https://turbo0.com/item/pixel-art-village"
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              title="Listed on Turbo0"
-              aria-label="Listed on Turbo0"
-              className="w-1/2 md:w-auto flex justify-center"
-            >
-              <span className="sr-only">Listed on Turbo0</span>
+            <a href="https://turbo0.com/item/pixel-art-village" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
               <img
                 src="/turbo0-badge.svg"
                 alt="Listed on Turbo0"
@@ -199,15 +139,7 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
-            <a
-              href="https://indie.deals?ref=https%3A%2F%2Fpixelartvillage.org%2F"
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              title="Find us on Indie.Deals"
-              aria-label="Find us on Indie.Deals"
-              className="w-1/2 md:w-auto flex justify-center"
-            >
-              <span className="sr-only">Find us on Indie.Deals</span>
+            <a href="https://indie.deals?ref=https%3A%2F%2Fpixelartvillage.org%2F" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
               <img
                 src="/indie-deals-badge.svg"
                 alt="Find us on Indie.Deals"
@@ -216,15 +148,7 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
-            <a
-              href="https://backlinkdirs.com"
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              title="Listed on AI Dirs"
-              aria-label="Listed on AI Dirs"
-              className="w-1/2 md:w-auto flex justify-center"
-            >
-              <span className="sr-only">Listed on AI Dirs</span>
+            <a href="https://backlinkdirs.com" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
               <img
                 src="/ai-dirs-badge.svg"
                 alt="Listed on AI Dirs"

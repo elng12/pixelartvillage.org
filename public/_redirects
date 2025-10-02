@@ -34,12 +34,3 @@
 
 # Specific redirects (if needed)
 # /old-path    /new-path    301
-/converter/webp-to-pixel-art    /converter/webp-to-pixel-art/   301
-/blog/photo-to-sprite-converter-tips    /blog/photo-to-sprite-converter-tips/   301
-/en/blog/turn-photo-into-pixel-art    /en/blog/turn-photo-into-pixel-art/   301
-/pt/blog/photo-to-sprite-converter-tips    /pt/blog/photo-to-sprite-converter-tips/   301
-/privacy    /privacy/   301
-/about    /about/   301
-https://www.pixelartvillage.org/*    https://pixelartvillage.org/:splat   301
-http://www.pixelartvillage.org/*    https://pixelartvillage.org/:splat   301
-http://pixelartvillage.org/*    https://pixelartvillage.org/:splat   301

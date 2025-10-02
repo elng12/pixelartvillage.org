@@ -6,7 +6,7 @@
   "scripts": {
     "predev": "node scripts/embed-en-locale.cjs && node scripts/gen-social-preview.cjs && node scripts/gen-showcase.cjs",
     "dev": "node scripts/dev.cjs",
-    "prebuild": "node scripts/embed-en-locale.cjs && node scripts/gen-social-preview.cjs && node scripts/gen-showcase.cjs && node scripts/generate-sitemap.js && node scripts/gen-pseo-og.cjs",
+    "prebuild": "node scripts/embed-en-locale.cjs && node scripts/gen-social-preview.cjs && node scripts/gen-showcase.cjs && node scripts/generate-sitemap.cjs && node scripts/gen-pseo-og.cjs",
     "build": "vite build && node scripts/prerender-spa.cjs",
     "postbuild": "node scripts/inline-critical-css.cjs && node scripts/seo-check.js",
     "lint": "eslint .",
@@ -33,7 +33,6 @@
     "seo:verify-ranking": "node scripts/verify-target-ranking.js",
     "i18n:check": "node scripts/i18n-check.js",
     "i18n:pseudo": "node scripts/gen-pseudo-locale.js",
-    "i18n:validate": "node scripts/i18n-validate.cjs",
     "seo:kw": "node scripts/kw-density-check.js",
     "seo:kw:report": "node scripts/kw-density-report.js",
     "seo:kw:words": "node scripts/kw-density-words.js",
@@ -45,10 +44,7 @@
     "seo:kw:site:full": "node scripts/kw-density-site-full.js",
     "seo:kw:root:full": "node scripts/kw-density-single.js --route / --include-meta --include-jsonld --include-attrs --split-hyphen --tsv",
     "seo:kw:root:yourtool": "node scripts/kw-density-single.js --route / --include-meta --include-jsonld --include-attrs --split-hyphen --dupe-text --stem --token-letters-only --tsv --verbose",
-    "sitemap:verify": "node scripts/verify-sitemap-no-en.cjs",
-    "seo:gsc-redirects": "node scripts/generate-redirects-from-csv.cjs",
-    "test:e2e": "playwright test",
-    "verify:nav": "npm run typecheck && npm run build && npm run test:e2e && node scripts/i18n-validate.cjs && echo 'Run lighthouse separately after starting preview: npm run preview'"
+    "sitemap:verify": "node scripts/verify-sitemap-no-en.cjs"
   },
   "dependencies": {
     "i18next": "^25.5.2",
