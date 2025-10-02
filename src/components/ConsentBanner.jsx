@@ -9,7 +9,7 @@ function updateConsent(granted) {
   try {
     const payload = { granted: !!granted, t: Date.now() }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload))
-  } catch { void 0 }
+  } catch { /* TODO: handle error */ }
   try {
     // gtag shim if present
     const gtag = window.gtag || (function(){ window.dataLayer = window.dataLayer || []; return function(){ window.dataLayer.push(arguments) } })()
@@ -19,7 +19,7 @@ function updateConsent(granted) {
       ad_user_data: granted ? 'granted' : 'denied',
       ad_personalization: granted ? 'granted' : 'denied',
     })
-  } catch { void 0 }
+  } catch { /* TODO: handle error */ }
 }
 
 export default function ConsentBanner() {

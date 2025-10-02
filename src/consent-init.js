@@ -35,7 +35,7 @@ try {
     })
     if (granted) {
       // 等待空闲后加载，避免争抢主线程/LCP
-      const loadAll = () => { try { ensureAdSenseLoaded() } catch { /* ignore */ void 0 } try { ensureClarityLoaded() } catch { /* ignore */ void 0 } }
+      const loadAll = () => { try { ensureAdSenseLoaded() } catch { /* TODO: handle error */ } try { ensureClarityLoaded() } catch { /* TODO: handle error */ } }
       if ('requestIdleCallback' in window) {
         requestIdleCallback(loadAll, { timeout: 2000 })
       } else {
@@ -43,7 +43,7 @@ try {
       }
     }
   }
-} catch { void 0 }
+} catch { /* TODO: handle error */ }
 
 // GitHub Pages SPA fallback: if 404.html redirected here with ?p=/x&q=query#hash, fix the URL
 try {
@@ -55,4 +55,4 @@ try {
     const next = decodeURIComponent(p) + (q ? `?${decodeURIComponent(q)}` : '') + hash
     window.history.replaceState(null, '', next)
   }
-} catch { void 0 }
+} catch { /* TODO: handle error */ }
