@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import LangRoot from './components/LangRoot.jsx'
 import i18n from '@/i18n'
+import { ensureClarityLoaded } from './clarity-init.js'
 
 const rootEl = document.getElementById('root')
 if (!rootEl) {
@@ -25,6 +26,8 @@ async function bootstrapWebVitals(reportHandler) {
 // Initialize Web Vitals tracking once，根据环境决定回调
 const reportWebVitals = import.meta.env.PROD ? () => {} : undefined
 bootstrapWebVitals(reportWebVitals)
+
+ensureClarityLoaded()
 
 ;(async () => {
   try {
