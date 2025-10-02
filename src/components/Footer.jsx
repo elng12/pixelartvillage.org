@@ -121,17 +121,25 @@ function Footer() {
           <div className="mt-10 pt-6 border-t border-gray-700/60 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <p className="text-xs text-gray-400">{t('footer.copy', { year: new Date().getFullYear() })}</p>
             <div className="flex items-center gap-4 text-xs text-gray-400">
-              <Link to={`${prefix}/terms/`} className="hover:text-white">{t('footer.terms')}</Link>
+              <Link to={`${prefix}/terms/`} className="hover:text-white" title={t('footer.terms')} aria-label={t('footer.terms')}>{t('footer.terms')}</Link>
               <span aria-hidden>•</span>
-              <Link to={`${prefix}/privacy/`} className="hover:text-white">{t('footer.privacy')}</Link>
+              <Link to={`${prefix}/privacy/`} className="hover:text-white" title={t('footer.privacy')} aria-label={t('footer.privacy')}>{t('footer.privacy')}</Link>
               <span aria-hidden>•</span>
-              <Link to={`${prefix}/about/`} className="hover:text-white">{t('nav.about')}</Link>
+              <Link to={`${prefix}/about/`} className="hover:text-white" title={t('nav.about')} aria-label={t('nav.about')}>{t('nav.about')}</Link>
               <span aria-hidden>•</span>
-              <Link to={`${prefix}/contact/`} className="hover:text-white">{t('nav.contact')}</Link>
+              <Link to={`${prefix}/contact/`} className="hover:text-white" title={t('nav.contact')} aria-label={t('nav.contact')}>{t('nav.contact')}</Link>
             </div>
           </div>
           <div className="mt-6 text-center flex flex-wrap items-center justify-center gap-6">
-            <a href="https://twelve.tools" target="_blank" rel="noopener noreferrer nofollow" title="Featured on Twelve Tools" className="w-1/2 md:w-auto flex justify-center">
+            <a
+              href="https://twelve.tools"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              title="Featured on Twelve Tools"
+              aria-label="Featured on Twelve Tools"
+              className="w-1/2 md:w-auto flex justify-center"
+            >
+              <span className="sr-only">Featured on Twelve Tools</span>
               <img
                 src="/twelve-tools-badge.svg"
                 alt="Featured on Twelve Tools"
@@ -140,7 +148,15 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
-            <a href="https://fazier.com/launches/pixelartvillage.org" target="_blank" rel="noopener noreferrer nofollow" title="Fazier launch page" className="w-1/2 md:w-auto flex justify-center">
+            <a
+              href="https://fazier.com/launches/pixelartvillage.org"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              title="Fazier launch page"
+              aria-label="Fazier launch page"
+              className="w-1/2 md:w-auto flex justify-center"
+            >
+              <span className="sr-only">Fazier launch page</span>
               <img
                 src="/fazier-badge.svg"
                 alt="Fazier badge"
@@ -149,7 +165,15 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
-            <a href="https://startupfa.me/s/pixel-art-village?utm_source=pixelartvillage.org" target="_blank" rel="noopener noreferrer nofollow" title="Featured on Startup Fame" className="w-1/2 md:w-auto flex justify-center">
+            <a
+              href="https://startupfa.me/s/pixel-art-village?utm_source=pixelartvillage.org"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              title="Featured on Startup Fame"
+              aria-label="Featured on Startup Fame"
+              className="w-1/2 md:w-auto flex justify-center"
+            >
+              <span className="sr-only">Featured on Startup Fame</span>
               <img
                 src="/startupfame-badge.webp"
                 alt="Featured on Startup Fame"
@@ -158,7 +182,15 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
-            <a href="https://turbo0.com/item/pixel-art-village" target="_blank" rel="noopener noreferrer nofollow" title="Listed on Turbo0" className="w-1/2 md:w-auto flex justify-center">
+            <a
+              href="https://turbo0.com/item/pixel-art-village"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              title="Listed on Turbo0"
+              aria-label="Listed on Turbo0"
+              className="w-1/2 md:w-auto flex justify-center"
+            >
+              <span className="sr-only">Listed on Turbo0</span>
               <img
                 src="/turbo0-badge.svg"
                 alt="Listed on Turbo0"
@@ -167,7 +199,15 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
-            <a href="https://indie.deals?ref=https%3A%2F%2Fpixelartvillage.org%2F" target="_blank" rel="noopener noreferrer nofollow" title="Find us on Indie.Deals" className="w-1/2 md:w-auto flex justify-center">
+            <a
+              href="https://indie.deals?ref=https%3A%2F%2Fpixelartvillage.org%2F"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              title="Find us on Indie.Deals"
+              aria-label="Find us on Indie.Deals"
+              className="w-1/2 md:w-auto flex justify-center"
+            >
+              <span className="sr-only">Find us on Indie.Deals</span>
               <img
                 src="/indie-deals-badge.svg"
                 alt="Find us on Indie.Deals"
@@ -176,7 +216,15 @@ function Footer() {
                 className="inline-block h-[54px] w-auto object-contain"
               />
             </a>
-            <a href="https://backlinkdirs.com" target="_blank" rel="noopener noreferrer nofollow" title="Listed on AI Dirs" className="w-1/2 md:w-auto flex justify-center">
+            <a
+              href="https://backlinkdirs.com"
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              title="Listed on AI Dirs"
+              aria-label="Listed on AI Dirs"
+              className="w-1/2 md:w-auto flex justify-center"
+            >
+              <span className="sr-only">Listed on AI Dirs</span>
               <img
                 src="/ai-dirs-badge.svg"
                 alt="Listed on AI Dirs"
