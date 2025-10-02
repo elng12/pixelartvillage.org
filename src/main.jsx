@@ -4,6 +4,7 @@ import './index.css'
 import LangRoot from './components/LangRoot.jsx'
 import i18n from '@/i18n'
 import { ensureClarityLoaded } from './clarity-init.js'
+import { ensureGtmLoaded, insertGtmNoScript } from './gtm-init.js'
 
 const rootEl = document.getElementById('root')
 if (!rootEl) {
@@ -27,7 +28,10 @@ async function bootstrapWebVitals(reportHandler) {
 const reportWebVitals = import.meta.env.PROD ? () => {} : undefined
 bootstrapWebVitals(reportWebVitals)
 
+// Load analytics as early as possible
 ensureClarityLoaded()
+ensureGtmLoaded()
+insertGtmNoScript()
 
 ;(async () => {
   try {
