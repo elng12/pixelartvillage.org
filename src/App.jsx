@@ -14,6 +14,8 @@ const Footer = lazy(() => import('./components/Footer'));
 import ScrollManager from './components/ScrollManager';
 import LanguageSwitcher from '@/components/LanguageSwitcherFixed';
 import CompatNotice from '@/components/CompatNotice.jsx';
+import ResourcePreloader from '@/components/ResourcePreloader';
+import CriticalCSS from '@/components/CriticalCSS';
 import i18n, { SUPPORTED_LANGS, getStoredLang, setStoredLang, detectBrowserLang } from '@/i18n';
 const PrivacyPolicy = lazy(() => import('./components/policy/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./components/policy/TermsOfService'));
@@ -22,6 +24,7 @@ const Contact = lazy(() => import('./components/Contact'));
 const Blog = lazy(() => import('./components/Blog'));
 const BlogPost = lazy(() => import('./components/BlogPost'));
 const PseoPage = lazy(() => import('./components/PseoPage'));
+const NotFound = lazy(() => import('./components/NotFound'));
 const ConsentBanner = lazy(() => import('./components/ConsentBanner'));
 
 function Home({ uploadedImage, setUploadedImage }) {
@@ -37,6 +40,7 @@ function Home({ uploadedImage, setUploadedImage }) {
         description="Pixelate photos in your browser – convert PNG/JPG into crisp, grid‑friendly pixel art. Adjust pixel size and palettes with instant preview, then export clean results for sprites, icons, or retro game graphics. Fast, private, and free."
         canonical={canonical}
         hreflang={hreflangLinks}
+        lang={currentLang}
       />
       
       <ToolSection onImageUpload={setUploadedImage} enablePaste={!uploadedImage} />
@@ -95,6 +99,8 @@ function App() {
 
   return (
     <Fragment>
+      <CriticalCSS />
+      <ResourcePreloader />
       <Header rightSlot={<LanguageSwitcher />} />
       <CompatNotice />
       <ScrollManager />
@@ -122,8 +128,8 @@ function App() {
               <Route path="blog/:slug" element={<BlogPost />} />
               <Route path="converter/:slug" element={<PseoPage />} />
             </Route>
-            {/* 未匹配路由：回根路径 */}
-            <Route path="*" element={<Navigate to={`/`} replace />} />
+            {/* 404页面 */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>

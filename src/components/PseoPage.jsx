@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import Seo from '@/components/Seo'
 import ToolSection from '@/components/ToolSection'
 import Editor from '@/components/Editor'
@@ -23,7 +23,7 @@ export default function PseoPage() {
     const canonical = `https://pixelartvillage.org${prefix}/converter/${slug || ''}`
     return (
       <div className="container mx-auto px-4 py-10 max-w-3xl">
-        <Seo title={t('pseo.notFound.seoTitle')} canonical={canonical} />
+        <Seo title={t('pseo.notFound.seoTitle')} canonical={canonical} lang={currentLang} />
         <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('pseo.notFound.title')}</h1>
         <p className="text-gray-700">{t('pseo.notFound.desc')}</p>
       </div>
@@ -37,6 +37,7 @@ export default function PseoPage() {
       <Seo
         title={page.title}
         canonical={canonical}
+        lang={currentLang}
         meta={[
           { name: 'description', content: page.metaDescription },
           { property: 'og:url', content: canonical },
@@ -56,6 +57,42 @@ export default function PseoPage() {
           {(Array.isArray(page.intro) ? page.intro : [page.intro]).map((para, i) => (
             <p key={i} className="text-gray-700 mb-3">{para}</p>
           ))}
+        </div>
+      </section>
+
+      {/* 相关工具链接部分 */}
+      <section className="bg-gray-50 py-8">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Related Pixel Art Converters</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {pages
+              .filter(p => p.slug !== page.slug)
+              .slice(0, 6)
+              .map(relatedPage => (
+                <Link
+                  key={relatedPage.slug}
+                  to={`/converter/${relatedPage.slug}/`}
+                  className="block p-4 bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-200"
+                >
+                  <h3 className="font-medium text-gray-900 mb-2">{relatedPage.h1}</h3>
+                  <p className="text-sm text-gray-600 line-clamp-2">
+                    {Array.isArray(relatedPage.intro) ? relatedPage.intro[0] : relatedPage.intro}
+                  </p>
+                </Link>
+              ))}
+          </div>
+
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <h3 className="text-lg font-medium text-gray-900 mb-3">Site Navigation</h3>
+            <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+              <Link to={`${prefix}/`} className="text-blue-600 hover:text-blue-800">Home</Link>
+              <Link to={`${prefix}/about/`} className="text-blue-600 hover:text-blue-800">About</Link>
+              <Link to={`${prefix}/contact/`} className="text-blue-600 hover:text-blue-800">Contact</Link>
+              <Link to={`${prefix}/privacy/`} className="text-blue-600 hover:text-blue-800">Privacy Policy</Link>
+              <Link to={`${prefix}/terms/`} className="text-blue-600 hover:text-blue-800">Terms of Service</Link>
+              <Link to={`${prefix}/blog/`} className="text-blue-600 hover:text-blue-800">Blog</Link>
+            </nav>
+          </div>
         </div>
       </section>
 

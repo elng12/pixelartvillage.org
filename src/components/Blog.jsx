@@ -15,6 +15,7 @@ export default function Blog() {
       <Seo
         title={`${t('blog.title')} | Pixel Art Village`}
         canonical={canonical}
+        lang={rawLang}
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },

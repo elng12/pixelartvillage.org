@@ -14,10 +14,11 @@ export default function About() {
   return (
     <div className="container mx-auto px-4 py-10 max-w-3xl">
       <Seo
-        title="About | Pixel Art Village"
+        title="About Us | Free Pixel Art Converter | Pixel Art Village"
         description="About Pixel Art Village: a free, browser‑based pixel art maker & converter. Privacy‑first, fast, and accessible tool for creating retro game graphics."
         canonical={canonical}
         hreflang={hreflangLinks}
+        lang={currentLang}
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
@@ -34,9 +35,16 @@ export default function About() {
       <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('about.h1')}</h1>
       <div className="prose prose-sm text-gray-700">
         <p>{t('about.p1')}</p>
+        <p>{t('about.p2')}</p>
+        <p>{t('about.p3')}</p>
         <p>
           Try our <Link to={`${prefix}/`} className="text-blue-600 underline">pixel art converter</Link> tool
           or explore our <Link to={`${prefix}/blog`} className="text-blue-600 underline">blog</Link> for tips and tutorials.
+        </p>
+        <p>
+          Our specialized converters include <Link to={`${prefix}/converter/png-to-pixel-art/`} className="text-blue-600 underline">PNG to pixel art</Link>,
+          <Link to={`${prefix}/converter/jpg-to-pixel-art/`} className="text-blue-600 underline">JPG to pixel art</Link>,
+          and <Link to={`${prefix}/converter/photo-to-sprite-converter/`} className="text-blue-600 underline">photo to sprite converter</Link> tools.
         </p>
         <h2>{t('about.principles.title')}</h2>
         <ul>

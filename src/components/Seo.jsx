@@ -2,10 +2,20 @@ import { createPortal } from 'react-dom'
 
 // 轻量声明式 Head 管理：通过 Portal 将标签渲染到 <head>
 // 避免直接使用 DOM API，保持 React 声明式模型
-export default function Seo({ title, canonical, description, meta = [], hreflang = [] }) {
+export default function Seo({ title, canonical, description, meta = [], hreflang = [], lang = 'en' }) {
   const metas = Array.isArray(meta) ? meta : []
   const hreflangs = Array.isArray(hreflang) ? hreflang : []
   if (typeof document === 'undefined') return null
+
+  // Set HTML lang attribute
+  try {
+    if (document.documentElement && document.documentElement.getAttribute('lang') !== lang) {
+      document.documentElement.setAttribute('lang', lang)
+    }
+  } catch (error) {
+    // Ignore errors in SSR or when document is not available
+  }
+
   return createPortal(
     <>
       {title ? <title>{title}</title> : null}

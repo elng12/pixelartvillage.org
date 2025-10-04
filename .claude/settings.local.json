@@ -3,7 +3,11 @@
     "allow": [
       "Bash(cat public/robots.txt)",
       "Bash(cat public/sitemap.xml)",
-      "Bash(node scripts/generate-sitemap.cjs)"
+      "Bash(node scripts/generate-sitemap.cjs)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run build)",
+      "Read(//mnt/f/**)",
+      "Bash(jq '.[].metaDescription | length' src/content/pseo-pages.json)"
     ],
     "deny": [],
     "ask": []

@@ -1,4 +1,5 @@
 // Auto-generate sitemap.xml at build time with current date as lastmod (CommonJS)
+// 优化：只包含规范URL（英文无前缀版本），避免向搜索引擎提交重复内容
 const fs = require('fs');
 const path = require('path');
 
@@ -9,45 +10,75 @@ const outPath = path.resolve(process.cwd(), 'public', 'sitemap.xml');
 const today = new Date();
 const isoDate = today.toISOString().slice(0, 10);
 
-// 默认语言使用根路径；不再生成 /en/ 版本
-const BASE_PATHS = ['/', '/privacy', '/terms', '/about', '/contact', '/blog'];
-const DEFAULT_LANG = 'en';
-const OTHER_LANGS = ['es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
-const PATHS = [];
-for (const p of BASE_PATHS) {
-  // 默认语言根路径（canonical）
-  PATHS.push(p);
-  // 其他语言版本
-  for (const l of OTHER_LANGS) {
-    PATHS.push(`/${l}${p === '/' ? '/' : p}`);
-  }
-}
-// Include blog posts from content
+// 只包含规范URL（英文无前缀版本），避免重复内容
+// 根据 canonical 策略，其他语言版本不应包含在sitemap中
+const CANONICAL_PATHS = ['/', '/privacy', '/terms', '/about', '/contact', '/blog'];
+const PATHS = [...CANONICAL_PATHS];
+
+// Include blog posts from content - 只包含规范版本
 try {
   const posts = require('../src/content/blog-posts.json');
   for (const p of posts) {
     if (p && p.slug) {
-  // 默认语言：/blog/slug（canonical）；其它语言：/xx/blog/slug
-  PATHS.push(`/blog/${p.slug}`);
-  for (const l of OTHER_LANGS) PATHS.push(`/${l}/blog/${p.slug}`);
+      // 只添加英文规范版本：/blog/slug
+      PATHS.push(`/blog/${p.slug}`);
     }
   }
 } catch (e) {
   console.warn('[sitemap] warn: cannot load blog-posts.json', e && e.message);
 }
 
-// Include pSEO pages (converter/:slug)
+// Include pSEO pages (converter/:slug) - 只包含规范版本
 try {
   const pseo = require('../src/content/pseo-pages.json');
   for (const p of pseo) {
     if (p && p.slug) {
-  // 默认语言：/converter/slug（canonical）；其它语言：/xx/converter/slug
-  PATHS.push(`/converter/${p.slug}`);
-  for (const l of OTHER_LANGS) PATHS.push(`/${l}/converter/${p.slug}`);
+      // 只添加英文规范版本：/converter/slug
+      PATHS.push(`/converter/${p.slug}`);
     }
   }
 } catch (e) {
   console.warn('[sitemap] warn: cannot load pseo-pages.json', e && e.message);
+}
+
+// 可选：生成hreflang sitemap供参考（但不推荐提交给搜索引擎）
+const generateHreflangSitemap = () => {
+  const OTHER_LANGS = ['es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
+  const HREFLANG_PATHS = [];
+
+  for (const p of CANONICAL_PATHS) {
+    for (const l of OTHER_LANGS) {
+      HREFLANG_PATHS.push(`/${l}${p === '/' ? '/' : p}`);
+    }
+  }
+
+  try {
+    const posts = require('../src/content/blog-posts.json');
+    for (const p of posts) {
+      if (p && p.slug) {
+        for (const l of OTHER_LANGS) {
+          HREFLANG_PATHS.push(`/${l}/blog/${p.slug}`);
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('[hreflang-sitemap] warn: cannot load blog-posts.json', e && e.message);
+  }
+
+  try {
+    const pseo = require('../src/content/pseo-pages.json');
+    for (const p of pseo) {
+      if (p && p.slug) {
+        for (const l of OTHER_LANGS) {
+          HREFLANG_PATHS.push(`/${l}/converter/${p.slug}`);
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('[hreflang-sitemap] warn: cannot load pseo-pages.json', e && e.message);
+  }
+
+  return HREFLANG_PATHS;
 }
 
 function withSlash(p) {
@@ -55,12 +86,49 @@ function withSlash(p) {
   return p.endsWith('/') ? p : p + '/';
 }
 
+// 生成主sitemap（只包含规范URL）
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<!-- 优化站点地图：只包含规范URL，避免重复内容问题 -->
+<!-- 生成时间: ${new Date().toISOString()} -->
+<!-- URL总数: ${PATHS.length} (规范版本) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${PATHS.map((p) => `  <url>\n    <loc>${DOMAIN.replace(/\/$/, '')}${withSlash(p)}</loc>\n    <lastmod>${isoDate}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${p === '/' ? '1.0' : '0.8'}</priority>\n  </url>`).join('\n')}
+${PATHS.map((p) => {
+  const priority = p === '/' ? '1.0' :
+                   p.startsWith('/converter/') ? '0.9' :
+                   p.startsWith('/blog/') ? '0.7' : '0.8';
+  const changefreq = p === '/' ? 'daily' :
+                      p.startsWith('/blog/') ? 'monthly' : 'weekly';
+
+  return `  <url>\n    <loc>${DOMAIN.replace(/\/$/, '')}${withSlash(p)}</loc>\n    <lastmod>${isoDate}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+}).join('\n')}
 </urlset>
 `;
 
+// 确保目录存在
 fs.mkdirSync(path.dirname(outPath), { recursive: true });
+
+// 写入主sitemap
 fs.writeFileSync(outPath, xml, 'utf8');
-console.log('[sitemap] Generated', outPath, 'with lastmod =', isoDate);
+console.log('[sitemap] Generated canonical sitemap:', outPath);
+console.log('[sitemap] Total canonical URLs:', PATHS.length);
+console.log('[sitemap] Last modified:', isoDate);
+
+// 可选：生成包含所有语言版本的sitemap供开发参考
+const hreflangPaths = generateHreflangSitemap();
+const hreflangXml = `<?xml version="1.0" encoding="UTF-8"?>
+<!-- 非规范URL参考站点地图（仅供开发参考，不要提交给搜索引擎） -->
+<!-- 生成时间: ${new Date().toISOString()} -->
+<!-- URL总数: ${hreflangPaths.length} (包含非规范版本) -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${hreflangPaths.map((p) => {
+  const priority = p === '/' ? '0.8' : '0.6';
+  return `  <url>\n    <loc>${DOMAIN.replace(/\/$/, '')}${withSlash(p)}</loc>\n    <lastmod>${isoDate}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+}).join('\n')}
+</urlset>
+`;
+
+const hreflangOutPath = path.resolve(process.cwd(), 'public', 'sitemap-hreflang-reference.xml');
+fs.writeFileSync(hreflangOutPath, hreflangXml, 'utf8');
+console.log('[sitemap] Generated hreflang reference sitemap:', hreflangOutPath);
+console.log('[sitemap] Total hreflang URLs (reference only):', hreflangPaths.length);
+console.log('[sitemap] Note: Do not submit hreflang-reference.xml to search engines');

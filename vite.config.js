@@ -22,9 +22,47 @@ export default defineConfig(({ mode }) => {
     define: {
       __BUILD_ID__: JSON.stringify(BUILD_ID),
     },
-    // 可选：生产构建可打开 sourcemap，便于线上排错
+    // 性能优化配置
     build: {
       sourcemap: mode === 'production',
+      // 启用代码分割
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // 将React相关库分离成单独的chunk
+            'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+            // 将i18n相关库分离
+            'i18n-vendor': ['react-i18next', 'i18next', 'i18next-http-backend'],
+            // 其他第三方库
+            'vendor': ['canvas-confetti', 'html2canvas', 'lucide-react'],
+          }
+        }
+      },
+      // 启用gzip压缩提示
+      reportCompressedSize: true,
+      // 优化chunk大小警告阈值
+      chunkSizeWarningLimit: 1000,
+      // 目标浏览器
+      target: 'es2015',
+      // 启用CSS代码分割
+      cssCodeSplit: true,
+    },
+    // 开发服务器优化
+    server: {
+      preTransformRequests: true,
+    },
+    // 预加载优化
+    optimizeDeps: {
+      include: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        'react-i18next',
+        'i18next',
+        'i18next-http-backend',
+        'canvas-confetti',
+        'html2canvas'
+      ]
     },
   }
 })

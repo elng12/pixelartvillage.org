@@ -77,11 +77,11 @@ function Footer() {
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.community')}</p>
               <ul className="space-y-2 text-sm">
-                <li><a href="#tool" className="hover:text-white">{t('footer.links.start')}</a></li>
-                <li><a href="#features" className="hover:text-white">{t('footer.links.tips')}</a></li>
-                <li><a href="#faq" className="hover:text-white">{t('footer.links.privacyLocal')}</a></li>
+                <li><a href={`${prefix}/#tool`} className="hover:text-white">{t('footer.links.start')}</a></li>
+                <li><a href={`${prefix}/#features`} className="hover:text-white">{t('footer.links.tips')}</a></li>
+                <li><a href={`${prefix}/#faq`} className="hover:text-white">{t('footer.links.privacyLocal')}</a></li>
                 <li>
-                  <a href="#" className="inline-flex items-center gap-2 hover:text-white" aria-label={t('footer.github')}>
+                  <a href="https://github.com/pixelartvillage/pixelartvillage" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-white" aria-label={t('footer.github')}>
                     <GitHubIcon className="w-4 h-4" /> {t('footer.github')}
                   </a>
                 </li>
