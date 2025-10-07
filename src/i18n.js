@@ -5,8 +5,8 @@ import { initReactI18next } from 'react-i18next'
 import HttpBackend from 'i18next-http-backend'
 import enBundle from '@/locales/en.json'
 
-const BASE_LANGS = ['en', 'es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'fil', 'vi', 'ja']
-// 可选：在开发环境下通过 VITE_ENABLE_PSEUDO=1 启用伪本地化语言 'pseudo'
+const BASE_LANGS = ['en']
+// 保留扩展点：允许通过 VITE_ENABLE_PSEUDO=1 启用伪本地化，但默认仅提供英文版本
 export const SUPPORTED_LANGS = (() => {
   try {
     if (import.meta?.env?.VITE_ENABLE_PSEUDO) return [...BASE_LANGS, 'pseudo']

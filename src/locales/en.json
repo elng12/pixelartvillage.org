@@ -287,13 +287,11 @@
     "seoDesc": "About pixel art Village: a free, browser‑based pixel art maker & converter. Privacy‑first, fast, and accessible.",
     "h1": "About pixel art Village",
     "p1": "pixel art Village is a free, browser‑based pixel image maker & converter. Upload a PNG/JPG image, tweak pixel size and palettes, preview instantly, and export crisp image results.",
-    "p2": "Our mission is to make pixel art creation accessible to everyone, from professional game developers to hobbyists exploring digital art. We believe that creativity should not be limited by technical barriers or expensive software.",
-    "p3": "Founded with a passion for retro aesthetics and modern web technologies, pixel art Village combines the charm of classic pixel art with the convenience of cloud-free, privacy-first processing. All image conversion happens directly in your browser, ensuring your artwork remains private while delivering professional-quality results.",
     "principles": {
-      "title": "Our Principles",
-      "privacy": { "title": "Privacy‑first:", "desc": "Your images are processed locally in your browser — we do not upload files. Your artwork never leaves your device, ensuring complete privacy and security." },
-      "performance": { "title": "Performance:", "desc": "Fast previews and clean exports without heavy dependencies. Our optimized algorithms deliver instant results, making creative experimentation smooth and enjoyable." },
-      "accessibility": { "title": "Accessibility:", "desc": "Keyboard‑friendly UI and visible focus states. We're committed to making pixel art creation accessible to users of all abilities and technical backgrounds." }
+      "title": "Principles",
+      "privacy": { "title": "Privacy‑first:", "desc": "Your images are processed locally in your browser — we do not upload files." },
+      "performance": { "title": "Performance:", "desc": "Fast previews and clean exports without heavy dependencies." },
+      "accessibility": { "title": "Accessibility:", "desc": "Keyboard‑friendly UI and visible focus states." }
     },
     "contact": {
       "title": "Contact",
@@ -302,9 +300,7 @@
   },
   "contact": {
     "h1": "Contact",
-    "p1": "We'd love to hear from you. For support, feedback, or partnership inquiries, reach out via email.",
-    "p2": "Whether you're experiencing technical issues, have feature suggestions, or want to share your pixel art creations with us, we're here to help. Our team is passionate about pixel art and committed to making pixel art Village the best tool for digital artists and game developers.",
-    "p3": "We typically respond to inquiries within 24-48 hours. For technical support, please include details about your browser and operating system, along with a description of the issue you're experiencing. For feature requests, we'd love to hear how new functionality would enhance your creative workflow.",
+    "p1": "We’d love to hear from you. For support, feedback, or partnership inquiries, reach out via email.",
     "emailLabel": "Email:",
     "note": "Replace the email placeholder with your official contact address to meet AdSense review requirements."
   },

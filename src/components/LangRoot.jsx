@@ -2,36 +2,29 @@ import React, { useEffect, Suspense } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import ErrorBoundary from './ErrorBoundary'
 import App from '@/App'
-import i18n, { SUPPORTED_LANGS, setStoredLang } from '@/i18n'
-
-// 在模块加载阶段即根据 URL 前缀同步 i18n 语言，避免初次渲染短暂英文态
-try {
-  const seg = (window.location.pathname.split('/')[1] || '').toLowerCase()
-  if (SUPPORTED_LANGS.includes(seg) && i18n.language !== seg) {
-    i18n.changeLanguage(seg)
-    setStoredLang(seg)
-  }
-} catch { /* noop */ }
+import i18n from '@/i18n'
 
 export default function LangRoot() {
   useEffect(() => {
     const el = document.documentElement
-    const sync = () => { 
-      try { 
-        el.setAttribute('lang', i18n.language || 'en') 
-      } catch { 
-        /* noop */ 
-      } 
+    const sync = () => {
+      try {
+        el.setAttribute('lang', i18n.language || 'en')
+      } catch {
+        /* noop */
+      }
     }
     sync()
     i18n.on('languageChanged', sync)
-    return () => { i18n.off('languageChanged', sync) }
+    return () => {
+      i18n.off('languageChanged', sync)
+    }
   }, [])
-  
+
   return (
     <BrowserRouter>
       <ErrorBoundary>
-        <Suspense fallback={<div className="container mx-auto px-4 py-10 text-sm text-gray-600" role="status">Loading…</div>}>
+        <Suspense fallback={<div className="container mx-auto px-4 py-10 text-sm text-gray-600" role="status">Loading...</div>}>
           <App />
         </Suspense>
       </ErrorBoundary>

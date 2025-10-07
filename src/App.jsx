@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment, lazy, Suspense } from 'react';
-import { Routes, Route, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Seo from '@/components/Seo';
 import Header from './components/Header';
 import ToolSection from './components/ToolSection';
@@ -12,11 +12,10 @@ const HowItWorksSection = lazy(() => import('./components/HowItWorksSection'));
 const FaqSection = lazy(() => import('./components/FaqSection'));
 const Footer = lazy(() => import('./components/Footer'));
 import ScrollManager from './components/ScrollManager';
-import LanguageSwitcher from '@/components/LanguageSwitcherFixed';
 import CompatNotice from '@/components/CompatNotice.jsx';
 import ResourcePreloader from '@/components/ResourcePreloader';
 import CriticalCSS from '@/components/CriticalCSS';
-import i18n, { SUPPORTED_LANGS, getStoredLang, setStoredLang, detectBrowserLang } from '@/i18n';
+import i18n, { getStoredLang, setStoredLang, detectBrowserLang } from '@/i18n';
 const PrivacyPolicy = lazy(() => import('./components/policy/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./components/policy/TermsOfService'));
 const About = lazy(() => import('./components/About'));
@@ -28,19 +27,16 @@ const NotFound = lazy(() => import('./components/NotFound'));
 const ConsentBanner = lazy(() => import('./components/ConsentBanner'));
 
 function Home({ uploadedImage, setUploadedImage }) {
-  const { lang } = useParams();
-  const currentLang = (lang && SUPPORTED_LANGS.includes(lang)) ? lang : 'en';
-  const prefix = currentLang === 'en' ? '' : `/${currentLang}`;
-  const canonical = `https://pixelartvillage.org${prefix}/`;
+  const canonical = 'https://pixelartvillage.org/';
   const hreflangLinks = generateHreflangLinks('/');
   return (
     <Fragment>
       <Seo
         title="Pixel Art Village: Image to Pixel Art Place Color Converter"
-        description="Pixelate photos in your browser – convert PNG/JPG into crisp, grid‑friendly pixel art. Adjust pixel size and palettes with instant preview, then export clean results for sprites, icons, or retro game graphics. Fast, private, and free."
+        description="Pixelate photos in your browser – convert PNG/JPG into crisp, grid-friendly pixel art. Adjust pixel size and palettes with instant preview, then export clean results for sprites, icons, or retro game graphics. Fast, private, and free."
         canonical={canonical}
         hreflang={hreflangLinks}
-        lang={currentLang}
+        lang="en"
       />
       
       <ToolSection onImageUpload={setUploadedImage} enablePaste={!uploadedImage} />
@@ -56,23 +52,13 @@ function Home({ uploadedImage, setUploadedImage }) {
 
 function useLangRouting() {
   const { pathname, search, hash } = useLocation();
-  const navigate = useNavigate();
 
-  // Derive current language from URL or storage/detection
   useEffect(() => {
-    const seg = (pathname.split('/')[1] || '').toLowerCase();
-    const hasLangInPath = SUPPORTED_LANGS.includes(seg);
-    if (hasLangInPath) {
-      if (i18n.language !== seg) i18n.changeLanguage(seg);
-      setStoredLang(seg);
-      return;
-    }
-    // 无语言前缀：仅设置语言，不再跳转
     const persisted = getStoredLang();
     const auto = persisted || detectBrowserLang();
     if (i18n.language !== auto) i18n.changeLanguage(auto);
     setStoredLang(auto);
-  }, [pathname, search, hash, navigate]);
+  }, [pathname, search, hash]);
 }
 
 function App() {
@@ -101,7 +87,7 @@ function App() {
     <Fragment>
       <CriticalCSS />
       <ResourcePreloader />
-      <Header rightSlot={<LanguageSwitcher />} />
+      <Header />
       <CompatNotice />
       <ScrollManager />
       <main>
@@ -116,18 +102,6 @@ function App() {
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<BlogPost />} />
             <Route path="converter/:slug" element={<PseoPage />} />
-
-            {/* 保留语言前缀路径（非默认语言） */}
-            <Route path=":lang/">
-              <Route index element={<Home uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />} />
-              <Route path="privacy" element={<PrivacyPolicy />} />
-              <Route path="terms" element={<TermsOfService />} />
-              <Route path="about" element={<About />} />
-              <Route path="contact" element={<Contact />} />
-              <Route path="blog" element={<Blog />} />
-              <Route path="blog/:slug" element={<BlogPost />} />
-              <Route path="converter/:slug" element={<PseoPage />} />
-            </Route>
             {/* 404页面 */}
             <Route path="*" element={<NotFound />} />
           </Routes>

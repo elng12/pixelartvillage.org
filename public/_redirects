@@ -1,36 +1,25 @@
 # Netlify redirects file
-# Language-aware SPA routing
+# Canonical SPA routing（仅英文版）
 
-## Default language en：保留 /en 前缀路径直出（与其它语言一致），规范化由 canonical 处理
-/en/*    /index.html   200
+# 旧的语言前缀主页统一重定向到英文规范路径
+/en    /   301!
+/es    /   301!
+/id    /   301!
+/de    /   301!
+/pl    /   301!
+/it    /   301!
+/pt    /   301!
+/fr    /   301!
+/ru    /   301!
+/fil   /   301!
+/vi    /   301!
+/ja    /   301!
 
-# Allowlisted languages (excluding default en) serve SPA directly
-/es/*    /index.html   200
-/id/*    /index.html   200
-/de/*    /index.html   200
-/pl/*    /index.html   200
-/it/*    /index.html   200
-/pt/*    /index.html   200
-/fr/*    /index.html   200
-/ru/*    /index.html   200
-/fil/*   /index.html   200
-/vi/*    /index.html   200
-/ja/*    /index.html   200
-
-# Unknown language prefix → canonical root
+# 任意语言前缀路径（含子路径）去掉前缀后指向规范 URL
 /:lang/*   /:splat   301!
 
-# Legacy plain paths that previously redirected to /en/... now stay as is (no redirect) – keep for reference
-# /privacy     /privacy   301!
-# /terms       /terms     301!
-# /about       /about     301!
-# /contact     /contact   301!
-# /blog        /blog      301!
-# /blog/*      /blog/:splat 301!
-# /converter/* /converter/:splat 301!
-
-# Fallback SPA routing
+# SPA 兜底
 /*    /index.html   200
 
-# Specific redirects (if needed)
+# 如需额外定向，根据需求添加
 # /old-path    /new-path    301

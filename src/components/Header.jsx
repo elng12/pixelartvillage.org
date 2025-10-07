@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Avatar from './Avatar';
 import { useTranslation } from 'react-i18next';
 
@@ -35,10 +35,6 @@ function Header({ rightSlot }) {
     return () => observer.disconnect();
   }, []);
 
-  const params = useParams();
-  const rawLang = params.lang || 'en';
-  // 默认语言不使用 /en/ 前缀，直接根路径
-  const prefix = rawLang === 'en' ? '' : `/${rawLang}`;
   const location = useLocation();
   const isBlog = location.pathname.includes('/blog');
 
@@ -47,14 +43,14 @@ function Header({ rightSlot }) {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <div className="text-2xl font-bold text-gray-800">
-            <Link to={`${prefix}/`} aria-label="Pixel Art Village home">
+            <Link to="/" aria-label="Pixel Art Village home">
               Pixel Art Village
             </Link>
           </div>
           <div className="flex items-center gap-4">
             <nav className="hidden md:flex items-center space-x-8" aria-label="Main navigation">
               {NAV_LINKS.map((link) => {
-                const to = link.id ? `${prefix}/#${link.id}` : `${prefix}/${link.to}`
+                const to = link.id ? `/#${link.id}` : `/${link.to}/`;
                 return (
                   <Link
                     key={link.id || link.to}

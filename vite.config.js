@@ -33,8 +33,7 @@ export default defineConfig(({ mode }) => {
             'react-vendor': ['react', 'react-dom', 'react-router-dom'],
             // 将i18n相关库分离
             'i18n-vendor': ['react-i18next', 'i18next', 'i18next-http-backend'],
-            // 其他第三方库
-            'vendor': ['canvas-confetti', 'html2canvas', 'lucide-react'],
+            // 其他第三方库（当前暂无额外拆分）
           }
         }
       },
@@ -59,9 +58,7 @@ export default defineConfig(({ mode }) => {
         'react-router-dom',
         'react-i18next',
         'i18next',
-        'i18next-http-backend',
-        'canvas-confetti',
-        'html2canvas'
+        'i18next-http-backend'
       ]
     },
   }
