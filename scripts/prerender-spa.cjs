@@ -102,6 +102,13 @@ function ensureTrailingSlash(p) {
   return p.endsWith('/') ? p : `${p}/`
 }
 
+function injectVisibleContent(html, visible) {
+  if (!visible) return html
+  const placeholder = /<div id="root"><\/div>/
+  if (!placeholder.test(html)) return html
+  return html.replace(placeholder, `<div id="root">${visible}</div>`)
+}
+
 function escapeHtml(s) {
   return String(s || '')
     .replace(/&/g, '&amp;')
@@ -165,6 +172,36 @@ function prerender() {
       ? paragraphs.map((para) => `<p>${escapeHtml(para)}</p>`).join('')
       : ''
     return `<article><header><h2>${title}</h2>${date}${tags}</header>${body}</article>`
+  }
+
+  const renderBlogIndexVisible = (list = []) => {
+    if (!Array.isArray(list) || !list.length) return ''
+    const items = list
+      .map((item) => {
+        if (!item || !item.slug) return ''
+        const title = escapeHtml(item.title || '')
+        const date = item.date ? `<p class="text-xs text-gray-500 mt-1 text-left">${escapeHtml(item.date)}</p>` : ''
+        const excerpt = item.excerpt ? `<p class="text-gray-700 mt-2 text-left">${escapeHtml(item.excerpt)}</p>` : ''
+        return `<li class="p-4 rounded-lg border border-gray-200 bg-white shadow-sm"><h2 class="text-lg font-semibold text-gray-900 text-center"><a href="/blog/${escapeHtml(item.slug)}" class="hover:text-blue-600">${title}</a></h2>${date}${excerpt}</li>`
+      })
+      .filter(Boolean)
+      .join('')
+    if (!items) return ''
+    return `<div class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 mb-4 text-center">Blog</h1><p class="text-gray-700 mb-6 max-w-2xl mx-auto text-center">Articles and updates about making pixel image visuals, tutorials, and new features.</p><ul class="space-y-4 max-w-2xl mx-auto">${items}</ul></div>`
+  }
+
+  const renderBlogPostVisible = (post) => {
+    if (!post || !post.slug) return ''
+    const title = escapeHtml(post.title || '')
+    const date = post.date ? `<p class="text-xs text-gray-500 mt-1 text-center md:text-left">${escapeHtml(post.date)}</p>` : ''
+    const paragraphs = Array.isArray(post.body)
+      ? post.body
+          .filter((para) => typeof para === 'string')
+          .map((para) => `<p>${escapeHtml(para)}</p>`)
+          .join('')
+      : ''
+    const excerpt = post.excerpt ? `<p class="text-gray-700 mt-2 text-left">${escapeHtml(post.excerpt)}</p>` : ''
+    return `<article class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${title}</h1>${date}<div class="prose prose-sm md:prose-base text-gray-800 mt-4 text-center md:text-left prose-pre:text-left prose-code:text-left prose-img:mx-0">${paragraphs || excerpt}</div><footer class="mt-8 text-center md:text-left"><a class="text-blue-600 underline" href="/blog">Back to Blog</a></footer></article>`
   }
 
   let posts = []
@@ -243,7 +280,7 @@ function prerender() {
       { name: 'twitter:title', content: 'Blog | Pixel Art Village' },
       { name: 'twitter:description', content: 'Articles and updates about making pixel art, tips, and features.' },
       { name: 'twitter:image', content: ABS('/blog-og/_index.png') },
-    ], extras: blogIndexExtras },
+    ], extras: blogIndexExtras, visible: renderBlogIndexVisible(posts) },
   ]
 
   try {
@@ -290,6 +327,7 @@ function prerender() {
         { name: 'twitter:image', content: ABS(`/blog-og/${p.slug}.png`) },
       ],
       extras: renderBlogArticle(p),
+      visible: renderBlogPostVisible(p),
     })
   }
 
@@ -301,6 +339,7 @@ function prerender() {
     metas: r.metas,
     extras: r.extras || '',
     links: r.links || null,
+    visible: r.visible || '',
   }))
 
   for (const r of expanded) {
@@ -312,6 +351,10 @@ function prerender() {
       lang: r.lang,
       routePath: r.routePath,
     })
+
+    if (r.visible) {
+      out = injectVisibleContent(out, r.visible)
+    }
 
     const defaultLinks = [
       { href: ABS('/'), text: 'Home' },
