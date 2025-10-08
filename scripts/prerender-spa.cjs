@@ -134,6 +134,43 @@ function prerender() {
   const base = read(INDEX)
   const ABS = (p) => `https://pixelartvillage.org${p}`
 
+  const renderBlogIndex = (list = []) => {
+    if (!Array.isArray(list) || !list.length) return ''
+    const items = list
+      .map((item) => {
+        if (!item || !item.slug) return ''
+        const url = ABS(ensureTrailingSlash(`/blog/${item.slug}`))
+        const title = escapeHtml(item.title || '')
+        const date = item.date ? `<p class="date">${escapeHtml(item.date)}</p>` : ''
+        const excerpt = item.excerpt ? `<p class="excerpt">${escapeHtml(item.excerpt)}</p>` : ''
+        return `<li><a href="${url}">${title}</a>${date}${excerpt}</li>`
+      })
+      .filter(Boolean)
+      .join('')
+    if (!items) return ''
+    return `<section aria-label="Blog articles"><h2>Latest Posts</h2><ul>${items}</ul></section>`
+  }
+
+  const renderBlogArticle = (post) => {
+    if (!post) return ''
+    const title = escapeHtml(post.title || '')
+    const date = post.date ? `<p class="date">${escapeHtml(post.date)}</p>` : ''
+    const tags = Array.isArray(post.tags) && post.tags.length
+      ? `<ul class="tags">${post.tags.map((tag) => `<li>${escapeHtml(tag)}</li>`).join('')}</ul>`
+      : ''
+    const paragraphs = Array.isArray(post.body)
+      ? post.body.filter((para) => typeof para === 'string' && para.trim())
+      : []
+    const body = paragraphs.length
+      ? paragraphs.map((para) => `<p>${escapeHtml(para)}</p>`).join('')
+      : ''
+    return `<article><header><h2>${title}</h2>${date}${tags}</header>${body}</article>`
+  }
+
+  let posts = []
+  try { posts = require('../src/content/blog-posts.json') } catch {}
+  const blogIndexExtras = renderBlogIndex(posts)
+
   const routes = [
     { path: '/', title: 'Pixel Art Village: Image to Pixel Art Place Color Converter', metas: [
       { name: 'description', content: 'Free Image to Pixel Art Generator & Maker | Pixel Art Village. Drag/drop photo, live preview, palettes, dithering. Place color converter: Export PNGs online!' },
@@ -206,7 +243,7 @@ function prerender() {
       { name: 'twitter:title', content: 'Blog | Pixel Art Village' },
       { name: 'twitter:description', content: 'Articles and updates about making pixel art, tips, and features.' },
       { name: 'twitter:image', content: ABS('/blog-og/_index.png') },
-    ]},
+    ], extras: blogIndexExtras },
   ]
 
   try {
@@ -235,8 +272,6 @@ function prerender() {
     console.warn('[prerender] warn: cannot load pseo-pages.json', e && e.message)
   }
 
-  let posts = []
-  try { posts = require('../src/content/blog-posts.json') } catch {}
   for (const p of posts) {
     if (!p || !p.slug) continue
     routes.push({
@@ -254,6 +289,7 @@ function prerender() {
         { name: 'twitter:description', content: p.excerpt || '' },
         { name: 'twitter:image', content: ABS(`/blog-og/${p.slug}.png`) },
       ],
+      extras: renderBlogArticle(p),
     })
   }
 
@@ -263,6 +299,8 @@ function prerender() {
     routePath: r.path,
     title: r.title,
     metas: r.metas,
+    extras: r.extras || '',
+    links: r.links || null,
   }))
 
   for (const r of expanded) {
@@ -291,20 +329,24 @@ function prerender() {
       .replace(/\bpixel\b/gi, 'grid')
       .replace(/\bart\b/gi, 'design')
 
-    let extras = ''
+    let extras = r.extras || ''
+    const addExtras = (html) => {
+      extras = extras ? `${extras}${html}` : html
+    }
     const pathKey = (r.routePath || '/').toLowerCase()
     if (/^\/converter\//.test(pathKey)) {
-      extras = '<p>Palette control, palette limits, palette preview – manage palettes precisely.</p>' +
-               '<p>image workflow and image formats.</p>'
+      addExtras('<p>Palette control, palette limits, palette preview – manage palettes precisely.</p>')
+      addExtras('<p>image workflow and image formats.</p>')
     } else if (/^\/blog\//.test(pathKey)) {
-      extras = '<p>Tips on choosing the right palette, palette examples, and image handling for your style.</p>'
+      addExtras('<p>Tips on choosing the right palette, palette examples, and image handling for your style.</p>')
     } else if (/^\/(privacy|terms|about|contact)\//.test(pathKey)) {
-      extras = '<p>Reference palette guidelines for creators.</p>'
+      addExtras('<p>Reference palette guidelines for creators.</p>')
     } else if (r.path === '/') {
-      extras = '<p>Explore our palette overview and palette chooser for quick starts.</p>'
+      addExtras('<p>Explore our palette overview and palette chooser for quick starts.</p>')
     }
 
-    out = injectHiddenH1AndNav(out, { h1: h1Text, description: descMeta, links: defaultLinks, extras })
+    const navLinks = r.links && r.links.length ? r.links : defaultLinks
+    out = injectHiddenH1AndNav(out, { h1: h1Text, description: descMeta, links: navLinks, extras })
 
     const file = path.join(DIST, r.path.replace(/^\//, '').replace(/\/$/, ''), 'index.html')
     write(file, out)

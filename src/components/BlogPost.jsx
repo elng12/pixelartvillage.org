@@ -52,8 +52,10 @@ export default function BlogPost() {
         ))}
       </div>
 
-      <footer className="mt-8">
-  <Link className="text-blue-600 underline" to={`${prefix}/blog`}>← {t('blog.back')}</Link>
+      <footer className="mt-8 text-center md:text-left">
+        <Link className="text-blue-600 underline" to={`${prefix}/blog`}>
+          {t('blog.back')}
+        </Link>
       </footer>
     </article>
   )
