@@ -83,23 +83,53 @@
 
 @layer components {
   .btn-primary {
-    @apply px-4 py-2 bg-[var(--primary-color)] text-white rounded-lg hover:opacity-90 transition-opacity;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border-radius: 0.5rem;
+    transition: opacity 150ms ease-in-out;
+  }
+  .btn-primary:hover {
+    opacity: 0.9;
   }
 
   .btn-secondary {
-    @apply px-4 py-2 border border-[var(--border-color)] bg-white text-[var(--text-primary)] rounded-lg hover:bg-gray-50 transition-colors;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    background-color: #ffffff;
+    color: var(--text-primary);
+    border-radius: 0.5rem;
+    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+  }
+  .btn-secondary:hover {
+    background-color: #f9fafb;
   }
 
   .upload-zone {
-    @apply border-2 border-dashed border-[var(--border-color)] rounded-lg p-8 text-center hover:border-[var(--primary-color)] transition-colors cursor-pointer;
+    border: 2px dashed var(--border-color);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+  }
+  .upload-zone:hover {
+    border-color: var(--primary-color);
   }
 
   .demo-card {
-    @apply bg-white rounded-lg shadow-sm border border-[var(--border-color)] overflow-hidden;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
   }
 
   .control-panel {
-    @apply bg-white rounded-lg border border-[var(--border-color)] p-4;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    padding: 1rem;
   }
 
   /* 像素网格装饰背景（替代内联样式） */
