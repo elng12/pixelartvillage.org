@@ -50,6 +50,7 @@
     "clickToChoose": "kliknij, aby wybrać",
     "supports": "Obsługuje PNG, JPG, GIF — do 10MB",
     "chooseFile": "Wybierz plik",
+    "preparing": "Przygotowywanie obrazu…",
     "ariaUpload": "Prześlij obraz (przeciągnij i upuść lub kliknij, aby wybrać)",
     "ariaChoose": "Wybierz plik obrazu"
   },

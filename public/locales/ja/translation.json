@@ -49,6 +49,7 @@
     "clickToChoose": "クリックして選択",
     "supports": "PNG / JPG / GIF 対応 — 最大 10MB",
     "chooseFile": "ファイルを選択",
+    "preparing": "画像を準備しています…",
     "ariaUpload": "画像をアップロード（ドラッグ&ドロップまたはクリックで選択）",
     "ariaChoose": "画像ファイルを選択"
   },

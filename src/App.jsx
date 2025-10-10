@@ -63,6 +63,15 @@ function useLangRouting() {
 
 function App() {
   const [uploadedImage, setUploadedImage] = useState(null);
+  useEffect(() => {
+    if (import.meta?.env?.DEV) {
+      const status = typeof uploadedImage === 'string'
+        ? `blob:${uploadedImage.slice(0, 20)}`
+        : uploadedImage === null ? 'null' : typeof uploadedImage;
+      // eslint-disable-next-line no-console
+      console.log('[App] uploadedImage changed:', status);
+    }
+  }, [uploadedImage]);
 
   // 兜底释放通过 URL.createObjectURL 生成的临时资源
   useEffect(() => {
@@ -94,7 +103,10 @@ function App() {
         <Suspense fallback={<div className="container mx-auto px-4 py-10 text-sm text-gray-600" role="status">Loading…</div>}>
           <Routes>
             {/* 根路径与无语言路径（规范路径） */}
-            <Route path="/" element={<Home uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />} />
+            <Route path="/" element={<Home uploadedImage={uploadedImage} setUploadedImage={(url) => {
+              console.log('[App] setUploadedImage called with:', url);
+              setUploadedImage(url);
+            }} />} />
             <Route path="privacy" element={<PrivacyPolicy />} />
             <Route path="terms" element={<TermsOfService />} />
             <Route path="about" element={<About />} />

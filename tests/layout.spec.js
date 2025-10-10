@@ -38,7 +38,7 @@ test.beforeEach(async ({ page }, _testInfo) => {
   });
 });
 
-test.afterEach(async (_, testInfo) => {
+test.afterEach(async ({}, testInfo) => {
   try {
     const outConsole = testInfo.outputPath('browser-console.json');
     const outRequests = testInfo.outputPath('network-requests.json');

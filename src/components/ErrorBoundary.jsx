@@ -30,12 +30,17 @@ class ErrorBoundary extends React.Component {
       } catch { /* ignore */ }
       const isUseContextCrash = /useContext|Cannot read properties of null/i.test(errMsg || '')
       const buildId = (typeof __BUILD_ID__ !== 'undefined') ? __BUILD_ID__ : ''
+      // 暂时禁用自动刷新以避免文件上传时的页面刷新问题
       const hardRefresh = () => {
-        try {
-          const u = new URL(window.location.href)
-          u.searchParams.set('_r', String(Date.now()))
-          window.location.replace(u.toString())
-        } catch { window.location.reload() }
+        console.log('ErrorBoundary: 自动刷新已禁用，避免文件上传问题')
+        // 在开发环境中不自动刷新，只记录错误
+        if (!import.meta?.env?.DEV) {
+          try {
+            const u = new URL(window.location.href)
+            u.searchParams.set('_r', String(Date.now()))
+            window.location.replace(u.toString())
+          } catch { window.location.reload() }
+        }
       }
       return (
         <div role="alert" className="p-4 m-4 border rounded bg-red-50 text-red-700 text-sm">
