@@ -1,25 +1,31 @@
 # Netlify redirects file
-# Canonical SPA routing（仅英文版）
+# 优化的重定向配置 - 减少不必要的重定向
 
-# 旧的语言前缀主页统一重定向到英文规范路径
+# 1. 语言首页重定向 - 只保留必要的语言代码
 /en    /   301!
 /es    /   301!
-/id    /   301!
+/fr    /   301!
 /de    /   301!
-/pl    /   301!
 /it    /   301!
 /pt    /   301!
-/fr    /   301!
-/ru    /   301!
-/fil   /   301!
-/vi    /   301!
 /ja    /   301!
 
-# 任意语言前缀路径（含子路径）去掉前缀后指向规范 URL
-/:lang/*   /:splat   301!
+# 2. 语言子路径重定向 - 避免循环重定向
+/:lang/converter/*   /converter/:splat   301!
+/:lang/blog/*        /blog/:splat        301!
+/:lang/privacy       /privacy            301!
+/:lang/terms         /terms              301!
+/:lang/about         /about              301!
+/:lang/contact       /contact            301!
 
-# SPA 兜底
+# 3. SPA 兜底 - 只在必要时使用
 /*    /index.html   200
 
-# 如需额外定向，根据需求添加
-# /old-path    /new-path    301
+# 4. 静态资源优化 - 避免SPA路由干扰
+/assets/*   /assets/:splat   200
+/*.js       /:splat          200
+/*.css      /:splat          200
+/*.png      /:splat          200
+/*.jpg      /:splat          200
+/*.svg      /:splat          200
+/*.webp     /:splat          200

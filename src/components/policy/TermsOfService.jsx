@@ -29,8 +29,8 @@ export default function TermsOfService() {
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: 'Terms of Service | Pixel Art Village' },
-          { property: 'og:description', content: 'Pixel Art Village terms of service: usage rules, responsibilities, disclaimer, IP, governing law, contact info.' },
+          { property: 'og:title', content: 'Terms of Service | Image to Pixel Art Converter' },
+        { property: 'og:description', content: 'Terms of service for our image to pixel art converter: usage rules, responsibilities, disclaimer, IP, governing law, contact info.' },
           { property: 'og:image', content: 'https://pixelartvillage.org/social-terms.png' },
           { property: 'og:site_name', content: 'Pixel Art Village' },
           { name: 'twitter:card', content: 'summary_large_image' },

@@ -141,8 +141,8 @@ export default function BlogPost() {
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'article' },
-          { property: 'og:title', content: `${post.title} | Pixel Art Village` },
-          { property: 'og:description', content: post.excerpt },
+          { property: 'og:title', content: `${post.title} | Image to Pixel Art Converter` },
+        { property: 'og:description', content: post.excerpt },
           { name: 'twitter:card', content: 'summary' },
           { name: 'twitter:title', content: `${post.title} | Pixel Art Village` },
           { name: 'twitter:description', content: post.excerpt },

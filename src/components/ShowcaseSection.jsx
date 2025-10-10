@@ -8,7 +8,7 @@ function ShowcaseSection() {
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">{t('showcase.title')}</h2>
         <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
-          {t('showcase.desc')} <strong className="text-blue-600">Pixel Art Village</strong>.
+          {t('showcase.desc')} See how our image to pixel art converter transforms your photos into crisp pixel art.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-6 md:gap-x-8 items-center">
           <div className="text-center">

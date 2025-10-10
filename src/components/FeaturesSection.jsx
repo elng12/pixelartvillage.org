@@ -26,7 +26,7 @@ export default function FeaturesSection() {
               <div>
                 <h3 className="text-lg md:text-xl font-semibold text-gray-900">Palette control</h3>
                 <p className="mt-2 text-gray-600 leading-relaxed">
-                  Pixel Art Village gives precise palette control. Choose built-in retro palettes or auto-extract tones from your image, then lock, reorder, and fine-tune hues to match your style. With Pixel Art Village, consistent palettes keep sprites readable, game-ready, and easy to reuse across projects.
+                  Our image to pixel art converter gives precise palette control. Choose built-in retro palettes or auto-extract tones from your image, then lock, reorder, and fine-tune hues to match your style. With consistent palettes, your image to pixel art conversions keep sprites readable, game-ready, and easy to reuse across projects.
                 </p>
               </div>
             </div>
@@ -39,7 +39,7 @@ export default function FeaturesSection() {
               <div>
                 <h3 className="text-lg md:text-xl font-semibold text-gray-900">Live adjustments</h3>
                 <p className="mt-2 text-gray-600 leading-relaxed">
-                  Tweak pixel size, dithering, contrast, and brightness while results update instantly. In Pixel Art Village, side-by-side changes appear with no lag, so you can compare options and settle on the perfect look faster. Live preview reduces guesswork and keeps outcomes predictable on every export.
+                  Tweak pixel size, dithering, contrast, and brightness while your image to pixel art results update instantly. Side-by-side changes appear with no lag, so you can compare options and settle on the perfect look faster. Live preview reduces guesswork and keeps your image to pixel art conversions predictable on every export.
                 </p>
               </div>
             </div>

@@ -5,13 +5,49 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# 优化的重定向规则 - 避免循环重定向
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  conditions = {Role = ["admin"]}
+  from = "/en/*"
+  to = "/:splat"
+  status = 301
 
-# Handle SPA routing
+[[redirects]]
+  from = "/es/*"
+  to = "/:splat"
+  status = 301
+  
+[[redirects]]
+  from = "/fr/*"
+  to = "/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/de/*"
+  to = "/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/it/*"
+  to = "/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/pt/*"
+  to = "/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/ja/*"
+  to = "/:splat"
+  status = 301
+
+# 静态资源直接服务，不重定向
+[[redirects]]
+  from = "/assets/*"
+  to = "/assets/:splat"
+  status = 200
+
+# SPA 兜底 - 只在必要时使用
 [[redirects]]
   from = "/*"
   to = "/index.html"

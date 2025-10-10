@@ -22,8 +22,8 @@ export default function About() {
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: 'About | Pixel Art Village' },
-          { property: 'og:description', content: 'About Pixel Art Village: a free, browser‑based pixel art maker & converter. Privacy‑first, fast, and accessible tool for creating retro game graphics.' },
+          { property: 'og:title', content: 'About | Image to Pixel Art Converter' },
+        { property: 'og:description', content: 'About our image to pixel art converter: a free, browser‑based tool for creating retro game graphics. Privacy‑first, fast, and accessible pixel art maker.' },
           { property: 'og:image', content: 'https://pixelartvillage.org/social-about.png' },
           { property: 'og:site_name', content: 'Pixel Art Village' },
           { name: 'twitter:card', content: 'summary_large_image' },

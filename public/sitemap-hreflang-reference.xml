@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 非规范URL参考站点地图（仅供开发参考，不要提交给搜索引擎） -->
-<!-- 生成时间: 2025-10-10T03:46:23.328Z -->
-<!-- URL总数: 198 (包含非规范版本) -->
+<!-- 生成时间: 2025-10-10T12:19:47.919Z -->
+<!-- URL总数: 220 (包含非规范版本) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pixelartvillage.org/es/</loc>
@@ -461,6 +461,138 @@
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/blog/how-to-pixelate-an-image/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/es/blog/export-from-illustrator-image-to-pixel-art/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/id/blog/export-from-illustrator-image-to-pixel-art/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/de/blog/export-from-illustrator-image-to-pixel-art/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/pl/blog/export-from-illustrator-image-to-pixel-art/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/it/blog/export-from-illustrator-image-to-pixel-art/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/pt/blog/export-from-illustrator-image-to-pixel-art/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/fr/blog/export-from-illustrator-image-to-pixel-art/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/ru/blog/export-from-illustrator-image-to-pixel-art/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/fil/blog/export-from-illustrator-image-to-pixel-art/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/vi/blog/export-from-illustrator-image-to-pixel-art/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/ja/blog/export-from-illustrator-image-to-pixel-art/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/es/blog/make-image-more-like-pixel/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/id/blog/make-image-more-like-pixel/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/de/blog/make-image-more-like-pixel/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/pl/blog/make-image-more-like-pixel/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/it/blog/make-image-more-like-pixel/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/pt/blog/make-image-more-like-pixel/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/fr/blog/make-image-more-like-pixel/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/ru/blog/make-image-more-like-pixel/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/fil/blog/make-image-more-like-pixel/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/vi/blog/make-image-more-like-pixel/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/ja/blog/make-image-more-like-pixel/</loc>
     <lastmod>2025-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>

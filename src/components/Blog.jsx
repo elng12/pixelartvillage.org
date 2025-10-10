@@ -19,8 +19,8 @@ export default function Blog() {
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: `${t('blog.title')} | Pixel Art Village` },
-          { property: 'og:description', content: t('blog.subtitle') },
+          { property: 'og:title', content: `${t('blog.title')} | Image to Pixel Art Converter` },
+        { property: 'og:description', content: t('blog.subtitle') },
           { name: 'twitter:card', content: 'summary' },
           { name: 'twitter:title', content: `${t('blog.title')} | Pixel Art Village` },
           { name: 'twitter:description', content: t('blog.subtitle') },

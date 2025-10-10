@@ -29,8 +29,8 @@ export default function PrivacyPolicy() {
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: 'Privacy Policy | Pixel Art Village' },
-          { property: 'og:description', content: 'Pixel Art Village privacy policy: local image processing, AdSense cookies, third‑party partners, your choices and rights, contact info.' },
+          { property: 'og:title', content: 'Privacy Policy | Image to Pixel Art Converter' },
+        { property: 'og:description', content: 'Privacy policy for our image to pixel art converter: local image processing, AdSense cookies, third‑party partners, your choices and rights, contact info.' },
           { property: 'og:image', content: 'https://pixelartvillage.org/social-privacy.png' },
           { property: 'og:site_name', content: 'Pixel Art Village' },
           { name: 'twitter:card', content: 'summary_large_image' },

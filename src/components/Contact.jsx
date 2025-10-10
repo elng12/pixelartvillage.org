@@ -22,8 +22,8 @@ export default function Contact() {
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: 'Contact | Pixel Art Village' },
-          { property: 'og:description', content: 'Contact Pixel Art Village for support, feedback, partnerships, and feature requests. Get help with our pixel art converter tool.' },
+          { property: 'og:title', content: 'Contact | Image to Pixel Art Converter' },
+        { property: 'og:description', content: 'Contact us for support with our image to pixel art converter, feedback, partnerships, and feature requests. Get help with our pixel art converter tool.' },
           { property: 'og:image', content: 'https://pixelartvillage.org/social-contact.png' },
           { property: 'og:site_name', content: 'Pixel Art Village' },
           { name: 'twitter:card', content: 'summary_large_image' },

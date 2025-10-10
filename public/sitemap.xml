@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 优化站点地图：只包含规范URL，避免重复内容问题 -->
-<!-- 生成时间: 2025-10-10T03:46:23.323Z -->
-<!-- URL总数: 18 (规范版本) -->
+<!-- 生成时间: 2025-10-10T12:19:47.913Z -->
+<!-- URL总数: 20 (规范版本) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pixelartvillage.org/</loc>
@@ -41,6 +41,18 @@
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/how-to-pixelate-an-image/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/blog/export-from-illustrator-image-to-pixel-art/</loc>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/blog/make-image-more-like-pixel/</loc>
     <lastmod>2025-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

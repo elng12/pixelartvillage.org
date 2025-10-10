@@ -32,8 +32,8 @@ function Home({ uploadedImage, setUploadedImage }) {
   return (
     <Fragment>
       <Seo
-        title="Pixel Art Village: Image to Pixel Art Place Color Converter"
-        description="Pixelate photos in your browser – convert PNG/JPG into crisp, grid-friendly pixel art. Adjust pixel size and palettes with instant preview, then export clean results for sprites, icons, or retro game graphics. Fast, private, and free."
+        title="Image to Pixel Art Converter | Free Online Tool"
+        description="Convert images to pixel art with Pixel Art Village – transform PNG/JPG into crisp, grid-friendly pixel art. Adjust pixel size and palettes with instant preview, then export clean results for sprites, icons, or retro game graphics. Fast, private, and free."
         canonical={canonical}
         hreflang={hreflangLinks}
         lang="en"
