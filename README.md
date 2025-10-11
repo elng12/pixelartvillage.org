@@ -101,3 +101,5 @@ Pixel Art Village 是一个免费、完全在浏览器中运行的在线工具�
 
 - Build (includes prerender + OG image generation): `npm run build`
 - Verify production artifacts (SEO checks): `npm run verify:dist`
+
+chore: trigger pages deploy 2025-10-11T10:40:07.0107952+08:00
