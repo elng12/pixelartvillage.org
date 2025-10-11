@@ -1,125 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 优化站点地图：只包含规范URL，避免重复内容问题 -->
-<!-- 生成时间: 2025-10-10T12:19:47.913Z -->
+<!-- 生成时间: 2025-10-11T01:38:46.004Z -->
 <!-- URL总数: 20 (规范版本) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pixelartvillage.org/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/privacy/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/terms/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/about/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/contact/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/png-to-pixel-art/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/image-to-pixel-art/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/gif-to-pixel-art/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/webp-to-pixel-art/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/photo-to-pixel-art/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/pixelate-image-online/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/8-bit-art-generator/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2025-10-10</lastmod>
+    <lastmod>2025-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
