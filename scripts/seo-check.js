@@ -55,7 +55,7 @@ function runSeoCheck() {
     // Check HTML content
     () => checkFileContent(
       path.join(process.cwd(), 'index.html'),
-      /<title>[\s\S]*?Pixel Art Village: Image to Pixel Art Place Color Converter[\s\S]*?<\/title>/,
+      /<title>[\s\S]*?Image to Pixel Art Converter \| Pixel Art Village[\s\S]*?<\/title>/,
       'Title tag in index.html'
     ),
     () => checkFileContent(
