@@ -1,6 +1,5 @@
 # Netlify redirects file
 # 优化的重定向配置 - 减少不必要的重定向
-
 # 1. 语言首页重定向 - 只保留必要的语言代码
 /en    /   301!
 /es    /   301!
@@ -18,10 +17,7 @@
 /:lang/about         /about              301!
 /:lang/contact       /contact            301!
 
-# 3. SPA 兜底 - 只在必要时使用
-/*    /index.html   200
-
-# 4. 静态资源优化 - 避免SPA路由干扰
+# 3. 静态资源优先 - 避免 SPA 路由干扰
 /assets/*   /assets/:splat   200
 /*.js       /:splat          200
 /*.css      /:splat          200
@@ -29,3 +25,6 @@
 /*.jpg      /:splat          200
 /*.svg      /:splat          200
 /*.webp     /:splat          200
+
+# 4. SPA 兜底 - 只在必要时使用
+/*    /index.html   200
