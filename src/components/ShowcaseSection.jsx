@@ -1,5 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import showcaseBefore480Webp from '@/assets/generated/showcase-before-w480.webp';
+import showcaseBefore800Webp from '@/assets/generated/showcase-before-w800.webp';
+import showcaseBefore1200Webp from '@/assets/generated/showcase-before-w1200.webp';
+import showcaseBefore480Jpg from '@/assets/generated/showcase-before-w480.jpg';
+import showcaseBefore800Jpg from '@/assets/generated/showcase-before-w800.jpg';
+import showcaseBefore1200Jpg from '@/assets/generated/showcase-before-w1200.jpg';
+import showcaseAfter480Webp from '@/assets/generated/showcase-after-w480.webp';
+import showcaseAfter800Webp from '@/assets/generated/showcase-after-w800.webp';
+import showcaseAfter1200Webp from '@/assets/generated/showcase-after-w1200.webp';
+import showcaseAfter480Jpg from '@/assets/generated/showcase-after-w480.jpg';
+import showcaseAfter800Jpg from '@/assets/generated/showcase-after-w800.jpg';
+import showcaseAfter1200Jpg from '@/assets/generated/showcase-after-w1200.jpg';
 
 function ShowcaseSection() {
   const { t } = useTranslation();
@@ -16,12 +28,12 @@ function ShowcaseSection() {
             <picture>
               <source
                 type="image/webp"
-                srcSet="/showcase-before-w480.webp 480w, /showcase-before-w800.webp 800w, /showcase-before-w1200.webp 1200w"
+                srcSet={`${showcaseBefore480Webp} 480w, ${showcaseBefore800Webp} 800w, ${showcaseBefore1200Webp} 1200w`}
                 sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
               />
               <img
-                src="/showcase-before-w1200.jpg"
-                srcSet="/showcase-before-w480.jpg 480w, /showcase-before-w800.jpg 800w, /showcase-before-w1200.jpg 1200w"
+                src={showcaseBefore1200Jpg}
+                srcSet={`${showcaseBefore480Jpg} 480w, ${showcaseBefore800Jpg} 800w, ${showcaseBefore1200Jpg} 1200w`}
                 sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 600px"
                 alt={t('showcase.alt.before')}
                 loading="lazy"
@@ -37,12 +49,12 @@ function ShowcaseSection() {
             <picture>
               <source
                 type="image/webp"
-                srcSet="/showcase-after-w480.webp 480w, /showcase-after-w800.webp 800w, /showcase-after-w1200.webp 1200w"
+                srcSet={`${showcaseAfter480Webp} 480w, ${showcaseAfter800Webp} 800w, ${showcaseAfter1200Webp} 1200w`}
                 sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
               />
               <img
-                src="/showcase-after-w1200.jpg"
-                srcSet="/showcase-after-w480.jpg 480w, /showcase-after-w800.jpg 800w, /showcase-after-w1200.jpg 1200w"
+                src={showcaseAfter1200Jpg}
+                srcSet={`${showcaseAfter480Jpg} 480w, ${showcaseAfter800Jpg} 800w, ${showcaseAfter1200Jpg} 1200w`}
                 sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 600px"
                 alt={t('showcase.alt.after')}
                 loading="lazy"

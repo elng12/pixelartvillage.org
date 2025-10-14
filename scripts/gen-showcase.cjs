@@ -17,6 +17,9 @@ const inputs = [
   },
 ];
 
+const GENERATED_DIR = path.join(ROOT, 'src', 'assets', 'generated');
+fs.mkdirSync(GENERATED_DIR, { recursive: true });
+
 function log(msg) { console.log(`[showcase] ${msg}`); }
 function exists(p) { try { fs.accessSync(p, fs.constants.F_OK); return true; } catch { return false; } }
 
@@ -37,16 +40,34 @@ function exists(p) { try { fs.accessSync(p, fs.constants.F_OK); return true; } c
     const sizes = [1200, 800, 480];
     try {
       for (const w of sizes) {
+        const basename = path.basename(item.base);
+        const webpName = `${basename}-w${w}.webp`;
+        const jpgName = `${basename}-w${w}.jpg`;
         const webpPath = path.join(ROOT, `${item.base}-w${w}.webp`);
         const jpgPath = path.join(ROOT, `${item.base}-w${w}.jpg`);
-        await sharp(inputBuffer).resize(w, null, { fit: 'inside', withoutEnlargement: false }).webp({ quality: 85 }).toFile(webpPath);
-        await sharp(inputBuffer).resize(w, null, { fit: 'inside', withoutEnlargement: false }).jpeg({ quality: 88 }).toFile(jpgPath);
+        const genWebpPath = path.join(GENERATED_DIR, webpName);
+        const genJpgPath = path.join(GENERATED_DIR, jpgName);
+
+        await sharp(inputBuffer)
+          .resize(w, null, { fit: 'inside', withoutEnlargement: false })
+          .webp({ quality: 85 })
+          .toFile(webpPath);
+        await sharp(inputBuffer)
+          .resize(w, null, { fit: 'inside', withoutEnlargement: false })
+          .jpeg({ quality: 88 })
+          .toFile(jpgPath);
+
+        fs.copyFileSync(webpPath, genWebpPath);
+        fs.copyFileSync(jpgPath, genJpgPath);
       }
       // keep default aliases for 1200w for backward compatibility
       const aliasWebp = path.join(ROOT, `${item.base}.webp`);
       const aliasJpg = path.join(ROOT, `${item.base}.jpg`);
       fs.copyFileSync(path.join(ROOT, `${item.base}-w1200.webp`), aliasWebp);
       fs.copyFileSync(path.join(ROOT, `${item.base}-w1200.jpg`), aliasJpg);
+      const basename = path.basename(item.base);
+      fs.copyFileSync(path.join(ROOT, `${item.base}-w1200.webp`), path.join(GENERATED_DIR, `${basename}.webp`));
+      fs.copyFileSync(path.join(ROOT, `${item.base}-w1200.jpg`), path.join(GENERATED_DIR, `${basename}.jpg`));
       log(`generated multi-size webp/jpg for ${path.basename(item.base)}`);
     } catch (err) {
       log('error: ' + (err?.message || String(err)));
