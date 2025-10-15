@@ -5,13 +5,35 @@ import { initReactI18next } from 'react-i18next'
 import HttpBackend from 'i18next-http-backend'
 import enBundle from '@/locales/en.json'
 
-const BASE_LANGS = ['en']
-// 保留扩展点：允许通过 VITE_ENABLE_PSEUDO=1 启用伪本地化，但默认仅提供英文版本
-export const SUPPORTED_LANGS = (() => {
+const DEFAULT_LANGS = ['en']
+
+function parseConfiguredLangs() {
   try {
-    if (import.meta?.env?.VITE_ENABLE_PSEUDO) return [...BASE_LANGS, 'pseudo']
+    const raw = import.meta?.env?.VITE_LANGS
+    if (!raw || typeof raw !== 'string') return []
+    const normalized = raw
+      .split(',')
+      .map((token) => token.trim().toLowerCase())
+      .filter(Boolean)
+      .map((token) => token.replace(/[^a-z-]/g, ''))
+      .filter(Boolean)
+    return Array.from(new Set(normalized))
+  } catch {
+    return []
+  }
+}
+
+// 保留扩展点：通过 VITE_LANGS 指定额外语言，默认仅提供英文版本；
+// VITE_ENABLE_PSEUDO=1 可附加伪本地化，用于开发验证。
+export const SUPPORTED_LANGS = (() => {
+  const fromEnv = parseConfiguredLangs()
+  const base = fromEnv.length ? fromEnv : DEFAULT_LANGS
+  const unique = Array.from(new Set(base))
+  if (!unique.includes('en')) unique.unshift('en')
+  try {
+    if (import.meta?.env?.VITE_ENABLE_PSEUDO) unique.push('pseudo')
   } catch { /* noop */ }
-  return BASE_LANGS
+  return Array.from(new Set(unique))
 })()
 
 const STORAGE_KEY = 'pv_lang'

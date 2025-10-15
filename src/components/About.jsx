@@ -39,7 +39,7 @@ export default function About() {
         <p>{t('about.p3')}</p>
         <p>
           Try our <Link to={`${prefix}/`} className="text-blue-600 underline">pixel art converter</Link> tool
-          or explore our <Link to={`${prefix}/blog`} className="text-blue-600 underline">blog</Link> for tips and tutorials.
+          or explore our <Link to={`${prefix}/blog/`} className="text-blue-600 underline">blog</Link> for tips and tutorials.
         </p>
         <p>
           Our specialized converters include <Link to={`${prefix}/converter/png-to-pixel-art/`} className="text-blue-600 underline">PNG to pixel art</Link>,
@@ -58,8 +58,8 @@ export default function About() {
           {' '}<a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com" title="Email Pixel Art Village">2296744453m@gmail.com</a>.
         </p>
         <p>
-          For more information, see our <Link to={`${prefix}/privacy`} className="text-blue-600 underline">privacy policy</Link> and
-          <Link to={`${prefix}/terms`} className="text-blue-600 underline"> terms of service</Link>.
+          For more information, see our <Link to={`${prefix}/privacy/`} className="text-blue-600 underline">privacy policy</Link> and
+          <Link to={`${prefix}/terms/`} className="text-blue-600 underline"> terms of service</Link>.
         </p>
       </div>
     </div>

@@ -16,12 +16,12 @@ export function generateHreflangLinks(basePath) {
   const canonicalHref = `https://pixelartvillage.org${canonicalPath}`
 
   const hreflangLinks = []
+  const runtimeLangs = SUPPORTED_LANGS.filter((lang) => lang && lang !== 'pseudo')
+  const uniqueLangs = Array.from(new Set(runtimeLangs))
 
-  // 为所有支持的语言生成hreflang链接
-  SUPPORTED_LANGS.forEach(lang => {
+  uniqueLangs.forEach((lang) => {
     const localizedPath = lang === 'en' ? canonicalPath : `/${lang}${canonicalPath}`
-    const localizedHref = `https://pixelartvillage.org${localizedPath}`
-    hreflangLinks.push({ hreflang: lang, href: localizedHref })
+    hreflangLinks.push({ hreflang: lang, href: `https://pixelartvillage.org${localizedPath}` })
   })
 
   // 添加x-default指向英文版本（canonical版本）

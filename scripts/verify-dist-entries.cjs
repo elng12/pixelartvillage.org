@@ -49,18 +49,25 @@ for (const f of REQUIRED_FILES) {
 });
 
 // -------- Route SEO checks --------
-function readHtml(p) {
-  if (!fs.existsSync(p)) { fail(`route file missing: ${path.relative(DIST, p)}`); return null }
-  return fs.readFileSync(p, 'utf8');
+function resolveRouteFile(routePath, lang = 'en') {
+  const normalized = routePath.replace(/^\//, '');
+  const candidates = [path.join(DIST, normalized, 'index.html')];
+  if (lang) candidates.push(path.join(DIST, lang, normalized, 'index.html'));
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) return candidate;
+  }
+  const hint = lang ? `${lang}/${normalized}` : normalized;
+  fail(`route file missing: ${hint}/index.html`);
+  return null;
 }
 
 function find(re, html) { const m = re.exec(html); return m && m[1] ? m[1] : null }
 
-// 默认校验英文版路由（与 prerender 输出一致：dist/en/...）
+// 默认校验英文版路由；若 dist 根目录存在同名页面，则优先使用根目录
 function verifyRoute(routePath, lang = 'en') {
-  const localized = path.join(lang, routePath.replace(/^\//, ''));
-  const file = path.join(DIST, localized, 'index.html');
-  const html = readHtml(file);
+  const file = resolveRouteFile(routePath, lang);
+  if (!file) return;
+  const html = fs.readFileSync(file, 'utf8');
   if (!html) return;
   const title = find(/<title>\s*([^<]+)\s<\/title>/i, html) || find(/<title>\s*([^<]+)<\/title>/i, html);
   if (!title) fail(`${routePath}: missing <title>`); else ok(`${routePath}: title OK`);
@@ -122,8 +129,8 @@ ROUTES.forEach((r) => verifyRoute(r, 'en'));
 // Extra: verify blog index has image meta
 try {
   verifyRoute('/blog', 'en');
-  const blogIndex = path.join(DIST, 'en', 'blog', 'index.html');
-  const html = readHtml(blogIndex);
+  const blogIndex = resolveRouteFile('/blog', 'en');
+  const html = blogIndex ? fs.readFileSync(blogIndex, 'utf8') : null;
   if (html) {
     const ogImage = /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["'][^>]*>/i.exec(html);
     const twImage = /<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["'][^>]*>/i.exec(html);

@@ -61,7 +61,7 @@ export default function ConsentBanner() {
           <p className="text-sm text-gray-800 font-medium">{t('consent.title')}</p>
           <p className="mt-1 text-sm text-gray-600">
             {t('consent.desc')}
-            {' '}<Link className="text-blue-600 underline" to={`${prefix}/privacy`}>{t('consent.privacy')}</Link> {t('consent.andManage')}
+            {' '}<Link className="text-blue-600 underline" to={`${prefix}/privacy/`}>{t('consent.privacy')}</Link> {t('consent.andManage')}
             {' '}<a className="text-blue-600 underline" href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">adssettings.google.com</a>.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">

@@ -41,9 +41,9 @@ export default function Contact() {
           <li>{t('contact.emailLabel')} <a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com" title="Email Pixel Art Village">2296744453m@gmail.com</a></li>
         </ul>
         <p>
-          Before contacting us, you might find answers in our <Link to={`${prefix}/blog`} className="text-blue-600 underline">blog</Link> or
+          Before contacting us, you might find answers in our <Link to={`${prefix}/blog/`} className="text-blue-600 underline">blog</Link> or
           visit our <Link to={`${prefix}/`} className="text-blue-600 underline">pixel art converter tool</Link> to get started.
-          Also check our <Link to={`${prefix}/about`} className="text-blue-600 underline">about page</Link> for more information.
+          Also check our <Link to={`${prefix}/about/`} className="text-blue-600 underline">about page</Link> for more information.
         </p>
         <p>
           For specific converter help, try our <Link to={`${prefix}/converter/png-to-pixel-art/`} className="text-blue-600 underline">PNG to pixel art</Link> or
