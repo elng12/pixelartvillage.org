@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 优化站点地图：只包含规范URL，避免重复内容问题 -->
-<!-- 生成时间: 2025-10-30T03:01:29.273Z -->
-<!-- URL总数: 21 (规范版本) -->
+<!-- 生成时间: 2025-10-30T05:22:39.634Z -->
+<!-- URL总数: 22 (规范版本) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pixelartvillage.org/</loc>
@@ -59,6 +59,12 @@
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/how-to-get-pixel-art-version-of-image/</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/blog/best-pixel-art-converters-compared-2025/</loc>
     <lastmod>2025-10-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

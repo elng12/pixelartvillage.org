@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 非规范URL参考站点地图（仅供开发参考，不要提交给搜索引擎） -->
-<!-- 生成时间: 2025-10-30T03:01:29.277Z -->
-<!-- URL总数: 231 (包含非规范版本) -->
+<!-- 生成时间: 2025-10-30T05:22:39.638Z -->
+<!-- URL总数: 242 (包含非规范版本) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pixelartvillage.org/es/</loc>
@@ -659,6 +659,72 @@
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/blog/how-to-get-pixel-art-version-of-image/</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/es/blog/best-pixel-art-converters-compared-2025/</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/id/blog/best-pixel-art-converters-compared-2025/</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/de/blog/best-pixel-art-converters-compared-2025/</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/it/blog/best-pixel-art-converters-compared-2025/</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/pt/blog/best-pixel-art-converters-compared-2025/</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/fr/blog/best-pixel-art-converters-compared-2025/</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/ru/blog/best-pixel-art-converters-compared-2025/</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/fil/blog/best-pixel-art-converters-compared-2025/</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/vi/blog/best-pixel-art-converters-compared-2025/</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://pixelartvillage.org/ja/blog/best-pixel-art-converters-compared-2025/</loc>
     <lastmod>2025-10-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
