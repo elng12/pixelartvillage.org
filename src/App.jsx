@@ -10,6 +10,7 @@ const WplaceFeaturesSection = lazy(() => import('./components/WplaceFeaturesSect
 const FeaturesSection = lazy(() => import('./components/FeaturesSection'));
 const HowItWorksSection = lazy(() => import('./components/HowItWorksSection'));
 const FaqSection = lazy(() => import('./components/FaqSection'));
+const RelatedLinks = lazy(() => import('./components/RelatedLinks'));
 const Footer = lazy(() => import('./components/Footer'));
 import ScrollManager from './components/ScrollManager';
 import CompatNotice from '@/components/CompatNotice.jsx';
@@ -33,7 +34,7 @@ function Home({ uploadedImage, setUploadedImage }) {
     <Fragment>
       <Seo
         title="Image to Pixel Art Converter | Pixel Art Village"
-        description="Convert PNG or JPG into crisp pixel art with instant preview, palette controls, and private in-browser processing from Pixel Art Village."
+        description="Free image to pixel art converter online. Transform any photo into retro 8-bit graphics with custom palettes, instant preview, and 100% private browser-based processing. No signup required."
         canonical={canonical}
         hreflang={hreflangLinks}
         lang="en"
@@ -46,6 +47,7 @@ function Home({ uploadedImage, setUploadedImage }) {
       <FeaturesSection />
       <HowItWorksSection />
       <FaqSection />
+      <RelatedLinks currentPath="/" />
     </Fragment>
   );
 }

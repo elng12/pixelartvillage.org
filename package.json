@@ -24,6 +24,7 @@
     "seo:density": "node scripts/kw-density-check.js",
     "seo:phrases": "node scripts/phrase-density-analysis.js",
     "seo:verify-ranking": "node scripts/verify-target-ranking.js",
+    "seo:monitor": "node scripts/seo-monitor.cjs",
     "i18n:check": "node scripts/i18n-check.js",
     "i18n:pseudo": "node scripts/gen-pseudo-locale.js",
     "seo:kw": "node scripts/kw-density-check.js",
