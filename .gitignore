@@ -40,6 +40,8 @@ public/pseo-og/*.png
 .artifacts/
 
 data/
+# Exception: allow src/data/lospec-palettes.json
+!src/data/lospec-palettes.json
 tmp/
 *.zip
 pixelartvillage.org-Coverage-*/
