@@ -46,6 +46,17 @@ export default function LanguageSwitcherFixed() {
   const navigate = useNavigate()
   const params = useParams()
 
+  // Debug: 检查语言切换器状态
+  React.useEffect(() => {
+    if (import.meta?.env?.DEV) {
+      console.log('[LanguageSwitcherFixed] Component mounted');
+      console.log('[LanguageSwitcherFixed] RUNTIME_LANGS:', RUNTIME_LANGS);
+      console.log('[LanguageSwitcherFixed] Current language:', currentLang);
+      console.log('[LanguageSwitcherFixed] Location:', location.pathname);
+      console.log('[LanguageSwitcherFixed] Translation available:', !!i18n.getResourceBundle(currentLang, 'translation'));
+    }
+  }, [currentLang, location.pathname]);
+
   const currentLang = useMemo(() => {
     if (params.lang && RUNTIME_LANGS.includes(params.lang)) {
       return params.lang
@@ -130,7 +141,10 @@ export default function LanguageSwitcherFixed() {
   )
 
   return (
-    <div className="language-switcher inline-flex items-center gap-2 text-sm text-gray-600">
+    <div className="language-switcher inline-flex items-center gap-2 text-sm text-gray-600" style={{ display: 'inline-flex !important', visibility: 'visible !important', border: '2px solid red', padding: '8px' }}>
+      {/* 临时调试标签 */}
+      <span style={{ color: 'red', fontWeight: 'bold' }}>LANG:</span>
+
       <label htmlFor="language-select" className="sr-only">
         {t('lang.label')}
       </label>
@@ -140,6 +154,7 @@ export default function LanguageSwitcherFixed() {
         value={currentLang}
         onChange={onChange}
         className="px-2 py-1 rounded-md border border-gray-300 bg-white text-gray-800 hover:border-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 text-sm"
+        style={{ display: 'block !important', visibility: 'visible !important' }}
         data-build={typeof __BUILD_ID__ !== 'undefined' ? __BUILD_ID__ : 'dev'}
       >
         {RUNTIME_LANGS.map((lang) => (
