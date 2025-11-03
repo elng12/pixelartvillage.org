@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Switcher Test</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .debug-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .language-switcher {
+            display: inline-flex !important;
+            visibility: visible !important;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .language-switcher select {
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            display: block !important;
+            visibility: visible !important;
+        }
+        .test-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .hidden-test {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌍 Language Switcher Debug Test</h1>
+
+    <div class="test-container">
+        <h2>Component Visibility Test</h2>
+        <p>Testing if language switcher components are properly rendered and visible.</p>
+
+        <div class="debug-section">
+            <h3>Static Test (Always Visible)</h3>
+            <div class="language-switcher">
+                <span>LANG:</span>
+                <select>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="de">Deutsch</option>
+                    <option value="fr">Français</option>
+                    <option value="ja">日本語</option>
+                </select>
+            </div>
+            <p><strong>If you can see this dropdown with red border, the CSS is working.</strong></p>
+        </div>
+
+        <div class="debug-section">
+            <h3>Browser Info</h3>
+            <p><strong>Current URL:</strong> <span id="current-url"></span></p>
+            <p><strong>User Agent:</strong> <span id="user-agent"></span></p>
+            <p><strong>Language:</strong> <span id="browser-lang"></span></p>
+        </div>
+
+        <div class="debug-section">
+            <h3>Quick Tests</h3>
+            <button class="test-button" onclick="testLocalStorage()">Test LocalStorage</button>
+            <button class="test-button" onclick="testI18n()">Test i18n Files</button>
+            <button class="test-button" onclick="checkCSS()">Check CSS</button>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>🔧 Troubleshooting Steps</h2>
+        <ol>
+            <li><strong>Check if you can see the red bordered dropdown above</strong></li>
+            <li>Open browser DevTools (F12)</li>
+            <li>Go to Console tab and check for any JavaScript errors</li>
+            <li>Go to Elements tab and search for "language-switcher"</li>
+            <li>Check if there are any CSS rules hiding the element</li>
+        </ol>
+    </div>
+
+    <script>
+        // Display browser info
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('user-agent').textContent = navigator.userAgent.substring(0, 100) + '...';
+        document.getElementById('browser-lang').textContent = navigator.language;
+
+        // Test functions
+        function testLocalStorage() {
+            try {
+                localStorage.setItem('test', 'working');
+                const value = localStorage.getItem('test');
+                alert('✅ LocalStorage is working: ' + value);
+                localStorage.removeItem('test');
+            } catch (error) {
+                alert('❌ LocalStorage error: ' + error.message);
+            }
+        }
+
+        function testI18n() {
+            fetch('/locales/en/translation.json')
+                .then(response => response.json())
+                .then(data => {
+                    alert('✅ i18n files loaded successfully\nKeys: ' + Object.keys(data).length);
+                })
+                .catch(error => {
+                    alert('❌ i18n file error: ' + error.message);
+                });
+        }
+
+        function checkCSS() {
+            const testElement = document.querySelector('.language-switcher');
+            if (testElement) {
+                const styles = window.getComputedStyle(testElement);
+                alert('✅ CSS Test Results:\n' +
+                      'Display: ' + styles.display + '\n' +
+                      'Visibility: ' + styles.visibility + '\n' +
+                      'Position: ' + styles.position);
+            } else {
+                alert('❌ Could not find language-switcher element');
+            }
+        }
+
+        // Console log for debugging
+        console.log('Language Switcher Debug Test Page Loaded');
+        console.log('Current URL:', window.location.href);
+        console.log('Looking for language-switcher element...');
+
+        setTimeout(() => {
+            const elements = document.querySelectorAll('.language-switcher');
+            console.log('Found language-switcher elements:', elements.length);
+            elements.forEach((el, index) => {
+                console.log(`Element ${index}:`, el);
+            });
+        }, 100);
+    </script>
+</body>
+</html>

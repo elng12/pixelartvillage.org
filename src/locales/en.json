@@ -106,7 +106,16 @@
     "orClick": "o haz clic para seleccionar",
     "convertButton": "Convertir a Arte Píxel",
     "processing": "Procesando imagen...",
-    "converted": "Imagen convertida exitosamente"
+    "converted": "Imagen convertida exitosamente",
+    "dropZone": "Drop zone",
+    "downloadButton": "Download image",
+    "resetButton": "New image",
+    "pixelSize": "Pixel size",
+    "colorPalette": "Color palette",
+    "dithering": "Dithering",
+    "preview": "Preview",
+    "original": "Original",
+    "result": "Result"
   },
   "upload": {
     "selected": "Selected file: {{name}}"
@@ -263,7 +272,11 @@
     "realTimePreview": "Vista Previa en Tiempo Real",
     "realTimePreviewDesc": "Ve los cambios instantáneamente mientras ajustas la configuración",
     "multipleFormats": "Múltiples Formatos",
-    "multipleFormatsDesc": "Compatible con PNG, JPG, GIF, BMP y formatos de imagen WebP"
+    "multipleFormatsDesc": "Compatible con PNG, JPG, GIF, BMP y formatos de imagen WebP",
+    "highQuality": "High Quality",
+    "highQualityDesc": "Export high-quality images perfect for your project",
+    "easyToUse": "Easy to Use",
+    "easyToUseDesc": "Intuitive interface designed for artists and developers"
   },
   "how": {
     "title": "How pixel art Village works",
