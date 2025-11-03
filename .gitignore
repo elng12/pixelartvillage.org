@@ -43,3 +43,10 @@ data/
 tmp/
 *.zip
 pixelartvillage.org-Coverage-*/
+# Environment variables
+.env
+# Cache directories  
+.npm-cache/
+# Local settings
+.claude/settings.local.json
+
