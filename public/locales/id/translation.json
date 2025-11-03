@@ -1,26 +1,61 @@
 {
-  "nav": {"examples": "Contoh", "features": "Fitur", "how": "Cara kerja", "faq": "FAQ", "blog": "Blog", "home": "Beranda", "about": "Tentang", "contact": "Kontak"},
-  "navTitle": {
-    "hero": "Scroll to Home hero section",
-    "examples": "Scroll to Pixel Art Examples",
-    "features": "Scroll to Pixel Art Features",
-    "how": "Scroll to How Pixel Art Converter Works",
-    "faq": "Scroll to Pixel Art FAQ",
-    "blog": "Open Pixel Art Blog"
+  "nav": {
+    "examples": "Contoh",
+    "features": "Fitur",
+    "how": "Cara kerja",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "home": "Beranda",
+    "about": "Tentang",
+    "contact": "Kontak"
   },
-  "cta": {"start": "Mulai sekarang"},
-  "site": {"tagline": "Generator pixel art online • pembuat • konverter"},
+  "common": {
+    "loading": "Memuat...",
+    "error": "Kesalahan",
+    "success": "Berhasil",
+    "failed": "Gagal",
+    "imageFailedToLoad": "Gambar gagal dimuat",
+    "imageUnavailable": "Gambar tidak tersedia",
+    "lastUpdated": "Terakhir diperbarui: {{date}}"
+  },
+  "navTitle": {
+    "hero": "Gulir ke bagian hero beranda",
+    "examples": "Gulir ke Contoh Seni Piksel",
+    "features": "Gulir ke Fitur Pixel Art",
+    "how": "Gulir ke Cara Kerja Pixel Art Converter",
+    "faq": "Gulir ke Pixel Art FAQ",
+    "blog": "Blog Pixel Art Terbuka"
+  },
+  "cta": {
+    "start": "Mulai sekarang"
+  },
+  "site": {
+    "tagline": "Pembuat pixel art online • pembuat • konverter",
+    "name": "Pixel Art Village",
+    "homeLinkAria": "Pixel Art Village Beranda"
+  },
   "footer": {
-    "tools": "Alat", "formats": "Format", "explore": "Jelajahi", "community": "Komunitas",
-    "terms": "Ketentuan", "privacy": "Privasi", "about": "Tentang", "contact": "Kontak",
+    "tools": "Alat",
+    "formats": "Format",
+    "explore": "Jelajahi",
+    "community": "Komunitas",
+    "terms": "Ketentuan",
+    "privacy": "Privasi",
+    "about": "Tentang",
+    "contact": "Kontak",
+    "github": "GitHub",
+    "cta": {
+      "ariaStart": "Mulai mengubah gambar menjadi pixel art di pixel art Village"
+    },
+    "copy": "© {{year}} Desa pixel art. Semua hak cipta dilindungi.",
     "links": {
-      "generator": "Generator pixel art",
+      "generator": "Generator seni pixel",
       "converter": "Konverter pixel art",
       "imageToPixel": "Gambar ke pixel art",
       "makePixelArt": "Buat pixel art",
       "png2pixel": "PNG ke pixel art",
       "jpg2pixel": "JPG ke pixel art",
-      "img2pixel": "IMG ke pixel art",
+      "img2pixel": "IMG ke seni pixel",
       "gridPreview": "Pratinjau kisi piksel",
       "how": "Cara kerja",
       "start": "Mulai di pixel art Village",
@@ -32,167 +67,543 @@
     "title": "Blog",
     "subtitle": "Artikel dan pembaruan tentang membuat pixel art, tutorial, dan fitur baru.",
     "back": "Kembali ke Blog",
-    "notFound": {"title": "Posting tidak ditemukan", "desc": "Artikel yang Anda cari tidak ada. Kembali ke"}
+    "notFound": {
+      "title": "Post not found",
+      "desc": "Artikel yang Anda cari tidak ada. Kembali ke"
+    }
   },
   "consent": {
     "title": "Privasi & Cookie",
-    "desc": "Kami menggunakan cookie untuk menjalankan situs ini dan, jika diaktifkan, menampilkan iklan Google AdSense. Anda dapat menerima atau menolak cookie non-esensial kapan saja.",
+    "desc": "We use cookies to run this site and, if enabled, display Google AdSense ads. You can accept or reject non-essential cookies at any time.",
     "privacy": "Kebijakan Privasi",
     "andManage": "dan kelola personalisasi iklan di",
     "accept": "Terima semua",
-    "reject": "Tolak non-esensial"
-  }
-  ,
+    "reject": "Tolak non-esensial",
+    "bannerLabel": "Dialog persetujuan cookie",
+    "acceptLabel": "Terima semua kuki",
+    "rejectLabel": "Tolak cookie yang tidak penting"
+  },
   "tool": {
     "title": "Pembuat & konverter pixel art online",
+    "subtitle2": "ukuran piksel yang dapat disesuaikan dan palet khusus. Sempurna untuk sprite, ikon, dan seni permainan retro dengan opsi palet lanjutan.",
     "subtitle": "Pixelasikan gambar di browser — ubah PNG/JPG menjadi pixel art bersih ramah‑grid. Atur ukuran piksel dan palet dengan pratinjau instan, lalu ekspor hasil tajam untuk sprite, ikon, atau grafis retro. Cepat, privat, dan gratis dengan pixel art Village.",
     "dragOrClick": "Seret gambar Anda ke sini atau",
-    "clickToChoose": "klik untuk memilih",
+    "clickToChoose": "click to select",
     "supports": "Mendukung PNG, JPG, GIF — hingga 10MB",
     "chooseFile": "Pilih berkas",
     "preparing": "Menyiapkan gambar…",
     "ariaUpload": "Unggah gambar (seret & lepas atau klik untuk memilih)",
-    "ariaChoose": "Pilih berkas gambar"
+    "ariaChoose": "Pilih berkas gambar",
+    "dragDrop": "Drag and drop image here",
+    "orClick": "or click to choose",
+    "convertButton": "Convert to Pixel Art",
+    "processing": "Processing...",
+    "converted": "Successfully converted"
   },
-  "upload": {"selected": "Berkas dipilih: {{name}}"},
+  "upload": {
+    "selected": "Berkas dipilih: {{name}}"
+  },
   "errors": {
     "fileTooLarge10": "Berkas terlalu besar. Unggah gambar < 10MB.",
     "prepareFail": "Gagal menyiapkan gambar. Coba berkas lain.",
     "onlyPngJpg": "Pilih gambar PNG atau JPG.",
     "maxFile": "Berkas terlalu besar. Batas maksimum: {{mb}}MB."
   },
-  "editor": {"title": "Pembuat pixel art online"}
-  ,
+  "editor": {
+    "title": "Pembuat seni pixel online",
+    "downloadBtn": "Unduh Pixel Art Gambar",
+    "uploadBtn": "Unggah Gambar",
+    "section": {
+      "general": "Umum ▾"
+    }
+  },
+  "adjustments": {
+    "reset": {
+      "title": "Reset Penggeser",
+      "all": "Reset Semua",
+      "tooltip": "Reset Ukuran Piksel / Kecerahan / Kontras / Saturasi",
+      "pixelSizeBtnTitle": "Atur Ulang Ukuran Pixel",
+      "brightnessBtnTitle": "Setel Ulang Kecerahan",
+      "contrastBtnTitle": "Setel Ulang Kontras",
+      "saturationBtnTitle": "Reset Saturasi"
+    },
+    "pixelSize": "Ukuran Piksel: {{value}}",
+    "section": {
+      "color": "Penyesuaian Warna"
+    },
+    "brightness": "Kecerahan: {{value}}",
+    "contrast": "Kontras: {{value}}",
+    "saturation": "Saturasi: {{value}}",
+    "palette": {
+      "label": "Palet",
+      "none": "Tidak ada",
+      "custom": "Kustom",
+      "note": "Pico‑8 adalah palet yang tetap. Nama lain tanpa warna palet internal akan menghasilkan palet secara otomatis berdasarkan ukurnya (contoh: Sunset 8 → 8 warna palet palet)."
+    },
+    "colorDistance": {
+      "label": "Jarak warna",
+      "rgb": "RGB (cepat)",
+      "lab": "LAB (akurat, lebih lambat)"
+    },
+    "autoPalette": "Generate palet dari gambar",
+    "paletteSize": "# Palet Palet Warna: {{value}}",
+    "dither": "Aktifkan dithering (Floyd–Steinberg)",
+    "zoom": "Zoom: {{value}}x",
+    "grid": "Tampilkan kisi"
+  },
+  "export": {
+    "label": {
+      "format": "Format ekspor",
+      "size": "Ukuran ekspor"
+    },
+    "option": {
+      "png": "PNG (lossless)",
+      "jpeg": "JPEG",
+      "webp": "WebP"
+    },
+    "size": {
+      "xs": "XS (0.5×)",
+      "sm": "Kecil (1×)",
+      "lg": "Besar (2×)",
+      "xl": "XL (4×)"
+    },
+    "transparent": {
+      "label": "Latar belakang transparan (PNG/WebP)"
+    },
+    "quality": {
+      "label": "Kualitas: {{percent}}%"
+    }
+  },
+  "notFound": {
+    "seoTitle": "Halaman Tidak Ditemukan | Pixel Art Village",
+    "title": "Halaman tidak ditemukan",
+    "desc": "Halaman yang Anda cari tidak ada atau telah dipindahkan. Kembali ke Pixel Art Village untuk terus membuat pixel art yang menakjubkan.",
+    "backHome": "← Kembali ke Pixel Art Village",
+    "popularPages": "Atau coba halaman populer ini:",
+    "links": {
+      "home": "Beranda",
+      "pngConverter": "Konverter PNG ke pixel art",
+      "jpgConverter": "Konverter JPG ke pixel art",
+      "about": "Tentang kami"
+    }
+  },
+  "pseo": {
+    "notFound": {
+      "seoTitle": "Halaman tidak ditemukan | pixel art Desa",
+      "title": "Page not found",
+      "desc": "Halaman konverter yang Anda cari tidak ada."
+    },
+    "relatedHeading": "Konverter Pixel Art Terkait",
+    "siteNavigationTitle": "Navigasi Situs"
+  },
+  "showcase": {
+    "title": "Dari Gambar ke Piksel: Lihat Kemampuan Pemroses Gambar Kami",
+    "desc": "Dengan",
+    "before": "Sebelum",
+    "after": "Setelah",
+    "alt": {
+      "before": "Gambar asli sebelum konversi ke pixel art",
+      "after": "Gambar pemandangan yang dikonversi menjadi pixel art bergaya 8-bit oleh generator pixel art Village"
+    },
+    "descFull": "Lihat bagaimana konverter gambar ke pixel art kami mengubah foto Anda menjadi pixel art yang jernih."
+  },
+  "lang": {
+    "label": "Bahasa"
+  },
+  "wplace": {
+    "title": "Alat Sempurna untuk Pengguna Pixel Art Village",
+    "desc": "Kawan utama untuk pixel art Village — mengubah gambar apa pun menjadi visual pixel yang bersih dengan pratinjau waktu nyata, palet pintar, dan ekspor instan. Buat pixel art dengan alat gambar kami.",
+    "features": {
+      "free": {
+        "title": "100% Gratis",
+        "desc": "Sepenuhnya gratis untuk semua orang. Tanpa biaya tersembunyi atau langganan — buat visual piksel tanpa batas dari gambar apa pun."
+      },
+      "privacy": {
+        "title": "Privasi Terdepan",
+        "desc": "Semua pemrosesan terjadi di browser Anda. Gambar Anda tidak pernah meninggalkan perangkat Anda — alur kerja yang privat dan aman secara desain."
+      },
+      "easy": {
+        "title": "Mudah untuk Semua Pemain",
+        "desc": "Antarmuka yang intuitif dan umpan balik cepat. Mengubah gambar apa pun menjadi visual piksel yang dapat dilukis hanya dalam beberapa klik dengan opsi palet kustom."
+      },
+      "size": {
+        "title": "Tanpa Batasan Ukuran",
+        "desc": "Unggah gambar dengan ukuran apa pun — dari ikon kecil hingga grafik besar — dengan penskalaan yang halus dan pratinjau gambar responsif menggunakan palet lanjutan."
+      }
+    }
+  },
+  "features": {
+    "title": "Konverter Gambar ke Pixel dengan Palet Khusus",
+    "desc": "Ubah gambar menjadi karya seni yang pixel‑sempurna. Menyetel detail secara langsung dengan palet khusus dan kontrol sampel warna. Pratinjau instan dan ekspor PNG yang siap sprite.",
+    "palette": {
+      "title": "Palet kontrol",
+      "desc": "Our image to pixel art converter gives precise palette control. Choose built-in retro palettes or auto-extract tones from your image, then lock, reorder, and fine-tune hues to match your style. With consistent palettes, your image to pixel art conversions keep sprites readable, game-ready, and easy to reuse across projects."
+    },
+    "live": {
+      "title": "Penyesuaian Langsung",
+      "desc": "Tweak pixel size, dithering, contrast, and brightness while your image to pixel art results update instantly. Side-by-side changes appear with no lag, so you can compare options and settle on the perfect look faster. Live preview reduces guesswork and keeps your image to pixel art conversions predictable on every export."
+    },
+    "clientSide": {
+      "title": "100% di sisi klien",
+      "desc": "Semua konversi berjalan 100% di sisi klien di browser Anda. Gambar tidak pernah meninggalkan perangkat Anda, dan build offline dimungkinkan, menjaga aset tetap privat dan aman. Pixel Art Village melindungi pekerjaan Anda sambil memberikan pemrosesan yang cepat dan aman di desktop dan seluler. Dengan Pixel Art Village Anda tetap memiliki kontrol dari pratinjau pertama hingga ekspor akhir."
+    },
+    "customPalettes": "Custom Palettes",
+    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
+    "realTimePreview": "Real-time Preview",
+    "realTimePreviewDesc": "See changes instantly as you adjust settings",
+    "multipleFormats": "Multiple Formats",
+    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+  },
   "how": {
-    "title": "Cara kerja pixel art Village",
+    "title": "Cara kerja pixel art Desa",
     "desc": "Buat pixel art dalam tiga langkah sederhana.",
     "steps": {
       "upload": "Unggah",
-      "adjust": "Sesuaikan",
+      "adjust": "Adjust",
       "download": "Unduh",
       "upload.desc": "Pilih atau seret gambar (PNG, JPG) ke pixelizer gambar.",
       "adjust.desc": "Sesuaikan ukuran piksel, palet, dan kisi piksel secara langsung.",
       "download.desc": "Ekspor dengan sekali klik dari generator pixel art dan bagikan."
     }
-  }
-,
-  "massivePhrases": {
-    "phrases1_1": "Convert image to pixel art online",
-    "phrases1_2": "Transform image to pixel art instantly",
-    "phrases1_3": "Turn image to pixel art with ease",
-    "phrases1_4": "Change image to pixel art format",
-    "phrases1_5": "Process image to pixel art style",
-    "phrases1_6": "Edit image to pixel art quickly",
-    "phrases1_7": "Make image to pixel art conversion",
-    "phrases1_8": "Create image to pixel art result",
-    "phrases1_9": "Generate image to pixel art output",
-    "phrases1_10": "Produce image to pixel art design",
-    "phrases2_1": "Create pixel art image from photo",
-    "phrases2_2": "Generate pixel art image online",
-    "phrases2_3": "Make pixel art image quickly",
-    "phrases2_4": "Build pixel art image easily",
-    "phrases2_5": "Design pixel art image professionally",
-    "phrases2_6": "Craft pixel art image perfectly",
-    "phrases2_7": "Produce pixel art image instantly",
-    "phrases2_8": "Develop pixel art image efficiently",
-    "phrases2_9": "Form pixel art image beautifully",
-    "phrases2_10": "Construct pixel art image smoothly",
-    "phrases3_1": "Convert image to format",
-    "phrases3_2": "Transform image to style",
-    "phrases3_3": "Turn image to design",
-    "phrases3_4": "Change image to type",
-    "phrases3_5": "Process image to result",
-    "phrases3_6": "Edit image to output",
-    "phrases3_7": "Make image to creation",
-    "phrases3_8": "Create image to artwork",
-    "phrases3_9": "Generate image to graphic",
-    "phrases3_10": "Produce image to visual",
-    "phrases3_11": "Develop image to picture",
-    "phrases3_12": "Form image to illustration",
-    "phrases3_13": "Build image to composition",
-    "phrases3_14": "Design image to masterpiece",
-    "phrases3_15": "Craft image to creation",
-    "phrases4_1": "Adjust pixel size setting",
-    "phrases4_2": "Control pixel size option",
-    "phrases4_3": "Change pixel size value",
-    "phrases4_4": "Set pixel size parameter",
-    "phrases4_5": "Modify pixel size dimension",
-    "phrases4_6": "Configure pixel size property",
-    "phrases4_7": "Customize pixel size feature",
-    "phrases4_8": "Define pixel size measurement",
-    "phrases4_9": "Specify pixel size requirement",
-    "phrases4_10": "Determine pixel size standard",
-    "phrases4_11": "Establish pixel size guideline",
-    "phrases4_12": "Fix pixel size resolution",
-    "phrases4_13": "Select pixel size preference",
-    "phrases4_14": "Choose pixel size configuration",
-    "phrases5_1": "Process the image file",
-    "phrases5_2": "Edit the image content",
-    "phrases5_3": "Transform the image data",
-    "phrases5_4": "Convert the image format",
-    "phrases5_5": "Modify the image properties",
-    "phrases5_6": "Adjust the image settings",
-    "phrases5_7": "Enhance the image quality",
-    "phrases5_8": "Improve the image appearance",
-    "phrases5_9": "Optimize the image output",
-    "phrases5_10": "Refine the image details",
-    "phrases5_11": "Perfect the image result",
-    "phrases5_12": "Polish the image finish",
-    "phrases5_13": "Upgrade the image standard",
-    "phrases5_14": "Boost the image performance",
-    "phrases6_1": "Create art image masterpiece",
-    "phrases6_2": "Generate art image design",
-    "phrases6_3": "Make art image creation",
-    "phrases6_4": "Build art image artwork",
-    "phrases6_5": "Produce art image visual",
-    "phrases6_6": "Develop art image graphic",
-    "phrases6_7": "Form art image illustration",
-    "phrases6_8": "Craft art image composition",
-    "phrases6_9": "Design art image project",
-    "phrases6_10": "Construct art image piece",
-    "phrases7_1": "Customize the palette colors",
-    "phrases7_2": "Adjust the palette settings",
-    "phrases7_3": "Control the palette options",
-    "phrases7_4": "Modify the palette configuration",
-    "phrases7_5": "Configure the palette properties",
-    "phrases7_6": "Set the palette parameters",
-    "phrases7_7": "Define the palette scheme",
-    "phrases7_8": "Choose the palette selection",
-    "phrases7_9": "Select the palette combination",
-    "phrases7_10": "Determine the palette arrangement",
-    "phrases8_1": "Convert to pixel format",
-    "phrases8_2": "Transform to pixel style",
-    "phrases8_3": "Change to pixel design",
-    "phrases8_4": "Turn to pixel art",
-    "phrases8_5": "Switch to pixel mode",
-    "phrases8_6": "Shift to pixel type",
-    "phrases8_7": "Move to pixel version",
-    "phrases8_8": "Adapt to pixel standard",
-    "phrases8_9": "Adjust to pixel specification",
-    "phrases8_10": "Modify to pixel requirement",
-    "phrases9_1": "Edit the pixel details",
-    "phrases9_2": "Adjust the pixel properties",
-    "phrases9_3": "Control the pixel settings",
-    "phrases9_4": "Modify the pixel attributes",
-    "phrases9_5": "Configure the pixel parameters",
-    "phrases9_6": "Set the pixel values",
-    "phrases9_7": "Define the pixel characteristics",
-    "phrases9_8": "Specify the pixel features",
-    "phrases9_9": "Determine the pixel qualities",
-    "phrases9_10": "Establish the pixel standards",
-    "phrases10_1": "Convert to pixel art style",
-    "phrases10_2": "Transform to pixel art format",
-    "phrases10_3": "Change to pixel art design",
-    "phrases10_4": "Turn to pixel art version",
-    "phrases10_5": "Switch to pixel art mode",
-    "phrases10_6": "Shift to pixel art type",
-    "phrases10_7": "Move to pixel art standard",
-    "phrases11_1": "Convert image to pixel format",
-    "phrases11_2": "Transform image to pixel style",
-    "phrases11_3": "Change image to pixel design",
-    "phrases11_4": "Turn image to pixel version",
-    "phrases11_5": "Process image to pixel mode",
-    "phrases11_6": "Edit image to pixel type",
-    "phrases11_7": "Make image to pixel standard"
+  },
+  "privacy": {
+    "h1": "Kebijakan Privasi",
+    "sections": {
+      "overview": {
+        "title": "Ikhtisar",
+        "p1": "pixel art Village respects your privacy. This policy explains what data we process, how we use cookies (including Google AdSense cookies), and your choices. If you have questions, please contact us via the email on the Contact page."
+      },
+      "local": {
+        "title": "Pemrosesan Gambar Lokal",
+        "p1": "Gambar Anda tidak pernah meninggalkan perangkat Anda. Semua обработка gambar terjadi secara lokal di браузер Anda. Kami tidak mengunggah, menyimpan, atau berbagi file gambar Anda di server kami."
+      },
+      "collect": {
+        "title": "Informasi yang Kami Kumpulkan",
+        "li1": "Data teknis untuk operasi situs (misalnya, informasi perangkat/peramban dasar) yang diperlukan untuk menyediakan layanan.",
+        "li2": "Data penggunaan secara agregat untuk meningkatkan fitur (jika analitik diaktifkan, kami menghindari pengumpulan informasi yang dapat mengidentifikasi pribadi).",
+        "li3": "Data iklan dari Google AdSense (lihat di bawah) jika iklan ditampilkan.",
+        "p2": "Kami tidak mengharuskan pendaftaran akun. Kami tidak mengumpulkan data pribadi sensitif dengan sengaja."
+      },
+      "cookies": {
+        "title": "Cookies and AdSense",
+        "p1": "We may use cookies and similar technologies to operate the website and improve your experience. If Google AdSense is enabled, Google and its partners may use cookies to serve ads based on your visits to this and other sites.",
+        "learn": "Pelajari cara Google menggunakan informasi dari situs atau aplikasi yang menggunakan Google layanan:",
+        "manage": "Kelola personalisasi iklan:",
+        "more": "Selamat Google iklan dan kuki:"
+      },
+      "third": {
+        "title": "Mitra Pihak Ketiga",
+        "p1": "We may integrate third‑party services (e.g., Google AdSense). These partners may process data under their own privacy policies. We encourage you to review their policies to understand data handling practices."
+      },
+      "use": {
+        "title": "Penggunaan dan Pembagian Data",
+        "li1": "Memberikan dan mempertahankan layanan.",
+        "li2": "Jaga integritas layanan, deteksi penyalahgunaan, dan tingkatkan fitur.",
+        "li3": "Patuhi kewajiban hukum. Kami tidak menjual data pribadi."
+      },
+      "rights": {
+        "title": "Pilihan dan Hak Anda",
+        "li1": "Berhenti mengikuti atau kelola personalisasi iklan menggunakan tautan di atas.",
+        "li2": "Kelola kuki melalui pengaturan browser Anda.",
+        "li3": "Hubungi kami untuk menggunakan hak privasi yang berlaku (akses, perbaikan, penghapusan sesuai hukum)."
+      },
+      "children": {
+        "title": "Privasi Anak",
+        "p1": "Layanan tidak ditujukan untuk anak di bawah 13 tahun (atau usia yang disyaratkan oleh hukum setempat). Kami tidak mengumpulkan informasi pribadi dari anak-anak."
+      },
+      "changes": {
+        "title": "Perubahan pada Kebijakan ini",
+        "p1": "We may update this policy from time to time. Material changes will be highlighted on this page with an updated date. Your continued use of the site indicates acceptance of the updated policy."
+      },
+      "contact": {
+        "title": "Kontak",
+        "p1": "Untuk pertanyaan privasi, silakan lihat halaman Kontak.",
+        "emailTitle": "Email Pixel Art Village tentang privasi"
+      }
+    },
+    "seoTitle": "Kebijakan Privasi | pixel art Desa",
+    "seoDesc": "kebijakan privasi pixel art Village: pemrosesan gambar lokal, cookie AdSense, mitra pihak ketiga, pilihan dan hak Anda, info kontak.",
+    "meta": {
+      "ogTitle": "Kebijakan Privasi | Konverter Gambar ke Pixel Art",
+      "ogDescription": "Kebijakan privasi untuk konverter gambar ke pixel art: pemrosesan gambar lokal, cookie AdSense, mitra pihak ketiga, pilihan dan hak Anda, info kontak.",
+      "twitterTitle": "Kebijakan Privasi | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village kebijakan privasi: pemrosesan gambar lokal, cookie AdSense, mitra pihak ketiga, pilihan dan hak Anda, informasi kontak."
+    },
+    "quickLinks": {
+      "heading": "Tautan Cepat",
+      "mainSite": "Situs Utama",
+      "popularConverters": "Konverter Populer",
+      "links": {
+        "home": "Konverter Pixel Art",
+        "about": "Tentang Kami",
+        "contact": "Kontak",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "terms": {
+    "h1": "Syarat dan Ketentuan",
+    "sections": {
+      "acceptance": {
+        "title": "Penerimaan Syarat dan Ketentuan",
+        "p1": "Dengan mengakses atau menggunakan pixel art Village (Layanan), Anda setuju untuk terikat oleh Ketentuan ini. Jika Anda tidak setuju, jangan gunakan Layanan."
+      },
+      "use": {
+        "title": "Penggunaan Layanan",
+        "li1": "Unggah hanya konten yang Anda berhak gunakan. Anda bertanggung jawab atas konten dan kepatuhan Anda terhadap hukum yang berlaku.",
+        "li2": "Jangan menyalahgunakan, mengganggu, atau merusak Layanan atau pengguna lain.",
+        "li3": "Jangan gunakan Layanan untuk aktivitas illegal, berbahaya, atau melanggar hak cipta."
+      },
+      "ip": {
+        "title": "Kekayaan Intelektual",
+        "p1": "Kami mempertahankan semua hak atas Layanan dan materi terkait. Anda mempertahankan hak atas upload asli dan output yang dihasilkan, terutama hak-hak yang berlaku dan hak pihak ketiga."
+      },
+      "processing": {
+        "title": "Pengolahan Gambar",
+        "p1": "Pemrosesan gambar dilakukan secara lokal di browser Anda. Kami tidak menyimpan gambar yang Anda unggah di server kami."
+      },
+      "disclaimer": {
+        "title": "Penafian Jaminan",
+        "p1": "Layanan disediakan “sebagaimana adanya” dan “sesuai ketersediaan” tanpa jaminan apapun, baik yang tegas maupun tersirat. Kami tidak menjamin bahwa Layanan akan berkelanjutan atau bebas dari kesalahan."
+      },
+      "liability": {
+        "title": "Pembatasan Tanggung Jawab",
+        "p1": "To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from or related to your use of the Service."
+      },
+      "changes": {
+        "title": "Perubahan Layanan atau Ketentuan",
+        "p1": "Kami dapat mengubah atau menghentikan Layanan dan memperbarui Ketentuan ini kapan saja. Penggunaan Layanan yang berkelanjutan merupakan penerimaan terhadap Ketentuan yang diperbarui."
+      },
+      "law": {
+        "title": "Hukum yang Mengatur",
+        "p1": "These Terms are governed by applicable laws in your jurisdiction to the extent not preempted by other laws. Venue and jurisdiction will follow applicable conflict of laws rules."
+      },
+      "contact": {
+        "title": "Kontak",
+        "p1": "Untuk pertanyaan mengenai Syarat dan Ketentuan ini, silakan lihat halaman Kontak.",
+        "emailTitle": "Email Pixel Art Village tentang syarat"
+      }
+    },
+    "seoTitle": "Syarat dan Ketentuan | Pixel Art Village",
+    "meta": {
+      "ogTitle": "Syarat dan Ketentuan | Konverter Gambar ke Pixel Art",
+      "ogDescription": "Syarat dan ketentuan untuk converter gambar kami ke pixel art: aturan penggunaan, tanggung jawab, penafian, IP, hukum yang berlaku, informasi kontak.",
+      "twitterTitle": "Syarat Layanan | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village syarat dan ketentuan layanan: aturan penggunaan, tanggung jawab, penafian, IP, hukum yang berlaku, informasi kontak."
+    },
+    "quickLinks": {
+      "heading": "Tautan Cepat",
+      "mainSite": "Situs Utama",
+      "popularConverters": "Konverter Populer",
+      "links": {
+        "home": "Konverter Seni Piksel",
+        "about": "Tentang Kami",
+        "contact": "Kontak",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "about": {
+    "seoTitle": "Tentang | Desa Pixel Art",
+    "seoDesc": "Tentang pixel art Village: alat membuat dan mengonversi pixel art gratis yang berbasis browser. Privasi‑pertama, cepat, dan mudah diakses.",
+    "h1": "Tentang Seni Pixel Desa",
+    "p1": "pixel art Village is a free, browser‑based pixel image maker & converter. Upload a PNG/JPG image, tweak pixel size and palettes, preview instantly, and export crisp image results.",
+    "principles": {
+      "title": "Prinsip",
+      "privacy": {
+        "title": "Privasi-terutama:",
+        "desc": "Gambar Anda diproses secara lokal di browser Anda — kami tidak mengunggah file."
+      },
+      "performance": {
+        "title": "Kinerja:",
+        "desc": "Pratinjau cepat dan ekspor yang bersih tanpa dependensi berat."
+      },
+      "accessibility": {
+        "title": "Aksesibilitas:",
+        "desc": "UI yang ramah keyboard dan status fokus yang terlihat."
+      }
+    },
+    "contact": {
+      "title": "Kontak",
+      "p1": "Lihat halaman Kontak untuk dukungan dan pertanyaan. Anda juga dapat email kami langsung di",
+      "emailTitle": "Surel Pixel Art Village"
+    },
+    "ogTitle": "Tentang | Pixel Art Village",
+    "ogDesc": "Pelajari tentang Pixel Art Village, konverter pixel art yang mengutamakan privasi dengan pratinjau instan, palet, dan tutorial.",
+    "twitterTitle": "Tentang | Pixel Art Village",
+    "twitterDesc": "Temukan siapa yang menciptakan Pixel Art Village dan bagaimana konverter pixel art yang mengutamakan privasi kami bekerja.",
+    "p2": "Kami berfokus pada privasi, kecepatan, dan aksesibilitas sehingga Anda dapat mengonversi gambar menjadi pixel art tanpa mengunggah atau mendaftar.",
+    "p3": "Tim kami membangun sumber daya edukatif dan alat-alat khusus untuk seniman, pendidik, dan pengembang game indie.",
+    "cta": "Coba alat <tool>converter tool</tool> kami atau jelajahi <blog>blog</blog> kami untuk tips dan tutorial.",
+    "specializedLinks": "Membutuhkan alur kerja yang spesifik untuk format? <png>PNG to Pixel Art</png>, <jpg>JPG to Pixel Art</jpg>, dan <photo>Photo to Sprite Converter</photo> alat siap membantu.",
+    "moreInfoRich": "Temukan detail selengkapnya di <privacy>Kebijakan Privasi</privacy> dan <terms>Syarat Layanan</terms>."
+  },
+  "contact": {
+    "h1": "Kontak",
+    "p1": "Kami ingin mendengar kabar dari Anda. Untuk bantuan, umpan balik, atau pertanyaan kemitraan, hubungi kami melalui surel.",
+    "emailLabel": "Email:",
+    "note": "Ganti placeholder email dengan alamat kontak resmi Anda untuk memenuhi persyaratan peninjauan AdSense.",
+    "p2": "Sebelum menghubungi kami, Anda mungkin menemukan jawaban di",
+    "p3": "blog",
+    "p4": "atau kunjungi kami",
+    "p5": "alat konverter pixel art",
+    "p6": "untuk memulai. Juga periksa kami",
+    "p7": "halaman tentang",
+    "p8": "untuk informasi lebih lanjut.",
+    "p9": "Untuk bantuan converter khusus, coba",
+    "p10": "PNG menjadi pixel art",
+    "p11": "or",
+    "p12": "gambar ke pixel art",
+    "p13": "panduan",
+    "seoTitle": "Kontak | Pixel Art Village",
+    "seoDesc": "Hubungi Pixel Art Village untuk dukungan, umpan balik, atau kemitraan. Hubungi kami dengan cepat melalui email atau jelajahi sumber daya untuk jawaban segera.",
+    "ogTitle": "Kontak | Pixel Art Village",
+    "ogDesc": "Hubungi Pixel Art Village: dukungan, umpan balik, pertanyaan kemitraan, dan sumber daya tambahan.",
+    "twitterTitle": "Kontak | Pixel Art Village",
+    "twitterDesc": "Butuh bantuan dengan Pixel Art Village? Hubungi kami untuk dukungan, masukan, atau kolaborasi.",
+    "emailTitle": "Surel Pixel Art Village"
+  },
+  "faq": {
+    "title": "pixel art Desa: Pertanyaan yang Sering Diajukan",
+    "items": [
+      {
+        "question": "Situs menampilkan halaman kosong atau crash — apa yang harus saya lakukan?",
+        "answer": "Beberapa ekstensi browser menyuntikkan runtime pengembangan (misalnya, Plasmo/BacklinkPilot) ke setiap halaman, yang dapat merusak aplikasi React. Silakan nonaktifkan ekstensi tersebut di situs ini dan muat ulang paksa (Ctrl/Cmd+Shift+R)."
+      },
+      {
+        "question": "Apakah alat pembuat gambar digital dengan kontrol palet ini gratis?",
+        "answer": "Ya. Image Village adalah alat gambar online yang sepenuhnya gratis untuk semua pengguna. Nikmati konversi gambar tanpa batas, kontrol palet khusus, dan unduhan resolusi tinggi dengan palet lanjutan tanpa biaya apapun."
+      },
+      {
+        "question": "Apakah gambar saya bersifat pribadi? Apakah Anda mengunggah file gambar?",
+        "answer": "Privasi gambar Anda terjamin. File gambar Anda tidak pernah meninggalkan perangkat Anda karena semua pemrosesan gambar dilakukan secara lokal di browser Anda. Image Village tidak dapat mengakses file gambar Anda, sehingga menjadikannya creator gambar digital yang aman dari gambar Anda dengan opsi palet."
+      },
+      {
+        "question": "Bagaimana cara saya mengubah gambar menjadi sprite game dengan palet khusus?",
+        "answer": "Pembuat gambar digital kami dengan kontrol palet sangat cocok untuk membuat sprite game. Unggah gambar karakter Anda, sesuaikan ukurannya agar sesuai dengan gaya visual gim Anda, dan gunakan kontrol palet khusus untuk menyesuaikan batas warna mesin Anda. Buat pixel art dengan palet canggih untuk membantu Anda membuat sprite yang sempurna sebagai PNG transparan."
+      },
+      {
+        "question": "Bisakah saya menyesuaikan kisi piksel pada gambar saya?",
+        "answer": "Pastinya. Editor langsung mencakup opsi \"Show grid\". Overlay kisi piksel ini membantu Anda melihat piksel individual dengan jelas, yang berguna untuk penyesuaian halus karya seni Anda atau untuk mempelajari bagaimana efek pikselasi bekerja pada gambar Anda."
+      },
+      {
+        "question": "Apa cara terbaik untuk mengubah gambar menjadi pixel art?",
+        "answer": "Untuk hasil terbaik saat mengubah gambar menjadi visual piksel, mulailah dengan gambar kontras tinggi. Gunakan slider ukuran piksel untuk menemukan tingkat detail yang Anda sukai dengan pengaturan palet khusus. Buat seni piksel dengan ukuran yang lebih besar untuk tampilan yang lebih abstrak, tampilan 8-bit, sedangkan ukuran yang lebih kecil mempertahankan lebih banyak detail dari gambar asli dengan palet lanjutan."
+      },
+      {
+        "question": "Apakah saya dapat menggunakan pixel art yang dihasilkan secara komersial?",
+        "answer": "Ya. Anda memiliki hak atas upload asli Anda dan atas hasil yang dihasilkan. Anda dapat menggunakan grafik yang dibuat dengan Pixel Village untuk tujuan apa pun, termasuk proyek komersial. Buat seni piksel dengan alat kami untuk penggunaan komersial tanpa batas."
+      },
+      {
+        "question": "Format apa yang bisa saya gunakan dengan pixelator gambar ini?",
+        "answer": "Pixelator gambar ini mendukung semua format browser umum seperti PNG, JPG, GIF, dan WEBP. Anda dapat mengonversi PNG menjadi visual piksel atau JPG menjadi visual piksel dengan mudah. Buat seni piksel dengan format gambar apa pun."
+      },
+      {
+        "question": "Mengapa alat ini disebut pixel art Village?",
+        "answer": "Kami percaya bahwa membuat grafis adalah aktivitas komunitas, bahkan ketika menggunakan alat online. pixel Village adalah tempat dimana siapa saja, dari pemula hingga profesional, dapat berkumpul untuk dengan mudah membuat visual piksel dengan palet kustom. Buat karya seni piksel dengan alat kami dan bergabunglah dengan desa kami yang ramah untuk semua antusias piksel."
+      }
+    ]
+  },
+  "related": {
+    "converters": {
+      "title": "Pengonversi Pixel Art Terbaru",
+      "desc": "Jelajahi lebih banyak alat gratis untuk mengubah gambar menjadi pixel art",
+      "items": [
+        {
+          "title": "Image to Pixel Art",
+          "href": "/konverter/gambar-ke-seni-piksel/",
+          "desc": "Konverter universal untuk semua format gambar"
+        },
+        {
+          "title": "PNG to Pixel Art",
+          "href": "/konverter/png-ke-pixel-art/",
+          "desc": "Konversi PNG gambar dengan transparansi"
+        },
+        {
+          "title": "JPG to Pixel Art",
+          "href": "/converter/jpg-ke-pixel-art/",
+          "desc": "Ubah foto menjadi grafik retro"
+        },
+        {
+          "title": "Photo to Sprite",
+          "href": "/konverter/foto-ke-sprite-konverter/",
+          "desc": "Buat sprite siap untuk game dari foto"
+        },
+        {
+          "title": "Generator Seni 8-bit",
+          "href": "/konverter/8-bit-seni-generator/",
+          "desc": "Buat karya autentik gaya 8-bit"
+        },
+        {
+          "title": "Pixelate Gambar Online",
+          "href": "/konverter/pixelate-gambar-online/",
+          "desc": "Pengaburan gambar cepat dan gratis"
+        }
+      ]
+    },
+    "guides": {
+      "title": "Tutorial & Panduan Pixel Art",
+      "desc": "Pelajari cara membuat seni pixel yang lebih baik dengan tutorial langkah demi langkah kami",
+      "items": [
+        {
+          "title": "Cara Pixelasi Gambar",
+          "href": "/blog/cara-pixelate-gambar/",
+          "desc": "Panduan mudah dipahami pemula untuk seni pixel"
+        },
+        {
+          "title": "Ekspor dari Illustrator",
+          "href": "/blog/ekspor-dari-illustrator-gambar-ke-pixel-seni/",
+          "desc": "Hindari masalah pikselasi saat ekspor"
+        },
+        {
+          "title": "Jadikan Gambar Lebih Mirip Piksel",
+          "href": "/blog/membuat-gambar-lebih-seperti-piksel/",
+          "desc": "Teknik editing dasar untuk hasil yang lebih baik"
+        },
+        {
+          "title": "Dapatkan Versi Pixel Art dari Gambar",
+          "href": "/blog/cara-mendapatkan-seni-piksel-dari-gambar/",
+          "desc": "Panduan converter lengkap dengan tips SNES"
+        }
+      ]
+    }
+  },
+  "paletteManager": {
+    "createTab": "Buat Palet",
+    "importTab": "🆕 Impor dari Lospec",
+    "createTitle": "Buat palet",
+    "nameLabel": "Nama Palet",
+    "namePlaceholder": "Palet Saya",
+    "colorsLabel": "Warna Palet",
+    "noColors": "Belum ada warna",
+    "colorInputPlaceholder": "#000000",
+    "addColor": "Tambahkan warna",
+    "removeSelected": "Hapus yang dipilih",
+    "save": "Simpan palet",
+    "reset": "Atur ulang formulir",
+    "delete": "Hapus Palet",
+    "importTitle": "Impor dari Lospec",
+    "importDesc": "Jelajah dan impor palet dari",
+    "importDescSuffix": "，这是最大的像素艺术调色板社区，拥有 5000+ 配色方案。",
+    "importSuccess": "Palet \"{{name}}\" telah diimpor dan diterapkan secara otomatis.\n\nGulir ke atas untuk melihat hasilnya, atau pilih Palet lain di menu dropdown."
+  },
+  "home": {
+    "seoTitle": "Konverter Gambar ke Pixel Art | Pixel Art Village",
+    "seoDescription": "Ubah setiap foto menjadi seni piksel 8-bit retro dengan palet yang dapat disesuaikan, pratinjau instan, kontrol dithering, dan pemrosesan aman di browser—tanpa memerlukan pendaftaran."
+  },
+  "header": {
+    "mainNav": "Navigasi utama",
+    "userAvatarTitle": "Avatar pengguna"
+  },
+  "content": {
+    "fallbackNotice": "Konten untuk bahasa ini akan segera hadir. Menampilkan bahasa Inggris untuk saat ini."
   }
 }

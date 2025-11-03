@@ -2,7 +2,7 @@ import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import LangRoot from './components/LangRoot.jsx'
-import i18n from '@/i18n'
+import i18n, { SUPPORTED_LANGS, setStoredLang } from '@/i18n'
 import { ensureClarityLoaded } from './clarity-init.js'
 import { ensureGtmLoaded, insertGtmNoScript } from './gtm-init.js'
 import { ensureGaLoaded } from './ga-init.js'
@@ -35,8 +35,32 @@ ensureClarityLoaded()
 ensureGtmLoaded()
 insertGtmNoScript()
 
+async function ensureInitialLanguage() {
+  try {
+    const params = new URLSearchParams(location.search)
+    const forced = (params.get('forceLang') || '').toLowerCase()
+    const first = (location.pathname.split('/')[1] || '').toLowerCase()
+    const target = SUPPORTED_LANGS.includes(forced) ? forced : (SUPPORTED_LANGS.includes(first) ? first : null)
+    if (target && i18n.language !== target) {
+      await i18n.changeLanguage(target)
+      try {
+        setStoredLang(target)
+      } catch (error) {
+        if (import.meta.env?.DEV) {
+          console.warn('Failed to persist language preference:', error)
+        }
+      }
+    }
+  } catch (error) {
+    if (import.meta.env?.DEV) {
+      console.warn('ensureInitialLanguage failed:', error)
+    }
+  }
+}
+
 ;(async () => {
   try {
+    await ensureInitialLanguage()
     // 最小改动：在挂载前确保翻译命名空间已加载，避免键名闪现
     await i18n.loadNamespaces('translation')
   } catch (error) {

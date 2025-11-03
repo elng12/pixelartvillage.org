@@ -10,6 +10,25 @@ const INDEX = path.join(DIST, 'index.html')
 // 单语言站点：仅保留英文规范路径
 const DEFAULT_LANG = 'en'
 
+function resolveContent(baseName) {
+  const paths = [
+    path.join(ROOT, 'src', 'content', `${baseName}.en.json`),
+    path.join(ROOT, 'src', 'content', `${baseName}.json`),
+  ]
+  for (const filePath of paths) {
+    if (fs.existsSync(filePath)) {
+      try {
+        return JSON.parse(fs.readFileSync(filePath, 'utf8'))
+      } catch (error) {
+        console.warn(`[prerender] warn: failed to parse ${path.basename(filePath)} -> ${error.message}`)
+        return []
+      }
+    }
+  }
+  console.warn(`[prerender] warn: content source not found for ${baseName}`)
+  return []
+}
+
 function read(file) { return fs.readFileSync(file, 'utf8') }
 function write(file, content) {
   fs.mkdirSync(path.dirname(file), { recursive: true })
@@ -204,8 +223,7 @@ function prerender() {
     return `<article class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${title}</h1>${date}<div class="prose prose-sm md:prose-base text-gray-800 mt-4 text-center md:text-left prose-pre:text-left prose-code:text-left prose-img:mx-0">${paragraphs || excerpt}</div><footer class="mt-8 text-center md:text-left"><a class="text-blue-600 underline" href="/blog">Back to Blog</a></footer></article>`
   }
 
-  let posts = []
-  try { posts = require('../src/content/blog-posts.json') } catch {}
+  const posts = resolveContent('blog-posts')
   const blogIndexExtras = renderBlogIndex(posts)
 
   const routes = [
@@ -283,30 +301,26 @@ function prerender() {
     ], extras: blogIndexExtras, visible: renderBlogIndexVisible(posts) },
   ]
 
-  try {
-    const pseo = require('../src/content/pseo-pages.json')
-    for (const p of pseo) {
-      if (!p || !p.slug) continue
-      const url = ensureTrailingSlash(`/converter/${p.slug}`)
-      routes.push({
-        path: url,
-        title: p.title,
-        metas: [
-          { name: 'description', content: p.metaDescription || '' },
-          { property: 'og:url', content: ABS(url) },
-          { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: p.title },
-          { property: 'og:description', content: p.metaDescription || '' },
-          { property: 'og:image', content: ABS(`/pseo-og/${p.slug}.png`) },
-          { name: 'twitter:card', content: 'summary' },
-          { name: 'twitter:title', content: p.title },
-          { name: 'twitter:description', content: p.metaDescription || '' },
-          { name: 'twitter:image', content: ABS(`/pseo-og/${p.slug}.png`) },
-        ],
-      })
-    }
-  } catch (e) {
-    console.warn('[prerender] warn: cannot load pseo-pages.json', e && e.message)
+  const pseoPages = resolveContent('pseo-pages')
+  for (const p of pseoPages) {
+    if (!p || !p.slug) continue
+    const url = ensureTrailingSlash(`/converter/${p.slug}`)
+    routes.push({
+      path: url,
+      title: p.title,
+      metas: [
+        { name: 'description', content: p.metaDescription || '' },
+        { property: 'og:url', content: ABS(url) },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: p.title },
+        { property: 'og:description', content: p.metaDescription || '' },
+        { property: 'og:image', content: ABS(`/pseo-og/${p.slug}.png`) },
+        { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:title', content: p.title },
+        { name: 'twitter:description', content: p.metaDescription || '' },
+        { name: 'twitter:image', content: ABS(`/pseo-og/${p.slug}.png`) },
+      ],
+    })
   }
 
   for (const p of posts) {

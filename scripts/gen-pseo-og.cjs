@@ -7,8 +7,17 @@ const path = require('path');
 const ROOT = process.cwd();
 const OUT_PSEO = path.join(ROOT, 'public', 'pseo-og');
 const OUT_BLOG = path.join(ROOT, 'public', 'blog-og');
-const PSEO_PATH = path.join(ROOT, 'src', 'content', 'pseo-pages.json');
-const BLOG_PATH = path.join(ROOT, 'src', 'content', 'blog-posts.json');
+
+function resolveContentPath(baseName) {
+  const candidates = [
+    path.join(ROOT, 'src', 'content', `${baseName}.en.json`),
+    path.join(ROOT, 'src', 'content', `${baseName}.json`),
+  ];
+  return candidates.find((filePath) => fs.existsSync(filePath)) || null;
+}
+
+const PSEO_PATH = resolveContentPath('pseo-pages');
+const BLOG_PATH = resolveContentPath('blog-posts');
 
 function log(...a) { console.log('[pseo-og]', ...a) }
 function warn(...a) { console.warn('[pseo-og] warn:', ...a) }
@@ -85,8 +94,8 @@ function svgFor(title, subtitle) {
 function ensureDir(p) { fs.mkdirSync(p, { recursive: true }) }
 
 function genPseo() {
-  if (!fs.existsSync(PSEO_PATH)) {
-    warn('no pseo-pages.json found, skipping pSEO OG');
+  if (!PSEO_PATH) {
+    warn('no pseo-pages content found, skipping pSEO OG');
     return 0;
   }
   const pages = JSON.parse(fs.readFileSync(PSEO_PATH, 'utf8'));
@@ -110,8 +119,8 @@ function genPseo() {
 }
 
 function genBlog() {
-  if (!fs.existsSync(BLOG_PATH)) {
-    warn('no blog-posts.json found, skipping Blog OG');
+  if (!BLOG_PATH) {
+    warn('no blog-posts content found, skipping Blog OG');
     return 0;
   }
   const posts = JSON.parse(fs.readFileSync(BLOG_PATH, 'utf8'));

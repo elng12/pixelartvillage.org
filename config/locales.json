@@ -1,0 +1,23 @@
+{
+  "default": "en",
+  "supported": [
+    "en",
+    "es",
+    "id",
+    "de",
+    "pl",
+    "it",
+    "pt",
+    "fr",
+    "ru",
+    "fil",
+    "vi",
+    "ja",
+    "sv",
+    "no",
+    "nl",
+    "ar",
+    "ko",
+    "th"
+  ]
+}

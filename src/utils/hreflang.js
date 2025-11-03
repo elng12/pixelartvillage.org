@@ -1,31 +1,40 @@
-import { SUPPORTED_LANGS } from '@/i18n'
+import { SUPPORTED_LANGS, CANONICAL_LOCALE } from '@/i18n'
 
-// Hreflang utilities for multi-language SEO
-// 注意：为符合当前 canonical 策略（仅无语言前缀 URL 为规范版本），
-// 这里生成的 hreflang 仅包含 `en` 与 `x-default`，均指向规范 URL。
-// 保留多语言能力由路由与 i18n 负责，但不把各语言版本声明到 hreflang，避免"指向非规范"与工具告警。
+const SITE_ORIGIN = 'https://pixelartvillage.org'
+
+function normalizePath(path) {
+  if (!path || path === '/') return '/'
+  const ensured = path.startsWith('/') ? path : `/${path}`
+  return ensured.endsWith('/') ? ensured.slice(0, -1) : ensured
+}
+
+function buildHref(locale, basePath) {
+  if (locale === CANONICAL_LOCALE) {
+    return `${SITE_ORIGIN}${basePath === '/' ? '/' : `${basePath}/`}`
+  }
+  const localized = `${SITE_ORIGIN}/${locale}${basePath === '/' ? '/' : `${basePath}/`}`
+  return localized.replace(/\/+$/, '/')
+}
 
 /**
- * Generate hreflang links for a given page path
- * @param {string} basePath - The base path without language prefix (e.g., '/about', '/blog/post-slug')
- * @returns {Array} Array of hreflang objects with hreflang and href properties
+ * 生成指定路径的 hreflang 声明
+ * @param {string} basePath - 不含语言前缀的路径（如 `/about`、`/blog/post`）
+ * @returns {{hreflang: string, href: string}[]}
  */
 export function generateHreflangLinks(basePath) {
-  const cleanBasePath = basePath.startsWith('/') ? basePath : `/${basePath}`;
-  const canonicalPath = cleanBasePath === '/' ? '/' : cleanBasePath.replace(/\/$/, '/')
-  const canonicalHref = `https://pixelartvillage.org${canonicalPath}`
-
-  const hreflangLinks = []
+  const normalized = normalizePath(basePath)
   const runtimeLangs = SUPPORTED_LANGS.filter((lang) => lang && lang !== 'pseudo')
   const uniqueLangs = Array.from(new Set(runtimeLangs))
 
-  uniqueLangs.forEach((lang) => {
-    const localizedPath = lang === 'en' ? canonicalPath : `/${lang}${canonicalPath}`
-    hreflangLinks.push({ hreflang: lang, href: `https://pixelartvillage.org${localizedPath}` })
-  })
+  const links = uniqueLangs.map((lang) => ({
+    hreflang: lang,
+    href: buildHref(lang, normalized)
+  }))
 
-  // 添加x-default指向英文版本（canonical版本）
-  hreflangLinks.push({ hreflang: 'x-default', href: canonicalHref })
+  const canonicalEntry = links.find((entry) => entry.hreflang === CANONICAL_LOCALE)
+  if (canonicalEntry) {
+    links.push({ hreflang: 'x-default', href: canonicalEntry.href })
+  }
 
-  return hreflangLinks
+  return links
 }

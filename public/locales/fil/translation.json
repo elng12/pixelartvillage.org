@@ -1,27 +1,62 @@
 {
-  "nav": {"examples": "Mga Halimbawa", "features": "Mga Tampok", "how": "Paano ito gumagana", "faq": "FAQ", "blog": "Blog", "home": "Home", "about": "Tungkol", "contact": "Makipag-ugnay"},
-  "navTitle": {
-    "hero": "Scroll to Home hero section",
-    "examples": "Scroll to Pixel Art Examples",
-    "features": "Scroll to Pixel Art Features",
-    "how": "Scroll to How Pixel Art Converter Works",
-    "faq": "Scroll to Pixel Art FAQ",
-    "blog": "Open Pixel Art Blog"
+  "nav": {
+    "examples": "Mga Halimbawa",
+    "features": "Mga Tampok",
+    "how": "Paano ito gumagana",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "home": "Tahanan",
+    "about": "Tungkol",
+    "contact": "Makipag-ugnay"
   },
-  "cta": {"start": "Simulan ngayon"},
-  "site": {"tagline": "Online na pixel art generator • tagalikha • converter"},
+  "common": {
+    "loading": "Naglo-load...",
+    "error": "May mali",
+    "success": "Matagumpay",
+    "failed": "Nabigo",
+    "imageFailedToLoad": "Hindi ma-load ang larawan",
+    "imageUnavailable": "Hindi magamit ang larawan",
+    "lastUpdated": "Huling na-update: {{date}}"
+  },
+  "navTitle": {
+    "hero": "I-scroll sa Home hero section",
+    "examples": "Mag-scroll sa mga Pixel Art na Halimbawa",
+    "features": "I-scroll sa Mga Feature ng Pixel Art",
+    "how": "Mag-scroll sa Paano Gumagana ang Pixel Art Converter",
+    "faq": "Mag-scroll sa Pixel Art FAQ",
+    "blog": "Libre Sining Pixel Blog"
+  },
+  "cta": {
+    "start": "Simulan ngayon"
+  },
+  "site": {
+    "tagline": "Online na pixel art generator • tagalikha • converter",
+    "name": "Pixel Art Village",
+    "homeLinkAria": "Pixel Art Village bahay"
+  },
   "footer": {
-    "tools": "Mga Tool", "formats": "Mga Format", "explore": "Tuklasin", "community": "Komunidad",
-    "terms": "Mga Tuntunin", "privacy": "Privacy", "about": "Tungkol", "contact": "Makipag-ugnay",
+    "tools": "Mga Tool",
+    "formats": "Mga Pormat",
+    "explore": "Tuklasin",
+    "community": "Komunidad",
+    "terms": "Mga Tuntunin",
+    "privacy": "Privacy",
+    "about": "Tungkol",
+    "contact": "Makipag-ugnay",
+    "github": "GitHub",
+    "cta": {
+      "ariaStart": "Simulan ang larawan patungo sa pixel art sa Pixel Art Village"
+    },
+    "copy": "© {{year}} pixel art Village. Lahat ng karapatan ay nakaluklok.",
     "links": {
-      "generator": "pixel art generator",
-      "converter": "pixel art converter",
+      "generator": "generator ng pixel art",
+      "converter": "taga-iba ng pixel art",
       "imageToPixel": "Larawan sa pixel art",
       "makePixelArt": "Gumawa ng pixel art",
       "png2pixel": "PNG sa pixel art",
       "jpg2pixel": "JPG sa pixel art",
       "img2pixel": "IMG sa pixel art",
-      "gridPreview": "Preview ng grid ng pixel",
+      "gridPreview": "Tingnan ang grid ng pixel",
       "how": "Paano ito gumagana",
       "start": "Magsimula sa pixel art Village",
       "tips": "Mga tip at palette",
@@ -32,167 +67,543 @@
     "title": "Blog",
     "subtitle": "Mga artikulo at balita tungkol sa pixel art, mga tutorial, at mga bagong tampok.",
     "back": "Bumalik sa Blog",
-    "notFound": {"title": "Hindi natagpuan ang post", "desc": "Walang ganitong artikulo. Bumalik sa"}
+    "notFound": {
+      "title": "Hindi natagpuan ang post",
+      "desc": "Walang ganitong artikulo. Bumalik sa <a href=\"/\">{{ TERM_0 }}</a>"
+    }
   },
   "consent": {
     "title": "Privacy at Cookies",
-    "desc": "Gumagamit kami ng cookies upang patakbuhin ang site na ito at, kung pinagana, magpakita ng mga ad ng Google AdSense. Maaari mong tanggapin o tanggihan ang mga hindi mahalagang cookies anumang oras.",
+    "desc": "We use cookies to operate this site and, if enabled, to show Google AdSense ads. You can accept or reject non‑essential cookies at any time.",
     "privacy": "Patakaran sa Privacy",
     "andManage": "at pamahalaan ang pag-personalize ng ad sa",
     "accept": "Tanggapin lahat",
-    "reject": "Tanggihan ang hindi mahalaga"
-  }
-  ,
+    "reject": "Tanggihan ang hindi mahalaga",
+    "bannerLabel": "Dialog ng pagpayag sa cookies",
+    "acceptLabel": "Tanggapin ang lahat ng cookies",
+    "rejectLabel": "Huwag tanggapin ang hindi mahalagang cookies"
+  },
   "tool": {
-    "title": "Online na tagalikha at converter ng pixel art",
-    "subtitle": "Gawing pixel art ang mga larawan sa browser — i‑convert ang PNG/JPG sa malinis, grid‑friendly na pixel art. Ayusin ang laki ng pixel at mga palette na may instant preview, at i‑export ang malinaw na resulta para sa sprites, icons, o retro art. Mabilis, pribado, at libre sa pixel art Village.",
+    "title": "Online na pixel art tagagawa at converter",
+    "subtitle2": "naaangkop na pixel size at pasadyang mga palette. Perpekto para sa mga sprites, icons, at retro game art na may mga advanced na palette options.",
+    "subtitle": "Gawing pixel art ang mga larawan sa browser — i‑convert ang PNG/JPG sa malinis, grid‑friendly na pixel art. Ayusin ang laki ng pixel at mga palette na may instant preview, at i‑export ang malinaw na resultado para sa sprites, icons, o retro art. Mabilis, pribado, at libre sa pixel art Village.",
     "dragOrClick": "I‑drag ang iyong larawan dito o",
     "clickToChoose": "i‑click para pumili",
-    "supports": "Sumusuporta sa PNG, JPG, GIF — hanggang 10MB",
-    "chooseFile": "Pumili ng file",
+    "supports": "Sumusuportahan ang PNG, JPG, GIF — hanggang 10MB",
+    "chooseFile": "Piliin ang file",
     "preparing": "Inihahanda ang larawan…",
     "ariaUpload": "Mag‑upload ng larawan (i‑drag & drop o i‑click para pumili)",
-    "ariaChoose": "Pumili ng file ng larawan"
+    "ariaChoose": "Pumili ng file ng larawan",
+    "dragDrop": "Drag and drop image here",
+    "orClick": "or click to choose",
+    "convertButton": "Convert to Pixel Art",
+    "processing": "Processing...",
+    "converted": "Successfully converted"
   },
-  "upload": {"selected": "Napiling file: {{name}}"},
+  "upload": {
+    "selected": "Napiling file: {{name}}"
+  },
   "errors": {
     "fileTooLarge10": "Masyadong malaki ang file. Mag‑upload ng larawan < 10MB.",
     "prepareFail": "Nabigong ihanda ang larawan. Subukan ang ibang file.",
     "onlyPngJpg": "Pumili ng PNG o JPG na larawan.",
     "maxFile": "Masyadong malaki ang file. Pinakamataas na sukat: {{mb}}MB."
   },
-  "editor": {"title": "Online na tagalikha ng pixel art"}
-  ,
+  "editor": {
+    "title": "Online na tagalikha ng pixel art",
+    "downloadBtn": "I-download ang Pixel Art Image",
+    "uploadBtn": "I-upload ang Larawan",
+    "section": {
+      "general": "Pangkalahatan ▾"
+    }
+  },
+  "notFound": {
+    "seoTitle": "Hindi Natagpuan ang Pahina | Pixel Art Village",
+    "title": "Hindi natagpuan ang pahina",
+    "desc": "Hindi umiiral o inilipat na ang pahinang hinahanap mo. Bumalik sa Pixel Art Village para magpatuloy sa paglikha ng kamangha-manghang pixel art.",
+    "backHome": "← Bumalik sa Pixel Art Village",
+    "popularPages": "O subukan ang mga kilalang pahinang ito:",
+    "links": {
+      "home": "Tahanan",
+      "pngConverter": "PNG sa pixel art",
+      "jpgConverter": "JPG papuntang pixel art",
+      "about": "Tungkol sa Amin"
+    }
+  },
+  "adjustments": {
+    "reset": {
+      "title": "I-reset ang mga slider",
+      "all": "I-reset ang Lahat",
+      "tooltip": "I-reset Pixel Laki / Liwanag / Kontras / Saturasyon",
+      "pixelSizeBtnTitle": "I-reset ang Laki ng Pixel",
+      "brightnessBtnTitle": "I-reset ang Liwanag",
+      "contrastBtnTitle": "I-reset ang Kontrast",
+      "saturationBtnTitle": "I-reset ang Saturasyon"
+    },
+    "pixelSize": "Laki ng Pixel: {{value}}",
+    "section": {
+      "color": "Pag-aayos ng Kulay"
+    },
+    "brightness": "Liwanag: {{value}}",
+    "contrast": "Kontras: {{value}}",
+    "saturation": "Saturasyon: {{value}}",
+    "palette": {
+      "label": "Palette",
+      "none": "Wala",
+      "custom": "Pasadya",
+      "note": "Ang Pico‑8 ay isang fixed palette. Iba pang mga pangalan na walang built‑in na kulay ng paleta ay mag-aautong-generate ng mga paleta ayon sa kanilang laki (hal. Sunset 8 → 8 na kulay ng paleta)."
+    },
+    "colorDistance": {
+      "label": "Distansiya ng kulay",
+      "rgb": "RGB (mabilis)",
+      "lab": "LAB (tumpak, mas mabagal)"
+    },
+    "autoPalette": "Gumawa ng palette mula sa larawan",
+    "paletteSize": "# Palette Mga Kulay: {{value}}",
+    "dither": "I-activate ang dithering (Floyd–Steinberg)",
+    "zoom": "Zoom: {{value}}x",
+    "grid": "Ipakita ang grid"
+  },
+  "export": {
+    "label": {
+      "format": "Format ng pag-eksport",
+      "size": "Laki ng Export"
+    },
+    "option": {
+      "png": "PNG (walang pagkawala)",
+      "jpeg": "JPEG",
+      "webp": "WebP"
+    },
+    "size": {
+      "xs": "XS (0.5×)",
+      "sm": "Maliit (1×)",
+      "lg": "Malaki (2×)",
+      "xl": "XL (4×)"
+    },
+    "transparent": {
+      "label": "Transparent na background (PNG/WebP)"
+    },
+    "quality": {
+      "label": "Kalidad: {{percent}}%"
+    }
+  },
+  "pseo": {
+    "notFound": {
+      "seoTitle": "Hindi natagpuan ang pahina | pixel art Village",
+      "title": "Hindi natagpuan ang pahina",
+      "desc": "Ang converter page na hinahanap mo ay wala na."
+    },
+    "relatedHeading": "Mga Kaugnay na Pixel Art Converter",
+    "siteNavigationTitle": "Navegasyon ng Site"
+  },
+  "showcase": {
+    "title": "Sa Pagproseso ng Larawan patungo sa Mga Pixel: Makita mo ang Kakayahan ng Aming Prosesador ng Larawan",
+    "desc": "Gamit",
+    "before": "Bago",
+    "after": "Pagkaraan",
+    "alt": {
+      "before": "Orihinal na larawan bago i-convert sa pixel art",
+      "after": "Isang larawan ng tanawin na na-convert sa 8-bit style pixel art ng pixel art Village generator"
+    },
+    "descFull": "Tingnan kung paano nagiging matalas na pixel art ang inyong mga larawan gamit ang aming image to pixel art converter."
+  },
+  "lang": {
+    "label": "Wika"
+  },
+  "wplace": {
+    "title": "Perpektong Tool para sa mga User ng Pixel Art Village",
+    "desc": "The ultimate companion for pixel art Village — convert any image into clean pixel visuals with real‑time preview, smart palettes, and instant export. Create pixel art with our image tools.",
+    "features": {
+      "free": {
+        "title": "100% Libre",
+        "desc": "Lahat ay ganap na libre. Walang nakatagong gastos o subscription — lumikha ng walang limitasyong pixel visuals mula sa alinmang larawan."
+      },
+      "privacy": {
+        "title": "Pribasiya Muna",
+        "desc": "Lahat ng pagproseso ay nangyayari sa inyong browser. Ang inyong mga larawan ay hindi kailanman umaalis sa inyong device — isang pribado, secure na workflow sa pamamagitan ng pagdidisenyo."
+      },
+      "easy": {
+        "title": "Madali para sa Lahat na Manlalaro",
+        "desc": "Intuitive interface and fast feedback. Convert any image to paintable pixel visuals in just a few clicks with custom palette options."
+      },
+      "size": {
+        "title": "Walang Limitasyon sa Laki",
+        "desc": "Upload images of any size — from tiny icons to large graphics — with smooth scaling and responsive image previews using advanced palettes."
+      }
+    }
+  },
+  "features": {
+    "title": "Image to Pixel Converter na may Custom Palette",
+    "desc": "I-convert ang mga larawan sa pixel‑perfect na sining. Live‑tune ang mga detalye gamit ang custom na palette at swatch control. Instant preview at sprite‑ready PNG export.",
+    "palette": {
+      "title": "Paleta kontrol",
+      "desc": "Our image to pixel art converter gives precise palette control. Choose built-in retro palettes or auto-extract tones from your image, then lock, reorder, and fine-tune hues to match your style. With consistent palettes, your image to pixel art conversions keep sprites readable, game-ready, and easy to reuse across projects."
+    },
+    "live": {
+      "title": "Mga pagbabago nang live",
+      "desc": "Tweak pixel size, dithering, contrast, and brightness while your image to pixel art results update instantly. Side-by-side changes appear with no lag, so you can compare options and settle on the perfect look faster. Live preview reduces guesswork and keeps your image to pixel art conversions predictable on every export."
+    },
+    "clientSide": {
+      "title": "100% client‑side",
+      "desc": "Ang lahat ng conversion ay tumatakbo 100% sa client-side sa inyong browser. Ang mga larawan ay hindi kailanman umaalis sa inyong device, at mga offline builds ay posible, na pinapanatiling pribado at ligtas ang mga asset. Pixel Art Village ay nagpo-protekta sa inyong gawain habang nagbibigay ng mabilis, secure na processing sa desktop at mobile. Sa pamamagitan ng Pixel Art Village ay napananatili ninyo ang kontrol mula sa unang preview hanggang sa final export."
+    },
+    "customPalettes": "Custom Palettes",
+    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
+    "realTimePreview": "Real-time Preview",
+    "realTimePreviewDesc": "See changes instantly as you adjust settings",
+    "multipleFormats": "Multiple Formats",
+    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+  },
   "how": {
     "title": "Paano gumagana ang pixel art Village",
     "desc": "Gumawa ng pixel art sa tatlong simpleng hakbang.",
     "steps": {
       "upload": "I‑upload",
       "adjust": "Ayusin",
-      "download": "I‑download",
+      "download": "I‑i-download",
       "upload.desc": "Pumili o i‑drag ang larawan (PNG, JPG) sa image pixelizer.",
-      "adjust.desc": "Ayusin nang live ang laki ng pixel, palette at pixel grid.",
+      "adjust.desc": "Adjust live the size of pixel, palette and pixel grid.",
       "download.desc": "Mag‑export sa isang click mula sa pixel art generator at i‑share."
     }
-  }
-,
-  "massivePhrases": {
-    "phrases1_1": "Convert image to pixel art online",
-    "phrases1_2": "Transform image to pixel art instantly",
-    "phrases1_3": "Turn image to pixel art with ease",
-    "phrases1_4": "Change image to pixel art format",
-    "phrases1_5": "Process image to pixel art style",
-    "phrases1_6": "Edit image to pixel art quickly",
-    "phrases1_7": "Make image to pixel art conversion",
-    "phrases1_8": "Create image to pixel art result",
-    "phrases1_9": "Generate image to pixel art output",
-    "phrases1_10": "Produce image to pixel art design",
-    "phrases2_1": "Create pixel art image from photo",
-    "phrases2_2": "Generate pixel art image online",
-    "phrases2_3": "Make pixel art image quickly",
-    "phrases2_4": "Build pixel art image easily",
-    "phrases2_5": "Design pixel art image professionally",
-    "phrases2_6": "Craft pixel art image perfectly",
-    "phrases2_7": "Produce pixel art image instantly",
-    "phrases2_8": "Develop pixel art image efficiently",
-    "phrases2_9": "Form pixel art image beautifully",
-    "phrases2_10": "Construct pixel art image smoothly",
-    "phrases3_1": "Convert image to format",
-    "phrases3_2": "Transform image to style",
-    "phrases3_3": "Turn image to design",
-    "phrases3_4": "Change image to type",
-    "phrases3_5": "Process image to result",
-    "phrases3_6": "Edit image to output",
-    "phrases3_7": "Make image to creation",
-    "phrases3_8": "Create image to artwork",
-    "phrases3_9": "Generate image to graphic",
-    "phrases3_10": "Produce image to visual",
-    "phrases3_11": "Develop image to picture",
-    "phrases3_12": "Form image to illustration",
-    "phrases3_13": "Build image to composition",
-    "phrases3_14": "Design image to masterpiece",
-    "phrases3_15": "Craft image to creation",
-    "phrases4_1": "Adjust pixel size setting",
-    "phrases4_2": "Control pixel size option",
-    "phrases4_3": "Change pixel size value",
-    "phrases4_4": "Set pixel size parameter",
-    "phrases4_5": "Modify pixel size dimension",
-    "phrases4_6": "Configure pixel size property",
-    "phrases4_7": "Customize pixel size feature",
-    "phrases4_8": "Define pixel size measurement",
-    "phrases4_9": "Specify pixel size requirement",
-    "phrases4_10": "Determine pixel size standard",
-    "phrases4_11": "Establish pixel size guideline",
-    "phrases4_12": "Fix pixel size resolution",
-    "phrases4_13": "Select pixel size preference",
-    "phrases4_14": "Choose pixel size configuration",
-    "phrases5_1": "Process the image file",
-    "phrases5_2": "Edit the image content",
-    "phrases5_3": "Transform the image data",
-    "phrases5_4": "Convert the image format",
-    "phrases5_5": "Modify the image properties",
-    "phrases5_6": "Adjust the image settings",
-    "phrases5_7": "Enhance the image quality",
-    "phrases5_8": "Improve the image appearance",
-    "phrases5_9": "Optimize the image output",
-    "phrases5_10": "Refine the image details",
-    "phrases5_11": "Perfect the image result",
-    "phrases5_12": "Polish the image finish",
-    "phrases5_13": "Upgrade the image standard",
-    "phrases5_14": "Boost the image performance",
-    "phrases6_1": "Create art image masterpiece",
-    "phrases6_2": "Generate art image design",
-    "phrases6_3": "Make art image creation",
-    "phrases6_4": "Build art image artwork",
-    "phrases6_5": "Produce art image visual",
-    "phrases6_6": "Develop art image graphic",
-    "phrases6_7": "Form art image illustration",
-    "phrases6_8": "Craft art image composition",
-    "phrases6_9": "Design art image project",
-    "phrases6_10": "Construct art image piece",
-    "phrases7_1": "Customize the palette colors",
-    "phrases7_2": "Adjust the palette settings",
-    "phrases7_3": "Control the palette options",
-    "phrases7_4": "Modify the palette configuration",
-    "phrases7_5": "Configure the palette properties",
-    "phrases7_6": "Set the palette parameters",
-    "phrases7_7": "Define the palette scheme",
-    "phrases7_8": "Choose the palette selection",
-    "phrases7_9": "Select the palette combination",
-    "phrases7_10": "Determine the palette arrangement",
-    "phrases8_1": "Convert to pixel format",
-    "phrases8_2": "Transform to pixel style",
-    "phrases8_3": "Change to pixel design",
-    "phrases8_4": "Turn to pixel art",
-    "phrases8_5": "Switch to pixel mode",
-    "phrases8_6": "Shift to pixel type",
-    "phrases8_7": "Move to pixel version",
-    "phrases8_8": "Adapt to pixel standard",
-    "phrases8_9": "Adjust to pixel specification",
-    "phrases8_10": "Modify to pixel requirement",
-    "phrases9_1": "Edit the pixel details",
-    "phrases9_2": "Adjust the pixel properties",
-    "phrases9_3": "Control the pixel settings",
-    "phrases9_4": "Modify the pixel attributes",
-    "phrases9_5": "Configure the pixel parameters",
-    "phrases9_6": "Set the pixel values",
-    "phrases9_7": "Define the pixel characteristics",
-    "phrases9_8": "Specify the pixel features",
-    "phrases9_9": "Determine the pixel qualities",
-    "phrases9_10": "Establish the pixel standards",
-    "phrases10_1": "Convert to pixel art style",
-    "phrases10_2": "Transform to pixel art format",
-    "phrases10_3": "Change to pixel art design",
-    "phrases10_4": "Turn to pixel art version",
-    "phrases10_5": "Switch to pixel art mode",
-    "phrases10_6": "Shift to pixel art type",
-    "phrases10_7": "Move to pixel art standard",
-    "phrases11_1": "Convert image to pixel format",
-    "phrases11_2": "Transform image to pixel style",
-    "phrases11_3": "Change image to pixel design",
-    "phrases11_4": "Turn image to pixel version",
-    "phrases11_5": "Process image to pixel mode",
-    "phrases11_6": "Edit image to pixel type",
-    "phrases11_7": "Make image to pixel standard"
+  },
+  "privacy": {
+    "h1": "Patakaran sa Pagkapribado",
+    "sections": {
+      "overview": {
+        "title": "Buod",
+        "p1": "pixel art Village respects your privacy. This policy explains what data we process, how we use cookies (including Google AdSense cookies), and your choices. If you have questions, please contact us via the email on the Contact page."
+      },
+      "local": {
+        "title": "Lokal na Pagproseso ng Larawan",
+        "p1": "Your images never leave your device. All image processing happens locally in your browser. We do not upload, store, or share your image files on our servers."
+      },
+      "collect": {
+        "title": "Impormasyong Kinakalap Namin",
+        "li1": "Mga teknikal na datos para sa pagpapatakbo ng site (tulad ng pangunahing impormasyon ng device/browser) na kinakailangan para sa pagbibigay ng serbisyo.",
+        "li2": "Paggamit ng data sa kabuuan upang mapabuti ang mga feature (kung naka-enable ang analytics, hindi kami nangongolekta ng personal na impormasyon).",
+        "li3": "Data ng advertising mula sa Google AdSense (tingnan sa ibaba) kung ipinapakita ang mga ad.",
+        "p2": "Hindi namin nangangailangan ng pagpaparehistro ng account. Hindi namin sinasadyang nakakalap ng mga sensitibong personal na datos."
+      },
+      "cookies": {
+        "title": "Cookies and AdSense",
+        "p1": "We may use cookies and similar technologies to operate the website and improve your experience. If Google AdSense is enabled, Google and its partners may use cookies to serve ads based on your visits to this and other sites.",
+        "learn": "Alamin kung paano Google gumagamit ng impormasyon mula sa mga site o app na gumagamit ng Google services:",
+        "manage": "Pamahalaan ang pagkakapersonalidad ng ad:",
+        "more": "Higit pa sa Google ads at cookies:"
+      },
+      "third": {
+        "title": "Mga Kasosyo ng Ikatlong Panig",
+        "p1": "Maaaring i‑integrate namin ang mga third‑party na serbisyo (hal., Google AdSense). Maaaring mag‑proseso ng data ang mga partner sa ilalim ng kanilang mga privacy policy. Hinihikayat namin kayong tingnan ang kanilang mga patakaran upang maintindihan ang mga gawi sa paghawak ng data."
+      },
+      "use": {
+        "title": "Paggamit ng Data at Pagbabahagi",
+        "li1": "Magbigay at panatilihin ang serbisyo.",
+        "li2": "Pangalagaan ang integridad ng serbisyo, tuklasin ang pang-aabuso, at pagandahin ang mga katangian.",
+        "li3": "Tumupad sa mga pananagutang legal. Hindi namin ibinebenta ang personal na data."
+      },
+      "rights": {
+        "title": "Inyong Mga Pagpipilian at Mga Karapatan",
+        "li1": "Mag-opt out o pamahalaan ang personalisasyon ng ad gamit ang mga link sa itaas.",
+        "li2": "Kontrolin ang cookies sa pamamagitan ng mga setting ng iyong browser.",
+        "li3": "Makipag-ugnayan sa amin upang maipatupad ang mga naaangkop na karapatan sa privacy (pag-access, pagwawasto, pagtanggal ayon sa hinihinging ng batas)."
+      },
+      "children": {
+        "title": "Privacy ng mga Bata",
+        "p1": "Ang serbisyo ay hindi naglalayon sa mga bata na wala pang 13 taong gulang (o ang edad na itinakda ng lokal na batas). Hindi namin sinasadya na mangalap ng personal na impormasyon mula sa mga bata."
+      },
+      "changes": {
+        "title": "Mga pagbabago sa Patakarang ito",
+        "p1": "We may update this policy from time to time. Material changes will be highlighted on this page with an updated date. Your continued use of the site indicates acceptance of the updated policy."
+      },
+      "contact": {
+        "title": "Makipag-ugnayan",
+        "p1": "Para sa mga tanong tungkol sa privacy, pakitingin ang Contact page.",
+        "emailTitle": "Mag-email sa Pixel Art Village tungkol sa privacy"
+      }
+    },
+    "seoTitle": "Patakaran sa Pagkapribado | pixel art Village",
+    "seoDesc": "pixel art Village patakaran sa privacy: lokal na pagproseso ng larawan, AdSense cookies, mga kasosyo ng third‑party, inyong mga pagpipilian at mga karapatan, impormasyon ng pakikipag-ugnayan.",
+    "meta": {
+      "ogTitle": "Privacy Policy | Image patungo sa Pixel Art Converter",
+      "ogDescription": "Privacy policy for our image to pixel art converter: local image processing, AdSense cookies, third‑party partners, your choices and rights, contact info.",
+      "twitterTitle": "Patakaran sa Privacy | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village patakaran sa privacy: lokal na pagproseso ng larawan, AdSense cookies, mga third‑party na kasosyo, ang inyong mga pagpipilian at karapatan, impormasyon sa pakikipag-ugnayan."
+    },
+    "quickLinks": {
+      "heading": "Mabilis na Links",
+      "mainSite": "Pangunahing Site",
+      "popularConverters": "Mga Popular na Converter",
+      "links": {
+        "home": "Pixel Art Converter",
+        "about": "Tungkol sa Amin",
+        "contact": "Kontak",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "terms": {
+    "h1": "Mga Tuntunin ng Serbisyo",
+    "sections": {
+      "acceptance": {
+        "title": "Pagtatanggap ng Mga Tuntunin",
+        "p1": "Sa pamamagitan ng pag-access o paggamit sa pixel art Village (ang \"Serbisyo\"), sumasang-ayon ka na ikaw ay nahuhulog sa mga Tuntunang ito. Kung hindi ka sumasang-ayon, huwag gamitin ang Serbisyo."
+      },
+      "use": {
+        "title": "Paggamit ng Serbisyo",
+        "li1": "Mag-upload lamang ng nilalaman na may karapatan kang gamitin. Ikaw ay responsable sa iyong nilalaman at pagsunod sa mga naangkop na batas.",
+        "li2": "Huwag mang-abuso, makialam, o magdulot ng kaguluhan sa Serbisyo o sa ibang mga gumagamit.",
+        "li3": "Huwag gamitin ang Serbisyo para sa ilegal, nakakasama, o lumalabag na mga aktibidad."
+      },
+      "ip": {
+        "title": "Intelektuwal na Ari-arian",
+        "p1": "We retain all rights to the Service and related materials. You retain rights to your original uploads and generated outputs, subject to your applicable rights and third‑party rights."
+      },
+      "processing": {
+        "title": "Pagpoproseso ng Larawan",
+        "p1": "Ang pagpoproseso ng larawan ay nangyayari nang lokal sa inyong browser. Hindi namin iniimbak ang inyong mga na-upload na larawan sa aming mga server."
+      },
+      "disclaimer": {
+        "title": "Pagtanggi ng mga Garantiya",
+        "p1": "Ang Serbisyo ay inihatid \"as is\" at \"as available\" nang walang mga warranty ng anumang uri, malinaw o tahimik. Hindi kami nagsisiguro na ang Serbisyo ay hindi mailap o walang mali."
+      },
+      "liability": {
+        "title": "Limitasyon ng Pananagutan",
+        "p1": "To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from or related to your use of the Service."
+      },
+      "changes": {
+        "title": "Mga Pagbabago sa Serbisyo o sa Mga Tuntunin",
+        "p1": "Maaari naming baguhin o itigil ang Serbisyo at i-update ang mga Termino sa anumang oras. Ang patuloy na paggamit ng Serbisyo ay bumubuo ng pagtanggap ng na-update na mga Termino."
+      },
+      "law": {
+        "title": "Batas na Namamahala",
+        "p1": "These Terms are governed by applicable laws in your jurisdiction to the extent not preempted by other laws. Venue and jurisdiction will follow applicable conflict of laws rules."
+      },
+      "contact": {
+        "title": "Makipag-ugnayan",
+        "p1": "Para sa mga katanungan tungkol sa Mga Tuntunang ito, tingnan ang Contact page.",
+        "emailTitle": "Email Pixel Art Village tungkol sa mga termino"
+      }
+    },
+    "seoTitle": "Mga Tuntunin ng Serbisyo | Pixel Art Village",
+    "meta": {
+      "ogTitle": "Mga Tuntunin ng Serbisyo | Converter ng Larawan sa Pixel Art",
+      "ogDescription": "Mga Tuntunin ng Paggamit para sa aming image to pixel art converter: mga panuntunan sa paggamit, mga responsibilidad, disclaimer, IP, namamahalang batas, impormasyon ng pakikipag-ugnayan.",
+      "twitterTitle": "Mga Tuntunin ng Serbisyo | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village mga termino ng serbisyo: mga panuntunan sa paggamit, mga responsibilidad, pagtanggi, IP, nangingibabaw na batas, impormasyon sa pakikipag-ugnayan."
+    },
+    "quickLinks": {
+      "heading": "Mga mabilis na link",
+      "mainSite": "Pangunahing Website",
+      "popularConverters": "Mga Sikat na Converter",
+      "links": {
+        "home": "Pixel Art Converter",
+        "about": "Tungkol Sa Amin",
+        "contact": "Makipag-ugnayan",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "about": {
+    "seoTitle": "Tungkol sa Pixel Art Village | Libreng Pixel Art Converter",
+    "seoDesc": "Meet Pixel Art Village: a free pixel art maker and converter in browser that prioritizes privacy, speed, and accessibility.",
+    "h1": "Tungkol sa Pixel Art Village",
+    "p1": "pixel art Village is a free, browser‑based pixel image maker & converter. Upload a PNG/JPG image, tweak pixel size and palettes, preview instantly, and export crisp image results.",
+    "principles": {
+      "title": "Mga Prinsipyo",
+      "privacy": {
+        "title": "Privacy muna:",
+        "desc": "Lokal na pinoproseso sa iyong browser ang mga imahe — hindi kami nag-a-upload ng files."
+      },
+      "performance": {
+        "title": "Pagganap:",
+        "desc": "Mabilis na preview at malilinis na export nang walang mabibigat na dependency."
+      },
+      "accessibility": {
+        "title": "Aksibilidad:",
+        "desc": "UI na madaling gamitin ng keyboard at malinaw ang mga estado ng focus."
+      }
+    },
+    "contact": {
+      "title": "Makipag-ugnayan",
+      "p1": "Tingnan ang pahinang Contact para sa suporta at mga tanong. Maaari mo rin kaming i-email sa",
+      "emailTitle": "Email ang Pixel Art Village"
+    },
+    "ogTitle": "Tungkol sa Pixel Art Village",
+    "ogDesc": "Alamin ang Pixel Art Village, ang privacy-first na pixel art converter na may instant preview, mga palette, at tutorials.",
+    "twitterTitle": "Tungkol sa Pixel Art Village",
+    "twitterDesc": "Alamin kung sino ang nasa likod ng Pixel Art Village at paano gumagana ang aming privacy-first na pixel art converter.",
+    "p2": "Pinahahalagahan namin ang privacy, bilis, at accessibility para makapag-convert ka ng mga larawan tungo sa pixel art nang walang upload o pag-sign up.",
+    "p3": "Gumagawa ang aming koponan ng mga materyales sa pagkatuto at mga espesyal na tool para sa mga artist, guro, at indie game developer.",
+    "cta": "Subukan ang aming <tool>converter</tool> o basahin ang <blog>blog</blog> para sa mga tip at tutorial.",
+    "specializedLinks": "Kailangan mo ng daloy na ayon sa format? Nandiyan ang <png>PNG to Pixel Art</png>, <jpg>JPG to Pixel Art</jpg>, at <photo>Photo to Sprite Converter</photo> para tumulong.",
+    "moreInfoRich": "Makakakita ka ng higit pang detalye sa aming <privacy>Patakaran sa Privacy</privacy> at <terms>Mga Tuntunin ng Serbisyo</terms>."
+  },
+  "contact": {
+    "h1": "Makipag-ugnayan",
+    "p1": "Ipadala sa amin ang iyong mensahe. Para sa suporta, feedback, o pakikipagtulungan, sumulat sa amin sa pamamagitan ng email.",
+    "emailLabel": "Email:",
+    "note": "Palitan ang pansamantalang email ng iyong opisyal na address upang matugunan ang mga kinakailangan ng pagsusuri ng AdSense.",
+    "p2": "Bago ka magsulat, baka makita mo na ang sagot sa aming",
+    "p3": "blog",
+    "p4": "o bisitahin ang aming",
+    "p5": "tagapalit ng pixel art",
+    "p6": "Para magsimula. Silipin din ang aming",
+    "p7": "Pahina ng Tungkol sa Amin",
+    "p8": "para sa karagdagang impormasyon.",
+    "p9": "Para sa mas detalyadong tulong, tingnan ang",
+    "p10": "gabay na \"PNG to pixel art\"",
+    "p11": "o",
+    "p12": "gabay na imahe patungo sa pixel art",
+    "p13": "in our library",
+    "seoTitle": "Makipag-ugnayan | Suporta at Feedback | Pixel Art Village",
+    "seoDesc": "Makipag-ugnayan sa Pixel Art Village para sa suporta, feedback, pakikipagtulungan, at mga request ng feature. Mabilis kaming maabot sa email o sa aming mga resource.",
+    "ogTitle": "Makipag-ugnayan | Pixel Art Village",
+    "ogDesc": "Kontakin ang Pixel Art Village para sa suporta, feedback, pakikipagtulungan, at karagdagang resources.",
+    "twitterTitle": "Makipag-ugnayan | Pixel Art Village",
+    "twitterDesc": "Kailangan mo ng tulong sa Pixel Art Village? Makipag-ugnayan para sa suporta, feedback, o kolaborasyon.",
+    "emailTitle": "I-email ang Pixel Art Village"
+  },
+  "faq": {
+    "title": "pixel art Village: Mga Madalas na Tanong",
+    "items": [
+      {
+        "question": "Ang site ay nagpapakita ng blank page o nagco-crash — ano ang dapat kong gawin?",
+        "answer": "Ilang extension ng browser (hal. Plasmo/BacklinkPilot) ang naglalagay ng mga development runtimes sa bawat pahina, na magsisirang sa React apps. Paki-huwag paganahin ang mga extension na iyon sa site na ito at pwersahang i-refresh (Ctrl/Cmd+Shift+R)."
+      },
+      {
+        "question": "Libre ba ang digital image maker na may mga control ng paleta?",
+        "answer": "Oo. Ang Image Village ay isang ganap na libreng online image tool para sa lahat ng gumagamit. Masiyahan sa mga walang limitasyong image conversions, custom palette controls, at high‑resolution downloads na may advanced palettes nang walang gastos."
+      },
+      {
+        "question": "Pribado ba ang larawan ko? Nag-uupload ka ba ng mga larawan?",
+        "answer": "Nakarehistro ang privacy ng iyong larawan. Hindi umaalis ang iyong mga file ng larawan sa iyong device dahil ang lahat ng pagproseso ng larawan ay ginagawa nang lokal sa iyong browser. Hindi maa-access ng Image Village ang iyong mga file ng larawan, na ginagawa itong isang secure digital image creator mula sa iyong mga larawan na may mga opsyon sa palette."
+      },
+      {
+        "question": "Paano ko gagawin ang isang larawan na maging game sprite na may pasadong paleta?",
+        "answer": "Ang aming digital image maker na may mga control sa paleta ay perpekto sa paggawa ng game sprite. I-upload ang larawan ng inyong tauhan, i-adjust ang sukat para sa inyong istilo sa paningin ng laro, at gamitin ang mga custom control sa paleta para sa mga hangganan ng kulay ng inyong engine. Gumawa ng pixel art gamit ang mga advanced na paleta para tulungan kayo na gawin ang perpektong sprite bilang isang transparent PNG."
+      },
+      {
+        "question": "Maaari ba akong i-ayos ang pixel grid ng aking larawan?",
+        "answer": "Tunay naman. Ang live editor ay may pagpipilian na \"Show grid\". Tumutulong ang pixel grid overlay na ito upang makita mo nang malinaw ang mga indibidwal na pixel, na kapaki-pakinabang para sa pag-ayos ng iyong sining o para sa pagkatuto kung paano gumagana ang pixelation effect sa larawan mo."
+      },
+      {
+        "question": "Ano ang pinakamahusay na paraan para ma-convert ang isang larawan sa pixel art?",
+        "answer": "Para sa pinakamagandang resulta kapag nag-convert ka ng larawan sa pixel visuals, simulan sa isang mataas na kontras na larawan. Gamitin ang pixel size slider para makahanap ng antas ng detalye na gusto mo gamit ang mga setting ng custom palette. Lumikha ng pixel art gamit ang mas malaking sukat para sa mas abstract na 8-bit na hitsura, habang mas maliit na sukat ay nagpapanatili ng mas maraming detalye mula sa orihinal na larawan gamit ang mga advanced na palette."
+      },
+      {
+        "question": "Maaari ba akong gamitin ang pixel art para sa pang-negosyo?",
+        "answer": "May-ari ka ng mga karapatan sa iyong orihinal na upload at sa mga nabuong resulta. Magagamit mo ang mga larawang ginawa gamit ang Pixel Village para sa anumang layunin, kasama ang mga proyektong pang-komersiyo. Lumikha ng pixel art gamit ang aming mga kasangkapan para sa walang limitasyong paggamit sa komersyo."
+      },
+      {
+        "question": "Anong mga format ang pwedeng gamitin ko sa image pixelator na ito?",
+        "answer": "Sinusuportahan ng image pixelator na ito ang lahat ng karaniwang format ng browser tulad ng PNG, JPG, GIF, at WEBP. Maaari kang mag-convert ng PNG sa pixel visuals o JPG sa pixel visuals nang madali. Lumikha ng pixel art gamit ang anumang format ng larawan."
+      },
+      {
+        "question": "Bakit ang tawag sa tool na ito ay pixel art Village?",
+        "answer": "Naniniwala kami na ang paglikha ng graphics ay isang aktibidad ng komunidad, kahit na gumagamit ng online tool. pixel Village ay isang lugar kung saan sinuman, mula sa baguhan hanggang sa pro, ay maaaring magkakatipon upang madaling gumawa ng mga pixel visual na may custom na palette. Lumikha ng pixel art gamit ang aming mga tool at sumali sa aming malugod na village para sa lahat ng mga pixel enthusiasts."
+      }
+    ]
+  },
+  "related": {
+    "converters": {
+      "title": "Mga Pixel Art Converter",
+      "desc": "Tuklasin ang higit pang libreng tool para sa pag-convert ng mga larawan sa pixel art.",
+      "items": [
+        {
+          "title": "Image to Pixel Art",
+          "href": "/converter/imahe-sa-pixel-art/",
+          "desc": "Pangkalahatang converter para sa lahat ng mga format ng larawan"
+        },
+        {
+          "title": "PNG to Pixel Art",
+          "href": "/converter/png-sa-pixel-art/",
+          "desc": "I-convert ang mga PNG na may transparency."
+        },
+        {
+          "title": "JPG to Pixel Art",
+          "href": "/converter/jpg-to-pixel-art/",
+          "desc": "I-convert ang mga larawan sa retro graphics"
+        },
+        {
+          "title": "Photo to Sprite",
+          "href": "/converter/larawan-sa-sprite-converter/",
+          "desc": "Lumikha ng handang gamitin na sprite ng laro mula sa larawan"
+        },
+        {
+          "title": "8-bit Art Generator",
+          "href": "/tagapalit/8-bit-sining-tagagawa/",
+          "desc": "Gumawa ng tunay na 8-bit na estilo ng artwork"
+        },
+        {
+          "title": "I-pixelate ang Larawan Online",
+          "href": "/converter/pixelate-image-online/)",
+          "desc": "Mabilis at libre na pixelasyon ng larawan"
+        }
+      ]
+    },
+    "guides": {
+      "title": "Pixel Art: Mga Tutorial at Gabay",
+      "desc": "Matuto kung paano gumawa ng mas magandang pixel art sa aming mga hakbang-hakbang na tutorial.",
+      "items": [
+        {
+          "title": "Paano Pixelate ang isang Larawan",
+          "href": "/blog/paano-mag-pixelate-ng-isang-larawan/",
+          "desc": "Angkop para sa mga baguhan: gabay sa pixel art"
+        },
+        {
+          "title": "I-export mula sa Illustrator",
+          "href": "/blog/i-export-mula-sa-illustrator-patungo-sa-pixel-art/",
+          "desc": "Iwasan ang pixelasyon kapag nag‑eeksport"
+        },
+        {
+          "title": "Gumawa ng Larawan na Mas Tulad ng Pixel",
+          "href": "/blog/lumikha-ng-larawan-mas-tulad-pixel/",
+          "desc": "Mga pangunahing teknik ng pag-edit para sa mas mahusay na resulta"
+        },
+        {
+          "title": "Kunin ang Pixel Art na Bersyon ng Larawan",
+          "href": "/paano-makakuha-pixel-art-na-bersiyon-ng-larawan/",
+          "desc": "Kumpletong gabay sa converter na may mga tip para sa SNES"
+        }
+      ]
+    }
+  },
+  "paletteManager": {
+    "createTab": "Gumawa ng Paleta",
+    "importTab": "🆕 I-import galing sa Lospec",
+    "createTitle": "Lumikha ng paleta",
+    "nameLabel": "Pangalan ng Palette",
+    "namePlaceholder": "Aking Paleta",
+    "colorsLabel": "Mga Kulay ng Palette",
+    "noColors": "Walang kulay pa",
+    "colorInputPlaceholder": "#000000",
+    "addColor": "Dagdag kulay",
+    "removeSelected": "Tanggalin ang napili",
+    "save": "I-save ang palette",
+    "reset": "I-reset ang pormularyo",
+    "delete": "Tanggalin ang palette",
+    "importTitle": "Mag-import mula sa Lospec",
+    "importDesc": "Mag-browse at mag-import ng mga paleta mula sa",
+    "importDescSuffix": "，这是最大的像素艺术调色板社区，拥有 5000+ 配色方案。",
+    "importSuccess": "Na-import at na-apply na nang awtomatikong ang palette \"{{name}}\".\\n\\nMag-scroll pataas para makita ang effect, o magpalit ng ibang palette sa Palette dropdown menu."
+  },
+  "home": {
+    "seoTitle": "Larawan sa Pixel Art Converter | Pixel Art Village",
+    "seoDescription": "I-convert ang anumang larawan sa retro 8-bit pixel art na may mga nababagong palette, mabilis na preview, mga control ng dithering, at secure na pagproseso sa browser—hindi kailangan ng pag-sign up."
+  },
+  "header": {
+    "mainNav": "Pangunahing Navigation",
+    "userAvatarTitle": "User avatar"
+  },
+  "content": {
+    "fallbackNotice": "Malapit nang makumpleto ang nilalaman para sa wikang ito. Nagpapakita ng English ngayon."
   }
 }

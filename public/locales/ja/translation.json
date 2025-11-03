@@ -1,18 +1,44 @@
 {
-  "nav": {"examples": "例", "features": "機能", "how": "使い方", "faq": "よくある質問", "blog": "ブログ", "home": "ホーム", "about": "概要", "contact": "お問い合わせ"},
-  "navTitle": {
-    "hero": "Scroll to Home hero section",
-    "examples": "Scroll to Pixel Art Examples",
-    "features": "Scroll to Pixel Art Features",
-    "how": "Scroll to How Pixel Art Converter Works",
-    "faq": "Scroll to Pixel Art FAQ",
-    "blog": "Open Pixel Art Blog"
+  "nav": {
+    "examples": "例",
+    "features": "機能",
+    "how": "使い方",
+    "faq": "よくある質問",
+    "blog": "ブログ",
+    "home": "ホーム",
+    "about": "概要",
+    "contact": "お問い合わせ"
   },
-  "cta": {"start": "今すぐ始める"},
-  "site": {"tagline": "オンライン ピクセルグラフィック ジェネレーター・メーカー・コンバーター"},
+  "navTitle": {
+    "hero": "ホームのヒーローセクションへスクロール",
+    "examples": "ピクセルアートの例へスクロール",
+    "features": "ピクセルアートの機能へスクロール",
+    "how": "ピクセルアートコンバーターの使い方へスクロール",
+    "faq": "よくある質問へスクロール",
+    "blog": "ピクセルアートブログを開く"
+  },
+  "cta": {
+    "start": "今すぐ始める"
+  },
+  "site": {
+    "name": "Pixel Art Village",
+    "tagline": "オンライン ピクセルグラフィック ジェネレーター・メーカー・コンバーター",
+    "homeLinkAria": "Pixel Art Village ホーム"
+  },
   "footer": {
-    "tools": "ツール", "formats": "フォーマット", "explore": "探索", "community": "コミュニティ",
-    "terms": "利用規約", "privacy": "プライバシー", "about": "概要", "contact": "お問い合わせ",
+    "tools": "ツール",
+    "formats": "フォーマット",
+    "explore": "探索",
+    "community": "コミュニティ",
+    "terms": "利用規約",
+    "privacy": "プライバシー",
+    "about": "概要",
+    "contact": "お問い合わせ",
+    "github": "GitHub",
+    "cta": {
+      "ariaStart": "Pixel Art Village で画像をピクセルアートに変換開始"
+    },
+    "copy": "© {{year}} ピクセルアートビレッジ. 全著作権所有。",
     "links": {
       "generator": "ピクセルグラフィック ジェネレーター",
       "converter": "ピクセルグラフィック コンバーター",
@@ -23,7 +49,7 @@
       "img2pixel": "IMG からピクセルグラフィック",
       "gridPreview": "ピクセルグリッドのプレビュー",
       "how": "使い方",
-      "start": "pixel art Village で始める",
+      "start": "ピクセルアート Village で始める",
       "tips": "ヒント & パレット",
       "privacyLocal": "プライバシー & ローカル処理"
     }
@@ -32,7 +58,10 @@
     "title": "ブログ",
     "subtitle": "ピクセルグラフィックの作り方、チュートリアル、機能紹介の記事。",
     "back": "ブログに戻る",
-    "notFound": {"title": "記事が見つかりません", "desc": "お探しの記事は存在しません。戻る先:"}
+    "notFound": {
+      "title": "記事が見つかりません",
+      "desc": "お探しの記事は存在しません。ブログに戻ってください"
+    }
   },
   "consent": {
     "title": "プライバシーと Cookie",
@@ -40,28 +69,195 @@
     "privacy": "プライバシーポリシー",
     "andManage": "広告のパーソナライズ管理:",
     "accept": "すべて許可",
-    "reject": "不要なものを拒否"
+    "reject": "不要なものを拒否",
+    "bannerLabel": "Cookie 同意ダイアログ",
+    "acceptLabel": "すべての Cookie を許可",
+    "rejectLabel": "不要な Cookie を拒否"
   },
   "tool": {
-    "title": "無料のオンライン ピクセルグラフィック メーカー & コンバーター",
-    "subtitle": "ブラウザ上で画像をピクセル化 — PNG/JPG をクリーンでグリッドに優しいピクセルグラフィックへ。ピクセルサイズやパレットを即時プレビューで調整し、スプライト、アイコン、レトログラフィック向けにシャープに書き出せます。高速・プライバシー重視・無料の pixel art Village。",
+    "title": "画像ピクセルアート変換ツール",
+    "subtitle2": "調整可能なピクセルサイズとカスタムパレット。高度なパレットオプション付きスプライト、アイコン、レトロゲームアートに最適。",
+    "subtitle": "写真を素晴らしいピクセルアートに瞬時に変換",
     "dragOrClick": "ここに画像をドラッグするか",
     "clickToChoose": "クリックして選択",
     "supports": "PNG / JPG / GIF 対応 — 最大 10MB",
     "chooseFile": "ファイルを選択",
     "preparing": "画像を準備しています…",
     "ariaUpload": "画像をアップロード（ドラッグ&ドロップまたはクリックで選択）",
-    "ariaChoose": "画像ファイルを選択"
+    "ariaChoose": "画像ファイルを選択",
+    "dragDrop": "ここに画像をドラッグ＆ドロップ",
+    "orClick": "またはクリックして選択",
+    "convertButton": "ピクセルアートに変換",
+    "processing": "画像を処理中...",
+    "converted": "画像の変換が完了しました",
+    "dropZone": "Drop zone",
+    "downloadButton": "Download image",
+    "resetButton": "New image",
+    "pixelSize": "Pixel size",
+    "colorPalette": "Color palette",
+    "dithering": "Dithering",
+    "preview": "Preview",
+    "original": "Original",
+    "result": "Result"
   },
-  "upload": {"selected": "選択されたファイル: {{name}}"},
+  "upload": {
+    "selected": "選択されたファイル: {{name}}"
+  },
   "errors": {
     "fileTooLarge10": "ファイルサイズが大きすぎます。10MB 未満の画像をアップロードしてください。",
     "prepareFail": "画像の準備に失敗しました。別のファイルをお試しください。",
     "onlyPngJpg": "PNG または JPG 画像を選択してください。",
     "maxFile": "ファイルサイズが大きすぎます。最大 {{mb}}MB までです。"
   },
-  "editor": {"title": "オンライン ピクセルグラフィック メーカー"}
-  ,
+  "editor": {
+    "title": "オンライン ピクセルグラフィック メーカー",
+    "downloadBtn": "ピクセルアート画像のダウンロード",
+    "uploadBtn": "画像をアップロード",
+    "section": {
+      "general": "一般 ▾"
+    }
+  },
+  "adjustments": {
+    "reset": {
+      "title": "スライダーをリセット",
+      "all": "すべてリセット",
+      "tooltip": "ピクセルサイズ / 輝度 / コントラスト / 彩度をリセット",
+      "pixelSizeBtnTitle": "ピクセルサイズをリセット",
+      "brightnessBtnTitle": "輝度をリセット",
+      "contrastBtnTitle": "コントラストのリセット",
+      "saturationBtnTitle": "彩度をリセット"
+    },
+    "pixelSize": "ピクセルサイズ: {{value}}",
+    "section": {
+      "color": "カラー調整"
+    },
+    "brightness": "輝度: {{value}}",
+    "contrast": "コントラスト: {{value}}",
+    "saturation": "彩度: {{value}}",
+    "palette": {
+      "label": "パレット",
+      "none": "なし",
+      "custom": "カスタム",
+      "note": "Pico‑8は固定パレットです。組み込みパレットパレット色がない他の名前、パレットパレット色はサイズによってパレットを自動生成します（例：Sunset 8 → 8パレットパレット色）。"
+    },
+    "colorDistance": {
+      "label": "色差",
+      "rgb": "RGB (高速)",
+      "lab": "LAB (正確、より遅い)"
+    },
+    "autoPalette": "画像からカラーパレットを生成します",
+    "paletteSize": "# パレット パレット カラー: {{value}}",
+    "dither": "Floyd–Steinberg ディザリングを有効にする",
+    "zoom": "ズーム: {{value}}x",
+    "grid": "グリッドを表示"
+  },
+  "export": {
+    "label": {
+      "format": "エクスポート形式",
+      "size": "エクスポートサイズ"
+    },
+    "option": {
+      "png": "PNG (損失なし)",
+      "jpeg": "JPEG",
+      "webp": "WebP"
+    },
+    "size": {
+      "xs": "XS (0.5×)",
+      "sm": "スモール (1×)",
+      "lg": "ラージ (2×)",
+      "xl": "XL (4×)"
+    },
+    "transparent": {
+      "label": "透明背景 (PNG/WebP)"
+    },
+    "quality": {
+      "label": "品質: {{percent}}%"
+    }
+  },
+  "notFound": {
+    "seoTitle": "ページが見つかりません | pixel art Village",
+    "title": "ページが見つかりません",
+    "desc": "The page you're looking for doesn't exist or may have been moved. Return to pixel art Village and continue creating wonderful pixel art.",
+    "backHome": "← ピクセルアートの Village に戻る",
+    "popularPages": "または人気のページをお試しください:",
+    "links": {
+      "home": "ホーム",
+      "pngConverter": "PNG からピクセルアートに変換",
+      "jpgConverter": "JPG からピクセルアートに変換",
+      "about": "概要"
+    }
+  },
+  "pseo": {
+    "notFound": {
+      "seoTitle": "コンバーターページが見つかりません | pixel art Village",
+      "title": "コンバーターページが見つかりません",
+      "desc": "お探しのコンバーターページは存在しません。"
+    },
+    "relatedHeading": "関連ピクセルアートコンバーター",
+    "siteNavigationTitle": "サイトナビゲーション"
+  },
+  "showcase": {
+    "title": "画像からピクセルへ：画像プロセッサーの能力をご覧ください",
+    "desc": "と",
+    "before": "前",
+    "after": "後で",
+    "alt": {
+      "before": "ピクセルアートへの変換前の元の画像",
+      "after": "ピクセルアートビレッジジェネレーターによって風景画像が8ビットスタイルピクセルアートに変換されました"
+    },
+    "descFull": "当社の画像からピクセルアートへの変換ツールが、あなたの写真を鮮明なピクセルアートに変換する様子をご覧ください。"
+  },
+  "lang": {
+    "label": "言語"
+  },
+  "wplace": {
+    "title": "Villageユーザーのための完璧なピクセルアートツール",
+    "desc": "ピクセルアート Village のための最良のコンパニオン — 任意の画像をクリーンなピクセルビジュアルに変換し、リアルタイムプレビュー、スマートパレット、そしてインスタントエクスポートが可能です。画像ツールでピクセルアートを作成しましょう。",
+    "features": {
+      "free": {
+        "title": "100%無料",
+        "desc": "すべての方に完全無料。隠れた料金やサブスクリプションなし — 任意の画像から無制限のピクセルビジュアルを作成。"
+      },
+      "privacy": {
+        "title": "プライバシーフラス",
+        "desc": "すべての処理はブラウザ内で実行されます。画像はデバイスから外部に送信されることはありません — プライベートで安全なワークフローを設計しています。"
+      },
+      "easy": {
+        "title": "すべてのプレイヤーにとって簡単",
+        "desc": "直感的なインターフェースと高速なフィードバック。カスタムパレットオプションで、数回のクリックで任意の画像を塗り替え可能なピクセルビジュアルに変換します。"
+      },
+      "size": {
+        "title": "サイズ制限なし",
+        "desc": "あらゆるサイズの画像をアップロード—小さなアイコンから大きなグラフィックまで—高度なパレットを使用した、滑らかなスケーリングとレスポンシブな画像プレビューが可能です。"
+      }
+    }
+  },
+  "features": {
+    "title": "主な機能",
+    "desc": "画像をピクセル完璧なアートに変換。カスタムパレットとカラースwatch管理で詳細をライブ調整。即座のプレビューとスプライトレディPNGエクスポート。",
+    "palette": {
+      "title": "パレットコントロール",
+      "desc": "画像からピクセルアートへの変換ツールは、正確なパレット制御を提供します。ビルトインのレトロパレットを選択するか、影像からトーンを自動抽出し затем lock, reorder, and fine-tune hues to match your style. 一貫したパレットにより、画像からピクセルアートへの変換は、スプライトを読みやすく、ゲームに対応し、プロジェクト間で再利用できます。"
+    },
+    "live": {
+      "title": "ライブ調整",
+      "desc": "ピクセルサイズ、ディザリング、コントラスト、明るさを調整すると、画像からピクセルアートへの結果が瞬時に更新されます。変更が横並びで表示されるため、遅延なしで選択肢を比較でき、より早く完璧な外観を決められます。ライブプレビューは推測を減らし、エクスポート每次ごとに画像からピクセルアートへの変換を予測可能にします。"
+    },
+    "clientSide": {
+      "title": "100% クライアントサイド",
+      "desc": "すべての変換は、ブラウザ内で100%クライアントサイドで実行されます。画像はデバイスから離れることはなく、オフライン構築も可能で、資産をプライベートで安全に保ちます。ピクセルアートビレッジ は、デスクトップからモバイルまで、高速で安全な処理を提供しながらあなたの作業を保護します。ピクセルアートビレッジ を使用すると、最初のプレビューから最終エクスポートまであなたの制御を維持できます。"
+    },
+    "customPalettes": "カスタムパレット",
+    "customPalettesDesc": "定義済みパレットから選択するか、独自のカスタムカラーパレットを作成",
+    "realTimePreview": "リアルタイムプレビュー",
+    "realTimePreviewDesc": "設定を調整しながら変更を即座に確認",
+    "multipleFormats": "複数のフォーマット",
+    "multipleFormatsDesc": "PNG、JPG、GIF、BMP、WebP画像フォーマットをサポート",
+    "highQuality": "High Quality",
+    "highQualityDesc": "Export high-quality images perfect for your project",
+    "easyToUse": "Easy to Use",
+    "easyToUseDesc": "Intuitive interface designed for artists and developers"
+  },
   "how": {
     "title": "pixel art Village の使い方",
     "desc": "3つの簡単なステップでピクセルグラフィックを作成できます。",
@@ -73,125 +269,354 @@
       "adjust.desc": "ピクセルサイズ、パレット、ピクセルグリッドをライブで調整します。",
       "download.desc": "ピクセルグラフィック ジェネレーターからワンクリックで書き出して共有します。"
     }
-  }
-,
-  "massivePhrases": {
-    "phrases1_1": "Convert image to pixel art online",
-    "phrases1_2": "Transform image to pixel art instantly",
-    "phrases1_3": "Turn image to pixel art with ease",
-    "phrases1_4": "Change image to pixel art format",
-    "phrases1_5": "Process image to pixel art style",
-    "phrases1_6": "Edit image to pixel art quickly",
-    "phrases1_7": "Make image to pixel art conversion",
-    "phrases1_8": "Create image to pixel art result",
-    "phrases1_9": "Generate image to pixel art output",
-    "phrases1_10": "Produce image to pixel art design",
-    "phrases2_1": "Create pixel art image from photo",
-    "phrases2_2": "Generate pixel art image online",
-    "phrases2_3": "Make pixel art image quickly",
-    "phrases2_4": "Build pixel art image easily",
-    "phrases2_5": "Design pixel art image professionally",
-    "phrases2_6": "Craft pixel art image perfectly",
-    "phrases2_7": "Produce pixel art image instantly",
-    "phrases2_8": "Develop pixel art image efficiently",
-    "phrases2_9": "Form pixel art image beautifully",
-    "phrases2_10": "Construct pixel art image smoothly",
-    "phrases3_1": "Convert image to format",
-    "phrases3_2": "Transform image to style",
-    "phrases3_3": "Turn image to design",
-    "phrases3_4": "Change image to type",
-    "phrases3_5": "Process image to result",
-    "phrases3_6": "Edit image to output",
-    "phrases3_7": "Make image to creation",
-    "phrases3_8": "Create image to artwork",
-    "phrases3_9": "Generate image to graphic",
-    "phrases3_10": "Produce image to visual",
-    "phrases3_11": "Develop image to picture",
-    "phrases3_12": "Form image to illustration",
-    "phrases3_13": "Build image to composition",
-    "phrases3_14": "Design image to masterpiece",
-    "phrases3_15": "Craft image to creation",
-    "phrases4_1": "Adjust pixel size setting",
-    "phrases4_2": "Control pixel size option",
-    "phrases4_3": "Change pixel size value",
-    "phrases4_4": "Set pixel size parameter",
-    "phrases4_5": "Modify pixel size dimension",
-    "phrases4_6": "Configure pixel size property",
-    "phrases4_7": "Customize pixel size feature",
-    "phrases4_8": "Define pixel size measurement",
-    "phrases4_9": "Specify pixel size requirement",
-    "phrases4_10": "Determine pixel size standard",
-    "phrases4_11": "Establish pixel size guideline",
-    "phrases4_12": "Fix pixel size resolution",
-    "phrases4_13": "Select pixel size preference",
-    "phrases4_14": "Choose pixel size configuration",
-    "phrases5_1": "Process the image file",
-    "phrases5_2": "Edit the image content",
-    "phrases5_3": "Transform the image data",
-    "phrases5_4": "Convert the image format",
-    "phrases5_5": "Modify the image properties",
-    "phrases5_6": "Adjust the image settings",
-    "phrases5_7": "Enhance the image quality",
-    "phrases5_8": "Improve the image appearance",
-    "phrases5_9": "Optimize the image output",
-    "phrases5_10": "Refine the image details",
-    "phrases5_11": "Perfect the image result",
-    "phrases5_12": "Polish the image finish",
-    "phrases5_13": "Upgrade the image standard",
-    "phrases5_14": "Boost the image performance",
-    "phrases6_1": "Create art image masterpiece",
-    "phrases6_2": "Generate art image design",
-    "phrases6_3": "Make art image creation",
-    "phrases6_4": "Build art image artwork",
-    "phrases6_5": "Produce art image visual",
-    "phrases6_6": "Develop art image graphic",
-    "phrases6_7": "Form art image illustration",
-    "phrases6_8": "Craft art image composition",
-    "phrases6_9": "Design art image project",
-    "phrases6_10": "Construct art image piece",
-    "phrases7_1": "Customize the palette colors",
-    "phrases7_2": "Adjust the palette settings",
-    "phrases7_3": "Control the palette options",
-    "phrases7_4": "Modify the palette configuration",
-    "phrases7_5": "Configure the palette properties",
-    "phrases7_6": "Set the palette parameters",
-    "phrases7_7": "Define the palette scheme",
-    "phrases7_8": "Choose the palette selection",
-    "phrases7_9": "Select the palette combination",
-    "phrases7_10": "Determine the palette arrangement",
-    "phrases8_1": "Convert to pixel format",
-    "phrases8_2": "Transform to pixel style",
-    "phrases8_3": "Change to pixel design",
-    "phrases8_4": "Turn to pixel art",
-    "phrases8_5": "Switch to pixel mode",
-    "phrases8_6": "Shift to pixel type",
-    "phrases8_7": "Move to pixel version",
-    "phrases8_8": "Adapt to pixel standard",
-    "phrases8_9": "Adjust to pixel specification",
-    "phrases8_10": "Modify to pixel requirement",
-    "phrases9_1": "Edit the pixel details",
-    "phrases9_2": "Adjust the pixel properties",
-    "phrases9_3": "Control the pixel settings",
-    "phrases9_4": "Modify the pixel attributes",
-    "phrases9_5": "Configure the pixel parameters",
-    "phrases9_6": "Set the pixel values",
-    "phrases9_7": "Define the pixel characteristics",
-    "phrases9_8": "Specify the pixel features",
-    "phrases9_9": "Determine the pixel qualities",
-    "phrases9_10": "Establish the pixel standards",
-    "phrases10_1": "Convert to pixel art style",
-    "phrases10_2": "Transform to pixel art format",
-    "phrases10_3": "Change to pixel art design",
-    "phrases10_4": "Turn to pixel art version",
-    "phrases10_5": "Switch to pixel art mode",
-    "phrases10_6": "Shift to pixel art type",
-    "phrases10_7": "Move to pixel art standard",
-    "phrases11_1": "Convert image to pixel format",
-    "phrases11_2": "Transform image to pixel style",
-    "phrases11_3": "Change image to pixel design",
-    "phrases11_4": "Turn image to pixel version",
-    "phrases11_5": "Process image to pixel mode",
-    "phrases11_6": "Edit image to pixel type",
-    "phrases11_7": "Make image to pixel standard"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "success": "成功",
+    "failed": "失敗",
+    "imageFailedToLoad": "画像を読み込めませんでした",
+    "imageUnavailable": "画像を利用できません",
+    "lastUpdated": "最終更新: {{date}}"
+  },
+  "privacy": {
+    "h1": "プライバシーポリシー",
+    "sections": {
+      "overview": {
+        "title": "概要",
+        "p1": "ピクセルアート Village はお客様のプライバシーを尊重しています。このポリシーでは、当社が処理するデータ、Cookie の使用方法（Google AdSense Cookie を含む）、およびお客様の選択肢について説明しています。ご質問がある場合は、連絡先ページのメールでお問い合わせください。"
+      },
+      "local": {
+        "title": "ローカル画像処理",
+        "p1": "あなたの画像はデバイスから離れることはありません。すべての画像処理はブラウザ内でローカルに発生します。画像を当社のサーバーにアップロード、保存、共有しません。"
+      },
+      "collect": {
+        "title": "収集する情報",
+        "li1": "サイト運営に必要な技術データ（例：基本的なデバイス/ブラウザ情報）は、サービスの提供に必要です。",
+        "li2": "機能を改善するために集積した利用データ（分析が有効になっている場合、個人を特定できる情報は収集しません）。",
+        "li3": "広告データは (Google AdSense) が広告が表示される場合に取得されます（以下を参照）。",
+        "p2": "アカウント登録は不要です。故意に機微な個人データを収集することはありません。"
+      },
+      "cookies": {
+        "title": "Cookies and AdSense",
+        "p1": "私たちは、Webサイトの運用とエクスペリエンスの改善のために、クッキーテクノロジー相似的技術を使用する場合があります。Google AdSenseが有効になっている場合、Googleとそのパートナーは、このサイトやその他のサイトへの訪問に基づいて広告を提供するために、クッキーを使用場合があります。",
+        "learn": "GoogleがGoogleサービスを使用するサイトやアプリから情報をどのように使用するかについて学習します：",
+        "manage": "広告の個別化:",
+        "more": "の詳細Google広告とCookie:"
+      },
+      "third": {
+        "title": "第三者パートナー",
+        "p1": "当社は第三方コンテンツを統合する場合があります（例：Google AdSense）。これらのパートナーは独自のプライバシーポリシーに基づいてデータを処理する場合があります。データ処理の実践を理解するために、パートナーのポリシーを確認されることをお勧めします。"
+      },
+      "use": {
+        "title": "データ使用と共有",
+        "li1": "サービスを 제공하고、維持する。",
+        "li2": "サービスの整合性を保護し、濫用を検出し、機能を改善します。",
+        "li3": "法的義務に従う。 当社は個人データを販売していません。"
+      },
+      "rights": {
+        "title": "あなたの選択と権利",
+        "li1": "上記のリンクを使用して、広告のパーソナライズを管理するか、オプトアウトしてください。",
+        "li2": "ブラウザ設定でcookieを制御する。",
+        "li3": "適用されるプライバシー権（アクセス、訂正、法令により要求される削除）の行使をご希望の場合は、お気軽にお問い合わせください。"
+      },
+      "children": {
+        "title": "子供のプライバシー",
+        "p1": "このサービスは13歳以下の児童向けではありません（または現地の法で規定された年齢）。故意に児童から個人情報を収集することはありません。"
+      },
+      "changes": {
+        "title": "このポリシーの変更",
+        "p1": "当ポリシーは随時更新される場合があります。重要な変更は、更新日とともに本ページでハイライトされます。サイトの継続的な利用は、更新されたポリシーの受諾を示します。"
+      },
+      "contact": {
+        "title": "お問い合わせ",
+        "p1": "プライバシーに関するお問い合わせは、お問い合わせくださいページをご確認ください。",
+        "emailTitle": "プライバシーについて ピクセルアートビレッジ にメール"
+      }
+    },
+    "seoTitle": "プライバシーポリシー | pixel art Village",
+    "seoDesc": "ピクセルアート Village プライバシー ポリシー: ローカル画像処理、AdSense Cookie、第三者パートナー、あなたの選択と権利、連絡先情報。",
+    "meta": {
+      "ogTitle": "プライバシーポリシー | 画像からピクセルアートへの変換器",
+      "ogDescription": "画像からピクセルアートへの変換ツールのプライバシーポリシー：ローカル画像処理、AdSense cookies、サードパーティパートナー、あなたの選択と権利、連絡先情報。",
+      "twitterTitle": "プライバシーポリシー | ピクセルアートビレッジ",
+      "twitterDescription": "ピクセルアートビレッジ プライバシーポリシー: ローカル画像処理、AdSense cookie、 third‑party パートナー、お客様の選択と権利、連絡先情報。"
+    },
+    "quickLinks": {
+      "heading": "クイックリンク",
+      "mainSite": "メインサイト",
+      "popularConverters": "人気の変換ツール",
+      "links": {
+        "home": "ピクセルアートコンバーター",
+        "about": "私たちについて",
+        "contact": "お問い合わせ",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "terms": {
+    "h1": "利用規約",
+    "sections": {
+      "acceptance": {
+        "title": "利用規約の承諾",
+        "p1": "ピクセルアーヴィレッジ（「サービス」）にアクセ スまたはこれを使用함으로써、お客様はこれらの利用規約に拘束されることに同意するものとします。同意しない場合は、ソリューションしないでください。"
+      },
+      "use": {
+        "title": "サービスの利用",
+        "li1": "使用する権利のあるコンテンツのみをアップロードしてください。コンテンツと適用法規の遵守について責任を負います。",
+        "li2": "サービスを悪用、干渉、または妨害したり、他のユーザーに危害を加えないでください。",
+        "li3": "サービスを違法、有害、または侵害活動に使用しないでください。"
+      },
+      "ip": {
+        "title": "知的財産",
+        "p1": "当社は、サービスおよび関連資料に関するすべての権利を保持します。あなたは、あなたの元のアップロードおよび生成された出力に関する権利を保持します。ただし、これはあなたの適用可能な権利および第三者の権利に従います。"
+      },
+      "processing": {
+        "title": "画像処理",
+        "p1": "画像処理はブラウザ内でローカルに実行されます。アップロードされた画像はサーバーに保存されません。"
+      },
+      "disclaimer": {
+        "title": "保証の免責",
+        "p1": "本サービスは「現状のまま」および「利用可能な状態で」提供され、いかなる種類の保証も、明示的か黙示的かを問いません。当社は本サービスに中断がないこと、エラーフリーであることを保証致しません。"
+      },
+      "liability": {
+        "title": "責任の制限",
+        "p1": "法により許される限り最大限のレベルにおいて、当社は、サービスのご利用から起因または関連して生じた間接的、偶発的、特殊的、派生的、または懲罰的損害的一切について責任を負いません。"
+      },
+      "changes": {
+        "title": "サービスまたは利用規約の変更",
+        "p1": "当サービスはこの利用規約の修正または提供終了、またはいつでも利用規約の更新を行う場合があります。当サービスの継続的な使用は、更新された利用規約の承諾とみなされます。"
+      },
+      "law": {
+        "title": "準拠法",
+        "p1": "これらの利用規約は、他の法律により優先されない限り、あなたの司法管轄区域内において適用される法律に従います。裁判地および裁判管轄権は、適用される法律衝突ルールに従います。"
+      },
+      "contact": {
+        "title": "お問い合わせ",
+        "p1": "これらの利用規約について質問がある場合は、お問い合わせページをご覧ください。",
+        "emailTitle": "ピクセルアートビレッジ にメールして、規約について"
+      }
+    },
+    "seoTitle": "利用規約 | ピクセルアートビレッジ",
+    "meta": {
+      "ogTitle": "利用規約 | 画像からピクセルアートへの変換ツール",
+      "ogDescription": "当方の画像からピクセルアートへの変換ツールの利用規約: 使用規則、責任、免責事項、知的財産権、準拠法、連絡先情報",
+      "twitterTitle": "利用規約 | ピクセルアートビレッジ",
+      "twitterDescription": "ピクセルアートビレッジ サービス利用規約：利用規則、責任、免責事項、IP、準拠法、連絡先。"
+    },
+    "quickLinks": {
+      "heading": "クイックリンク",
+      "mainSite": "メインサイト",
+      "popularConverters": "人気の変換ツール",
+      "links": {
+        "home": "ピクセルアート変換ツール",
+        "about": "会社概要",
+        "contact": "お問い合わせ",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "about": {
+    "seoTitle": "私たちについて | 無料のピクセルアートコンバーター | Pixel Art Village",
+    "seoDesc": "Pixel Art Villageについて：無料のブラウザベースピクセルアートメーカー＆コンバーター。プライバシー優先、高速、アクセシブルなレトロゲームグラフィック作成ツール。",
+    "ogTitle": "私たちについて | 画像からピクセルアートへ変換",
+    "ogDesc": "私たちの画像からピクセルアートへの変換について：無料のブラウザベースツールでレトロゲームグラフィックを作成。プライバシー優先、高速、アクセシブルなピクセルアートメーカー。",
+    "twitterTitle": "私たちについて | Pixel Art Village",
+    "twitterDesc": "Pixel Art Villageについて：無料のブラウザベースピクセルアートメーカー＆コンバーター。プライバシー優先、高速、アクセシブルなレトロゲームグラフィック作成ツール。",
+    "h1": "Pixel Art Village について",
+    "p1": "Pixel Art Village は無料で利用できるブラウザベースのピクセルアート作成・変換ツールです。PNG または JPG 画像をアップロードし、ピクセルサイズやパレットを調整して、即座にプレビューしながら鮮明な仕上がりをエクスポートできます。",
+    "p2": "アップロードや登録なしで画像をピクセルアートに変換できるよう、プライバシー、速度、アクセシビリティを最優先に設計しています。",
+    "p3": "私たちのチームは、アーティスト、教育者、インディーゲーム開発者のために学習リソースと専門ツールを提供しています。",
+    "principles": {
+      "title": "原則",
+      "privacy": {
+        "title": "プライバシー第一:",
+        "desc": "画像はブラウザ内でローカル処理され、ファイルがアップロードされることはありません。"
+      },
+      "performance": {
+        "title": "パフォーマンス:",
+        "desc": "重い依存関係なしに、素早いプレビューときれいな書き出しを実現します。"
+      },
+      "accessibility": {
+        "title": "アクセシビリティ:",
+        "desc": "キーボード操作に対応した UI とわかりやすいフォーカス表示を備えています。"
+      }
+    },
+    "contact": {
+      "title": "お問い合わせ",
+      "p1": "サポートやご質問はお問い合わせページをご覧ください。下記のアドレス宛に直接メールを送ることもできます。",
+      "emailTitle": "Pixel Art Village へメールする"
+    },
+    "cta": "First try the <tool>converter tool</tool>, or check out <blog>blog</blog> for hints and tutorials.",
+    "specializedLinks": "形式別のワークフローが必要ですか？ <png>PNG をピクセルアートに変換</png>、<jpg>JPG をピクセルアートに変換</jpg>、<photo>写真からスプライトへ変換</photo> の各ツールをご活用ください。",
+    "moreInfoRich": "詳しくは <privacy>プライバシーポリシー</privacy> と <terms>利用規約</terms> をご確認ください。"
+  },
+  "contact": {
+    "seoTitle": "お問い合わせ | サポートとフィードバック | Pixel Art Village",
+    "seoDesc": "Pixel Art Villageにサポート、フィードバック、パートナーシップ、機能リクエストでお問い合わせください。ピクセルアートコンバーターツールのヘルプをご利用いただけます。",
+    "ogTitle": "お問い合わせ | 画像からピクセルアートへ変換",
+    "ogDesc": "画像からピクセルアートへの変換についてサポートが必要な場合はお問い合わせください。フィードバック、パートナーシップ、機能リクエストも歓迎します。ピクセルアートコンバーターツールのヘルプをご利用いただけます。",
+    "twitterTitle": "お問い合わせ | Pixel Art Village",
+    "twitterDesc": "Pixel Art Villageにサポート、フィードバック、パートナーシップ、機能リクエストでお問い合わせください。ピクセルアートコンバーターツールのヘルプをご利用いただけます。",
+    "h1": "お問い合わせ",
+    "p1": "ご意見やご質問をお待ちしています。サポート、フィードバック、提携のご相談はメールでご連絡ください。",
+    "emailLabel": "メール：",
+    "note": "AdSense の審査要件を満たすため、仮のメールアドレスは公式の連絡先に差し替えてください。",
+    "p2": "ご連絡の前に、まずは",
+    "p3": "ブログ",
+    "p4": "や",
+    "p5": "ピクセルアートコンバーター",
+    "p6": "をご覧ください。また、",
+    "p7": "運営情報ページ",
+    "p8": "にも詳細があります。",
+    "p9": "変換ツールの詳しい使い方は",
+    "p10": "PNG からピクセルアートのガイド",
+    "p11": "または",
+    "p12": "画像からピクセルアートのガイド",
+    "p13": "をご参照ください。",
+    "emailTitle": "Pixel Art Village へメールする"
+  },
+  "faq": {
+    "title": "ピクセルアート Village: よくある質問",
+    "items": [
+      {
+        "question": "サイト下一篇空白のページが表示されるかクラッシュする — 何をすべきですか？",
+        "answer": "一部ブラウザ拡張機能が開発ランタイム（例：Plasmo/BacklinkPilot）をすべてのページに挿入し、Reactアプリケーションを破損させる可能性があります。このサイトでそれらの拡張機能を無効にして、ハードリフレッシュ（Ctrl/Cmd+Shift+R）を行ってください。"
+      },
+      {
+        "question": "このパレット操作付きデジタル画像作成ツールは無料でしょうか？",
+        "answer": "はい。Image Villageは、すべてのユーザー向けの完全無料のオンライン画像ツールです。年中無休の変換、カスタムパレットコントロール、高品質ダウンロードなデザイン設計による効果的なサービス應用により、どのような費用隙中也无需承擔付費効果的負担で提供魯行します。"
+      },
+      {
+        "question": "私の画像はプライベートですか？画像ファイルをアップロードしますか？",
+        "answer": "画像のプライバシーは保証されています。すべての画像処理はブラウザ内でローカルに行われるため、あなたの画像ファイルがデバイスから流出することは一切ありません。Image Villageはあなたの画像ファイルにアクセスできないため、パレットオプションを備えたあなたの画像からの安全なデジタル画像作成ツールとなっています。"
+      },
+      {
+        "question": "画像をカスタムパレットでゲームスプライトに変換するにはどうすればよいですか？",
+        "answer": "パレットコントロール付きのデジタル画像作成ツールは、ゲームスプライトの作成に最適です。キャラクターの画像をアップロードし、ゲームのビジュアルスタイルに合わせてサイズを調整し、カスタムパレットコントロールを使用してエンジンの色制限に適合させてください。高度なパレットでピクセルアートを作成し、透明なPNGとして完璧なスプライトを作成してください。"
+      },
+      {
+        "question": "画像のピクセルグリッドを調整できますか？",
+        "answer": "もちろん。ライブ エディターには「グリッドを表示」オプションが含まれています。このピクセルグリッドオーバーレイは、個別ピクセルを明確に確認するのに役立ちます。これは、作品の微調整や、画像のピクセル化効果のしくみを学習するのに便利です。"
+      },
+      {
+        "question": "画像をピクセルアートに変換する最良の方法は何ですか？",
+        "answer": "画像をピクセルビジュアルに変換する場合、最良の結果を得るには、ハイコントラストの画像から始めましょう。カスタムパレット設定で好きな詳細レベルを見つけるには、ピクセルサイズスライダーを使用してください。より抽象的で8-bitの外観にするには大きなサイズでピクセルアートを作成し、一方で小さなサイズは高度パレットで元の画像の詳細をより多く保持します。"
+      },
+      {
+        "question": "生成されたピクセルアートを商業目的で使用できますか？",
+        "answer": "はい。あなたは、元のアップロードと生成された結果に対する権利を所有しています。Pixel Villageで作成したgraphicは、商用プロジェクトを含む任意の目的に使用できます。私たちのツールでピクセルアートを作成し、無制限に商用利用することができます。"
+      },
+      {
+        "question": "この画像ピクセラレーターでは、どのような形式を使用できますか？",
+        "answer": "この画像ピクセル化ツールは、すべての一般的なブラウザ形式如 PNG、JPG、GIF、WEBP をサポートしています。PNG をピクセル化するのに、または JPG をピクセル化するのに簡単にできます。任意のイメージ形式でピクセルアートを作成できます。"
+      },
+      {
+        "question": "なぜこのツールは pixel art Village と呼ばれるのですか？",
+        "answer": "グラフィックスの作成は、オンラインでツールを使用している場合でも、コラボレーション活動だと信じています。pixel Villageは、初心者はもちろん、プロ级别の方でも簡単にカスタムパレットでピクセル視覚表現を作成できる場所です。私たちのツールでピクセルアートを作成し、すべてのピクセル愛好者を歓迎する Village に参加してください。"
+      }
+    ]
+  },
+  "related": {
+    "converters": {
+      "title": "関連ピクセルアートコンバーター",
+      "desc": "画像をピクセルアートに変換するための無料のツールをさらに探してみましょう",
+      "items": [
+        {
+          "title": "Image to Pixel Art",
+          "href": "/converter/画像からピクセルアート/",
+          "desc": "すべての画像フォーマット универсальный конвертатор"
+        },
+        {
+          "title": "PNG to Pixel Art",
+          "href": "/変換/PNGからピクセルアートへ/",
+          "desc": "透明度付きPNG画像に変換"
+        },
+        {
+          "title": "JPG to Pixel Art",
+          "href": "/コンバーター/jpg-to-ピクセルアート/",
+          "desc": "写真をRetroなGraphicsに変換"
+        },
+        {
+          "title": "Photo to Sprite",
+          "href": "/converter/写真スタイルドスケッチ変換器/",
+          "desc": "写真からゲーム用スプライトを作成する"
+        },
+        {
+          "title": "8ビットアートジェネレーター",
+          "href": "/converter/8-bitアート生成器/",
+          "desc": "本物の8ビットスタイルのアートワークを生成する"
+        },
+        {
+          "title": "画像をピクセル化（オンライン）",
+          "href": "/converter/ピクセル化画像オンライン/",
+          "desc": "高速・無料の画像ピクセル化"
+        }
+      ]
+    },
+    "guides": {
+      "title": "ピクセルアート チュートリアル & ガイド",
+      "desc": "私たちのステップバイステップのチュートリアルでより良いピクセルアートの作成方法を学びます",
+      "items": [
+        {
+          "title": "画像をピクセル化する方法",
+          "href": "/blog/gazou-no-pikuseruka-houhou/",
+          "desc": "ピクセルアートの初学者向けガイド"
+        },
+        {
+          "title": "Illustratorから書き出し",
+          "href": "/blog/illustrator画像からピクセルアートにエクスポート/",
+          "desc": "エクスポート時にピクセル化の問題を避ける"
+        },
+        {
+          "title": "画像をよりピクセル風に",
+          "href": "/blog/画像をピクセル風にする/",
+          "desc": "より良い結果のための基本的な編集技術"
+        },
+        {
+          "title": "画像のピクセルアート版を取得",
+          "href": "/blog/画像のピクセルアート版を取得する方法/",
+          "desc": "SNESのコツ付きコンバーター完全ガイド"
+        }
+      ]
+    }
+  },
+  "paletteManager": {
+    "createTab": "パレットを作成",
+    "importTab": "🆕 Lospecからインポート",
+    "createTitle": "パレットを作成",
+    "nameLabel": "パレット名",
+    "namePlaceholder": "マイパレット",
+    "colorsLabel": "パレットカラー",
+    "noColors": "色はまだありません",
+    "colorInputPlaceholder": "#000000",
+    "addColor": "色を追加",
+    "removeSelected": "選択項目を削除",
+    "save": "パレットを保存",
+    "reset": "フォームをリセット",
+    "delete": "パレットを削除",
+    "importTitle": "Lospecからインポート",
+    "importDesc": "パレットを閲覧してインポートする",
+    "importDescSuffix": "，这是最大的像素艺术调色板社区，拥有 5000+ 配色方案。",
+    "importSuccess": "カラーパレット \"{{name}}\" がインポートされ、自動的に適用されました。\n\n上にスクロールして効果を確認するか、Palette ドロップダウンメニューで他のカラーパレットに切り替えてください。"
+  },
+  "home": {
+    "seoTitle": "画像をピクセルアートに変換 | Pixel Art Village",
+    "seoDescription": "カスタマイズ可能なパレット、インスタントプレビュー、ディザリング制御、安全なブラウザ内処理で、写真をレトロ8ビットピクセルアートに変換。登録不要。"
+  },
+  "header": {
+    "mainNav": "メインナビゲーション",
+    "userAvatarTitle": "ユーザーアバター"
+  },
+  "content": {
+    "fallbackNotice": "この言語のコンテンツは近日公開予定です。今は英語を表示しています。"
   }
 }

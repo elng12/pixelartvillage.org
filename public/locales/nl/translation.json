@@ -1,0 +1,609 @@
+{
+  "nav": {
+    "examples": "Voorbeelden",
+    "features": "Functies",
+    "how": "Hoe het werkt",
+    "faq": "Veelgestelde vragen",
+    "blog": "Bloggen",
+    "home": "Thuis",
+    "about": "Over",
+    "contact": "Contact"
+  },
+  "navTitle": {
+    "hero": "Scroll naar de Home Hero-sectie",
+    "examples": "Scroll naar Pixel Art-voorbeelden",
+    "features": "Scroll naar Pixel Art-functies",
+    "how": "Scroll naar Hoe Pixel Art Converter werkt",
+    "faq": "Scroll naar Veelgestelde vragen over pixelkunst",
+    "blog": "Open Pixel Art-blog"
+  },
+  "cta": {
+    "start": "Begin nu"
+  },
+  "site": {
+    "tagline": "Online beeldgenerator • beeld-naar-pixel-omzetter • maker van beeldpaletten • beeldverwerker • beeldeditor",
+    "name": "Pixel Art Village",
+    "homeLinkAria": "Pixel Art Village Start"
+  },
+  "footer": {
+    "tools": "Hulpmiddelen",
+    "formats": "Formaten",
+    "explore": "Ontdekken",
+    "community": "Gemeenschap",
+    "terms": "Voorwaarden",
+    "privacy": "Privacy",
+    "about": "Over",
+    "contact": "Contact",
+    "github": "GitHub",
+    "cta": {
+      "ariaStart": "Start afbeelding naar pixelkunst in pixelkunstdorp"
+    },
+    "copy": "© {{year}} pixelkunst Dorp. Alle rechten voorbehouden.",
+    "links": {
+      "generator": "Digitale beeldconverter en beeldgenerator met het palet",
+      "converter": "Afbeelding naar pixelkunstconverter met aangepast palet",
+      "imageToPixel": "Afbeelding naar pixelkunst met paletten",
+      "makePixelArt": "Maak/creëer pixelafbeeldingsvisuals met de paletbesturingselementen",
+      "png2pixel": "PNG naar pixelkunst met het palet",
+      "jpg2pixel": "JPG naar pixelkunst met aangepaste paletten",
+      "img2pixel": "IMG naar pixelkunst met de paletopties",
+      "gridPreview": "Voorbeeld van pixelraster",
+      "how": "Hoe het werkt",
+      "start": "Begin in pixelkunstdorp",
+      "tips": "Tips & Paletten",
+      "privacyLocal": "Privacy & lokale verwerking"
+    }
+  },
+  "blog": {
+    "title": "Bloggen",
+    "subtitle": "Artikelen en updates over het maken van pixelafbeeldingsvisuals, tutorials en nieuwe functies.",
+    "back": "Terug naar Blog",
+    "notFound": {
+      "title": "Bericht niet gevonden",
+      "desc": "Het artikel dat u zoekt bestaat niet. Ga terug naar de blog"
+    }
+  },
+  "consent": {
+    "title": "Privacy en cookies",
+    "desc": "We gebruiken cookies om deze site te laten functioneren en, indien ingeschakeld, om Google AdSense-advertenties weer te geven. U kunt niet-essentiële cookies op elk moment accepteren of weigeren.",
+    "privacy": "Privacybeleid",
+    "andManage": "en beheer advertentiepersonalisatie op",
+    "accept": "Accepteer alles",
+    "reject": "Niet-essentiële zaken afwijzen",
+    "bannerLabel": "Cookie toestemming dialoogvenster",
+    "acceptLabel": "Accepteer alle cookies",
+    "rejectLabel": "Afwijzen niet-essentiële cookies"
+  },
+  "tool": {
+    "title": "Afbeelding naar Pixel Art Generator met aangepast palet",
+    "subtitle2": "aanpasbare pixelgrootte en aangepaste paletten. Perfect voor sprites, iconen en retro-gamekunst met geavanceerde paletopties.",
+    "subtitle": "Image to Pixel Art Converter – Turn PNG or JPG image to pixel art with instant preview and the palette controls, with image to pixel conversion.",
+    "dragOrClick": "Sleep uw afbeelding hierheen of",
+    "clickToChoose": "klik om te kiezen",
+    "supports": "Ondersteunt PNG, JPG, GIF – tot 10 MB",
+    "chooseFile": "Kies bestand",
+    "preparing": "Afbeelding voorbereiden…",
+    "ariaUpload": "Afbeelding uploaden (slepen en neerzetten of klikken om te kiezen)",
+    "ariaChoose": "Kies afbeeldingsbestand",
+    "dragDrop": "Drag and drop image here",
+    "orClick": "or click to choose",
+    "convertButton": "Convert to Pixel Art",
+    "processing": "Processing...",
+    "converted": "Successfully converted"
+  },
+  "upload": {
+    "selected": "Geselecteerd bestand: {{name}}"
+  },
+  "errors": {
+    "fileTooLarge10": "Bestand is te groot. Upload een afbeelding kleiner dan 10 MB.",
+    "prepareFail": "Kan afbeelding niet voorbereiden. Probeer een ander bestand.",
+    "onlyPngJpg": "Selecteer een PNG- of JPG-afbeelding.",
+    "maxFile": "Bestand is te groot. De maximaal toegestane grootte is {{mb}}MB."
+  },
+  "editor": {
+    "title": "Online pixelkunstmaker",
+    "downloadBtn": "Pixelart-afbeelding downloaden",
+    "uploadBtn": "Afbeelding uploaden",
+    "section": {
+      "general": "Algemeen ▾"
+    }
+  },
+  "adjustments": {
+    "reset": {
+      "title": "Schuifregelaars opnieuw instellen",
+      "all": "Alles resetten",
+      "tooltip": "Pixelgrootte / Helderheid / Contrast / Verzadiging opnieuw instellen",
+      "pixelSizeBtnTitle": "Reset de pixelgrootte",
+      "brightnessBtnTitle": "Helderheid opnieuw instellen",
+      "contrastBtnTitle": "Reset contrast",
+      "saturationBtnTitle": "Verzadiging opnieuw instellen"
+    },
+    "pixelSize": "Pixelgrootte: {{value}}",
+    "section": {
+      "color": "Kleuraanpassingen"
+    },
+    "brightness": "Helderheid: {{value}}",
+    "contrast": "Contrast: {{value}}",
+    "saturation": "Verzadiging: {{value}}",
+    "palette": {
+      "label": "palet",
+      "none": "Geen",
+      "custom": "Aangepast",
+      "note": "Pico‑8 is een vast palet. Andere namen zonder ingebouwde paletkleuren genereren automatisch paletten op basis van hun grootte (bijvoorbeeld Zonsondergang 8 → 8 paletpaletkleuren)."
+    },
+    "colorDistance": {
+      "label": "Kleur afstand",
+      "rgb": "RGB (snel)",
+      "lab": "LAB (nauwkeurig, langzamer)"
+    },
+    "autoPalette": "Genereer palet uit afbeelding",
+    "paletteSize": "# Palet Paletkleuren: {{value}}",
+    "dither": "Dithering inschakelen (Floyd-Steinberg)",
+    "zoom": "Zoomen: {{value}}x",
+    "grid": "Toon raster"
+  },
+  "export": {
+    "label": {
+      "format": "Exporteer formaat",
+      "size": "Grootte exporteren"
+    },
+    "option": {
+      "png": "PNG (zonder verlies)",
+      "jpeg": "JPEG",
+      "webp": "WebP"
+    },
+    "size": {
+      "xs": "XS (0,5×)",
+      "sm": "Klein (1×)",
+      "lg": "Groot (2×)",
+      "xl": "XL (4×)"
+    },
+    "transparent": {
+      "label": "Transparante achtergrond (PNG/WebP)"
+    },
+    "quality": {
+      "label": "Kwaliteit: {{percent}}%"
+    }
+  },
+  "notFound": {
+    "seoTitle": "Pagina niet gevonden | pixel art Village",
+    "title": "Pagina niet gevonden",
+    "desc": "De pagina die u zoekt bestaat niet of is verplaatst. Ga terug naar pixel art Village om verder te gaan met het maken van prachtige pixelkunst.",
+    "backHome": "← Terug naar pixel art Dorpen",
+    "popularPages": "Of probeer deze populaire pagina's:",
+    "links": {
+      "home": "Thuis",
+      "pngConverter": "PNG naar pixelkunstconverter",
+      "jpgConverter": "JPG naar pixelkunstconverter",
+      "about": "Over"
+    }
+  },
+  "pseo": {
+    "notFound": {
+      "seoTitle": "Converterpagina niet gevonden | pixel art Village",
+      "title": "Converterpagina niet gevonden",
+      "desc": "De converterpagina die u zoekt bestaat niet."
+    },
+    "relatedHeading": "Gerelateerde Pixel Art Converters",
+    "siteNavigationTitle": "Sitenavigatie"
+  },
+  "showcase": {
+    "title": "Van beeld naar pixels: kijk wat onze beeldprocessor kan doen",
+    "desc": "Met",
+    "before": "Voor",
+    "after": "Na",
+    "alt": {
+      "before": "Originele afbeelding vóór conversie naar pixelkunst",
+      "after": "De door u opgegeven tekst is al in het Nederlands. Wilt u dat ik de Engelse originele tekst naar het Nederlands vertaal?"
+    },
+    "descFull": "Bekijk hoe onze afbeelding-naar-pixelart-converter je foto's in scherpe pixel art omzet."
+  },
+  "lang": {
+    "label": "Taal"
+  },
+  "wplace": {
+    "title": "Perfect hulpmiddel voor pixelart Village-gebruikers",
+    "desc": "De ultieme metgezel voor pixelkunst Village: zet elke afbeelding om in heldere pixelbeelden met realtime preview, slimme paletten en directe export. Maak pixelkunst met onze afbeeldingstools.",
+    "features": {
+      "free": {
+        "title": "100% gratis",
+        "desc": "Geheel gratis voor iedereen. Geen verborgen kosten of abonnementen: maak onbeperkte pixelbeelden van elke afbeelding."
+      },
+      "privacy": {
+        "title": "Privacy eerst",
+        "desc": "Alle verwerking gebeurt in uw browser. Uw afbeeldingen verlaten uw apparaat nooit: een persoonlijke, veilige workflow by design."
+      },
+      "easy": {
+        "title": "Gemakkelijk voor alle spelers",
+        "desc": "Intuïtieve interface en snelle feedback. Converteer elke afbeelding in slechts een paar klikken naar overschilderbare pixelbeelden met aangepaste paletopties."
+      },
+      "size": {
+        "title": "Geen maatlimieten",
+        "desc": "Upload afbeeldingen van elk formaat (van kleine pictogrammen tot grote afbeeldingen) met vloeiende schaling en responsieve afbeeldingsvoorbeelden met behulp van geavanceerde paletten."
+      }
+    }
+  },
+  "features": {
+    "title": "Afbeelding naar Pixel Converter met aangepast palet",
+    "desc": "Transformeer afbeeldingen in pixel-perfecte kunst. Live-tune details met aangepaste paletten en staalcontrole. Directe preview en sprite-ready PNG-export.",
+    "palette": {
+      "title": "Paletregeling",
+      "desc": "Our image to pixel art converter gives precise palette control. Choose built-in retro palettes or auto-extract tones from your image, then lock, reorder, and fine-tune hues to match your style. With consistent palettes, your image to pixel art conversions keep sprites readable, game-ready, and easy to reuse across projects."
+    },
+    "live": {
+      "title": "Live aanpassingen",
+      "desc": "Tweak pixel size, dithering, contrast, and brightness while your image to pixel art results update instantly. Side-by-side changes appear with no lag, so you can compare options and settle on the perfect look faster. Live preview reduces guesswork and keeps your image to pixel art conversions predictable on every export."
+    },
+    "clientSide": {
+      "title": "100% cliëntzijde",
+      "desc": "Alle conversies worden 100% client-side in uw browser uitgevoerd. Afbeeldingen verlaten uw apparaat nooit en offline builds zijn mogelijk, waardoor uw assets privé en veilig blijven. Pixel Art Village beschermt uw werk terwijl snelle, veilige verwerking wordt geleverd op desktop en mobiel. Met Pixel Art Village behoudt u de controle van de eerste preview tot de definitieve export."
+    },
+    "customPalettes": "Custom Palettes",
+    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
+    "realTimePreview": "Real-time Preview",
+    "realTimePreviewDesc": "See changes instantly as you adjust settings",
+    "multipleFormats": "Multiple Formats",
+    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+  },
+  "how": {
+    "title": "Hoe pixelart Village werkt",
+    "desc": "Gebruik pixelart Village om afbeeldingen in drie eenvoudige stappen om te zetten in pixelkunst.",
+    "steps": {
+      "upload": "Uploaden",
+      "adjust": "Aanpassen",
+      "download": "Downloaden",
+      "upload.desc": "Kies of sleep uw afbeelding (PNG, JPG) naar de beeldprocessor voor beeldconversie.",
+      "adjust.desc": "Gebruik live-instellingen om de pixelgrootte, het palet en het pixelraster nauwkeurig af te stemmen met aangepaste paletten.",
+      "download.desc": "Deze tekst is al in het Nederlands. Een Engelse versie zou zijn: \"With one click, export from the image generator and share your image creation.\""
+    }
+  },
+  "common": {
+    "loading": "Bezig met laden...",
+    "error": "Fout",
+    "success": "Gelukt",
+    "failed": "Mislukt",
+    "imageFailedToLoad": "Afbeelding kan niet worden geladen",
+    "imageUnavailable": "Afbeelding niet beschikbaar",
+    "lastUpdated": "Laatst bijgewerkt: {{date}}"
+  },
+  "privacy": {
+    "h1": "Privacybeleid",
+    "sections": {
+      "overview": {
+        "title": "Overzicht",
+        "p1": "pixel art Village respects your privacy. This policy explains what data we process, how we use cookies (including Google AdSense cookies), and your choices. If you have questions, please contact us via the email on the Contact page."
+      },
+      "local": {
+        "title": "Lokale beeldverwerking",
+        "p1": "Uw afbeeldingen verlaten nooit uw apparaat. Alle beeldverwerking gebeurt lokaal in uw browser. We uploaden, bewaren of delen uw afbeeldingsbestanden niet op onze servers."
+      },
+      "collect": {
+        "title": "Informatie die we verzamelen",
+        "li1": "Technische gegevens voor de werking van de site (bijvoorbeeld apparaat-/browserinformatie) die nodig zijn om de service te leveren.",
+        "li2": "Geaggregeerde gebruiksgegevens om functies te verbeteren (als analyses zijn ingeschakeld, vermijden we het verzamelen van persoonlijk identificeerbare informatie).",
+        "li3": "Advertentiegegevens van Google AdSense (zie hieronder) als er advertenties worden weergegeven.",
+        "p2": "We vereisen geen accountregistratie. Wij verzamelen niet bewust gevoelige persoonsgegevens."
+      },
+      "cookies": {
+        "title": "Cookies en AdSense",
+        "p1": "We kunnen cookies en vergelijkbare technologieën gebruiken om de website te beheren en uw ervaring te verbeteren. Als Google AdSense is ingeschakeld, kunnen Google en zijn partners cookies gebruiken om advertenties weer te geven op basis van uw bezoeken aan deze en andere sites.",
+        "learn": "Ontdek hoe Google informatie gebruikt van websites of apps die Google-services gebruiken:",
+        "manage": "Advertentiepersonalisatie beheren:",
+        "more": "Meer over Google-advertenties en cookies:"
+      },
+      "third": {
+        "title": "Externe partners",
+        "p1": "We may integrate third‑party services (e.g., Google AdSense). These partners may process data under their own privacy policies. We encourage you to review their policies to understand data handling practices."
+      },
+      "use": {
+        "title": "Gegevensgebruik en delen",
+        "li1": "Het leveren en onderhouden van de dienst.",
+        "li2": "Beveilig de service-integriteit, spoor misbruik op en verbeter functies.",
+        "li3": "Voldoen aan wettelijke verplichtingen. Wij verkopen geen persoonlijke gegevens."
+      },
+      "rights": {
+        "title": "Uw keuzes en rechten",
+        "li1": "Meld u af of beheer advertentiepersonalisatie via de bovenstaande links.",
+        "li2": "Beheer cookies via uw browserinstellingen.",
+        "li3": "Neem contact met ons op om toepasselijke privacyrechten uit te oefenen (toegang, correctie, verwijdering zoals vereist door de wet)."
+      },
+      "children": {
+        "title": "Privacy van kinderen",
+        "p1": "De service is niet bedoeld voor kinderen jonger dan 13 jaar (of de leeftijd vereist door de lokale wetgeving). Wij verzamelen niet bewust persoonlijke gegevens van kinderen."
+      },
+      "changes": {
+        "title": "Wijzigingen in dit beleid",
+        "p1": "We kunnen dit beleid van tijd tot tijd bijwerken. Materiële wijzigingen worden op deze pagina gemarkeerd met een bijgewerkte datum. Als u de site blijft gebruiken, betekent dit dat u akkoord gaat met het bijgewerkte beleid."
+      },
+      "contact": {
+        "title": "Contact",
+        "p1": "Voor privacyvragen kunt u terecht op de contactpagina.",
+        "emailTitle": "E-mail Pixel Art Village over privacy"
+      }
+    },
+    "seoTitle": "Privacybeleid | pixelkunst dorp",
+    "seoDesc": "privacybeleid van pixel art Village: lokale beeldverwerking, AdSense-cookies, externe partners, uw keuzes en rechten, contactgegevens.",
+    "meta": {
+      "ogTitle": "Privacybeleid | Afbeelding naar Pixelkunst Converter",
+      "ogDescription": "Privacybeleid voor onze afbeelding-naar-pixelkunst-converter: lokale afbeeldingsverwerking, AdSense-cookies, externe partners, uw keuzes en rechten, contactgegevens.",
+      "twitterTitle": "Privacybeleid | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village privacybeleid: lokale afbeeldingsverwerking, AdSense-cookies, externe partners, uw keuzes en rechten, contactgegevens."
+    },
+    "quickLinks": {
+      "heading": "Snelle Links",
+      "mainSite": "Hoofdsite",
+      "popularConverters": "Populaire Converters",
+      "links": {
+        "home": "Pixel Art Converter",
+        "about": "Over Ons",
+        "contact": "Contact",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "terms": {
+    "h1": "Servicevoorwaarden",
+    "sections": {
+      "acceptance": {
+        "title": "Acceptatie van voorwaarden",
+        "p1": "Door pixel art Village (de \"Service\") te openen of te gebruiken, gaat u ermee akkoord gebonden te zijn aan deze Voorwaarden. Als u het er niet mee eens bent, gebruik de Dienst dan niet."
+      },
+      "use": {
+        "title": "Gebruik van de Dienst",
+        "li1": "Only upload content for which you have usage rights. You are responsible for your content and compliance with applicable legislation.",
+        "li2": "Maak geen misbruik, interfereer of onderbreek de Service of andere gebruikers niet.",
+        "li3": "Gebruik de Service niet voor illegale, schadelijke of inbreukmakende activiteiten."
+      },
+      "ip": {
+        "title": "Intellectual property",
+        "p1": "We retain all rights to the Service and related materials. You retain rights to your original uploads and generated outputs, subject to your applicable rights and third‑party rights."
+      },
+      "processing": {
+        "title": "Beeldverwerking",
+        "p1": "De beeldverwerking wordt lokaal in uw browser uitgevoerd. Wij slaan uw geüploade afbeeldingen niet op onze servers op."
+      },
+      "disclaimer": {
+        "title": "Afwijzing van garanties",
+        "p1": "De Dienst wordt geleverd \"zoals deze is\" en \"zoals beschikbaar\" zonder enige vorm van garantie, expliciet of impliciet. Wij garanderen niet dat de Service ononderbroken of foutloos zal zijn."
+      },
+      "liability": {
+        "title": "Limitation of liability",
+        "p1": "Voor zover maximaal toegestaan ​​door de wet, zijn wij niet aansprakelijk voor enige indirecte, incidentele, speciale, gevolg- of punitieve schade die voortvloeit uit of verband houdt met uw gebruik van de Service."
+      },
+      "changes": {
+        "title": "Wijzigingen in de Service of Voorwaarden",
+        "p1": "We kunnen de Service op elk moment wijzigen of stopzetten en deze Voorwaarden bijwerken. Voortgezet gebruik van de Service houdt aanvaarding in van de bijgewerkte Voorwaarden."
+      },
+      "law": {
+        "title": "Toepasselijk recht",
+        "p1": "These Terms are governed by applicable laws in your jurisdiction to the extent not preempted by other laws. Venue and jurisdiction will follow applicable conflict of laws rules."
+      },
+      "contact": {
+        "title": "Contact",
+        "p1": "Voor vragen over deze Voorwaarden kunt u terecht op de Contactpagina.",
+        "emailTitle": "E-mail Pixel Art Village over de voorwaarden"
+      }
+    },
+    "seoTitle": "Gebruiksvoorwaarden | Pixel Art Village",
+    "meta": {
+      "ogTitle": "Gebruiksvoorwaarden | Afbeelding naar Pixelkunst Converter",
+      "ogDescription": "Gebruiksvoorwaarden voor onze afbeelding-naar-pixelart-omzetter: gebruiksregels, aansprakelijkheid, disclaimer, intellectueel eigendom, toepasselijk recht, contactinformatie.",
+      "twitterTitle": "Gebruiksvoorwaarden | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village servicevoorwaarden: gebruiksregels, verantwoordelijkheden, disclaimer, IP, toepasselijk recht, contactgegevens."
+    },
+    "quickLinks": {
+      "heading": "Snelle Links",
+      "mainSite": "Hoofdsite",
+      "popularConverters": "Populaire Converters",
+      "links": {
+        "home": "Pixel Kunst Converter",
+        "about": "Over Ons",
+        "contact": "Contact",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "about": {
+    "seoTitle": "Over | pixelkunst dorp",
+    "seoDesc": "Over pixelkunst Village: een gratis, browsergebaseerde maker en converter van pixelkunst. Privacy voorop, snel en toegankelijk.",
+    "h1": "Over pixelkunst Dorp",
+    "p1": "pixel art Village is a free, browser‑based pixel image maker & converter. Upload a PNG/JPG image, tweak pixel size and palettes, preview instantly, and export crisp image results.",
+    "principles": {
+      "title": "Principes",
+      "privacy": {
+        "title": "Privacy eerst:",
+        "desc": "Uw afbeeldingen worden lokaal in uw browser verwerkt; wij uploaden geen bestanden."
+      },
+      "performance": {
+        "title": "Prestatie:",
+        "desc": "Snelle previews en schone exports zonder zware afhankelijkheden."
+      },
+      "accessibility": {
+        "title": "Toegankelijkheid:",
+        "desc": "Toetsenbordvriendelijke gebruikersinterface en zichtbare focusstatussen."
+      }
+    },
+    "contact": {
+      "title": "Contact",
+      "p1": "Zie de contactpagina voor ondersteuning en vragen. U kunt ons ook rechtstreeks mailen via",
+      "emailTitle": "E-mail Pixel Art Village"
+    },
+    "ogTitle": "Over | Pixel Art Village",
+    "ogDesc": "Leer over Pixel Art Village, de privacy-first pixel art-converter met directe voorvertoning, paletten en tutorials.",
+    "twitterTitle": "Over | Pixel Art Village",
+    "twitterDesc": "Ontdek wie Pixel Art Village heeft gemaakt en hoe onze privacy-first pixel art converter werkt.",
+    "p2": "We richten ons op privacy, snelheid en toegankelijkheid zodat je afbeeldingen naar pixelkunst kunt omzetten zonder uploads of registraties.",
+    "p3": "Ons team ontwikkelt educatieve bronnen en gespecialiseerde tools voor kunstenaars, docenten en onafhankelijke spelontwikkelaars.",
+    "cta": "Probeer onze <tool>converter tool</tool> of bekijk onze <blog>blog</blog> voor tips en tutorials.",
+    "specializedLinks": "Heeft u workflows nodig die specifiek zijn voor formaten? <png>PNG naar Pixel Art</png>, <jpg>JPG naar Pixel Art</jpg>, en <photo>Foto naar Sprite Converter</photo> tools zijn klaar om te helpen.",
+    "moreInfoRich": "Vind meer details in ons <privacy>Privacybeleid</privacy> en <terms>Servicevoorwaarden</terms>."
+  },
+  "contact": {
+    "h1": "Contact",
+    "p1": "Wij horen graag van u. Voor ondersteuning, feedback of vragen over samenwerking kunt u contact opnemen via e-mail.",
+    "emailLabel": "E-mail:",
+    "note": "Vervang de tijdelijke aanduiding voor het e-mailadres door uw officiële contactadres om aan de beoordelingsvereisten van AdSense te voldoen.",
+    "p2": "Voordat je contact met ons opneemt, vind je mogelijk antwoorden in onze",
+    "p3": "blog",
+    "p4": "of bezoek onze",
+    "p5": "pixel art conversietool",
+    "p6": "om te beginnen. Bekijk ook onze",
+    "p7": "over pagina",
+    "p8": "voor meer informatie.",
+    "p9": "Voor specifieke converter-hulp, probeer onze",
+    "p10": "PNG naar pixelkunst",
+    "p11": "or",
+    "p12": "afbeelding naar pixel art",
+    "p13": "gidsen",
+    "seoTitle": "Contact | Pixel Art Village",
+    "seoDesc": "Neem contact op met Pixel Art Village voor ondersteuning, feedback of partnerships. Bereik ons snel via e-mail of verken bronnen voor directe antwoorden.",
+    "ogTitle": "Contact | Pixel Art Village",
+    "ogDesc": "Neem contact op met Pixel Art Village: ondersteuning, feedback, partnership aanvragen, en extra bronnen.",
+    "twitterTitle": "Contact | Pixel Art Village",
+    "twitterDesc": "Hulp nodig met Pixel Art Village? Neem contact met ons op voor ondersteuning, feedback of samenwerking.",
+    "emailTitle": "E-mail Pixel Art Village"
+  },
+  "faq": {
+    "title": "pixelart Village: veelgestelde vragen",
+    "items": [
+      {
+        "question": "De site toont een lege pagina of loopt vast. Wat moet ik doen?",
+        "answer": "Sommige browserextensies injecteren ontwikkelingsruntimes (bijvoorbeeld Plasmo/BacklinkPilot) in elke pagina, waardoor React-apps kapot kunnen gaan. Schakel deze extensies op deze site uit en vernieuw de pagina hard (Ctrl/Cmd+Shift+R)."
+      },
+      {
+        "question": "Is deze digitale beeldmaker met paletbediening gratis?",
+        "answer": "Ja. Image Village is een volledig gratis online beeldtool voor alle gebruikers. Geniet kosteloos van onbeperkte afbeeldingsconversies, aangepaste paletbesturingselementen en downloads in hoge resolutie met geavanceerde paletten."
+      },
+      {
+        "question": "Is mijn afbeelding privé? Uploaden jullie afbeeldingsbestanden?",
+        "answer": "Uw beeldprivacy is gegarandeerd. Uw afbeeldingsbestanden verlaten uw apparaat nooit, omdat alle beeldverwerking lokaal in uw browser plaatsvindt. Image Village heeft geen toegang tot uw afbeeldingsbestanden, waardoor het een veilige digitale maker van afbeeldingen is met paletopties."
+      },
+      {
+        "question": "How do I change an image into a game sprite with a custom palette?",
+        "answer": "Onze digitale afbeeldingsmaker met paletbesturing is ideaal voor het maken van game sprites. Upload de afbeelding van je personage, pas de grootte aan zodat deze past bij de visuele stijl van je game en gebruik de aangepaste paletbesturingselementen om te voldoen aan de kleurlimieten van je engine. Maak pixelkunst met geavanceerde paletten, zodat je de perfecte sprite als transparante PNG kunt maken."
+      },
+      {
+        "question": "Kan ik het pixelraster op mijn afbeelding aanpassen?",
+        "answer": "Absoluut. De live-editor bevat een optie \"Raster weergeven\". Met deze pixelrasteroverlay kunt u de afzonderlijke pixels duidelijk zien, wat handig is om uw kunst te verfijnen of om te leren hoe het pixeleffect op uw afbeelding werkt."
+      },
+      {
+        "question": "Wat is de beste manier om een ​​afbeelding naar pixelkunst om te zetten?",
+        "answer": "Voor de beste resultaten wanneer u een afbeelding naar pixelafbeeldingen converteert, begint u met een afbeelding met hoog contrast. Gebruik de schuifregelaar voor de pixelgrootte om het gewenste detailniveau te vinden met aangepaste paletinstellingen. Creëer pixelkunst met grotere formaten voor een abstracter 8-bits uiterlijk, terwijl kleinere formaten meer details van de originele afbeelding behouden met geavanceerde paletten."
+      },
+      {
+        "question": "Kan ik de gegenereerde pixelkunst commercieel gebruiken?",
+        "answer": "Ja. U bezit de rechten op uw originele uploads en op de gegenereerde resultaten. Je kunt afbeeldingen gemaakt met Pixel Village voor elk doel gebruiken, inclusief commerciële projecten. Maak pixelkunst met onze tools voor onbeperkt commercieel gebruik."
+      },
+      {
+        "question": "Welke formaten kan ik gebruiken met deze beeldpixelator?",
+        "answer": "Deze beeldpixelator ondersteunt alle gangbare browserformaten zoals PNG, JPG, GIF en WEBP. U kunt eenvoudig een PNG naar pixelafbeeldingen of een JPG naar pixelafbeeldingen converteren. Maak pixelkunst met elk afbeeldingsformaat."
+      },
+      {
+        "question": "Waarom heet deze tool Pixel Art Village?",
+        "answer": "Wij zijn van mening dat het maken van afbeeldingen een gemeenschapsactiviteit is, zelfs als u een tool online gebruikt. pixel Village is een plek waar iedereen, van beginner tot professional, samen kan komen om eenvoudig pixelvisuals te maken met aangepaste paletten. Maak pixelkunst met onze tools en sluit je aan bij ons gastvrije dorp voor alle pixelliefhebbers."
+      }
+    ]
+  },
+  "related": {
+    "converters": {
+      "title": "Gerelateerde Pixel Art Converters",
+      "desc": "Ontdek meer gratis tools om afbeeldingen om te zetten in pixelkunst",
+      "items": [
+        {
+          "title": "Image to Pixel Art",
+          "href": "/omzetter/afbeelding-naar-pixelkunst/",
+          "desc": "Universeel converter voor alle afbeeldingsformaten"
+        },
+        {
+          "title": "PNG to Pixel Art",
+          "href": "/converter/png-naar-pixel-art/",
+          "desc": "Converter PNG afbeeldingen met transparantie"
+        },
+        {
+          "title": "JPG to Pixel Art",
+          "href": "/converter/jpg-naar-pixelkunst/",
+          "desc": "Transformeer foto's naar retro graphics"
+        },
+        {
+          "title": "Photo to Sprite",
+          "href": "/converter/foto-naar-sprite-converter/",
+          "desc": "Creëer game-sprites van foto's"
+        },
+        {
+          "title": "8-bit Kunst Generator",
+          "href": "/converter/8-bit-kunst-generator/",
+          "desc": "Genereer authentieke 8-bit stijl kunstwerk"
+        },
+        {
+          "title": "Pixelateer Afbeelding Online",
+          "href": "/converter/pixeliseer-afbeelding-online/",
+          "desc": "Snel en gratis afbeelding pixelatie"
+        }
+      ]
+    },
+    "guides": {
+      "title": "Pixel Art Tutorials & Gidsen",
+      "desc": "Leer hoe je betere pixel art maakt met onze stap-voor-stap tutorials",
+      "items": [
+        {
+          "title": "Hoe een afbeelding te pixeleren",
+          "href": "/blog/hoe-een-afbeelding-te-pixeliseren/",
+          "desc": "Gids voor beginners over pixel art"
+        },
+        {
+          "title": "Exporteren van Illustrator",
+          "href": "/blog/export-van-illustrator-afbeelding-naar-pixel-art/",
+          "desc": "Vermijd pixelatieproblemen bij exporteren"
+        },
+        {
+          "title": "Afbeelding Pixelerig Maken",
+          "href": "/blog/maak-afbeelding-meer-pixel-achtig/",
+          "desc": "Basis bewerkingstechnieken voor betere resultaten"
+        },
+        {
+          "title": "Pixel Art-versie van afbeelding ophalen",
+          "href": "/blog/hoe-krijg-je-de-pixel-art-versie-van-een-afbeelding/",
+          "desc": "Volledige converterhandleiding met SNES-tips"
+        }
+      ]
+    }
+  },
+  "paletteManager": {
+    "createTab": "Creëer Palet",
+    "importTab": "🆕 Importeren van Lospec",
+    "createTitle": "Palet maken",
+    "nameLabel": "Palet naam",
+    "namePlaceholder": "Mijn palet",
+    "colorsLabel": "Palet kleuren",
+    "noColors": "Nog geen kleuren",
+    "colorInputPlaceholder": "#000000",
+    "addColor": "Kleur toevoegen",
+    "removeSelected": "Geselecteerde verwijderen",
+    "save": "Palette opslaan",
+    "reset": "Formulier resetten",
+    "delete": "Palette verwijderen",
+    "importTitle": "Importeren van Lospec",
+    "importDesc": "Bladeren en paletten importeren van",
+    "importDescSuffix": "，这是最大的像素艺术调色板社区，拥有 5000+ 配色方案。",
+    "importSuccess": "Palet \"{{name}}\" is geïmporteerd en automatisch toegepast.\\n\\nScroll naar boven om het effect te bekijken, of schakel tussen andere paletten in het Palet dropdown menu."
+  },
+  "home": {
+    "seoTitle": "Afbeelding naar Pixelart Converter | Pixel Art Village",
+    "seoDescription": "Verander elke foto in retro 8-bits pixelkunst met aanpasbare paletten, directe voorvertoning, dithering-instellingen en veilige in‑browser verwerking—geen registratie vereist."
+  },
+  "header": {
+    "mainNav": "Hoofdnavigatie",
+    "userAvatarTitle": "Gebruikersavatar"
+  },
+  "content": {
+    "fallbackNotice": "De content voor deze taal komt binnenkort. Nu wordt Engels weergegeven."
+  }
+}

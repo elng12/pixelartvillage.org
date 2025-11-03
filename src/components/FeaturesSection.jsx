@@ -24,9 +24,9 @@ export default function FeaturesSection() {
             <div className="flex items-start gap-4">
               <div className="shrink-0 text-2xl md:text-3xl">🎨</div>
               <div>
-                <h3 className="text-lg md:text-xl font-semibold text-gray-900">Palette control</h3>
+                <h3 className="text-lg md:text-xl font-semibold text-gray-900">{t('features.palette.title')}</h3>
                 <p className="mt-2 text-gray-600 leading-relaxed">
-                  Our image to pixel art converter gives precise palette control. Choose built-in retro palettes or auto-extract tones from your image, then lock, reorder, and fine-tune hues to match your style. With consistent palettes, your image to pixel art conversions keep sprites readable, game-ready, and easy to reuse across projects.
+                  {t('features.palette.desc')}
                 </p>
               </div>
             </div>
@@ -37,9 +37,9 @@ export default function FeaturesSection() {
             <div className="flex items-start gap-4">
               <div className="shrink-0 text-2xl md:text-3xl">⚙️</div>
               <div>
-                <h3 className="text-lg md:text-xl font-semibold text-gray-900">Live adjustments</h3>
+                <h3 className="text-lg md:text-xl font-semibold text-gray-900">{t('features.live.title')}</h3>
                 <p className="mt-2 text-gray-600 leading-relaxed">
-                  Tweak pixel size, dithering, contrast, and brightness while your image to pixel art results update instantly. Side-by-side changes appear with no lag, so you can compare options and settle on the perfect look faster. Live preview reduces guesswork and keeps your image to pixel art conversions predictable on every export.
+                  {t('features.live.desc')}
                 </p>
               </div>
             </div>
@@ -50,9 +50,9 @@ export default function FeaturesSection() {
             <div className="flex items-start gap-4">
               <div className="shrink-0 text-2xl md:text-3xl">🔒</div>
               <div>
-                <h3 className="text-lg md:text-xl font-semibold text-gray-900">100% client‑side</h3>
+                <h3 className="text-lg md:text-xl font-semibold text-gray-900">{t('features.clientSide.title')}</h3>
                 <p className="mt-2 text-gray-600 leading-relaxed">
-                  All conversion runs 100% client-side in your browser. Images never leave your device, and offline builds are possible, keeping assets private and safe. Pixel Art Village protects your work while delivering fast, secure processing across desktop and mobile. With Pixel Art Village you retain control from first preview to final export.
+                  {t('features.clientSide.desc')}
                 </p>
               </div>
             </div>

@@ -1,58 +1,161 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import LospecPalettePicker from '../LospecPalettePicker'
 
-function PaletteManager({ onSavePalette, onDeletePalette }) {
-  const [pmName, setPmName] = useState('')
-  const [pmColors, setPmColors] = useState([])
-  const [pmInput, setPmInput] = useState('#000000')
-  const [pmSelectedIdx, setPmSelectedIdx] = useState(-1)
+function PaletteManager({ onSavePalette, onDeletePalette, onApplyPalette }) {
+  const { t } = useTranslation()
+  const [paletteName, setPaletteName] = useState('')
+  const [colors, setColors] = useState([])
+  const [colorInput, setColorInput] = useState('#000000')
+  const [selectedIndex, setSelectedIndex] = useState(-1)
+  const [activeTab, setActiveTab] = useState('create') // 'create' | 'lospec'
 
-  const savePalette = () => {
-    const name = pmName.trim()
-    if (!name || pmColors.length === 0) return
-    onSavePalette?.(name, pmColors)
+  const handleSavePalette = () => {
+    const name = paletteName.trim()
+    if (!name || colors.length === 0) return
+    onSavePalette?.(name, colors)
   }
 
-  const resetPaletteForm = () => {
-    setPmName('')
-    setPmColors([])
-    setPmInput('#000000')
-    setPmSelectedIdx(-1)
+  const handleResetForm = () => {
+    setPaletteName('')
+    setColors([])
+    setColorInput('#000000')
+    setSelectedIndex(-1)
   }
 
-  const deleteCurrentPalette = () => {
-    const name = pmName.trim()
+  const handleDeletePalette = () => {
+    const name = paletteName.trim()
     if (!name) return
     onDeletePalette?.(name)
   }
+
+  const handleAddColor = () => {
+    const value = colorInput.startsWith('#') ? colorInput : `#${colorInput}`
+    if (!/^#[0-9A-Fa-f]{6}$/.test(value)) return
+    setColors((prev) => [...prev, value.toUpperCase()])
+    setColorInput('#000000')
+  }
+
+  const handleRemoveColor = () => {
+    if (selectedIndex < 0) return
+    setColors((prev) => prev.filter((_, index) => index !== selectedIndex))
+    setSelectedIndex(-1)
+  }
+
+  const handleLospecPaletteSelect = (paletteColors, paletteInfo) => {
+    if (!paletteInfo) return
+    const lospecName = `${paletteInfo.name} (Lospec)`
+    onSavePalette?.(lospecName, paletteColors)
+    onApplyPalette?.(lospecName)
+    window.alert(t('paletteManager.importSuccess', { name: paletteInfo.name }))
+  }
+
   return (
     <div className="border-t pt-6">
-      <h3 className="text-base font-semibold mb-3">Create palette</h3>
-      <label className="block text-sm font-medium mb-1" htmlFor="pm-name">Palette Name</label>
-      <input id="pm-name" className="w-full border rounded p-2 mb-3" value={pmName} onChange={(e)=>setPmName(e.target.value)} placeholder="My Palette" />
-      <label className="block text-sm font-medium mb-1">Palette Colors</label>
-      <div className="min-h-[48px] border rounded p-2 flex flex-wrap gap-2 mb-2">
-        {pmColors.map((c, i) => (
-          <button key={`${c}-${i}`} type="button" title={c}
-            className={`h-6 w-6 rounded border ${pmSelectedIdx===i?'ring-2 ring-blue-500':''}`}
-            style={{ background: c }}
-            onClick={()=>setPmSelectedIdx(i)} />
-        ))}
-        {pmColors.length===0 && (<span className="text-xs text-gray-500">No colors yet</span>)}
-      </div>
-      <div className="flex items-center gap-2 mb-3">
-        <input className="border rounded p-2 w-36" value={pmInput} onChange={(e)=>setPmInput(e.target.value)} placeholder="#000000" />
-        <button type="button" className="btn-secondary" onClick={()=>{ if(/^#?[0-9a-fA-F]{6}$/.test(pmInput.startsWith('#')?pmInput:('#'+pmInput))) { const hex = pmInput.startsWith('#')?pmInput:('#'+pmInput); setPmColors((arr)=>[...arr, hex]); } }}>
-          Add color
+      <div className="mb-4 flex gap-2 border-b border-gray-200">
+        <button
+          type="button"
+          onClick={() => setActiveTab('create')}
+          className={`px-3 py-2 text-sm font-medium border-b-2 transition-colors ${
+            activeTab === 'create'
+              ? 'border-blue-600 text-blue-600'
+              : 'border-transparent text-gray-500 hover:text-gray-700'
+          }`}
+        >
+          {t('paletteManager.createTab')}
         </button>
-        <button type="button" className="btn-secondary" onClick={()=>{ if(pmSelectedIdx>=0){ setPmColors((arr)=>arr.filter((_,i)=>i!==pmSelectedIdx)); setPmSelectedIdx(-1);} }}>
-          Remove selected
+        <button
+          type="button"
+          onClick={() => setActiveTab('lospec')}
+          className={`px-3 py-2 text-sm font-medium border-b-2 transition-colors ${
+            activeTab === 'lospec'
+              ? 'border-blue-600 text-blue-600'
+              : 'border-transparent text-gray-500 hover:text-gray-700'
+          }`}
+        >
+          {t('paletteManager.importTab')}
         </button>
       </div>
-      <div className="flex flex-wrap gap-2">
-        <button type="button" className="btn-primary" onClick={savePalette}>Save palette</button>
-        <button type="button" className="btn-secondary" onClick={resetPaletteForm}>Reset form</button>
-        <button type="button" className="btn-secondary" onClick={deleteCurrentPalette}>Delete palette</button>
-      </div>
+
+      {activeTab === 'create' && (
+        <div>
+          <h3 className="mb-3 text-base font-semibold">{t('paletteManager.createTitle')}</h3>
+
+          <label className="mb-1 block text-sm font-medium" htmlFor="palette-name-input">
+            {t('paletteManager.nameLabel')}
+          </label>
+          <input
+            id="palette-name-input"
+            className="mb-3 w-full rounded border px-3 py-2"
+            value={paletteName}
+            onChange={(event) => setPaletteName(event.target.value)}
+            placeholder={t('paletteManager.namePlaceholder')}
+          />
+
+          <label className="mb-1 block text-sm font-medium" htmlFor="palette-colors">
+            {t('paletteManager.colorsLabel')}
+          </label>
+          <div className="mb-2 flex min-h-[48px] flex-wrap gap-2 rounded border p-2">
+            {colors.map((color, index) => (
+              <button
+                key={`${color}-${index}`}
+                type="button"
+                title={color}
+                className={`h-6 w-6 rounded border ${selectedIndex === index ? 'ring-2 ring-blue-500' : ''}`}
+                style={{ background: color }}
+                onClick={() => setSelectedIndex(index)}
+              />
+            ))}
+            {colors.length === 0 && <span className="text-xs text-gray-500">{t('paletteManager.noColors')}</span>}
+          </div>
+
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            <input
+              className="w-36 rounded border px-3 py-2"
+              value={colorInput}
+              onChange={(event) => setColorInput(event.target.value)}
+              placeholder={t('paletteManager.colorInputPlaceholder')}
+            />
+            <button type="button" className="btn-secondary" onClick={handleAddColor}>
+              {t('paletteManager.addColor')}
+            </button>
+            <button type="button" className="btn-secondary" onClick={handleRemoveColor}>
+              {t('paletteManager.removeSelected')}
+            </button>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            <button type="button" className="btn-primary" onClick={handleSavePalette}>
+              {t('paletteManager.save')}
+            </button>
+            <button type="button" className="btn-secondary" onClick={handleResetForm}>
+              {t('paletteManager.reset')}
+            </button>
+            <button type="button" className="btn-secondary" onClick={handleDeletePalette}>
+              {t('paletteManager.delete')}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {activeTab === 'lospec' && (
+        <div>
+          <h3 className="mb-3 text-base font-semibold">{t('paletteManager.importTitle')}</h3>
+          <p className="mb-4 text-sm text-gray-600">
+            {t('paletteManager.importDesc')}{' '}
+            <a
+              href="https://lospec.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              Lospec.com
+            </a>
+            {t('paletteManager.importDescSuffix')}
+          </p>
+          <LospecPalettePicker onSelectPalette={handleLospecPaletteSelect} />
+        </div>
+      )}
     </div>
   )
 }

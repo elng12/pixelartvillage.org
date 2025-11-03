@@ -1,37 +1,42 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Seo from '@/components/Seo';
+import { useLocaleContext } from '@/contexts/LocaleContext';
 
 function NotFound() {
+  const { t } = useTranslation();
+  const { lang } = useParams();
+  const { buildPath } = useLocaleContext();
+  
   return (
     <>
       <Seo
-        title="Page Not Found | Pixel Art Village"
-        description="The page you're looking for doesn't exist. Return to Pixel Art Village to create pixel art online."
+        title={t('notFound.seoTitle')}
+        description={t('notFound.desc')}
         noindex={true}
-        lang="en"
+        lang={lang || 'en'}
       />
       <div className="min-h-screen flex items-center justify-center bg-white px-4">
         <div className="text-center max-w-lg">
           <h1 className="text-6xl font-bold text-gray-900 mb-4">404</h1>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Page Not Found</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">{t('notFound.title')}</h2>
           <p className="text-gray-600 mb-8 leading-relaxed">
-            The page you're looking for doesn't exist or has been moved.
-            Return to Pixel Art Village to start creating amazing pixel art.
+            {t('notFound.desc')}
           </p>
           <Link
-            to="/"
+            to={buildPath('/')}
             className="inline-flex items-center px-6 py-3 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition-colors duration-200"
           >
-            ← Back to Pixel Art Village
+            {t('notFound.backHome')}
           </Link>
 
           <div className="mt-12 text-sm text-gray-500">
-            <p>Or try these popular pages:</p>
+            <p>{t('notFound.popularPages')}</p>
             <nav className="mt-4 space-y-2">
-              <Link to="/" className="block text-blue-500 hover:text-blue-600">Home</Link>
-              <Link to="/converter/png-to-pixel-art/" className="block text-blue-500 hover:text-blue-600">PNG to Pixel Art Converter</Link>
-              <Link to="/converter/jpg-to-pixel-art/" className="block text-blue-500 hover:text-blue-600">JPG to Pixel Art Converter</Link>
-              <Link to="/about/" className="block text-blue-500 hover:text-blue-600">About Us</Link>
+              <Link to={buildPath('/')} className="block text-blue-500 hover:text-blue-600">{t('notFound.links.home')}</Link>
+              <Link to={buildPath('/converter/png-to-pixel-art/')} className="block text-blue-500 hover:text-blue-600">{t('notFound.links.pngConverter')}</Link>
+              <Link to={buildPath('/converter/jpg-to-pixel-art/')} className="block text-blue-500 hover:text-blue-600">{t('notFound.links.jpgConverter')}</Link>
+              <Link to={buildPath('/about/')} className="block text-blue-500 hover:text-blue-600">{t('notFound.links.about')}</Link>
             </nav>
           </div>
         </div>

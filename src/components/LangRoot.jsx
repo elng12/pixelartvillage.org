@@ -9,7 +9,11 @@ export default function LangRoot() {
     const el = document.documentElement
     const sync = () => {
       try {
-        el.setAttribute('lang', i18n.language || 'en')
+        const lang = i18n.language || 'en'
+        el.setAttribute('lang', lang)
+        // 阿语等 RTL 语言需同步 dir 属性，避免布局错乱
+        const rtlLangs = new Set(['ar'])
+        el.setAttribute('dir', rtlLangs.has(lang) ? 'rtl' : 'ltr')
       } catch {
         /* noop */
       }

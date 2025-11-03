@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react'
+﻿import React, { useState, useRef, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
-// 优化的图片组件，支持懒加载和多种优化策略
+// 浼樺寲鐨勫浘鐗囩粍浠讹紝鏀寔鎳掑姞杞藉拰澶氱浼樺寲绛栫暐
 export default function OptimizedImage({
   src,
   alt,
@@ -13,12 +14,13 @@ export default function OptimizedImage({
   placeholder = 'blur',
   ...props
 }) {
+  const { t } = useTranslation()
   const [isLoaded, setIsLoaded] = useState(false)
   const [isInView, setIsInView] = useState(priority)
   const [hasError, setHasError] = useState(false)
   const imgRef = useRef(null)
 
-  // 交集观察器实现懒加载
+  // 浜ら泦瑙傚療鍣ㄥ疄鐜版噿鍔犺浇
   useEffect(() => {
     if (priority || !imgRef.current) return
 
@@ -30,7 +32,7 @@ export default function OptimizedImage({
         }
       },
       {
-        rootMargin: '50px 0px', // 提前50px开始加载
+        rootMargin: '50px 0px', // 鎻愬墠50px寮€濮嬪姞杞?
         threshold: 0.01
       }
     )
@@ -40,38 +42,37 @@ export default function OptimizedImage({
     return () => observer.disconnect()
   }, [priority])
 
-  // 图片加载完成处理
+  // 鍥剧墖鍔犺浇瀹屾垚澶勭悊
   const handleLoad = () => {
     setIsLoaded(true)
   }
 
-  // 图片加载错误处理
+  // 鍥剧墖鍔犺浇閿欒澶勭悊
   const handleError = () => {
     setHasError(true)
   }
 
-  // 生成模糊占位符
+  // 鐢熸垚妯＄硦鍗犱綅绗?
   const getPlaceholderStyle = () => {
     if (placeholder !== 'blur' || !isInView) return {}
 
     return {
       filter: isLoaded ? 'none' : 'blur(20px)',
-      transition: 'filter 0.3s ease-in-out',
-      transform: isLoaded ? 'scale(1)' : 'scale(1.1)',
-      transition: 'transform 0.3s ease-in-out'
+      transform: isLoaded ? 'scale(1)' : 'scale(1.05)',
+      transition: 'filter 0.3s ease-in-out, transform 0.3s ease-in-out'
     }
   }
 
-  // 错误回退
+  // 閿欒鍥為€€
   if (hasError) {
     return (
       <div
         className={`bg-gray-200 flex items-center justify-center ${className}`}
         style={{ width: width || '100%', height: height || '200px' }}
         role="img"
-        aria-label={alt || 'Image failed to load'}
+        aria-label={alt || t('common.imageFailedToLoad', 'Image failed to load')}
       >
-        <span className="text-gray-500 text-sm">Image unavailable</span>
+        <span className="text-gray-500 text-sm">{t('common.imageUnavailable', 'Image unavailable')}</span>
       </div>
     )
   }
@@ -96,7 +97,7 @@ export default function OptimizedImage({
         />
       )}
 
-      {/* 加载占位符 */}
+      {/* 鍔犺浇鍗犱綅绗?*/}
       {!isLoaded && isInView && (
         <div
           className="absolute inset-0 bg-gray-200 animate-pulse"
@@ -107,7 +108,7 @@ export default function OptimizedImage({
   )
 }
 
-// 预加载关键图片的Hook
+// 棰勫姞杞藉叧閿浘鐗囩殑Hook
 export function usePreloadImages(srcs, priority = false) {
   useEffect(() => {
     if (!srcs || srcs.length === 0) return
@@ -124,10 +125,10 @@ export function usePreloadImages(srcs, priority = false) {
     const preloadImages = async () => {
       try {
         if (priority) {
-          // 高优先级：立即预加载
+          // 楂樹紭鍏堢骇锛氱珛鍗抽鍔犺浇
           await Promise.all(srcs.map(preloadImage))
         } else {
-          // 低优先级：在空闲时间预加载
+          // 浣庝紭鍏堢骇锛氬湪绌洪棽鏃堕棿棰勫姞杞?
           if ('requestIdleCallback' in window) {
             requestIdleCallback(async () => {
               for (const src of srcs) {
@@ -150,3 +151,4 @@ export function usePreloadImages(srcs, priority = false) {
     preloadImages()
   }, [srcs, priority])
 }
+

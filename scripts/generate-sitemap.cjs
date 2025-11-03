@@ -6,6 +6,25 @@ const path = require('path');
 const DOMAIN = 'https://pixelartvillage.org/';
 const outPath = path.resolve(process.cwd(), 'public', 'sitemap.xml');
 
+function loadContent(baseName) {
+  const attempts = [
+    path.resolve(__dirname, `../src/content/${baseName}.en.json`),
+    path.resolve(__dirname, `../src/content/${baseName}.json`),
+  ];
+  for (const filePath of attempts) {
+    if (fs.existsSync(filePath)) {
+      try {
+        return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      } catch (error) {
+        console.warn(`[sitemap] warn: failed to parse ${path.basename(filePath)} -> ${error.message}`);
+        return [];
+      }
+    }
+  }
+  console.warn(`[sitemap] warn: content source not found for ${baseName}`);
+  return [];
+}
+
 // ISO date YYYY-MM-DD
 const today = new Date();
 const isoDate = today.toISOString().slice(0, 10);
@@ -16,29 +35,19 @@ const CANONICAL_PATHS = ['/', '/privacy', '/terms', '/about', '/contact', '/blog
 const PATHS = [...CANONICAL_PATHS];
 
 // Include blog posts from content - 只包含规范版本
-try {
-  const posts = require('../src/content/blog-posts.json');
-  for (const p of posts) {
-    if (p && p.slug) {
-      // 只添加英文规范版本：/blog/slug
-      PATHS.push(`/blog/${p.slug}`);
-    }
+const blogPosts = loadContent('blog-posts');
+for (const p of blogPosts) {
+  if (p && p.slug) {
+    PATHS.push(`/blog/${p.slug}`);
   }
-} catch (e) {
-  console.warn('[sitemap] warn: cannot load blog-posts.json', e && e.message);
 }
 
 // Include pSEO pages (converter/:slug) - 只包含规范版本
-try {
-  const pseo = require('../src/content/pseo-pages.json');
-  for (const p of pseo) {
-    if (p && p.slug) {
-      // 只添加英文规范版本：/converter/slug
-      PATHS.push(`/converter/${p.slug}`);
-    }
+const pseoPages = loadContent('pseo-pages');
+for (const p of pseoPages) {
+  if (p && p.slug) {
+    PATHS.push(`/converter/${p.slug}`);
   }
-} catch (e) {
-  console.warn('[sitemap] warn: cannot load pseo-pages.json', e && e.message);
 }
 
 // 可选：生成hreflang sitemap供参考（但不推荐提交给搜索引擎）
@@ -52,30 +61,20 @@ const generateHreflangSitemap = () => {
     }
   }
 
-  try {
-    const posts = require('../src/content/blog-posts.json');
-    for (const p of posts) {
-      if (p && p.slug) {
-        for (const l of OTHER_LANGS) {
-          HREFLANG_PATHS.push(`/${l}/blog/${p.slug}`);
-        }
+  for (const p of blogPosts) {
+    if (p && p.slug) {
+      for (const l of OTHER_LANGS) {
+        HREFLANG_PATHS.push(`/${l}/blog/${p.slug}`);
       }
     }
-  } catch (e) {
-    console.warn('[hreflang-sitemap] warn: cannot load blog-posts.json', e && e.message);
   }
 
-  try {
-    const pseo = require('../src/content/pseo-pages.json');
-    for (const p of pseo) {
-      if (p && p.slug) {
-        for (const l of OTHER_LANGS) {
-          HREFLANG_PATHS.push(`/${l}/converter/${p.slug}`);
-        }
+  for (const p of pseoPages) {
+    if (p && p.slug) {
+      for (const l of OTHER_LANGS) {
+        HREFLANG_PATHS.push(`/${l}/converter/${p.slug}`);
       }
     }
-  } catch (e) {
-    console.warn('[hreflang-sitemap] warn: cannot load pseo-pages.json', e && e.message);
   }
 
   return HREFLANG_PATHS;

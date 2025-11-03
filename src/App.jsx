@@ -1,45 +1,60 @@
-import React, { useState, useEffect, Fragment, lazy, Suspense } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import Seo from '@/components/Seo';
-import Header from './components/Header';
-import ToolSection from './components/ToolSection';
-import { generateHreflangLinks } from '@/utils/hreflang';
-const Editor = lazy(() => import('./components/Editor'));
-const ShowcaseSection = lazy(() => import('./components/ShowcaseSection'));
-const WplaceFeaturesSection = lazy(() => import('./components/WplaceFeaturesSection'));
-const FeaturesSection = lazy(() => import('./components/FeaturesSection'));
-const HowItWorksSection = lazy(() => import('./components/HowItWorksSection'));
-const FaqSection = lazy(() => import('./components/FaqSection'));
-const RelatedLinks = lazy(() => import('./components/RelatedLinks'));
-const Footer = lazy(() => import('./components/Footer'));
-import ScrollManager from './components/ScrollManager';
-import CompatNotice from '@/components/CompatNotice.jsx';
-import ResourcePreloader from '@/components/ResourcePreloader';
-import CriticalCSS from '@/components/CriticalCSS';
-import i18n, { getStoredLang, setStoredLang, detectBrowserLang } from '@/i18n';
-const PrivacyPolicy = lazy(() => import('./components/policy/PrivacyPolicy'));
-const TermsOfService = lazy(() => import('./components/policy/TermsOfService'));
-const About = lazy(() => import('./components/About'));
-const Contact = lazy(() => import('./components/Contact'));
-const Blog = lazy(() => import('./components/Blog'));
-const BlogPost = lazy(() => import('./components/BlogPost'));
-const PseoPage = lazy(() => import('./components/PseoPage'));
-const NotFound = lazy(() => import('./components/NotFound'));
-const ConsentBanner = lazy(() => import('./components/ConsentBanner'));
+﻿import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react'
+import { Routes, Route, Outlet, useLocation, useNavigate, useParams, useOutletContext } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import ScrollManager from './components/ScrollManager'
+import CompatNotice from '@/components/CompatNotice.jsx'
+import ResourcePreloader from '@/components/ResourcePreloader'
+import TranslationPreloader from '@/components/TranslationPreloader'
+import CriticalCSS from '@/components/CriticalCSS'
+import Header from './components/Header'
+import LanguageSwitcherFixed from './components/LanguageSwitcherFixed'
+import ToolSection from './components/ToolSection'
+import { LocaleProvider } from '@/contexts/LocaleContext'
+import { generateHreflangLinks } from '@/utils/hreflang'
+import Seo from '@/components/Seo'
+import i18n, { CANONICAL_LOCALE, getStoredLang, setStoredLang, detectBrowserLang } from '@/i18n'
+import { buildLocalizedPath, extractLocaleFromPath, RUNTIME_LANGS } from '@/utils/locale'
 
-function Home({ uploadedImage, setUploadedImage }) {
-  const canonical = 'https://pixelartvillage.org/';
-  const hreflangLinks = generateHreflangLinks('/');
+const Editor = lazy(() => import('./components/Editor'))
+const ShowcaseSection = lazy(() => import('./components/ShowcaseSection'))
+const WplaceFeaturesSection = lazy(() => import('./components/WplaceFeaturesSection'))
+const FeaturesSection = lazy(() => import('./components/FeaturesSection'))
+const HowItWorksSection = lazy(() => import('./components/HowItWorksSection'))
+const FaqSection = lazy(() => import('./components/FaqSection'))
+const RelatedLinks = lazy(() => import('./components/RelatedLinks'))
+const Footer = lazy(() => import('./components/Footer'))
+const PrivacyPolicy = lazy(() => import('./components/policy/PrivacyPolicy'))
+const TermsOfService = lazy(() => import('./components/policy/TermsOfService'))
+const About = lazy(() => import('./components/About'))
+const Contact = lazy(() => import('./components/Contact'))
+const Blog = lazy(() => import('./components/Blog'))
+const BlogPost = lazy(() => import('./components/BlogPost'))
+const PseoPage = lazy(() => import('./components/PseoPage'))
+const NotFound = lazy(() => import('./components/NotFound'))
+const ConsentBanner = lazy(() => import('./components/ConsentBanner'))
+
+function useAppOutletContext() {
+  return useOutletContext()
+}
+
+function Home() {
+  const { t } = useTranslation()
+  const { uploadedImage, setUploadedImage, currentLocale } = useAppOutletContext()
+  const canonical =
+    currentLocale === CANONICAL_LOCALE
+      ? 'https://pixelartvillage.org/'
+      : `https://pixelartvillage.org/${currentLocale}/`
+  const hreflangLinks = generateHreflangLinks('/')
+
   return (
-    <Fragment>
+    <>
       <Seo
-        title="Image to Pixel Art Converter | Pixel Art Village"
-        description="Free image to pixel art converter online. Transform any photo into retro 8-bit graphics with custom palettes, instant preview, and 100% private browser-based processing. No signup required."
+        title={t('home.seoTitle')}
+        description={t('home.seoDescription')}
         canonical={canonical}
         hreflang={hreflangLinks}
-        lang="en"
+        lang={currentLocale}
       />
-      
       <ToolSection onImageUpload={setUploadedImage} enablePaste={!uploadedImage} />
       {uploadedImage ? <Editor image={uploadedImage} /> : null}
       <ShowcaseSection />
@@ -48,85 +63,165 @@ function Home({ uploadedImage, setUploadedImage }) {
       <HowItWorksSection />
       <FaqSection />
       <RelatedLinks currentPath="/" />
-    </Fragment>
-  );
+    </>
+  )
 }
 
-function useLangRouting() {
-  const { pathname, search, hash } = useLocation();
-
-  useEffect(() => {
-    const persisted = getStoredLang();
-    const auto = persisted || detectBrowserLang();
-    if (i18n.language !== auto) i18n.changeLanguage(auto);
-    setStoredLang(auto);
-  }, [pathname, search, hash]);
-}
-
-function App() {
-  const [uploadedImage, setUploadedImage] = useState(null);
-  useEffect(() => {
-    if (import.meta?.env?.DEV) {
-      const status = typeof uploadedImage === 'string'
-        ? `blob:${uploadedImage.slice(0, 20)}`
-        : uploadedImage === null ? 'null' : typeof uploadedImage;
-      // eslint-disable-next-line no-console
-      console.log('[App] uploadedImage changed:', status);
-    }
-  }, [uploadedImage]);
-
-  // 兜底释放通过 URL.createObjectURL 生成的临时资源
-  useEffect(() => {
-    return () => {
-      try {
-        if (uploadedImage && typeof uploadedImage === 'string' && uploadedImage.startsWith('blob:')) {
-          URL.revokeObjectURL(uploadedImage)
-        }
-      } catch { /* ignore */ }
-    }
-  }, [uploadedImage])
-
-  // 将全局背景样式施加到 body，避免冗余 div 包装
-  useEffect(() => {
-    document.body.classList.add('bg-white');
-    return () => document.body.classList.remove('bg-white');
-  }, []);
-
-  useLangRouting();
+function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
+  const { t } = useTranslation()
+  const localeValue = useMemo(
+    () => ({
+      currentLocale,
+      buildPath: (path) => buildLocalizedPath(currentLocale, path),
+    }),
+    [currentLocale]
+  )
 
   return (
-    <Fragment>
+    <LocaleProvider value={localeValue}>
       <CriticalCSS />
       <ResourcePreloader />
-      <Header />
+      <TranslationPreloader />
+      <Header rightSlot={<LanguageSwitcherFixed />} />
       <CompatNotice />
       <ScrollManager />
       <main>
-        <Suspense fallback={<div className="container mx-auto px-4 py-10 text-sm text-gray-600" role="status">Loading…</div>}>
-          <Routes>
-            {/* 根路径与无语言路径（规范路径） */}
-            <Route path="/" element={<Home uploadedImage={uploadedImage} setUploadedImage={(url) => {
-              console.log('[App] setUploadedImage called with:', url);
-              setUploadedImage(url);
-            }} />} />
-            <Route path="privacy" element={<PrivacyPolicy />} />
-            <Route path="terms" element={<TermsOfService />} />
-            <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="blog" element={<Blog />} />
-            <Route path="blog/:slug" element={<BlogPost />} />
-            <Route path="converter/:slug" element={<PseoPage />} />
-            {/* 404页面 */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+        <Suspense
+          fallback={
+            <div className="container mx-auto px-4 py-10 text-sm text-gray-600" role="status" aria-live="polite">
+              {t('common.loading')}
+            </div>
+          }
+        >
+          <Outlet context={{ uploadedImage, setUploadedImage, currentLocale }} />
         </Suspense>
       </main>
       <Suspense fallback={null}>
         <ConsentBanner />
         <Footer />
       </Suspense>
-    </Fragment>
-  );
+    </LocaleProvider>
+  )
 }
 
-export default App;
+function BaseLayout(props) {
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.pathname === '/' || location.pathname === '') {
+      const persisted = getStoredLang()
+      const auto = persisted || detectBrowserLang()
+      if (auto && auto !== CANONICAL_LOCALE && RUNTIME_LANGS.includes(auto)) {
+        navigate(`/${auto}/`, { replace: true })
+        return
+      }
+    }
+    if (i18n.language !== CANONICAL_LOCALE) {
+      i18n.changeLanguage(CANONICAL_LOCALE)
+    }
+  }, [location.pathname, navigate])
+
+  return <SharedLayout {...props} currentLocale={CANONICAL_LOCALE} />
+}
+
+function LocaleLayout(props) {
+  const { lang } = useParams()
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    if (!lang) return
+    if (!RUNTIME_LANGS.includes(lang)) {
+      navigate('/', { replace: true })
+      return
+    }
+    if (i18n.language !== lang) {
+      i18n.changeLanguage(lang)
+    }
+    setStoredLang(lang)
+  }, [lang, navigate])
+
+  useEffect(() => {
+    const localeFromPath = extractLocaleFromPath(location.pathname)
+    if (!localeFromPath || !RUNTIME_LANGS.includes(localeFromPath)) return
+    if (localeFromPath !== lang) {
+      navigate(`/${localeFromPath}/`, { replace: true })
+    }
+  }, [lang, location.pathname, navigate])
+
+  return <SharedLayout {...props} currentLocale={lang || CANONICAL_LOCALE} />
+}
+
+function useUploadedImageCleanup(uploadedImage) {
+  useEffect(() => {
+    return () => {
+      try {
+        if (uploadedImage && typeof uploadedImage === 'string' && uploadedImage.startsWith('blob:')) {
+          URL.revokeObjectURL(uploadedImage)
+        }
+      } catch {
+        /* noop */
+      }
+    }
+  }, [uploadedImage])
+}
+
+function useBodyBackground() {
+  useEffect(() => {
+    document.body.classList.add('bg-white')
+    return () => document.body.classList.remove('bg-white')
+  }, [])
+}
+
+export default function App() {
+  const [uploadedImage, setUploadedImage] = useState(null)
+
+  useEffect(() => {
+    if (import.meta?.env?.DEV) {
+      const status =
+        typeof uploadedImage === 'string'
+          ? `blob:${uploadedImage.slice(0, 20)}`
+          : uploadedImage === null
+          ? 'null'
+          : typeof uploadedImage
+      console.log('[App] uploadedImage changed:', status)
+    }
+  }, [uploadedImage])
+
+  useUploadedImageCleanup(uploadedImage)
+  useBodyBackground()
+
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={<BaseLayout uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />}
+      >
+        <Route index element={<Home />} />
+        <Route path="privacy" element={<PrivacyPolicy />} />
+        <Route path="terms" element={<TermsOfService />} />
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="blog" element={<Blog />} />
+        <Route path="blog/:slug" element={<BlogPost />} />
+        <Route path="converter/:slug" element={<PseoPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+      <Route
+        path=":lang"
+        element={<LocaleLayout uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />}
+      >
+        <Route index element={<Home />} />
+        <Route path="privacy" element={<PrivacyPolicy />} />
+        <Route path="terms" element={<TermsOfService />} />
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="blog" element={<Blog />} />
+        <Route path="blog/:slug" element={<BlogPost />} />
+        <Route path="converter/:slug" element={<PseoPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+  )
+}

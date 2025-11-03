@@ -281,7 +281,11 @@ function Editor({ image }) {
                 quality={state.quality}
                 setQuality={(e)=>dispatch({type:'SET', field:'quality', value:Number(e.target.value)})}
               />
-              <PaletteManager onSavePalette={upsertPalette} onDeletePalette={deletePalette} />
+              <PaletteManager 
+                onSavePalette={upsertPalette} 
+                onDeletePalette={deletePalette}
+                onApplyPalette={(paletteName) => dispatch({type:'SET', field:'palette', value:paletteName})}
+              />
             </div>
           </div>
         </div>

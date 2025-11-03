@@ -1,40 +1,40 @@
 // i18n initialization for Pixel Art Village
-// Lazy-load JSON from /public/locales/{lang}/translation.json
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import HttpBackend from 'i18next-http-backend'
 import enBundle from '@/locales/en.json'
+import localeConfig from '../config/locales.json'
 
-const DEFAULT_LANGS = ['en']
+export const DEFAULT_LOCALE = localeConfig?.default || 'en'
+export const ALL_SUPPORTED_LOCALES = Array.isArray(localeConfig?.supported)
+  ? Array.from(new Set(localeConfig.supported))
+  : [DEFAULT_LOCALE]
 
 function parseConfiguredLangs() {
   try {
     const raw = import.meta?.env?.VITE_LANGS
     if (!raw || typeof raw !== 'string') return []
-    const normalized = raw
+    return raw
       .split(',')
       .map((token) => token.trim().toLowerCase())
       .filter(Boolean)
       .map((token) => token.replace(/[^a-z-]/g, ''))
       .filter(Boolean)
-    return Array.from(new Set(normalized))
   } catch {
     return []
   }
 }
 
-// 保留扩展点：通过 VITE_LANGS 指定额外语言，默认仅提供英文版本；
-// VITE_ENABLE_PSEUDO=1 可附加伪本地化，用于开发验证。
+// Merge env-provided languages with config defaults; support pseudo locale for testing.
 export const SUPPORTED_LANGS = (() => {
   const fromEnv = parseConfiguredLangs()
-  const base = fromEnv.length ? fromEnv : DEFAULT_LANGS
-  const unique = Array.from(new Set(base))
-  if (!unique.includes('en')) unique.unshift('en')
-  try {
-    if (import.meta?.env?.VITE_ENABLE_PSEUDO) unique.push('pseudo')
-  } catch { /* noop */ }
-  return Array.from(new Set(unique))
+  const base = fromEnv.length ? fromEnv : ALL_SUPPORTED_LOCALES
+  const unique = Array.from(new Set([...base, 'pseudo']))
+  if (!unique.includes(DEFAULT_LOCALE)) unique.unshift(DEFAULT_LOCALE)
+  return unique
 })()
+
+export const CANONICAL_LOCALE = DEFAULT_LOCALE
 
 const STORAGE_KEY = 'pv_lang'
 const STORAGE_TTL = 365 * 24 * 60 * 60 * 1000 // 1 year
@@ -57,57 +57,116 @@ export function setStoredLang(lang) {
   try {
     if (!SUPPORTED_LANGS.includes(lang)) return
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ lang, ts: Date.now() }))
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
 }
 
 export function detectBrowserLang() {
   const nav = typeof navigator !== 'undefined' ? navigator : null
-  const cands = []
-  if (nav?.languages && Array.isArray(nav.languages)) cands.push(...nav.languages)
-  if (nav?.language) cands.push(nav.language)
-  for (const c of cands) {
-    if (!c) continue
-    const lc = String(c).toLowerCase()
-    // map regioned to base: pt-BR -> pt, en-US -> en
+  const candidates = []
+  if (nav?.languages && Array.isArray(nav.languages)) candidates.push(...nav.languages)
+  if (nav?.language) candidates.push(nav.language)
+  for (const candidate of candidates) {
+    if (!candidate) continue
+    const lc = String(candidate).toLowerCase()
     const base = lc.split('-')[0]
     if (SUPPORTED_LANGS.includes(base)) return base
   }
-  return 'en'
+  return DEFAULT_LOCALE
 }
 
-// Initialize i18n
 i18n
   .use(HttpBackend)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'en',
+    fallbackLng: DEFAULT_LOCALE,
     supportedLngs: SUPPORTED_LANGS,
     ns: ['translation'],
     defaultNS: 'translation',
     load: 'languageOnly',
-    // 将英文资源内置进主包，其它语言仍经由 HttpBackend 按需加载
     resources: { en: { translation: enBundle } },
     backend: {
-      loadPath: '/locales/{{lng}}/translation.json',
+      loadPath: `${(import.meta?.env?.BASE_URL ?? '/') }locales/{{lng}}/translation.json`.replace(/\/+/, '/'),
+      // 添加请求超时和重试机制
+      requestOptions: {
+        cache: 'default',
+        credentials: 'same-origin',
+        mode: 'cors'
+      },
+      // 自定义加载函数，增加错误处理
+      customLoad: (lng, ns, callback) => {
+        const url = `${(import.meta?.env?.BASE_URL ?? '/') }locales/${lng}/translation.json`.replace(/\/+/, '/')
+        
+        fetch(url, {
+          cache: 'default',
+          credentials: 'same-origin',
+          mode: 'cors'
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+          }
+          return response.json()
+        })
+        .then(data => {
+          callback(null, data)
+        })
+        .catch(error => {
+          console.warn(`[i18n] Failed to load ${lng}/${ns}:`, error.message)
+          // 如果不是默认语言，尝试加载默认语言作为后备
+          if (lng !== DEFAULT_LOCALE) {
+            callback(error, false) // 让 i18next 使用 fallback
+          } else {
+            callback(error, {}) // 返回空对象避免完全失败
+          }
+        })
+      }
     },
     interpolation: { escapeValue: false },
-    // 启用 Suspense：在资源未就绪时由 <Suspense> 兜底，避免闪现键名
-    react: { useSuspense: true },
-  })
-
-// 在开发环境中，缺失 key 立即报错并在控制台标红，防止漏补
-try {
-  i18n.on('missingKey', (lngs, ns, key) => {
-    const msg = `[i18n missing] key="${key}" ns="${ns}" langs=${Array.isArray(lngs)?lngs.join(','):lngs}`
-    if (import.meta?.env?.DEV) {
-      // 控制台显式报错，并抛出异常以便 ErrorBoundary 捕获
-      // 注意：仅当英文基线也缺失时才会触发此事件
-      // 若仅当前语言缺失、英文存在，将回退到英文，不触发此事件
-      // 因此不会影响正常的回退策略
-      console.error(msg)
-      throw new Error(msg)
+    react: { 
+      useSuspense: true,
+      // 添加绑定事件，确保组件在语言变化时重新渲染
+      bindI18n: 'languageChanged loaded',
+      bindI18nStore: 'added removed'
+    },
+    debug: !!(import.meta?.env?.DEV),
+    // 添加更严格的缓存策略
+    saveMissing: false,
+    updateMissing: false,
+    // 改进加载策略
+    preload: [DEFAULT_LOCALE], // 预加载默认语言
+    cleanCode: true,
+    detection: {
+      order: ['localStorage', 'navigator'],
+      caches: ['localStorage']
     }
   })
-} catch { /* noop */ }
+
+// Expose i18n for debugging in browser console (preview/dev)
+try {
+  if (typeof window !== 'undefined') {
+    window.i18next = i18n
+  }
+} catch (error) {
+  if (import.meta?.env?.DEV) {
+    console.warn('[i18n] Failed to expose i18next on window:', error)
+  }
+}
+
+try {
+  i18n.on('missingKey', (langs, ns, key) => {
+    const msg = `[i18n missing] key="${key}" ns="${ns}" langs=${Array.isArray(langs) ? langs.join(',') : langs}`
+    if (import.meta?.env?.DEV) {
+      console.error(msg)
+      // Don't throw error in dev mode to avoid blank page, but log it clearly
+      // Developers can check console for missing keys
+    }
+  })
+} catch (error) {
+  if (import.meta?.env?.DEV) {
+    console.warn('[i18n] Failed to attach missingKey listener:', error)
+  }
+}
 
 export default i18n

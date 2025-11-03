@@ -1,0 +1,609 @@
+{
+  "nav": {
+    "examples": "Exempel",
+    "features": "Dra",
+    "how": "Hur det fungerar",
+    "faq": "FAQ",
+    "blog": "Blogg",
+    "home": "Hem",
+    "about": "Om",
+    "contact": "Kontakta"
+  },
+  "navTitle": {
+    "hero": "Scrolla till avsnittet Hemhjälte",
+    "examples": "Scrolla till Pixel Art-exempel",
+    "features": "Scroll to Pixel Art Features",
+    "how": "Bläddra till Hur Pixel Art Converter fungerar",
+    "faq": "Bläddra till Pixel Art FAQ",
+    "blog": "Öppna Pixel Art-bloggen"
+  },
+  "cta": {
+    "start": "Börja nu"
+  },
+  "site": {
+    "tagline": "Online bildgenerator • bild till pixel konverterare • bildpaletttillverkare • bildprocessor • bildredigerare",
+    "name": "Pixel Art Village",
+    "homeLinkAria": "Pixel Art Village hem"
+  },
+  "footer": {
+    "tools": "Tools",
+    "formats": "Format",
+    "explore": "Utforska",
+    "community": "Gemenskap",
+    "terms": "Villkor",
+    "privacy": "Privatliv",
+    "about": "Om",
+    "contact": "Kontakta",
+    "github": "GitHub",
+    "cta": {
+      "ariaStart": "Starta bild till pixelkonst i pixelart Village"
+    },
+    "copy": "© {{year}} pixelkonstby. Alla rättigheter reserverade.",
+    "links": {
+      "generator": "Digital bildkonverterare och bildgenerator med paletten",
+      "converter": "Bild till pixelkonstkonverterare med anpassad palett",
+      "imageToPixel": "Bild till pixelkonst med paletter",
+      "makePixelArt": "Skapa/skapa pixelbilder med palettkontrollerna",
+      "png2pixel": "PNG till pixelkonst med paletten",
+      "jpg2pixel": "JPG till pixelkonst med anpassade paletter",
+      "img2pixel": "IMG till pixelkonst med palettalternativen",
+      "gridPreview": "Förhandsvisning av pixelnät",
+      "how": "How it works",
+      "start": "Börja i pixel art Village",
+      "tips": "Tips och paletter",
+      "privacyLocal": "Sekretess och lokal behandling"
+    }
+  },
+  "blog": {
+    "title": "Blogg",
+    "subtitle": "Artiklar och uppdateringar om att göra pixelbilder, självstudier och nya funktioner.",
+    "back": "Tillbaka till bloggen",
+    "notFound": {
+      "title": "Inlägget hittades inte",
+      "desc": "Artikeln du letar efter finns inte. Gå tillbaka till bloggen"
+    }
+  },
+  "consent": {
+    "title": "Sekretess och cookies",
+    "desc": "Vi använder cookies för att driva den här webbplatsen och, om den är aktiverad, för att visa Google AdSense-annonser. Du kan acceptera eller avvisa icke-väsentliga cookies när som helst.",
+    "privacy": "Sekretesspolicy",
+    "andManage": "och hantera annonsanpassning på",
+    "accept": "Acceptera alla",
+    "reject": "Avvisa icke väsentliga",
+    "bannerLabel": "Cookie-samtyckesdialogruta",
+    "acceptLabel": "Acceptera alla cookies",
+    "rejectLabel": "Avvisa icke-nödvändiga kakor"
+  },
+  "tool": {
+    "title": "Bild till Pixel Art Generator med anpassad palett",
+    "subtitle2": "justerbar pixelstorlek och anpassade paletter. Perfekt för sprites, ikoner och retrospelkonst med avancerade palettalternativ.",
+    "subtitle": "Bild till pixelkonstkonverterare – Vänd PNG- eller JPG-bild till pixelkonst med omedelbar förhandsgranskning och palettkontroller, med bild till pixelkonvertering.",
+    "dragOrClick": "Dra din bild hit eller",
+    "clickToChoose": "klicka för att välja",
+    "supports": "Stöder PNG, JPG, GIF - upp till 10 MB",
+    "chooseFile": "Välj fil",
+    "preparing": "Förbereder bild...",
+    "ariaUpload": "Upload image (drag and drop or click to choose)",
+    "ariaChoose": "Välj bildfil",
+    "dragDrop": "Drag and drop image here",
+    "orClick": "or click to choose",
+    "convertButton": "Convert to Pixel Art",
+    "processing": "Processing...",
+    "converted": "Successfully converted"
+  },
+  "upload": {
+    "selected": "Vald fil: {{name}}"
+  },
+  "errors": {
+    "fileTooLarge10": "Filen är för stor. Ladda upp en bild som är mindre än 10 MB.",
+    "prepareFail": "Det gick inte att förbereda bilden. Försök med en annan fil.",
+    "onlyPngJpg": "Välj en PNG- eller JPG-bild.",
+    "maxFile": "Filen är för stor. Högsta tillåtna storlek är {{mb}}MB."
+  },
+  "editor": {
+    "title": "Online Pixel Konst Skapare",
+    "downloadBtn": "Ladda ner Pixel Art-bild",
+    "uploadBtn": "Ladda upp bild",
+    "section": {
+      "general": "Allmänt ▾"
+    }
+  },
+  "adjustments": {
+    "reset": {
+      "title": "Återställ skjutreglagen",
+      "all": "Återställ alla",
+      "tooltip": "Återställ pixelstorlek / ljusstyrka / kontrast / mättnad",
+      "pixelSizeBtnTitle": "Återställ pixelstorleken",
+      "brightnessBtnTitle": "Återställ ljusstyrka",
+      "contrastBtnTitle": "Återställ kontrast",
+      "saturationBtnTitle": "Återställ mättnad"
+    },
+    "pixelSize": "Pixel size: {{value}}",
+    "section": {
+      "color": "Färgjusteringar"
+    },
+    "brightness": "Ljusstyrka: {{value}}",
+    "contrast": "Kontrast: {{value}}",
+    "saturation": "Mättnad: {{value}}",
+    "palette": {
+      "label": "Palett",
+      "none": "Ingen",
+      "custom": "Beställnings",
+      "note": "Pico-8 är en fast palett. Andra namn utan inbyggda palettpalettfärger kommer automatiskt att generera paletter efter deras storlek (t.ex. Sunset 8 → 8 palettpalettfärger)."
+    },
+    "colorDistance": {
+      "label": "Färgavstånd",
+      "rgb": "RGB (snabb)",
+      "lab": "LAB (exakt, långsammare)"
+    },
+    "autoPalette": "Create palette from the image",
+    "paletteSize": "# Palett Färger: {{value}}",
+    "dither": "Aktivera dithering (Floyd–Steinberg)",
+    "zoom": "Zoom: {{value}}x",
+    "grid": "Visa rutnät"
+  },
+  "export": {
+    "label": {
+      "format": "Exportformat",
+      "size": "Exportstorlek"
+    },
+    "option": {
+      "png": "PNG (förlustfri)",
+      "jpeg": "JPEG",
+      "webp": "WebP"
+    },
+    "size": {
+      "xs": "XS (0,5×)",
+      "sm": "Liten (1×)",
+      "lg": "Stor (2×)",
+      "xl": "XL (4×)"
+    },
+    "transparent": {
+      "label": "Transparent bakgrund (PNG/WebP)"
+    },
+    "quality": {
+      "label": "Kvalitet: {{percent}}%"
+    }
+  },
+  "notFound": {
+    "seoTitle": "Sidan hittades inte | pixel art Village",
+    "title": "Sidan hittades inte",
+    "desc": "The page you're looking for doesn't exist or has been moved. Go back to pixel art Village to continue creating amazing pixel art.",
+    "backHome": "← Tillbaka till pixel art Village",
+    "popularPages": "Eller prova dessa populära sidor:",
+    "links": {
+      "home": "Hem",
+      "pngConverter": "PNG till pixelkonverterare",
+      "jpgConverter": "JPG till pixelkonverterare",
+      "about": "Om"
+    }
+  },
+  "pseo": {
+    "notFound": {
+      "seoTitle": "Konverteringssidan hittades inte | pixel art Village",
+      "title": "Konverteringssidan hittades inte",
+      "desc": "Konverteringssidan du letar efter finns inte."
+    },
+    "relatedHeading": "Relaterade Pixelkonstkonverterare",
+    "siteNavigationTitle": "Webbplatsnavigering"
+  },
+  "showcase": {
+    "title": "Från bild till pixlar: Se vad vår bildprocessor kan göra",
+    "desc": "Med",
+    "before": "Före",
+    "after": "Efter",
+    "alt": {
+      "before": "Originalbild före konvertering till pixelkonst",
+      "after": "En landskapsbild konverterad till 8-bitars pixelkonst av pixelart Village-generatorn"
+    },
+    "descFull": "Se hur vår bild till pixelkonst-omvandlare förvandlar dina foton till klar pixelkonst."
+  },
+  "lang": {
+    "label": "Språk"
+  },
+  "wplace": {
+    "title": "Perfekt verktyg för pixel art Village-användare",
+    "desc": "The ultimate companion for pixel art Village – convert any image into pure pixel images with real-time preview, smart palettes and instant export. Create pixel art with our image tools.",
+    "features": {
+      "free": {
+        "title": "100 % gratis",
+        "desc": "Helt gratis för alla. Inga dolda kostnader eller prenumerationer – skapa obegränsade pixelbilder från vilken bild som helst."
+      },
+      "privacy": {
+        "title": "Sekretess först",
+        "desc": "All bearbetning sker i din webbläsare. Dina bilder lämnar aldrig din enhet – ett privat, säkert arbetsflöde genom design."
+      },
+      "easy": {
+        "title": "Enkelt för alla spelare",
+        "desc": "Den text du angav är redan på svenska. Får jag den engelska texten du vill översätta?"
+      },
+      "size": {
+        "title": "Inga storleksbegränsningar",
+        "desc": "Upload images of any size — from tiny icons to large graphics — with smooth scaling and responsive image previews using advanced palettes."
+      }
+    }
+  },
+  "features": {
+    "title": "Bild till Pixel Converter med anpassad palett",
+    "desc": "Förvandla bilder till pixelperfekt konst. Justera detaljer med anpassade paletter och färgprovskontroll. Omedelbar förhandsgranskning och sprite-klar PNG-export.",
+    "palette": {
+      "title": "Palettkontroll",
+      "desc": "Vår bild till pixelkonst-konverterare ger exakt palettkontroll. Välj inbyggda retro-paletter eller auto-extrahera toner från din bild, lås sedan om, ordna om och finputsa nyanser för att matcha din stil. Med konsekventa paletter håller dina bild till pixelkonst-konverteringar sprites läsbara, spelfärdiga och lätta att återanvändas mellan projekt."
+    },
+    "live": {
+      "title": "Live-justeringar",
+      "desc": "Tweak pixel size, dithering, contrast, and brightness while your image to pixel art results update instantly. Side-by-side changes appear with no lag, so you can compare options and settle on the perfect look faster. Live preview reduces guesswork and keeps your image to pixel art conversions predictable on every export."
+    },
+    "clientSide": {
+      "title": "100% klientsida",
+      "desc": "All konvertering körs 100% på klientsidan i din webbläsare. Bilder lämnar aldrig din enhet, och offlineversioner är möjliga, vilket håller tillgångar privata och säkra. Pixel Art Village skyddar ditt arbete samtidigt som det ger snabb, säker bearbetning på stationära och mobila enheter. Med Pixel Art Village behåller du kontrollen från första förhandsvisningen till slutlig export."
+    },
+    "customPalettes": "Custom Palettes",
+    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
+    "realTimePreview": "Real-time Preview",
+    "realTimePreviewDesc": "See changes instantly as you adjust settings",
+    "multipleFormats": "Multiple Formats",
+    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+  },
+  "how": {
+    "title": "Hur pixel art Village fungerar",
+    "desc": "Använd pixel art Village för att konvertera bild till pixel art i tre enkla steg.",
+    "steps": {
+      "upload": "Ladda upp",
+      "adjust": "Justera",
+      "download": "Ladda ner",
+      "upload.desc": "Välj eller dra din bild (PNG, JPG) till bildprocessorn för bildkonvertering.",
+      "adjust.desc": "Use live controls to fine-tune pixel size, palette, and pixel grid with custom palettes.",
+      "download.desc": "Ett klick för att exportera från bildgeneratorn och dela din bildskapande."
+    }
+  },
+  "common": {
+    "loading": "Laddar...",
+    "error": "Fel",
+    "success": "Lyckades",
+    "failed": "Failed",
+    "imageFailedToLoad": "Det gick inte att ladda bilden",
+    "imageUnavailable": "Bilden är inte tillgänglig",
+    "lastUpdated": "Senast uppdaterad: {{date}}"
+  },
+  "privacy": {
+    "h1": "Sekretesspolicy",
+    "sections": {
+      "overview": {
+        "title": "Översikt",
+        "p1": "pixel art Village respekterar din integritet. Denna policy förklarar vilken data vi behandlar, hur vi använder cookies (inklusive Google AdSense-cookies) och dina val. Om du har frågor, vänligen kontakta oss via mejlet på kontaktsidan."
+      },
+      "local": {
+        "title": "Lokal bildbehandling",
+        "p1": "Dina bilder lämnar aldrig din enhet. All bildbehandling sker lokalt i din webbläsare. Vi laddar inte upp, lagrar eller delar dina bildfiler på våra servrar."
+      },
+      "collect": {
+        "title": "Information vi samlar in",
+        "li1": "Tekniska data för webbplatsdrift (t.ex. grundläggande enhets-/webbläsarinformation) som krävs för att leverera tjänsten.",
+        "li2": "Använd sammanlagd data för att förbättra funktioner (om analys är aktiverad undviker vi att samla in personligt identifierbar information).",
+        "li3": "Annonsinformation från Google AdSense (se nedan) om annonser visas.",
+        "p2": "Vi kräver ingen kontoregistrering. Vi samlar inte medvetet in känsliga personuppgifter."
+      },
+      "cookies": {
+        "title": "Cookies och AdSense",
+        "p1": "Vi kan använda cookies och liknande tekniker för att driva webbplatsen och förbättra din upplevelse. Om Google AdSense är aktiverat kan Google och dess partner använda cookies för att visa annonser baserat på dina besök på denna och andra webbplatser.",
+        "learn": "Lär dig hur Google använder information från webbplatser eller appar som använder Googles tjänster:",
+        "manage": "Hantera annonsanpassning:",
+        "more": "Mer om Google-annonser och cookies:"
+      },
+      "third": {
+        "title": "Tredjepartspartner",
+        "p1": "Vi kan integrera tjänster från tredje part (t.ex. Google AdSense). Dessa partners kan behandla data enligt sina egna integritetspolicyer. Vi uppmuntrar dig att granska deras policyer för att förstå praxis för datahantering."
+      },
+      "use": {
+        "title": "Dataanvändning och -delning",
+        "li1": "To provide and maintain the service.",
+        "li2": "Skydda tjänstens integritet, upptäcka missbruk och förbättra funktionerna.",
+        "li3": "Följ rättsliga skyldigheter. Vi säljer inte personuppgifter."
+      },
+      "rights": {
+        "title": "Dina val och rättigheter",
+        "li1": "Välj bort eller hantera annonsanpassning med länkarna ovan.",
+        "li2": "Control cookies through your browser settings.",
+        "li3": "Kontakta oss för att utöva tillämpliga integritetsrättigheter (åtkomst, rättelse, radering enligt lag)."
+      },
+      "children": {
+        "title": "Barns integritet",
+        "p1": "Tjänsten riktar sig inte till barn under 13 år (eller den ålder som krävs enligt lokal lag). Vi samlar inte medvetet in personlig information från barn."
+      },
+      "changes": {
+        "title": "Ändringar av denna policy",
+        "p1": "Vi kan uppdatera denna policy då och då. Materialändringar kommer att markeras på denna sida med ett uppdaterat datum. Din fortsatta användning av webbplatsen visar att du accepterar den uppdaterade policyn."
+      },
+      "contact": {
+        "title": "Kontakta",
+        "p1": "För integritetsfrågor, se kontaktsidan.",
+        "emailTitle": "Skicka e-post till Pixel Art Village om integritet"
+      }
+    },
+    "seoTitle": "Sekretesspolicy | pixel art Village",
+    "seoDesc": "pixel art Village sekretesspolicy: lokal bildbehandling, AdSense-cookies, tredjepartspartners, dina val och rättigheter, kontaktinformation.",
+    "meta": {
+      "ogTitle": "Integritetspolicy | Bild till Pixel Art Konverterare",
+      "ogDescription": "Integritetspolicy för vår bild-till-pixelkonverterare: lokal bildbehandling, AdSense-cookies, tredjepartspartner, dina val och rättigheter, kontaktinformation.",
+      "twitterTitle": "Integritetspolicy | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village integritetspolicy: lokal bildbehandling, AdSense-cookies, tredjepartspartner, dina val och rättigheter, kontaktinformation."
+    },
+    "quickLinks": {
+      "heading": "Snabblänkar",
+      "mainSite": "Huvudsida",
+      "popularConverters": "Populära konverterare",
+      "links": {
+        "home": "Pixel Art-omvandlare",
+        "about": "Om oss",
+        "contact": "Kontakt",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "terms": {
+    "h1": "Användarvillkor",
+    "sections": {
+      "acceptance": {
+        "title": "Godkännande av villkor",
+        "p1": "Genom att komma åt eller använda pixel art Village (\"Tjänsten\") samtycker du till att vara bunden av dessa villkor. Om du inte accepterar, använd inte tjänsten."
+      },
+      "use": {
+        "title": "Användning av tjänsten",
+        "li1": "Only upload content that you have the rights to use. You are responsible for your content and compliance with applicable laws.",
+        "li2": "Missbruka inte, stör eller stör inte tjänsten eller andra användare.",
+        "li3": "Använd inte tjänsten för olagliga, skadliga eller kränkande aktiviteter."
+      },
+      "ip": {
+        "title": "Immateriella rättigheter",
+        "p1": "Vi behåller alla rättigheter till Tjänsten och relaterat material. Du behåller rättigheterna till dina ursprungliga uppladdningar och genererade utdata, med förbehåll för dina tillämpliga rättigheter och tredje parts rättigheter."
+      },
+      "processing": {
+        "title": "Bildbehandling",
+        "p1": "Bildbehandling sker lokalt i din webbläsare. Vi lagrar inte dina uppladdade bilder på våra servrar."
+      },
+      "disclaimer": {
+        "title": "Friskrivning från garantier",
+        "p1": "Tjänsten tillhandahålls \"i befintligt skick\" och \"som tillgänglig\" utan garantier av något slag, uttryckliga eller underförstådda. Vi garanterar inte att tjänsten kommer att vara oavbruten eller felfri."
+      },
+      "liability": {
+        "title": "Ansvarsbegränsning",
+        "p1": "I den maximala utsträckning som lagen tillåter, ska vi inte hållas ansvariga för några indirekta, tillfälliga, speciella, följdskador eller straffskador som uppstår från eller relaterade till din användning av tjänsten."
+      },
+      "changes": {
+        "title": "Ändringar av tjänsten eller villkoren",
+        "p1": "Vi kan ändra eller avbryta tjänsten och uppdatera dessa villkor när som helst. Fortsatt användning av tjänsten innebär godkännande av uppdaterade villkor."
+      },
+      "law": {
+        "title": "Gällande lag",
+        "p1": "Dessa villkor regleras av tillämpliga lagar i din jurisdiktion i den utsträckning som inte föreskrivs av andra lagar. Plats och jurisdiktion kommer att följa tillämpliga lagvalsregler."
+      },
+      "contact": {
+        "title": "Kontakta",
+        "p1": "För frågor om dessa villkor, se kontaktsidan.",
+        "emailTitle": "Mejla Pixel Art Village om villkor"
+      }
+    },
+    "seoTitle": "Användarvillkor | Pixel Art Village",
+    "meta": {
+      "ogTitle": "Användarvillkor | Bild till Pixelkonst-omvandlare",
+      "ogDescription": "Användarvillkor för vår bild till pixelkonst-konverterare: användningsregler, ansvar, ansvarsfriskrivning, IP, tillämplig lag, kontaktinformation.",
+      "twitterTitle": "Användarvillkor | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village användarvillkor: användningsregler, ansvar, ansvarsfriskrivning, IP, gällande lag, kontaktinformation."
+    },
+    "quickLinks": {
+      "heading": "Snabblänkar",
+      "mainSite": "Huvudwebbplats",
+      "popularConverters": "Populära omvandlare",
+      "links": {
+        "home": "Pixel Art-konverterare",
+        "about": "Om oss",
+        "contact": "Kontakta",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "about": {
+    "seoTitle": "Om | pixelkonstby",
+    "seoDesc": "Om pixel art Village: en gratis webbläsarbaserad pixelkonsttillverkare och -omvandlare. Sekretess i första hand, snabbt och tillgängligt.",
+    "h1": "Om pixel art Village",
+    "p1": "pixel art Village är en gratis webbläsarbaserad pixelbildskapare och -omvandlare. Ladda upp en PNG/JPG-bild, justera pixelstorlek och paletter, förhandsgranska direkt och exportera skarpa bildresultat.",
+    "principles": {
+      "title": "Principer",
+      "privacy": {
+        "title": "Sekretess-först:",
+        "desc": "Dina bilder bearbetas lokalt i din webbläsare – vi laddar inte upp filer."
+      },
+      "performance": {
+        "title": "Prestanda:",
+        "desc": "Snabba förhandsgranskningar och ren export utan stora beroenden."
+      },
+      "accessibility": {
+        "title": "Tillgänglighet:",
+        "desc": "Tangentbordsvänligt gränssnitt och synliga fokustillstånd."
+      }
+    },
+    "contact": {
+      "title": "Kontakta",
+      "p1": "Se kontaktsidan för support och förfrågningar. Du kan även maila oss direkt på",
+      "emailTitle": "E-post Pixel Art Village"
+    },
+    "ogTitle": "Om | Pixel Art Village",
+    "ogDesc": "Läs mer om Pixel Art Village, den integritetsfokuserade pixelkonverteraren med omedelbar förhandsvisning, paletter och handledningar.",
+    "twitterTitle": "Om | Pixel Art Village",
+    "twitterDesc": "Upptäck vem som skapade Pixel Art Village och hur vår integritet-först pixelkonstkonverterare fungerar.",
+    "p2": "Vi fokuserar på integritet, hastighet och tillgänglighet så att du kan konvertera bilder till pixelkonst utan uppladdningar eller registreringar.",
+    "p3": "Vårt team bygger utbildningsresurser och specialiserade verktyg för konstnärer, pedagoger och indie-spelutvecklare.",
+    "cta": "Prova vårt <tool>konverteringsverktyg</tool> eller utforska vår <blog>blog</blog> för tips och handledningar.",
+    "specializedLinks": "Behöver du format-specifika arbetsflöden? <png>PNG till pixelkonst</png>, <jpg>JPG till pixelkonst</jpg>, och <photo>Foto till sprite‑konverterare</photo> verktygen är redo att hjälpa.",
+    "moreInfoRich": "Mer information finns i vår <privacy>Integritetspolicy</privacy> och <terms>Användarvillkor</terms>."
+  },
+  "contact": {
+    "h1": "Kontakta",
+    "p1": "Vi vill gärna höra från dig. För support, feedback eller partnerskapsförfrågningar, kontakta via e-post.",
+    "emailLabel": "E-post:",
+    "note": "Byt ut platshållaren för e-post med din officiella kontaktadress för att uppfylla kraven för AdSense-granskning.",
+    "p2": "Innan du kontaktar oss, kan du hitta svar i vår",
+    "p3": "blogg",
+    "p4": "eller besök vår",
+    "p5": "pixel art-konverteringsverktyg",
+    "p6": "för att komma igång. Se även våra",
+    "p7": "Om sidan",
+    "p8": "för mer information.",
+    "p9": "För specifik omvandlarhjälp, prova vår",
+    "p10": "PNG till pixel art",
+    "p11": "or",
+    "p12": "bild till pixelkonst",
+    "p13": "Guider.",
+    "seoTitle": "Kontakt | Pixel Art Village",
+    "seoDesc": "Kontakta Pixel Art Village för support, feedback eller partnerskap. Nå oss snabbt via e-post eller utforska resurser för omedelbara svar.",
+    "ogTitle": "Kontakt | Pixel Art Village",
+    "ogDesc": "Kontakta Pixel Art Village: support, feedback, samarbetsförfrågningar och ytterligare resurser.",
+    "twitterTitle": "Kontakt | Pixel Art Village",
+    "twitterDesc": "Behöver du hjälp med Pixel Art Village? Kontakta oss för support, feedback eller samarbete.",
+    "emailTitle": "E‑post Pixel Art Village"
+  },
+  "faq": {
+    "title": "pixel art Village: Vanliga frågor",
+    "items": [
+      {
+        "question": "Webbplatsen visar en tom sida eller kraschar – vad ska jag göra?",
+        "answer": "Vissa webbläsartillägg injicerar utvecklingskörtider (t.ex. Plasmo/BacklinkPilot) på varje sida, vilket kan bryta React-appar. Inaktivera dessa tillägg på den här webbplatsen och hårduppdatera (Ctrl/Cmd+Shift+R)."
+      },
+      {
+        "question": "I notice the text you provided (\"Är denna digitala bildtillverkare med palettkontroller gratis?\") is already in Swedish, but your instruction asks to translate \"from English into Swedish.\" \n\nCould you please provide the English text that needs to be translated into Swedish?",
+        "answer": "Ja. Image Village är ett helt gratis bildverktyg online för alla användare. Njut av obegränsade bildkonverteringar, anpassade palettkontroller och högupplösta nedladdningar med avancerade paletter utan kostnad."
+      },
+      {
+        "question": "Är min bild privat? Laddar du upp bildfiler?",
+        "answer": "Din bildintegritet är garanterad. Dina bildfiler lämnar aldrig din enhet eftersom all bildbehandling sker lokalt i din webbläsare. Image Village kan inte komma åt dina bildfiler, vilket gör det till en säker digital bildskapare från dina bilder med palettalternativ."
+      },
+      {
+        "question": "Hur förvandlar jag en bild till en spelsprite med anpassad palett?",
+        "answer": "Vår digitala bildskapare med palettkontroller är perfekt för att skapa spelsprites. Ladda upp din karaktärs bild, justera storleken för att matcha ditt spels visuella stil och använd de anpassade palettkontrollerna för att passa din motors färggränser. Skapa pixelkonst med avancerade paletter som hjälper dig att göra den perfekta spriten som en transparent PNG."
+      },
+      {
+        "question": "Can I adjust the pixel grid on my image?",
+        "answer": "Absolut. Liveredigeraren innehåller ett \"Visa rutnät\"-alternativ. Detta pixelrutnätsöverlägg hjälper dig att se de enskilda pixlarna tydligt, vilket är användbart för att finjustera din konst eller för att lära dig hur pixeleringseffekten fungerar på din bild."
+      },
+      {
+        "question": "Vad är det bästa sättet att konvertera en bild till pixelkonst?",
+        "answer": "För bästa resultat när du konverterar en bild till bildpunkter, börja med en bild med hög kontrast. Använd skjutreglaget för pixelstorlek för att hitta en detaljnivå du gillar med anpassade palettinställningar. Skapa pixelkonst med större storlekar för en mer abstrakt 8-bitars look, medan mindre storlekar behåller mer detaljer från originalbilden med avancerade paletter."
+      },
+      {
+        "question": "Kan jag använda den genererade pixelkonsten kommersiellt?",
+        "answer": "Ja. Du äger rättigheterna till dina ursprungliga uppladdningar och till de genererade resultaten. Du kan använda grafik gjord med pixel Village för alla ändamål, inklusive kommersiella projekt. Skapa pixelkonst med våra verktyg för obegränsad kommersiell användning."
+      },
+      {
+        "question": "Vilka format kan jag använda med denna bildpixelator?",
+        "answer": "Denna bildpixelator stöder alla vanliga webbläsarformat som PNG, JPG, GIF och WEBP. Du kan enkelt konvertera en PNG till pixelbild eller en JPG till pixelbild. Skapa pixelkonst med valfritt bildformat."
+      },
+      {
+        "question": "Varför kallas det här verktyget pixel art Village?",
+        "answer": "Vi tror att att skapa grafik är en gemenskapsaktivitet, även när du använder ett verktyg online. pixel Village är en plats där alla, från nybörjare till proffs, kan samlas för att enkelt göra pixelvisualer med anpassade paletter. Skapa pixelkonst med våra verktyg och gå med i vår välkomnande by för alla pixelentusiaster."
+      }
+    ]
+  },
+  "related": {
+    "converters": {
+      "title": "Relaterade Pixel Art-omvandlare",
+      "desc": "Utforska fler gratis verktyg för att konvertera bilder till pixelkonst",
+      "items": [
+        {
+          "title": "Image to Pixel Art",
+          "href": "/converter/bild-till-pixelkonst/",
+          "desc": "Universell konverterare för alla bildformat"
+        },
+        {
+          "title": "PNG to Pixel Art",
+          "href": "/konverterare/png-till-pixel-art/",
+          "desc": "Konvertera PNG bilder med genomskinlighet"
+        },
+        {
+          "title": "JPG to Pixel Art",
+          "href": "/konverterare/jpg-till-pixelkonst/",
+          "desc": "Förvandla foton till retro grafik"
+        },
+        {
+          "title": "Photo to Sprite",
+          "href": "/konverterare/foto-till-spajt-konverterare/",
+          "desc": "Skapa spelfärdiga sprites från foton"
+        },
+        {
+          "title": "8-bitars konstgenerator",
+          "href": "/konverterare/8-bit-konst-generator/",
+          "desc": "Generera äkta 8-bitars stilkonst"
+        },
+        {
+          "title": "Pixelera bild online",
+          "href": "/konverterare/pixelera-bild-online/",
+          "desc": "Snabb och gratis bildpixelering"
+        }
+      ]
+    },
+    "guides": {
+      "title": "Pixelkonst-handledningar och guider",
+      "desc": "Lär dig att skapa bättre pixelkonst med våra steg-för-steg handledningar.",
+      "items": [
+        {
+          "title": "Hur man pixelerar en bild",
+          "href": "/blog/hur-man-pixelerar-en-bild/",
+          "desc": "Guide till pixelkonst för nybörjare"
+        },
+        {
+          "title": "Exportera från Illustrator",
+          "href": "/blog/exportera-från-illustrator-bild-till-pixelkonst/",
+          "desc": "Undvik pixeleringsproblem vid export"
+        },
+        {
+          "title": "Gör bilden mer pixelaktig",
+          "href": "/blog/gör-bild-mer-som-pixel/",
+          "desc": "Grundläggande redigeringstekniker för bättre resultat"
+        },
+        {
+          "title": "Hämta pixelartversion av bilden",
+          "href": "/blog/hur-man-far-pixel-art-version-av-bild/",
+          "desc": "Komplett konverteringsguide med SNES tips"
+        }
+      ]
+    }
+  },
+  "paletteManager": {
+    "createTab": "Skapa palett",
+    "importTab": "🆕 Importera från Lospec",
+    "createTitle": "Skapa palett",
+    "nameLabel": "Palettnamn",
+    "namePlaceholder": "Min Palett",
+    "colorsLabel": "Palettfärger",
+    "noColors": "Inga färger ännu",
+    "colorInputPlaceholder": "#000000",
+    "addColor": "Lägg till färg",
+    "removeSelected": "Ta bort markerade",
+    "save": "Spara palett",
+    "reset": "Återställ formulär",
+    "delete": "Ta bort palett",
+    "importTitle": "Importera från Lospec",
+    "importDesc": "Bläddra och importera paletter från",
+    "importDescSuffix": "，这是最大的像素艺术调色板社区，拥有 5000+ 配色方案。",
+    "importSuccess": "Paletten \"{{name}}\" har importerats och tillämpats automatiskt.\\n\\nBläddra uppåt för att visa effekterna, eller växla till andra paletter i Palette-rullgardinsmenyn."
+  },
+  "home": {
+    "seoTitle": "Bild till pixelkonst-omvandlare | Pixel Art Village",
+    "seoDescription": "Förvandla vilket foto som helst till retro 8-bitars pixelkonst med anpassningsbara färgpaletter, omedelbar förhandsgranskning, dithering-kontroller och säker webbläsarbaserad bearbetning—ingen registrering krävs."
+  },
+  "header": {
+    "mainNav": "Huvudnavigation",
+    "userAvatarTitle": "Användaravatar"
+  },
+  "content": {
+    "fallbackNotice": "Innehåll för detta språk kommer snart. Visar engelska för närvarande."
+  }
+}

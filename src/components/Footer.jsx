@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import LocalizedLink from '@/components/LocalizedLink';
 
 function GitHubIcon({ className }) {
   return (
@@ -27,16 +27,16 @@ function Footer() {
           {/* 顶部品牌与行动 */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
             <div>
-              <p className="font-extrabold text-2xl text-white">Pixel Art Village</p>
+              <p className="font-extrabold text-2xl text-white">{t('site.name')}</p>
               <p className="text-sm text-gray-400 mt-1">{t('site.tagline')}</p>
             </div>
             <div>
-              <Link
+              <LocalizedLink
                 to="/#tool"
                 className="inline-block px-4 py-2 rounded-md bg-violet-700 text-white font-semibold hover:bg-violet-800 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
               >
                 {t('cta.start')}
-              </Link>
+              </LocalizedLink>
             </div>
           </div>
 
@@ -45,38 +45,38 @@ function Footer() {
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.tools')}</p>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/#tool" className="hover:text-white">{t('footer.links.generator')}</Link></li>
-                <li><Link to="/#tool" className="hover:text-white">{t('footer.links.converter')}</Link></li>
-                <li><Link to="/#showcase" className="hover:text-white">{t('footer.links.imageToPixel')}</Link></li>
-                <li><Link to="/#features" className="hover:text-white">{t('footer.links.makePixelArt')}</Link></li>
+                <li><LocalizedLink to="/#tool" className="hover:text-white">{t('footer.links.generator')}</LocalizedLink></li>
+                <li><LocalizedLink to="/#tool" className="hover:text-white">{t('footer.links.converter')}</LocalizedLink></li>
+                <li><LocalizedLink to="/#showcase" className="hover:text-white">{t('footer.links.imageToPixel')}</LocalizedLink></li>
+                <li><LocalizedLink to="/#features" className="hover:text-white">{t('footer.links.makePixelArt')}</LocalizedLink></li>
               </ul>
             </div>
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.formats')}</p>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/#showcase" className="hover:text-white">{t('footer.links.png2pixel')}</Link></li>
-                <li><Link to="/#showcase" className="hover:text-white">{t('footer.links.jpg2pixel')}</Link></li>
-                <li><Link to="/#showcase" className="hover:text-white">{t('footer.links.img2pixel')}</Link></li>
-                <li><Link to="/#features" className="hover:text-white">{t('footer.links.gridPreview')}</Link></li>
+                <li><LocalizedLink to="/#showcase" className="hover:text-white">{t('footer.links.png2pixel')}</LocalizedLink></li>
+                <li><LocalizedLink to="/#showcase" className="hover:text-white">{t('footer.links.jpg2pixel')}</LocalizedLink></li>
+                <li><LocalizedLink to="/#showcase" className="hover:text-white">{t('footer.links.img2pixel')}</LocalizedLink></li>
+                <li><LocalizedLink to="/#features" className="hover:text-white">{t('footer.links.gridPreview')}</LocalizedLink></li>
               </ul>
             </div>
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.explore')}</p>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/#tool" className="hover:text-white">{t('nav.home')}</Link></li>
-                <li><Link to="/#showcase" className="hover:text-white">{t('nav.examples')}</Link></li>
-                <li><Link to="/#features" className="hover:text-white">{t('nav.features')}</Link></li>
-                <li><Link to="/#how-it-works" className="hover:text-white">{t('nav.how')}</Link></li>
-                <li><Link to="/#faq" className="hover:text-white">{t('nav.faq')}</Link></li>
-                <li><Link to="/blog/" className="hover:text-white">{t('nav.blog')}</Link></li>
+                <li><LocalizedLink to="/#tool" className="hover:text-white">{t('nav.home')}</LocalizedLink></li>
+                <li><LocalizedLink to="/#showcase" className="hover:text-white">{t('nav.examples')}</LocalizedLink></li>
+                <li><LocalizedLink to="/#features" className="hover:text-white">{t('nav.features')}</LocalizedLink></li>
+                <li><LocalizedLink to="/#how-it-works" className="hover:text-white">{t('nav.how')}</LocalizedLink></li>
+                <li><LocalizedLink to="/#faq" className="hover:text-white">{t('nav.faq')}</LocalizedLink></li>
+                <li><LocalizedLink to="/blog/" className="hover:text-white">{t('nav.blog')}</LocalizedLink></li>
               </ul>
             </div>
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.community')}</p>
               <ul className="space-y-2 text-sm">
-                <li><a href="/#tool" className="hover:text-white">{t('footer.links.start')}</a></li>
-                <li><a href="/#features" className="hover:text-white">{t('footer.links.tips')}</a></li>
-                <li><a href="/#faq" className="hover:text-white">{t('footer.links.privacyLocal')}</a></li>
+                <li><LocalizedLink to="/#tool" className="hover:text-white">{t('footer.links.start')}</LocalizedLink></li>
+                <li><LocalizedLink to="/#features" className="hover:text-white">{t('footer.links.tips')}</LocalizedLink></li>
+                <li><LocalizedLink to="/#faq" className="hover:text-white">{t('footer.links.privacyLocal')}</LocalizedLink></li>
                 <li>
                   <a href="https://github.com/pixelartvillage/pixelartvillage" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-white" aria-label={t('footer.github')}>
                     <GitHubIcon className="w-4 h-4" /> {t('footer.github')}
@@ -87,73 +87,73 @@ function Footer() {
           </div>
 
           {/* 底部信息栏 */}
-          <div className="mt-10 pt-6 border-t border-gray-700/60 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <p className="text-xs text-gray-400">{t('footer.copy', { year: new Date().getFullYear() })}</p>
-            <div className="flex items-center gap-4 text-xs text-gray-400">
-              <Link to="/terms/" className="hover:text-white">{t('footer.terms')}</Link>
-              <span aria-hidden>•</span>
-              <Link to="/privacy/" className="hover:text-white">{t('footer.privacy')}</Link>
-              <span aria-hidden>•</span>
-              <Link to="/about/" className="hover:text-white">{t('nav.about')}</Link>
-              <span aria-hidden>•</span>
-              <Link to="/contact/" className="hover:text-white">{t('nav.contact')}</Link>
+            <div className="mt-10 pt-6 border-t border-gray-700/60 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <p className="text-xs text-gray-400">{t('footer.copy', { year: new Date().getFullYear() })}</p>
+              <div className="flex items-center gap-4 text-xs text-gray-400">
+                <LocalizedLink to="/terms/" className="hover:text-white">{t('footer.terms')}</LocalizedLink>
+                <span aria-hidden>•</span>
+                <LocalizedLink to="/privacy/" className="hover:text-white">{t('footer.privacy')}</LocalizedLink>
+                <span aria-hidden>•</span>
+                <LocalizedLink to="/about/" className="hover:text-white">{t('nav.about')}</LocalizedLink>
+                <span aria-hidden>•</span>
+                <LocalizedLink to="/contact/" className="hover:text-white">{t('nav.contact')}</LocalizedLink>
+              </div>
             </div>
-          </div>
-          <div className="mt-6 text-center flex flex-wrap items-center justify-center gap-6">
-            <a href="https://twelve.tools" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
-              <img
-                src="/twelve-tools-badge.svg"
-                alt="Featured on Twelve Tools"
-                width="200"
-                height="54"
-                className="inline-block h-[54px] w-auto object-contain"
-              />
-            </a>
-            <a href="https://fazier.com/launches/pixelartvillage.org" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
-              <img
-                src="/fazier-badge.svg"
-                alt="Fazier badge"
-                width="250"
-                height="54"
-                className="inline-block h-[54px] w-auto object-contain"
-              />
-            </a>
-            <a href="https://startupfa.me/s/pixel-art-village?utm_source=pixelartvillage.org" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
-              <img
-                src="/startupfame-badge.webp"
-                alt="Featured on Startup Fame"
-                width="171"
-                height="54"
-                className="inline-block h-[54px] w-auto object-contain"
-              />
-            </a>
-            <a href="https://turbo0.com/item/pixel-art-village" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
-              <img
-                src="/turbo0-badge.svg"
-                alt="Listed on Turbo0"
-                width="180"
-                height="54"
-                className="inline-block h-[54px] w-auto object-contain"
-              />
-            </a>
-            <a href="https://indie.deals?ref=https%3A%2F%2Fpixelartvillage.org%2F" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
-              <img
-                src="/indie-deals-badge.svg"
-                alt="Find us on Indie.Deals"
-                width="180"
-                height="54"
-                className="inline-block h-[54px] w-auto object-contain"
-              />
-            </a>
-            <a href="https://backlinkdirs.com" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
-              <img
-                src="/ai-dirs-badge.svg"
-                alt="Listed on AI Dirs"
-                width="180"
-                height="54"
-                className="inline-block h-[54px] w-auto object-contain"
-              />
-            </a>
+            <div className="mt-6 text-center flex flex-wrap items-center justify-center gap-6">
+              <a href="https://twelve.tools" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
+                <img
+                  src="/twelve-tools-badge.svg"
+                  alt={t('footer.badges.twelveTools')}
+                  width="200"
+                  height="54"
+                  className="inline-block h-[54px] w-auto object-contain"
+                />
+              </a>
+              <a href="https://fazier.com/launches/pixelartvillage.org" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
+                <img
+                  src="/fazier-badge.svg"
+                  alt={t('footer.badges.fazier')}
+                  width="250"
+                  height="54"
+                  className="inline-block h-[54px] w-auto object-contain"
+                />
+              </a>
+              <a href="https://startupfa.me/s/pixel-art-village?utm_source=pixelartvillage.org" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
+                <img
+                  src="/startupfame-badge.webp"
+                  alt={t('footer.badges.startupFame')}
+                  width="171"
+                  height="54"
+                  className="inline-block h-[54px] w-auto object-contain"
+                />
+              </a>
+              <a href="https://turbo0.com/item/pixel-art-village" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
+                <img
+                  src="/turbo0-badge.svg"
+                  alt={t('footer.badges.turbo0')}
+                  width="180"
+                  height="54"
+                  className="inline-block h-[54px] w-auto object-contain"
+                />
+              </a>
+              <a href="https://indie.deals?ref=https%3A%2F%2Fpixelartvillage.org%2F" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
+                <img
+                  src="/indie-deals-badge.svg"
+                  alt={t('footer.badges.indieDeals')}
+                  width="180"
+                  height="54"
+                  className="inline-block h-[54px] w-auto object-contain"
+                />
+              </a>
+              <a href="https://backlinkdirs.com" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
+                <img
+                  src="/ai-dirs-badge.svg"
+                  alt={t('footer.badges.aiDirs')}
+                  width="180"
+                  height="54"
+                  className="inline-block h-[54px] w-auto object-contain"
+                />
+              </a>
           </div>
         </div>
       </div>

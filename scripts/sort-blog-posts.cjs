@@ -28,3 +28,17 @@ posts.forEach((post, idx) => {
   console.log(`  ${idx + 1}. ${post.date} - ${post.title}`);
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

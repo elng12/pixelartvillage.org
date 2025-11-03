@@ -1,0 +1,609 @@
+{
+  "nav": {
+    "examples": "Eksempler",
+    "features": "Funksjoner",
+    "how": "Hvordan det fungerer",
+    "faq": "FAQ",
+    "blog": "Blogg",
+    "home": "Hjem",
+    "about": "Om",
+    "contact": "Kontakt"
+  },
+  "navTitle": {
+    "hero": "Rull til delen Hjemmehelter",
+    "examples": "Bla til Pixel Art-eksempler",
+    "features": "Scroll to Pixel Art functions",
+    "how": "Rull til Hvordan Pixel Art Converter fungerer",
+    "faq": "Rull til vanlige spørsmål om Pixel Art",
+    "blog": "Åpne Pixel Art-bloggen"
+  },
+  "cta": {
+    "start": "Start nå"
+  },
+  "site": {
+    "tagline": "Online bildegenerator • bilde til piksel-konverter • bildepalettmaker • bildeprosessor • bilderedigerer",
+    "name": "Pixel Art Village",
+    "homeLinkAria": "Pixel Art Village hjem"
+  },
+  "footer": {
+    "tools": "Verktøy",
+    "formats": "Formater",
+    "explore": "Utforske",
+    "community": "Fellesskap",
+    "terms": "Vilkår",
+    "privacy": "Privatliv",
+    "about": "Om",
+    "contact": "Kontakt",
+    "github": "GitHub",
+    "cta": {
+      "ariaStart": "Start bilde til pixel art i pixel art Village"
+    },
+    "copy": "© {{year}} pixel art landsby. Alle rettigheter forbeholdt.",
+    "links": {
+      "generator": "Digital bildekonverter og bildegenerator med paletten",
+      "converter": "Bilde til pikselkunstkonverter med egendefinert palett",
+      "imageToPixel": "Bilde til pikselkunst med paletter",
+      "makePixelArt": "Lag / lag pikselbilder med palettkontrollene",
+      "png2pixel": "PNG til pikselkunst med paletten",
+      "jpg2pixel": "JPG til pikselkunst med egendefinerte paletter",
+      "img2pixel": "IMG til pikselkunst med palettalternativene",
+      "gridPreview": "Forhåndsvisning av pikselnett",
+      "how": "Hvordan det fungerer",
+      "start": "Start i pixel art landsby",
+      "tips": "Tips og paletter",
+      "privacyLocal": "Personvern og lokal behandling"
+    }
+  },
+  "blog": {
+    "title": "Blogg",
+    "subtitle": "Artikler og oppdateringer om å lage pikselbilder, veiledninger og nye funksjoner.",
+    "back": "Tilbake til bloggen",
+    "notFound": {
+      "title": "Can't find the post",
+      "desc": "Artikkelen du leter etter eksisterer ikke. Gå tilbake til bloggen"
+    }
+  },
+  "consent": {
+    "title": "Personvern og informasjonskapsler",
+    "desc": "Vi bruker informasjonskapsler for å drive dette nettstedet og, hvis aktivert, for å vise Google AdSense-annonser. Du kan godta eller avvise ikke-essensielle informasjonskapsler når som helst.",
+    "privacy": "Personvernerklæring",
+    "andManage": "og administrer personlig tilpasning av annonser på",
+    "accept": "Godta alle",
+    "reject": "Avvis ikke-essensielt",
+    "bannerLabel": "Samtykkedialog",
+    "acceptLabel": "Godta alle cookies",
+    "rejectLabel": "Avslå ikke-nødvendige informasjonskapsler"
+  },
+  "tool": {
+    "title": "Bilde til Pixel Art Generator med tilpasset palett",
+    "subtitle2": "justerbar pikselstørrelse og tilpassede paletter. Perfekt for sprites, ikoner og retrospillkunst med avanserte palettalternativer.",
+    "subtitle": "Image to Pixel Art Converter – Gjør PNG- eller JPG-bilde til pikselkunst med umiddelbar forhåndsvisning og palettkontroller, med bilde til pikselkonvertering.",
+    "dragOrClick": "Dra bildet ditt hit eller",
+    "clickToChoose": "klikk for å velge",
+    "supports": "Supports PNG, JPG, GIF - recording up to 10 MB",
+    "chooseFile": "Velg fil",
+    "preparing": "Forbereder bilde …",
+    "ariaUpload": "Last opp bilde (dra og slipp eller klikk for å velge)",
+    "ariaChoose": "Velg bildefil",
+    "dragDrop": "Drag and drop image here",
+    "orClick": "or click to choose",
+    "convertButton": "Convert to Pixel Art",
+    "processing": "Processing...",
+    "converted": "Successfully converted"
+  },
+  "upload": {
+    "selected": "Valgt fil: {{name}}"
+  },
+  "errors": {
+    "fileTooLarge10": "Filen er for stor. Last opp et bilde som er mindre enn 10 MB.",
+    "prepareFail": "Kunne ikke forberede bildet. Prøv en annen fil.",
+    "onlyPngJpg": "Velg et PNG- eller JPG-bilde.",
+    "maxFile": "Filen er for stor. Maksimal tillatt størrelse er {{mb}}MB."
+  },
+  "editor": {
+    "title": "Online pikselkunst-verktøy",
+    "downloadBtn": "Last ned Pixel Art Image",
+    "uploadBtn": "Last opp bilde",
+    "section": {
+      "general": "Generelt ▾"
+    }
+  },
+  "adjustments": {
+    "reset": {
+      "title": "Tilbakestill glidebrytere",
+      "all": "Tilbakestill alle",
+      "tooltip": "Tilbakestill pikselstørrelse / lysstyrke / kontrast / metning",
+      "pixelSizeBtnTitle": "Tilbakestill pikselstørrelsen",
+      "brightnessBtnTitle": "Tilbakestill lysstyrke",
+      "contrastBtnTitle": "Tilbakestill kontrast",
+      "saturationBtnTitle": "Tilbakestill metning"
+    },
+    "pixelSize": "Pikselstørrelse: {{value}}",
+    "section": {
+      "color": "Fargejusteringer"
+    },
+    "brightness": "Lysstyrke: {{value}}",
+    "contrast": "Kontrast: {{value}}",
+    "saturation": "Metning: {{value}}",
+    "palette": {
+      "label": "Palett",
+      "none": "Ingen",
+      "custom": "Skikk",
+      "note": "Pico-8 er en fast palett. Andre navn uten innebygde palettpalettfarger vil automatisk generere paletter etter størrelse (f.eks. Sunset 8 → 8 palettpalettfarger)."
+    },
+    "colorDistance": {
+      "label": "Fargeavstand",
+      "rgb": "RGB (rask)",
+      "lab": "LAB (nøyaktig, langsommere)"
+    },
+    "autoPalette": "Generate palette from image",
+    "paletteSize": "# Palett Palett farger: {{value}}",
+    "dither": "Aktiver dithering (Floyd–Steinberg)",
+    "zoom": "Zoom: {{value}}x",
+    "grid": "Vis rutenett"
+  },
+  "export": {
+    "label": {
+      "format": "Eksportformat",
+      "size": "Eksportstørrelse"
+    },
+    "option": {
+      "png": "PNG (tapfri)",
+      "jpeg": "JPEG",
+      "webp": "WebP"
+    },
+    "size": {
+      "xs": "XS (0,5×)",
+      "sm": "Liten (1×)",
+      "lg": "Stor (2×)",
+      "xl": "XL (4×)"
+    },
+    "transparent": {
+      "label": "Gjennomsiktig bakgrunn (PNG/WebP)"
+    },
+    "quality": {
+      "label": "Kvalitet: {{percent}}%"
+    }
+  },
+  "notFound": {
+    "seoTitle": "Siden ble ikke funnet | pixel art Landsby",
+    "title": "Siden ble ikke funnet",
+    "desc": "Siden du leter etter finnes ikke eller er flyttet. Gå tilbake til pixel art Village for å fortsette å lage fantastisk pikselkunst.",
+    "backHome": "← Tilbake til pixel art landsby",
+    "popularPages": "Eller prøv disse populære sidene:",
+    "links": {
+      "home": "Hjem",
+      "pngConverter": "PNG til pikselkunstkonverter",
+      "jpgConverter": "JPG til pikselkunstkonverter",
+      "about": "Om"
+    }
+  },
+  "pseo": {
+    "notFound": {
+      "seoTitle": "Konverteringssiden ble ikke funnet | pixel art Village",
+      "title": "Konverteringssiden ble ikke funnet",
+      "desc": "Konverteringssiden du leter etter finnes ikke."
+    },
+    "relatedHeading": "Relaterte Pixel Art-verktøy",
+    "siteNavigationTitle": "Sidenavigasjon"
+  },
+  "showcase": {
+    "title": "Fra bilde til piksler: Se hva bildeprosessoren vår kan",
+    "desc": "Med",
+    "before": "Før",
+    "after": "Etter",
+    "alt": {
+      "before": "Originalbilde før konvertering til pikselkunst",
+      "after": "Et landskapsbilde konvertert til 8-biters pikselkunst av pixel art Village-generatoren"
+    },
+    "descFull": "Se hvordan vårt bilde til pikselkunst‑konverterer forvandler dine bilder til skarp pikselkunst."
+  },
+  "lang": {
+    "label": "Språk"
+  },
+  "wplace": {
+    "title": "Perfekt verktøy for pixel art Village-brukere",
+    "desc": "Den ultimate følgesvennen for pixel art Village – konverter hvilket som helst bilde til rene pikselbilder med forhåndsvisning i sanntid, smarte paletter og umiddelbar eksport. Lag pikselkunst med bildeverktøyene våre.",
+    "features": {
+      "free": {
+        "title": "100 % gratis",
+        "desc": "Helt gratis for alle. Ingen skjulte kostnader eller abonnementer – lag ubegrensede pikselbilder fra alle bilder."
+      },
+      "privacy": {
+        "title": "Personvern først",
+        "desc": "All behandling skjer i nettleseren din. Bildene dine forlater aldri enheten din – en privat, sikker arbeidsflyt designet."
+      },
+      "easy": {
+        "title": "Enkelt for alle spillere",
+        "desc": "Intuitivt grensesnitt og rask tilbakemelding. Konverter et hvilket som helst bilde til malbare pikselbilder med bare noen få klikk med tilpassede palettalternativer."
+      },
+      "size": {
+        "title": "Ingen størrelsesgrenser",
+        "desc": "Last opp bilder i alle størrelser – fra små ikoner til stor grafikk – med jevn skalering og responsive bildeforhåndsvisninger ved hjelp av avanserte paletter."
+      }
+    }
+  },
+  "features": {
+    "title": "Bilde til piksel-konvertering med egendefinert palett",
+    "desc": "Forvandle bilder til pikselperfekt kunst. Live-tune detaljer med egendefinerte paletter og fargeprøvekontroll. Umiddelbar forhåndsvisning og sprite-klar PNG-eksport.",
+    "palette": {
+      "title": "Palettkontroll",
+      "desc": "Vårt bilde til pixel art‑konverteringsverktøy gir nøyaktig palettkontroll. Velg innebygde retro‑paletter eller automatisk ekstraher toner fra bildet ditt, og lås, omorganiser og finjuster fargetoner for å matche stilen din. Med konsekvente paletter holder konverteringen av bildet til pixel art sprites lesbare, spillklare og enkle å gjenbruke på tvers av prosjekter."
+    },
+    "live": {
+      "title": "Live justeringer",
+      "desc": "Juster pikselstørrelse, dithering, kontrast og lysstyrke mens bildet ditt til pixel art-resultater oppdateres øyeblikkelig. Endringene vises side ved side uten forsinkelse, slik at du kan sammenligne alternativer og finne det perfekte utseendet raskere. Live-forhåndsvisning reduserer gjetting og holder dine bilde til pixel art-konverteringer forutsigbare ved hver eksport."
+    },
+    "clientSide": {
+      "title": "100% klient-sidig",
+      "desc": "Alle konverteringer kjører 100% på klient-siden i nettleseren din. Bilder forlater aldri enheten din, og offline‑bygg er mulig, slik at ressursene holdes private og sikre. Pixel Art Village beskytter arbeidet ditt mens den leverer rask, sikker prosessering på stasjonære og mobile plattformer. Med Pixel Art Village beholder du kontrollen fra første forhåndsvisning til slutteksport."
+    },
+    "customPalettes": "Custom Palettes",
+    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
+    "realTimePreview": "Real-time Preview",
+    "realTimePreviewDesc": "See changes instantly as you adjust settings",
+    "multipleFormats": "Multiple Formats",
+    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+  },
+  "how": {
+    "title": "Teksten er allerede på norsk: \"Hvordan pixel art Village fungerer\"\n\nHvis du mente å oversette fra engelsk, er oversettelsen: \"Hvordan pixel art Village fungerer\"",
+    "desc": "Bruk pixel art Village for å konvertere bilde til pixel art i tre enkle trinn.",
+    "steps": {
+      "upload": "Last opp",
+      "adjust": "Justere",
+      "download": "Last ned",
+      "upload.desc": "Velg eller dra bildet ditt (PNG, JPG) inn i bildeprosessoren for bildekonvertering.",
+      "adjust.desc": "Bruk direktekontroller til å finjustere pikselstørrelse, palett og pikselrutenett med egendefinerte paletter.",
+      "download.desc": "Ett klikk for å eksportere fra bildegeneratoren og dele bildeskapingen din."
+    }
+  },
+  "common": {
+    "loading": "Laster...",
+    "error": "Feil",
+    "success": "Vellykket",
+    "failed": "Mislyktes",
+    "imageFailedToLoad": "Kunne ikke laste bildet",
+    "imageUnavailable": "Bildet er ikke tilgjengelig",
+    "lastUpdated": "Sist oppdatert: {{date}}"
+  },
+  "privacy": {
+    "h1": "Personvernerklæring",
+    "sections": {
+      "overview": {
+        "title": "Oversikt",
+        "p1": "pixel art Village respects your privacy. This policy explains what data we process, how we use cookies (including Google AdSense cookies), and your choices. If you have questions, please contact us via the email on the Contact page."
+      },
+      "local": {
+        "title": "Lokal bildebehandling",
+        "p1": "Your images never leave your device. All image processing happens locally in your browser. We do not upload, store, or share your image files on our servers."
+      },
+      "collect": {
+        "title": "Informasjon vi samler inn",
+        "li1": "Tekniske data for drift av nettstedet (f.eks. grunnleggende enhet/nettleserinformasjon) som er nødvendig for å levere tjenesten.",
+        "li2": "Bruk data samlet for å forbedre funksjonene (hvis analyse er aktivert, unngår vi å samle inn personlig identifiserbar informasjon).",
+        "li3": "Annonseringsdata fra Google AdSense (se nedenfor) hvis annonser vises.",
+        "p2": "Vi krever ikke kontoregistrering. Vi samler ikke bevisst inn sensitive personopplysninger."
+      },
+      "cookies": {
+        "title": "Informasjonskapsler og AdSense",
+        "p1": "Vi kan bruke informasjonskapsler og lignende teknologier for å drive nettstedet og forbedre opplevelsen din. Hvis Google AdSense er aktivert, kan Google og dets partnere bruke informasjonskapsler for å vise annonser basert på dine besøk på dette og andre nettsteder.",
+        "learn": "Finn ut hvordan Google bruker informasjon fra nettsteder eller apper som bruker Google-tjenester:",
+        "manage": "Administrer personlig tilpasning av annonser:",
+        "more": "Mer om Google-annonser og informasjonskapsler:"
+      },
+      "third": {
+        "title": "Tredjepartspartnere",
+        "p1": "We may integrate third‑party services (e.g., Google AdSense). These partners may process data under their own privacy policies. We encourage you to review their policies to understand data handling practices."
+      },
+      "use": {
+        "title": "Databruk og deling",
+        "li1": "Tilby og vedlikeholde tjenesten.",
+        "li2": "Beskytt tjenesteintegriteten, oppdage misbruk og forbedre funksjonene.",
+        "li3": "Overhold juridiske forpliktelser. Vi selger ikke personopplysninger."
+      },
+      "rights": {
+        "title": "Dine valg og rettigheter",
+        "li1": "Velg bort eller administrer personlig tilpasning av annonser ved å bruke koblingene ovenfor.",
+        "li2": "Kontroller informasjonskapsler via nettleserinnstillingene.",
+        "li3": "Kontakt oss for å utøve gjeldende personvernrettigheter (tilgang, retting, sletting i henhold til lov)."
+      },
+      "children": {
+        "title": "Barnas personvern",
+        "p1": "Tjenesten er ikke rettet mot barn under 13 år (eller alderen som kreves av lokal lov). Vi samler ikke bevisst inn personopplysninger fra barn."
+      },
+      "changes": {
+        "title": "Endringer i denne policyen",
+        "p1": "Vi kan oppdatere denne policyen fra tid til annen. Materielle endringer vil bli uthevet på denne siden med en oppdatert dato. Din fortsatte bruk av nettstedet indikerer aksept av de oppdaterte retningslinjene."
+      },
+      "contact": {
+        "title": "Kontakt",
+        "p1": "For spørsmål om personvern, se kontaktsiden.",
+        "emailTitle": "E-post Pixel Art Village om personvern"
+      }
+    },
+    "seoTitle": "Personvernerklæring | pixel kunst landsby",
+    "seoDesc": "pixel art Landsby personvernregler: lokal bildebehandling, AdSense-informasjonskapsler, tredjepartspartnere, dine valg og rettigheter, kontaktinformasjon.",
+    "meta": {
+      "ogTitle": "Personvernpolicy | Bilde til Pixel Art Konverterer",
+      "ogDescription": "Personvernregler for vår konverterer fra bilde til pikselkunst: lokal bildebehandling, AdSense-informasjonskapsler, tredjepartspartnerne, dine valg og rettigheter, kontaktinformasjon.",
+      "twitterTitle": "Personvernpolicy | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village personvernpolicy: lokal bildebehandling, AdSense‑informasjonskapsler, tredjeparts‑partnere, dine valg og rettigheter, kontaktinformasjon."
+    },
+    "quickLinks": {
+      "heading": "Hurtiglenker",
+      "mainSite": "Hovedsiden",
+      "popularConverters": "Populære omformere",
+      "links": {
+        "home": "Pikselkunstomformer",
+        "about": "Om oss",
+        "contact": "Kontakt",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "terms": {
+    "h1": "Vilkår for bruk",
+    "sections": {
+      "acceptance": {
+        "title": "Aksept av vilkår",
+        "p1": "Ved å gå inn på eller bruke pixel art Village (\"tjenesten\") godtar du å være bundet av disse vilkårene. Hvis du ikke er enig, ikke bruk tjenesten."
+      },
+      "use": {
+        "title": "Bruk av tjenesten",
+        "li1": "Last opp kun innhold du har rettighetene til å bruke. Du er ansvarlig for innholdet ditt og overholdelse av gjeldende lover.",
+        "li2": "Ikke misbruk, forstyrre eller forstyrre tjenesten eller andre brukere.",
+        "li3": "Ikke bruk tjenesten til ulovlige, skadelige eller krenkende aktiviteter."
+      },
+      "ip": {
+        "title": "Immaterielle rettigheter",
+        "p1": "We retain all rights to the Service and related materials. You retain rights to your original uploads and generated outputs, subject to your applicable rights and third‑party rights."
+      },
+      "processing": {
+        "title": "Bildebehandling",
+        "p1": "Bildebehandling utføres lokalt i nettleseren din. Vi lagrer ikke dine opplastede bilder på våre servere."
+      },
+      "disclaimer": {
+        "title": "Fraskrivelse av garantier",
+        "p1": "Tjenesten leveres \"som den er\" og \"som tilgjengelig\" uten garantier av noe slag, uttrykkelig eller underforstått. Vi garanterer ikke at tjenesten vil være uavbrutt eller feilfri."
+      },
+      "liability": {
+        "title": "Ansvarsbegrensning",
+        "p1": "I den maksimale utstrekning loven tillater, skal vi ikke være ansvarlige for indirekte, tilfeldige, spesielle, følgeskader eller straffskader som oppstår fra eller relatert til din bruk av tjenesten."
+      },
+      "changes": {
+        "title": "Endringer i tjenesten eller vilkårene",
+        "p1": "Vi kan endre eller avbryte tjenesten og oppdatere disse vilkårene når som helst. Fortsatt bruk av tjenesten innebærer aksept av oppdaterte vilkår."
+      },
+      "law": {
+        "title": "Gjeldende lov",
+        "p1": "Disse vilkårene styres av gjeldende lover i din jurisdiksjon i den grad det ikke er foreskrevet av andre lover. Sted og jurisdiksjon vil følge gjeldende lovkonfliktregler."
+      },
+      "contact": {
+        "title": "Kontakt",
+        "p1": "For spørsmål om disse vilkårene, se kontaktsiden.",
+        "emailTitle": "Send e-post Pixel Art Village om vilkår"
+      }
+    },
+    "seoTitle": "Vilkår for bruk | Pixel Art Village",
+    "meta": {
+      "ogTitle": "Vilkår og betingelser | Bilde til pikselkunst-konverterer",
+      "ogDescription": "Vilkår for tjenesten for vårt bilde til pikselkunst‑konverter: bruksregler, ansvar, ansvarsfraskrivelse, IP, gjeldende lov, kontaktinformasjon.",
+      "twitterTitle": "Vilkår for bruk | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village tjenestevilkår: bruksregler, ansvar, ansvarsfraskrivelse, IP, gjeldende lovgivning, kontaktinformasjon."
+    },
+    "quickLinks": {
+      "heading": "Snarveier",
+      "mainSite": "Hovedside",
+      "popularConverters": "Populære konverterere",
+      "links": {
+        "home": "Pikselkunstkonverterer",
+        "about": "Om oss",
+        "contact": "Kontakt",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "about": {
+    "seoTitle": "Om | pixel art Landsby",
+    "seoDesc": "Om pixel art Village: en gratis, nettleserbasert pixel art maker og konverter. Personvern først, raskt og tilgjengelig.",
+    "h1": "Om pixel art landsby",
+    "p1": "pixel art Village er en gratis, nettleserbasert pixel image maker & converter. Last opp et PNG/JPG-bilde, juster pikselstørrelse og paletter, forhåndsvis umiddelbart og eksporter skarpe bilderesultater.",
+    "principles": {
+      "title": "Principles",
+      "privacy": {
+        "title": "Personvern – først:",
+        "desc": "Bildene dine behandles lokalt i nettleseren din – vi laster ikke opp filer."
+      },
+      "performance": {
+        "title": "Ytelse:",
+        "desc": "Raske forhåndsvisninger og ren eksport uten store avhengigheter."
+      },
+      "accessibility": {
+        "title": "Tilgjengelighet:",
+        "desc": "Tastaturvennlig brukergrensesnitt og synlige fokustilstander."
+      }
+    },
+    "contact": {
+      "title": "Kontakt",
+      "p1": "Se kontaktsiden for støtte og forespørsler. Du kan også sende oss en e-post direkte på",
+      "emailTitle": "E-post Pixel Art Village"
+    },
+    "ogTitle": "Om | Pixel Art Village",
+    "ogDesc": "Lær om Pixel Art Village, den personvernførste pixelkunst-omformeren med øyeblikkelig forhåndsvisning, paletter og veiledninger.",
+    "twitterTitle": "Om | Pixel Art Village",
+    "twitterDesc": "Oppdag hvem som opprettet Pixel Art Village og hvordan vår personvern-første pikselkunst-konverterer fungerer.",
+    "p2": "Vi fokuserer på personvern, hastighet og tilgjengelighet så du kan konvertere bilder til pixel art uten opplasting eller registrering.",
+    "p3": "Vårt team bygger utdanningsressurser og spesialiserte verktøy for kunstnere, lærere og indie-spillutviklere.",
+    "cta": "Prøv vårt <tool>konverteringsverktøy</tool> eller utforsk vår <blog>blogg</blog> for tips og veiledninger.",
+    "specializedLinks": "Trenger du arbeidsflyter spesifikt for formater? <png>PNG til Pixel Art</png>, <jpg>JPG til Pixel Art</jpg>, og <photo>Foto til Sprite Converter</photo> verktøy er klare til å hjelpe.",
+    "moreInfoRich": "Finn flere detaljer i vår <privacy>personvernpolicy</privacy> og <terms>bruksvilkår</terms>."
+  },
+  "contact": {
+    "h1": "Kontakt",
+    "p1": "Vi vil gjerne høre fra deg. For støtte, tilbakemeldinger eller spørsmål om partnerskap, ta kontakt via e-post.",
+    "emailLabel": "E-post:",
+    "note": "Replace the __PH_0__ for email with your official contact address to meet AdSense review requirements.",
+    "p2": "Før du kontakter oss, kan du finne svar i vår",
+    "p3": "blogg",
+    "p4": "eller besøk vårt",
+    "p5": "pikselkunst konverterer verktøy",
+    "p6": "for å komme i gang. Sjekk også våre",
+    "p7": "Om siden",
+    "p8": "for mer informasjon",
+    "p9": "For spesifikk konvertererhjelp, prøv våre",
+    "p10": "PNG til pixel art",
+    "p11": "or",
+    "p12": "bilde til pixelkunst",
+    "p13": "Veiledninger.",
+    "seoTitle": "Kontakt | Pixel Art Village",
+    "seoDesc": "Kontakt Pixel Art Village for støtte, tilbakemeldinger eller partnerskap. Kontakt oss raskt via e-post eller utforsk ressurser for umiddelbare svar.",
+    "ogTitle": "Kontakt | Pixel Art Village",
+    "ogDesc": "Ta kontakt med Pixel Art Village: støtte, tilbakemeldinger, partnerskapsforespørsler og tilleggsressurser.",
+    "twitterTitle": "Kontakt | Pixel Art Village",
+    "twitterDesc": "Trenger du hjelp med Pixel Art Village? Kontakt oss for støtte, tilbakemelding eller samarbeid.",
+    "emailTitle": "E-post Pixel Art Village"
+  },
+  "faq": {
+    "title": "pixel art Village: Ofte stilte spørsmål",
+    "items": [
+      {
+        "question": "Nettstedet viser en tom side eller krasjer – hva skal jeg gjøre?",
+        "answer": "Noen nettleserutvidelser injiserer utviklingskjøringer (f.eks. Plasmo/BacklinkPilot) på hver side, noe som kan ødelegge React-apper. Vennligst deaktiver disse utvidelsene på dette nettstedet og oppdater hardt (Ctrl/Cmd+Shift+R)."
+      },
+      {
+        "question": "Er denne digitale bildegeneratoren med palettkontroller gratis?",
+        "answer": "Ja. Image Village er et helt gratis online bildeverktøy for alle brukere. Nyt ubegrensede bildekonverteringer, egendefinerte palettkontroller og høyoppløselige nedlastinger med avanserte paletter uten kostnad."
+      },
+      {
+        "question": "Er bildet mitt privat? Laster du opp bildefiler?",
+        "answer": "Bildefilens personvern er garantert. Bildefilene dine forlater aldri enheten din, da all bildebehandling gjøres lokalt i nettleseren din. Image Village kan ikke få tilgang til bildefilene dine, noe som gjør den til en sikker digital bildeskaper fra bildene dine med palettalternativer."
+      },
+      {
+        "question": "Hvordan gjør jeg et bilde til en spillsprite med egendefinert palett?",
+        "answer": "Vår digitale bildeprodusent med palettkontroller er perfekt for å lage spillsprites. Last opp figurens bilde, juster størrelsen for å matche spillets visuelle stil, og bruk de egendefinerte palettkontrollene for å passe motorens fargegrenser. Lag pikselkunst med avanserte paletter for å hjelpe deg med å lage den perfekte spriten som en gjennomsiktig PNG."
+      },
+      {
+        "question": "Can I adjust the pixel grid on my image?",
+        "answer": "Absolutt. Live-editoren inkluderer et \"Vis rutenett\"-alternativ. Dette pikselnettoverlegget hjelper deg å se de individuelle pikslene tydelig, noe som er nyttig for å finjustere kunsten din eller for å lære hvordan pikseleringseffekten fungerer på bildet ditt."
+      },
+      {
+        "question": "Hva er den beste måten å konvertere et bilde til pixel art?",
+        "answer": "For best resultat når du konverterer et bilde til pikselbilder, start med et høykontrastbilde. Bruk pikselstørrelsesglidebryteren for å finne et detaljnivå du liker med egendefinerte palettinnstillinger. Lag pikselkunst med større størrelser for et mer abstrakt 8-bits utseende, mens mindre størrelser beholder flere detaljer fra originalbildet med avanserte paletter."
+      },
+      {
+        "question": "Kan jeg bruke den genererte pikselkunsten kommersielt?",
+        "answer": "Ja. Du eier rettighetene til dine originale opplastinger og til de genererte resultatene. Du kan bruke grafikk laget med pixel Village til alle formål, inkludert kommersielle prosjekter. Lag pikselkunst med våre verktøy for ubegrenset kommersiell bruk."
+      },
+      {
+        "question": "Hvilke formater kan jeg bruke med denne bildepikselatoren?",
+        "answer": "Denne bildepikselatoren støtter alle vanlige nettleserformater som PNG, JPG, GIF og WEBP. Du kan enkelt konvertere en PNG til pikselbilder eller en JPG til pikselbilder. Lag pikselkunst med hvilket som helst bildeformat."
+      },
+      {
+        "question": "Hvorfor kalles dette verktøyet pixel art Village?",
+        "answer": "Vi tror at å lage grafikk er en fellesskapsaktivitet, selv når du bruker et verktøy på nettet. pixel Village er et sted hvor alle, fra nybegynnere til profesjonelle, kan samles for enkelt å lage pikselvisualiseringer med egendefinerte paletter. Lag pikselkunst med verktøyene våre og bli med i vår innbydende landsby for alle pikselentusiaster."
+      }
+    ]
+  },
+  "related": {
+    "converters": {
+      "title": "Relaterte Pixelkunst-konvertere",
+      "desc": "Utforsk flere gratis verktøy for å konvertere bilder til pixelkunst",
+      "items": [
+        {
+          "title": "Image to Pixel Art",
+          "href": "/konverterer/bilde-til-pikselkunst/",
+          "desc": "Universal omformer for alle bildeformater"
+        },
+        {
+          "title": "PNG to Pixel Art",
+          "href": "/konverterer/png-til-pikselkunst/",
+          "desc": "Konverter PNG bilder med gjennomsiktighet"
+        },
+        {
+          "title": "JPG to Pixel Art",
+          "href": "/konverter/jpg-til-pixelkunst/",
+          "desc": "Gjør om bilder til retro grafikk"
+        },
+        {
+          "title": "Photo to Sprite",
+          "href": "/konverterer/foto-til-sprite-konverterer/",
+          "desc": "Lag spillklare sprites fra bilder"
+        },
+        {
+          "title": "8-bit kunstgenerator",
+          "href": "/converter/8-bit-kunst-generator/",
+          "desc": "Generer autentisk 8-bit stil kunstverk"
+        },
+        {
+          "title": "Pixeler Bilde Online",
+          "href": "/converter/pixelere-bilde-online/",
+          "desc": "Rask og gratis bildepikselering"
+        }
+      ]
+    },
+    "guides": {
+      "title": "Pixel Art Veiledninger & Guider",
+      "desc": "Lær hvordan du lager bedre pixel art med våre trinnvise veiledninger",
+      "items": [
+        {
+          "title": "Hvordan pixeliserer du et bilde",
+          "href": "/blog/hvordan-pikselere-bilde/",
+          "desc": "Nybegynnervennlig guide til pixelkunst"
+        },
+        {
+          "title": "Eksporter fra Illustrator",
+          "href": "/blog/eksporter-fra-illustrator-bilde-til-pixelkunst/",
+          "desc": "Unngå pixeleringproblemer under eksport"
+        },
+        {
+          "title": "Gjøre bildet mer som pixel",
+          "href": "/blog/lage-bilde-mer-som-piksel/",
+          "desc": "Grunnleggende redigeringsteknikker for bedre resultater"
+        },
+        {
+          "title": "Hent pikselkunstversjon av bilde",
+          "href": "/blog/hvordan-få-pixel-art-versjon-av-bilde/",
+          "desc": "Komplett konverteringsguide med SNES-tips"
+        }
+      ]
+    }
+  },
+  "paletteManager": {
+    "createTab": "Opprett palett",
+    "importTab": "🆕 Importer fra Lospec",
+    "createTitle": "Opprett palett",
+    "nameLabel": "Palett Navn",
+    "namePlaceholder": "Min palett",
+    "colorsLabel": "Palettfarger",
+    "noColors": "Ingen farger ennå",
+    "colorInputPlaceholder": "#000000",
+    "addColor": "Legg til farge",
+    "removeSelected": "Fjern valgte",
+    "save": "Lagre palett",
+    "reset": "Nullstill skjema",
+    "delete": "Slett palett",
+    "importTitle": "Import fra Lospec",
+    "importDesc": "Bla gjennom og importer paletter fra",
+    "importDescSuffix": "，这是最大的像素艺术调色板社区，拥有 5000+ 配色方案。",
+    "importSuccess": "Fargepalett \"{{name}}\" er importert og automatisk anvendt.\\n\\nRull oppover for å se effekten, eller bytt til andre fargepaletter i Palette-menyen."
+  },
+  "home": {
+    "seoTitle": "Bilde til Pixel Art-konverterer | Pixel Art Village",
+    "seoDescription": "Gjør ethvert bilde om til retro 8-bit pikselkunst med tilpassbare paletter, øyeblikkelig forhåndsvisning, dithering-kontroller og sikker behandling i nettleseren—ingen registrering kreves."
+  },
+  "header": {
+    "mainNav": "Hovednavigasjon",
+    "userAvatarTitle": "Brukerbilde"
+  },
+  "content": {
+    "fallbackNotice": "Innhold for dette språket kommer snart. Viser engelsk for øyeblikket."
+  }
+}

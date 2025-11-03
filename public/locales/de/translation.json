@@ -1,68 +1,272 @@
 {
-  "nav": {"examples": "Beispiele", "features": "Funktionen", "how": "So funktioniert’s", "faq": "FAQ", "blog": "Blog", "home": "Startseite", "about": "Über uns", "contact": "Kontakt"},
-  "navTitle": {
-    "hero": "Scroll to Home hero section",
-    "examples": "Scroll to Pixel Art Examples",
-    "features": "Scroll to Pixel Art Features",
-    "how": "Scroll to How Pixel Art Converter Works",
-    "faq": "Scroll to Pixel Art FAQ",
-    "blog": "Open Pixel Art Blog"
+  "nav": {
+    "examples": "Beispiele",
+    "features": "Funktionen",
+    "how": "Wie es funktioniert",
+    "faq": "Häufig gestellte Fragen",
+    "blog": "Blog",
+    "home": "Start",
+    "about": "Über uns",
+    "contact": "Kontakt"
   },
-  "cta": {"start": "Jetzt starten"},
-  "site": {"tagline": "Online‑Pixel‑Art‑Generator • Maker • Konverter"},
+  "common": {
+    "loading": "Laden...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "failed": "Fehlgeschlagen",
+    "imageFailedToLoad": "Bild konnte nicht geladen werden",
+    "imageUnavailable": "Bild nicht verfügbar",
+    "lastUpdated": "Zuletzt aktualisiert: {{date}}"
+  },
+  "navTitle": {
+    "hero": "Scrollen Sie zum Abschnitt Home Hero",
+    "examples": "Scrollen Sie zu Pixel-Art-Beispielen",
+    "features": "Scrollen Sie zu Pixel-Art-Funktionen",
+    "how": "Scrollen Sie zu „Funktionsweise des Pixel Art Converter“.",
+    "faq": "Scrollen Sie zu den häufig gestellten Fragen zu Pixel Art",
+    "blog": "Open the Pixel Art Blog"
+  },
+  "cta": {
+    "start": "Jetzt starten"
+  },
+  "site": {
+    "name": "Pixel-Art-Dorf",
+    "tagline": "Online‑Pixel‑Art‑Generator • Ersteller • Konverter",
+    "homeLinkAria": "Pixel Art Village Startseite"
+  },
   "footer": {
-    "tools": "Tools", "formats": "Formate", "explore": "Entdecken", "community": "Community",
-    "terms": "Nutzungsbedingungen", "privacy": "Datenschutz", "about": "Über uns", "contact": "Kontakt",
+    "tools": "Werkzeuge",
+    "formats": "Formate",
+    "explore": "Entdecken",
+    "community": "Gemeinschaft",
+    "terms": "Nutzungsbedingungen",
+    "privacy": "Datenschutz",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "github": "GitHub",
+    "cta": {
+      "ariaStart": "Beginnen Sie mit der Bild-Pixel-Kunst im Pixel-Art-Dorf"
+    },
+    "copy": "© {{year}} Pixel Art Village. Alle Rechte vorbehalten.",
     "links": {
-      "generator": "Pixel‑Art‑Generator",
-      "converter": "Pixel‑Art‑Konverter",
-      "imageToPixel": "Bild zu Pixel‑Art",
-      "makePixelArt": "Pixel‑Art erstellen",
-      "png2pixel": "PNG zu Pixel‑Art",
-      "jpg2pixel": "JPG zu Pixel‑Art",
-      "img2pixel": "IMG zu Pixel‑Art",
-      "gridPreview": "Pixelraster‑Vorschau",
-      "how": "So funktioniert’s",
-      "start": "Starten in pixel art Village",
+      "generator": "Digitaler Bildgenerator mit benutzerdefinierter Palette",
+      "converter": "Bild zu Pixel Art Konverter mit benutzerdefinierter Palette",
+      "imageToPixel": "Bild zu Pixel Art mit Paletten",
+      "makePixelArt": "Pixel-Art-Grafiken mit Paletten-Steuerung erstellen",
+      "png2pixel": "PNG zu Pixel Art mit Palette",
+      "jpg2pixel": "JPG zu Pixel Art mit benutzerdefinierten Paletten",
+      "img2pixel": "IMG zu Pixel Art mit Paletten-Optionen",
+      "gridPreview": "Pixel-Raster-Vorschau",
+      "how": "Wie es funktioniert",
+      "start": "Starten in Pixel Art Village",
       "tips": "Tipps & Paletten",
       "privacyLocal": "Datenschutz & lokale Verarbeitung"
     }
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Artikel und Updates über Pixel‑Art, Tutorials und neue Funktionen.",
+    "subtitle": "Artikel und Updates zur Erstellung von Pixel-Art-Grafiken, Tutorials und neue Funktionen.",
     "back": "Zurück zum Blog",
-    "notFound": {"title": "Beitrag nicht gefunden", "desc": "Der gesuchte Artikel existiert nicht. Zurück zum"}
+    "notFound": {
+      "title": "Beitrag nicht gefunden",
+      "desc": "Der gesuchte Artikel existiert nicht. Gehen Sie zurück zum Blog."
+    }
   },
   "consent": {
     "title": "Datenschutz & Cookies",
-    "desc": "Wir verwenden Cookies, um diese Website zu betreiben und – sofern aktiviert – Google AdSense‑Anzeigen anzuzeigen. Sie können nicht notwendige Cookies jederzeit akzeptieren oder ablehnen.",
+    "desc": "We use cookies to operate this website and – if enabled – to display Google AdSense ads. You can accept or reject non-essential cookies at any time.",
     "privacy": "Datenschutzerklärung",
     "andManage": "und verwalten Sie die Anzeigenpersonalisierung unter",
     "accept": "Alle akzeptieren",
-    "reject": "Nicht notwendige ablehnen"
-  }
-  ,
+    "reject": "Nicht notwendig ablehnen",
+    "bannerLabel": "Dialog zur Cookie-Einwilligung",
+    "acceptLabel": "Akzeptieren Sie alle Cookies",
+    "rejectLabel": "Nicht unbedingt erforderliche Cookies ablehnen"
+  },
   "tool": {
-    "title": "Online‑Pixel‑Art‑Generator & Konverter",
-    "subtitle": "Pixeln Sie Bilder direkt im Browser – wandeln Sie PNG/JPG in sauberes, rasterfreundliches Pixel‑Art um. Passen Sie Pixelgröße und Paletten mit Sofort‑Vorschau an und exportieren Sie gestochen scharfe Ergebnisse für Sprites, Icons oder Retro‑Grafiken. Schnell, privat und kostenlos mit pixel art Village.",
+    "title": "Bild zu Pixel Art Konverter mit benutzerdefinierter Palette",
+    "subtitle2": "Anpassbare Pixelgröße und benutzerdefinierte Paletten. Perfekt für Sprites, Symbole und Retro-Spiel-Grafiken mit erweiterten Paletten-Optionen.",
+    "subtitle": "Verwandeln Sie Ihre Fotos sofort in beeindruckende Pixel",
     "dragOrClick": "Ziehen Sie Ihr Bild hierher oder",
     "clickToChoose": "klicken Sie zum Auswählen",
     "supports": "Unterstützt PNG, JPG, GIF — bis 10MB",
     "chooseFile": "Datei auswählen",
     "preparing": "Bild wird vorbereitet…",
     "ariaUpload": "Bild hochladen (ziehen & ablegen oder klicken, um auszuwählen)",
-    "ariaChoose": "Bilddatei auswählen"
+    "ariaChoose": "Bilddatei auswählen",
+    "dragDrop": "Ziehen Sie ein Bild hierher",
+    "orClick": "oder klicken Sie zum Auswählen",
+    "convertButton": "In Pixel Art konvertieren",
+    "processing": "Bild wird verarbeitet...",
+    "converted": "Bild erfolgreich konvertiert!",
+    "dropZone": "Drop-Zone",
+    "downloadButton": "Bild herunterladen",
+    "resetButton": "Neues Bild",
+    "pixelSize": "Pixelgröße",
+    "colorPalette": "Farbpalette",
+    "dithering": "Dithering",
+    "preview": "Vorschau",
+    "original": "Original",
+    "result": "Ergebnis"
   },
-  "upload": {"selected": "Ausgewählte Datei: {{name}}"},
+  "upload": {
+    "selected": "Ausgewählte Datei: {{name}}"
+  },
   "errors": {
     "fileTooLarge10": "Datei zu groß. Bitte ein Bild < 10MB hochladen.",
     "prepareFail": "Bildvorbereitung fehlgeschlagen. Bitte andere Datei versuchen.",
     "onlyPngJpg": "Bitte PNG‑ oder JPG‑Bild auswählen.",
     "maxFile": "Datei zu groß. Maximal zulässig: {{mb}}MB."
   },
-  "editor": {"title": "Pixel‑Art‑Generator online"}
-  ,
+  "editor": {
+    "title": "Online-Pixel‑Art‑Generator",
+    "downloadBtn": "Laden Sie das Pixel-Art-Bild herunter",
+    "uploadBtn": "Bild hochladen",
+    "section": {
+      "general": "Allgemeines ▾"
+    }
+  },
+  "adjustments": {
+    "reset": {
+      "title": "Schieberegler zurücksetzen",
+      "all": "Alles zurücksetzen",
+      "tooltip": "Pixelgröße / Helligkeit / Kontrast / Sättigung zurücksetzen",
+      "pixelSizeBtnTitle": "Setzen Sie die Pixelgröße zurück",
+      "brightnessBtnTitle": "Helligkeit zurücksetzen",
+      "contrastBtnTitle": "Kontrast zurücksetzen",
+      "saturationBtnTitle": "Sättigung zurücksetzen"
+    },
+    "pixelSize": "Pixelgröße: {{value}}",
+    "section": {
+      "color": "Farbanpassungen"
+    },
+    "brightness": "Helligkeit: {{value}}",
+    "contrast": "Kontrast: {{value}}",
+    "saturation": "Sättigung: {{value}}",
+    "palette": {
+      "label": "Palette",
+      "none": "Keiner",
+      "custom": "Brauch",
+      "note": "Pico-8 ist eine feste Palette. Bei anderen Namen ohne integrierte Palettenfarben werden Paletten automatisch anhand ihrer Größe generiert (z. B. Sunset 8 → 8 Palette Palettenfarben)."
+    },
+    "colorDistance": {
+      "label": "Farbabstand",
+      "rgb": "RGB (schnell)",
+      "lab": "LAB (genau, langsamer)"
+    },
+    "autoPalette": "Palette aus Bild generieren",
+    "paletteSize": "# Palettefarben: {{value}}",
+    "dither": "Dithering aktivieren (Floyd–Steinberg)",
+    "zoom": "Zoom: {{value}}x",
+    "grid": "Raster anzeigen"
+  },
+  "export": {
+    "label": {
+      "format": "Exportformat",
+      "size": "Exportgröße"
+    },
+    "option": {
+      "png": "PNG (verlustfrei)",
+      "jpeg": "JPEG",
+      "webp": "WebP"
+    },
+    "size": {
+      "xs": "XS (0,5×)",
+      "sm": "Klein (1×)",
+      "lg": "Groß (2×)",
+      "xl": "XL (4×)"
+    },
+    "transparent": {
+      "label": "Transparenter Hintergrund (PNG/WebP)"
+    },
+    "quality": {
+      "label": "Qualität: {{percent}} %"
+    }
+  },
+  "notFound": {
+    "seoTitle": "Seite nicht gefunden | Pixel Art Village",
+    "title": "Page not found",
+    "desc": "Die gesuchte Seite existiert nicht oder wurde verschoben. Kehren Sie zu Pixel Art Village zurück, um weiterhin beeindruckende Pixelgrafiken zu erstellen.",
+    "backHome": "← Zurück zu Pixel Art Village",
+    "popularPages": "Oder versuchen Sie diese beliebten Seiten:",
+    "links": {
+      "home": "Startseite",
+      "pngConverter": "PNG-zu-Pixel-Art-Konverter",
+      "jpgConverter": "JPG-zu-Pixel-Art-Konverter",
+      "about": "Über uns"
+    }
+  },
+  "pseo": {
+    "notFound": {
+      "seoTitle": "Seite nicht gefunden | pixel art Village",
+      "title": "Seite nicht gefunden",
+      "desc": "Die gesuchte Konverterseite existiert nicht."
+    },
+    "relatedHeading": "Verwandte Pixel-Art-Konverter",
+    "siteNavigationTitle": "Website-Navigation"
+  },
+  "showcase": {
+    "title": "Vom Bild zu Pixeln: Sehen Sie, was unser Bildprozessor leisten kann",
+    "desc": "Mit",
+    "before": "Vor",
+    "after": "Nach",
+    "alt": {
+      "before": "Originalbild vor der Konvertierung zu Pixelkunst",
+      "after": "Ein Landschaftsbild, das vom Pixel‑Art‑Dorf‑Generator in 8‑Bit‑Stil‑Pixel‑Art konvertiert wurde."
+    },
+    "descFull": "Entdecken Sie, wie unser Bild-zu-Pixelkunst-Konverter Ihre Fotos in scharfe Pixelkunst verwandelt."
+  },
+  "lang": {
+    "label": "Sprache"
+  },
+  "wplace": {
+    "title": "Perfektes Tool für Pixelart Village Benutzer",
+    "desc": "Der ultimative Begleiter für Pixelkunst Village — konvertiere jedes Bild in saubere Pixelvisuals mit Vorschau in Echtzeit, intelligenten Paletten und sofortigem Export. Erstelle Pixelkunst mit unseren Bildtools.",
+    "features": {
+      "free": {
+        "title": "100% kostenlos",
+        "desc": "Kostenlos für alle. Keine versteckten Kosten oder Abonnements — erstelle unbegrenzte Pixel-Visuals aus jedem Bild."
+      },
+      "privacy": {
+        "title": "Datenschutz zuerst",
+        "desc": "Alle Verarbeitung erfolgt in Ihrem Browser. Ihre Bilder verlassen nie Ihr Gerät — ein privater, sicherer Workflow, der bewusst konzipiert wurde."
+      },
+      "easy": {
+        "title": "Einfach für alle Spieler",
+        "desc": "Intuitive Benutzeroberfläche und schnelles Feedback. Konvertieren Sie jedes Bild mit nur wenigen Klicks in malbare Pixel-Visuals mit benutzerdefinierten Palette-Optionen."
+      },
+      "size": {
+        "title": "Keine Größenbeschränkungen",
+        "desc": "Bilder in beliebiger Größe hochladen — von winzigen Symbolen bis zu großen Grafiken — mit flüssiger Skalierung und responsiven Bildvorschauen unter Verwendung erweiterter Paletten."
+      }
+    }
+  },
+  "features": {
+    "title": "Hauptfunktionen",
+    "desc": "Bilder in pixel‑perfekte Kunst verwandeln. Live‑Details mit benutzerdefinierten Paletten und Farbprobesteuerung abstimmen. Sofortige Vorschau und sprite‑bereite PNG-Export.",
+    "palette": {
+      "title": "Palette-Steuerung",
+      "desc": "Unser Bild‑zu‑Pixel‑Art‑Konverter bietet eine präzise Palettensteuerung. Wählen Sie eingebaute Retro‑Paletten oder extrahieren Sie automatisch Farbtöne aus Ihrem Bild, und sperren, ordnen und feinabstimmen Sie Farbvarianten, um Ihren Stil zu treffen. Mit konsistenten Paletten bleiben Ihre Bild‑zu‑Pixel‑Art‑Konvertierungen gut lesbar, spielbereit und einfach in Projekten wiederverwendbar."
+    },
+    "live": {
+      "title": "Live-Einstellungen",
+      "desc": "Pikselgröße, Dithering, Kontrast und Helligkeit anpassen, während Ihre Bild‑zu‑Pixelkunst‑Ergebnisse sofort aktualisiert werden. Nebeneinander‑Ansichten erscheinen ohne Verzögerung, sodass Sie Optionen vergleichen und den perfekten Look schneller festlegen können. Live‑Vorschau reduziert das Rätselraten und sorgt dafür, dass Ihre Bild‑zu‑Pixelkunst‑Konvertierungen bei jedem Export vorhersagbar bleiben."
+    },
+    "clientSide": {
+      "title": "100% clientseitig",
+      "desc": "Alle Konvertierungen laufen zu 100% clientseitig in Ihrem Browser. Bilder verlassen niemals Ihr Gerät, und Offline-Builds sind möglich, wobei Assets privat und sicher bleiben. Pixel Art Village schützt Ihre Arbeit, während es schnelle, sichere Verarbeitung auf Desktop- und Mobilgeräten liefert. Mit Pixel Art Village behalten Sie die Kontrolle von der ersten Vorschau bis zum finalen Export."
+    },
+    "customPalettes": "Anpassbare Paletten",
+    "customPalettesDesc": "Wählen Sie aus vordefinierten Paletten oder erstellen Sie Ihre eigene benutzerdefinierte Farbpalette",
+    "realTimePreview": "Echtzeit-Vorschau",
+    "realTimePreviewDesc": "Änderungen sofort sehen, während Sie die Einstellungen anpassen",
+    "multipleFormats": "Mehrere Formate",
+    "multipleFormatsDesc": "Unterstützt PNG, JPG, GIF, BMP und WebP Bildformate",
+    "highQuality": "Hohe Qualität",
+    "highQualityDesc": "Exportieren Sie hochwertige Bilder, perfekt für Ihr Projekt",
+    "easyToUse": "Einfach zu verwenden",
+    "easyToUseDesc": "Intuitive Benutzeroberfläche für Künstler und Entwickler"
+  },
   "how": {
     "title": "So funktioniert pixel art Village",
     "desc": "Erstellen Sie Pixel‑Art in drei einfachen Schritten.",
@@ -74,125 +278,345 @@
       "adjust.desc": "Passen Sie Pixelgröße, Palette und Pixelraster live an.",
       "download.desc": "Mit einem Klick aus dem Pixel‑Art‑Generator exportieren und teilen."
     }
-  }
-,
-  "massivePhrases": {
-    "phrases1_1": "Convert image to pixel art online",
-    "phrases1_2": "Transform image to pixel art instantly",
-    "phrases1_3": "Turn image to pixel art with ease",
-    "phrases1_4": "Change image to pixel art format",
-    "phrases1_5": "Process image to pixel art style",
-    "phrases1_6": "Edit image to pixel art quickly",
-    "phrases1_7": "Make image to pixel art conversion",
-    "phrases1_8": "Create image to pixel art result",
-    "phrases1_9": "Generate image to pixel art output",
-    "phrases1_10": "Produce image to pixel art design",
-    "phrases2_1": "Create pixel art image from photo",
-    "phrases2_2": "Generate pixel art image online",
-    "phrases2_3": "Make pixel art image quickly",
-    "phrases2_4": "Build pixel art image easily",
-    "phrases2_5": "Design pixel art image professionally",
-    "phrases2_6": "Craft pixel art image perfectly",
-    "phrases2_7": "Produce pixel art image instantly",
-    "phrases2_8": "Develop pixel art image efficiently",
-    "phrases2_9": "Form pixel art image beautifully",
-    "phrases2_10": "Construct pixel art image smoothly",
-    "phrases3_1": "Convert image to format",
-    "phrases3_2": "Transform image to style",
-    "phrases3_3": "Turn image to design",
-    "phrases3_4": "Change image to type",
-    "phrases3_5": "Process image to result",
-    "phrases3_6": "Edit image to output",
-    "phrases3_7": "Make image to creation",
-    "phrases3_8": "Create image to artwork",
-    "phrases3_9": "Generate image to graphic",
-    "phrases3_10": "Produce image to visual",
-    "phrases3_11": "Develop image to picture",
-    "phrases3_12": "Form image to illustration",
-    "phrases3_13": "Build image to composition",
-    "phrases3_14": "Design image to masterpiece",
-    "phrases3_15": "Craft image to creation",
-    "phrases4_1": "Adjust pixel size setting",
-    "phrases4_2": "Control pixel size option",
-    "phrases4_3": "Change pixel size value",
-    "phrases4_4": "Set pixel size parameter",
-    "phrases4_5": "Modify pixel size dimension",
-    "phrases4_6": "Configure pixel size property",
-    "phrases4_7": "Customize pixel size feature",
-    "phrases4_8": "Define pixel size measurement",
-    "phrases4_9": "Specify pixel size requirement",
-    "phrases4_10": "Determine pixel size standard",
-    "phrases4_11": "Establish pixel size guideline",
-    "phrases4_12": "Fix pixel size resolution",
-    "phrases4_13": "Select pixel size preference",
-    "phrases4_14": "Choose pixel size configuration",
-    "phrases5_1": "Process the image file",
-    "phrases5_2": "Edit the image content",
-    "phrases5_3": "Transform the image data",
-    "phrases5_4": "Convert the image format",
-    "phrases5_5": "Modify the image properties",
-    "phrases5_6": "Adjust the image settings",
-    "phrases5_7": "Enhance the image quality",
-    "phrases5_8": "Improve the image appearance",
-    "phrases5_9": "Optimize the image output",
-    "phrases5_10": "Refine the image details",
-    "phrases5_11": "Perfect the image result",
-    "phrases5_12": "Polish the image finish",
-    "phrases5_13": "Upgrade the image standard",
-    "phrases5_14": "Boost the image performance",
-    "phrases6_1": "Create art image masterpiece",
-    "phrases6_2": "Generate art image design",
-    "phrases6_3": "Make art image creation",
-    "phrases6_4": "Build art image artwork",
-    "phrases6_5": "Produce art image visual",
-    "phrases6_6": "Develop art image graphic",
-    "phrases6_7": "Form art image illustration",
-    "phrases6_8": "Craft art image composition",
-    "phrases6_9": "Design art image project",
-    "phrases6_10": "Construct art image piece",
-    "phrases7_1": "Customize the palette colors",
-    "phrases7_2": "Adjust the palette settings",
-    "phrases7_3": "Control the palette options",
-    "phrases7_4": "Modify the palette configuration",
-    "phrases7_5": "Configure the palette properties",
-    "phrases7_6": "Set the palette parameters",
-    "phrases7_7": "Define the palette scheme",
-    "phrases7_8": "Choose the palette selection",
-    "phrases7_9": "Select the palette combination",
-    "phrases7_10": "Determine the palette arrangement",
-    "phrases8_1": "Convert to pixel format",
-    "phrases8_2": "Transform to pixel style",
-    "phrases8_3": "Change to pixel design",
-    "phrases8_4": "Turn to pixel art",
-    "phrases8_5": "Switch to pixel mode",
-    "phrases8_6": "Shift to pixel type",
-    "phrases8_7": "Move to pixel version",
-    "phrases8_8": "Adapt to pixel standard",
-    "phrases8_9": "Adjust to pixel specification",
-    "phrases8_10": "Modify to pixel requirement",
-    "phrases9_1": "Edit the pixel details",
-    "phrases9_2": "Adjust the pixel properties",
-    "phrases9_3": "Control the pixel settings",
-    "phrases9_4": "Modify the pixel attributes",
-    "phrases9_5": "Configure the pixel parameters",
-    "phrases9_6": "Set the pixel values",
-    "phrases9_7": "Define the pixel characteristics",
-    "phrases9_8": "Specify the pixel features",
-    "phrases9_9": "Determine the pixel qualities",
-    "phrases9_10": "Establish the pixel standards",
-    "phrases10_1": "Convert to pixel art style",
-    "phrases10_2": "Transform to pixel art format",
-    "phrases10_3": "Change to pixel art design",
-    "phrases10_4": "Turn to pixel art version",
-    "phrases10_5": "Switch to pixel art mode",
-    "phrases10_6": "Shift to pixel art type",
-    "phrases10_7": "Move to pixel art standard",
-    "phrases11_1": "Convert image to pixel format",
-    "phrases11_2": "Transform image to pixel style",
-    "phrases11_3": "Change image to pixel design",
-    "phrases11_4": "Turn image to pixel version",
-    "phrases11_5": "Process image to pixel mode",
-    "phrases11_6": "Edit image to pixel type",
-    "phrases11_7": "Make image to pixel standard"
+  },
+  "privacy": {
+    "h1": "Datenschutzerklärung",
+    "sections": {
+      "overview": {
+        "title": "Übersicht",
+        "p1": "pixel art Village achtet Ihre Privatsphäre. Diese Richtlinie erläutert, welche Daten wir verarbeiten, wie wir Cookies verwenden (einschließlich Google AdSense-Cookies) und Ihre Entscheidungen. Falls Sie Fragen haben, kontaktieren Sie uns bitte über die E-Mail auf der Kontaktseite."
+      },
+      "local": {
+        "title": "Lokale Bildverarbeitung",
+        "p1": "Ihre Bilder verlassen nie Ihr Gerät. Alle Bildverarbeitung erfolgt lokal in Ihrem Browser. Wir laden Ihre Bildedateien nicht auf unsere Server hoch, speichern oder teilen sie."
+      },
+      "collect": {
+        "title": "Informationen, die wir sammeln",
+        "li1": "Technische Daten für den Website-Betrieb (z.B. grundlegende Geräte-/Browser-Informationen) erforderlich für die Bereitstellung des Dienstes.",
+        "li2": "Aggregierte Nutzungsdaten zur Verbesserung der Funktionen (falls Analytik aktiviert ist, vermeiden wir die Erfassung personenbezogener Daten).",
+        "li3": "Werbungsdaten von Google AdSense (siehe unten), wenn Anzeigen angezeigt werden.",
+        "p2": "Wir benötigen keine Kontoregistrierung. Wir sammeln nicht wissentlich sensible personenbezogene Daten."
+      },
+      "cookies": {
+        "title": "Cookies and AdSense",
+        "p1": "Wir können Cookies und ähnliche Technologien verwenden, um die Website zu betreiben und Ihr Erlebnis zu verbessern. Wenn Google AdSense aktiviert ist, können Google und seine Partner Cookies verwenden, um Anzeigen basierend auf Ihren Besuchen auf dieser und anderen Websites zu schalten.",
+        "learn": "Erfahren Sie, wie Google Informationen von Websites oder Apps nutzt, die Google-Services verwenden:",
+        "manage": "Anzeigenpersonalisierung verwalten:",
+        "more": "Weitere Informationen zu Google-Anzeigen und Cookies:"
+      },
+      "third": {
+        "title": "Drittanbieter‑Partner",
+        "p1": "Wir können Drittanbieter-Dienste integrieren (z. B. Google AdSense). Diese Partner können Daten gemäß ihren eigenen Datenschutzrichtlinien verarbeiten. Wir empfehlen Ihnen, deren Richtlinien zu überprüfen, um die Datenhandhabungspraktiken zu verstehen."
+      },
+      "use": {
+        "title": "Datennutzung und -freigabe",
+        "li1": "Den Service bereitstellen und aufrechterhalten.",
+        "li2": "Schützen Sie die Service-Integrität, erkennen Sie Missbrauch und verbessern Sie Funktionen.",
+        "li3": "Gesetzliche Verpflichtungen einhalten. Wir verkaufen keine personenbezogenen Daten."
+      },
+      "rights": {
+        "title": "Ihre Auswahl und Rechte",
+        "li1": "Anzeigenpersonalisierung deaktivieren oder über die obigen Links verwalten.",
+        "li2": "Cookies über Ihre Browser-Einstellungen verwalten.",
+        "li3": "Kontaktieren Sie uns, um Ihre geltenden Datenschutzrechte auszuüben (Zugriff, Berichtigung, Löschung, wie gesetzlich vorgeschrieben)."
+      },
+      "children": {
+        "title": "Kinder-Privatsphäre",
+        "p1": "Der Dienst richtet sich nicht an Kinder unter 13 Jahren (oder dem durch lokales Gesetz vorgeschriebenen Alter). Wir sammeln wissentlich keine persönlichen Daten von Kindern."
+      },
+      "changes": {
+        "title": "Änderungen an dieser Richtlinie",
+        "p1": "Wir können diese Richtlinie von Zeit zu Zeit aktualisieren. Wesentliche Änderungen werden auf dieser Seite mit einem aktualisierten Datum hervorgehoben. Ihre fortgesetzte Nutzung der Website zeigt Ihre Zustimmung zur aktualisierten Richtlinie an."
+      },
+      "contact": {
+        "title": "Kontakt",
+        "p1": "Für Datenschutzanfragen konsultieren Sie bitte die Kontaktseite.",
+        "emailTitle": "E-Mail Pixel Art Village zum Datenschutz"
+      }
+    },
+    "seoTitle": "Datenschutzrichtlinie | pixel art Village",
+    "seoDesc": "Pixel Art Village Datenschutzrichtlinie: lokale Bildverarbeitung, AdSense-Cookies, Drittanbieter-Partner, Ihre Wahlmöglichkeiten und Rechte, Kontaktinformationen.",
+    "meta": {
+      "ogTitle": "Datenschutzrichtlinie | Bild-zu-Pixelkunst-Konverter",
+      "ogDescription": "Datenschutzrichtlinie für unseren Bild-zu-Pixel-Art-Konverter: lokale Bildverarbeitung, AdSense-Cookies, Drittpartner, Ihre Entscheidungen und Rechte, Kontaktinformationen.",
+      "twitterTitle": "Datenschutzerklärung | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village Datenschutzrichtlinie: lokale Bildverarbeitung, AdSense-Cookies, Drittanbieter-Partner, Ihre Wahlmöglichkeiten und Rechte, Kontaktinformationen."
+    },
+    "quickLinks": {
+      "heading": "Quicklinks",
+      "mainSite": "Hauptseite",
+      "popularConverters": "Beliebte Konverter",
+      "links": {
+        "home": "Pixel-Kunst-Konverter",
+        "about": "Über uns",
+        "contact": "Kontakt",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "terms": {
+    "h1": "Nutzungsbedingungen",
+    "sections": {
+      "acceptance": {
+        "title": "Annahme der Bedingungen",
+        "p1": "Durch den Zugriff auf oder die Nutzung von pixel art Village (dem \"Dienst\") stimmen Sie zu, an diese Bedingungen gebunden zu sein. Falls Sie nicht zustimmen, nutzen Sie den Dienst nicht."
+      },
+      "use": {
+        "title": "Nutzung des Dienstes",
+        "li1": "Laden Sie nur Inhalte hoch, zu deren Nutzung Sie berechtigt sind. Sie sind für Ihre Inhalte und die Einhaltung geltender Gesetze verantwortlich.",
+        "li2": "Missbrauchen, stören oder unterbrechen Sie nicht den Service oder andere Benutzer.",
+        "li3": "Nicht den Service für illegale, schädliche oder rechtsverletzende Aktivitäten verwenden."
+      },
+      "ip": {
+        "title": "Geistiges Eigentum",
+        "p1": "We retain all rights to the Service and related materials. You retain rights to your original uploads and generated outputs, subject to your applicable rights and third‑party rights."
+      },
+      "processing": {
+        "title": "Bildverarbeitung",
+        "p1": "Die Bildverarbeitung erfolgt lokal in Ihrem Browser. Wir speichern Ihre hochgeladenen Bilder nicht auf unseren Servern."
+      },
+      "disclaimer": {
+        "title": "Haftungsausschluss für Garantien",
+        "p1": "Der Dienst wird \"wie er ist\" und \"wie verfügbar\" ohne Gewährleistungen jeglicher Art, ausdrücklich oder stillschweigend, bereitgestellt. Wir gewährleisten nicht, dass der Dienst unterbrechungs- oder fehlerfrei sein wird."
+      },
+      "liability": {
+        "title": "Haftungsbeschränkung",
+        "p1": "Soweit gesetzlich zulässig, haften wir nicht für indirekte, zufällige, besondere, Folge- oder Strafschäden, die aus oder im Zusammenhang mit Ihrer Nutzung des Dienstes entstehen."
+      },
+      "changes": {
+        "title": "Änderungen des Dienstes oder der Bedingungen",
+        "p1": "Wir können den Dienst jederzeit ändern oder einstellen und diese Bedingungen aktualisieren. Die fortgesetzte Nutzung des Dienstes gilt als Zustimmung zu den aktualisierten Bedingungen."
+      },
+      "law": {
+        "title": "Anwendbares Recht",
+        "p1": "These Terms are governed by applicable laws in your jurisdiction to the extent not preempted by other laws. Venue and jurisdiction will follow applicable conflict of laws rules."
+      },
+      "contact": {
+        "title": "Kontakt",
+        "p1": "Bei Fragen zu diesen Bedingungen siehe bitte die Kontaktseite.",
+        "emailTitle": "E-Mail Pixel Art Village zu den Bedingungen"
+      }
+    },
+    "seoTitle": "Nutzungsbedingungen | Pixel Art Village",
+    "meta": {
+      "ogTitle": "Nutzungsbedingungen | Bild-zu-Pixel-Art-Konverter",
+      "ogDescription": "Nutzungsbedingungen für unseren Bild-zu-Pixel-Art-Konverter: Nutzungsregeln, Verantwortlichkeiten, Haftungsausschluss, geistiges Eigentum, anwendendes Recht, Kontaktinformationen.",
+      "twitterTitle": "Nutzungsbedingungen | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village Nutzungsbedingungen: Nutzungsregeln, Verantwortlichkeiten, Haftungsausschluss, IP, anwendbares Recht, Kontaktinformationen."
+    },
+    "quickLinks": {
+      "heading": "Schnellzugriffe",
+      "mainSite": "Hauptseite",
+      "popularConverters": "Beliebte Konverter",
+      "links": {
+        "home": "Pixel-Art-Konverter",
+        "about": "Über uns",
+        "contact": "Kontakt",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "about": {
+    "seoTitle": "Über uns | Kostenloser Pixel Art Converter | Pixel Art Village",
+    "seoDesc": "Über Pixel Art Village: ein kostenloser, browser-basierter Pixel Art Maker & Converter. Datenschutz zuerst, schnell und zugänglich.",
+    "ogTitle": "Über | Bild zu Pixel Art Converter",
+    "ogDesc": "Über unseren Bild zu Pixel Art Converter: ein kostenloses browser-basiertes Tool zur Erstellung von Retro-Spielgrafiken. Datenschutz zuerst, schnell und zugänglich.",
+    "twitterTitle": "Über | Pixel Art Village",
+    "twitterDesc": "Über Pixel Art Village: ein kostenloser, browser-basierter Pixel Art Maker & Converter. Datenschutz zuerst, schnell und zugänglich.",
+    "h1": "Über Pixel Art Village",
+    "p1": "Pixel Art Village ist ein kostenloser, browserbasierter Generator und Konverter für Pixelgrafiken. Laden Sie ein PNG- oder JPG-Bild hoch, passen Sie Pixelgröße und Paletten an, sehen Sie sofort eine Vorschau und exportieren Sie gestochen scharfe Ergebnisse.",
+    "p2": "We focus on privacy, speed, and accessibility, so you can convert images to pixel art without upload or registration.",
+    "p3": "Unser Team entwickelt Lernmaterialien und spezialisierte Tools für Künstler:innen, Lehrkräfte und Indie-Game-Entwickler:innen.",
+    "principles": {
+      "title": "Grundsätze",
+      "privacy": {
+        "title": "Datenschutz zuerst:",
+        "desc": "Ihre Bilder werden lokal in Ihrem Browser verarbeitet – wir laden keine Dateien hoch."
+      },
+      "performance": {
+        "title": "Leistung:",
+        "desc": "Schnelle Vorschauen und saubere Exporte ohne schwere Abhängigkeiten."
+      },
+      "accessibility": {
+        "title": "Barrierefreiheit:",
+        "desc": "Tastaturfreundliche Oberfläche und gut sichtbare Fokuszustände."
+      }
+    },
+    "contact": {
+      "title": "Kontakt",
+      "p1": "Besuchen Sie die Kontaktseite für Support und Anfragen. Sie können uns auch direkt schreiben an",
+      "emailTitle": "E-Mail an Pixel Art Village"
+    },
+    "cta": "Testen Sie unseren <tool>Konverter</tool> oder stöbern Sie im <blog>Blog</blog> nach Tipps und Tutorials.",
+    "specializedLinks": "Benötigen Sie formatspezifische Workflows? Unsere Tools <png>PNG zu Pixel Art</png>, <jpg>JPG zu Pixel Art</jpg> und <photo>Foto zu Sprite</photo> helfen Ihnen weiter.",
+    "moreInfoRich": "Weitere Details finden Sie in unserer <privacy>Datenschutzerklärung</privacy> und in den <terms>Nutzungsbedingungen</terms>."
+  },
+  "contact": {
+    "seoTitle": "Kontakt | Hilfe & Rückmeldung | Pixel Art Village",
+    "seoDesc": "Kontaktieren Sie Pixel Art Village für Support, Feedback, Partnerschaften und Funktionsanfragen. Erhalten Sie Hilfe mit unserem Pixel Art Converter Tool.",
+    "ogTitle": "Kontakt | Bild zu Pixel Art Konverter",
+    "ogDesc": "Kontaktieren Sie uns für Support mit unserem Bild zu Pixel Art Converter, Feedback, Partnerschaften und Funktionsanfragen. Erhalten Sie Hilfe mit unserem Pixel Art Converter Tool.",
+    "twitterTitle": "Kontakt | Pixel Art Village",
+    "twitterDesc": "Kontaktieren Sie Pixel Art Village für Support, Feedback, Partnerschaften und Funktionsanfragen. Erhalten Sie Hilfe mit unserem Pixel Art Converter Tool.",
+    "h1": "Kontakt",
+    "p1": "Wir freuen uns auf Ihre Nachricht. Für Support, Feedback oder Kooperationsanfragen erreichen Sie uns per E-Mail.",
+    "emailLabel": "E-Mail:",
+    "note": "Ersetzen Sie die Platzhalter-Adresse durch Ihre offizielle Kontaktadresse, um die Anforderungen der AdSense-Prüfung zu erfüllen.",
+    "p2": "Bevor Sie uns schreiben, finden Sie vielleicht Antworten in unserem",
+    "p3": "Blog",
+    "p4": "oder besuchen Sie unseren",
+    "p5": "Pixel-Art-Konverter",
+    "p6": "für den Einstieg. Werfen Sie außerdem einen Blick auf unsere",
+    "p7": "Über-uns-Seite",
+    "p8": "für weitere Informationen.",
+    "p9": "Für gezielte Unterstützung lesen Sie",
+    "p10": "den Leitfaden „PNG zu Pixel Art\"",
+    "p11": "oder",
+    "p12": "den Leitfaden „Bild zu Pixel Art“",
+    "p13": "aus unserer Sammlung.",
+    "emailTitle": "E-Mail an Pixel Art Village"
+  },
+  "faq": {
+    "title": "pixel art Dorf: Häufig gestellte Fragen",
+    "items": [
+      {
+        "question": "Die Website zeigt eine leere Seite oder stürzt ab — was soll ich tun?",
+        "answer": "Einige Browser‑Erweiterungen injizieren Entwicklungsruntimes (z. B. Plasmo/BacklinkPilot) in jede Seite, was React‑Apps beschädigen kann. Bitte deaktivieren Sie diese Erweiterungen auf dieser Seite und führen Sie einen Hard‑Refresh durch (Strg/Cmd+Shift+R)."
+      },
+      {
+        "question": "Ist dieser digitale Bild-Ersteller mit Palette-Steuerungen kostenlos?",
+        "answer": "Ja. Image Village ist ein komplett kostenloses Online-Bildtool für alle Benutzer. Genießen Sie unbegrenzte Bildkonvertierungen, benutzerdefinierte Palettensteuerungen und Downloads in hoher Auflösung mit erweiterten Paletten ohne jegliche Kosten."
+      },
+      {
+        "question": "Ist mein Bild privat? Laden Sie Bilddateien hoch?",
+        "answer": "Ihre Bildprivatsphäre ist garantiert. Ihre Bilddateien verlassen Ihr Gerät nie, da alle Bildverarbeitung lokal in Ihrem Browser stattfindet. Image Village kann nicht auf Ihre Bilddateien zugreifen, wodurch es ein sicherer digitaler Bildcreator aus Ihren Bildern mit Farbpalette-Optionen wird."
+      },
+      {
+        "question": "Wie kann ich ein Bild in ein Spiel-Sprite mit benutzerdefinierter Farbpalette umwandeln?",
+        "answer": "Unser digitales Bild-Erstellungstool mit Paletten-Steuerelementen ist perfekt zum Erstellen von Spiel-Sprites. Laden Sie das Bild Ihres Charakters hoch, passen Sie die Größe an Ihren visuellen Stil des Spiels an und verwenden Sie die benutzerdefinierten Paletten-Steuerelemente, um sie an die Farblimits Ihrer Engine anzupassen. Erstellen Sie Pixelkunst mit erweiterten Paletten, um Ihnen zu helfen, den perfekten Sprite als transparenten PNG zu erstellen."
+      },
+      {
+        "question": "Kann ich das Pixelraster bei meinem Bild anpassen?",
+        "answer": "Absolut. Der Live-Editor enthält eine \"Raster anzeigen\" Option. Diese Pixel-Raster-Überlagerung hilft Ihnen dabei, die einzelnen Pixel deutlich zu sehen, was nützlich ist für das Feintuning Ihrer Kunst oder um zu lernen, wie der Pixelierungseffekt auf Ihrem Bild funktioniert."
+      },
+      {
+        "question": "Was ist der beste Weg, ein Bild in Pixelkunst umzuwandeln?",
+        "answer": "Für optimale Ergebnisse bei der Konvertierung eines Bildes in Pixelvisuals beginnen Sie mit einem hochkontrastreichen Bild. Verwenden Sie den Pixelgrößen-Regler, um mit individuellen Paletteinstellungen einen Detailgrad nach Ihrem Geschmack zu finden. Erstellen Sie Pixelart mit größeren Größen für einen abstrakteren 8-Bit-Look, während kleinere Größen mit erweiterten Paletten mehr Details des ursprünglichen Bildes beibehalten."
+      },
+      {
+        "question": "Kann ich die generierten Pixel-Arts gewerblich nutzen?",
+        "answer": "Ja. Sie besitzen die Rechte an Ihren ursprünglichen Uploads und den generierten Ergebnissen. Sie können die von pixel Village erstellten Grafiken für beliebige Zwecke verwenden, einschließlich kommerzieller Projekte. Erstellen Sie Pixel‑Art mit unseren Tools für unbegrenzte kommerzielle Nutzung."
+      },
+      {
+        "question": "Welche Formate kann ich mit diesem Bild-Pixelator verwenden?",
+        "answer": "Dieser Bildpixelator unterstützt alle gängigen Browser-Formate wie PNG, JPG, GIF und WEBP. Sie können PNG zu Pixel-Visuals oder JPG zu Pixel-Visuals mühelos konvertieren. Erstellen Sie Pixelkunst mit jedem Bildformat."
+      },
+      {
+        "question": "Warum wird dieses Tool pixel art Village genannt?",
+        "answer": "Wir glauben, dass das Erstellen von Grafiken eine gemeinschaftliche Aktivität ist, auch bei der Verwendung eines Online-Tools. pixel Village ist ein Ort, an dem sich jeder, vom Anfänger bis zum Profi, versammeln kann, um mühelos Pixel-Visuals mit benutzerdefinierten Farbpaletten zu erstellen. Erstellen Sie Pixel-Kunst mit unseren Tools und werden Sie Teil unseres einladenden Dorfes für alle Pixel-Enthusiasten."
+      }
+    ]
+  },
+  "related": {
+    "converters": {
+      "title": "Verwandte Pixel-Art-Konverter",
+      "desc": "Entdecken Sie weitere kostenlose Tools zum Konvertieren von Bildern in Pixelkunst.",
+      "items": [
+        {
+          "title": "Image to Pixel Art",
+          "href": "/converter/bild-zu-pixel-art/",
+          "desc": "Universeller Konverter für alle Bildformate"
+        },
+        {
+          "title": "PNG to Pixel Art",
+          "href": "/converter/png-zu-pixel-art/",
+          "desc": "Konvertiere PNG Bilder mit Transparenz"
+        },
+        {
+          "title": "JPG to Pixel Art",
+          "href": "/converter/jpg-zu-pixel-kunst/",
+          "desc": "Fotos in Retro-Grafiken umwandeln"
+        },
+        {
+          "title": "Photo to Sprite",
+          "href": "/konverter/foto-zu-sprite-konverter/",
+          "desc": "Erstelle spielfertige Sprites aus Fotos"
+        },
+        {
+          "title": "8-Bit-Kunstgenerator",
+          "href": "/Konverter/8-bit-art-generator/",
+          "desc": "Authentische 8‑Bit‑Stil‑Kunstwerke erstellen"
+        },
+        {
+          "title": "Bild Online Verpixeln",
+          "href": "/converter/bild-online-verpixeln/",
+          "desc": "Schnelle und kostenlose Bildverpixelung"
+        }
+      ]
+    },
+    "guides": {
+      "title": "Pixelkunst-Tutorials & Leitfäden",
+      "desc": "Lerne, wie du bessere Pixelkunst mit unseren Schritt-für-Schritt-Tutorials erstellst.",
+      "items": [
+        {
+          "title": "Wie man ein Bild pixeliert",
+          "href": "/blog/wie-man-ein-bild-pixeliert/",
+          "desc": "Anfängerfreundlicher Leitfaden zur Pixelkunst"
+        },
+        {
+          "title": "Export aus Illustrator",
+          "href": "/blog/export-von-illustrator-zu-pixel-kunst/",
+          "desc": "Vermeiden Sie Pixelierungsprobleme beim Export."
+        },
+        {
+          "title": "Bild pixeliger machen",
+          "href": "/blog/bild-mehr-wie-pixel-erstellen/",
+          "desc": "Grundlegende Bearbeitungstechniken für bessere Ergebnisse"
+        },
+        {
+          "title": "Pixel‑Art‑Version des Bildes abrufen",
+          "href": "/blog/wie-sie-pixel-art-version-von-bildern/",
+          "desc": "Vollständiger Konverter-Leitfaden mit SNES-Tipps"
+        }
+      ]
+    }
+  },
+  "paletteManager": {
+    "createTab": "Palette erstellen",
+    "importTab": "🆕 Import von Lospec",
+    "createTitle": "Palette erstellen",
+    "nameLabel": "Palette Name",
+    "namePlaceholder": "Meine Palette",
+    "colorsLabel": "Palette-Farben",
+    "noColors": "Noch keine Farben",
+    "colorInputPlaceholder": "#000000",
+    "addColor": "Farbe hinzufügen",
+    "removeSelected": "Ausgewählte entfernen",
+    "save": "Farbpalette speichern",
+    "reset": "Formular zurücksetzen",
+    "delete": "Palette löschen",
+    "importTitle": "Importieren von Lospec",
+    "importDesc": "Paletten durchsuchen und importieren von",
+    "importDescSuffix": "，这是最大的像素艺术调色板社区，拥有 5000+ 配色方案。",
+    "importSuccess": "Farbpalette \"{{name}}\" wurde importiert und automatisch angewendet.\\n\\nScrollen Sie nach oben, um die Effekte anzuzeigen, oder wechseln Sie im Palette-Dropdown-Menü zu anderen Farbpaletten."
+  },
+  "home": {
+    "seoTitle": "Bild zu Pixel Art Konverter | Pixel Art Village",
+    "seoDescription": "Wandle jedes Foto in retro 8-Bit Pixel Art mit anpassbaren Paletten, sofortiger Vorschau, Dithering-Kontrollen und sicherer Browser-Verarbeitung um, ohne Anmeldung erforderlich."
+  },
+  "header": {
+    "mainNav": "Hauptnavigation",
+    "userAvatarTitle": "Benutzer-Avatar"
+  },
+  "content": {
+    "fallbackNotice": "Inhalte für diese Sprache folgen in Kürze. Vorerst wird Englisch angezeigt."
   }
 }

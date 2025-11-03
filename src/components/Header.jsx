@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Avatar from './Avatar';
 import { useTranslation } from 'react-i18next';
+import LocalizedLink from '@/components/LocalizedLink';
 
 function Header({ rightSlot }) {
   const { t } = useTranslation()
@@ -39,33 +40,33 @@ function Header({ rightSlot }) {
   const isBlog = location.pathname.includes('/blog');
 
   return (
-    <header className="sticky top-0 bg-white/80 backdrop-blur-lg z-50 border-b border-gray-200">
+    <header className="sticky top-0 bg-white/80 backdrop-blur-lg z-50 border-b border-gray-200" role="banner">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <div className="text-2xl font-bold text-gray-800">
-            <Link to="/" aria-label="Pixel Art Village home">
-              Pixel Art Village
-            </Link>
+            <LocalizedLink to="/" aria-label={t('site.homeLinkAria')}>
+              {t('site.name')}
+            </LocalizedLink>
           </div>
           <div className="flex items-center gap-4">
-            <nav className="hidden md:flex items-center space-x-8" aria-label="Main navigation">
+            <nav className="hidden md:flex items-center gap-8 order-1" aria-label={t('header.mainNav')}>
               {NAV_LINKS.map((link) => {
                 const to = link.id ? `/#${link.id}` : `/${link.to}/`;
                 return (
-                  <Link
+                  <LocalizedLink
                     key={link.id || link.to}
                     to={to}
                     aria-current={link.id ? (current===link.id?'page':undefined) : (isBlog ? 'page' : undefined)}
-                    className="text-gray-600 hover:text-blue-600 transition-colors"
+                    className="text-gray-600 hover:text-blue-600 transition-colors whitespace-nowrap"
                   >
                     {link.label}
-                  </Link>
+                  </LocalizedLink>
                 )
               })}
             </nav>
-            {rightSlot ? <div className="flex items-center gap-2">{rightSlot}</div> : null}
-            <div className="flex items-center">
-              <Avatar size={40} userId="guest" title="User avatar" />
+            {rightSlot ? <div className="flex items-center gap-2 order-2">{rightSlot}</div> : null}
+            <div className="flex items-center order-3">
+              <Avatar size={40} userId="guest" title={t('header.userAvatarTitle')} />
             </div>
           </div>
         </div>

@@ -1,50 +1,82 @@
 {
-  "nav": {"examples": "Ví dụ", "features": "Tính năng", "how": "Cách hoạt động", "faq": "FAQ", "blog": "Blog", "home": "Trang chủ", "about": "Giới thiệu", "contact": "Liên hệ"},
-  "navTitle": {
-    "hero": "Scroll to Home hero section",
-    "examples": "Scroll to Pixel Art Examples",
-    "features": "Scroll to Pixel Art Features",
-    "how": "Scroll to How Pixel Art Converter Works",
-    "faq": "Scroll to Pixel Art FAQ",
-    "blog": "Open Pixel Art Blog"
+  "nav": {
+    "examples": "Ví dụ",
+    "features": "Tính năng",
+    "how": "Cách hoạt động",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "home": "Trang chủ",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ"
   },
-  "cta": {"start": "Bắt đầu ngay"},
-  "site": {"tagline": "Trình tạo pixel art trực tuyến • tạo • chuyển đổi"},
+  "navTitle": {
+    "hero": "Cuộn đến phần hero trang chủ",
+    "examples": "Cuộn đến Ví dụ Pixel Art",
+    "features": "Cuộn đến Tính năng Pixel Art",
+    "how": "Cuộn đến Cách Pixel Art Converter hoạt động",
+    "faq": "Cuộn đến Pixel Art FAQ",
+    "blog": "Blog Nghệ thuật Pixel"
+  },
+  "cta": {
+    "start": "Bắt đầu ngay"
+  },
+  "site": {
+    "tagline": "Trình tạo pixel art trực tuyến • tạo • chuyển đổi",
+    "name": "Pixel Art Village",
+    "homeLinkAria": "Pixel Art Village trang chủ"
+  },
   "footer": {
-    "tools": "Công cụ", "formats": "Định dạng", "explore": "Khám phá", "community": "Cộng đồng",
-    "terms": "Điều khoản", "privacy": "Quyền riêng tư", "about": "Giới thiệu", "contact": "Liên hệ",
+    "tools": "Công cụ",
+    "formats": "Định dạng",
+    "explore": "Khám phá",
+    "community": "Cộng đồng",
+    "terms": "Điều khoản",
+    "privacy": "Quyền riêng tư",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ",
+    "github": "GitHub",
+    "cta": {
+      "ariaStart": "Bắt đầu chuyển đổi hình ảnh thành pixel art trong Pixel Art Village"
+    },
+    "copy": "© {{year}} Làng nghệ thuật pixel. Mọi quyền được bảo lưu.",
     "links": {
       "generator": "Trình tạo pixel art",
-      "converter": "Trình chuyển đổi pixel art",
+      "converter": "Pixel Art Converter",
       "imageToPixel": "Ảnh sang pixel art",
       "makePixelArt": "Tạo pixel art",
       "png2pixel": "PNG sang pixel art",
       "jpg2pixel": "JPG sang pixel art",
-      "img2pixel": "IMG sang pixel art",
+      "img2pixel": "IMG chuyển đổi thành nghệ thuật pixel",
       "gridPreview": "Xem trước lưới pixel",
       "how": "Cách hoạt động",
-      "start": "Bắt đầu tại pixel art Village",
+      "start": "Bắt đầu tại ngôi làng pixel art",
       "tips": "Mẹo & bảng màu",
       "privacyLocal": "Quyền riêng tư & xử lý cục bộ"
     }
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Bài viết và cập nhật về pixel art, hướng dẫn và tính năng mới.",
-    "back": "Quay lại Blog",
-    "notFound": {"title": "Không tìm thấy bài viết", "desc": "Bài viết bạn tìm không tồn tại. Quay lại"}
+    "subtitle": "Articles and updates about pixel art, guides and new features.",
+    "back": "Back to Blog",
+    "notFound": {
+      "title": "Không tìm thấy bài viết",
+      "desc": "Bài viết bạn tìm không tồn tại. Quay lại blog."
+    }
   },
   "consent": {
     "title": "Quyền riêng tư & Cookies",
-    "desc": "Chúng tôi dùng cookie để vận hành trang web này và, nếu bật, hiển thị quảng cáo Google AdSense. Bạn có thể chấp nhận hoặc từ chối cookie không cần thiết bất cứ lúc nào.",
+    "desc": "We use cookies to operate this site and, if enabled, to show Google AdSense ads. You can accept or reject non‑essential cookies at any time.",
     "privacy": "Chính sách quyền riêng tư",
     "andManage": "và quản lý cá nhân hóa quảng cáo tại",
     "accept": "Chấp nhận tất cả",
-    "reject": "Từ chối không cần thiết"
-  }
-  ,
+    "reject": "Từ chối không cần thiết",
+    "bannerLabel": "Hộp thoại xin phép cookie",
+    "acceptLabel": "Chấp nhận tất cả cookie",
+    "rejectLabel": "Từ chối cookie không cần thiết"
+  },
   "tool": {
     "title": "Trình tạo & chuyển đổi pixel art trực tuyến",
+    "subtitle2": "kích thước pixel có thể điều chỉnh và bảng màu tùy chỉnh. Hoàn hảo cho sprites, biểu tượng và nghệ thuật game cổ điển với các tùy chọn bảng màu nâng cao.",
     "subtitle": "Tạo pixel art trong trình duyệt — chuyển PNG/JPG thành pixel art sạch, phù hợp lưới. Điều chỉnh kích thước pixel và bảng màu với xem trước tức thì, rồi xuất kết quả sắc nét cho sprite, icon hoặc đồ họa retro. Nhanh, riêng tư và miễn phí với pixel art Village.",
     "dragOrClick": "Kéo ảnh của bạn vào đây hoặc",
     "clickToChoose": "nhấp để chọn",
@@ -52,147 +84,526 @@
     "chooseFile": "Chọn tệp",
     "preparing": "Đang chuẩn bị hình ảnh…",
     "ariaUpload": "Tải ảnh lên (kéo thả hoặc nhấp để chọn)",
-    "ariaChoose": "Chọn tệp ảnh"
+    "ariaChoose": "Chọn tệp ảnh",
+    "dragDrop": "Drag and drop image here",
+    "orClick": "or click to choose",
+    "convertButton": "Convert to Pixel Art",
+    "processing": "Processing...",
+    "converted": "Successfully converted"
   },
-  "upload": {"selected": "Đã chọn tệp: {{name}}"},
+  "upload": {
+    "selected": "Đã chọn tệp: {{name}}"
+  },
   "errors": {
     "fileTooLarge10": "Tệp quá lớn. Vui lòng tải ảnh nhỏ hơn 10MB.",
     "prepareFail": "Chuẩn bị ảnh thất bại. Hãy thử tệp khác.",
     "onlyPngJpg": "Vui lòng chọn ảnh PNG hoặc JPG.",
     "maxFile": "Tệp quá lớn. Kích thước tối đa: {{mb}}MB."
   },
-  "editor": {"title": "Trình tạo pixel art trực tuyến"}
-  ,
+  "editor": {
+    "title": "Trình tạo pixel art trực tuyến",
+    "downloadBtn": "Tải xuống hình ảnh pixel",
+    "uploadBtn": "Tải Ảnh Lên",
+    "section": {
+      "general": "Tổng quan ▾"
+    }
+  },
+  "adjustments": {
+    "reset": {
+      "title": "Đặt lại thanh trượt",
+      "all": "Đặt lại tất cả",
+      "tooltip": "Đặt lại Kích thước pixel / Độ sáng / Tương phản / Độ bão hòa",
+      "pixelSizeBtnTitle": "Đặt lại Kích thước Pixel",
+      "brightnessBtnTitle": "Đặt lại độ sáng",
+      "contrastBtnTitle": "Đặt lại độ tương phản",
+      "saturationBtnTitle": "Đặt lại độ bão hòa"
+    },
+    "pixelSize": "Kích thước pixel: {{value}}",
+    "section": {
+      "color": "Điều chỉnh màu sắc"
+    },
+    "brightness": "Độ sáng: {{value}}",
+    "contrast": "Tương phản: {{value}}",
+    "saturation": "Độ bão hòa: {{value}}",
+    "palette": {
+      "label": "Bảng màu",
+      "none": "Không có",
+      "custom": "Tùy chỉnh",
+      "note": "Pico‑8 là một bảng màu cố định. Các tên khác không có bảng màu tích hợp sẵn sẽ tự động tạo ra các bảng màu theo kích thước của chúng (ví dụ: Sunset 8 → 8 màu bảng màu)."
+    },
+    "colorDistance": {
+      "label": "Khoảng cách màu sắc",
+      "rgb": "RGB (nhanh)",
+      "lab": "LAB (chính xác, chậm hơn)"
+    },
+    "autoPalette": "Tạo bảng màu từ hình ảnh",
+    "paletteSize": "# Bảng màu Bảng màu Màu sắc: {{value}}",
+    "dither": "Bật dithering (Floyd–Steinberg)",
+    "zoom": "Phóng to: {{value}}x",
+    "grid": "Hiển thị lưới"
+  },
+  "export": {
+    "label": {
+      "format": "Định dạng xuất",
+      "size": "Kích thước xuất"
+    },
+    "option": {
+      "png": "PNG (không mất dữ liệu)",
+      "jpeg": "JPEG",
+      "webp": "WebP"
+    },
+    "size": {
+      "xs": "XS (0.5×)",
+      "sm": "Nhỏ (1×)",
+      "lg": "Lớn (2×)",
+      "xl": "XL (4×)"
+    },
+    "transparent": {
+      "label": "Nền trong suốt (PNG/WebP)"
+    },
+    "quality": {
+      "label": "Chất lượng: {{percent}}%"
+    }
+  },
+  "notFound": {
+    "seoTitle": "Không tìm thấy | Làng pixel art",
+    "title": "Không tìm thấy trang",
+    "desc": "Trang bạn đang tìm không tồn tại hoặc đã được chuyển đi. Quay lại pixel art Village để tiếp tục tạo nên những tác phẩm pixel tuyệt đẹp.",
+    "backHome": "← Quay lại làng pixel art",
+    "popularPages": "Hoặc khám phá những trang phổ biến này:",
+    "links": {
+      "home": "Trang chủ",
+      "pngConverter": "Chuyển PNG sang pixel art",
+      "jpgConverter": "Convert JPG to pixel art",
+      "about": "Giới thiệu"
+    }
+  },
+  "pseo": {
+    "notFound": {
+      "seoTitle": "Không tìm thấy trang chuyển đổi | pixel art Village",
+      "title": "Không tìm thấy trang chuyển đổi",
+      "desc": "The page you're looking for doesn't exist."
+    },
+    "relatedHeading": "Các bộ chuyển đổi Pixel Art liên quan",
+    "siteNavigationTitle": "Điều hướng trang web"
+  },
+  "showcase": {
+    "title": "Từ Hình ảnh đến Pixels: Xem Khả năng của Bộ xử lý hình ảnh của chúng tôi",
+    "desc": "Với",
+    "before": "Trước",
+    "after": "Sau",
+    "alt": {
+      "before": "Ảnh gốc trước khi chuyển đổi thành nghệ thuật pixel",
+      "after": "Một hình ảnh phong cảnh được chuyển đổi thành nghệ thuật pixel phong cách 8-bit bởi trình tạo Village nghệ thuật pixel"
+    },
+    "descFull": "Xem cách công cụ chuyển đổi hình ảnh thành nghệ thuật pixel của chúng tôi biến những bức ảnh của bạn thành nghệ thuật pixel sắc nét."
+  },
+  "lang": {
+    "label": "Ngôn ngữ"
+  },
+  "wplace": {
+    "title": "Công cụ hoàn hảo dành cho người dùng Village pixel art",
+    "desc": "Người bạn đồng hành tối thượng cho pixel art Village — chuyển đổi bất kỳ hình ảnh nào thành hình ảnh pixel rõ nét với xem trước thời gian thực, bảng màu thông minh và xuất tức thì. Tạo pixel art với công cụ hình ảnh của chúng tôi.",
+    "features": {
+      "free": {
+        "title": "Miễn phí 100%",
+        "desc": "Hoàn toàn miễn phí cho mọi người. Không có chi phí ẩn hoặc đăng ký — tạo hình ảnh pixel không giới hạn từ bất kỳ hình ảnh nào."
+      },
+      "privacy": {
+        "title": "Quyền riêng tư trước tiên",
+        "desc": "Tất cả xử lý đều diễn ra trong trình duyệt của bạn. Hình ảnh của bạn không bao giờ rời khỏi thiết bị — một quy trình làm việc riêng tư, an toàn theo thiết kế."
+      },
+      "easy": {
+        "title": "Dễ dàng cho tất cả người chơi",
+        "desc": "Giao diện trực quan và phản hồi nhanh. Chuyển đổi bất kỳ hình ảnh nào thành hình ảnh pixel có thể vẽ chỉ trong vài lần nhấp với các tùy chọn bảng màu tùy chỉnh."
+      },
+      "size": {
+        "title": "Không Có Giới Hạn Kích Thước",
+        "desc": "Tải lên hình ảnh có kích thước bất kỳ — từ biểu tượng nhỏ đến đồ họa lớn — với khả năng thay đổi kích thước mượt mà và xem trước hình ảnh responsive sử dụng bảng màu nâng cao."
+      }
+    }
+  },
+  "features": {
+    "title": "Công cụ chuyển đổi Hình ảnh thành Pixel với Bảng màu Tùy chỉnh",
+    "desc": "Chuyển đổi hình ảnh thành nghệ thuật pixel hoàn hảo. Tinh chỉnh chi tiết trực tiếp với bảng màu tùy chỉnh và điều khiển mẫu. Xem trước tức thì và xuất PNG sẵn sàng cho sprite.",
+    "palette": {
+      "title": "Điều khiển bảng màu",
+      "desc": "Công cụ chuyển đổi hình ảnh thành pixel art của chúng tôi mang lại khả năng kiểm soát bảng màu chính xác. Chọn các bảng màu retro có sẵn hoặc tự động trích xuất sắc thái từ hình ảnh của bạn, sau đó khóa, sắp xếp lại và tinh chỉnh màu sắc để phù hợp với phong cách của bạn. Với các bảng màu nhất quán, việc chuyển đổi hình ảnh thành pixel art giúp các nhân vật (sprite) dễ đọc, sẵn sàng cho trò chơi và dễ dàng tái sử dụng trong các dự án khác."
+    },
+    "live": {
+      "title": "Điều chỉnh trực tiếp",
+      "desc": "Điều chỉnh kích thước pixel, dithering, tương phản và độ sáng trong khi kết quả chuyển đổi hình ảnh thành pixel art của bạn cập nhật ngay lập tức. Các thay đổi hiển thị song song không có độ trễ, giúp bạn so sánh các tùy chọn và lựa chọn giao diện hoàn hảo nhanh hơn. Xem trước trực tiếp giảm bớt việc đoán đoán và giữ cho việc chuyển đổi hình ảnh thành pixel art của bạn có thể dự đoán được ở mỗi lần xuất file."
+    },
+    "clientSide": {
+      "title": "100% phía máy khách",
+      "desc": "Tất cả việc chuyển đổi chạy 100% ở phía client trong trình duyệt của bạn. Hình ảnh không bao giờ rời khỏi thiết bị của bạn, và các bản dựng ngoại tuyến có thể, giữ tài sản riêng tư và an toàn. Pixel Art Village bảo vệ công việc của bạn trong khi cung cấp xử lý nhanh, an toàn trên máy tính để bàn và di động. Với Pixel Art Village bạn giữ quyền kiểm soát từ bản xem trước đầu tiên đến xuất cuối cùng."
+    },
+    "customPalettes": "Custom Palettes",
+    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
+    "realTimePreview": "Real-time Preview",
+    "realTimePreviewDesc": "See changes instantly as you adjust settings",
+    "multipleFormats": "Multiple Formats",
+    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+  },
   "how": {
-    "title": "Cách hoạt động của pixel art Village",
+    "title": "How the pixel art Village works",
     "desc": "Tạo pixel art trong 3 bước đơn giản.",
     "steps": {
       "upload": "Tải lên",
       "adjust": "Điều chỉnh",
       "download": "Tải xuống",
-      "upload.desc": "Chọn hoặc kéo thả ảnh (PNG, JPG) vào bộ pixel hóa hình ảnh.",
+      "upload.desc": "Chọn hoặc kéo thả hình ảnh (PNG, JPG) vào bộ pixel hóa hình ảnh.",
       "adjust.desc": "Điều chỉnh trực tiếp kích thước pixel, bảng màu và lưới pixel.",
       "download.desc": "Xuất chỉ với một cú nhấp từ trình tạo pixel art và chia sẻ."
     }
-  }
-,
-  "massivePhrases": {
-    "phrases1_1": "Convert image to pixel art online",
-    "phrases1_2": "Transform image to pixel art instantly",
-    "phrases1_3": "Turn image to pixel art with ease",
-    "phrases1_4": "Change image to pixel art format",
-    "phrases1_5": "Process image to pixel art style",
-    "phrases1_6": "Edit image to pixel art quickly",
-    "phrases1_7": "Make image to pixel art conversion",
-    "phrases1_8": "Create image to pixel art result",
-    "phrases1_9": "Generate image to pixel art output",
-    "phrases1_10": "Produce image to pixel art design",
-    "phrases2_1": "Create pixel art image from photo",
-    "phrases2_2": "Generate pixel art image online",
-    "phrases2_3": "Make pixel art image quickly",
-    "phrases2_4": "Build pixel art image easily",
-    "phrases2_5": "Design pixel art image professionally",
-    "phrases2_6": "Craft pixel art image perfectly",
-    "phrases2_7": "Produce pixel art image instantly",
-    "phrases2_8": "Develop pixel art image efficiently",
-    "phrases2_9": "Form pixel art image beautifully",
-    "phrases2_10": "Construct pixel art image smoothly",
-    "phrases3_1": "Convert image to format",
-    "phrases3_2": "Transform image to style",
-    "phrases3_3": "Turn image to design",
-    "phrases3_4": "Change image to type",
-    "phrases3_5": "Process image to result",
-    "phrases3_6": "Edit image to output",
-    "phrases3_7": "Make image to creation",
-    "phrases3_8": "Create image to artwork",
-    "phrases3_9": "Generate image to graphic",
-    "phrases3_10": "Produce image to visual",
-    "phrases3_11": "Develop image to picture",
-    "phrases3_12": "Form image to illustration",
-    "phrases3_13": "Build image to composition",
-    "phrases3_14": "Design image to masterpiece",
-    "phrases3_15": "Craft image to creation",
-    "phrases4_1": "Adjust pixel size setting",
-    "phrases4_2": "Control pixel size option",
-    "phrases4_3": "Change pixel size value",
-    "phrases4_4": "Set pixel size parameter",
-    "phrases4_5": "Modify pixel size dimension",
-    "phrases4_6": "Configure pixel size property",
-    "phrases4_7": "Customize pixel size feature",
-    "phrases4_8": "Define pixel size measurement",
-    "phrases4_9": "Specify pixel size requirement",
-    "phrases4_10": "Determine pixel size standard",
-    "phrases4_11": "Establish pixel size guideline",
-    "phrases4_12": "Fix pixel size resolution",
-    "phrases4_13": "Select pixel size preference",
-    "phrases4_14": "Choose pixel size configuration",
-    "phrases5_1": "Process the image file",
-    "phrases5_2": "Edit the image content",
-    "phrases5_3": "Transform the image data",
-    "phrases5_4": "Convert the image format",
-    "phrases5_5": "Modify the image properties",
-    "phrases5_6": "Adjust the image settings",
-    "phrases5_7": "Enhance the image quality",
-    "phrases5_8": "Improve the image appearance",
-    "phrases5_9": "Optimize the image output",
-    "phrases5_10": "Refine the image details",
-    "phrases5_11": "Perfect the image result",
-    "phrases5_12": "Polish the image finish",
-    "phrases5_13": "Upgrade the image standard",
-    "phrases5_14": "Boost the image performance",
-    "phrases6_1": "Create art image masterpiece",
-    "phrases6_2": "Generate art image design",
-    "phrases6_3": "Make art image creation",
-    "phrases6_4": "Build art image artwork",
-    "phrases6_5": "Produce art image visual",
-    "phrases6_6": "Develop art image graphic",
-    "phrases6_7": "Form art image illustration",
-    "phrases6_8": "Craft art image composition",
-    "phrases6_9": "Design art image project",
-    "phrases6_10": "Construct art image piece",
-    "phrases7_1": "Customize the palette colors",
-    "phrases7_2": "Adjust the palette settings",
-    "phrases7_3": "Control the palette options",
-    "phrases7_4": "Modify the palette configuration",
-    "phrases7_5": "Configure the palette properties",
-    "phrases7_6": "Set the palette parameters",
-    "phrases7_7": "Define the palette scheme",
-    "phrases7_8": "Choose the palette selection",
-    "phrases7_9": "Select the palette combination",
-    "phrases7_10": "Determine the palette arrangement",
-    "phrases8_1": "Convert to pixel format",
-    "phrases8_2": "Transform to pixel style",
-    "phrases8_3": "Change to pixel design",
-    "phrases8_4": "Turn to pixel art",
-    "phrases8_5": "Switch to pixel mode",
-    "phrases8_6": "Shift to pixel type",
-    "phrases8_7": "Move to pixel version",
-    "phrases8_8": "Adapt to pixel standard",
-    "phrases8_9": "Adjust to pixel specification",
-    "phrases8_10": "Modify to pixel requirement",
-    "phrases9_1": "Edit the pixel details",
-    "phrases9_2": "Adjust the pixel properties",
-    "phrases9_3": "Control the pixel settings",
-    "phrases9_4": "Modify the pixel attributes",
-    "phrases9_5": "Configure the pixel parameters",
-    "phrases9_6": "Set the pixel values",
-    "phrases9_7": "Define the pixel characteristics",
-    "phrases9_8": "Specify the pixel features",
-    "phrases9_9": "Determine the pixel qualities",
-    "phrases9_10": "Establish the pixel standards",
-    "phrases10_1": "Convert to pixel art style",
-    "phrases10_2": "Transform to pixel art format",
-    "phrases10_3": "Change to pixel art design",
-    "phrases10_4": "Turn to pixel art version",
-    "phrases10_5": "Switch to pixel art mode",
-    "phrases10_6": "Shift to pixel art type",
-    "phrases10_7": "Move to pixel art standard",
-    "phrases11_1": "Convert image to pixel format",
-    "phrases11_2": "Transform image to pixel style",
-    "phrases11_3": "Change image to pixel design",
-    "phrases11_4": "Turn image to pixel version",
-    "phrases11_5": "Process image to pixel mode",
-    "phrases11_6": "Edit image to pixel type",
-    "phrases11_7": "Make image to pixel standard"
+  },
+  "common": {
+    "loading": "Đang tải...",
+    "error": "Lỗi",
+    "success": "Thành công",
+    "failed": "Thất bại",
+    "imageFailedToLoad": "Không tải được hình ảnh",
+    "imageUnavailable": "Hình ảnh không khả dụng",
+    "lastUpdated": "Cập nhật lần cuối: {{date}}"
+  },
+  "privacy": {
+    "h1": "Chính sách Bảo mật",
+    "sections": {
+      "overview": {
+        "title": "Tổng quan",
+        "p1": "pixel art Village tôn trọng quyền riêng tư của bạn. Chính sách này giải thích dữ liệu nào chúng tôi xử lý, cách chúng tôi sử dụng cookie (bao gồm Google AdSense cookies), và lựa chọn của bạn. Nếu bạn có câu hỏi, vui lòng liên hệ với chúng tôi qua email trang Liên hệ."
+      },
+      "local": {
+        "title": "Xử lý hình ảnh cục bộ",
+        "p1": "Hình ảnh của bạn không bao giờ rời khỏi thiết bị. Mọi xử lý hình ảnh đều diễn ra cục bộ trong trình duyệt của bạn. Chúng tôi không tải lên, lưu trữ, hoặc chia sẻ các tệp hình ảnh của bạn trên máy chủ của chúng tôi."
+      },
+      "collect": {
+        "title": "Thông tin chúng tôi thu thập",
+        "li1": "Dữ liệu kỹ thuật cho hoạt động của trang web (ví dụ: thông tin cơ bản về thiết bị/trình duyệt) cần thiết để cung cấp dịch vụ.",
+        "li2": "Dữ liệu sử dụng tổng hợp để cải thiện các tính năng (nếu analytics được bật, chúng tôi tránh thu thập thông tin nhận dạng cá nhân).",
+        "li3": "Dữ liệu quảng cáo từ Google AdSense (xem bên dưới) nếu quảng cáo được hiển thị.",
+        "p2": "Chúng tôi không yêu cầu đăng ký tài khoản. Chúng tôi không cố ý thu thập dữ liệu cá nhân nhạy cảm."
+      },
+      "cookies": {
+        "title": "Cookies and AdSense",
+        "p1": "Chúng tôi có thể sử dụng cookie và các công nghệ tương tự để vận hành trang web và cải thiện trải nghiệm của bạn. Nếu Google AdSense được bật, Google và các đối tác của họ có thể sử dụng cookie để hiển thị quảng cáo dựa trên việc bạn truy cập trang này và các trang khác.",
+        "learn": "Tìm hiểu cách Google sử dụng thông tin từ các trang web hoặc ứng dụng sử dụng Google services:",
+        "manage": "Quản lý cá nhân hóa quảng cáo:",
+        "more": "Tìm hiểu thêm về Google quảng cáo và cookie:"
+      },
+      "third": {
+        "title": "Đối tác bên thứ ba",
+        "p1": "Chúng tôi có thể tích hợp các dịch vụ bên thứ ba (ví dụ, Google AdSense). Các đối tác này có thể xử lý dữ liệu theo chính sách bảo mật riêng của họ. Chúng tôi khuyến khích bạn xem xét các chính sách của họ để hiểu cách xử lý dữ liệu."
+      },
+      "use": {
+        "title": "Sử dụng và chia sẻ dữ liệu",
+        "li1": "Cung cấp và duy trì dịch vụ.",
+        "li2": "Bảo vệ tính toàn vẹn của dịch vụ, phát hiện lạm dụng và cải thiện tính năng.",
+        "li3": "Tuân thủ nghĩa vụ pháp lý. Chúng tôi không bán dữ liệu cá nhân."
+      },
+      "rights": {
+        "title": "Lựa chọn và quyền lợi của bạn",
+        "li1": "Chọn không tham gia hoặc quản lý cá nhân hóa quảng cáo bằng các liên kết ở trên.",
+        "li2": "Điều khiển cookie thông qua cài đặt trình duyệt của bạn.",
+        "li3": "Liên hệ chúng tôi để thực hiện quyền riêng tư hiện hành (truy cập, chỉnh sửa, xóa theo yêu cầu của luật pháp)."
+      },
+      "children": {
+        "title": "Quyền riêng tư của trẻ em",
+        "p1": "Dịch vụ này không dành cho trẻ em dưới 13 tuổi (hoặc độ tuổi luật pháp địa phương quy định). Chúng tôi không cố ý thu thập thông tin cá nhân từ trẻ em."
+      },
+      "changes": {
+        "title": "Các thay đổi đối với Chính sách này",
+        "p1": "Chúng tôi có thể cập nhật chính sách này theo thời gian. Những thay đổi quan trọng sẽ được làm nổi bật trên trang này cùng với ngày cập nhật. Việc bạn tiếp tục sử dụng trang web thể hiện sự chấp nhận đối với chính sách đã được cập nhật."
+      },
+      "contact": {
+        "title": "Liên hệ",
+        "p1": "Nếu có thắc mắc về quyền riêng tư, vui lòng xem trang Liên hệ.",
+        "emailTitle": "Email Pixel Art Village về quyền riêng tư"
+      }
+    },
+    "seoTitle": "Chính Sách Bảo Mật | nghệ thuật pixel Village",
+    "seoDesc": "chính sách quyền riêng tư pixel art Village: xử lý hình ảnh cục bộ, cookies AdSense, đối tác bên thứ ba, quyền lựa chọn và quyền của bạn, thông tin liên hệ.",
+    "meta": {
+      "ogTitle": "Chính sách bảo mật | Công cụ chuyển đổi hình ảnh thành pixel art",
+      "ogDescription": "Chính sách quyền riêng tư cho công cụ chuyển đổi hình ảnh thành pixel art: xử lý hình ảnh tại chỗ, cookie AdSense, đối tác bên thứ ba, quyền lựa chọn và quyền của bạn, thông tin liên hệ.",
+      "twitterTitle": "Chính sách Bảo mật | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village chính sách bảo mật: xử lý hình ảnh nội bộ, cookie AdSense, đối tác bên thứ ba, lựa chọn và quyền của bạn, thông tin liên hệ."
+    },
+    "quickLinks": {
+      "heading": "Liên kết nhanh",
+      "mainSite": "Trang Chính",
+      "popularConverters": "Bộ chuyển đổi phổ biến",
+      "links": {
+        "home": "Bộ chuyển đổi Pixel Art",
+        "about": "Về Chúng Tôi",
+        "contact": "Liên hệ",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "terms": {
+    "h1": "Điều Khoản Dịch Vụ",
+    "sections": {
+      "acceptance": {
+        "title": "Chấp nhận Điều khoản",
+        "p1": "Bằng cách truy cập hoặc sử dụng pixel art Village (“Dịch vụ”), bạn đồng ý bị ràng buộc bởi các Điều khoản này. Nếu bạn không đồng ý, đừng sử dụng Dịch vụ."
+      },
+      "use": {
+        "title": "Sử dụng Dịch vụ",
+        "li1": "Chỉ tải lên nội dung mà bạn có quyền sử dụng. Bạn chịu trách nhiệm về nội dung của mình và tuân thủ các luật hiện hành.",
+        "li2": "Không lạm dụng, can thiệp hoặc làm gián đoạn Dịch vụ hoặc người dùng khác.",
+        "li3": "Không sử dụng Dịch vụ cho các hoạt động bất hợp pháp, có hại hoặc xâm phạm quyền."
+      },
+      "ip": {
+        "title": "Sở hữu trí tuệ",
+        "p1": "Chúng tôi giữ toàn quyền đối với Dịch vụ và các tài liệu liên quan. Bạn giữ quyền đối với các tải lên ban đầu và các đầu ra được tạo ra của bạn, tuân theo các quyền hiện hành và quyền của bên thứ ba."
+      },
+      "processing": {
+        "title": "Xử lý hình ảnh",
+        "p1": "Xử lý hình ảnh được thực hiện cục bộ trong trình duyệt của bạn. Chúng tôi không lưu trữ hình ảnh bạn tải lên trên các máy chủ của chúng tôi."
+      },
+      "disclaimer": {
+        "title": "Tuyên bố miễn trừ bảo đảm",
+        "p1": "Dịch vụ được cung cấp \"nguyên trạng\" và \"khi có sẵn\" mà không có bảo đảm dưới bất kỳ hình thức nào, rõ ràng hay ngầm định. Chúng tôi không đảm bảo rằng Dịch vụ sẽ không bị gián đoạn hoặc không có lỗi."
+      },
+      "liability": {
+        "title": "Giới hạn trách nhiệm",
+        "p1": "Trong phạm vi tối đa được pháp luật cho phép, chúng tôi sẽ không chịu trách nhiệm đối với bất kỳ thiệt hại gián tiếp, ngẫu nhiên, đặc biệt, hậu quả hoặc trừng phạt phát sinh từ hoặc liên quan đến việc bạn sử dụng Dịch vụ."
+      },
+      "changes": {
+        "title": "Thay đổi đối với Dịch vụ hoặc Điều khoản",
+        "p1": "Chúng tôi có thể thay đổi hoặc ngừng cung cấp Dịch vụ và cập nhật các Điều khoản này bất cứ lúc nào. Việc tiếp tục sử dụng Dịch vụ được coi là chấp nhận các Điều khoản đã cập nhật."
+      },
+      "law": {
+        "title": "Luật áp dụng",
+        "p1": "Các Điều khoản này được điều chỉnh bởi các luật áp dụng trong khu vực pháp lý của bạn trong phạm vi không bị các luật khác chiếm quyền ưu tiên. Trụ sở và thẩm quyền sẽ tuân theo các quy tắc xung đột pháp luật áp dụng."
+      },
+      "contact": {
+        "title": "Liên hệ",
+        "p1": "Nếu có câu hỏi về các Điều khoản này, vui lòng xem trang Liên hệ.",
+        "emailTitle": "Gửi email Pixel Art Village về điều khoản"
+      }
+    },
+    "seoTitle": "Điều Khoản Dịch Vụ | Pixel Art Village",
+    "meta": {
+      "ogTitle": "Điều Khoản Dịch Vụ | Công Cụ Chuyển Đổi Hình Ảnh Thành Pixel Art",
+      "ogDescription": "Điều khoản dịch vụ cho trình chuyển đổi hình ảnh thành pixel art của chúng tôi: quy tắc sử dụng, trách nhiệm, tuyên bố từ chối trách nhiệm, IP, pháp luật áp dụng, thông tin liên hệ.",
+      "twitterTitle": "Điều khoản dịch vụ | Pixel Art Village",
+      "twitterDescription": "Pixel Art Village điều khoản dịch vụ: quy tắc sử dụng, trách nhiệm, tuyên bố miễn trừ, IP, pháp luật có thẩm quyền, thông tin liên hệ."
+    },
+    "quickLinks": {
+      "heading": "Liên kết nhanh",
+      "mainSite": "Trang chính",
+      "popularConverters": "Bộ chuyển đổi phổ biến",
+      "links": {
+        "home": "Công cụ chuyển đổi Pixel Art",
+        "about": "Giới thiệu",
+        "contact": "Liên hệ",
+        "blog": "Blog",
+        "png": "PNG to Pixel Art",
+        "jpg": "JPG to Pixel Art",
+        "image": "Image to Pixel Art",
+        "photo": "Photo to Pixel Art"
+      }
+    }
+  },
+  "about": {
+    "seoTitle": "Về | làng nghệ thuật pixel",
+    "seoDesc": "Về pixel art Village: một công cụ miễn phí, dựa trên trình duyệt để tạo và chuyển đổi pixel art. Bảo mật‑đầu tiên, nhanh chóng và dễ tiếp cận.",
+    "h1": "Về pixel art Làng",
+    "p1": "pixel art Village là công cụ tạo và chuyển đổi hình ảnh pixel miễn phí, dựa trên trình duyệt. Tải lên hình ảnh PNG/JPG, điều chỉnh kích thước pixel và bảng màu, xem trước ngay lập tức, và xuất kết quả hình ảnh sắc nét.",
+    "principles": {
+      "title": "Nguyên tắc",
+      "privacy": {
+        "title": "Quyền riêng tư trước:",
+        "desc": "Ảnh của bạn được xử lý ngay trong trình duyệt — chúng tôi không tải lên tệp."
+      },
+      "performance": {
+        "title": "Hiệu suất:",
+        "desc": "Xem nhanh và xuất dữ liệu gọn gàng mà không cần phụ thuộc nặng nề."
+      },
+      "accessibility": {
+        "title": "Khả năng tiếp cận:",
+        "desc": "Giao diện thân thiện với bàn phím và trạng thái tiêu điểm hiển thị."
+      }
+    },
+    "contact": {
+      "title": "Liên hệ",
+      "p1": "Xem trang Liên hệ để được hỗ trợ và giải đáp thắc mắc. Bạn cũng có thể email cho chúng tôi trực tiếp tại",
+      "emailTitle": "Thư điện tử Pixel Art Village"
+    },
+    "ogTitle": "Giới thiệu | Pixel Art Village",
+    "ogDesc": "Tìm hiểu về Pixel Art Village, công cụ chuyển đổi pixel art ưu tiên quyền riêng tư với xem trước tức thì, bảng màu và các hướng dẫn.",
+    "twitterTitle": "Giới thiệu | Pixel Art Village",
+    "twitterDesc": "Khám phá ai đã tạo ra Pixel Art Village và cách bộ chuyển đổi pixel art ưu tiên quyền riêng tư của chúng tôi hoạt động.",
+    "p2": "Chúng tôi tập trung vào quyền riêng tư, tốc độ và khả năng tiếp cận để bạn có thể chuyển đổi hình ảnh thành pixel art mà không cần tải lên hay đăng ký.",
+    "p3": "Đội ngũ của chúng tôi xây dựng các tài nguyên giáo dục và công cụ chuyên biệt dành cho nghệ sĩ, nhà giáo dục và các nhà phát triển game indie.",
+    "cta": "Hãy thử <tool>công cụ chuyển đổi</tool> của chúng tôi hoặc khám phá <blog>blog</blog> của chúng tôi để có các mẹo và hướng dẫn.",
+    "specializedLinks": "Cần quy trình làm việc theo định dạng cụ thể? <png>PNG thành Pixel Art</png>, <jpg>JPG thành Pixel Art</jpg>, và <photo>Công cụ chuyển đổi Ảnh thành Sprite</photo> công cụ đã sẵn sàng hỗ trợ.",
+    "moreInfoRich": "Tìm hiểu thêm chi tiết trong <privacy>Chính sách Bảo mật</privacy> và <terms>Điều khoản Dịch vụ</terms>."
+  },
+  "contact": {
+    "h1": "Liên hệ",
+    "p1": "Chúng tôi rất mong nhận được phản hồi từ bạn. Để được hỗ trợ, phản hồi, hoặc các câu hỏi về đối tác, vui lòng liên hệ qua email.",
+    "emailLabel": "Thư điện tử:",
+    "note": "Thay thế giữ chỗ email bằng địa chỉ liên hệ chính thức của bạn để đáp ứng yêu cầu xem xét AdSense.",
+    "p2": "Trước khi liên hệ chúng tôi, bạn có thể tìm thấy câu trả lời trong",
+    "p3": "blog",
+    "p4": "hoặc ghé thăm",
+    "p5": "công cụ chuyển đổi nghệ thuật pixel",
+    "p6": "Để bắt đầu. Cũng hãy kiểm tra của chúng tôi.",
+    "p7": "trang giới thiệu",
+    "p8": "để biết thêm thông tin",
+    "p9": "Để được trợ giúp cụ thể về bộ chuyển đổi, hãy thử",
+    "p10": "PNG thành pixel art",
+    "p11": "or",
+    "p12": "ảnh thành nghệ thuật pixel",
+    "p13": "hướng dẫn",
+    "seoTitle": "Liên hệ | Pixel Art Village",
+    "seoDesc": "Liên hệ Pixel Art Village để được hỗ trợ, góp ý hoặc hợp tác. Hãy liên hệ nhanh qua email hoặc khám phá tài nguyên để được giải đáp ngay!",
+    "ogTitle": "Liên hệ | Pixel Art Village",
+    "ogDesc": "Liên hệ với Pixel Art Village: hỗ trợ, phản hồi, câu hỏi hợp tác và các tài nguyên bổ sung.",
+    "twitterTitle": "Liên hệ | Pixel Art Village",
+    "twitterDesc": "Bạn cần trợ giúp với Pixel Art Village? Liên hệ chúng tôi để được hỗ trợ, phản hồi hoặc hợp tác.",
+    "emailTitle": "Email Pixel Art Village"
+  },
+  "faq": {
+    "title": "pixel art Village: Câu hỏi thường gặp",
+    "items": [
+      {
+        "question": "Trang web hiển thị một trang trống hoặc bị crash — tôi nên làm gì?",
+        "answer": "Một số tiện ích trình duyệt tiêm runtime phát triển (ví dụ: Plasmo/BacklinkPilot) vào mọi trang, điều này có thể làm hỏng ứng dụng React. Vui lòng vô hiệu hóa những tiện ích đó trên trang web này và làm mới cứng (Ctrl/Cmd+Shift+R)."
+      },
+      {
+        "question": "Công cụ tạo hình ảnh kỹ thuật số này với các điều khiển bảng màu có miễn phí không?",
+        "answer": "Có. Image Village là một công cụ xử lý ảnh trực tuyến hoàn toàn miễn phí cho tất cả người dùng. Tận hưởng chuyển đổi hình ảnh không giới hạn, điều khiển bảng màu tùy chỉnh và tải xuống chất lượng cao với bảng màu nâng cao mà không tốn phí gì cả."
+      },
+      {
+        "question": "Ảnh của tôi có riêng tư không? Bạn có tải lên tập tin hình ảnh không?",
+        "answer": "Quyền riêng tư hình ảnh của bạn được đảm bảo. Các tệp hình ảnh của bạn không bao giờ rời khỏi thiết bị vì tất cả việc xử lý hình ảnh đều được thực hiện cục bộ trong trình duyệt của bạn. Image Village không thể truy cập các tệp hình ảnh của bạn, khiến nó trở thành một công cụ tạo hình ảnh kỹ thuật số an toàn từ các hình ảnh của bạn với các tùy chọn bảng màu."
+      },
+      {
+        "question": "Làm cách nào để chuyển đổi một hình ảnh thành sprite game với bảng màu tùy chỉnh?",
+        "answer": "Công cụ tạo hình ảnh kỹ thuật số của chúng tôi với các điều khiển bảng màu hoàn hảo để tạo sprites trò chơi. Tải lên hình ảnh nhân vật của bạn, điều chỉnh kích thước để phù hợp với phong cách hình ảnh trò chơi của bạn, và sử dụng các điều khiển bảng màu tùy chỉnh để phù hợp với giới hạn màu sắc của engine. Tạo nghệ thuật pixel với các bảng màu nâng cao để giúp bạn tạo sprite hoàn hảo dưới dạng PNG trong suốt."
+      },
+      {
+        "question": "Tôi có thể điều chỉnh lưới pixel trên hình ảnh của mình không?",
+        "answer": "Tuyệt đối. Trình chỉnh sửa trực tiếp bao gồm tùy chọn \"Hiển thị lưới\". Lớp phủ lưới pixel này giúp bạn nhìn thấy từng pixel một cách rõ ràng, điều này hữu ích cho việc tinh chỉnh tác phẩm nghệ thuật của bạn hoặc để học cách hiệu ứng phân mảnh pixel hoạt động trên hình ảnh của bạn."
+      },
+      {
+        "question": "Cách tốt nhất để chuyển đổi hình ảnh thành pixel art là gì?",
+        "answer": "Để có kết quả tốt nhất khi bạn chuyển đổi a image thành hình ảnh pixel, bắt đầu với hình ảnh có độ tương phản cao. Sử dụng thanh trượt kích thước pixel để tìm mức độ chi tiết bạn thích với cài đặt bảng màu tùy chỉnh. Tạo nghệ thuật pixel với kích thước lớn hơn để có giao diện trừu tượng hơn, 8-bit, trong khi các kích thước nhỏ hơn giữ lại nhiều chi tiết hơn từ hình ảnh gốc với bảng màu nâng cao."
+      },
+      {
+        "question": "Tôi có thể sử dụng pixel art đã được tạo ra cho mục đích thương mại không?",
+        "answer": "Có. Bạn sở hữu quyền đối với các tải lên ban đầu của mình và đối với các kết quả được tạo ra. Bạn có thể sử dụng đồ họa được tạo bằng pixel Village cho bất kỳ mục đích nào, bao gồm các dự án thương mại. Tạo nghệ thuật pixel với các công cụ của chúng tôi để sử dụng thương mại không giới hạn."
+      },
+      {
+        "question": "Tôi có thể sử dụng các định dạng nào với bộ pixel hóa ảnh này?",
+        "answer": "Trình chuyển đổi hình ảnh này hỗ trợ tất cả các định dạng trình duyệt phổ biến như PNG, JPG, GIF và WEBP. Bạn có thể chuyển đổi PNG thành hình ảnh pixel hoặc JPG thành hình ảnh pixel một cách dễ dàng. Tạo nghệ thuật pixel từ bất kỳ định dạng hình ảnh nào."
+      },
+      {
+        "question": "Tại sao công cụ này được gọi là pixel art Village?",
+        "answer": "Chúng tôi tin rằng việc tạo ra đồ họa là một hoạt động cộng đồng, ngay cả khi sử dụng công cụ trực tuyến. pixel Village là nơi mà bất kỳ ai, từ người mới bắt đầu đến chuyên nghiệp, đều có thể tụ tập để dễ dàng tạo ra những hình ảnh pixel với bảng màu tùy chỉnh. Tạo nghệ thuật pixel với các công cụ của chúng tôi và tham gia ngôi làng thân thiện của chúng tôi dành cho tất cả những người đam mê pixel."
+      }
+    ]
+  },
+  "related": {
+    "converters": {
+      "title": "Công cụ chuyển đổi nghệ thuật pixel liên quan",
+      "desc": "Khám phá thêm các công cụ miễn phí để chuyển đổi hình ảnh thành nghệ thuật pixel",
+      "items": [
+        {
+          "title": "Image to Pixel Art",
+          "href": "/trinh-chuyen-doi/hinh-anh-thanh-pixel-art/",
+          "desc": "Bộ chuyển đổi phổ quát cho tất cả định dạng hình ảnh"
+        },
+        {
+          "title": "PNG to Pixel Art",
+          "href": "/converter/png-thành-pixel-art/",
+          "desc": "Chuyển đổi PNG hình ảnh có độ trong suốt"
+        },
+        {
+          "title": "JPG to Pixel Art",
+          "href": "/chuyển-đổi/jpg-thành-nghệ-thuật-pixel/",
+          "desc": "Chuyển đổi ảnh thành đồ họa retro"
+        },
+        {
+          "title": "Photo to Sprite",
+          "href": "/chuyển-đổi/ảnh-sang-sprite/",
+          "desc": "Tạo sprite sẵn sàng cho game từ ảnh"
+        },
+        {
+          "title": "Công cụ tạo nghệ thuật 8-bit",
+          "href": "/bộ-chuyển-đổi/máy-tạo-nghệ-thuật-8-bit/",
+          "desc": "Tạo ra tác phẩm nghệ thuật phong cách 8-bit chân thật"
+        },
+        {
+          "title": "Pixel hóa hình ảnh trực tuyến",
+          "href": "/bộ-chuyển-đổi/pixel-hóa-hình-ảnh-trực-tuyến/",
+          "desc": "Pixel hóa ảnh nhanh và miễn phí"
+        }
+      ]
+    },
+    "guides": {
+      "title": "Hướng dẫn & Cẩm nang Nghệ thuật Pixel",
+      "desc": "Tìm hiểu cách tạo nghệ thuật pixel đẹp hơn với các hướng dẫn từng bước của chúng tôi",
+      "items": [
+        {
+          "title": "Làm thế nào để làm mờ điểm ảnh một hình ảnh",
+          "href": "/blog/cach-lam-pixel-hinh-anh/",
+          "desc": "Hướng dẫn nghệ thuật pixel dành cho người mới bắt đầu"
+        },
+        {
+          "title": "Xuất từ Illustrator",
+          "href": "/blog/xuất-hình-từ-illustrator-sang-pixel-art/",
+          "desc": "Tránh hiện tượng pixel hóa khi xuất"
+        },
+        {
+          "title": "Làm cho hình ảnh giống pixel hơn",
+          "href": "/blog/lam-hinh-anh-giong-pixel/",
+          "desc": "Kỹ thuật chỉnh sửa cơ bản để có kết quả tốt hơn"
+        },
+        {
+          "title": "Lấy Phiên bản Pixel Art của Ảnh",
+          "href": "/blog/cach-tao-phien-ban-pixel-art-cua-hinh-anh/",
+          "desc": "Hướng dẫn chuyển đổi hoàn chỉnh với mẹo SNES"
+        }
+      ]
+    }
+  },
+  "paletteManager": {
+    "createTab": "Tạo Bảng Màu",
+    "importTab": "🆕 Nhập khẩu từ Lospec",
+    "createTitle": "Tạo bảng màu",
+    "nameLabel": "Tên bảng màu",
+    "namePlaceholder": "Bảng màu của tôi",
+    "colorsLabel": "Màu Sắc Bảng Màu",
+    "noColors": "Chưa có màu nào",
+    "colorInputPlaceholder": "#000000",
+    "addColor": "Thêm màu",
+    "removeSelected": "Xóa các mục đã chọn",
+    "save": "Lưu bảng màu",
+    "reset": "Đặt lại biểu mẫu",
+    "delete": "Xóa bảng màu",
+    "importTitle": "Nhập từ Lospec",
+    "importDesc": "Duyệt và nhập bảng màu từ",
+    "importDescSuffix": "，这是最大的像素艺术调色板社区，拥有 5000+ 配色方案。",
+    "importSuccess": "Bảng màu \"{{name}}\" đã được nhập và tự động áp dụng.\n\nCuộn lên để xem hiệu ứng hoặc chuyển sang các bảng màu khác trong menu thả xuống Palette."
+  },
+  "home": {
+    "seoTitle": "Công cụ chuyển đổi hình ảnh thành Pixel Art | Pixel Art Village",
+    "seoDescription": "Chuyển đổi bất kỳ ảnh nào thành nghệ thuật pixel 8-bit cổ điển với bảng màu có thể tùy chỉnh, xem trước tức thì, điều khiển dithering và xử lý an toàn trong trình duyệt—không cần đăng ký."
+  },
+  "header": {
+    "mainNav": "Điều hướng chính",
+    "userAvatarTitle": "Ảnh đại diện người dùng"
+  },
+  "content": {
+    "fallbackNotice": "Nội dung cho ngôn ngữ này sẽ sớm có. Hiện tại hiển thị tiếng Anh."
   }
 }

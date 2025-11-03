@@ -1,34 +1,33 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { useParams, Link } from 'react-router-dom'
+import { Trans, useTranslation } from 'react-i18next'
 import Seo from '@/components/Seo'
 import { generateHreflangLinks } from '@/utils/hreflang'
+import { useLocaleContext } from '@/contexts/LocaleContext'
+import LocalizedLink from '@/components/LocalizedLink'
 
 export default function About() {
   const { t } = useTranslation()
-  const params = useParams()
-  const currentLang = params.lang || 'en'
-  const prefix = currentLang === 'en' ? '' : `/${currentLang}`
-  const canonical = `https://pixelartvillage.org${prefix}/about/`
+  const { currentLocale, buildPath } = useLocaleContext()
+  const canonical = `https://pixelartvillage.org${buildPath('/about/')}`
   const hreflangLinks = generateHreflangLinks('/about')
   return (
     <div className="container mx-auto px-4 py-10 max-w-3xl">
       <Seo
-        title="About Us | Free Pixel Art Converter | Pixel Art Village"
-        description="About Pixel Art Village: a free, browser‑based pixel art maker & converter. Privacy‑first, fast, and accessible tool for creating retro game graphics."
+        title={t('about.seoTitle')}
+        description={t('about.seoDesc')}
         canonical={canonical}
         hreflang={hreflangLinks}
-        lang={currentLang}
+        lang={currentLocale}
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: 'About | Image to Pixel Art Converter' },
-        { property: 'og:description', content: 'About our image to pixel art converter: a free, browser‑based tool for creating retro game graphics. Privacy‑first, fast, and accessible pixel art maker.' },
+          { property: 'og:title', content: t('about.ogTitle') },
+          { property: 'og:description', content: t('about.ogDesc') },
           { property: 'og:image', content: 'https://pixelartvillage.org/social-about.png' },
-          { property: 'og:site_name', content: 'Pixel Art Village' },
+          { property: 'og:site_name', content: t('site.name') },
           { name: 'twitter:card', content: 'summary_large_image' },
-          { name: 'twitter:title', content: 'About | Pixel Art Village' },
-          { name: 'twitter:description', content: 'About Pixel Art Village: a free, browser‑based pixel art maker & converter. Privacy‑first, fast, and accessible tool for creating retro game graphics.' },
+          { name: 'twitter:title', content: t('about.twitterTitle') },
+          { name: 'twitter:description', content: t('about.twitterDesc') },
           { name: 'twitter:image', content: 'https://pixelartvillage.org/social-about.png' },
         ]}
       />
@@ -38,13 +37,23 @@ export default function About() {
         <p>{t('about.p2')}</p>
         <p>{t('about.p3')}</p>
         <p>
-          Try our <Link to={`${prefix}/`} className="text-blue-600 underline">pixel art converter</Link> tool
-          or explore our <Link to={`${prefix}/blog/`} className="text-blue-600 underline">blog</Link> for tips and tutorials.
+          <Trans
+            i18nKey="about.cta"
+            components={{
+              tool: <LocalizedLink to="/" className="text-blue-600 underline" />,
+              blog: <LocalizedLink to="/blog/" className="text-blue-600 underline" />,
+            }}
+          />
         </p>
         <p>
-          Our specialized converters include <Link to={`${prefix}/converter/png-to-pixel-art/`} className="text-blue-600 underline">PNG to pixel art</Link>,
-          <Link to={`${prefix}/converter/jpg-to-pixel-art/`} className="text-blue-600 underline">JPG to pixel art</Link>,
-          and <Link to={`${prefix}/converter/photo-to-sprite-converter/`} className="text-blue-600 underline">photo to sprite converter</Link> tools.
+          <Trans
+            i18nKey="about.specializedLinks"
+            components={{
+              png: <LocalizedLink to="/converter/png-to-pixel-art/" className="text-blue-600 underline" />,
+              jpg: <LocalizedLink to="/converter/jpg-to-pixel-art/" className="text-blue-600 underline" />,
+              photo: <LocalizedLink to="/converter/photo-to-sprite-converter/" className="text-blue-600 underline" />,
+            }}
+          />
         </p>
         <h2>{t('about.principles.title')}</h2>
         <ul>
@@ -55,11 +64,19 @@ export default function About() {
         <h2>{t('about.contact.title')}</h2>
         <p>
           {t('about.contact.p1')}
-          {' '}<a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com" title="Email Pixel Art Village">2296744453m@gmail.com</a>.
+          {' '}
+          <a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com" title={t('about.contact.emailTitle')}>
+            2296744453m@gmail.com
+          </a>.
         </p>
         <p>
-          For more information, see our <Link to={`${prefix}/privacy/`} className="text-blue-600 underline">privacy policy</Link> and
-          <Link to={`${prefix}/terms/`} className="text-blue-600 underline"> terms of service</Link>.
+          <Trans
+            i18nKey="about.moreInfoRich"
+            components={{
+              privacy: <LocalizedLink to="/privacy/" className="text-blue-600 underline" />,
+              terms: <LocalizedLink to="/terms/" className="text-blue-600 underline" />,
+            }}
+          />
         </p>
       </div>
     </div>
