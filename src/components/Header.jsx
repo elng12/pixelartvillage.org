@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Avatar from './Avatar';
 import { useTranslation } from 'react-i18next';
 import LocalizedLink from '@/components/LocalizedLink';
-import LanguageSwitcherMinimal from './LanguageSwitcherMinimal';
+import LanguageSwitcherBalanced from './LanguageSwitcherBalanced';
 
 function Header({ rightSlot }) {
   const { t } = useTranslation()
@@ -74,7 +74,7 @@ function Header({ rightSlot }) {
               })}
             </nav>
             <div className="flex items-center gap-2 order-2">
-              <LanguageSwitcherMinimal />
+              <LanguageSwitcherBalanced />
             </div>
             <div className="flex items-center order-3">
               <Avatar size={40} userId="guest" title={t('header.userAvatarTitle')} />
