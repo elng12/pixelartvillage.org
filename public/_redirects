@@ -1,8 +1,5 @@
 # Netlify redirects file
 # 优化的重定向配置 - 减少不必要的重定向
-# 预处理关键路径 - 将旧工具入口引导至规范pSEO页
-/converter    /converter/image-to-pixel-art/   301!
-/converter/   /converter/image-to-pixel-art/   301!
 # 1. 语言首页重定向 - 只保留必要的语言代码
 /en    /   301!
 /es    /   301!

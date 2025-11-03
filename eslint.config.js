@@ -5,7 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist', 'plugins/seo-ext/**']),
+  globalIgnores(['dist', 'plugins/seo-ext/**', '.artifacts/**']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [
@@ -24,6 +24,7 @@ export default defineConfig([
     rules: {
       // 在未引入 eslint-plugin-react 的情况下，为了避免 JSX 组件/标识符被误判未使用，放宽为忽略大写开头；同时忽略以 _ 开头的参数。
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]', argsIgnorePattern: '^_' }],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
   },
   // Vite 配置文件（Node 环境）

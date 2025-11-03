@@ -38,7 +38,7 @@ test.beforeEach(async ({ page }, _testInfo) => {
   });
 });
 
-test.afterEach(async ({}, testInfo) => {
+test.afterEach(async (_, testInfo) => {
   try {
     const outConsole = testInfo.outputPath('browser-console.json');
     const outRequests = testInfo.outputPath('network-requests.json');
@@ -167,3 +167,4 @@ test('clicking the inner choose-file button opens file chooser and processes onc
   await fc.setFiles({ name: 'test.png', mimeType: 'image/png', buffer: createRedPixelImage() });
   await waitForProcessing(page);
 });
+

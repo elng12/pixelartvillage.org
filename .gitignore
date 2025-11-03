@@ -24,6 +24,9 @@ dist-ssr
 *.sw?
 # CodeBuddy
 .codebuddy/
+.claude/
+.cursor/
+.superdesign/
 
 # Test reports
 playwright-report/
