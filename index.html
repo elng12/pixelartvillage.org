@@ -12,34 +12,38 @@
   <meta name="theme-color" content="#0ea5e9" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="canonical" href="https://pixelartvillage.org/" />
-  <title>Pixel Art Village: Image to Pixel Art Place Color Converter</title>
-  <meta name="description" content="Free Image to Pixel Art Generator & Maker | Pixel Art Village. Drag/drop photo, live preview, palettes, dithering. Place color converter: Export PNGs online!">
+  <title>Free Pixel Art Converter Online | Create 8-Bit Graphics from Images</title>
+  <meta name="description" content="Transform photos into stunning pixel art in seconds. Professional online converter with custom palettes, dithering, and instant preview. No registration required.">
   <meta name="google-adsense-account" content="ca-pub-3219924658522446">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Pixel Art Village: Image to Pixel Art Place Color Converter">
-  <meta property="og:description" content="Free Image to Pixel Art Generator & Maker | Pixel Art Village. Drag/drop photo, live preview, palettes, dithering. Place color converter: Export PNGs online!">
+  <meta property="og:title" content="Free Pixel Art Converter Online | Create 8-Bit Graphics from Images">
+  <meta property="og:description" content="Transform photos into stunning pixel art in seconds. Professional online converter with custom palettes, dithering, and instant preview. No registration required.">
   <meta property="og:url" content="https://pixelartvillage.org/">
   <meta property="og:image" content="https://pixelartvillage.org/social-preview.png">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pixel Art Village: Image to Pixel Art Place Color Converter">
-  <meta name="twitter:description" content="Free Image to Pixel Art Generator & Maker | Pixel Art Village. Drag/drop photo, live preview, palettes, dithering. Place color converter: Export PNGs online!">
+  <meta name="twitter:title" content="Free Pixel Art Converter Online | Create 8-Bit Graphics from Images">
+  <meta name="twitter:description" content="Transform photos into stunning pixel art in seconds. Professional online converter with custom palettes, dithering, and instant preview. No registration required.">
   <meta name="twitter:image" content="https://pixelartvillage.org/social-preview.png">
 
-  <!-- Structured Data: SoftwareApplication -->
+  <!-- Structured Data: SoftwareApplication with multilingual support -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Pixel Art Village",
+      "name": "Pixel Art Village - Free Pixel Art Converter",
       "url": "https://pixelartvillage.org/",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "Web",
-      "description": "Online pixel graphics maker & converter. Turn PNG/JPG into crisp, grid‑friendly pixels with instant preview and clean export.",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Professional online pixel art converter. Transform images into pixel graphics with custom palettes, dithering, and instant preview. Perfect for game developers and retro artists.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.8",
@@ -47,9 +51,17 @@
         "bestRating": "5",
         "worstRating": "1"
       },
-      "inLanguage": "en"
+      "inLanguage": ["en", "es", "fr", "de", "ja", "ko", "pt", "ru", "ar", "it", "nl", "pl", "id", "th", "vi", "fil", "no", "sv"],
+      "availableLanguage": ["English", "Español", "Français", "Deutsch", "日本語", "한국어", "Português", "Русский", "العربية", "Italiano", "Nederlands", "Polski", "Bahasa Indonesia", "ไทย", "Tiếng Việt", "Filipino", "Norsk", "Svenska"],
+      "browserRequirements": "HTML5, JavaScript enabled",
+      "softwareVersion": "2.0",
+      "author": {
+        "@type": "Organization",
+        "name": "Pixel Art Village"
+      },
+      "screenshot": "https://pixelartvillage.org/social-preview.png"
     }
-    </script>
+  </script>
 
   <!-- Structured Data: FAQPage (matches on-page FAQ) -->
   <script type="application/ld+json">
@@ -90,7 +102,24 @@
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://pixelartvillage.org/"}
       ]
     }
-    </script>
+  </script>
+
+  <!-- Structured Data: WebSite for search action -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Pixel Art Village",
+      "url": "https://pixelartvillage.org/",
+      "description": "Free online pixel art converter and sprite generator",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://pixelartvillage.org/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "inLanguage": ["en", "es", "fr", "de", "ja", "ko", "pt", "ru", "ar", "it", "nl", "pl", "id", "th", "vi", "fil", "no", "sv"]
+    }
+  </script>
 
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; script-src 'self' https://pagead2.googlesyndication.com https://securepubads.g.doubleclick.net https://*.adtrafficquality.google https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://img.turbo0.com https://indie.deals https://tpc.googlesyndication.com https://pagead2.googlesyndication.com https://*.adtrafficquality.google; font-src 'self' data:; connect-src 'self' ws: https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://adservice.google.com https://*.adtrafficquality.google https://cloudflareinsights.com; frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.adtrafficquality.google https://www.google.com; worker-src 'self'; object-src 'none'; base-uri 'self'" />
@@ -100,6 +129,15 @@
   <!-- Runtime fallback as module (CSP-friendly) -->
   <script type="module" src="/src/runtime-fallback.js"></script>
 
+  <!-- 预加载关键资源 -->
+  <link rel="preload" href="/src/main.jsx" as="script" type="module" crossorigin="anonymous">
+  <link rel="preload" href="/src/runtime-fallback.js" as="script" type="module" crossorigin="anonymous">
+
+  <!-- 预连接到外部域名 -->
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+  <link rel="preconnect" href="https://securepubads.g.doubleclick.net">
+  <link rel="preconnect" href="https://static.cloudflareinsights.com">
+
 </head>
 
 <body>
@@ -107,87 +145,43 @@
 
   
 
-  <!-- Hidden SEO snippet for homepage: provide H1 and internal links for crawlers without altering UI -->
-  <div data-prerender-seo aria-hidden="true"
+  <!-- 优化的SEO内容：保留核心价值，避免过度优化 -->
+  <div data-prerender-seo aria-hidden="true" inert
     style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
     <main>
       <header>
-        <h1>Pixel Art Village: Image to Pixel Art Place Color Converter</h1>
+        <h1>Pixel Art Village: Free Online Image to Pixel Art Converter</h1>
       </header>
+
       <section>
-        <h2>Free Online Pixel Art Converter with Custom Palette</h2>
-        <p>Convert images to pixel graphics online for free. Turn PNG or JPG with instant preview, palette controls, and clean export for sprites, icons, and game graphics. Advanced palette options and palettes management are available. Use our converter to turn an image into pixels with a custom palette and precise pixel size controls.</p>
-        <p>Enjoy fast, high‑quality image results with our browser‑based image converter. No sign‑up required, and all processing stays on your device for privacy and speed. Custom palette creation and palette editing are included. Go from image to pixels in seconds — producing tidy, grid‑friendly results while you adjust pixel size.</p>
-        <p>Start creating pixel graphics today with a simple workflow designed for creators and game makers. Image transformation with custom palette configuration and advanced palettes support. Pixel Art Village helps you convert an image to pixels with a custom palette — a reliable image‑to‑pixel tool for creators.</p>
+        <h2>Professional Pixel Art Converter Tool</h2>
+        <p>Convert images to pixel art instantly with our free online converter. Support for PNG, JPG, GIF, WebP, and BMP formats with custom palette controls and dithering options.</p>
+        <p>Perfect for game developers, sprite artists, and retro graphics creators. All processing happens locally in your browser for complete privacy.</p>
       </section>
 
-      <!-- Main navigation -->
+      <!-- Essential navigation only -->
       <nav aria-label="Main navigation">
-        <h2>Site Navigation</h2>
+        <h2>Quick Links</h2>
         <ul>
-          <li><a href="/about/">About Pixel Art Village</a></li>
-          <li><a href="/contact/">Contact & Support</a></li>
-          <li><a href="/privacy/">Privacy Policy</a></li>
-          <li><a href="/terms/">Terms of Service</a></li>
-          <li><a href="/blog/">Pixel Graphics Blog & Tutorials</a></li>
+          <li><a href="/converter/png-to-pixel-art/">PNG to Pixel Art</a></li>
+          <li><a href="/converter/jpg-to-pixel-art/">JPG to Pixel Art</a></li>
+          <li><a href="/converter/image-to-pixel-art/">Image to Pixel Art Converter</a></li>
+          <li><a href="/converter/photo-to-pixel-art/">Photo to Pixel Art</a></li>
+          <li><a href="/converter/gif-to-pixel-art/">GIF to Pixel Art</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/blog/">Pixel Art Blog</a></li>
         </ul>
       </nav>
 
-      <!-- Converter tools navigation -->
-      <nav aria-label="Converter tools">
-        <h2>Image to Pixel Converters with Palette Controls</h2>
-        <ul>
-          <li><a href="/converter/png-to-pixel-art/">PNG to Pixel Converter with Custom Palette</a></li>
-          <li><a href="/converter/jpg-to-pixel-art/">JPG to Pixel Converter with Custom Palette</a></li>
-          <li><a href="/converter/image-to-pixel-art/">Image to Pixels with Advanced Palettes</a></li>
-          <li><a href="/converter/photo-to-pixel-art/">Photo to Pixels Converter with Palette Options</a></li>
-          <li><a href="/converter/gif-to-pixel-art/">GIF to Pixel Converter</a></li>
-          <li><a href="/converter/webp-to-pixel-art/">WebP to Pixel Converter</a></li>
-          <li><a href="/converter/bmp-to-pixel-art/">BMP to Pixel Converter</a></li>
-          <li><a href="/converter/photo-to-sprite-converter/">Photo to Sprite Converter with the Palette</a></li>
-          <li><a href="/converter/pixelate-image-online/">Pixelate Image Online with Custom Palettes</a></li>
-          <li><a href="/converter/8-bit-art-generator/">8‑Bit Pixel Art Generator with Custom Palette</a></li>
-          <li><a href="/converter/retro-game-graphics-maker/">Retro Game Graphics Maker with the Palette</a></li>
-        </ul>
-      </nav>
-
-      <!-- Blog posts navigation -->
-      <nav aria-label="Blog posts">
-        <h2>Pixel Graphics Tutorials & Guides</h2>
-        <ul>
-          <li><a href="/blog/getting-started-pixel-art-maker/">Getting Started with Pixel Art Maker</a></li>
-          <li><a href="/blog/photo-to-sprite-converter-tips/">Photo to Sprite Converter Tips</a></li>
-        </ul>
-      </nav>
-
-      <!-- Related keywords and content -->
       <section>
-        <h2>Features</h2>
-        <p>Our converter supports PNG, JPG, GIF, WebP, and BMP. Produce crisp, grid‑friendly results, generate sprites, and craft retro game graphics with ease while preserving authentic aesthetics.</p>
-        <p>Built for game developers and digital artists, everything runs locally in your browser for privacy and security. Get instant results with professional‑grade output quality.</p>
-      </section>
-
-      <!-- Tips to emphasize target phrases for relevance (SEO-only, hidden from UI) -->
-      <section>
-        <h2>Tips for the image to pixel workflow</h2>
-        <p>To convert the image to pixel results you love, start with a clear photo and adjust pixel size gently. The pixel size slider controls how much detail the image keeps — increase pixel size for bold blocks, or decrease pixel size to keep the image readable. Use the palette and the palette controls to match your style, then preview how the image looks at each pixel size.</p>
-        <p>When you finish, export the final graphic as PNG or WebP. If you prefer a smoother look, try a pass to digital graphics in a separate step — the site also works as a lightweight graphics converter. For most creators the image‑to‑pixel workflow is best: tweak pixel size, refine the palette, and export the result. These steps keep the image consistent while using the palette choices you set.</p>
-        <p>Before export, adjust image contrast and palette for clarity. Pixel Art Village — your pixel graphics tool online for simple, reliable results. Drag and drop any image to begin; the preview updates instantly as you change settings. Image quality remains consistent through conversion.</p>
-      </section>
-
-      <section>
-        <h2>Use cases for the image workflow</h2>
+        <h2>Key Features</h2>
         <ul>
-          <li>Image to sprites: convert the image to small sprites while keeping edges clear using the palette limits you choose.</li>
-          <li>Image to icons: keep the image readable at tiny sizes by dialing the pixel size and balancing tones with the palette.</li>
-          <li>Export the art image for UI mockups or game HUDs; adjust the image once more if the palette needs a small tweak.</li>
-          <li>Batch ideas: plan the image to multiple outputs and compare the image versions using the palette variants you saved.</li>
-          <li>Keep the image crisp for print‑style layouts: try a smaller pixel size and set the palette to a high‑contrast scheme.</li>
-          <li>Logo drafts: trace the image roughly, then refine the art image with the palette to get a simple, strong silhouette.</li>
-          <li>Concept boards: map the image to two or three palette themes and decide which palette reads best at your target pixel size.</li>
-          <li>Social posts: prepare the image for platform previews; crop the image and use the palette to keep brand colors consistent.</li>
-          <li>Icon sets: maintain the image proportions across sizes; test a few pixel size values and lock the palette you prefer.</li>
-          <li>Quick demos: show the image before/after and annotate the image to explain how the palette and pixel size impact clarity.</li>
+          <li>Instant preview and real-time editing</li>
+          <li>Custom color palette support</li>
+          <li>Multiple dithering algorithms</li>
+          <li>High-resolution export options</li>
+          <li>No registration required</li>
+          <li>Complete privacy - processing stays local</li>
         </ul>
       </section>
     </main>

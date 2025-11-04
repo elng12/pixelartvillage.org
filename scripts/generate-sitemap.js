@@ -24,8 +24,8 @@ function loadJson(relativePath) {
   }
 }
 
-const blogPosts = loadJson('src/content/blog-posts.json');
-const pseoPages = loadJson('src/content/pseo-pages.json');
+const blogPosts = loadJson('src/content/blog-posts.en.json');
+const pseoPages = loadJson('src/content/pseo-pages.en.json');
 
 const paths = new Set(BASE_PATHS);
 
