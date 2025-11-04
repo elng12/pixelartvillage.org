@@ -9,14 +9,6 @@
     "about": "عن",
     "contact": "اتصال"
   },
-  "navTitle": {
-    "hero": "قم بالتمرير إلى قسم بطل الصفحة الرئيسية",
-    "examples": "قم بالتمرير إلى أمثلة Pixel Art",
-    "features": "قم بالتمرير إلى ميزات Pixel Art",
-    "how": "قم بالتمرير إلى كيفية عمل Pixel Art Converter",
-    "faq": "قم بالتمرير إلى الأسئلة الشائعة حول Pixel Art",
-    "blog": "افتح مدونة Pixel Art"
-  },
   "cta": {
     "start": "ابدأ الآن"
   },
@@ -52,6 +44,14 @@
       "start": "ابدأ في قرية بيكسل آرت",
       "tips": "نصائح ولوحات",
       "privacyLocal": "الخصوصية والمعالجة المحلية"
+    },
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
     }
   },
   "blog": {
@@ -84,12 +84,7 @@
     "chooseFile": "اختر الملف",
     "preparing": "جارٍ تحضير الصورة…",
     "ariaUpload": "تحميل الصورة (اسحب وأسقط أو انقر للاختيار)",
-    "ariaChoose": "اختر ملف الصورة",
-    "dragDrop": "Drag and drop image here",
-    "orClick": "or click to choose",
-    "convertButton": "Convert to Pixel Art",
-    "processing": "Processing...",
-    "converted": "Successfully converted"
+    "ariaChoose": "اختر ملف الصورة"
   },
   "upload": {
     "selected": "الملف المحدد: {{name}}"
@@ -199,7 +194,8 @@
     "descFull": "شاهد كيف يحول محول الصور إلى فن البكسل صورك إلى فن بكسل واضح وحاد."
   },
   "lang": {
-    "label": "لغة"
+    "label": "لغة",
+    "title": "Select language"
   },
   "wplace": {
     "title": "أداة مثالية لمستخدمي قرية فن البكسل",
@@ -237,13 +233,7 @@
     "clientSide": {
       "title": "100% على جانب العميل",
       "desc": "جميع عمليات التحويل تعمل 100% من جانب العميل في متصفحك. الصور لا تغادر جهازك أبداً، ويمكن إنشاء إصدارات غير متصلة، مما يحافظ على الأصول خاصة وآمنة. Pixel Art Village يحمي عملك أثناء تقديم معالجة سريعة وآمنة عبر سطح المكتب والهاتف المحمول. باستخدام Pixel Art Village تحتفظ بالتحكم من المعاينة الأولى إلى التصدير النهائي."
-    },
-    "customPalettes": "Custom Palettes",
-    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
-    "realTimePreview": "Real-time Preview",
-    "realTimePreviewDesc": "See changes instantly as you adjust settings",
-    "multipleFormats": "Multiple Formats",
-    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+    }
   },
   "how": {
     "title": "كيف تعمل قرية الفن بكسل",
@@ -259,9 +249,6 @@
   },
   "common": {
     "loading": "جارٍ التحميل...",
-    "error": "خطأ",
-    "success": "تم بنجاح",
-    "failed": "فشل",
     "imageFailedToLoad": "تعذر تحميل الصورة",
     "imageUnavailable": "الصورة غير متاحة",
     "lastUpdated": "النص: آخر تحديث: {{date}}"
@@ -441,10 +428,7 @@
     "twitterTitle": "حول | Pixel Art Village",
     "twitterDesc": "اكتشف من أنشأ Pixel Art Village وكيف يعمل محول الفن المبكسل الذي يحترم الخصوصية.",
     "p2": "نحن نهتم بالخصوصية والسرعة وسهولة الوصول حتى تتمكن من تحويل الصور إلى فنّ البكسل بدون رفع أو تسجيل.",
-    "p3": "فريقنا يبني موارد تعليمية وأدوات متخصصة للفنانين والمعلمين ومطوري الألعاب المستقلين.",
-    "cta": "جرب أداة <tool>converter</tool> أو استكشف <blog>blog</blog> للحصول على نصائح ودروس تعليمية.",
-    "specializedLinks": "هل تحتاج إلى مهام عمل محددة التنسيق؟ <png>PNG إلى Pixel Art</png>, <jpg>JPG إلى Pixel Art</jpg>, و<photo>محول الصورة إلى سبرايت</photo> الأدوات جاهزة للمساعدة.",
-    "moreInfoRich": "اعثر على مزيد من التفاصيل في <privacy>سياسة الخصوصية</privacy> و <terms>شروط الخدمة</terms>."
+    "p3": "فريقنا يبني موارد تعليمية وأدوات متخصصة للفنانين والمعلمين ومطوري الألعاب المستقلين."
   },
   "contact": {
     "h1": "اتصال",
@@ -605,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "المحتوى لهذه اللغة قادم قريباً. عرض الإنجليزية الآن."
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }

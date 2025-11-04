@@ -9,14 +9,6 @@
     "about": "เกี่ยวกับ",
     "contact": "ติดต่อ"
   },
-  "navTitle": {
-    "hero": "เลื่อนไปที่ส่วนโฮมฮีโร่",
-    "examples": "เลื่อนไปที่ตัวอย่างศิลปะพิกเซล",
-    "features": "เลื่อนไปที่คุณสมบัติศิลปะพิกเซล",
-    "how": "เลื่อนไปที่วิธีการทำงานของ Pixel Art Converter",
-    "faq": "เลื่อนไปที่คำถามที่พบบ่อยเกี่ยวกับ Pixel Art",
-    "blog": "เปิดบล็อกศิลปะพิกเซล"
-  },
   "cta": {
     "start": "เริ่มตอนนี้"
   },
@@ -52,6 +44,14 @@
       "start": "เริ่มต้นในหมู่บ้านศิลปะพิกเซล",
       "tips": "เคล็ดลับและจานสี",
       "privacyLocal": "ความเป็นส่วนตัวและการประมวลผลในท้องถิ่น"
+    },
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
     }
   },
   "blog": {
@@ -84,12 +84,7 @@
     "chooseFile": "เลือกไฟล์",
     "preparing": "กำลังเตรียมรูปภาพ...",
     "ariaUpload": "อัพโหลดรูปภาพ (ลากและวางหรือคลิกเพื่อเลือก)",
-    "ariaChoose": "เลือกไฟล์รูปภาพ",
-    "dragDrop": "Drag and drop image here",
-    "orClick": "or click to choose",
-    "convertButton": "Convert to Pixel Art",
-    "processing": "Processing...",
-    "converted": "Successfully converted"
+    "ariaChoose": "เลือกไฟล์รูปภาพ"
   },
   "upload": {
     "selected": "ไฟล์ที่เลือก: {{name}}"
@@ -199,7 +194,8 @@
     "descFull": "ดูว่าตัวแปลงรูปภาพเป็นศิลปะพิกเซลของเราแปลงภาพถ่ายของคุณเป็นศิลปะพิกเซลที่คมชัดได้อย่างไร"
   },
   "lang": {
-    "label": "ภาษา"
+    "label": "ภาษา",
+    "title": "Select language"
   },
   "wplace": {
     "title": "เครื่องมือที่สมบูรณ์แบบสำหรับผู้ใช้หมู่บ้านศิลปะพิกเซล",
@@ -237,13 +233,7 @@
     "clientSide": {
       "title": "100% ฝั่งไคลเอนต์",
       "desc": "การแปลงทั้งหมดทำงาน 100% ฝั่งไคลเอนต์ในเบราว์เซอร์ของคุณ รูปภาพไม่เคยออกจากอุปกรณ์ของคุณ และสามารถสร้างแบบออฟไลน์ได้ ทำให้ทรัพยากรมีความเป็นส่วนตัวและปลอดภัย Pixel Art Village ปกป้องงานของคุณในขณะเดียวกันก็มอบการประมวลผลที่รวดเร็วและปลอดภัยทั้งบนเดสก์ท็อปและมือถือ ด้วย Pixel Art Village คุณจะคงการควบคุมตั้งแต่การดูตัวอย่างแรกไปจนถึงการส่งออกครั้งสุดท้าย"
-    },
-    "customPalettes": "Custom Palettes",
-    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
-    "realTimePreview": "Real-time Preview",
-    "realTimePreviewDesc": "See changes instantly as you adjust settings",
-    "multipleFormats": "Multiple Formats",
-    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+    }
   },
   "how": {
     "title": "หมู่บ้านศิลปะพิกเซลทำงานอย่างไร",
@@ -259,9 +249,6 @@
   },
   "common": {
     "loading": "กำลังโหลด...",
-    "error": "เกิดข้อผิดพลาด",
-    "success": "สำเร็จ",
-    "failed": "ล้มเหลว",
     "imageFailedToLoad": "ไม่สามารถโหลดภาพได้",
     "imageUnavailable": "ไม่พบภาพ",
     "lastUpdated": "อัปเดตล่าสุด: {{date}}"
@@ -441,10 +428,7 @@
     "twitterTitle": "เกี่ยวกับ | Pixel Art Village",
     "twitterDesc": "ค้นพบว่าใครเป็นผู้สร้าง Pixel Art Village และวิธีการทำงานของตัวแปลงงานศิลป์พิกเซลที่ให้ความสำคัญกับความเป็นส่วนตัวของเรา",
     "p2": "เราเน้นเรื่องความเป็นส่วนตัว ความเร็ว และการเข้าถึง เพื่อให้คุณสามารถแปลงภาพเป็นพิกเซลอาร์ตโดยไม่ต้องอัปโหลดหรือสมัครสมาชิก",
-    "p3": "ทีมงานของเราสร้างทรัพยากรเพื่อการศึกษาและเครื่องมือเฉพาะทางสำหรับศิลปิน นักการศึกษา และนักพัฒนาเกมอินดี้",
-    "cta": "ลองใช้ <tool>เครื่องมือแปลง</tool> หรือสำรวจ <blog>บล็อก</blog> สำหรับเคล็ดลับและบทช่วยสอน",
-    "specializedLinks": "ต้องการเวิร์กโฟลว์เฉพาะรูปแบบหรือไม่? <png>PNG เป็น Pixel Art</png>, <jpg>JPG เป็น Pixel Art</jpg>, และ <photo>Photo เป็น Sprite Converter</photo> เครื่องมือพร้อมให้ความช่วยเหลือ",
-    "moreInfoRich": "ค้นหารายละเอียดเพิ่มเติมใน <privacy>นโยบายความเป็นส่วนตัว</privacy> และ <terms>ข้อกำหนดการใช้งาน</terms> ของเรา"
+    "p3": "ทีมงานของเราสร้างทรัพยากรเพื่อการศึกษาและเครื่องมือเฉพาะทางสำหรับศิลปิน นักการศึกษา และนักพัฒนาเกมอินดี้"
   },
   "contact": {
     "h1": "ติดต่อ",
@@ -605,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "เนื้อหาสำหรับภาษานี้จะมาในเร็วๆ นี้ แสดงภาษาอังกฤษในขณะนี้"
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }

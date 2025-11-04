@@ -1,3 +1,4 @@
+import logger from '@/utils/logger'
 import { useState, useRef, useEffect } from 'react';
 // 处理策略说明：尺寸上限（PREVIEW_LIMIT.maxEdge）在 utils/imageProcessor 的主处理链中统一执行：
 // 先等比 contain 缩放（避免内存/耗时极端），再执行像素化/调色板量化。
@@ -43,7 +44,7 @@ export function useImageProcessor(image, settings) {
         if (err?.name === 'AbortError') {
           // ignore
         } else {
-          if (import.meta.env?.DEV) console.error('Image processing failed:', err);
+          if (import.meta.env?.DEV) logger.error('Image processing failed:', err);
           setError(err?.message || 'Image processing failed');
           if (!signal.aborted) setProcessedImage(image);
         }

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import showcaseBefore480Webp from '@/assets/generated/showcase-before-w480.webp';
 import showcaseBefore800Webp from '@/assets/generated/showcase-before-w800.webp';

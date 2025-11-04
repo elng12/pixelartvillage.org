@@ -5,11 +5,12 @@ test.describe('i18n basic', () => {
   test('language switch updates UI without reload', async ({ page }) => {
     await page.goto('/')
     // Switch to Spanish via select
-    const select = page.locator('select[aria-label="Language"]')
+    const select = page.locator('#language-switcher, select[aria-label="Language"]')
     await expect(select).toBeVisible()
     await select.selectOption('es')
-    // Footer CTA should change quickly
-    const cta = page.getByRole('link', { name: /Empezar ahora/ })
-    await expect(cta).toBeVisible()
+    // URL and <html lang> should reflect Spanish
+    await expect(page).toHaveURL(/\/es\//)
+    const html = page.locator('html')
+    await expect(html).toHaveAttribute('lang', /es/i)
   })
 })

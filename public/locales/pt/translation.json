@@ -9,14 +9,6 @@
     "about": "Sobre",
     "contact": "Contato"
   },
-  "navTitle": {
-    "hero": "Voltar à seção hero inicial",
-    "examples": "Rolar para Exemplos de Pixel Art",
-    "features": "Rolar para Recursos de Pixel Art",
-    "how": "Rolar para Como Funciona o Pixel Art Converter",
-    "faq": "Rolar até o FAQ de Pixel Art",
-    "blog": "Blog de Pixel Art Aberto"
-  },
   "cta": {
     "start": "Começar agora"
   },
@@ -52,6 +44,14 @@
       "start": "Começar no pixel art Village",
       "tips": "Dicas e paletas",
       "privacyLocal": "Privacidade e processamento local"
+    },
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
     }
   },
   "blog": {
@@ -84,12 +84,7 @@
     "chooseFile": "Escolher arquivo",
     "preparing": "Preparando imagem…",
     "ariaUpload": "Enviar imagem (arraste e solte ou clique para escolher)",
-    "ariaChoose": "Escolher arquivo de imagem",
-    "dragDrop": "Drag and drop image here",
-    "orClick": "or click to choose",
-    "convertButton": "Convert to Pixel Art",
-    "processing": "Processing...",
-    "converted": "Successfully converted"
+    "ariaChoose": "Escolher arquivo de imagem"
   },
   "upload": {
     "selected": "Arquivo selecionado: {{name}}"
@@ -199,7 +194,8 @@
     "descFull": "Veja como nosso conversor de imagem para pixel art transforma suas fotos em pixel art nítido."
   },
   "lang": {
-    "label": "Idioma"
+    "label": "Idioma",
+    "title": "Select language"
   },
   "wplace": {
     "title": "Ferramenta Perfeita para Usuários de Pixel Art da Vila",
@@ -237,13 +233,7 @@
     "clientSide": {
       "title": "100% do lado do cliente",
       "desc": "Toda a conversão é executada 100% no lado do cliente no seu navegador. As imagens nunca saem do seu dispositivo, e compilações offline são possíveis, mantendo os ativos privados e seguros. Pixel Art Village protege seu trabalho enquanto oferece processamento rápido e seguro em desktop e mobile. Com Pixel Art Village você mantém o controle desde a primeira visualização até a exportação final."
-    },
-    "customPalettes": "Custom Palettes",
-    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
-    "realTimePreview": "Real-time Preview",
-    "realTimePreviewDesc": "See changes instantly as you adjust settings",
-    "multipleFormats": "Multiple Formats",
-    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+    }
   },
   "how": {
     "title": "Como funciona o pixel art Village",
@@ -259,9 +249,6 @@
   },
   "common": {
     "loading": "Carregando...",
-    "error": "Erro",
-    "success": "Sucesso",
-    "failed": "Falha",
     "imageFailedToLoad": "Não foi possível carregar a imagem",
     "imageUnavailable": "Imagem indisponível",
     "lastUpdated": "Última atualização: {{date}}"
@@ -441,10 +428,7 @@
       "title": "Contato",
       "p1": "Veja a página de Contato para suporte e dúvidas. Você também pode nos escrever diretamente em",
       "emailTitle": "Enviar e-mail para Pixel Art Village"
-    },
-    "cta": "Experimente nosso <tool>conversor</tool> ou explore o <blog>blog</blog> para dicas e tutoriais.",
-    "specializedLinks": "Precisa de fluxos por formato? As ferramentas <png>PNG para pixel art</png>, <jpg>JPG para pixel art</jpg> e <photo>Foto para sprite</photo> estão prontas para ajudar.",
-    "moreInfoRich": "Encontre mais detalhes em nossa <privacy>Política de Privacidade</privacy> e nos <terms>Termos de Serviço</terms>."
+    }
   },
   "contact": {
     "seoTitle": "Contate-nos | Suporte e Feedback | Pixel Art Village",
@@ -605,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "Conteúdo para este idioma chegará em breve. Mostrando inglês por enquanto."
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }

@@ -9,14 +9,6 @@
     "about": "Over",
     "contact": "Contact"
   },
-  "navTitle": {
-    "hero": "Scroll naar de Home Hero-sectie",
-    "examples": "Scroll naar Pixel Art-voorbeelden",
-    "features": "Scroll naar Pixel Art-functies",
-    "how": "Scroll naar Hoe Pixel Art Converter werkt",
-    "faq": "Scroll naar Veelgestelde vragen over pixelkunst",
-    "blog": "Open Pixel Art-blog"
-  },
   "cta": {
     "start": "Begin nu"
   },
@@ -52,6 +44,14 @@
       "start": "Begin in pixelkunstdorp",
       "tips": "Tips & Paletten",
       "privacyLocal": "Privacy & lokale verwerking"
+    },
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
     }
   },
   "blog": {
@@ -84,12 +84,7 @@
     "chooseFile": "Kies bestand",
     "preparing": "Afbeelding voorbereiden…",
     "ariaUpload": "Afbeelding uploaden (slepen en neerzetten of klikken om te kiezen)",
-    "ariaChoose": "Kies afbeeldingsbestand",
-    "dragDrop": "Drag and drop image here",
-    "orClick": "or click to choose",
-    "convertButton": "Convert to Pixel Art",
-    "processing": "Processing...",
-    "converted": "Successfully converted"
+    "ariaChoose": "Kies afbeeldingsbestand"
   },
   "upload": {
     "selected": "Geselecteerd bestand: {{name}}"
@@ -199,7 +194,8 @@
     "descFull": "Bekijk hoe onze afbeelding-naar-pixelart-converter je foto's in scherpe pixel art omzet."
   },
   "lang": {
-    "label": "Taal"
+    "label": "Taal",
+    "title": "Select language"
   },
   "wplace": {
     "title": "Perfect hulpmiddel voor pixelart Village-gebruikers",
@@ -237,13 +233,7 @@
     "clientSide": {
       "title": "100% cliëntzijde",
       "desc": "Alle conversies worden 100% client-side in uw browser uitgevoerd. Afbeeldingen verlaten uw apparaat nooit en offline builds zijn mogelijk, waardoor uw assets privé en veilig blijven. Pixel Art Village beschermt uw werk terwijl snelle, veilige verwerking wordt geleverd op desktop en mobiel. Met Pixel Art Village behoudt u de controle van de eerste preview tot de definitieve export."
-    },
-    "customPalettes": "Custom Palettes",
-    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
-    "realTimePreview": "Real-time Preview",
-    "realTimePreviewDesc": "See changes instantly as you adjust settings",
-    "multipleFormats": "Multiple Formats",
-    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+    }
   },
   "how": {
     "title": "Hoe pixelart Village werkt",
@@ -259,9 +249,6 @@
   },
   "common": {
     "loading": "Bezig met laden...",
-    "error": "Fout",
-    "success": "Gelukt",
-    "failed": "Mislukt",
     "imageFailedToLoad": "Afbeelding kan niet worden geladen",
     "imageUnavailable": "Afbeelding niet beschikbaar",
     "lastUpdated": "Laatst bijgewerkt: {{date}}"
@@ -441,10 +428,7 @@
     "twitterTitle": "Over | Pixel Art Village",
     "twitterDesc": "Ontdek wie Pixel Art Village heeft gemaakt en hoe onze privacy-first pixel art converter werkt.",
     "p2": "We richten ons op privacy, snelheid en toegankelijkheid zodat je afbeeldingen naar pixelkunst kunt omzetten zonder uploads of registraties.",
-    "p3": "Ons team ontwikkelt educatieve bronnen en gespecialiseerde tools voor kunstenaars, docenten en onafhankelijke spelontwikkelaars.",
-    "cta": "Probeer onze <tool>converter tool</tool> of bekijk onze <blog>blog</blog> voor tips en tutorials.",
-    "specializedLinks": "Heeft u workflows nodig die specifiek zijn voor formaten? <png>PNG naar Pixel Art</png>, <jpg>JPG naar Pixel Art</jpg>, en <photo>Foto naar Sprite Converter</photo> tools zijn klaar om te helpen.",
-    "moreInfoRich": "Vind meer details in ons <privacy>Privacybeleid</privacy> en <terms>Servicevoorwaarden</terms>."
+    "p3": "Ons team ontwikkelt educatieve bronnen en gespecialiseerde tools voor kunstenaars, docenten en onafhankelijke spelontwikkelaars."
   },
   "contact": {
     "h1": "Contact",
@@ -605,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "De content voor deze taal komt binnenkort. Nu wordt Engels weergegeven."
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }

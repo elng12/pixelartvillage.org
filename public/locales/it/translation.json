@@ -9,14 +9,6 @@
     "about": "Chi siamo",
     "contact": "Contatti"
   },
-  "navTitle": {
-    "hero": "Scorri alla sezione hero della Home",
-    "examples": "Scorri a Esempi di Pixel Art",
-    "features": "Scorri alle funzionalità Pixel Art",
-    "how": "Scorri per vedere Come Funziona Pixel Art Converter",
-    "faq": "Scorri alla FAQ di Pixel Art",
-    "blog": "Blog Open Pixel Art"
-  },
   "cta": {
     "start": "Inizia ora"
   },
@@ -52,6 +44,14 @@
       "start": "Start on pixel art Village",
       "tips": "Suggerimenti e palette",
       "privacyLocal": "Privacy e elaborazione locale"
+    },
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
     }
   },
   "blog": {
@@ -84,12 +84,7 @@
     "chooseFile": "Scegli file",
     "preparing": "Preparazione dell'immagine…",
     "ariaUpload": "Carica immagine (trascina e rilascia o clicca per scegliere)",
-    "ariaChoose": "Scegli file immagine",
-    "dragDrop": "Drag and drop image here",
-    "orClick": "or click to choose",
-    "convertButton": "Convert to Pixel Art",
-    "processing": "Processing...",
-    "converted": "Successfully converted"
+    "ariaChoose": "Scegli file immagine"
   },
   "upload": {
     "selected": "File selezionato: {{name}}"
@@ -199,7 +194,8 @@
     "descFull": "Scopri come il nostro convertitore da immagine a pixel art trasforma le tue foto in pixel art nitide."
   },
   "lang": {
-    "label": "Lingua"
+    "label": "Lingua",
+    "title": "Select language"
   },
   "wplace": {
     "title": "Perfetto strumento per gli utenti di pixel art Village",
@@ -237,13 +233,7 @@
     "clientSide": {
       "title": "100% lato client",
       "desc": "Tutte le conversioni vengono eseguite al 100% lato client nel tuo browser. Le immagini non escono mai dal tuo dispositivo e sono possibili build offline, mantenendo gli asset privati e sicuri. Pixel Art Village protegge il tuo lavoro offrendo elaborazione rapida e sicura su desktop e mobile. Con Pixel Art Village mantieni il controllo dalla prima anteprima fino all'export finale."
-    },
-    "customPalettes": "Custom Palettes",
-    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
-    "realTimePreview": "Real-time Preview",
-    "realTimePreviewDesc": "See changes instantly as you adjust settings",
-    "multipleFormats": "Multiple Formats",
-    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+    }
   },
   "how": {
     "title": "Come funziona pixel art Village",
@@ -259,9 +249,6 @@
   },
   "common": {
     "loading": "Caricamento...",
-    "error": "Errore",
-    "success": "Successo",
-    "failed": "Operazione non riuscita",
     "imageFailedToLoad": "Impossibile caricare l'immagine",
     "imageUnavailable": "Immagine non disponibile",
     "lastUpdated": "Ultimo aggiornamento: {{date}}"
@@ -441,10 +428,7 @@
     "twitterTitle": "Informazioni | Pixel Art Village",
     "twitterDesc": "Scopri chi ha creato Pixel Art Village e come funziona il nostro convertitore di pixel art che tutela la privacy.",
     "p2": "Ci concentriamo sulla privacy, sulla velocità e sull'accessibilità in modo da poter convertire le immagini in pixel art senza caricamenti o registrazioni.",
-    "p3": "Il nostro team sviluppa risorse educative e strumenti specializzati per artisti, educatori e sviluppatori di giochi indie.",
-    "cta": "Prova il nostro <tool><tool>strumento convertitore</tool></tool> o esplora il nostro <blog><blog>blog</blog></blog> per consigli e tutorial.",
-    "specializedLinks": "Serve un flusso di lavoro specifico per formato? <png>PNG to Pixel Art</png>, <jpg>JPG to Pixel Art</jpg>, e <photo>Photo to Sprite Converter</photo> strumenti sono pronti ad aiutare.",
-    "moreInfoRich": "Trova maggiori dettagli nella nostra <privacy>Informativa sulla Privacy</privacy> e nei <terms>Termini di Servizio</terms>."
+    "p3": "Il nostro team sviluppa risorse educative e strumenti specializzati per artisti, educatori e sviluppatori di giochi indie."
   },
   "contact": {
     "h1": "Contatto",
@@ -605,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "Il contenuto per questa lingua sarà disponibile a breve. Per ora mostriamo l’inglese."
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }

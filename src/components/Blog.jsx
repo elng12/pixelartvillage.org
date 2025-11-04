@@ -1,9 +1,8 @@
-import React from 'react'
 import { useParams } from 'react-router-dom'
 import Seo from '@/components/Seo'
 import { useTranslation } from 'react-i18next'
 import { useLocalizedContent } from '@/hooks/useLocalizedContent'
-import { useLocaleContext } from '@/contexts/LocaleContext'
+import { useLocaleContext } from '@/hooks/useLocaleContext'
 import LocalizedLink from '@/components/LocalizedLink'
 
 export default function Blog() {

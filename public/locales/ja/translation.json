@@ -9,14 +9,6 @@
     "about": "概要",
     "contact": "お問い合わせ"
   },
-  "navTitle": {
-    "hero": "ホームのヒーローセクションへスクロール",
-    "examples": "ピクセルアートの例へスクロール",
-    "features": "ピクセルアートの機能へスクロール",
-    "how": "ピクセルアートコンバーターの使い方へスクロール",
-    "faq": "よくある質問へスクロール",
-    "blog": "ピクセルアートブログを開く"
-  },
   "cta": {
     "start": "今すぐ始める"
   },
@@ -52,6 +44,14 @@
       "start": "ピクセルアート Village で始める",
       "tips": "ヒント & パレット",
       "privacyLocal": "プライバシー & ローカル処理"
+    },
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
     }
   },
   "blog": {
@@ -84,21 +84,7 @@
     "chooseFile": "ファイルを選択",
     "preparing": "画像を準備しています…",
     "ariaUpload": "画像をアップロード（ドラッグ&ドロップまたはクリックで選択）",
-    "ariaChoose": "画像ファイルを選択",
-    "dragDrop": "ここに画像をドラッグ＆ドロップ",
-    "orClick": "またはクリックして選択",
-    "convertButton": "ピクセルアートに変換",
-    "processing": "画像を処理中...",
-    "converted": "画像の変換が完了しました",
-    "dropZone": "Drop zone",
-    "downloadButton": "Download image",
-    "resetButton": "New image",
-    "pixelSize": "Pixel size",
-    "colorPalette": "Color palette",
-    "dithering": "Dithering",
-    "preview": "Preview",
-    "original": "Original",
-    "result": "Result"
+    "ariaChoose": "画像ファイルを選択"
   },
   "upload": {
     "selected": "選択されたファイル: {{name}}"
@@ -208,7 +194,8 @@
     "descFull": "当社の画像からピクセルアートへの変換ツールが、あなたの写真を鮮明なピクセルアートに変換する様子をご覧ください。"
   },
   "lang": {
-    "label": "言語"
+    "label": "言語",
+    "title": "Select language"
   },
   "wplace": {
     "title": "Villageユーザーのための完璧なピクセルアートツール",
@@ -246,17 +233,7 @@
     "clientSide": {
       "title": "100% クライアントサイド",
       "desc": "すべての変換は、ブラウザ内で100%クライアントサイドで実行されます。画像はデバイスから離れることはなく、オフライン構築も可能で、資産をプライベートで安全に保ちます。ピクセルアートビレッジ は、デスクトップからモバイルまで、高速で安全な処理を提供しながらあなたの作業を保護します。ピクセルアートビレッジ を使用すると、最初のプレビューから最終エクスポートまであなたの制御を維持できます。"
-    },
-    "customPalettes": "カスタムパレット",
-    "customPalettesDesc": "定義済みパレットから選択するか、独自のカスタムカラーパレットを作成",
-    "realTimePreview": "リアルタイムプレビュー",
-    "realTimePreviewDesc": "設定を調整しながら変更を即座に確認",
-    "multipleFormats": "複数のフォーマット",
-    "multipleFormatsDesc": "PNG、JPG、GIF、BMP、WebP画像フォーマットをサポート",
-    "highQuality": "High Quality",
-    "highQualityDesc": "Export high-quality images perfect for your project",
-    "easyToUse": "Easy to Use",
-    "easyToUseDesc": "Intuitive interface designed for artists and developers"
+    }
   },
   "how": {
     "title": "pixel art Village の使い方",
@@ -272,9 +249,6 @@
   },
   "common": {
     "loading": "読み込み中...",
-    "error": "エラー",
-    "success": "成功",
-    "failed": "失敗",
     "imageFailedToLoad": "画像を読み込めませんでした",
     "imageUnavailable": "画像を利用できません",
     "lastUpdated": "最終更新: {{date}}"
@@ -454,10 +428,7 @@
       "title": "お問い合わせ",
       "p1": "サポートやご質問はお問い合わせページをご覧ください。下記のアドレス宛に直接メールを送ることもできます。",
       "emailTitle": "Pixel Art Village へメールする"
-    },
-    "cta": "First try the <tool>converter tool</tool>, or check out <blog>blog</blog> for hints and tutorials.",
-    "specializedLinks": "形式別のワークフローが必要ですか？ <png>PNG をピクセルアートに変換</png>、<jpg>JPG をピクセルアートに変換</jpg>、<photo>写真からスプライトへ変換</photo> の各ツールをご活用ください。",
-    "moreInfoRich": "詳しくは <privacy>プライバシーポリシー</privacy> と <terms>利用規約</terms> をご確認ください。"
+    }
   },
   "contact": {
     "seoTitle": "お問い合わせ | サポートとフィードバック | Pixel Art Village",
@@ -618,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "この言語のコンテンツは近日公開予定です。今は英語を表示しています。"
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }

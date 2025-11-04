@@ -1,3 +1,4 @@
+import logger from '@/utils/logger'
 import { useEffect } from 'react'
 
 // 以最小依赖的方式提供可复用的防抖 effect
@@ -8,7 +9,7 @@ export function useDebouncedEffect(effect, deps, delay) {
         effect()
       } catch (e) {
         if (import.meta?.env?.DEV) {
-          console.error('useDebouncedEffect error:', e)
+          logger.error('useDebouncedEffect error:', e)
         }
       }
     }, delay)

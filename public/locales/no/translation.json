@@ -9,14 +9,6 @@
     "about": "Om",
     "contact": "Kontakt"
   },
-  "navTitle": {
-    "hero": "Rull til delen Hjemmehelter",
-    "examples": "Bla til Pixel Art-eksempler",
-    "features": "Scroll to Pixel Art functions",
-    "how": "Rull til Hvordan Pixel Art Converter fungerer",
-    "faq": "Rull til vanlige spørsmål om Pixel Art",
-    "blog": "Åpne Pixel Art-bloggen"
-  },
   "cta": {
     "start": "Start nå"
   },
@@ -52,6 +44,14 @@
       "start": "Start i pixel art landsby",
       "tips": "Tips og paletter",
       "privacyLocal": "Personvern og lokal behandling"
+    },
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
     }
   },
   "blog": {
@@ -84,12 +84,7 @@
     "chooseFile": "Velg fil",
     "preparing": "Forbereder bilde …",
     "ariaUpload": "Last opp bilde (dra og slipp eller klikk for å velge)",
-    "ariaChoose": "Velg bildefil",
-    "dragDrop": "Drag and drop image here",
-    "orClick": "or click to choose",
-    "convertButton": "Convert to Pixel Art",
-    "processing": "Processing...",
-    "converted": "Successfully converted"
+    "ariaChoose": "Velg bildefil"
   },
   "upload": {
     "selected": "Valgt fil: {{name}}"
@@ -199,7 +194,8 @@
     "descFull": "Se hvordan vårt bilde til pikselkunst‑konverterer forvandler dine bilder til skarp pikselkunst."
   },
   "lang": {
-    "label": "Språk"
+    "label": "Språk",
+    "title": "Select language"
   },
   "wplace": {
     "title": "Perfekt verktøy for pixel art Village-brukere",
@@ -237,13 +233,7 @@
     "clientSide": {
       "title": "100% klient-sidig",
       "desc": "Alle konverteringer kjører 100% på klient-siden i nettleseren din. Bilder forlater aldri enheten din, og offline‑bygg er mulig, slik at ressursene holdes private og sikre. Pixel Art Village beskytter arbeidet ditt mens den leverer rask, sikker prosessering på stasjonære og mobile plattformer. Med Pixel Art Village beholder du kontrollen fra første forhåndsvisning til slutteksport."
-    },
-    "customPalettes": "Custom Palettes",
-    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
-    "realTimePreview": "Real-time Preview",
-    "realTimePreviewDesc": "See changes instantly as you adjust settings",
-    "multipleFormats": "Multiple Formats",
-    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+    }
   },
   "how": {
     "title": "Teksten er allerede på norsk: \"Hvordan pixel art Village fungerer\"\n\nHvis du mente å oversette fra engelsk, er oversettelsen: \"Hvordan pixel art Village fungerer\"",
@@ -259,9 +249,6 @@
   },
   "common": {
     "loading": "Laster...",
-    "error": "Feil",
-    "success": "Vellykket",
-    "failed": "Mislyktes",
     "imageFailedToLoad": "Kunne ikke laste bildet",
     "imageUnavailable": "Bildet er ikke tilgjengelig",
     "lastUpdated": "Sist oppdatert: {{date}}"
@@ -441,10 +428,7 @@
     "twitterTitle": "Om | Pixel Art Village",
     "twitterDesc": "Oppdag hvem som opprettet Pixel Art Village og hvordan vår personvern-første pikselkunst-konverterer fungerer.",
     "p2": "Vi fokuserer på personvern, hastighet og tilgjengelighet så du kan konvertere bilder til pixel art uten opplasting eller registrering.",
-    "p3": "Vårt team bygger utdanningsressurser og spesialiserte verktøy for kunstnere, lærere og indie-spillutviklere.",
-    "cta": "Prøv vårt <tool>konverteringsverktøy</tool> eller utforsk vår <blog>blogg</blog> for tips og veiledninger.",
-    "specializedLinks": "Trenger du arbeidsflyter spesifikt for formater? <png>PNG til Pixel Art</png>, <jpg>JPG til Pixel Art</jpg>, og <photo>Foto til Sprite Converter</photo> verktøy er klare til å hjelpe.",
-    "moreInfoRich": "Finn flere detaljer i vår <privacy>personvernpolicy</privacy> og <terms>bruksvilkår</terms>."
+    "p3": "Vårt team bygger utdanningsressurser og spesialiserte verktøy for kunstnere, lærere og indie-spillutviklere."
   },
   "contact": {
     "h1": "Kontakt",
@@ -605,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "Innhold for dette språket kommer snart. Viser engelsk for øyeblikket."
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }

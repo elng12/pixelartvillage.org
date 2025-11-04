@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Avatar from './Avatar';
 import { useTranslation } from 'react-i18next';
 import LocalizedLink from '@/components/LocalizedLink';
 import LanguageSwitcherBalanced from './LanguageSwitcherBalanced';
 
-function Header({ rightSlot }) {
+function Header() {
   const { t } = useTranslation()
   const [current, setCurrent] = useState('tool');
 
-  // Debug: 检查rightSlot是否正确传递
-  React.useEffect(() => {
-    if (import.meta?.env?.DEV) {
-      console.log('[Header] rightSlot:', rightSlot ? 'exists' : 'missing');
-      console.log('[Header] rightSlot type:', typeof rightSlot);
-    }
-  }, [rightSlot]);
   // 支持锚点型（id）与路由型（to）链接；直接在渲染期取文案，避免首次渲染时资源未就绪导致标签停留在 key
   const NAV_LINKS = [
     { id: 'tool', label: t('nav.home') },

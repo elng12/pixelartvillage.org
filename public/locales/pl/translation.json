@@ -11,20 +11,9 @@
   },
   "common": {
     "loading": "Ładowanie...",
-    "error": "Błąd",
-    "success": "Sukces",
-    "failed": "Niepowodzenie",
     "imageFailedToLoad": "Nie udało się wczytać obrazu",
     "imageUnavailable": "Obraz niedostępny",
     "lastUpdated": "Ostatnia aktualizacja: {{date}}"
-  },
-  "navTitle": {
-    "hero": "Przewiń do sekcji hero",
-    "examples": "Przewiń do przykładów Pixel Art",
-    "features": "Przewiń do funkcji Pixel Art",
-    "how": "Przewiń do Jak Działa Konwerter Pixel Art",
-    "faq": "Przewiń do Pixel Art FAQ",
-    "blog": "Blog Sztuki Pikselowej"
   },
   "cta": {
     "start": "Zacznij teraz"
@@ -61,7 +50,15 @@
     "cta": {
       "ariaStart": "Rozpocznij konwersję obrazu do pikselowej sztuki w wiosce Pixel Art"
     },
-    "copy": "© {{year}} Pixel Art Village. Wszystkie prawa zastrzeżone."
+    "copy": "© {{year}} Pixel Art Village. Wszystkie prawa zastrzeżone.",
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
+    }
   },
   "blog": {
     "title": "Blog",
@@ -93,12 +90,7 @@
     "preparing": "Przygotowywanie obrazu…",
     "ariaUpload": "Prześlij obraz (przeciągnij i upuść lub kliknij, aby wybrać)",
     "ariaChoose": "Wybierz plik obrazu",
-    "subtitle2": "regulowany rozmiar pikseli i niestandardowe palety. Idealne dla sprytów, ikon i sztuki gier retro z zaawansowanymi opcjami palety.",
-    "dragDrop": "Drag and drop image here",
-    "orClick": "or click to choose",
-    "convertButton": "Convert to Pixel Art",
-    "processing": "Processing...",
-    "converted": "Successfully converted"
+    "subtitle2": "regulowany rozmiar pikseli i niestandardowe palety. Idealne dla sprytów, ikon i sztuki gier retro z zaawansowanymi opcjami palety."
   },
   "upload": {
     "selected": "Wybrano plik: {{name}}"
@@ -231,7 +223,8 @@
     }
   },
   "lang": {
-    "label": "Język"
+    "label": "Język",
+    "title": "Select language"
   },
   "wplace": {
     "title": "Doskonałe narzędzie do pixel artu dla użytkowników wioski",
@@ -269,13 +262,7 @@
     "clientSide": {
       "title": "100% po stronie klienta",
       "desc": "Wszystkie konwersje działają w 100% po stronie klienta w przeglądarce. Obrazy nigdy nie opuszczają twojego urządzenia, a budowanie offline jest możliwe, zapewniając prywatność i bezpieczeństwo zasobów. Pixel Art Village chroni twoją pracę, zapewniając szybkie i bezpieczne przetwarzanie na komputerach stacjonarnych i urządzeniach mobilnych. Z Pixel Art Village zachowujesz kontrolę od pierwszego podglądu do ostatecznego eksportu."
-    },
-    "customPalettes": "Custom Palettes",
-    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
-    "realTimePreview": "Real-time Preview",
-    "realTimePreviewDesc": "See changes instantly as you adjust settings",
-    "multipleFormats": "Multiple Formats",
-    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+    }
   },
   "privacy": {
     "h1": "Polityka Prywatności",
@@ -433,9 +420,6 @@
     "p1": "Pixel Art Village to darmowe narzędzie działające w przeglądarce do tworzenia i konwertowania obrazu na pixel art. Prześlij plik PNG lub JPG, dostosuj rozmiar piksela i palety, zobacz natychmiastowy podgląd i wyeksportuj wyraźny wynik.",
     "p2": "Stawiamy na prywatność, szybkość i dostępność, abyś mógł zamieniać obrazy w pixel art bez wysyłania plików i zakładania konta.",
     "p3": "Nasz zespół przygotowuje materiały edukacyjne i specjalistyczne narzędzia dla artystów, nauczycieli oraz niezależnych twórców gier.",
-    "cta": "Wypróbuj nasz <tool>konwerter</tool> lub zajrzyj na <blog>blog</blog>, aby znaleźć porady i tutoriale.",
-    "specializedLinks": "Potrzebujesz przepływów dla konkretnych formatów? Skorzystaj z narzędzi <png>PNG na pixel art</png>, <jpg>JPG na pixel art</jpg> oraz <photo>Zdjęcie na sprite</photo>.",
-    "moreInfoRich": "Więcej informacji znajdziesz w naszej <privacy>Polityce prywatności</privacy> i w <terms>Regulaminie</terms>.",
     "principles": {
       "title": "Zasady",
       "privacy": {
@@ -605,5 +589,10 @@
     "importDesc": "Przeglądaj i importuj palety z",
     "importDescSuffix": "，这是最大的像素艺术调色板社区，拥有 5000+ 配色方案。",
     "importSuccess": "Palette \"{{name}}\" została zaimportowana i automatycznie zastosowana.\n\nPrzewiń w górę, aby zobaczyć efekt, lub przełącz na inne palety w menu rozwijanym Palette."
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }

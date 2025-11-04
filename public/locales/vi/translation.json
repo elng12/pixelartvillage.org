@@ -9,14 +9,6 @@
     "about": "Giới thiệu",
     "contact": "Liên hệ"
   },
-  "navTitle": {
-    "hero": "Cuộn đến phần hero trang chủ",
-    "examples": "Cuộn đến Ví dụ Pixel Art",
-    "features": "Cuộn đến Tính năng Pixel Art",
-    "how": "Cuộn đến Cách Pixel Art Converter hoạt động",
-    "faq": "Cuộn đến Pixel Art FAQ",
-    "blog": "Blog Nghệ thuật Pixel"
-  },
   "cta": {
     "start": "Bắt đầu ngay"
   },
@@ -52,6 +44,14 @@
       "start": "Bắt đầu tại ngôi làng pixel art",
       "tips": "Mẹo & bảng màu",
       "privacyLocal": "Quyền riêng tư & xử lý cục bộ"
+    },
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
     }
   },
   "blog": {
@@ -84,12 +84,7 @@
     "chooseFile": "Chọn tệp",
     "preparing": "Đang chuẩn bị hình ảnh…",
     "ariaUpload": "Tải ảnh lên (kéo thả hoặc nhấp để chọn)",
-    "ariaChoose": "Chọn tệp ảnh",
-    "dragDrop": "Drag and drop image here",
-    "orClick": "or click to choose",
-    "convertButton": "Convert to Pixel Art",
-    "processing": "Processing...",
-    "converted": "Successfully converted"
+    "ariaChoose": "Chọn tệp ảnh"
   },
   "upload": {
     "selected": "Đã chọn tệp: {{name}}"
@@ -199,7 +194,8 @@
     "descFull": "Xem cách công cụ chuyển đổi hình ảnh thành nghệ thuật pixel của chúng tôi biến những bức ảnh của bạn thành nghệ thuật pixel sắc nét."
   },
   "lang": {
-    "label": "Ngôn ngữ"
+    "label": "Ngôn ngữ",
+    "title": "Select language"
   },
   "wplace": {
     "title": "Công cụ hoàn hảo dành cho người dùng Village pixel art",
@@ -237,13 +233,7 @@
     "clientSide": {
       "title": "100% phía máy khách",
       "desc": "Tất cả việc chuyển đổi chạy 100% ở phía client trong trình duyệt của bạn. Hình ảnh không bao giờ rời khỏi thiết bị của bạn, và các bản dựng ngoại tuyến có thể, giữ tài sản riêng tư và an toàn. Pixel Art Village bảo vệ công việc của bạn trong khi cung cấp xử lý nhanh, an toàn trên máy tính để bàn và di động. Với Pixel Art Village bạn giữ quyền kiểm soát từ bản xem trước đầu tiên đến xuất cuối cùng."
-    },
-    "customPalettes": "Custom Palettes",
-    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
-    "realTimePreview": "Real-time Preview",
-    "realTimePreviewDesc": "See changes instantly as you adjust settings",
-    "multipleFormats": "Multiple Formats",
-    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+    }
   },
   "how": {
     "title": "How the pixel art Village works",
@@ -259,9 +249,6 @@
   },
   "common": {
     "loading": "Đang tải...",
-    "error": "Lỗi",
-    "success": "Thành công",
-    "failed": "Thất bại",
     "imageFailedToLoad": "Không tải được hình ảnh",
     "imageUnavailable": "Hình ảnh không khả dụng",
     "lastUpdated": "Cập nhật lần cuối: {{date}}"
@@ -441,10 +428,7 @@
     "twitterTitle": "Giới thiệu | Pixel Art Village",
     "twitterDesc": "Khám phá ai đã tạo ra Pixel Art Village và cách bộ chuyển đổi pixel art ưu tiên quyền riêng tư của chúng tôi hoạt động.",
     "p2": "Chúng tôi tập trung vào quyền riêng tư, tốc độ và khả năng tiếp cận để bạn có thể chuyển đổi hình ảnh thành pixel art mà không cần tải lên hay đăng ký.",
-    "p3": "Đội ngũ của chúng tôi xây dựng các tài nguyên giáo dục và công cụ chuyên biệt dành cho nghệ sĩ, nhà giáo dục và các nhà phát triển game indie.",
-    "cta": "Hãy thử <tool>công cụ chuyển đổi</tool> của chúng tôi hoặc khám phá <blog>blog</blog> của chúng tôi để có các mẹo và hướng dẫn.",
-    "specializedLinks": "Cần quy trình làm việc theo định dạng cụ thể? <png>PNG thành Pixel Art</png>, <jpg>JPG thành Pixel Art</jpg>, và <photo>Công cụ chuyển đổi Ảnh thành Sprite</photo> công cụ đã sẵn sàng hỗ trợ.",
-    "moreInfoRich": "Tìm hiểu thêm chi tiết trong <privacy>Chính sách Bảo mật</privacy> và <terms>Điều khoản Dịch vụ</terms>."
+    "p3": "Đội ngũ của chúng tôi xây dựng các tài nguyên giáo dục và công cụ chuyên biệt dành cho nghệ sĩ, nhà giáo dục và các nhà phát triển game indie."
   },
   "contact": {
     "h1": "Liên hệ",
@@ -605,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "Nội dung cho ngôn ngữ này sẽ sớm có. Hiện tại hiển thị tiếng Anh."
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }

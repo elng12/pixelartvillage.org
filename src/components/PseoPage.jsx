@@ -10,7 +10,7 @@ import FeaturesSection from '@/components/FeaturesSection'
 import HowItWorksSection from '@/components/HowItWorksSection'
 import FaqSection from '@/components/FaqSection'
 import { useLocalizedContent } from '@/hooks/useLocalizedContent'
-import { useLocaleContext } from '@/contexts/LocaleContext'
+import { useLocaleContext } from '@/hooks/useLocaleContext'
 import LocalizedLink from '@/components/LocalizedLink'
 
 export default function PseoPage() {

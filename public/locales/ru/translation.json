@@ -9,14 +9,6 @@
     "about": "О нас",
     "contact": "Контакты"
   },
-  "navTitle": {
-    "hero": "Прокрутить к главному разделу",
-    "examples": "Прокрутите до примеров пиксель‑арта",
-    "features": "Прокрутить к функциям пиксель-арта",
-    "how": "Прокрутите до раздела Как работает Pixel Art Converter",
-    "faq": "Прокрутить до FAQ по пиксель-арту",
-    "blog": "Блог Open Pixel Art"
-  },
   "cta": {
     "start": "Начать сейчас"
   },
@@ -52,6 +44,14 @@
       "start": "Начать в pixel art Village",
       "tips": "Советы и палитры",
       "privacyLocal": "Конфиденциальность и локальная обработка"
+    },
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
     }
   },
   "blog": {
@@ -84,12 +84,7 @@
     "chooseFile": "Выбрать файл",
     "preparing": "Подготовка изображения…",
     "ariaUpload": "Загрузить изображение (перетащите или нажмите для выбора)",
-    "ariaChoose": "Выбрать файл изображения",
-    "dragDrop": "Drag and drop image here",
-    "orClick": "or click to choose",
-    "convertButton": "Convert to Pixel Art",
-    "processing": "Processing...",
-    "converted": "Successfully converted"
+    "ariaChoose": "Выбрать файл изображения"
   },
   "upload": {
     "selected": "Выбран файл: {{name}}"
@@ -199,7 +194,8 @@
     "descFull": "Посмотрите, как наш конвертер изображений в пиксельное искусство превращает ваши фотографии в четкое пиксельное искусство."
   },
   "lang": {
-    "label": "Язык"
+    "label": "Язык",
+    "title": "Select language"
   },
   "wplace": {
     "title": "Отличный Инструмент для пиксель-арт Деревни Пользователи",
@@ -237,13 +233,7 @@
     "clientSide": {
       "title": "100% на стороне клиента",
       "desc": "Все преобразования выполняются на 100% на стороне клиента в вашем браузере. Изображения никогда не покидают ваше устройство, и автономные сборки возможны, сохраняя ресурсы приватными и безопасными. Pixel Art Village защищает вашу работу, обеспечивая быструю и безопасную обработку на настольных и мобильных устройствах. С Pixel Art Village вы сохраняете контроль от первого просмотра до финального экспорта."
-    },
-    "customPalettes": "Custom Palettes",
-    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
-    "realTimePreview": "Real-time Preview",
-    "realTimePreviewDesc": "See changes instantly as you adjust settings",
-    "multipleFormats": "Multiple Formats",
-    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+    }
   },
   "how": {
     "title": "Как работает pixel art Village",
@@ -259,9 +249,6 @@
   },
   "common": {
     "loading": "Загрузка...",
-    "error": "Ошибка",
-    "success": "Успешно",
-    "failed": "Не удалось",
     "imageFailedToLoad": "Не удалось загрузить изображение",
     "imageUnavailable": "Изображение недоступно",
     "lastUpdated": "Последнее обновление: {{date}}"
@@ -441,10 +428,7 @@
       "title": "Контакты",
       "p1": "Загляните на страницу «Контакты» для поддержки и вопросов. Вы также можете написать нам напрямую на",
       "emailTitle": "Написать Pixel Art Village"
-    },
-    "cta": "Попробуйте наш <tool>конвертер</tool> или загляните в <blog>блог</blog> за советами и уроками.",
-    "specializedLinks": "Нужны сценарии под конкретный формат? Инструменты <png>PNG в пиксель-арт</png>, <jpg>JPG в пиксель-арт</jpg> и <photo>Фото в спрайт</photo> уже готовы помочь.",
-    "moreInfoRich": "For more details, read in our <privacy>privacy policy</privacy> and in <terms>terms of service</terms>."
+    }
   },
   "contact": {
     "seoTitle": "Свяжитесь с нами | Поддержка и отзывы | Pixel Art Village",
@@ -605,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "Содержимое для этого языка скоро появится. Сейчас показываем английский."
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }

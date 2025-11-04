@@ -1,7 +1,6 @@
-﻿import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-// 浼樺寲鐨勫浘鐗囩粍浠讹紝鏀寔鎳掑姞杞藉拰澶氱浼樺寲绛栫暐
 export default function OptimizedImage({
   src,
   alt,
@@ -20,7 +19,6 @@ export default function OptimizedImage({
   const [hasError, setHasError] = useState(false)
   const imgRef = useRef(null)
 
-  // 浜ら泦瑙傚療鍣ㄥ疄鐜版噿鍔犺浇
   useEffect(() => {
     if (priority || !imgRef.current) return
 
@@ -32,7 +30,7 @@ export default function OptimizedImage({
         }
       },
       {
-        rootMargin: '50px 0px', // 鎻愬墠50px寮€濮嬪姞杞?
+        rootMargin: '50px 0px',
         threshold: 0.01
       }
     )
@@ -42,17 +40,14 @@ export default function OptimizedImage({
     return () => observer.disconnect()
   }, [priority])
 
-  // 鍥剧墖鍔犺浇瀹屾垚澶勭悊
   const handleLoad = () => {
     setIsLoaded(true)
   }
 
-  // 鍥剧墖鍔犺浇閿欒澶勭悊
   const handleError = () => {
     setHasError(true)
   }
 
-  // 鐢熸垚妯＄硦鍗犱綅绗?
   const getPlaceholderStyle = () => {
     if (placeholder !== 'blur' || !isInView) return {}
 
@@ -63,7 +58,6 @@ export default function OptimizedImage({
     }
   }
 
-  // 閿欒鍥為€€
   if (hasError) {
     return (
       <div
@@ -90,14 +84,11 @@ export default function OptimizedImage({
           onLoad={handleLoad}
           onError={handleError}
           style={getPlaceholderStyle()}
-          className={`transition-opacity duration-300 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           {...props}
         />
       )}
 
-      {/* 鍔犺浇鍗犱綅绗?*/}
       {!isLoaded && isInView && (
         <div
           className="absolute inset-0 bg-gray-200 animate-pulse"
@@ -106,49 +97,5 @@ export default function OptimizedImage({
       )}
     </div>
   )
-}
-
-// 棰勫姞杞藉叧閿浘鐗囩殑Hook
-export function usePreloadImages(srcs, priority = false) {
-  useEffect(() => {
-    if (!srcs || srcs.length === 0) return
-
-    const preloadImage = (src) => {
-      return new Promise((resolve, reject) => {
-        const img = new Image()
-        img.onload = resolve
-        img.onerror = reject
-        img.src = src
-      })
-    }
-
-    const preloadImages = async () => {
-      try {
-        if (priority) {
-          // 楂樹紭鍏堢骇锛氱珛鍗抽鍔犺浇
-          await Promise.all(srcs.map(preloadImage))
-        } else {
-          // 浣庝紭鍏堢骇锛氬湪绌洪棽鏃堕棿棰勫姞杞?
-          if ('requestIdleCallback' in window) {
-            requestIdleCallback(async () => {
-              for (const src of srcs) {
-                await preloadImage(src)
-              }
-            })
-          } else {
-            setTimeout(async () => {
-              for (const src of srcs) {
-                await preloadImage(src)
-              }
-            }, 2000)
-          }
-        }
-      } catch (error) {
-        console.warn('Failed to preload images:', error)
-      }
-    }
-
-    preloadImages()
-  }, [srcs, priority])
 }
 

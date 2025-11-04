@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import safeStorage from '@/utils/safeStorage'
 
 const STORAGE_KEY = 'pv_compat_notice_dismiss.v1'
 
@@ -21,7 +22,7 @@ export default function CompatNotice() {
 
   useEffect(() => {
     try {
-      const dismissed = localStorage.getItem(STORAGE_KEY)
+      const dismissed = safeStorage.get(STORAGE_KEY)
       if (dismissed === '1') return
     } catch { /* ignore */ }
     if (detectExtensionFootprints()) setVisible(true)
@@ -39,7 +40,7 @@ export default function CompatNotice() {
         <button
           type="button"
           className="ml-2 inline-flex items-center rounded border border-amber-300 px-2 py-0.5 hover:bg-amber-100"
-          onClick={() => { try { localStorage.setItem(STORAGE_KEY, '1') } catch { /* ignore */ void 0 } ; setVisible(false) }}
+          onClick={() => { try { safeStorage.set(STORAGE_KEY, '1') } catch { /* ignore */ void 0 } ; setVisible(false) }}
         >
           Dismiss
         </button>

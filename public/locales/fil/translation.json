@@ -11,20 +11,9 @@
   },
   "common": {
     "loading": "Naglo-load...",
-    "error": "May mali",
-    "success": "Matagumpay",
-    "failed": "Nabigo",
     "imageFailedToLoad": "Hindi ma-load ang larawan",
     "imageUnavailable": "Hindi magamit ang larawan",
     "lastUpdated": "Huling na-update: {{date}}"
-  },
-  "navTitle": {
-    "hero": "I-scroll sa Home hero section",
-    "examples": "Mag-scroll sa mga Pixel Art na Halimbawa",
-    "features": "I-scroll sa Mga Feature ng Pixel Art",
-    "how": "Mag-scroll sa Paano Gumagana ang Pixel Art Converter",
-    "faq": "Mag-scroll sa Pixel Art FAQ",
-    "blog": "Libre Sining Pixel Blog"
   },
   "cta": {
     "start": "Simulan ngayon"
@@ -61,6 +50,14 @@
       "start": "Magsimula sa pixel art Village",
       "tips": "Mga tip at palette",
       "privacyLocal": "Privacy at lokal na pagproseso"
+    },
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
     }
   },
   "blog": {
@@ -93,12 +90,7 @@
     "chooseFile": "Piliin ang file",
     "preparing": "Inihahanda ang larawan…",
     "ariaUpload": "Mag‑upload ng larawan (i‑drag & drop o i‑click para pumili)",
-    "ariaChoose": "Pumili ng file ng larawan",
-    "dragDrop": "Drag and drop image here",
-    "orClick": "or click to choose",
-    "convertButton": "Convert to Pixel Art",
-    "processing": "Processing...",
-    "converted": "Successfully converted"
+    "ariaChoose": "Pumili ng file ng larawan"
   },
   "upload": {
     "selected": "Napiling file: {{name}}"
@@ -208,7 +200,8 @@
     "descFull": "Tingnan kung paano nagiging matalas na pixel art ang inyong mga larawan gamit ang aming image to pixel art converter."
   },
   "lang": {
-    "label": "Wika"
+    "label": "Wika",
+    "title": "Select language"
   },
   "wplace": {
     "title": "Perpektong Tool para sa mga User ng Pixel Art Village",
@@ -246,13 +239,7 @@
     "clientSide": {
       "title": "100% client‑side",
       "desc": "Ang lahat ng conversion ay tumatakbo 100% sa client-side sa inyong browser. Ang mga larawan ay hindi kailanman umaalis sa inyong device, at mga offline builds ay posible, na pinapanatiling pribado at ligtas ang mga asset. Pixel Art Village ay nagpo-protekta sa inyong gawain habang nagbibigay ng mabilis, secure na processing sa desktop at mobile. Sa pamamagitan ng Pixel Art Village ay napananatili ninyo ang kontrol mula sa unang preview hanggang sa final export."
-    },
-    "customPalettes": "Custom Palettes",
-    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
-    "realTimePreview": "Real-time Preview",
-    "realTimePreviewDesc": "See changes instantly as you adjust settings",
-    "multipleFormats": "Multiple Formats",
-    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+    }
   },
   "how": {
     "title": "Paano gumagana ang pixel art Village",
@@ -441,10 +428,7 @@
     "twitterTitle": "Tungkol sa Pixel Art Village",
     "twitterDesc": "Alamin kung sino ang nasa likod ng Pixel Art Village at paano gumagana ang aming privacy-first na pixel art converter.",
     "p2": "Pinahahalagahan namin ang privacy, bilis, at accessibility para makapag-convert ka ng mga larawan tungo sa pixel art nang walang upload o pag-sign up.",
-    "p3": "Gumagawa ang aming koponan ng mga materyales sa pagkatuto at mga espesyal na tool para sa mga artist, guro, at indie game developer.",
-    "cta": "Subukan ang aming <tool>converter</tool> o basahin ang <blog>blog</blog> para sa mga tip at tutorial.",
-    "specializedLinks": "Kailangan mo ng daloy na ayon sa format? Nandiyan ang <png>PNG to Pixel Art</png>, <jpg>JPG to Pixel Art</jpg>, at <photo>Photo to Sprite Converter</photo> para tumulong.",
-    "moreInfoRich": "Makakakita ka ng higit pang detalye sa aming <privacy>Patakaran sa Privacy</privacy> at <terms>Mga Tuntunin ng Serbisyo</terms>."
+    "p3": "Gumagawa ang aming koponan ng mga materyales sa pagkatuto at mga espesyal na tool para sa mga artist, guro, at indie game developer."
   },
   "contact": {
     "h1": "Makipag-ugnayan",
@@ -605,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "Malapit nang makumpleto ang nilalaman para sa wikang ito. Nagpapakita ng English ngayon."
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }

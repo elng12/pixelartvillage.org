@@ -7,8 +7,9 @@ const path = require('path')
 const ROOT = process.cwd()
 const DIST = path.join(ROOT, 'dist')
 const INDEX = path.join(DIST, 'index.html')
-// 单语言站点：仅保留英文规范路径
-const DEFAULT_LANG = 'en'
+const localeConfig = require(path.join(ROOT, 'config', 'locales.json'))
+const DEFAULT_LANG = (localeConfig && localeConfig.default) || 'en'
+const SUPPORTED_LANGS = Array.from(new Set(((localeConfig && localeConfig.supported) || ['en']).filter(Boolean)))
 
 function resolveContent(baseName) {
   const paths = [
@@ -88,18 +89,13 @@ function injectMeta(html, metas) {
   return html.replace(/<\/head>/i, `  ${tags}\n</head>`)
 }
 
-function injectHreflang(html, routePath) {
-  const ABS = (p) => `https://pixelartvillage.org${p}`
-  const ensure = (p) => (p.endsWith('/') ? p : `${p}/`)
-  const canonicalHref = ABS(ensure(routePath))
-  const alternates = [
-    `<link rel="alternate" hreflang="en" href="${canonicalHref}">`,
-    `<link rel="alternate" hreflang="x-default" href="${canonicalHref}">`,
-  ].join('\n  ')
+function injectHreflang(html, alternates = []) {
+  if (!alternates || !alternates.length) return html
+  const tags = alternates.map(a => `<link rel="alternate" hreflang="${a.lang}" href="${a.href}">`).join('\n  ')
   if (html.match(/<link[^>]+rel=["']alternate["'][^>]*hreflang/i)) {
     html = html.replace(/\n?\s*<link[^>]+rel=["']alternate["'][^>]*hreflang=["'][^"']+["'][^>]*>\s*/ig, '')
   }
-  return html.replace(/<\/head>/i, `  ${alternates}\n</head>`)
+  return html.replace(/<\/head>/i, `  ${tags}\n</head>`)
 }
 
 function buildHtml(base, { title, canonical, metas, lang, routePath }) {
@@ -112,7 +108,7 @@ function buildHtml(base, { title, canonical, metas, lang, routePath }) {
   html = stripJsonLdTypes(html, ['FAQPage'])
   html = html.replace(/\n?\s*<div[^>]+data-prerender-seo[\s\S]*?<\/div>\s*/i, '')
   if (metas?.length) html = injectMeta(html, metas)
-  if (routePath) html = injectHreflang(html, ensureTrailingSlash(routePath))
+  // hreflang is injected later with full alternates set
   return html
 }
 
@@ -345,19 +341,76 @@ function prerender() {
     })
   }
 
-  const expanded = routes.map((r) => ({
-    lang: DEFAULT_LANG,
-    path: ensureTrailingSlash(r.path),
-    routePath: r.path,
-    title: r.title,
-    metas: r.metas,
-    extras: r.extras || '',
-    links: r.links || null,
-    visible: r.visible || '',
-  }))
+  const expandForLang = (r, lang) => {
+    const ensure = ensureTrailingSlash
+    const localizedPath = (lang === DEFAULT_LANG)
+      ? ensure(r.path)
+      : ensure((r.path === '/' ? `/${lang}/` : `/${lang}${ensure(r.path)}`))
+
+    let title = r.title
+    let metas = Array.isArray(r.metas) ? [...r.metas] : []
+
+    // Localized SEO meta per route
+    const bundle = loadLocaleBundle(lang)
+    const upsertDesc = (desc) => {
+      if (!desc) return
+      const idx = metas.findIndex(m => m && m.name === 'description')
+      if (idx >= 0) metas[idx] = { ...metas[idx], content: desc }
+      else metas.push({ name: 'description', content: desc })
+    }
+
+    if (r.path === '/') {
+      const tTitle = pick(bundle, 'home.seoTitle')
+      const tDesc = pick(bundle, 'home.seoDescription')
+      if (typeof tTitle === 'string' && tTitle) title = tTitle
+      if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
+    } else if (r.path === '/about/') {
+      const tTitle = pick(bundle, 'about.seoTitle')
+      const tDesc = pick(bundle, 'about.seoDesc')
+      if (typeof tTitle === 'string' && tTitle) title = tTitle
+      if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
+    } else if (r.path === '/privacy/') {
+      const tTitle = pick(bundle, 'privacy.seoTitle')
+      const tDesc = pick(bundle, 'privacy.seoDesc')
+      if (typeof tTitle === 'string' && tTitle) title = tTitle
+      if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
+    } else if (r.path === '/terms/') {
+      const tTitle = pick(bundle, 'terms.seoTitle')
+      const tDesc = pick(bundle, 'terms.seoDesc')
+      if (typeof tTitle === 'string' && tTitle) title = tTitle
+      if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
+    }
+
+    return {
+      lang,
+      path: localizedPath,
+      routePath: localizedPath,
+      title,
+      metas,
+      extras: r.extras || '',
+      links: r.links || null,
+      visible: r.visible || '',
+      basePath: r.path,
+    }
+  }
+
+  const expanded = []
+  for (const r of routes) {
+    for (const lang of SUPPORTED_LANGS) {
+      expanded.push(expandForLang(r, lang))
+    }
+  }
 
   for (const r of expanded) {
     const canonicalPath = (r.routePath === '/' ? '/' : ensureTrailingSlash(r.routePath))
+
+    const ABS = (p) => `https://pixelartvillage.org${p}`
+    const alternates = SUPPORTED_LANGS.map(l => {
+      const ensure = ensureTrailingSlash
+      const p = (l === DEFAULT_LANG) ? ensure(r.basePath) : (r.basePath === '/' ? `/${l}/` : `/${l}${ensure(r.basePath)}`)
+      return { lang: l, href: ABS(ensure(p)) }
+    }).concat([{ lang: 'x-default', href: ABS((r.basePath === '/' ? '/' : ensureTrailingSlash(r.basePath))) }])
+
     let out = buildHtml(base, {
       title: r.title,
       canonical: ABS(canonicalPath),
@@ -365,6 +418,8 @@ function prerender() {
       lang: r.lang,
       routePath: r.routePath,
     })
+
+    out = injectHreflang(out, alternates)
 
     if (r.visible) {
       out = injectVisibleContent(out, r.visible)
@@ -408,6 +463,24 @@ function prerender() {
     const file = path.join(DIST, r.path.replace(/^\//, '').replace(/\/$/, ''), 'index.html')
     write(file, out)
     console.log('[prerender]', r.path, '→', path.relative(DIST, file))
+  }
+}
+
+function loadLocaleBundle(lang) {
+  try {
+    const file = path.join(ROOT, 'public', 'locales', lang, 'translation.json')
+    if (fs.existsSync(file)) {
+      return JSON.parse(fs.readFileSync(file, 'utf8')) || {}
+    }
+  } catch {}
+  return {}
+}
+
+function pick(obj, pathStr) {
+  try {
+    return String(pathStr).split('.').reduce((o, k) => (o && o[k] != null ? o[k] : undefined), obj)
+  } catch {
+    return undefined
   }
 }
 

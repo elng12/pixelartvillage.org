@@ -9,14 +9,6 @@
     "about": "Om",
     "contact": "Kontakta"
   },
-  "navTitle": {
-    "hero": "Scrolla till avsnittet Hemhjälte",
-    "examples": "Scrolla till Pixel Art-exempel",
-    "features": "Scroll to Pixel Art Features",
-    "how": "Bläddra till Hur Pixel Art Converter fungerar",
-    "faq": "Bläddra till Pixel Art FAQ",
-    "blog": "Öppna Pixel Art-bloggen"
-  },
   "cta": {
     "start": "Börja nu"
   },
@@ -52,6 +44,14 @@
       "start": "Börja i pixel art Village",
       "tips": "Tips och paletter",
       "privacyLocal": "Sekretess och lokal behandling"
+    },
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
     }
   },
   "blog": {
@@ -84,12 +84,7 @@
     "chooseFile": "Välj fil",
     "preparing": "Förbereder bild...",
     "ariaUpload": "Upload image (drag and drop or click to choose)",
-    "ariaChoose": "Välj bildfil",
-    "dragDrop": "Drag and drop image here",
-    "orClick": "or click to choose",
-    "convertButton": "Convert to Pixel Art",
-    "processing": "Processing...",
-    "converted": "Successfully converted"
+    "ariaChoose": "Välj bildfil"
   },
   "upload": {
     "selected": "Vald fil: {{name}}"
@@ -199,7 +194,8 @@
     "descFull": "Se hur vår bild till pixelkonst-omvandlare förvandlar dina foton till klar pixelkonst."
   },
   "lang": {
-    "label": "Språk"
+    "label": "Språk",
+    "title": "Select language"
   },
   "wplace": {
     "title": "Perfekt verktyg för pixel art Village-användare",
@@ -237,13 +233,7 @@
     "clientSide": {
       "title": "100% klientsida",
       "desc": "All konvertering körs 100% på klientsidan i din webbläsare. Bilder lämnar aldrig din enhet, och offlineversioner är möjliga, vilket håller tillgångar privata och säkra. Pixel Art Village skyddar ditt arbete samtidigt som det ger snabb, säker bearbetning på stationära och mobila enheter. Med Pixel Art Village behåller du kontrollen från första förhandsvisningen till slutlig export."
-    },
-    "customPalettes": "Custom Palettes",
-    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
-    "realTimePreview": "Real-time Preview",
-    "realTimePreviewDesc": "See changes instantly as you adjust settings",
-    "multipleFormats": "Multiple Formats",
-    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+    }
   },
   "how": {
     "title": "Hur pixel art Village fungerar",
@@ -259,9 +249,6 @@
   },
   "common": {
     "loading": "Laddar...",
-    "error": "Fel",
-    "success": "Lyckades",
-    "failed": "Failed",
     "imageFailedToLoad": "Det gick inte att ladda bilden",
     "imageUnavailable": "Bilden är inte tillgänglig",
     "lastUpdated": "Senast uppdaterad: {{date}}"
@@ -441,10 +428,7 @@
     "twitterTitle": "Om | Pixel Art Village",
     "twitterDesc": "Upptäck vem som skapade Pixel Art Village och hur vår integritet-först pixelkonstkonverterare fungerar.",
     "p2": "Vi fokuserar på integritet, hastighet och tillgänglighet så att du kan konvertera bilder till pixelkonst utan uppladdningar eller registreringar.",
-    "p3": "Vårt team bygger utbildningsresurser och specialiserade verktyg för konstnärer, pedagoger och indie-spelutvecklare.",
-    "cta": "Prova vårt <tool>konverteringsverktyg</tool> eller utforska vår <blog>blog</blog> för tips och handledningar.",
-    "specializedLinks": "Behöver du format-specifika arbetsflöden? <png>PNG till pixelkonst</png>, <jpg>JPG till pixelkonst</jpg>, och <photo>Foto till sprite‑konverterare</photo> verktygen är redo att hjälpa.",
-    "moreInfoRich": "Mer information finns i vår <privacy>Integritetspolicy</privacy> och <terms>Användarvillkor</terms>."
+    "p3": "Vårt team bygger utbildningsresurser och specialiserade verktyg för konstnärer, pedagoger och indie-spelutvecklare."
   },
   "contact": {
     "h1": "Kontakta",
@@ -605,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "Innehåll för detta språk kommer snart. Visar engelska för närvarande."
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }

@@ -11,20 +11,9 @@
   },
   "common": {
     "loading": "Memuat...",
-    "error": "Kesalahan",
-    "success": "Berhasil",
-    "failed": "Gagal",
     "imageFailedToLoad": "Gambar gagal dimuat",
     "imageUnavailable": "Gambar tidak tersedia",
     "lastUpdated": "Terakhir diperbarui: {{date}}"
-  },
-  "navTitle": {
-    "hero": "Gulir ke bagian hero beranda",
-    "examples": "Gulir ke Contoh Seni Piksel",
-    "features": "Gulir ke Fitur Pixel Art",
-    "how": "Gulir ke Cara Kerja Pixel Art Converter",
-    "faq": "Gulir ke Pixel Art FAQ",
-    "blog": "Blog Pixel Art Terbuka"
   },
   "cta": {
     "start": "Mulai sekarang"
@@ -61,6 +50,14 @@
       "start": "Mulai di pixel art Village",
       "tips": "Tips & palet",
       "privacyLocal": "Privasi & pemrosesan lokal"
+    },
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
     }
   },
   "blog": {
@@ -93,12 +90,7 @@
     "chooseFile": "Pilih berkas",
     "preparing": "Menyiapkan gambar…",
     "ariaUpload": "Unggah gambar (seret & lepas atau klik untuk memilih)",
-    "ariaChoose": "Pilih berkas gambar",
-    "dragDrop": "Drag and drop image here",
-    "orClick": "or click to choose",
-    "convertButton": "Convert to Pixel Art",
-    "processing": "Processing...",
-    "converted": "Successfully converted"
+    "ariaChoose": "Pilih berkas gambar"
   },
   "upload": {
     "selected": "Berkas dipilih: {{name}}"
@@ -208,7 +200,8 @@
     "descFull": "Lihat bagaimana konverter gambar ke pixel art kami mengubah foto Anda menjadi pixel art yang jernih."
   },
   "lang": {
-    "label": "Bahasa"
+    "label": "Bahasa",
+    "title": "Select language"
   },
   "wplace": {
     "title": "Alat Sempurna untuk Pengguna Pixel Art Village",
@@ -246,13 +239,7 @@
     "clientSide": {
       "title": "100% di sisi klien",
       "desc": "Semua konversi berjalan 100% di sisi klien di browser Anda. Gambar tidak pernah meninggalkan perangkat Anda, dan build offline dimungkinkan, menjaga aset tetap privat dan aman. Pixel Art Village melindungi pekerjaan Anda sambil memberikan pemrosesan yang cepat dan aman di desktop dan seluler. Dengan Pixel Art Village Anda tetap memiliki kontrol dari pratinjau pertama hingga ekspor akhir."
-    },
-    "customPalettes": "Custom Palettes",
-    "customPalettesDesc": "Choose from predefined palettes or create your own custom color palette",
-    "realTimePreview": "Real-time Preview",
-    "realTimePreviewDesc": "See changes instantly as you adjust settings",
-    "multipleFormats": "Multiple Formats",
-    "multipleFormatsDesc": "Supports PNG, JPG, GIF, BMP and WebP image formats"
+    }
   },
   "how": {
     "title": "Cara kerja pixel art Desa",
@@ -441,10 +428,7 @@
     "twitterTitle": "Tentang | Pixel Art Village",
     "twitterDesc": "Temukan siapa yang menciptakan Pixel Art Village dan bagaimana konverter pixel art yang mengutamakan privasi kami bekerja.",
     "p2": "Kami berfokus pada privasi, kecepatan, dan aksesibilitas sehingga Anda dapat mengonversi gambar menjadi pixel art tanpa mengunggah atau mendaftar.",
-    "p3": "Tim kami membangun sumber daya edukatif dan alat-alat khusus untuk seniman, pendidik, dan pengembang game indie.",
-    "cta": "Coba alat <tool>converter tool</tool> kami atau jelajahi <blog>blog</blog> kami untuk tips dan tutorial.",
-    "specializedLinks": "Membutuhkan alur kerja yang spesifik untuk format? <png>PNG to Pixel Art</png>, <jpg>JPG to Pixel Art</jpg>, dan <photo>Photo to Sprite Converter</photo> alat siap membantu.",
-    "moreInfoRich": "Temukan detail selengkapnya di <privacy>Kebijakan Privasi</privacy> dan <terms>Syarat Layanan</terms>."
+    "p3": "Tim kami membangun sumber daya edukatif dan alat-alat khusus untuk seniman, pendidik, dan pengembang game indie."
   },
   "contact": {
     "h1": "Kontak",
@@ -605,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "Konten untuk bahasa ini akan segera hadir. Menampilkan bahasa Inggris untuk saat ini."
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }

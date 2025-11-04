@@ -1,6 +1,6 @@
-import React from 'react'
+import { forwardRef } from 'react'
 import { Link } from 'react-router-dom'
-import { useLocaleContext } from '@/contexts/LocaleContext'
+import { useLocaleContext } from '@/hooks/useLocaleContext'
 
 function resolveLocalizedTo(buildPath, to) {
   if (typeof to === 'string') {
@@ -38,7 +38,7 @@ function resolveLocalizedTo(buildPath, to) {
   return to
 }
 
-const LocalizedLink = React.forwardRef(function LocalizedLink({ to, ...rest }, ref) {
+const LocalizedLink = forwardRef(function LocalizedLink({ to, ...rest }, ref) {
   const { buildPath } = useLocaleContext()
   const resolvedTo = resolveLocalizedTo(buildPath, to)
   return <Link ref={ref} to={resolvedTo} {...rest} />

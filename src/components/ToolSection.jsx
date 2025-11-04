@@ -1,5 +1,6 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import logger from '@/utils/logger';
 import { downscaleFileToBlob, loadImageFromFile } from '../utils/resizeImage';
 import { PREVIEW_LIMIT } from '../utils/constants';
 
@@ -22,10 +23,7 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
   const lastUrlRef = useRef(null);
   const pasteGuardRef = useRef(0);
   const log = useCallback((event, payload = {}) => {
-    if (import.meta?.env?.DEV) {
-       
-      console.log(`[ToolSection] ${event}`, payload);
-    }
+    logger.debug(`[ToolSection] ${event}`, payload);
   }, []);
 
   useEffect(() => {

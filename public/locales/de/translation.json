@@ -11,20 +11,9 @@
   },
   "common": {
     "loading": "Laden...",
-    "error": "Fehler",
-    "success": "Erfolg",
-    "failed": "Fehlgeschlagen",
     "imageFailedToLoad": "Bild konnte nicht geladen werden",
     "imageUnavailable": "Bild nicht verfügbar",
     "lastUpdated": "Zuletzt aktualisiert: {{date}}"
-  },
-  "navTitle": {
-    "hero": "Scrollen Sie zum Abschnitt Home Hero",
-    "examples": "Scrollen Sie zu Pixel-Art-Beispielen",
-    "features": "Scrollen Sie zu Pixel-Art-Funktionen",
-    "how": "Scrollen Sie zu „Funktionsweise des Pixel Art Converter“.",
-    "faq": "Scrollen Sie zu den häufig gestellten Fragen zu Pixel Art",
-    "blog": "Open the Pixel Art Blog"
   },
   "cta": {
     "start": "Jetzt starten"
@@ -61,6 +50,14 @@
       "start": "Starten in Pixel Art Village",
       "tips": "Tipps & Paletten",
       "privacyLocal": "Datenschutz & lokale Verarbeitung"
+    },
+    "badges": {
+      "twelveTools": "Vorgestellt auf Twelve.tools",
+      "fazier": "Wird bei Fazier-Produkteinführungen vorgestellt",
+      "startupFame": "Gelistet auf StartupFa.me",
+      "turbo0": "Abzeichen der Turbo0-Sammlung",
+      "indieDeals": "Abzeichen für das Indie-Deals-Verzeichnis",
+      "aiDirs": "AI Dirs-Verzeichnisabzeichen"
     }
   },
   "blog": {
@@ -93,21 +90,7 @@
     "chooseFile": "Datei auswählen",
     "preparing": "Bild wird vorbereitet…",
     "ariaUpload": "Bild hochladen (ziehen & ablegen oder klicken, um auszuwählen)",
-    "ariaChoose": "Bilddatei auswählen",
-    "dragDrop": "Ziehen Sie ein Bild hierher",
-    "orClick": "oder klicken Sie zum Auswählen",
-    "convertButton": "In Pixel Art konvertieren",
-    "processing": "Bild wird verarbeitet...",
-    "converted": "Bild erfolgreich konvertiert!",
-    "dropZone": "Drop-Zone",
-    "downloadButton": "Bild herunterladen",
-    "resetButton": "Neues Bild",
-    "pixelSize": "Pixelgröße",
-    "colorPalette": "Farbpalette",
-    "dithering": "Dithering",
-    "preview": "Vorschau",
-    "original": "Original",
-    "result": "Ergebnis"
+    "ariaChoose": "Bilddatei auswählen"
   },
   "upload": {
     "selected": "Ausgewählte Datei: {{name}}"
@@ -185,7 +168,7 @@
   },
   "notFound": {
     "seoTitle": "Seite nicht gefunden | Pixel Art Village",
-    "title": "Page not found",
+    "title": "Seite nicht gefunden",
     "desc": "Die gesuchte Seite existiert nicht oder wurde verschoben. Kehren Sie zu Pixel Art Village zurück, um weiterhin beeindruckende Pixelgrafiken zu erstellen.",
     "backHome": "← Zurück zu Pixel Art Village",
     "popularPages": "Oder versuchen Sie diese beliebten Seiten:",
@@ -217,7 +200,8 @@
     "descFull": "Entdecken Sie, wie unser Bild-zu-Pixelkunst-Konverter Ihre Fotos in scharfe Pixelkunst verwandelt."
   },
   "lang": {
-    "label": "Sprache"
+    "label": "Sprache",
+    "title": "Sprache auswählen"
   },
   "wplace": {
     "title": "Perfektes Tool für Pixelart Village Benutzer",
@@ -255,17 +239,7 @@
     "clientSide": {
       "title": "100% clientseitig",
       "desc": "Alle Konvertierungen laufen zu 100% clientseitig in Ihrem Browser. Bilder verlassen niemals Ihr Gerät, und Offline-Builds sind möglich, wobei Assets privat und sicher bleiben. Pixel Art Village schützt Ihre Arbeit, während es schnelle, sichere Verarbeitung auf Desktop- und Mobilgeräten liefert. Mit Pixel Art Village behalten Sie die Kontrolle von der ersten Vorschau bis zum finalen Export."
-    },
-    "customPalettes": "Anpassbare Paletten",
-    "customPalettesDesc": "Wählen Sie aus vordefinierten Paletten oder erstellen Sie Ihre eigene benutzerdefinierte Farbpalette",
-    "realTimePreview": "Echtzeit-Vorschau",
-    "realTimePreviewDesc": "Änderungen sofort sehen, während Sie die Einstellungen anpassen",
-    "multipleFormats": "Mehrere Formate",
-    "multipleFormatsDesc": "Unterstützt PNG, JPG, GIF, BMP und WebP Bildformate",
-    "highQuality": "Hohe Qualität",
-    "highQualityDesc": "Exportieren Sie hochwertige Bilder, perfekt für Ihr Projekt",
-    "easyToUse": "Einfach zu verwenden",
-    "easyToUseDesc": "Intuitive Benutzeroberfläche für Künstler und Entwickler"
+    }
   },
   "how": {
     "title": "So funktioniert pixel art Village",
@@ -298,7 +272,7 @@
         "p2": "Wir benötigen keine Kontoregistrierung. Wir sammeln nicht wissentlich sensible personenbezogene Daten."
       },
       "cookies": {
-        "title": "Cookies and AdSense",
+        "title": "Cookies und AdSense",
         "p1": "Wir können Cookies und ähnliche Technologien verwenden, um die Website zu betreiben und Ihr Erlebnis zu verbessern. Wenn Google AdSense aktiviert ist, können Google und seine Partner Cookies verwenden, um Anzeigen basierend auf Ihren Besuchen auf dieser und anderen Websites zu schalten.",
         "learn": "Erfahren Sie, wie Google Informationen von Websites oder Apps nutzt, die Google-Services verwenden:",
         "manage": "Anzeigenpersonalisierung verwalten:",
@@ -373,7 +347,7 @@
       },
       "ip": {
         "title": "Geistiges Eigentum",
-        "p1": "We retain all rights to the Service and related materials. You retain rights to your original uploads and generated outputs, subject to your applicable rights and third‑party rights."
+        "p1": "Wir behalten uns alle Rechte an dem Service und den zugehörigen Materialien vor. Sie behalten die Rechte an Ihren ursprünglichen Uploads und generierten Ausgaben, vorbehaltlich Ihrer geltenden Rechte und der Rechte Dritter."
       },
       "processing": {
         "title": "Bildverarbeitung",
@@ -393,7 +367,7 @@
       },
       "law": {
         "title": "Anwendbares Recht",
-        "p1": "These Terms are governed by applicable laws in your jurisdiction to the extent not preempted by other laws. Venue and jurisdiction will follow applicable conflict of laws rules."
+        "p1": "Diese Bedingungen unterliegen den in Ihrem Land geltenden Gesetzen, soweit nicht andere Gesetze dem entgegenstehen. Gerichtsstand und Gerichtsstand richten sich nach den geltenden Kollisionsnormen."
       },
       "contact": {
         "title": "Kontakt",
@@ -454,10 +428,7 @@
       "title": "Kontakt",
       "p1": "Besuchen Sie die Kontaktseite für Support und Anfragen. Sie können uns auch direkt schreiben an",
       "emailTitle": "E-Mail an Pixel Art Village"
-    },
-    "cta": "Testen Sie unseren <tool>Konverter</tool> oder stöbern Sie im <blog>Blog</blog> nach Tipps und Tutorials.",
-    "specializedLinks": "Benötigen Sie formatspezifische Workflows? Unsere Tools <png>PNG zu Pixel Art</png>, <jpg>JPG zu Pixel Art</jpg> und <photo>Foto zu Sprite</photo> helfen Ihnen weiter.",
-    "moreInfoRich": "Weitere Details finden Sie in unserer <privacy>Datenschutzerklärung</privacy> und in den <terms>Nutzungsbedingungen</terms>."
+    }
   },
   "contact": {
     "seoTitle": "Kontakt | Hilfe & Rückmeldung | Pixel Art Village",
@@ -536,12 +507,12 @@
           "desc": "Universeller Konverter für alle Bildformate"
         },
         {
-          "title": "PNG to Pixel Art",
+          "title": "PNG zu Pixel Art",
           "href": "/converter/png-zu-pixel-art/",
           "desc": "Konvertiere PNG Bilder mit Transparenz"
         },
         {
-          "title": "JPG to Pixel Art",
+          "title": "JPG zu Pixel Art",
           "href": "/converter/jpg-zu-pixel-kunst/",
           "desc": "Fotos in Retro-Grafiken umwandeln"
         },
@@ -618,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "Inhalte für diese Sprache folgen in Kürze. Vorerst wird Englisch angezeigt."
+  },
+  "preview": {
+    "alt": "Pixel-Art-Vorschau",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Bild wird verarbeitet…"
   }
 }

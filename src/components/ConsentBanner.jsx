@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import safeStorage from '@/utils/safeStorage'
 import { ensureAdSenseLoaded } from '@/utils/loadAdSense.js'
 import LocalizedLink from '@/components/LocalizedLink'
 
@@ -8,7 +9,7 @@ const STORAGE_KEY = 'consent.choice.v1'
 function updateConsent(granted) {
   try {
     const payload = { granted: !!granted, t: Date.now() }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload))
+    safeStorage.set(STORAGE_KEY, JSON.stringify(payload))
   } catch { void 0 }
   try {
     // gtag shim if present
@@ -28,7 +29,7 @@ export default function ConsentBanner() {
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY)
+      const saved = safeStorage.get(STORAGE_KEY)
       if (!saved) setVisible(true)
     } catch { setVisible(true) }
   }, [])

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import Seo from '@/components/Seo'
-import { useLocaleContext } from '@/contexts/LocaleContext'
+import { useLocaleContext } from '@/hooks/useLocaleContext'
 import LocalizedLink from '@/components/LocalizedLink'
 
 function Section({ title, children, id }) {

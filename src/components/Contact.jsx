@@ -1,9 +1,8 @@
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import Seo from '@/components/Seo'
 import { generateHreflangLinks } from '@/utils/hreflang'
-import { useLocaleContext } from '@/contexts/LocaleContext'
+import { useLocaleContext } from '@/hooks/useLocaleContext'
 import LocalizedLink from '@/components/LocalizedLink'
 
 export default function Contact() {

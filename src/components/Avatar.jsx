@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 /**
  * Avatar - 简洁专业的品牌头像

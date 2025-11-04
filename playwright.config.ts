@@ -20,7 +20,8 @@ export default defineConfig({
     { name: 'webkit', use: { ...devices['Desktop Safari'], /* 专项提高期望超时 */ }, expect: { timeout: 30000 } },
   ],
   webServer: {
-    command: 'npm run build && npx vite preview --port 5173 --strictPort',
+    // Disable analytics and enable E2E preview container during preview build
+    command: 'set VITE_ENABLE_ANALYTICS=0&& set VITE_E2E=1&& npm run build && npx vite preview --port 5173 --strictPort',
     url: 'http://localhost:5173',
     reuseExistingServer: true,
     timeout: 180000,

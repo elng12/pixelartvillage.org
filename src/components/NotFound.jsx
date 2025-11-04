@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Seo from '@/components/Seo';
-import { useLocaleContext } from '@/contexts/LocaleContext';
+import { useLocaleContext } from '@/hooks/useLocaleContext';
 
 function NotFound() {
   const { t } = useTranslation();

@@ -178,9 +178,18 @@ Do not add explanations, only return the translated text.`
 
   const payload = {
     model,
-    max_tokens: 1024,
+    max_tokens: 512,
     temperature: 0,
     messages: [
+      {
+        role: 'system',
+        content: [
+          {
+            type: 'text',
+            text: 'You are a professional localization engine. Translate exactly what the user supplies into the requested language. Preserve placeholders, HTML tags, punctuation, and casing. Respond with the translated text only.'
+          }
+        ]
+      },
       {
         role: 'user',
         content: [
@@ -206,7 +215,11 @@ Do not add explanations, only return the translated text.`
   }
 
   const data = await response.json()
-  const textOut = data?.content?.[0]?.text || data?.output_text || ''
+  const contentBlocks = Array.isArray(data?.content) ? data.content : []
+  const textOut =
+    contentBlocks.find((block) => block?.type === 'text')?.text ||
+    data?.output_text ||
+    ''
   if (!textOut) {
     throw new Error('MiniMax API returned empty response')
   }

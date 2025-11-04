@@ -1,3 +1,4 @@
+import logger from '@/utils/logger'
 // Image processing utilities — pixel art conversion
 class ImageProcessor {
   constructor() { this.last = null; }
@@ -115,7 +116,7 @@ export async function processPixelArt(imageData, options, signal) {
     imageProcessor.setLast(outCanvas);
     return outCanvas.toDataURL();
   } catch (error) {
-    if (import.meta?.env?.DEV) console.error('Pixel art processing error:', error);
+    if (import.meta?.env?.DEV) logger.error('Pixel art processing error:', error);
     throw error;
   }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import logger from '@/utils/logger'
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class ErrorBoundary extends React.Component {
   componentDidCatch(error, info) {
     if (import.meta?.env?.DEV) {
       // 仅在开发环境输出详细错误，避免污染生产环境控制台
-      console.error('ErrorBoundary caught:', error, info)
+      logger.error('ErrorBoundary caught:', error, info)
     }
   }
 
@@ -32,7 +32,7 @@ class ErrorBoundary extends React.Component {
       const buildId = (typeof __BUILD_ID__ !== 'undefined') ? __BUILD_ID__ : ''
       // 暂时禁用自动刷新以避免文件上传时的页面刷新问题
       const hardRefresh = () => {
-        console.log('ErrorBoundary: 自动刷新已禁用，避免文件上传问题')
+        logger.debug('ErrorBoundary: 自动刷新已禁用，避免文件上传问题')
         // 在开发环境中不自动刷新，只记录错误
         if (!import.meta?.env?.DEV) {
           try {

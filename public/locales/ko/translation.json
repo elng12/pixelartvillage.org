@@ -11,20 +11,9 @@
   },
   "common": {
     "loading": "로딩 중...",
-    "error": "오류",
-    "success": "성공",
-    "failed": "실패",
     "imageFailedToLoad": "이미지 로드 실패",
     "imageUnavailable": "이미지를 사용할 수 없음",
     "lastUpdated": "최종 업데이트: {{date}}"
-  },
-  "navTitle": {
-    "hero": "홈 히어로 섹션으로 스크롤",
-    "examples": "픽셀 아트 예시로 스크롤",
-    "features": "픽셀 아트 기능으로 스크롤",
-    "how": "픽셀 아트 변환기 작동 방식으로 스크롤하세요.",
-    "faq": "픽셀 아트 FAQ로 스크롤",
-    "blog": "픽셀 아트 블로그 열기"
   },
   "cta": {
     "start": "지금 시작하세요"
@@ -61,6 +50,14 @@
       "start": "픽셀아트 마을에서 시작하세요",
       "tips": "팁 및 팔레트",
       "privacyLocal": "개인정보 보호 및 로컬 처리"
+    },
+    "badges": {
+      "twelveTools": "Featured on Twelve.tools",
+      "fazier": "Featured on Fazier launches",
+      "startupFame": "Listed on StartupFa.me",
+      "turbo0": "Turbo0 collection badge",
+      "indieDeals": "Indie Deals directory badge",
+      "aiDirs": "AI Dirs directory badge"
     }
   },
   "blog": {
@@ -93,21 +90,7 @@
     "chooseFile": "파일 선택",
     "preparing": "이미지 준비 중…",
     "ariaUpload": "이미지 업로드(끌어서 놓거나 클릭하여 선택)",
-    "ariaChoose": "이미지 파일 선택",
-    "dragDrop": "여기에 이미지를 드래그 앤 드롭하세요",
-    "orClick": "또는 클릭하여 선택하세요",
-    "convertButton": "픽셀아트로 변환",
-    "processing": "이미지 처리 중...",
-    "converted": "이미지 변환 완료",
-    "dropZone": "Drop zone",
-    "downloadButton": "Download image",
-    "resetButton": "New image",
-    "pixelSize": "Pixel size",
-    "colorPalette": "Color palette",
-    "dithering": "Dithering",
-    "preview": "Preview",
-    "original": "Original",
-    "result": "Result"
+    "ariaChoose": "이미지 파일 선택"
   },
   "upload": {
     "selected": "선택한 파일: {{name}}"
@@ -217,7 +200,8 @@
     "descFull": "이미지를 픽셀 아트로 변환하는 변환기가 어떻게 사진을 선명한 픽셀 아트로 바꾸는지 확인하세요."
   },
   "lang": {
-    "label": "언어"
+    "label": "언어",
+    "title": "Select language"
   },
   "wplace": {
     "title": "픽셀아트 마을 사용자를 위한 완벽한 도구",
@@ -255,17 +239,7 @@
     "clientSide": {
       "title": "100% 클라이언트 사이드",
       "desc": "모든 변환이 브라우저에서 100% 클라이언트 측에서 실행됩니다. 이미지가 장치를 벗어나지 않으며, 오프라인 빌드가 가능하여 에셋을 비공개로 안전하게 유지합니다. Pixel Art Village은 작업을 보호하면서 데스크톱과 모바일 전반에 걸친 빠르고 안전한 처리를 제공합니다. Pixel Art Village을 사용하면 첫 번째 미리보기부터 최종 내보내기에 이르기까지 제어를 유지할 수 있습니다."
-    },
-    "customPalettes": "사용자 정의 팔레트",
-    "customPalettesDesc": "미리 정의된 팔레트에서 선택하거나 자신만의 사용자 정의 색상 팔레트 만들기",
-    "realTimePreview": "실시간 미리보기",
-    "realTimePreviewDesc": "설정을 조정하면서 변경 사항을 즉시 확인",
-    "multipleFormats": "여러 형식",
-    "multipleFormatsDesc": "PNG, JPG, GIF, BMP 및 WebP 이미지 형식 지원",
-    "highQuality": "High Quality",
-    "highQualityDesc": "Export high-quality images perfect for your project",
-    "easyToUse": "Easy to Use",
-    "easyToUseDesc": "Intuitive interface designed for artists and developers"
+    }
   },
   "how": {
     "title": "픽셀 아트 빌리지의 작동 방식",
@@ -454,10 +428,7 @@
     "twitterTitle": "정보 | Pixel Art Village",
     "twitterDesc": "누가 Pixel Art Village를 만들었는지 발견하고, 프라이버시 우선 픽셀 아트 변환기가 어떻게 작동하는지 알아보세요.",
     "p2": "우리는 개인정보 보호, 속도, 접근성에 중점을 두므로 파일 업로드나 회원가입 없이 이미지를 픽셀 아트로 변환할 수 있습니다.",
-    "p3": "우리의 팀은 예술가, 교육자, 인디 게임 개발자를 위한 교육 자료와 전문 도구를 구축합니다.",
-    "cta": "팁과 튜토리얼을 위해 <tool>변환 도구</tool>를 사용해보시거나 <blog>블로그</blog>를 탐색하세요.",
-    "specializedLinks": "형식별 워크플로우가 필요하신가요? <png>PNG를 픽셀아트로</png>, <jpg>JPG를 픽셀아트로</jpg>, 그리고 <photo>사진을 스프라이트 변환기로</photo> 도구가 도움이 준비되어 있습니다.",
-    "moreInfoRich": "자세한 내용은 당사의 <privacy>개인정보처리방침</privacy> 및 <terms>이용약관</terms>을 참조하시기 바랍니다."
+    "p3": "우리의 팀은 예술가, 교육자, 인디 게임 개발자를 위한 교육 자료와 전문 도구를 구축합니다."
   },
   "contact": {
     "h1": "연락하다",
@@ -618,5 +589,10 @@
   },
   "content": {
     "fallbackNotice": "이 언어의 내용은 곧 제공됩니다. 지금은 영어로 표시됩니다."
+  },
+  "preview": {
+    "alt": "Pixel art preview",
+    "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
+    "processing": "Processing image…"
   }
 }
