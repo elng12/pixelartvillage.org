@@ -1,4 +1,5 @@
-import React, { useMemo, useEffect, useRef, useReducer, useCallback } from 'react';
+import logger from '@/utils/logger'
+import { useMemo, useEffect, useRef, useReducer, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useImageProcessor } from '../hooks/useImageProcessor';
 import { exportProcessedBlob } from '../utils/imageProcessor';
@@ -11,6 +12,7 @@ import { usePaletteStorage } from '../hooks/usePaletteStorage';
 
 function Editor({ image }) {
   const { t } = useTranslation()
+  const IS_E2E = String(import.meta?.env?.VITE_E2E) === '1'
   const initial = {
     pixelSize: 1,
     brightness: 0,
@@ -45,7 +47,7 @@ function Editor({ image }) {
   }
 
   const [state, dispatch] = useReducer(reducer, initial);
-  const [errorMsg, setErrorMsg] = React.useState('')
+  const [errorMsg, setErrorMsg] = useState('')
   const previewRef = useRef(null);
   const fileInputRef = useRef(null);
   const { palettes: customPalettes, upsertPalette, deletePalette } = usePaletteStorage();
@@ -91,64 +93,45 @@ function Editor({ image }) {
 
   // 不再依赖 <img> 的 onload 测量，统一使用解码得到的尺寸 + 容器尺寸自适应
 
-  // 观察容器尺寸变化，保持始终完整展示
+  // 观察容器尺寸变化，保持始终完整展示 - 添加防抖避免频繁重新计算
   useEffect(() => {
     const el = previewRef.current;
     if (!el) return;
+
+    let resizeTimeout;
     const ro = new ResizeObserver(() => {
-      if (state.imgDim.w && state.imgDim.h) fitToScreenDims(state.imgDim.w, state.imgDim.h);
+      // 防抖处理，避免频繁重新计算缩放导致闪烁
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (state.imgDim.w && state.imgDim.h) {
+          fitToScreenDims(state.imgDim.w, state.imgDim.h);
+        }
+      }, 100); // 100ms防抖
     });
+
     ro.observe(el);
-    return () => ro.disconnect();
+    return () => {
+      clearTimeout(resizeTimeout);
+      ro.disconnect();
+    };
   }, [state.imgDim.w, state.imgDim.h, fitToScreenDims]);
 
-  // 关键修复：当图片源或处理结果变化时，将预览容器滚动位置归零，避免停留在右下角看起来“空白”
+  // 修复：只在图片首次加载时重置滚动位置，避免在处理过程中强制移动滚动
   useEffect(() => {
     const el = previewRef.current;
     if (!el) return;
-    el.scrollLeft = 0;
-    el.scrollTop = 0;
-  }, [state.readySrc, processedImage]);
-
-  // 监听全局粘贴事件（仅当已进入编辑器时，避免与首页 ToolSection 重复）
-  useEffect(() => {
-    if (!image) return;
-    const onPaste = (e) => {
-      const files = Array.from(e.clipboardData?.files || []);
-      if (files.length) {
-        e.preventDefault();
-        handleFiles(files);
-      }
-    };
-    window.addEventListener('paste', onPaste);
-    return () => window.removeEventListener('paste', onPaste);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [image]);
-
-  // 等图片解码完成后再开始处理，避免“过早预览/拟合”的闪动
-  useEffect(() => {
-    dispatch({ type: 'SET', field: 'readySrc', value: null });
-    if (!image) return;
-    const i = new Image();
-    i.decoding = 'async';
-    i.src = image;
-    const onReady = async () => {
-      try { await i.decode(); } catch (e) { if (import.meta?.env?.DEV) console.error('Image decode failed', e); }
-      const iw = i.naturalWidth || 1;
-      const ih = i.naturalHeight || 1;
-      dispatch({ type: 'SET', field: 'imgDim', value: { w: iw, h: ih } });
-      fitToScreenDims(iw, ih);
-      dispatch({ type: 'SET', field: 'readySrc', value: image });
-    };
-    if (i.complete) onReady(); else i.onload = onReady;
-    return () => { i.onload = null; };
-  }, [image, fitToScreenDims]);
+    // 只在首次加载图片时重置滚动位置
+    if (state.readySrc && !processedImage) {
+      el.scrollLeft = 0;
+      el.scrollTop = 0;
+    }
+  }, [state.readySrc]);
 
   // 统一处理文件列表（PNG/JPG，大小≤10MB）
-  const handleFiles = (fileList) => {
+  const handleFiles = useCallback((fileList) => {
     const file = fileList?.[0];
     if (!file) return;
-    setErrorMsg('')
+    setErrorMsg('');
     if (!/^image\/(png|jpeg)$/.test(file.type)) {
       setErrorMsg(t('errors.onlyPngJpg'));
       return;
@@ -165,7 +148,7 @@ function Editor({ image }) {
       img.decoding = 'async';
       img.src = src;
       const onReady = async () => {
-        try { await img.decode(); } catch (e) { if (import.meta?.env?.DEV) console.error(e); }
+        try { await img.decode(); } catch (e) { logger.error(e); }
         const iw = img.naturalWidth || 1;
         const ih = img.naturalHeight || 1;
         dispatch({ type: 'SET', field: 'imgDim', value: { w: iw, h: ih } });
@@ -175,7 +158,40 @@ function Editor({ image }) {
       if (img.complete) onReady(); else img.onload = onReady;
     };
     reader.readAsDataURL(file);
-  };
+  }, [t, dispatch, fitToScreenDims]);
+
+  // 监听全局粘贴事件（仅当已进入编辑器时，避免与首页 ToolSection 重复）
+  useEffect(() => {
+    if (!image) return;
+    const onPaste = (e) => {
+      const files = Array.from(e.clipboardData?.files || []);
+      if (files.length) {
+        e.preventDefault();
+        handleFiles(files);
+      }
+    };
+    window.addEventListener('paste', onPaste);
+    return () => window.removeEventListener('paste', onPaste);
+  }, [image, handleFiles]);
+
+  // 等图片解码完成后再开始处理，避免“过早预览/拟合”的闪动
+  useEffect(() => {
+    dispatch({ type: 'SET', field: 'readySrc', value: null });
+    if (!image) return;
+    const i = new Image();
+    i.decoding = 'async';
+    i.src = image;
+    const onReady = async () => {
+      try { await i.decode(); } catch (e) { if (import.meta?.env?.DEV) logger.error('Image decode failed', e); }
+      const iw = i.naturalWidth || 1;
+      const ih = i.naturalHeight || 1;
+      dispatch({ type: 'SET', field: 'imgDim', value: { w: iw, h: ih } });
+      fitToScreenDims(iw, ih);
+      dispatch({ type: 'SET', field: 'readySrc', value: image });
+    };
+    if (i.complete) onReady(); else i.onload = onReady;
+    return () => { i.onload = null; };
+  }, [image, fitToScreenDims]);
 
   // 拖拽支持：阻止默认并读取文件
   const onDragOver = (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; };
@@ -212,7 +228,7 @@ function Editor({ image }) {
     setTimeout(() => URL.revokeObjectURL(url), 0);
   };
 
-  if (!image) return null;
+  if (!image && !IS_E2E) return null;
 
   const layout = state.compact ? LAYOUT_TOKENS.compact : LAYOUT_TOKENS.normal;
 

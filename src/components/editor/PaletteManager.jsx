@@ -47,7 +47,10 @@ function PaletteManager({ onSavePalette, onDeletePalette, onApplyPalette }) {
     const lospecName = `${paletteInfo.name} (Lospec)`
     onSavePalette?.(lospecName, paletteColors)
     onApplyPalette?.(lospecName)
-    window.alert(t('paletteManager.importSuccess', { name: paletteInfo.name }))
+    // 移除确认弹窗，直接应用调色板
+    if (import.meta?.env?.DEV) {
+      console.log(`[PaletteManager] 已应用调色板: ${paletteInfo.name}`)
+    }
   }
 
   return (

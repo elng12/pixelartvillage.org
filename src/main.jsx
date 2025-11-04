@@ -1,3 +1,4 @@
+import logger from '@/utils/logger'
 import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
@@ -29,31 +30,35 @@ async function bootstrapWebVitals(reportHandler) {
 const reportWebVitals = import.meta.env.PROD ? () => {} : undefined
 bootstrapWebVitals(reportWebVitals)
 
-// Load analytics as early as possible
-ensureGaLoaded('G-5RG3H97P63')
-ensureClarityLoaded()
-ensureGtmLoaded()
-insertGtmNoScript()
+// Load analytics only when explicitly enabled for production
+const ENABLE_ANALYTICS = Boolean(import.meta.env?.PROD) && String(import.meta.env?.VITE_ENABLE_ANALYTICS) === '1'
+if (ENABLE_ANALYTICS) {
+  ensureGaLoaded('G-5RG3H97P63')
+  ensureClarityLoaded()
+  ensureGtmLoaded()
+  insertGtmNoScript()
+}
 
 async function ensureInitialLanguage() {
   try {
     const params = new URLSearchParams(location.search)
     const forced = (params.get('forceLang') || '').toLowerCase()
-    const first = (location.pathname.split('/')[1] || '').toLowerCase()
-    const target = SUPPORTED_LANGS.includes(forced) ? forced : (SUPPORTED_LANGS.includes(first) ? first : null)
+    // const first = (location.pathname.split('/')[1] || '').toLowerCase()
+    // 临时禁用自动路径语言检测，避免跳转到日语
+    const target = SUPPORTED_LANGS.includes(forced) ? forced : null
     if (target && i18n.language !== target) {
       await i18n.changeLanguage(target)
       try {
         setStoredLang(target)
       } catch (error) {
         if (import.meta.env?.DEV) {
-          console.warn('Failed to persist language preference:', error)
+          logger.warn('Failed to persist language preference:', error)
         }
       }
     }
   } catch (error) {
     if (import.meta.env?.DEV) {
-      console.warn('ensureInitialLanguage failed:', error)
+      logger.warn('ensureInitialLanguage failed:', error)
     }
   }
 }
@@ -65,7 +70,7 @@ async function ensureInitialLanguage() {
     await i18n.loadNamespaces('translation')
   } catch (error) {
     if (import.meta.env?.DEV) {
-      console.warn('i18n loadNamespaces failed:', error)
+      logger.warn('i18n loadNamespaces failed:', error)
     }
   }
   createRoot(rootEl).render(

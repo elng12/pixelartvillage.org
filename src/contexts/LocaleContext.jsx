@@ -1,13 +1,9 @@
-import { createContext, useContext } from 'react'
-import { CANONICAL_LOCALE } from '@/i18n'
+import { LocaleContext } from './LocaleContextBase'
 
-const LocaleContext = createContext({
-  currentLocale: CANONICAL_LOCALE,
-  buildPath: (path) => path ?? '/',
-})
-
-export function useLocaleContext() {
-  return useContext(LocaleContext)
+export function LocaleProvider({ value, children }) {
+  return (
+    <LocaleContext.Provider value={value}>
+      {children}
+    </LocaleContext.Provider>
+  )
 }
-
-export const LocaleProvider = LocaleContext.Provider

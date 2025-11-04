@@ -1,51 +1,63 @@
-import React, { useState, useEffect } from 'react'
+import { useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { languageManager } from '@/utils/languageManager'
+import { SUPPORTED_LANGS as RUNTIME_LANGS } from '@/i18n'
+import useLanguageSync from '@/hooks/useLanguageSync'
+import logger from '@/utils/logger'
 
-const LANGUAGES = {
+const LANGUAGE_LABELS = {
   en: 'English',
   es: 'Español',
+  id: 'Bahasa Indonesia',
   de: 'Deutsch',
-  fr: 'Français',
-  ja: '日本語',
-  ko: '한국어',
-  pt: 'Português',
-  ru: 'Русский',
-  zh: '中文',
-  it: 'Italiano',
   pl: 'Polski',
-  nl: 'Nederlands',
+  it: 'Italiano',
+  pt: 'Português',
+  fr: 'Français',
+  ru: 'Русский',
+  fil: 'Filipino',
+  vi: 'Tiếng Việt',
+  ja: '日本語',
   sv: 'Svenska',
   no: 'Norsk',
+  nl: 'Nederlands',
   ar: 'العربية',
+  ko: '한국어',
   th: 'ไทย',
-  vi: 'Tiếng Việt',
-  id: 'Bahasa Indonesia',
-  fil: 'Filipino'
+  pseudo: 'Pseudo (Test)',
+}
+
+function getLanguageLabel(code) {
+  if (LANGUAGE_LABELS[code]) return LANGUAGE_LABELS[code]
+  try {
+    if (typeof Intl !== 'undefined' && typeof Intl.DisplayNames === 'function') {
+      const displayNames = new Intl.DisplayNames([code], { type: 'language' })
+      const name = displayNames.of(code)
+      if (name && typeof name === 'string') return name
+    }
+  } catch {
+    /* ignore */
+  }
+  return code
 }
 
 export default function LanguageSwitcherBalanced() {
-  const { t, i18n } = useTranslation()
-  const [currentLang, setCurrentLang] = useState('en')
+  const { t } = useTranslation()
+  const location = useLocation()
+  const { currentLang, handleLanguageChange } = useLanguageSync()
 
-  useEffect(() => {
-    setCurrentLang(i18n.language || 'en')
-  }, [i18n.language])
+  const handleChange = useCallback(async (event) => {
+    const nextLang = event?.target?.value || ''
+    await handleLanguageChange(nextLang)
+  }, [handleLanguageChange])
 
-  const handleLanguageChange = (newLang) => {
-    const currentPath = window.location.pathname
-    const search = window.location.search
-    const hash = window.location.hash
-
-    let newPath
-    if (newLang === 'en') {
-      newPath = currentPath.replace(/^\/[a-z]{2}\//, '/') || '/'
-    } else {
-      newPath = currentPath.replace(/^\/[a-z]{2}\//, '/') || '/'
-      newPath = `/${newLang}${newPath === '/' ? '' : newPath}`
-    }
-
-    window.location.href = newPath + search + hash
-  }
+  const options = useMemo(() => {
+    return RUNTIME_LANGS.map((code) => ({
+      code,
+      label: getLanguageLabel(code),
+    }))
+  }, [])
 
   return (
     <div
@@ -73,7 +85,7 @@ export default function LanguageSwitcherBalanced() {
         e.currentTarget.style.borderColor = '#e5e7eb'
         e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)'
       }}
-      title="选择语言 / Select Language"
+      title={t('lang.title', 'Select language')}
     >
       <span style={{
         fontSize: '14px',
@@ -84,9 +96,14 @@ export default function LanguageSwitcherBalanced() {
         🌍
       </span>
 
+      <label htmlFor="language-switcher" className="sr-only">
+        {t('lang.label', '选择语言')}
+      </label>
+
       <select
+        id="language-switcher"
         value={currentLang}
-        onChange={(e) => handleLanguageChange(e.target.value)}
+        onChange={handleChange}
         style={{
           padding: '4px 8px',
           border: '1px solid #d1d5db',
@@ -97,7 +114,7 @@ export default function LanguageSwitcherBalanced() {
           fontWeight: '500',
           cursor: 'pointer',
           outline: 'none',
-          minWidth: '110px',
+          minWidth: '130px',
           height: '28px',
           lineHeight: '20px'
         }}
@@ -110,25 +127,11 @@ export default function LanguageSwitcherBalanced() {
           e.currentTarget.style.boxShadow = 'none'
         }}
       >
-        <option value="en">English</option>
-        <option value="es">Español</option>
-        <option value="de">Deutsch</option>
-        <option value="fr">Français</option>
-        <option value="ja">日本語</option>
-        <option value="ko">한국어</option>
-        <option value="zh">中文</option>
-        <option value="pt">Português</option>
-        <option value="ru">Русский</option>
-        <option value="it">Italiano</option>
-        <option value="pl">Polski</option>
-        <option value="nl">Nederlands</option>
-        <option value="sv">Svenska</option>
-        <option value="no">Norsk</option>
-        <option value="ar">العربية</option>
-        <option value="th">ไทย</option>
-        <option value="vi">Tiếng Việt</option>
-        <option value="id">Bahasa Indonesia</option>
-        <option value="fil">Filipino</option>
+        {options.map(({ code, label }) => (
+          <option key={code} value={code}>
+            {label}
+          </option>
+        ))}
       </select>
 
       <div style={{
@@ -138,7 +141,6 @@ export default function LanguageSwitcherBalanced() {
         whiteSpace: 'nowrap'
       }}>
         {currentLang === 'en' ? 'EN' :
-         currentLang === 'zh' ? '中文' :
          currentLang === 'ja' ? '日本語' :
          currentLang === 'ko' ? '한국어' :
          currentLang === 'ar' ? 'العربية' :

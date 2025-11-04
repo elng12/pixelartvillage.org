@@ -1,19 +1,20 @@
-﻿import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react'
+﻿import { useState, useEffect, useMemo, lazy, Suspense } from 'react'
 import { Routes, Route, Outlet, useLocation, useNavigate, useParams, useOutletContext } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import logger from '@/utils/logger'
 import ScrollManager from './components/ScrollManager'
 import CompatNotice from '@/components/CompatNotice.jsx'
 import ResourcePreloader from '@/components/ResourcePreloader'
 import TranslationPreloader from '@/components/TranslationPreloader'
 import CriticalCSS from '@/components/CriticalCSS'
 import Header from './components/Header'
-import LanguageSwitcherFixed from './components/LanguageSwitcherFixed'
 import ToolSection from './components/ToolSection'
 import { LocaleProvider } from '@/contexts/LocaleContext'
 import { generateHreflangLinks } from '@/utils/hreflang'
 import Seo from '@/components/Seo'
 import i18n, { CANONICAL_LOCALE, getStoredLang, setStoredLang, detectBrowserLang } from '@/i18n'
 import { buildLocalizedPath, extractLocaleFromPath, RUNTIME_LANGS } from '@/utils/locale'
+import { languageManager } from '@/utils/languageManager'
 
 const Editor = lazy(() => import('./components/Editor'))
 const ShowcaseSection = lazy(() => import('./components/ShowcaseSection'))
@@ -40,6 +41,7 @@ function useAppOutletContext() {
 function Home() {
   const { t } = useTranslation()
   const { uploadedImage, setUploadedImage, currentLocale } = useAppOutletContext()
+  const IS_E2E = String(import.meta?.env?.VITE_E2E) === '1'
   const canonical =
     currentLocale === CANONICAL_LOCALE
       ? 'https://pixelartvillage.org/'
@@ -56,7 +58,7 @@ function Home() {
         lang={currentLocale}
       />
       <ToolSection onImageUpload={setUploadedImage} enablePaste={!uploadedImage} />
-      {uploadedImage ? <Editor image={uploadedImage} /> : null}
+      {(uploadedImage || IS_E2E) ? <Editor image={uploadedImage} /> : null}
       <ShowcaseSection />
       <WplaceFeaturesSection />
       <FeaturesSection />
@@ -82,7 +84,7 @@ function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
       <CriticalCSS />
       <ResourcePreloader />
       <TranslationPreloader />
-      <Header rightSlot={<LanguageSwitcherFixed />} />
+      <Header />
       <CompatNotice />
       <ScrollManager />
       <main>
@@ -109,14 +111,13 @@ function BaseLayout(props) {
   const location = useLocation()
 
   useEffect(() => {
-    if (location.pathname === '/' || location.pathname === '') {
-      const persisted = getStoredLang()
-      const auto = persisted || detectBrowserLang()
-      if (auto && auto !== CANONICAL_LOCALE && RUNTIME_LANGS.includes(auto)) {
-        navigate(`/${auto}/`, { replace: true })
-        return
-      }
+    // 完全禁用自动语言重定向，防止刷新后跳转到日语
+    // 用户必须手动选择语言或通过URL访问
+    if (import.meta?.env?.DEV) {
+      console.log('[BaseLayout] 自动语言重定向已禁用')
     }
+
+    // 确保i18n使用默认语言
     if (i18n.language !== CANONICAL_LOCALE) {
       i18n.changeLanguage(CANONICAL_LOCALE)
     }
@@ -178,15 +179,13 @@ export default function App() {
   const [uploadedImage, setUploadedImage] = useState(null)
 
   useEffect(() => {
-    if (import.meta?.env?.DEV) {
-      const status =
-        typeof uploadedImage === 'string'
-          ? `blob:${uploadedImage.slice(0, 20)}`
-          : uploadedImage === null
-          ? 'null'
-          : typeof uploadedImage
-      console.log('[App] uploadedImage changed:', status)
-    }
+    const status =
+      typeof uploadedImage === 'string'
+        ? `blob:${uploadedImage.slice(0, 20)}`
+        : uploadedImage === null
+        ? 'null'
+        : typeof uploadedImage
+    logger.debug('[App] uploadedImage changed:', status)
   }, [uploadedImage])
 
   useUploadedImageCleanup(uploadedImage)

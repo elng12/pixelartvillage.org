@@ -1,6 +1,7 @@
 import { useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams, useLocation } from 'react-router-dom'
+import logger from '@/utils/logger'
 import { SUPPORTED_LANGS, DEFAULT_LOCALE } from '@/i18n'
 
 /**
@@ -23,29 +24,15 @@ export default function TranslationPreloader() {
     }
 
     try {
-      // 检查资源是否已经加载
-      const hasResource = i18nInstance.getResourceBundle(targetLang, 'translation')
-      
-      if (!hasResource) {
-        // 如果资源未加载，强制加载
-        await i18nInstance.loadLanguages(targetLang)
-        
-        // 再次检查是否加载成功
-        const recheck = i18nInstance.getResourceBundle(targetLang, 'translation')
-        if (!recheck) {
-          console.warn(`[TranslationPreloader] Failed to load resources for ${targetLang}`)
-          return false
-        }
-      }
+      await i18nInstance.loadLanguages(targetLang)
 
-      // 确保 i18n 实例的当前语言与目标语言一致
       if (i18nInstance.language !== targetLang) {
         await i18nInstance.changeLanguage(targetLang)
       }
 
       return true
     } catch (error) {
-      console.error(`[TranslationPreloader] Error loading ${targetLang}:`, error)
+      logger.error(`[TranslationPreloader] Error loading ${targetLang}:`, error)
       return false
     }
   }, [i18nInstance])
@@ -53,57 +40,27 @@ export default function TranslationPreloader() {
   // 监听路由变化，预加载翻译资源
   useEffect(() => {
     const currentLang = lang || DEFAULT_LOCALE
-    
-    // 异步预加载，不阻塞渲染
-    preloadTranslation(currentLang).then(success => {
-      if (!success && currentLang !== DEFAULT_LOCALE) {
-        // 如果加载失败且不是默认语言，尝试加载默认语言
-        console.warn(`[TranslationPreloader] Falling back to ${DEFAULT_LOCALE}`)
-        preloadTranslation(DEFAULT_LOCALE)
-      }
-    })
+
+    preloadTranslation(currentLang)
   }, [lang, location.pathname, preloadTranslation])
 
-  // 预加载常用语言（在空闲时间）
+  // 预加载常用语言（在空闲时间）- 临时禁用以防止自动语言切换
   useEffect(() => {
-    const preloadCommonLanguages = () => {
-      const commonLangs = ['en', 'es', 'de', 'fr', 'ko', 'ja']
-      
-      commonLangs.forEach(lng => {
-        if (lng !== i18nInstance.language && SUPPORTED_LANGS.includes(lng)) {
-          // 使用 requestIdleCallback 在空闲时预加载
-          if (typeof requestIdleCallback === 'function') {
-            requestIdleCallback(() => {
-              preloadTranslation(lng)
-            }, { timeout: 5000 })
-          } else {
-            // 降级到 setTimeout
-            setTimeout(() => {
-              preloadTranslation(lng)
-            }, 2000)
-          }
-        }
-      })
+    // 临时禁用所有预加载，防止自动切换到日语
+    if (import.meta?.env?.DEV) {
+      console.log('[TranslationPreloader] 语言预加载已禁用')
     }
-
-    // 延迟预加载，避免影响初始页面加载
-    const timer = setTimeout(preloadCommonLanguages, 1000)
-    return () => clearTimeout(timer)
+    return () => {}
   }, [i18nInstance, preloadTranslation])
 
   // 监听 i18n 事件，处理加载错误
   useEffect(() => {
     const handleFailedLoading = (lng, ns, msg) => {
-      console.warn(`[TranslationPreloader] Failed to load ${lng}/${ns}:`, msg)
-      
-      // 如果不是默认语言，尝试加载默认语言
-      if (lng !== DEFAULT_LOCALE) {
-        preloadTranslation(DEFAULT_LOCALE)
-      }
+      logger.warn(`[TranslationPreloader] Failed to load ${lng}/${ns}:`, msg)
     }
 
     const handleLanguageChanged = (lng) => {
-      console.log(`[TranslationPreloader] Language changed to: ${lng}`)
+      logger.debug(`[TranslationPreloader] Language changed to: ${lng}`)
     }
 
     i18nInstance.on('failedLoading', handleFailedLoading)
