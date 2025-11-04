@@ -1,20 +1,7 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(cat public/robots.txt)",
-      "Bash(cat public/sitemap.xml)",
-      "Bash(node scripts/generate-sitemap.cjs)",
-      "Bash(npm run typecheck)",
-      "Bash(npm run build)",
-      "Read(//mnt/f/**)",
-      "Bash(jq '.[].metaDescription | length' src/content/pseo-pages.json)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nfix: comprehensive SEO optimizations based on Ahrefs audit\n\n- Add proper 404 NotFound component with multilingual support\n- Implement internal linking strategy across converter pages  \n- Fix broken links in Footer and navigation components\n- Optimize meta descriptions to 120-160 characters for all pages\n- Extend page content to 500-800 characters per converter page\n- Fix title length issues (30-60 characters range)\n- Add hidden SEO content with proper H1 tag structure\n- Enhance localization with HTML lang attribute and hreflang links\n- Optimize performance with CriticalCSS and ResourcePreloader\n- Clean up sitemap to include only canonical URLs (24 → 264 reduction)\n- Add About component and other missing pages\n- Implement proper canonical URL handling and HTTPS redirects\n- Add code splitting and performance optimizations in vite.config.js\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git push origin main)",
-      "Bash(npm run dev)",
-      "Bash(npm ci)",
-      "Bash(npm install)"
-    ],
-    "deny": [],
-    "ask": []
+﻿{
+  "permissions": { "allow": ["bash","python","node"], "deny": [], "ask": [] },
+  "hooks": {
+    "pre_tool": "sessions/hooks/sessions_enforce.py",
+    "post_tool": "sessions/hooks/post_tool_use.py"
   }
 }
