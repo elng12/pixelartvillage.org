@@ -27,7 +27,14 @@
     "i18n:check": "node scripts/i18n-check.js",
     "i18n:pseudo": "node scripts/gen-pseudo-locale.js",
     "seo:kw": "node scripts/kw-density-check.js",
-    "sitemap:verify": "node scripts/verify-sitemap-no-en.cjs"
+    "sitemap:verify": "node scripts/verify-sitemap-no-en.cjs",
+    "seo:monitor": "node scripts/seo-monitor.js",
+    "seo:keywords:analyze": "node scripts/keyword-analyzer.js",
+    "seo:test:suite": "node scripts/seo-test-runner.js",
+    "seo:mobile": "node scripts/mobile-seo-optimizer.js",
+    "seo:dashboard": "node scripts/seo-dashboard-config.js",
+    "seo:audit": "npm run seo:monitor && npm run seo:keywords:analyze && npm run seo:mobile && npm run seo:test:suite",
+    "seo:full": "npm run seo:sitemap && npm run seo:audit && npm run seo:dashboard"
   },
   "dependencies": {
     "@vitalets/google-translate-api": "^9.2.1",
