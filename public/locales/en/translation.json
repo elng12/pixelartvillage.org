@@ -60,7 +60,44 @@
     "back": "Back to Blog",
     "notFound": {
       "title": "Post not found",
-      "desc": "The article you’re looking for does not exist. Go back to the"
+      "desc": "The article you're looking for does not exist. Go back to the blog."
+    },
+    "posts": {
+      "best-pixel-art-converters-compared-2025": {
+        "title": "10 Best Pixel Art Converters Compared (2025) - Complete Guide",
+        "excerpt": "Compare the top 10 pixel art converters based on privacy, features, quality, and ease of use. Find the perfect tool for your pixel art needs, from hobby projects to professional game development.",
+        "tags": ["comparison", "tools", "pixel art converter", "best tools", "guide"],
+        "readMore": "Read full article",
+        "languageNote": "Full article available in English"
+      },
+      "how-to-get-pixel-art-version-of-image": {
+        "title": "How to Get Pixel Art Version of Image: Converter Guide for Image to Pixel Art",
+        "excerpt": "Step-by-step Pixel Art Village converter workflow for SNES-style pixel exports, including refinement tips.",
+        "tags": ["image to pixel art", "pixel art converter", "snes", "tutorial"],
+        "readMore": "Read full article",
+        "languageNote": "Full article available in English"
+      },
+      "make-image-more-like-pixel": {
+        "title": "How to Make Image More Like Pixel: Basic Editing Techniques for Image to Pixel Art",
+        "excerpt": "Learn simple editing moves that turn flat conversions into vibrant Image to Pixel Art, including selective pixelation and multilingual tips.",
+        "tags": ["image to pixel art", "editing", "pixel enhance", "tutorial"],
+        "readMore": "Read full article",
+        "languageNote": "Full article available in English"
+      },
+      "export-from-illustrator-image-to-pixel-art": {
+        "title": "How to Export from Illustrator So Images Aren't Pixelated",
+        "excerpt": "Free workflow for exporting from Illustrator without pixelation, with Canva tips and Pixel Art Village finishing steps.",
+        "tags": ["image to pixel art", "illustrator", "export", "tutorial"],
+        "readMore": "Read full article",
+        "languageNote": "Full article available in English"
+      },
+      "how-to-pixelate-an-image": {
+        "title": "How to Pixelate an Image: Beginner Guide",
+        "excerpt": "Learn how to turn any photo into playful pixel art with Pixel Art Village's free tools, step-by-step workflow, and quick troubleshooting tips.",
+        "tags": ["image to pixel art", "pixel art maker", "beginner guide", "tutorial"],
+        "readMore": "Read full article",
+        "languageNote": "Full article available in English"
+      }
     }
   },
   "consent": {

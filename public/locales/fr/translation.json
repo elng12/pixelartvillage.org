@@ -61,6 +61,43 @@
     "notFound": {
       "title": "Article non trouvé",
       "desc": "L'article que vous recherchez n'existe pas. Retournez au blog."
+    },
+    "posts": {
+      "best-pixel-art-converters-compared-2025": {
+        "title": "Les 10 Meilleurs Convertisseurs d'Art Pixel Comparés (2025) - Guide Complet",
+        "excerpt": "Comparez les 10 meilleurs convertisseurs d'art pixel basés sur la confidentialité, les fonctionnalités, la qualité et la facilité d'utilisation. Trouvez l'outil parfait pour vos besoins d'art pixel, des projets amateurs au développement de jeux professionnel.",
+        "tags": ["comparaison", "outils", "convertisseur d'art pixel", "meilleurs outils", "guide"],
+        "readMore": "Lire l'article complet en anglais",
+        "languageNote": "Article complet disponible en anglais"
+      },
+      "how-to-get-pixel-art-version-of-image": {
+        "title": "Comment Obtenir la Version Art Pixel d'une Image : Guide du Convertisseur pour Image en Art Pixel",
+        "excerpt": "Guide étape par étape du flux de travail du convertisseur Pixel Art Village pour les exportations de style SNES, y compris des conseils de raffinement.",
+        "tags": ["image en art pixel", "convertisseur d'art pixel", "snes", "tutoriel"],
+        "readMore": "Lire l'article complet en anglais",
+        "languageNote": "Article complet disponible en anglais"
+      },
+      "make-image-more-like-pixel": {
+        "title": "Comment Rendre une Image Plus Similaire aux Pixels : Techniques d'Édition de Base pour Image en Art Pixel",
+        "excerpt": "Apprenez des mouvements d'édition simples qui transforment les conversions plates en visuels d'art pixel vibrants, y compris la pixellisation sélective et les conseils multilingues.",
+        "tags": ["image en art pixel", "édition", "amélioration de pixels", "tutoriel"],
+        "readMore": "Lire l'article complet en anglais",
+        "languageNote": "Article complet disponible en anglais"
+      },
+      "export-from-illustrator-image-to-pixel-art": {
+        "title": "Comment Exporter depuis Illustrator pour que les Images ne se Pixelisent Pas",
+        "excerpt": "Flux de travail gratuit pour exporter depuis Illustrator sans pixellisation, avec des conseils Canva et les étapes de finition de Pixel Art Village.",
+        "tags": ["image en art pixel", "illustrator", "exportation", "tutoriel"],
+        "readMore": "Lire l'article complet en anglais",
+        "languageNote": "Article complet disponible en anglais"
+      },
+      "how-to-pixelate-an-image": {
+        "title": "Comment Pixelliser une Image : Guide pour Débutants",
+        "excerpt": "Apprenez à convertir n'importe quelle photo en un art pixel ludique avec les outils gratuits de Pixel Art Village, flux de travail étape par étape et conseils rapides de dépannage.",
+        "tags": ["image en art pixel", "créateur d'art pixel", "guide pour débutants", "tutoriel"],
+        "readMore": "Lire l'article complet en anglais",
+        "languageNote": "Article complet disponible en anglais"
+      }
     }
   },
   "consent": {
