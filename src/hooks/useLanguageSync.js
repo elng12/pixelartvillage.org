@@ -7,7 +7,7 @@ import { CANONICAL_LOCALE, SUPPORTED_LANGS } from '@/i18n'
 import logger from '@/utils/logger'
 
 export function useLanguageSync() {
-  const { t, i18n } = useTranslation()
+  const { i18n } = useTranslation()
   const location = useLocation()
   const navigate = useNavigate()
   const params = useParams()

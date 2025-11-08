@@ -5,6 +5,7 @@ import { initReactI18next } from 'react-i18next'
 import HttpBackend from 'i18next-http-backend'
 import localeConfig from '../config/locales.json'
 import safeStorage from './utils/safeStorage'
+import logger from './utils/logger'
 
 export const DEFAULT_LOCALE = localeConfig?.default || 'en'
 export const CANONICAL_LOCALE = DEFAULT_LOCALE

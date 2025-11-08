@@ -1,553 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<!-- 优化站点地图：只包含规范URL，避免重复内容问题 -->
+<!-- 生成时间: 2025-11-08T02:08:54.846Z -->
+<!-- URL总数: 22 (规范版本) -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pixelartvillage.org/</loc>
-    <lastmod>2025-11-04</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-11-08</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/" />
   </url>
   <url>
     <loc>https://pixelartvillage.org/privacy/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/privacy/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/privacy/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/privacy/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/privacy/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/privacy/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/privacy/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/privacy/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/privacy/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/privacy/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/privacy/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/privacy/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/privacy/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/privacy/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/privacy/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/privacy/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/privacy/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/privacy/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/privacy/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/privacy/" />
   </url>
   <url>
     <loc>https://pixelartvillage.org/terms/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/terms/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/terms/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/terms/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/terms/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/terms/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/terms/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/terms/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/terms/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/terms/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/terms/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/terms/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/terms/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/terms/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/terms/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/terms/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/terms/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/terms/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/terms/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/terms/" />
   </url>
   <url>
     <loc>https://pixelartvillage.org/about/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/about/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/about/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/about/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/about/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/about/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/about/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/about/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/about/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/about/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/about/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/about/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/about/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/about/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/about/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/about/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/about/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/about/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/about/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/about/" />
   </url>
   <url>
     <loc>https://pixelartvillage.org/contact/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/contact/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/contact/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/contact/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/contact/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/contact/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/contact/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/contact/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/contact/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/contact/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/contact/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/contact/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/contact/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/contact/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/contact/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/contact/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/contact/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/contact/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/contact/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/contact/" />
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/blog/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/blog/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/blog/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/blog/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/blog/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/blog/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/blog/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/blog/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/blog/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/blog/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/blog/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/blog/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/blog/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/blog/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/blog/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/blog/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/blog/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/blog/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/blog/" />
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2025-11-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/blog/best-pixel-art-converters-compared-2025/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/blog/best-pixel-art-converters-compared-2025/" />
+    <lastmod>2025-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/how-to-get-pixel-art-version-of-image/</loc>
-    <lastmod>2025-11-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/blog/how-to-get-pixel-art-version-of-image/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/blog/how-to-get-pixel-art-version-of-image/" />
+    <lastmod>2025-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2025-11-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/blog/make-image-more-like-pixel/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/blog/make-image-more-like-pixel/" />
+    <lastmod>2025-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2025-11-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/blog/export-from-illustrator-image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/blog/export-from-illustrator-image-to-pixel-art/" />
+    <lastmod>2025-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2025-11-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/blog/how-to-pixelate-an-image/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/blog/how-to-pixelate-an-image/" />
+    <lastmod>2025-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/png-to-pixel-art/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/converter/png-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/converter/png-to-pixel-art/" />
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/converter/jpg-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/converter/jpg-to-pixel-art/" />
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/image-to-pixel-art/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/converter/image-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/converter/image-to-pixel-art/" />
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/gif-to-pixel-art/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/converter/gif-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/converter/gif-to-pixel-art/" />
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/webp-to-pixel-art/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/converter/webp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/converter/webp-to-pixel-art/" />
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/converter/bmp-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/converter/bmp-to-pixel-art/" />
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/photo-to-pixel-art/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/converter/photo-to-pixel-art/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/converter/photo-to-pixel-art/" />
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/converter/photo-to-sprite-converter/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/converter/photo-to-sprite-converter/" />
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/pixelate-image-online/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/converter/pixelate-image-online/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/converter/pixelate-image-online/" />
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/8-bit-art-generator/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/converter/8-bit-art-generator/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/converter/8-bit-art-generator/" />
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2025-11-04</lastmod>
+    <lastmod>2025-11-08</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://pixelartvillage.org/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://pixelartvillage.org/ar/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://pixelartvillage.org/de/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://pixelartvillage.org/es/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="fil" href="https://pixelartvillage.org/fil/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://pixelartvillage.org/fr/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://pixelartvillage.org/id/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://pixelartvillage.org/it/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://pixelartvillage.org/ja/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://pixelartvillage.org/ko/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://pixelartvillage.org/nl/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="no" href="https://pixelartvillage.org/no/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://pixelartvillage.org/pl/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://pixelartvillage.org/pt/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="pseudo" href="https://pixelartvillage.org/pseudo/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://pixelartvillage.org/ru/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="sv" href="https://pixelartvillage.org/sv/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="th" href="https://pixelartvillage.org/th/converter/retro-game-graphics-maker/" />
-    <xhtml:link rel="alternate" hreflang="vi" href="https://pixelartvillage.org/vi/converter/retro-game-graphics-maker/" />
+    <priority>0.9</priority>
   </url>
 </urlset>

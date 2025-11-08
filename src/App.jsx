@@ -12,9 +12,8 @@ import ToolSection from './components/ToolSection'
 import { LocaleProvider } from '@/contexts/LocaleContext'
 import { generateHreflangLinks } from '@/utils/hreflang'
 import Seo from '@/components/Seo'
-import i18n, { CANONICAL_LOCALE, getStoredLang, setStoredLang, detectBrowserLang } from '@/i18n'
+import i18n, { CANONICAL_LOCALE, setStoredLang } from '@/i18n'
 import { buildLocalizedPath, extractLocaleFromPath, RUNTIME_LANGS } from '@/utils/locale'
-import { languageManager } from '@/utils/languageManager'
 
 const Editor = lazy(() => import('./components/Editor'))
 const ShowcaseSection = lazy(() => import('./components/ShowcaseSection'))

@@ -1,10 +1,8 @@
 import { useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { languageManager } from '@/utils/languageManager'
+import { useLocation } from 'react-router-dom'
 import { SUPPORTED_LANGS as RUNTIME_LANGS } from '@/i18n'
 import useLanguageSync from '@/hooks/useLanguageSync'
-import logger from '@/utils/logger'
 
 const LANGUAGE_LABELS = {
   en: 'English',

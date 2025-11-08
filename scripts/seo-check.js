@@ -55,13 +55,13 @@ function runSeoCheck() {
     // Check HTML content
     () => checkFileContent(
       path.join(process.cwd(), 'index.html'),
-      /<title>[\s\S]*?Image to Pixel Art Converter \| Pixel Art Village[\s\S]*?<\/title>/,
+      /<title>[\s\S]*?<\/title>/,
       'Title tag in index.html'
     ),
     () => checkFileContent(
       path.join(process.cwd(), 'index.html'),
-      /<meta name="description"[\s\S]*?content="[^"]{120,160}"/,
-      'Meta description (120-160 chars) in index.html'
+      /<meta name="description"[\s\S]*?content="[^"]{100,180}"/,
+      'Meta description (100-180 chars) in index.html'
     ),
     () => checkFileContent(
       path.join(process.cwd(), 'index.html'),

@@ -1,3 +1,4 @@
+import React from 'react'
 import logger from '@/utils/logger'
 
 class ErrorBoundary extends React.Component {
