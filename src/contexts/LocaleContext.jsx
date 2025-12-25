@@ -1,4 +1,6 @@
-import { LocaleContext } from './LocaleContextBase'
+import { createContext } from 'react'
+
+export const LocaleContext = createContext(null)
 
 export function LocaleProvider({ value, children }) {
   return (

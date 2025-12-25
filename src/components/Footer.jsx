@@ -44,19 +44,22 @@ function Footer() {
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.tools')}</p>
               <ul className="space-y-2 text-sm">
-                <li><LocalizedLink to="/#tool" className="hover:text-white">{t('footer.links.generator')}</LocalizedLink></li>
-                <li><LocalizedLink to="/#tool" className="hover:text-white">{t('footer.links.converter')}</LocalizedLink></li>
-                <li><LocalizedLink to="/#showcase" className="hover:text-white">{t('footer.links.imageToPixel')}</LocalizedLink></li>
-                <li><LocalizedLink to="/#features" className="hover:text-white">{t('footer.links.makePixelArt')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/image-to-pixel-art/" className="hover:text-white">{t('footer.links.generator')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/photo-to-pixel-art/" className="hover:text-white">{t('footer.links.converter')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/pixelate-image-online/" className="hover:text-white">{t('footer.links.pixelate')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/8-bit-art-generator/" className="hover:text-white">{t('footer.links.8bit')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/retro-game-graphics-maker/" className="hover:text-white">{t('footer.links.retroMaker')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/photo-to-sprite-converter/" className="hover:text-white">{t('footer.links.photo2sprite')}</LocalizedLink></li>
               </ul>
             </div>
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.formats')}</p>
               <ul className="space-y-2 text-sm">
-                <li><LocalizedLink to="/#showcase" className="hover:text-white">{t('footer.links.png2pixel')}</LocalizedLink></li>
-                <li><LocalizedLink to="/#showcase" className="hover:text-white">{t('footer.links.jpg2pixel')}</LocalizedLink></li>
-                <li><LocalizedLink to="/#showcase" className="hover:text-white">{t('footer.links.img2pixel')}</LocalizedLink></li>
-                <li><LocalizedLink to="/#features" className="hover:text-white">{t('footer.links.gridPreview')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/png-to-pixel-art/" className="hover:text-white">{t('footer.links.png2pixel')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/jpg-to-pixel-art/" className="hover:text-white">{t('footer.links.jpg2pixel')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/gif-to-pixel-art/" className="hover:text-white">{t('footer.links.gif2pixel')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/webp-to-pixel-art/" className="hover:text-white">{t('footer.links.webp2pixel')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/bmp-to-pixel-art/" className="hover:text-white">{t('footer.links.bmp2pixel')}</LocalizedLink></li>
               </ul>
             </div>
             <div>
