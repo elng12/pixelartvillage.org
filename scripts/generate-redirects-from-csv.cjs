@@ -20,6 +20,10 @@ const { URL } = require('url');
 const ROOT = process.cwd();
 const PUBLIC = path.join(ROOT, 'public');
 const REDIRECTS = path.join(PUBLIC, '_redirects');
+const localeConfig = require(path.join(ROOT, 'config', 'locales.json'));
+const DEFAULT_LANG = (localeConfig && localeConfig.default) || 'en';
+const SUPPORTED_LANGS = Array.from(new Set((localeConfig && localeConfig.supported) || []));
+const LANG_PREFIXES = SUPPORTED_LANGS.filter((lang) => lang && lang !== DEFAULT_LANG);
 
 const argv = process.argv.slice(2);
 const arg = (name, def) => {
@@ -77,7 +81,7 @@ function loadKnownRoutes() {
     '/', '/about/', '/contact/', '/privacy/', '/terms/', '/blog/',
   ]);
   // Load pSEO and blog slugs
-  const langPrefixes = ['en','es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
+  const langPrefixes = LANG_PREFIXES;
   function addWithLangs(p) {
     const clean = p.endsWith('/') ? p : p + '/';
     routes.add(clean);

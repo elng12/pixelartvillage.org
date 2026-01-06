@@ -10,7 +10,7 @@ const path = require('path');
 
 // 需要重点改进的核心语言
 const PRIORITY_LANGUAGES = ['es', 'de', 'fr', 'ja', 'ko'];
-const ALL_LANGUAGES = ['es', 'de', 'fr', 'ja', 'ko', 'pt', 'ru', 'it', 'nl', 'sv', 'no', 'pl', 'fil', 'vi', 'th', 'id', 'ar'];
+const ALL_LANGUAGES = ['es', 'de', 'fr', 'ja', 'ko', 'pt', 'ru', 'it', 'nl', 'sv', 'nb', 'pl', 'tl', 'vi', 'th', 'id', 'ar'];
 
 // 常见的翻译改进规则
 const TRANSLATION_IMPROVEMENTS = {

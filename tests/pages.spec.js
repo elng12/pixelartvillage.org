@@ -19,11 +19,10 @@ test.describe('Static pages visibility', () => {
     await expect(page.getByRole('heading', { level: 1, name: /About/i })).toBeVisible()
   })
 
-  test('Contact page renders content and email link', async ({ page }) => {
+  test('Contact page renders content', async ({ page }) => {
     await page.goto('/contact')
     await expect(page.getByRole('heading', { level: 1, name: /Contact/i })).toBeVisible()
-    const email = page.locator('a[href="mailto:2296744453m@gmail.com"]')
-    await expect(email).toBeVisible()
+    const main = page.getByRole('main')
+    await expect(main.getByRole('link', { name: /blog/i })).toBeVisible()
   })
 })
-

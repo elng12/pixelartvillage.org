@@ -41,14 +41,14 @@ const GOOGLE_LANG_MAP = {
   ar: 'ar',
   de: 'de',
   es: 'es',
-  fil: 'tl',
+  tl: 'tl',
   fr: 'fr',
   id: 'id',
   it: 'it',
   ja: 'ja',
   ko: 'ko',
   nl: 'nl',
-  no: 'no',
+  nb: 'no',
   pl: 'pl',
   pt: 'pt',
   ru: 'ru',
@@ -147,14 +147,14 @@ function languageLabel(code) {
     ja: 'Japanese',
     ko: 'Korean',
     nl: 'Dutch',
-    no: 'Norwegian',
+    nb: 'Norwegian (Bokmål)',
     pl: 'Polish',
     pt: 'Portuguese',
     ru: 'Russian',
     sv: 'Swedish',
     th: 'Thai',
     vi: 'Vietnamese',
-    fil: 'Filipino',
+    tl: 'Filipino',
     zh: 'Chinese',
   }
   return map[code?.toLowerCase()] || code
@@ -355,4 +355,3 @@ main().catch((error) => {
   console.error('[force-retranslate] failed:', error)
   process.exit(1)
 })
-

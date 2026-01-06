@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const RUNTIME_LANGS = ['en', 'es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'fil', 'vi', 'ja', 'sv', 'no', 'nl', 'ar', 'ko', 'th'];
+const RUNTIME_LANGS = ['en', 'es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'tl', 'vi', 'ja', 'sv', 'nb', 'nl', 'ar', 'ko', 'th'];
 
 // 允许的英文词（占位符、专有名词等）
 const ALLOWED_ENGLISH = new Set([
@@ -80,4 +80,3 @@ console.log(`  🟡 Good (21-50 issues): ${good} languages`);
 console.log(`  ⚠️ Needs work (51-100 issues): ${needsWork} languages`);
 console.log(`  ❌ Poor (>100 issues): ${poor} languages`);
 console.log('');
-

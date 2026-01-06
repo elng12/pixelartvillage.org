@@ -60,14 +60,6 @@ export default function About() {
           <li><strong>{t('about.principles.performance.title')}</strong> {t('about.principles.performance.desc')}</li>
           <li><strong>{t('about.principles.accessibility.title')}</strong> {t('about.principles.accessibility.desc')}</li>
         </ul>
-        <h2>{t('about.contact.title')}</h2>
-        <p>
-          {t('about.contact.p1')}
-          {' '}
-          <a className="font-mono text-blue-600 underline" href="mailto:2296744453m@gmail.com" title={t('about.contact.emailTitle')}>
-            2296744453m@gmail.com
-          </a>.
-        </p>
         <p>
           <Trans
             i18nKey="about.moreInfoRich"

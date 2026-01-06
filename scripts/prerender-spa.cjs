@@ -189,24 +189,29 @@ function prerender() {
     return `<article><header><h2>${title}</h2>${date}${tags}</header>${body}</article>`
   }
 
-  const renderBlogIndexVisible = (list = []) => {
+  const renderBlogIndexVisible = (list = [], lang = DEFAULT_LANG, bundle = {}) => {
     if (!Array.isArray(list) || !list.length) return ''
+    const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
+    const blogTitle = pick(bundle, 'blog.title') || 'Blog'
+    const blogSubtitle = pick(bundle, 'blog.subtitle') || 'Articles and updates about making pixel image visuals, tutorials, and new features.'
     const items = list
       .map((item) => {
         if (!item || !item.slug) return ''
         const title = escapeHtml(item.title || '')
         const date = item.date ? `<p class="text-xs text-gray-500 mt-1 text-left">${escapeHtml(item.date)}</p>` : ''
         const excerpt = item.excerpt ? `<p class="text-gray-700 mt-2 text-left">${escapeHtml(item.excerpt)}</p>` : ''
-        return `<li class="p-4 rounded-lg border border-gray-200 bg-white shadow-sm"><h2 class="text-lg font-semibold text-gray-900 text-center"><a href="/blog/${escapeHtml(item.slug)}" class="hover:text-blue-600">${title}</a></h2>${date}${excerpt}</li>`
+        const href = `${prefix}/blog/${escapeHtml(item.slug)}/`
+        return `<li class="p-4 rounded-lg border border-gray-200 bg-white shadow-sm"><h2 class="text-lg font-semibold text-gray-900 text-center"><a href="${href}" class="hover:text-blue-600">${title}</a></h2>${date}${excerpt}</li>`
       })
       .filter(Boolean)
       .join('')
     if (!items) return ''
-    return `<div class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 mb-4 text-center">Blog</h1><p class="text-gray-700 mb-6 max-w-2xl mx-auto text-center">Articles and updates about making pixel image visuals, tutorials, and new features.</p><ul class="space-y-4 max-w-2xl mx-auto">${items}</ul></div>`
+    return `<div class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 mb-4 text-center">${escapeHtml(blogTitle)}</h1><p class="text-gray-700 mb-6 max-w-2xl mx-auto text-center">${escapeHtml(blogSubtitle)}</p><ul class="space-y-4 max-w-2xl mx-auto">${items}</ul></div>`
   }
 
-  const renderBlogPostVisible = (post) => {
+  const renderBlogPostVisible = (post, lang = DEFAULT_LANG, bundle = {}) => {
     if (!post || !post.slug) return ''
+    const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
     const title = escapeHtml(post.title || '')
     const date = post.date ? `<p class="text-xs text-gray-500 mt-1 text-center md:text-left">${escapeHtml(post.date)}</p>` : ''
     const paragraphs = Array.isArray(post.body)
@@ -216,7 +221,41 @@ function prerender() {
           .join('')
       : ''
     const excerpt = post.excerpt ? `<p class="text-gray-700 mt-2 text-left">${escapeHtml(post.excerpt)}</p>` : ''
-    return `<article class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${title}</h1>${date}<div class="prose prose-sm md:prose-base text-gray-800 mt-4 text-center md:text-left prose-pre:text-left prose-code:text-left prose-img:mx-0">${paragraphs || excerpt}</div><footer class="mt-8 text-center md:text-left"><a class="text-blue-600 underline" href="/blog">Back to Blog</a></footer></article>`
+    const backLabel = pick(bundle, 'blog.back') || 'Back to Blog'
+    const backHref = `${prefix}/blog/`
+    return `<article class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${title}</h1>${date}<div class="prose prose-sm md:prose-base text-gray-800 mt-4 text-center md:text-left prose-pre:text-left prose-code:text-left prose-img:mx-0">${paragraphs || excerpt}</div><footer class="mt-8 text-center md:text-left"><a class="text-blue-600 underline" href="${backHref}">${escapeHtml(backLabel)}</a></footer></article>`
+  }
+
+  const cleanTitle = (text) => String(text || '')
+    .replace(/\s*\|\s*Pixel Art Village\s*$/i, '')
+    .replace(/\s*–\s*Pixel Art Village\s*$/i, '')
+    .trim()
+
+  const renderBasicVisible = ({ title, description }) => {
+    const heading = escapeHtml(cleanTitle(title))
+    const desc = description ? `<p class="text-gray-700 mt-3 text-center max-w-2xl mx-auto">${escapeHtml(description)}</p>` : ''
+    if (!heading && !desc) return ''
+    return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${desc}</main>`
+  }
+
+  const renderPseoVisible = (page) => {
+    if (!page) return ''
+    const heading = escapeHtml(page.h1 || page.title || '')
+    const intro = Array.isArray(page.intro) ? page.intro.slice(0, 2) : []
+    const paragraphs = intro.length
+      ? intro.map((para) => `<p class="text-gray-700 mt-3">${escapeHtml(para)}</p>`).join('')
+      : ''
+    const fallback = !paragraphs && page.metaDescription
+      ? `<p class="text-gray-700 mt-3">${escapeHtml(page.metaDescription)}</p>`
+      : ''
+    const body = paragraphs || fallback
+    if (!heading && !body) return ''
+    return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${body}</main>`
+  }
+
+  const getMetaDescription = (metas = []) => {
+    const entry = metas.find(m => m && m.name === 'description')
+    return entry?.content || ''
   }
 
   const posts = resolveContent('blog-posts')
@@ -272,15 +311,15 @@ function prerender() {
       { name: 'twitter:image', content: ABS('/social-about.png') },
     ]},
     { path: '/contact', title: 'Contact | Pixel Art Village', metas: [
-      { name: 'description', content: 'Support, feedback, partnerships. Email 2296744453m@gmail.com.' },
+      { name: 'description', content: 'Support, feedback, partnerships.' },
       { property: 'og:url', content: ABS(ensureTrailingSlash('/contact')) },
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: 'Contact | Pixel Art Village' },
-      { property: 'og:description', content: 'Support, feedback, partnerships. Email 2296744453m@gmail.com.' },
+      { property: 'og:description', content: 'Support, feedback, partnerships.' },
       { property: 'og:image', content: ABS('/social-contact.png') },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Contact | Pixel Art Village' },
-      { name: 'twitter:description', content: 'Support, feedback, partnerships. Email 2296744453m@gmail.com.' },
+      { name: 'twitter:description', content: 'Support, feedback, partnerships.' },
       { name: 'twitter:image', content: ABS('/social-contact.png') },
     ]},
     { path: '/blog', title: 'Blog | Pixel Art Village', metas: [
@@ -294,7 +333,7 @@ function prerender() {
       { name: 'twitter:title', content: 'Blog | Pixel Art Village' },
       { name: 'twitter:description', content: 'Articles and updates about making pixel art, tips, and features.' },
       { name: 'twitter:image', content: ABS('/blog-og/_index.png') },
-    ], extras: blogIndexExtras, visible: renderBlogIndexVisible(posts) },
+    ], extras: blogIndexExtras, visible: ({ lang, bundle }) => renderBlogIndexVisible(posts, lang, bundle) },
   ]
 
   const pseoPages = resolveContent('pseo-pages')
@@ -316,6 +355,7 @@ function prerender() {
         { name: 'twitter:description', content: p.metaDescription || '' },
         { name: 'twitter:image', content: ABS(`/pseo-og/${p.slug}.png`) },
       ],
+      visible: () => renderPseoVisible(p),
     })
   }
 
@@ -337,15 +377,16 @@ function prerender() {
         { name: 'twitter:image', content: ABS(`/blog-og/${p.slug}.png`) },
       ],
       extras: renderBlogArticle(p),
-      visible: renderBlogPostVisible(p),
+      visible: ({ lang, bundle }) => renderBlogPostVisible(p, lang, bundle),
     })
   }
 
   const expandForLang = (r, lang) => {
     const ensure = ensureTrailingSlash
+    const basePath = ensure(r.path)
     const localizedPath = (lang === DEFAULT_LANG)
-      ? ensure(r.path)
-      : ensure((r.path === '/' ? `/${lang}/` : `/${lang}${ensure(r.path)}`))
+      ? basePath
+      : (basePath === '/' ? `/${lang}/` : `/${lang}${basePath}`)
 
     let title = r.title
     let metas = Array.isArray(r.metas) ? [...r.metas] : []
@@ -359,27 +400,48 @@ function prerender() {
       else metas.push({ name: 'description', content: desc })
     }
 
-    if (r.path === '/') {
+    if (basePath === '/') {
       const tTitle = pick(bundle, 'home.seoTitle')
       const tDesc = pick(bundle, 'home.seoDescription')
       if (typeof tTitle === 'string' && tTitle) title = tTitle
       if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
-    } else if (r.path === '/about/') {
+    } else if (basePath === '/about/') {
       const tTitle = pick(bundle, 'about.seoTitle')
       const tDesc = pick(bundle, 'about.seoDesc')
       if (typeof tTitle === 'string' && tTitle) title = tTitle
       if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
-    } else if (r.path === '/privacy/') {
+    } else if (basePath === '/privacy/') {
       const tTitle = pick(bundle, 'privacy.seoTitle')
       const tDesc = pick(bundle, 'privacy.seoDesc')
       if (typeof tTitle === 'string' && tTitle) title = tTitle
       if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
-    } else if (r.path === '/terms/') {
+    } else if (basePath === '/terms/') {
       const tTitle = pick(bundle, 'terms.seoTitle')
       const tDesc = pick(bundle, 'terms.seoDesc')
       if (typeof tTitle === 'string' && tTitle) title = tTitle
       if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
+    } else if (basePath === '/contact/') {
+      const tTitle = pick(bundle, 'contact.seoTitle')
+      const tDesc = pick(bundle, 'contact.seoDesc')
+      if (typeof tTitle === 'string' && tTitle) title = tTitle
+      if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
+    } else if (basePath === '/blog/') {
+      const tTitle = pick(bundle, 'blog.title')
+      const tDesc = pick(bundle, 'blog.subtitle')
+      if (typeof tTitle === 'string' && tTitle) title = `${tTitle} | Pixel Art Village`
+      if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
     }
+
+    const ogUrl = `https://pixelartvillage.org${localizedPath}`
+    const ogIdx = metas.findIndex(m => m && m.property === 'og:url')
+    if (ogIdx >= 0) metas[ogIdx] = { ...metas[ogIdx], content: ogUrl }
+    else metas.push({ property: 'og:url', content: ogUrl })
+
+    const description = getMetaDescription(metas)
+    const resolvedVisible = typeof r.visible === 'function'
+      ? r.visible({ lang, bundle, title, description })
+      : r.visible
+    const visible = resolvedVisible || renderBasicVisible({ title, description })
 
     return {
       lang,
@@ -389,8 +451,8 @@ function prerender() {
       metas,
       extras: r.extras || '',
       links: r.links || null,
-      visible: r.visible || '',
-      basePath: r.path,
+      visible,
+      basePath,
     }
   }
 
@@ -445,7 +507,7 @@ function prerender() {
     const addExtras = (html) => {
       extras = extras ? `${extras}${html}` : html
     }
-    const pathKey = (r.routePath || '/').toLowerCase()
+    const pathKey = (r.basePath || '/').toLowerCase()
     if (/^\/converter\//.test(pathKey)) {
       addExtras('<p>Palette control, palette limits, palette preview – manage palettes precisely.</p>')
       addExtras('<p>image workflow and image formats.</p>')
@@ -453,7 +515,7 @@ function prerender() {
       addExtras('<p>Tips on choosing the right palette, palette examples, and image handling for your style.</p>')
     } else if (/^\/(privacy|terms|about|contact)\//.test(pathKey)) {
       addExtras('<p>Reference palette guidelines for creators.</p>')
-    } else if (r.path === '/') {
+    } else if (r.basePath === '/') {
       addExtras('<p>Explore our palette overview and palette chooser for quick starts.</p>')
     }
 

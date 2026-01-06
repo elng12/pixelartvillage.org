@@ -10,7 +10,7 @@ import logger from './utils/logger'
 export const DEFAULT_LOCALE = localeConfig?.default || 'en'
 export const CANONICAL_LOCALE = DEFAULT_LOCALE
 
-const BASE_LANGS = localeConfig?.supported || ['en', 'es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'fil', 'vi', 'ja', 'sv', 'no', 'nl', 'ar', 'ko', 'th']
+const BASE_LANGS = localeConfig?.supported || ['en', 'es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'tl', 'vi', 'ja', 'sv', 'nb', 'nl', 'ar', 'ko', 'th']
 // 可选：在开发环境下通过 VITE_ENABLE_PSEUDO=1 启用伪本地化语言 'pseudo'
 export const SUPPORTED_LANGS = (() => {
   try {

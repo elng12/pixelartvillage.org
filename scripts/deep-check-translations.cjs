@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const localesDir = path.join(__dirname, '../public/locales');
-const languages = ['es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'fil', 'vi', 'ja', 'sv', 'no', 'nl', 'ar', 'ko', 'th'];
+const languages = ['es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'tl', 'vi', 'ja', 'sv', 'nb', 'nl', 'ar', 'ko', 'th'];
 
 // 读取英文基准文件
 const enPath = path.join(localesDir, 'en', 'translation.json');
@@ -149,4 +149,3 @@ if (Object.keys(allIssues).length > 0) {
 }
 
 console.log('\n' + '='.repeat(80));
-

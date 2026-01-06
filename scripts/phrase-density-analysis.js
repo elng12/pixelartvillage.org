@@ -22,7 +22,8 @@ function analyzePhraseDensity() {
     'public/locales/pl/translation.json',
     'public/locales/id/translation.json',
     'public/locales/vi/translation.json',
-    'public/locales/fil/translation.json',
+    'public/locales/tl/translation.json',
+    'public/locales/nb/translation.json',
     'src/content/blog-posts.json'
   ];
 

@@ -139,19 +139,6 @@ export default function PrivacyPolicy() {
         <p>{t('privacy.sections.changes.p1')}</p>
       </Section>
 
-      <Section title={t('privacy.sections.contact.title')} id="contact">
-        <p>
-          {t('privacy.sections.contact.p1')}{' '}
-          <a
-            className="font-mono text-blue-600 underline"
-            href="mailto:2296744453m@gmail.com"
-            title={t('privacy.sections.contact.emailTitle')}
-          >
-            2296744453m@gmail.com
-          </a>
-        </p>
-      </Section>
-
       <section className="max-w-3xl mx-auto mt-12 pt-8 border-t border-gray-200">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('privacy.quickLinks.heading')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">

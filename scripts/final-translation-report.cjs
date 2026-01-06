@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const localesDir = path.join(__dirname, '../public/locales');
-const languages = ['es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'fil', 'vi', 'ja', 'sv', 'no', 'nl', 'ar', 'ko', 'th'];
+const languages = ['es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'tl', 'vi', 'ja', 'sv', 'nb', 'nl', 'ar', 'ko', 'th'];
 
 console.log('\n' + '='.repeat(80));
 console.log('📊 最终翻译质量报告');
@@ -121,4 +121,3 @@ if (excellent >= results.length * 0.7) {
 }
 
 console.log('\n' + '='.repeat(80) + '\n');
-

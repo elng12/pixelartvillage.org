@@ -35,19 +35,6 @@ export default function Contact() {
       />
       <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('contact.h1')}</h1>
       <div className="prose prose-sm text-gray-700">
-        <p>{t('contact.p1')}</p>
-        <ul>
-          <li>
-            {t('contact.emailLabel')}{' '}
-            <a
-              className="font-mono text-blue-600 underline"
-              href="mailto:2296744453m@gmail.com"
-              title={t('contact.emailTitle')}
-            >
-              2296744453m@gmail.com
-            </a>
-          </li>
-        </ul>
         <p>
           {t('contact.p2')}{' '}
           <LocalizedLink to="/blog/" className="text-blue-600 underline">{t('contact.p3')}</LocalizedLink>{' '}
@@ -64,7 +51,6 @@ export default function Contact() {
           <LocalizedLink to="/converter/image-to-pixel-art/" className="text-blue-600 underline">{t('contact.p12')}</LocalizedLink>{' '}
           {t('contact.p13')}
         </p>
-        <p className="text-xs text-gray-500">{t('contact.note')}</p>
       </div>
     </div>
   )

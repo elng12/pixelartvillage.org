@@ -8,17 +8,17 @@ const CONTENT_DIR = path.resolve('src/content')
 const BASE_LANG = 'en'
 
 // 需要翻译的语言（12种缺失语言）
-const MISSING_LANGUAGES = ['ar', 'fil', 'id', 'it', 'ko', 'nl', 'no', 'pl', 'pseudo', 'sv', 'th', 'vi']
+const MISSING_LANGUAGES = ['ar', 'tl', 'id', 'it', 'ko', 'nl', 'nb', 'pl', 'pseudo', 'sv', 'th', 'vi']
 
 // 语言映射
 const LANG_MAP = {
   ar: 'ar',
-  fil: 'tl',
+  tl: 'tl',
   id: 'id',
   it: 'it',
   ko: 'ko',
   nl: 'nl',
-  no: 'no',
+  nb: 'no',
   pl: 'pl',
   pseudo: 'en', // 伪语言使用英语
   sv: 'sv',

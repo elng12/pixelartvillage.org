@@ -5,6 +5,33 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# 规范化域名与协议
+[[redirects]]
+  from = "https://www.pixelartvillage.org/*"
+  to = "https://pixelartvillage.org/:splat"
+  status = 301
+
+[[redirects]]
+  from = "http://www.pixelartvillage.org/*"
+  to = "https://pixelartvillage.org/:splat"
+  status = 301
+
+[[redirects]]
+  from = "http://pixelartvillage.org/*"
+  to = "https://pixelartvillage.org/:splat"
+  status = 301
+
+# 旧语言前缀迁移
+[[redirects]]
+  from = "/fil/*"
+  to = "/tl/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/no/*"
+  to = "/nb/:splat"
+  status = 301
+
 # 重定向：仅将 /en/* 规范化为无前缀，其它语言前缀保留
 [[redirects]]
   from = "/en/*"

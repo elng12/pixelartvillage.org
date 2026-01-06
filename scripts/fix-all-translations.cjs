@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const localesDir = path.join(__dirname, '../public/locales');
-const languages = ['es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'fil', 'vi', 'sv', 'no', 'nl'];
+const languages = ['es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'tl', 'vi', 'sv', 'nb', 'nl'];
 
 // 读取英文基准文件
 const enPath = path.join(localesDir, 'en', 'translation.json');
@@ -111,4 +111,3 @@ console.log('='.repeat(80));
 console.log(`\n🎉 总共修复了 ${totalFixed} 个翻译问题！\n`);
 console.log('💡 提示: 这些字段已恢复为英文，需要重新翻译');
 console.log('='.repeat(80));
-

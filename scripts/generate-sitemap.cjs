@@ -1,9 +1,13 @@
 // Auto-generate sitemap.xml at build time with current date as lastmod (CommonJS)
-// 优化：只包含规范URL（英文无前缀版本），避免向搜索引擎提交重复内容
+// 优化：包含所有可索引语言版本，保证多语言页面可被收录
 const fs = require('fs');
 const path = require('path');
 
 const DOMAIN = 'https://pixelartvillage.org/';
+const localeConfig = require(path.resolve(__dirname, '..', 'config', 'locales.json'));
+const DEFAULT_LANG = (localeConfig && localeConfig.default) || 'en';
+const SUPPORTED_LANGS = Array.from(new Set((localeConfig && localeConfig.supported) || [DEFAULT_LANG]));
+const OTHER_LANGS = SUPPORTED_LANGS.filter((lang) => lang && lang !== DEFAULT_LANG);
 const outPath = path.resolve(process.cwd(), 'public', 'sitemap.xml');
 
 function loadContent(baseName) {
@@ -29,42 +33,61 @@ function loadContent(baseName) {
 const today = new Date();
 const isoDate = today.toISOString().slice(0, 10);
 
-// 只包含规范URL（英文无前缀版本），避免重复内容
-// 根据 canonical 策略，其他语言版本不应包含在sitemap中
-const CANONICAL_PATHS = ['/', '/privacy', '/terms', '/about', '/contact', '/blog'];
-const PATHS = [...CANONICAL_PATHS];
+// 基础路径（会扩展到所有支持语言）
+const BASE_PATHS = ['/', '/privacy', '/terms', '/about', '/contact', '/blog'];
+const PATHS = [];
 
-// Include blog posts from content - 只包含规范版本
+// Include blog posts & pSEO pages (用于扩展多语言路径)
 const blogPosts = loadContent('blog-posts');
-for (const p of blogPosts) {
-  if (p && p.slug) {
-    PATHS.push(`/blog/${p.slug}`);
-  }
-}
-
-// Include pSEO pages (converter/:slug) - 只包含规范版本
 const pseoPages = loadContent('pseo-pages');
-for (const p of pseoPages) {
-  if (p && p.slug) {
-    PATHS.push(`/converter/${p.slug}`);
+
+function localizePath(p, lang) {
+  const clean = p.startsWith('/') ? p : `/${p}`;
+  if (lang === DEFAULT_LANG) return clean;
+  if (clean === '/') return `/${lang}`;
+  return `/${lang}${clean}`;
+}
+
+function stripLangPrefix(p) {
+  const clean = p === '/' ? '/' : p.replace(/\/+$/, '');
+  const parts = clean.split('/').filter(Boolean);
+  if (parts.length && OTHER_LANGS.includes(parts[0])) {
+    return '/' + parts.slice(1).join('/');
+  }
+  return clean;
+}
+
+function addPathForLangs(p) {
+  for (const lang of SUPPORTED_LANGS) {
+    PATHS.push(localizePath(p, lang));
   }
 }
 
-// 可选：生成hreflang sitemap供参考（但不推荐提交给搜索引擎）
+// 扩展基础路径到所有语言版本
+for (const p of BASE_PATHS) addPathForLangs(p);
+
+// 扩展博客与 pSEO 页面到所有语言版本
+for (const p of blogPosts) {
+  if (p && p.slug) addPathForLangs(`/blog/${p.slug}`);
+}
+for (const p of pseoPages) {
+  if (p && p.slug) addPathForLangs(`/converter/${p.slug}`);
+}
+
+// 可选：生成 hreflang sitemap 供参考
 const generateHreflangSitemap = () => {
-  const OTHER_LANGS = ['es','id','de','pl','it','pt','fr','ru','fil','vi','ja'];
   const HREFLANG_PATHS = [];
 
-  for (const p of CANONICAL_PATHS) {
+  for (const p of BASE_PATHS) {
     for (const l of OTHER_LANGS) {
-      HREFLANG_PATHS.push(`/${l}${p === '/' ? '/' : p}`);
+      HREFLANG_PATHS.push(localizePath(p, l));
     }
   }
 
   for (const p of blogPosts) {
     if (p && p.slug) {
       for (const l of OTHER_LANGS) {
-        HREFLANG_PATHS.push(`/${l}/blog/${p.slug}`);
+        HREFLANG_PATHS.push(localizePath(`/blog/${p.slug}`, l));
       }
     }
   }
@@ -72,7 +95,7 @@ const generateHreflangSitemap = () => {
   for (const p of pseoPages) {
     if (p && p.slug) {
       for (const l of OTHER_LANGS) {
-        HREFLANG_PATHS.push(`/${l}/converter/${p.slug}`);
+        HREFLANG_PATHS.push(localizePath(`/converter/${p.slug}`, l));
       }
     }
   }
@@ -85,18 +108,19 @@ function withSlash(p) {
   return p.endsWith('/') ? p : p + '/';
 }
 
-// 生成主sitemap（只包含规范URL）
+// 生成主 sitemap（包含所有可索引语言版本）
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<!-- 优化站点地图：只包含规范URL，避免重复内容问题 -->
+<!-- 优化站点地图：包含所有可索引语言版本 -->
 <!-- 生成时间: ${new Date().toISOString()} -->
-<!-- URL总数: ${PATHS.length} (规范版本) -->
+<!-- URL总数: ${PATHS.length} (全量多语言) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${PATHS.map((p) => {
-  const priority = p === '/' ? '1.0' :
-                   p.startsWith('/converter/') ? '0.9' :
-                   p.startsWith('/blog/') ? '0.7' : '0.8';
-  const changefreq = p === '/' ? 'daily' :
-                      p.startsWith('/blog/') ? 'monthly' : 'weekly';
+  const basePath = stripLangPrefix(p);
+  const priority = basePath === '/' ? '1.0' :
+                   basePath.startsWith('/converter/') ? '0.9' :
+                   basePath.startsWith('/blog/') ? '0.7' : '0.8';
+  const changefreq = basePath === '/' ? 'daily' :
+                      basePath.startsWith('/blog/') ? 'monthly' : 'weekly';
 
   return `  <url>\n    <loc>${DOMAIN.replace(/\/$/, '')}${withSlash(p)}</loc>\n    <lastmod>${isoDate}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
 }).join('\n')}
@@ -108,14 +132,14 @@ fs.mkdirSync(path.dirname(outPath), { recursive: true });
 
 // 写入主sitemap
 fs.writeFileSync(outPath, xml, 'utf8');
-console.log('[sitemap] Generated canonical sitemap:', outPath);
-console.log('[sitemap] Total canonical URLs:', PATHS.length);
+console.log('[sitemap] Generated multilingual sitemap:', outPath);
+console.log('[sitemap] Total URLs:', PATHS.length);
 console.log('[sitemap] Last modified:', isoDate);
 
-// 可选：生成包含所有语言版本的sitemap供开发参考
+// 可选：生成 hreflang 参考站点地图（仅用于人工核对）
 const hreflangPaths = generateHreflangSitemap();
 const hreflangXml = `<?xml version="1.0" encoding="UTF-8"?>
-<!-- 非规范URL参考站点地图（仅供开发参考，不要提交给搜索引擎） -->
+<!-- hreflang 参考站点地图（仅供开发参考，不要提交给搜索引擎） -->
 <!-- 生成时间: ${new Date().toISOString()} -->
 <!-- URL总数: ${hreflangPaths.length} (包含非规范版本) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

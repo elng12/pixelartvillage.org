@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 
 // 所有需要同步的语言
-const ALL_LANGUAGES = ['es', 'de', 'fr', 'ja', 'ko', 'pt', 'ru', 'it', 'nl', 'sv', 'no', 'pl', 'fil', 'vi', 'th', 'id', 'ar'];
+const ALL_LANGUAGES = ['es', 'de', 'fr', 'ja', 'ko', 'pt', 'ru', 'it', 'nl', 'sv', 'nb', 'pl', 'tl', 'vi', 'th', 'id', 'ar'];
 
 // 基础翻译模板（对于缺失的键提供基本翻译）
 const BASIC_TRANSLATIONS = {

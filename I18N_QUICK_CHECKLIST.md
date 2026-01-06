@@ -105,11 +105,11 @@ node scripts/export-review-md.cjs
 | `pl` | Polski | ⚠️ 需审校 |
 | `nl` | Nederlands | ⚠️ 需审校 |
 | `sv` | Svenska | ⚠️ 需审校 |
-| `no` | Norsk | ⚠️ 需审校 |
+| `nb` | Norsk Bokmål | ⚠️ 需审校 |
 | `ar` | العربية | ⚠️ 需审校 (RTL) |
 | `th` | ไทย | ⚠️ 需审校 |
 | `vi` | Tiếng Việt | ⚠️ 需审校 |
-| `fil` | Filipino | ⚠️ 需审校 |
+| `tl` | Filipino | ⚠️ 需审校 |
 | `pseudo` | [Pseudo] | ✅ 测试用 |
 
 ---
@@ -213,4 +213,3 @@ return faqs.map((faq, i) => <div key={i}>{faq.question}</div>)
 ---
 
 **最后更新**: 2025-11-01
-
