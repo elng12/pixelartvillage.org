@@ -106,22 +106,37 @@ function verifyRoute(routePath, lang = 'en') {
 }
 
 const ROUTES = ['/privacy', '/terms', '/about', '/contact', '/blog'];
-try {
-  const posts = require('../src/content/blog-posts.json');
-  for (const p of posts) {
-    if (p && p.slug) ROUTES.push(`/blog/${p.slug}`);
+function loadJsonList(label, candidates) {
+  for (const rel of candidates) {
+    const filePath = path.resolve(__dirname, rel);
+    if (!fs.existsSync(filePath)) continue;
+    try {
+      const raw = fs.readFileSync(filePath, 'utf8');
+      const data = JSON.parse(raw);
+      if (Array.isArray(data)) return data;
+      console.warn(`[verify-dist] warn: ${label} not an array in ${rel}`);
+    } catch (e) {
+      console.warn(`[verify-dist] warn: cannot parse ${rel}`, e && e.message);
+    }
   }
-} catch (e) {
-  console.warn('[verify-dist] warn: cannot load blog-posts.json', e && e.message);
+  console.warn(`[verify-dist] warn: cannot load ${label} (no candidate found)`);
+  return [];
 }
 
-try {
-  const pseo = require('../src/content/pseo-pages.json');
-  for (const p of pseo) {
-    if (p && p.slug) ROUTES.push(`/converter/${p.slug}`);
-  }
-} catch (e) {
-  console.warn('[verify-dist] warn: cannot load pseo-pages.json', e && e.message);
+const posts = loadJsonList('blog-posts', [
+  '../src/content/blog-posts.json',
+  '../src/content/blog-posts.en.json',
+]);
+for (const p of posts) {
+  if (p && p.slug) ROUTES.push(`/blog/${p.slug}`);
+}
+
+const pseo = loadJsonList('pseo-pages', [
+  '../src/content/pseo-pages.json',
+  '../src/content/pseo-pages.en.json',
+]);
+for (const p of pseo) {
+  if (p && p.slug) ROUTES.push(`/converter/${p.slug}`);
 }
 
 ROUTES.forEach((r) => verifyRoute(r, 'en'));
