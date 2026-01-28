@@ -55,3 +55,4 @@ pixelartvillage.org-Coverage-*/
 # Lighthouse reports and local audit artifacts
 lighthouse-*.json
 pixelartvillage.org_*.json
+trace.json
