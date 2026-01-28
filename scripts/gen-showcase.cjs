@@ -37,7 +37,7 @@ function exists(p) { try { fs.accessSync(p, fs.constants.F_OK); return true; } c
     if (exists(preferredPath)) inputBuffer = fs.readFileSync(preferredPath);
     else if (exists(svgPath)) inputBuffer = fs.readFileSync(svgPath);
     else { log(`skip: neither ${item.preferred} nor ${item.fallbackSvg} exists`); continue; }
-    const sizes = [928, 800, 640, 520, 480];
+    const sizes = [928, 800, 736, 700, 640, 520, 480];
     try {
       for (const w of sizes) {
         const basename = path.basename(item.base);
