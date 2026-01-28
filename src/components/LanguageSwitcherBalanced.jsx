@@ -133,9 +133,9 @@ export default function LanguageSwitcherBalanced() {
       </select>
 
       <div style={{
-        fontSize: '11px',
-        color: '#9ca3af',
-        fontWeight: 'normal',
+        fontSize: '12px',
+        color: '#4b5563',
+        fontWeight: '500',
         whiteSpace: 'nowrap'
       }}>
         {currentLang === 'en' ? 'EN' :

@@ -51,7 +51,8 @@ function ShowcaseSection() {
                 srcSet={`${showcaseBefore480Jpg} 480w, ${showcaseBefore520Jpg} 520w, ${showcaseBefore640Jpg} 640w, ${showcaseBefore700Jpg} 700w, ${showcaseBefore736Jpg} 736w, ${showcaseBefore800Jpg} 800w, ${showcaseBefore928Jpg} 928w`}
                 sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
                 alt={t('showcase.alt.before')}
-                loading="lazy"
+                loading="eager"
+                fetchpriority="high"
                 decoding="async"
                 className="w-full max-w-[440px] md:max-w-[480px] lg:max-w-[520px] mx-auto bg-white object-contain aspect-[928/1232]"
                 width="928"
