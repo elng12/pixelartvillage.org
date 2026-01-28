@@ -9,6 +9,12 @@ import TranslationPreloader from '@/components/TranslationPreloader'
 import CriticalCSS from '@/components/CriticalCSS'
 import Header from './components/Header'
 import ToolSection from './components/ToolSection'
+import ShowcaseSection from './components/ShowcaseSection'
+import WplaceFeaturesSection from './components/WplaceFeaturesSection'
+import FeaturesSection from './components/FeaturesSection'
+import HowItWorksSection from './components/HowItWorksSection'
+import FaqSection from './components/FaqSection'
+import RelatedLinks from './components/RelatedLinks'
 import { LocaleProvider } from '@/contexts/LocaleContext'
 import { generateHreflangLinks } from '@/utils/hreflang'
 import Seo from '@/components/Seo'
@@ -16,12 +22,6 @@ import i18n, { CANONICAL_LOCALE, setStoredLang } from '@/i18n'
 import { buildLocalizedPath, extractLocaleFromPath, RUNTIME_LANGS } from '@/utils/locale'
 
 const Editor = lazy(() => import('./components/Editor'))
-const ShowcaseSection = lazy(() => import('./components/ShowcaseSection'))
-const WplaceFeaturesSection = lazy(() => import('./components/WplaceFeaturesSection'))
-const FeaturesSection = lazy(() => import('./components/FeaturesSection'))
-const HowItWorksSection = lazy(() => import('./components/HowItWorksSection'))
-const FaqSection = lazy(() => import('./components/FaqSection'))
-const RelatedLinks = lazy(() => import('./components/RelatedLinks'))
 const Footer = lazy(() => import('./components/Footer'))
 const PrivacyPolicy = lazy(() => import('./components/policy/PrivacyPolicy'))
 const TermsOfService = lazy(() => import('./components/policy/TermsOfService'))
@@ -57,7 +57,11 @@ function Home() {
         lang={currentLocale}
       />
       <ToolSection onImageUpload={setUploadedImage} enablePaste={!uploadedImage} />
-      {(uploadedImage || IS_E2E) ? <Editor image={uploadedImage} /> : null}
+      {(uploadedImage || IS_E2E) ? (
+        <Suspense fallback={null}>
+          <Editor image={uploadedImage} />
+        </Suspense>
+      ) : null}
       <ShowcaseSection />
       <WplaceFeaturesSection />
       <FeaturesSection />

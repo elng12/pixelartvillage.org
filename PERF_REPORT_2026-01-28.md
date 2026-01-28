@@ -194,6 +194,19 @@
 
 ---
 
+## 13. Validation Results (Local Preview, After Suspense Adjustment)
+**环境**：`npm run build` + `npm run preview` (http://localhost:4173)  
+**工具**：Lighthouse (headless, desktop preset), 输出保存为 `lighthouse-local.json`  
+
+**结果**  
+- Performance: 1.00  
+- FCP: 0.4s / LCP: 0.6s / TBT: 0ms / **CLS: 0.025** / SI: 0.4s  
+- `layout-shifts` 记录数：1（未定位具体 culprit）  
+
+**结论**：本地 CLS 已降至 0.025（良好区间）。仍有轻微抖动，但已满足 Lighthouse 的稳定性要求。
+
+---
+
 ## 11. Decision Log
 - 字体策略：选择系统字体（不引入 Inter）。  
   理由：避免新增字体请求与潜在 CLS 风险，优先确保性能与稳定性。  
