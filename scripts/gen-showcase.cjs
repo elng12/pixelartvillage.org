@@ -37,7 +37,7 @@ function exists(p) { try { fs.accessSync(p, fs.constants.F_OK); return true; } c
     if (exists(preferredPath)) inputBuffer = fs.readFileSync(preferredPath);
     else if (exists(svgPath)) inputBuffer = fs.readFileSync(svgPath);
     else { log(`skip: neither ${item.preferred} nor ${item.fallbackSvg} exists`); continue; }
-    const sizes = [1200, 800, 480];
+    const sizes = [928, 800, 640, 520, 480];
     try {
       for (const w of sizes) {
         const basename = path.basename(item.base);
@@ -49,25 +49,26 @@ function exists(p) { try { fs.accessSync(p, fs.constants.F_OK); return true; } c
         const genJpgPath = path.join(GENERATED_DIR, jpgName);
 
         await sharp(inputBuffer)
-          .resize(w, null, { fit: 'inside', withoutEnlargement: false })
-          .webp({ quality: 85 })
+          .resize(w, null, { fit: 'inside', withoutEnlargement: true })
+          .webp({ quality: 80 })
           .toFile(webpPath);
         await sharp(inputBuffer)
-          .resize(w, null, { fit: 'inside', withoutEnlargement: false })
-          .jpeg({ quality: 88 })
+          .resize(w, null, { fit: 'inside', withoutEnlargement: true })
+          .jpeg({ quality: 85 })
           .toFile(jpgPath);
 
         fs.copyFileSync(webpPath, genWebpPath);
         fs.copyFileSync(jpgPath, genJpgPath);
       }
-      // keep default aliases for 1200w for backward compatibility
+      const largest = Math.max(...sizes);
+      // keep default aliases for the largest size for backward compatibility
       const aliasWebp = path.join(ROOT, `${item.base}.webp`);
       const aliasJpg = path.join(ROOT, `${item.base}.jpg`);
-      fs.copyFileSync(path.join(ROOT, `${item.base}-w1200.webp`), aliasWebp);
-      fs.copyFileSync(path.join(ROOT, `${item.base}-w1200.jpg`), aliasJpg);
+      fs.copyFileSync(path.join(ROOT, `${item.base}-w${largest}.webp`), aliasWebp);
+      fs.copyFileSync(path.join(ROOT, `${item.base}-w${largest}.jpg`), aliasJpg);
       const basename = path.basename(item.base);
-      fs.copyFileSync(path.join(ROOT, `${item.base}-w1200.webp`), path.join(GENERATED_DIR, `${basename}.webp`));
-      fs.copyFileSync(path.join(ROOT, `${item.base}-w1200.jpg`), path.join(GENERATED_DIR, `${basename}.jpg`));
+      fs.copyFileSync(path.join(ROOT, `${item.base}-w${largest}.webp`), path.join(GENERATED_DIR, `${basename}.webp`));
+      fs.copyFileSync(path.join(ROOT, `${item.base}-w${largest}.jpg`), path.join(GENERATED_DIR, `${basename}.jpg`));
       log(`generated multi-size webp/jpg for ${path.basename(item.base)}`);
     } catch (err) {
       log('error: ' + (err?.message || String(err)));

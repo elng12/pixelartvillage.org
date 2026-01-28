@@ -1,16 +1,24 @@
 import { useTranslation } from 'react-i18next';
 import showcaseBefore480Webp from '@/assets/generated/showcase-before-w480.webp';
+import showcaseBefore520Webp from '@/assets/generated/showcase-before-w520.webp';
+import showcaseBefore640Webp from '@/assets/generated/showcase-before-w640.webp';
 import showcaseBefore800Webp from '@/assets/generated/showcase-before-w800.webp';
-import showcaseBefore1200Webp from '@/assets/generated/showcase-before-w1200.webp';
+import showcaseBefore928Webp from '@/assets/generated/showcase-before-w928.webp';
 import showcaseBefore480Jpg from '@/assets/generated/showcase-before-w480.jpg';
+import showcaseBefore520Jpg from '@/assets/generated/showcase-before-w520.jpg';
+import showcaseBefore640Jpg from '@/assets/generated/showcase-before-w640.jpg';
 import showcaseBefore800Jpg from '@/assets/generated/showcase-before-w800.jpg';
-import showcaseBefore1200Jpg from '@/assets/generated/showcase-before-w1200.jpg';
+import showcaseBefore928Jpg from '@/assets/generated/showcase-before-w928.jpg';
 import showcaseAfter480Webp from '@/assets/generated/showcase-after-w480.webp';
+import showcaseAfter520Webp from '@/assets/generated/showcase-after-w520.webp';
+import showcaseAfter640Webp from '@/assets/generated/showcase-after-w640.webp';
 import showcaseAfter800Webp from '@/assets/generated/showcase-after-w800.webp';
-import showcaseAfter1200Webp from '@/assets/generated/showcase-after-w1200.webp';
+import showcaseAfter928Webp from '@/assets/generated/showcase-after-w928.webp';
 import showcaseAfter480Jpg from '@/assets/generated/showcase-after-w480.jpg';
+import showcaseAfter520Jpg from '@/assets/generated/showcase-after-w520.jpg';
+import showcaseAfter640Jpg from '@/assets/generated/showcase-after-w640.jpg';
 import showcaseAfter800Jpg from '@/assets/generated/showcase-after-w800.jpg';
-import showcaseAfter1200Jpg from '@/assets/generated/showcase-after-w1200.jpg';
+import showcaseAfter928Jpg from '@/assets/generated/showcase-after-w928.jpg';
 
 function ShowcaseSection() {
   const { t } = useTranslation();
@@ -27,19 +35,19 @@ function ShowcaseSection() {
             <picture>
               <source
                 type="image/webp"
-                srcSet={`${showcaseBefore480Webp} 480w, ${showcaseBefore800Webp} 800w, ${showcaseBefore1200Webp} 1200w`}
+                srcSet={`${showcaseBefore480Webp} 480w, ${showcaseBefore520Webp} 520w, ${showcaseBefore640Webp} 640w, ${showcaseBefore800Webp} 800w, ${showcaseBefore928Webp} 928w`}
                 sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
               />
               <img
-                src={showcaseBefore1200Jpg}
-                srcSet={`${showcaseBefore480Jpg} 480w, ${showcaseBefore800Jpg} 800w, ${showcaseBefore1200Jpg} 1200w`}
+                src={showcaseBefore928Jpg}
+                srcSet={`${showcaseBefore480Jpg} 480w, ${showcaseBefore520Jpg} 520w, ${showcaseBefore640Jpg} 640w, ${showcaseBefore800Jpg} 800w, ${showcaseBefore928Jpg} 928w`}
                 sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
                 alt={t('showcase.alt.before')}
                 loading="lazy"
                 decoding="async"
-                className="w-full max-w-[440px] md:max-w-[480px] lg:max-w-[520px] mx-auto bg-white object-contain aspect-[800/1062]"
-                width="800"
-                height="1062"
+                className="w-full max-w-[440px] md:max-w-[480px] lg:max-w-[520px] mx-auto bg-white object-contain aspect-[928/1232]"
+                width="928"
+                height="1232"
               />
             </picture>
           </div>
@@ -48,19 +56,19 @@ function ShowcaseSection() {
             <picture>
               <source
                 type="image/webp"
-                srcSet={`${showcaseAfter480Webp} 480w, ${showcaseAfter800Webp} 800w, ${showcaseAfter1200Webp} 1200w`}
+                srcSet={`${showcaseAfter480Webp} 480w, ${showcaseAfter520Webp} 520w, ${showcaseAfter640Webp} 640w, ${showcaseAfter800Webp} 800w, ${showcaseAfter928Webp} 928w`}
                 sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
               />
               <img
-                src={showcaseAfter1200Jpg}
-                srcSet={`${showcaseAfter480Jpg} 480w, ${showcaseAfter800Jpg} 800w, ${showcaseAfter1200Jpg} 1200w`}
+                src={showcaseAfter928Jpg}
+                srcSet={`${showcaseAfter480Jpg} 480w, ${showcaseAfter520Jpg} 520w, ${showcaseAfter640Jpg} 640w, ${showcaseAfter800Jpg} 800w, ${showcaseAfter928Jpg} 928w`}
                 sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
                 alt={t('showcase.alt.after')}
                 loading="lazy"
                 decoding="async"
-                className="w-full max-w-[440px] md:max-w-[480px] lg:max-w-[520px] mx-auto bg-white object-contain aspect-[800/1062]"
-                width="800"
-                height="1062"
+                className="w-full max-w-[440px] md:max-w-[480px] lg:max-w-[520px] mx-auto bg-white object-contain aspect-[928/1232]"
+                width="928"
+                height="1232"
               />
             </picture>
           </div>

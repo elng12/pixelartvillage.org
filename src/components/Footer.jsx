@@ -1,5 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import LocalizedLink from '@/components/LocalizedLink';
+import aiDirsBadge from '@/assets/badges/ai-dirs-badge.svg';
+import fazierBadge from '@/assets/badges/fazier-badge.svg';
+import indieDealsBadge from '@/assets/badges/indie-deals-badge.svg';
+import startupFameBadge from '@/assets/badges/startupfame-badge.webp';
+import turbo0Badge from '@/assets/badges/turbo0-badge.svg';
+import twelveToolsBadge from '@/assets/badges/twelve-tools-badge.svg';
 
 function GitHubIcon({ className }) {
   return (
@@ -102,7 +108,7 @@ function Footer() {
             <div className="mt-6 text-center flex flex-wrap items-center justify-center gap-6">
               <a href="https://twelve.tools" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
                 <img
-                  src="/twelve-tools-badge.svg"
+                  src={twelveToolsBadge}
                   alt={t('footer.badges.twelveTools')}
                   width="200"
                   height="54"
@@ -111,7 +117,7 @@ function Footer() {
               </a>
               <a href="https://fazier.com/launches/pixelartvillage.org" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
                 <img
-                  src="/fazier-badge.svg"
+                  src={fazierBadge}
                   alt={t('footer.badges.fazier')}
                   width="250"
                   height="54"
@@ -120,7 +126,7 @@ function Footer() {
               </a>
               <a href="https://startupfa.me/s/pixel-art-village?utm_source=pixelartvillage.org" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
                 <img
-                  src="/startupfame-badge.webp"
+                  src={startupFameBadge}
                   alt={t('footer.badges.startupFame')}
                   width="171"
                   height="54"
@@ -129,7 +135,7 @@ function Footer() {
               </a>
               <a href="https://turbo0.com/item/pixel-art-village" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
                 <img
-                  src="/turbo0-badge.svg"
+                  src={turbo0Badge}
                   alt={t('footer.badges.turbo0')}
                   width="180"
                   height="54"
@@ -138,7 +144,7 @@ function Footer() {
               </a>
               <a href="https://indie.deals?ref=https%3A%2F%2Fpixelartvillage.org%2F" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
                 <img
-                  src="/indie-deals-badge.svg"
+                  src={indieDealsBadge}
                   alt={t('footer.badges.indieDeals')}
                   width="180"
                   height="54"
@@ -147,7 +153,7 @@ function Footer() {
               </a>
               <a href="https://backlinkdirs.com" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
                 <img
-                  src="/ai-dirs-badge.svg"
+                  src={aiDirsBadge}
                   alt={t('footer.badges.aiDirs')}
                   width="180"
                   height="54"
