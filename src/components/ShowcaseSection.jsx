@@ -33,13 +33,13 @@ function ShowcaseSection() {
               <img
                 src={showcaseBefore1200Jpg}
                 srcSet={`${showcaseBefore480Jpg} 480w, ${showcaseBefore800Jpg} 800w, ${showcaseBefore1200Jpg} 1200w`}
-                sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 600px"
+                sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
                 alt={t('showcase.alt.before')}
                 loading="lazy"
                 decoding="async"
-                className="w-full max-w-[440px] md:max-w-[480px] lg:max-w-[520px] mx-auto bg-white object-contain"
-                width="600"
-                height="400"
+                className="w-full max-w-[440px] md:max-w-[480px] lg:max-w-[520px] mx-auto bg-white object-contain aspect-[800/1062]"
+                width="800"
+                height="1062"
               />
             </picture>
           </div>
@@ -54,13 +54,13 @@ function ShowcaseSection() {
               <img
                 src={showcaseAfter1200Jpg}
                 srcSet={`${showcaseAfter480Jpg} 480w, ${showcaseAfter800Jpg} 800w, ${showcaseAfter1200Jpg} 1200w`}
-                sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 600px"
+                sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
                 alt={t('showcase.alt.after')}
                 loading="lazy"
                 decoding="async"
-                className="w-full max-w-[440px] md:max-w-[480px] lg:max-w-[520px] mx-auto bg-white object-contain"
-                width="600"
-                height="400"
+                className="w-full max-w-[440px] md:max-w-[480px] lg:max-w-[520px] mx-auto bg-white object-contain aspect-[800/1062]"
+                width="800"
+                height="1062"
               />
             </picture>
           </div>

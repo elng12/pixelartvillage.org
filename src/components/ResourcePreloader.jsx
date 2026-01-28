@@ -8,22 +8,6 @@ export default function ResourcePreloader() {
   useEffect(() => {
     // 预加载关键资源
     const preloadResources = () => {
-      // 预加载字体
-      const fontPreload = document.createElement('link')
-      fontPreload.rel = 'preload'
-      fontPreload.href = '/fonts/inter-var.woff2'
-      fontPreload.as = 'font'
-      fontPreload.type = 'font/woff2'
-      fontPreload.crossOrigin = 'anonymous'
-      document.head.appendChild(fontPreload)
-
-      // 预加载关键CSS
-      const cssPreload = document.createElement('link')
-      cssPreload.rel = 'preload'
-      cssPreload.href = '/src/index.css'
-      cssPreload.as = 'style'
-      document.head.appendChild(cssPreload)
-
       // 根据当前路由预加载相应的语言包
       const pathSegments = location.pathname.split('/')
       const currentLang = pathSegments[1] || 'en'
