@@ -483,9 +483,7 @@ function prerender() {
 
     out = injectHreflang(out, alternates)
 
-    if (r.visible) {
-      out = injectVisibleContent(out, r.visible)
-    }
+    // Do not inject visible fallback content into #root to avoid pre-hydration flashes.
 
     const defaultLinks = [
       { href: ABS('/'), text: 'Home' },
