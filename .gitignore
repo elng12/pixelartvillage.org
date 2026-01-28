@@ -52,3 +52,6 @@ pixelartvillage.org-Coverage-*/
 # Local settings
 .claude/settings.local.json
 
+# Lighthouse reports and local audit artifacts
+lighthouse-*.json
+pixelartvillage.org_*.json
