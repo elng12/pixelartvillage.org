@@ -7,11 +7,16 @@ export default function ScrollManager() {
   useEffect(() => {
     if (hash) {
       const id = decodeURIComponent(hash.slice(1))
+      const removableHashes = new Set(['tool', 'showcase', 'features', 'how-it-works', 'faq'])
       // 使用 rAF 等下一帧，确保目标节点已渲染
       requestAnimationFrame(() => {
         const el = document.getElementById(id)
         if (el && typeof el.scrollIntoView === 'function') {
           el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          if (removableHashes.has(id)) {
+            const nextUrl = `${window.location.pathname}${window.location.search}`
+            window.history.replaceState(null, '', nextUrl)
+          }
         }
       })
       return
@@ -22,4 +27,3 @@ export default function ScrollManager() {
 
   return null
 }
-
