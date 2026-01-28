@@ -12,10 +12,8 @@ function GitHubIcon({ className }) {
 function Footer() {
   const { t } = useTranslation()
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-gray-900 text-gray-300 footer-grid-bg">
       <div className="relative">
-        {/* 淡像素网格装饰 */}
-        <div className="hidden md:block absolute inset-0 pointer-events-none pixel-grid-bg" aria-hidden />
         {/* 像素角标 */}
         <div className="hidden md:block absolute top-2 left-2 w-2 h-2 bg-violet-400/70" aria-hidden />
         <div className="hidden md:block absolute top-2 right-2 w-2 h-2 bg-blue-500/70" aria-hidden />

@@ -99,6 +99,8 @@ function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
       </main>
       <Suspense fallback={null}>
         <ConsentBanner />
+      </Suspense>
+      <Suspense fallback={<div className="bg-gray-900 min-h-[520px] md:min-h-[570px]" aria-hidden />}>
         <Footer />
       </Suspense>
     </LocaleProvider>

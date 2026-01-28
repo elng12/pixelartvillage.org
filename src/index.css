@@ -140,6 +140,20 @@
     background-size: 12px 12px;
     image-rendering: pixelated;
   }
+
+  /* 页脚使用背景图，避免额外绝对层造成 CLS */
+  .footer-grid-bg {
+    position: relative;
+  }
+  @media (min-width: 768px) {
+    .footer-grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(167,139,250,0.09) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(59,130,246,0.09) 1px, transparent 1px);
+      background-size: 12px 12px;
+      image-rendering: pixelated;
+    }
+  }
 }
 
 /* Language switcher styles */
