@@ -47,7 +47,7 @@ export default function TranslationPreloader() {
   // 预加载常用语言（在空闲时间）- 临时禁用以防止自动语言切换
   useEffect(() => {
     // 临时禁用所有预加载，防止自动切换到日语
-    if (import.meta?.env?.DEV) {
+    if (import.meta.env.DEV) {
       console.log('[TranslationPreloader] 语言预加载已禁用')
     }
     return () => {}

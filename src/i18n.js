@@ -14,7 +14,7 @@ const BASE_LANGS = localeConfig?.supported || ['en', 'es', 'id', 'de', 'pl', 'it
 // 可选：在开发环境下通过 VITE_ENABLE_PSEUDO=1 启用伪本地化语言 'pseudo'
 export const SUPPORTED_LANGS = (() => {
   try {
-    if (import.meta?.env?.VITE_ENABLE_PSEUDO) return [...BASE_LANGS, 'pseudo']
+    if (import.meta.env.VITE_ENABLE_PSEUDO) return [...BASE_LANGS, 'pseudo']
   } catch { /* noop */ }
   return BASE_LANGS
 })()
@@ -50,7 +50,7 @@ export function detectBrowserLang() {
   if (nav?.language) cands.push(nav.language)
 
   // 调试日志
-  if (import.meta?.env?.DEV) {
+  if (import.meta.env.DEV) {
     console.log('[detectBrowserLang] 浏览器语言候选:', cands)
     console.log('[detectBrowserLang] 支持的语言:', SUPPORTED_LANGS)
   }
@@ -61,7 +61,7 @@ export function detectBrowserLang() {
     const lc = String(c).toLowerCase()
     const base = lc.split('-')[0]
     if (base === 'en') {
-      if (import.meta?.env?.DEV) {
+      if (import.meta.env.DEV) {
         console.log('[detectBrowserLang] 检测到英文，优先返回:', base)
       }
       return 'en'
@@ -74,14 +74,14 @@ export function detectBrowserLang() {
     const lc = String(c).toLowerCase()
     const base = lc.split('-')[0]
     if (SUPPORTED_LANGS.includes(base)) {
-      if (import.meta?.env?.DEV) {
+      if (import.meta.env.DEV) {
         console.log('[detectBrowserLang] 检测到支持的语言:', base)
       }
       return base
     }
   }
 
-  if (import.meta?.env?.DEV) {
+  if (import.meta.env.DEV) {
     console.log('[detectBrowserLang] 未检测到支持的语言，返回默认: en')
   }
   return 'en'
@@ -115,13 +115,13 @@ i18n
 try {
   i18n.on('missingKey', (lngs, ns, key) => {
     const msg = `[i18n missing] key="${key}" ns="${ns}" langs=${Array.isArray(lngs)?lngs.join(','):lngs}`
-    if (import.meta?.env?.DEV) {
+    if (import.meta.env.DEV) {
       console.warn(msg)
       // 提供修复建议
       console.info(`💡 修复建议: 在 public/locales/en/translation.json 中添加 "${key}": ""`)
     }
     // 生产环境可以选择发送到错误监控服务
-    // if (import.meta?.env?.PROD && typeof window !== 'undefined') {
+    // if (import.meta.env.PROD && typeof window !== 'undefined') {
     //   window.gtag?.('event', 'i18n_missing_key', { key, ns, langs: lngs })
     // }
   })

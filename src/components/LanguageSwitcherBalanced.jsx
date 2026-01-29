@@ -59,38 +59,10 @@ export default function LanguageSwitcherBalanced() {
 
   return (
     <div
-      className="language-switcher-balanced"
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '6px',
-        padding: '6px 12px',
-        backgroundColor: '#ffffff',
-        border: '1px solid #e5e7eb',
-        borderRadius: '8px',
-        fontSize: '13px',
-        color: '#374151',
-        transition: 'all 0.2s ease',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.backgroundColor = '#f9fafb'
-        e.currentTarget.style.borderColor = '#d1d5db'
-        e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.15)'
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.backgroundColor = '#ffffff'
-        e.currentTarget.style.borderColor = '#e5e7eb'
-        e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)'
-      }}
+      className="language-switcher-balanced inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm text-gray-700 shadow-sm transition hover:bg-gray-50 hover:border-gray-300 hover:shadow-md"
       title={t('lang.title', 'Select language')}
     >
-      <span style={{
-        fontSize: '14px',
-        color: '#6b7280',
-        fontWeight: '500',
-        whiteSpace: 'nowrap'
-      }}>
+      <span className="text-sm text-gray-500 font-medium whitespace-nowrap">
         🌍
       </span>
 
@@ -102,28 +74,7 @@ export default function LanguageSwitcherBalanced() {
         id="language-switcher"
         value={currentLang}
         onChange={handleChange}
-        style={{
-          padding: '4px 8px',
-          border: '1px solid #d1d5db',
-          borderRadius: '4px',
-          backgroundColor: '#ffffff',
-          color: '#374151',
-          fontSize: '13px',
-          fontWeight: '500',
-          cursor: 'pointer',
-          outline: 'none',
-          minWidth: '130px',
-          height: '28px',
-          lineHeight: '20px'
-        }}
-        onFocus={(e) => {
-          e.currentTarget.style.borderColor = '#3b82f6'
-          e.currentTarget.style.boxShadow = '0 0 0 2px rgba(59, 130, 246, 0.1)'
-        }}
-        onBlur={(e) => {
-          e.currentTarget.style.borderColor = '#d1d5db'
-          e.currentTarget.style.boxShadow = 'none'
-        }}
+        className="min-w-[130px] h-7 px-2 py-1 border border-gray-300 rounded bg-white text-gray-700 text-sm font-medium cursor-pointer outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
       >
         {options.map(({ code, label }) => (
           <option key={code} value={code}>
@@ -132,12 +83,7 @@ export default function LanguageSwitcherBalanced() {
         ))}
       </select>
 
-      <div style={{
-        fontSize: '12px',
-        color: '#4b5563',
-        fontWeight: '500',
-        whiteSpace: 'nowrap'
-      }}>
+      <div className="text-xs text-gray-700 font-medium whitespace-nowrap">
         {currentLang === 'en' ? 'EN' :
          currentLang === 'ja' ? '日本語' :
          currentLang === 'ko' ? '한국어' :

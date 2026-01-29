@@ -17,7 +17,7 @@ export function useLanguageSync() {
     // 存储的语言优先
     const stored = languageManager.getStoredLanguage()
     if (stored) {
-      if (import.meta?.env?.DEV) {
+      if (import.meta.env.DEV) {
         console.log('[useLanguageSync] 使用存储语言:', stored)
       }
       return stored
@@ -26,7 +26,7 @@ export function useLanguageSync() {
     // 路由参数语言
     const routeLang = (params.lang || '').toLowerCase()
     if (SUPPORTED_LANGS.includes(routeLang)) {
-      if (import.meta?.env?.DEV) {
+      if (import.meta.env.DEV) {
         console.log('[useLanguageSync] 使用路由语言:', routeLang)
       }
       return routeLang
@@ -35,7 +35,7 @@ export function useLanguageSync() {
     // 路径语言
     const pathLang = languageManager.extractLanguageFromPath(location.pathname)
     if (pathLang) {
-      if (import.meta?.env?.DEV) {
+      if (import.meta.env.DEV) {
         console.log('[useLanguageSync] 使用路径语言:', pathLang)
       }
       return pathLang
@@ -44,14 +44,14 @@ export function useLanguageSync() {
     // i18n语言
     const i18nLang = (i18n.language || '').toLowerCase()
     if (SUPPORTED_LANGS.includes(i18nLang)) {
-      if (import.meta?.env?.DEV) {
+      if (import.meta.env.DEV) {
         console.log('[useLanguageSync] 使用i18n语言:', i18nLang)
       }
       return i18nLang
     }
 
     // 默认语言
-    if (import.meta?.env?.DEV) {
+    if (import.meta.env.DEV) {
       console.log('[useLanguageSync] 使用默认语言:', CANONICAL_LOCALE)
     }
     return CANONICAL_LOCALE
@@ -61,13 +61,13 @@ export function useLanguageSync() {
   const handleLanguageChange = useCallback(async (targetLang) => {
     const lang = (targetLang || '').toLowerCase()
 
-    if (import.meta?.env?.DEV) {
+    if (import.meta.env.DEV) {
       console.log('[useLanguageSync] 尝试切换到语言:', lang)
       console.log('[useLanguageSync] 当前语言:', currentLang)
     }
 
     if (!SUPPORTED_LANGS.includes(lang) || lang === currentLang) {
-      if (import.meta?.env?.DEV) {
+      if (import.meta.env.DEV) {
         console.log('[useLanguageSync] 切换被阻止:',
           !SUPPORTED_LANGS.includes(lang) ? '语言不支持' : '语言相同')
       }
@@ -84,7 +84,7 @@ export function useLanguageSync() {
       // 更新i18n
       await i18n.changeLanguage(lang)
 
-      if (import.meta?.env?.DEV) {
+      if (import.meta.env.DEV) {
         console.log('[useLanguageSync] 语言切换成功:', lang)
       }
 
@@ -98,7 +98,7 @@ export function useLanguageSync() {
 
       const keepHash = (() => {
         try {
-          if (!import.meta?.env?.VITE_PRESERVE_HASH_ON_LANG_SWITCH) return false
+          if (!import.meta.env.VITE_PRESERVE_HASH_ON_LANG_SWITCH) return false
           const raw = (location.hash || '').slice(1)
           if (!raw) return false
           const id = decodeURIComponent(raw)
@@ -111,7 +111,7 @@ export function useLanguageSync() {
       const search = searchParams.toString()
       const nextUrl = `${newPath}${search ? `?${search}` : ''}${keepHash ? location.hash : ''}`
 
-      if (import.meta?.env?.DEV) {
+      if (import.meta.env.DEV) {
         console.log('[useLanguageSync] 导航到:', nextUrl)
       }
 

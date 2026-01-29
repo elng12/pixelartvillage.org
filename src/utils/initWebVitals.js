@@ -8,7 +8,7 @@ export function initWebVitals(report = () => {}) {
         po.observe({ type, buffered: true, ...opts })
         observers.push(po)
       } catch (err) {
-        if (import.meta?.env?.DEV) {
+        if (import.meta.env.DEV) {
           // 某些浏览器/环境不支持对应的 PerformanceObserver 类型
           console.debug('[web-vitals] observer unsupported:', type, err?.message)
         }
@@ -36,12 +36,12 @@ export function initWebVitals(report = () => {}) {
       report({ t: Date.now(), ...metrics });
       observers.forEach((po) => {
         try { po.disconnect(); } catch (err) {
-          if (import.meta?.env?.DEV) console.debug('[web-vitals] disconnect failed:', err?.message)
+          if (import.meta.env.DEV) console.debug('[web-vitals] disconnect failed:', err?.message)
         }
       });
     };
     addEventListener('pagehide', flush, { once: true });
   } catch (err) {
-    if (import.meta?.env?.DEV) console.debug('[web-vitals] init disabled:', err?.message)
+    if (import.meta.env.DEV) console.debug('[web-vitals] init disabled:', err?.message)
   }
 }

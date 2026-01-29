@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import safeStorage from '@/utils/safeStorage'
-import { ensureAdSenseLoaded } from '@/utils/loadAdSense.js'
+import { scheduleAdSenseLoad } from '@/utils/loadAdSense.js'
 import LocalizedLink from '@/components/LocalizedLink'
 
 const STORAGE_KEY = 'consent.choice.v1'
@@ -36,12 +36,8 @@ export default function ConsentBanner() {
 
   const acceptAll = useCallback(() => {
     updateConsent(true)
-    // 用户同意后再加载 AdSense
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => ensureAdSenseLoaded(), { timeout: 2000 })
-    } else {
-      setTimeout(() => ensureAdSenseLoaded(), 300)
-    }
+    // 用户同意后在空闲或交互时再加载 AdSense，减少首屏主线程压力
+    scheduleAdSenseLoad({ delayMs: 4000 })
     setVisible(false)
   }, [])
 

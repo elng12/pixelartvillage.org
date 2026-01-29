@@ -52,7 +52,7 @@ function ShowcaseSection() {
                 sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
                 alt={t('showcase.alt.before')}
                 loading="eager"
-                fetchpriority="high"
+                fetchPriority="high"
                 decoding="async"
                 className="w-full max-w-[440px] md:max-w-[480px] lg:max-w-[520px] mx-auto bg-white object-contain aspect-[928/1232]"
                 width="928"

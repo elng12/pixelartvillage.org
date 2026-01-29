@@ -3,7 +3,7 @@
  * 在生产环境中自动禁用调试日志
  */
 
-const isDev = import.meta?.env?.DEV || import.meta?.env?.MODE === 'development'
+const isDev = import.meta.env.DEV || import.meta.env.MODE === 'development'
 
 export const logger = {
   /**
