@@ -1,7 +1,6 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import logger from '@/utils/logger';
-import { downscaleFileToBlob, loadImageFromFile } from '../utils/resizeImage';
 import { PREVIEW_LIMIT } from '../utils/constants';
 
 // 常量定义
@@ -19,18 +18,10 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
   const uploadLiveRef = useRef(null); // 替代getElementById
   const [error, setError] = useState('');
   const [isPreparing, setIsPreparing] = useState(false);
-  const [compact, setCompact] = useState(false);
   const lastUrlRef = useRef(null);
   const pasteGuardRef = useRef(0);
   const log = useCallback((event, payload = {}) => {
     logger.debug(`[ToolSection] ${event}`, payload);
-  }, []);
-
-  useEffect(() => {
-    const evaluate = () => setCompact(window.innerHeight <= 900);
-    evaluate();
-    window.addEventListener('resize', evaluate);
-    return () => window.removeEventListener('resize', evaluate);
   }, []);
 
   const handleFileSelect = useCallback(async (file) => {
@@ -65,7 +56,8 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
     // Downscale oversized images in the browser to keep previews responsive
     const MAX_PREVIEW_DIM = PREVIEW_LIMIT.maxEdge;
     try {
-      const { img, url: tmpUrl } = await loadImageFromFile(file);
+    const { downscaleFileToBlob, loadImageFromFile } = await import('../utils/resizeImage');
+    const { img, url: tmpUrl } = await loadImageFromFile(file);
       const needsDownscale = Math.max(img.naturalWidth || img.width, img.naturalHeight || img.height) > MAX_PREVIEW_DIM;
       URL.revokeObjectURL(tmpUrl);
       let finalUrl;
@@ -81,7 +73,7 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
         try { 
           URL.revokeObjectURL(lastUrlRef.current); 
         } catch (e) { 
-          if (import.meta?.env?.DEV) {
+          if (import.meta.env.DEV) {
             log('revokeObjectURL:failed', { error: e?.message });
           }
         }
@@ -96,7 +88,7 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
       }
     } catch (e) {
       setError(t('errors.prepareFail'));
-      if (import.meta?.env?.DEV) {
+      if (import.meta.env.DEV) {
         log('handleFileSelect:error-details', { 
           name: file?.name, 
           error: e?.message,
@@ -180,21 +172,25 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
         {(() => {
           const HeadingTag = headingLevel === 'h2' ? 'h2' : 'h1';
           return (
-            <HeadingTag className={`${compact?'text-2xl md:text-4xl':'text-3xl md:text-5xl'} font-extrabold text-gray-800 mb-3 text-center`}>
+            <HeadingTag
+              className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-gray-800 mb-3 text-center"
+              style={{ fontSize: 'clamp(1.5rem, 2.2vw + 1rem, 3rem)', lineHeight: 1.1, marginBottom: '0.75rem' }}
+            >
               {t('tool.title')}
             </HeadingTag>
           );
         })()}
-        <div className="mb-6 max-w-4xl md:max-w-5xl mx-auto">
-          <p className={`${compact?'text-sm':'text-base'} text-gray-600 mb-2`}>
+        <div className="mb-6 max-w-4xl md:max-w-5xl mx-auto" style={{ marginBottom: '1.5rem' }}>
+          <p className="text-sm sm:text-base text-gray-600 mb-2" style={{ lineHeight: 1.5, marginBottom: '0.5rem' }}>
             {t('tool.subtitle')}
           </p>
-          <p className={`${compact?'text-sm':'text-base'} text-gray-600`}>
+          <p className="text-sm sm:text-base text-gray-600" style={{ lineHeight: 1.5 }}>
             {t('tool.subtitle2')}
           </p>
         </div>
         <div 
-          className={`upload-zone relative max-w-3xl mx-auto bg-white ${compact?'p-6':'p-8'} border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50 ${isPreparing ? 'cursor-not-allowed opacity-80 ring-1 ring-blue-200' : ''}`}
+          className={`upload-zone relative max-w-3xl mx-auto bg-white p-6 md:p-8 border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50 ${isPreparing ? 'cursor-not-allowed opacity-80 ring-1 ring-blue-200' : ''}`}
+          style={{ padding: '1.5rem', minHeight: '16rem', borderWidth: '2px', borderStyle: 'dashed', borderColor: '#d1d5db', borderRadius: '0.75rem', backgroundColor: '#fff' }}
           role="button"
           tabIndex={0}
           aria-labelledby="upload-instructions"
@@ -217,20 +213,21 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
               data-testid="file-input"
           />
           <div className="text-center">
-            <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 16a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v5a4 4 0 01-4 4H7z" /></svg>
-            <h2 id="upload-instructions" className="mt-4 text-xl font-semibold text-gray-700">
+            <svg className="mx-auto h-12 w-12 text-gray-400" width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 16a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v5a4 4 0 01-4 4H7z" /></svg>
+            <h2 id="upload-instructions" className="mt-4 text-xl font-semibold text-gray-700" style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginTop: '1rem', marginBottom: 0 }}>
               {t('tool.dragOrClick')} <span className="text-blue-600">{t('tool.clickToChoose')}</span>
             </h2>
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-gray-500" style={{ fontSize: '0.875rem', lineHeight: '1.25rem', marginTop: '0.25rem', marginBottom: 0 }}>
               {t('tool.supports')}
             </p>
             {error && (
               <p className="mt-3 text-sm text-red-600" role="alert" aria-live="polite">{error}</p>
             )}
-            <div className="mt-4">
+            <div className="mt-4" style={{ marginTop: '1rem' }}>
               <button
                 type="button"
                 className={`btn-primary ${isPreparing ? 'opacity-60 cursor-not-allowed' : ''}`}
+                style={{ padding: '0.5rem 1rem', borderRadius: '0.5rem', backgroundColor: '#2563eb', color: '#fff' }}
                 data-testid="choose-file-btn"
                 onClick={(e) => {
                   e.stopPropagation(); // 阻止事件冒泡
