@@ -179,8 +179,7 @@
       "title": "Không tìm thấy trang chuyển đổi",
       "desc": "The page you're looking for doesn't exist."
     },
-    "relatedHeading": "Các bộ chuyển đổi Pixel Art liên quan",
-    "siteNavigationTitle": "Điều hướng trang web"
+    "relatedHeading": "Các bộ chuyển đổi Pixel Art liên quan"
   },
   "showcase": {
     "title": "Từ Hình ảnh đến Pixels: Xem Khả năng của Bộ xử lý hình ảnh của chúng tôi",
@@ -459,10 +458,6 @@
     "title": "pixel art Village: Câu hỏi thường gặp",
     "items": [
       {
-        "question": "Trang web hiển thị một trang trống hoặc bị crash — tôi nên làm gì?",
-        "answer": "Một số tiện ích trình duyệt tiêm runtime phát triển (ví dụ: Plasmo/BacklinkPilot) vào mọi trang, điều này có thể làm hỏng ứng dụng React. Vui lòng vô hiệu hóa những tiện ích đó trên trang web này và làm mới cứng (Ctrl/Cmd+Shift+R)."
-      },
-      {
         "question": "Công cụ tạo hình ảnh kỹ thuật số này với các điều khiển bảng màu có miễn phí không?",
         "answer": "Có. Image Village là một công cụ xử lý ảnh trực tuyến hoàn toàn miễn phí cho tất cả người dùng. Tận hưởng chuyển đổi hình ảnh không giới hạn, điều khiển bảng màu tùy chỉnh và tải xuống chất lượng cao với bảng màu nâng cao mà không tốn phí gì cả."
       },
@@ -489,10 +484,6 @@
       {
         "question": "Tôi có thể sử dụng các định dạng nào với bộ pixel hóa ảnh này?",
         "answer": "Trình chuyển đổi hình ảnh này hỗ trợ tất cả các định dạng trình duyệt phổ biến như PNG, JPG, GIF và WEBP. Bạn có thể chuyển đổi PNG thành hình ảnh pixel hoặc JPG thành hình ảnh pixel một cách dễ dàng. Tạo nghệ thuật pixel từ bất kỳ định dạng hình ảnh nào."
-      },
-      {
-        "question": "Tại sao công cụ này được gọi là pixel art Village?",
-        "answer": "Chúng tôi tin rằng việc tạo ra đồ họa là một hoạt động cộng đồng, ngay cả khi sử dụng công cụ trực tuyến. pixel Village là nơi mà bất kỳ ai, từ người mới bắt đầu đến chuyên nghiệp, đều có thể tụ tập để dễ dàng tạo ra những hình ảnh pixel với bảng màu tùy chỉnh. Tạo nghệ thuật pixel với các công cụ của chúng tôi và tham gia ngôi làng thân thiện của chúng tôi dành cho tất cả những người đam mê pixel."
       }
     ]
   },

@@ -236,8 +236,7 @@
       "title": "Page not found",
       "desc": "The converter page you’re looking for does not exist."
     },
-    "relatedHeading": "Explore other converters",
-    "siteNavigationTitle": "Site navigation"
+    "relatedHeading": "Explore other converters"
   },
   "showcase": {
     "title": "From Image to Pixels: See What Our Image Processor Can Do",
@@ -516,10 +515,6 @@
     "title": "pixel art Village: Frequently Asked Questions",
     "items": [
       {
-        "question": "The site shows a blank page or crashes — what should I do?",
-        "answer": "Some browser extensions inject development runtimes (e.g., Plasmo/BacklinkPilot) into every page, which can break React apps. Please disable those extensions on this site and hard‑refresh (Ctrl/Cmd+Shift+R)."
-      },
-      {
         "question": "Is this digital image maker with palette controls free?",
         "answer": "Yes. Image Village is a completely free online image tool for all users. Enjoy unlimited image conversions, custom palette controls, and high-resolution downloads with advanced palettes without any cost."
       },
@@ -546,10 +541,6 @@
       {
         "question": "Which formats can I use with this image pixelator?",
         "answer": "This image pixelator supports all common browser formats like PNG, JPG, GIF, and WEBP. You can convert a PNG to pixel visuals or a JPG to pixel visuals with ease. Create pixel art with any image format."
-      },
-      {
-        "question": "Why is this tool called pixel art Village?",
-        "answer": "We believe that creating graphics is a community activity, even when using a tool online. pixel Village is a place where anyone, from beginner to pro, can gather to easily make pixel visuals with custom palettes. Create pixel art with our tools and join our welcoming village for all pixel enthusiasts."
       }
     ]
   },

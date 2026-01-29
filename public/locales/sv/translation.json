@@ -179,8 +179,7 @@
       "title": "Konverteringssidan hittades inte",
       "desc": "Konverteringssidan du letar efter finns inte."
     },
-    "relatedHeading": "Relaterade Pixelkonstkonverterare",
-    "siteNavigationTitle": "Webbplatsnavigering"
+    "relatedHeading": "Relaterade Pixelkonstkonverterare"
   },
   "showcase": {
     "title": "Från bild till pixlar: Se vad vår bildprocessor kan göra",
@@ -459,10 +458,6 @@
     "title": "pixel art Village: Vanliga frågor",
     "items": [
       {
-        "question": "Webbplatsen visar en tom sida eller kraschar – vad ska jag göra?",
-        "answer": "Vissa webbläsartillägg injicerar utvecklingskörtider (t.ex. Plasmo/BacklinkPilot) på varje sida, vilket kan bryta React-appar. Inaktivera dessa tillägg på den här webbplatsen och hårduppdatera (Ctrl/Cmd+Shift+R)."
-      },
-      {
         "question": "I notice the text you provided (\"Är denna digitala bildtillverkare med palettkontroller gratis?\") is already in Swedish, but your instruction asks to translate \"from English into Swedish.\" \n\nCould you please provide the English text that needs to be translated into Swedish?",
         "answer": "Ja. Image Village är ett helt gratis bildverktyg online för alla användare. Njut av obegränsade bildkonverteringar, anpassade palettkontroller och högupplösta nedladdningar med avancerade paletter utan kostnad."
       },
@@ -489,10 +484,6 @@
       {
         "question": "Vilka format kan jag använda med denna bildpixelator?",
         "answer": "Denna bildpixelator stöder alla vanliga webbläsarformat som PNG, JPG, GIF och WEBP. Du kan enkelt konvertera en PNG till pixelbild eller en JPG till pixelbild. Skapa pixelkonst med valfritt bildformat."
-      },
-      {
-        "question": "Varför kallas det här verktyget pixel art Village?",
-        "answer": "Vi tror att att skapa grafik är en gemenskapsaktivitet, även när du använder ett verktyg online. pixel Village är en plats där alla, från nybörjare till proffs, kan samlas för att enkelt göra pixelvisualer med anpassade paletter. Skapa pixelkonst med våra verktyg och gå med i vår välkomnande by för alla pixelentusiaster."
       }
     ]
   },

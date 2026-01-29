@@ -248,8 +248,7 @@
       "title": "Página no encontrada",
       "desc": "La página del conversor que buscas no existe."
     },
-    "relatedHeading": "Related pixel art converters",
-    "siteNavigationTitle": "Navegación del sitio"
+    "relatedHeading": "Related pixel art converters"
   },
   "showcase": {
     "title": "De imagen a píxeles: mira lo que puede hacer nuestro conversor",
@@ -522,10 +521,6 @@
     "title": "Pixel Art Village: preguntas frecuentes",
     "items": [
       {
-        "question": "El sitio muestra una página en blanco o se cierra, ¿qué puedo hacer?",
-        "answer": "Algunas extensiones del navegador inyectan runtimes de desarrollo (por ejemplo Plasmo o BacklinkPilot) en cada página y pueden romper aplicaciones React. Desactiva esas extensiones aquí y recarga forzando (Ctrl/Cmd+Shift+R)."
-      },
-      {
         "question": "¿Este creador de imágenes con controles de paleta es gratuito?",
         "answer": "Sí. Pixel Art Village es completamente gratuito. Disfruta conversiones ilimitadas, control de paletas personalizadas y descargas en alta resolución sin coste alguno."
       },
@@ -552,10 +547,6 @@
       {
         "question": "¿Qué formatos admite este pixelador de imágenes?",
         "answer": "English translation:\n\nEste conversor admite los formatos más comunes del navegador como PNG, JPG, GIF y WebP. Convierte fácilmente PNG o JPG a pixel art y trabaja con cualquier formato habitual.\n\nWait, I need to clarify - the text you provided is already in Spanish. If you meant to provide English text that needs translation to Spanish, please provide the original English version. If this Spanish text is what you want translated to English, here's the translation:\n\nThis converter supports the most common browser formats such as PNG, JPG, GIF and WebP. Easily convert PNG or JPG to pixel art and work with any common format."
-      },
-      {
-        "question": "¿Por qué la herramienta se llama Pixel Art Village?",
-        "answer": "Creemos que crear gráficos es una actividad comunitaria, incluso cuando se usa una herramienta en línea. Pixel Art Village es un lugar donde cualquier persona, de principiante a experta, puede crear pixel art con paletas personalizadas. Únete a nuestra aldea y comparte tu pasión por el pixel."
       }
     ]
   },

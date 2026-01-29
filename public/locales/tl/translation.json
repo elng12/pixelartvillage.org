@@ -185,8 +185,7 @@
       "title": "Hindi natagpuan ang pahina",
       "desc": "Ang converter page na hinahanap mo ay wala na."
     },
-    "relatedHeading": "Mga Kaugnay na Pixel Art Converter",
-    "siteNavigationTitle": "Navegasyon ng Site"
+    "relatedHeading": "Mga Kaugnay na Pixel Art Converter"
   },
   "showcase": {
     "title": "Sa Pagproseso ng Larawan patungo sa Mga Pixel: Makita mo ang Kakayahan ng Aming Prosesador ng Larawan",
@@ -459,10 +458,6 @@
     "title": "pixel art Village: Mga Madalas na Tanong",
     "items": [
       {
-        "question": "Ang site ay nagpapakita ng blank page o nagco-crash — ano ang dapat kong gawin?",
-        "answer": "Ilang extension ng browser (hal. Plasmo/BacklinkPilot) ang naglalagay ng mga development runtimes sa bawat pahina, na magsisirang sa React apps. Paki-huwag paganahin ang mga extension na iyon sa site na ito at pwersahang i-refresh (Ctrl/Cmd+Shift+R)."
-      },
-      {
         "question": "Libre ba ang digital image maker na may mga control ng paleta?",
         "answer": "Oo. Ang Image Village ay isang ganap na libreng online image tool para sa lahat ng gumagamit. Masiyahan sa mga walang limitasyong image conversions, custom palette controls, at high‑resolution downloads na may advanced palettes nang walang gastos."
       },
@@ -489,10 +484,6 @@
       {
         "question": "Anong mga format ang pwedeng gamitin ko sa image pixelator na ito?",
         "answer": "Sinusuportahan ng image pixelator na ito ang lahat ng karaniwang format ng browser tulad ng PNG, JPG, GIF, at WEBP. Maaari kang mag-convert ng PNG sa pixel visuals o JPG sa pixel visuals nang madali. Lumikha ng pixel art gamit ang anumang format ng larawan."
-      },
-      {
-        "question": "Bakit ang tawag sa tool na ito ay pixel art Village?",
-        "answer": "Naniniwala kami na ang paglikha ng graphics ay isang aktibidad ng komunidad, kahit na gumagamit ng online tool. pixel Village ay isang lugar kung saan sinuman, mula sa baguhan hanggang sa pro, ay maaaring magkakatipon upang madaling gumawa ng mga pixel visual na may custom na palette. Lumikha ng pixel art gamit ang aming mga tool at sumali sa aming malugod na village para sa lahat ng mga pixel enthusiasts."
       }
     ]
   },

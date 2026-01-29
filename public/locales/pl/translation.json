@@ -204,7 +204,6 @@
   },
   "pseo": {
     "relatedHeading": "Powiązane konwertery pikselowe",
-    "siteNavigationTitle": "Nawigacja strony",
     "notFound": {
       "seoTitle": "Nie znaleziono strony | pixel art Wioska",
       "title": "Strona nie znaleziona",
@@ -470,10 +469,6 @@
     "title": "pixel art Village: Często Zadawane Pytania",
     "items": [
       {
-        "question": "Witryna pokazuje pustą stronę lub zawiesza się — co mam zrobić?",
-        "answer": "Niektóre rozszerzenia przeglądarki wstrzykują środowiska uruchomieniowe deweloperskie (np. Plasmo/BacklinkPilot) na każdej stronie, co może uszkodzić aplikacje React. Proszę wyłączyć te rozszerzenia na tej stronie i odświeżyć na twardo (Ctrl/Cmd+Shift+R)."
-      },
-      {
         "question": "Czy to narzędzie do tworzenia obrazów cyfrowych z kontrolą palety jest darmowe?",
         "answer": "Tak, Image Village to całkowicie bezpłatne narzędzie online dla wszystkich użytkowników. Korzystaj z nieskończonych konwersji obrazów, niestandardowych ustawień palety i wysokiej rozdzielczości pobierania z zaawansowanymi paletami bez żadnych kosztów."
       },
@@ -500,10 +495,6 @@
       {
         "question": "Z jakich formatów mogę korzystać z tym pixelatorem obrazu?",
         "answer": "Ten pikselizator obrazu obsługuje wszystkie popularne formaty przeglądarek takie jak PNG, JPG, GIF i WEBP. Możesz przekształcić PNG do efektu pikselowego lub JPG do efektu pikselowego z łatwością. Twórz pikselowe dzieła sztuki z dowolnym formatem obrazu."
-      },
-      {
-        "question": "Dlaczego to narzędzie nazywa się pixel art Village?",
-        "answer": "Wierzzymy, że tworzenie grafiki to działalność społecznościowa, nawet podczas korzystania z narzędzia online. Pixel Village to miejsce, gdzie każdy, od początkującego po profesjonalistę, może się zbierać, aby łatwo tworzyć pikselowe wizualizacje z niestandardowymi paletami. Twórz sztukę pikselową za pomocą naszych narzędzi i dołącz do naszej przyjaznej wioski dla wszystkich entuzjastów pikseli."
       }
     ]
   },

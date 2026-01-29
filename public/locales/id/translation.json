@@ -185,8 +185,7 @@
       "title": "Page not found",
       "desc": "Halaman konverter yang Anda cari tidak ada."
     },
-    "relatedHeading": "Konverter Pixel Art Terkait",
-    "siteNavigationTitle": "Navigasi Situs"
+    "relatedHeading": "Konverter Pixel Art Terkait"
   },
   "showcase": {
     "title": "Dari Gambar ke Piksel: Lihat Kemampuan Pemroses Gambar Kami",
@@ -459,10 +458,6 @@
     "title": "pixel art Desa: Pertanyaan yang Sering Diajukan",
     "items": [
       {
-        "question": "Situs menampilkan halaman kosong atau crash — apa yang harus saya lakukan?",
-        "answer": "Beberapa ekstensi browser menyuntikkan runtime pengembangan (misalnya, Plasmo/BacklinkPilot) ke setiap halaman, yang dapat merusak aplikasi React. Silakan nonaktifkan ekstensi tersebut di situs ini dan muat ulang paksa (Ctrl/Cmd+Shift+R)."
-      },
-      {
         "question": "Apakah alat pembuat gambar digital dengan kontrol palet ini gratis?",
         "answer": "Ya. Image Village adalah alat gambar online yang sepenuhnya gratis untuk semua pengguna. Nikmati konversi gambar tanpa batas, kontrol palet khusus, dan unduhan resolusi tinggi dengan palet lanjutan tanpa biaya apapun."
       },
@@ -489,10 +484,6 @@
       {
         "question": "Format apa yang bisa saya gunakan dengan pixelator gambar ini?",
         "answer": "Pixelator gambar ini mendukung semua format browser umum seperti PNG, JPG, GIF, dan WEBP. Anda dapat mengonversi PNG menjadi visual piksel atau JPG menjadi visual piksel dengan mudah. Buat seni piksel dengan format gambar apa pun."
-      },
-      {
-        "question": "Mengapa alat ini disebut pixel art Village?",
-        "answer": "Kami percaya bahwa membuat grafis adalah aktivitas komunitas, bahkan ketika menggunakan alat online. pixel Village adalah tempat dimana siapa saja, dari pemula hingga profesional, dapat berkumpul untuk dengan mudah membuat visual piksel dengan palet kustom. Buat karya seni piksel dengan alat kami dan bergabunglah dengan desa kami yang ramah untuk semua antusias piksel."
       }
     ]
   },

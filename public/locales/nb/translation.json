@@ -179,8 +179,7 @@
       "title": "Konverteringssiden ble ikke funnet",
       "desc": "Konverteringssiden du leter etter finnes ikke."
     },
-    "relatedHeading": "Relaterte Pixel Art-verktøy",
-    "siteNavigationTitle": "Sidenavigasjon"
+    "relatedHeading": "Relaterte Pixel Art-verktøy"
   },
   "showcase": {
     "title": "Fra bilde til piksler: Se hva bildeprosessoren vår kan",
@@ -459,10 +458,6 @@
     "title": "pixel art Village: Ofte stilte spørsmål",
     "items": [
       {
-        "question": "Nettstedet viser en tom side eller krasjer – hva skal jeg gjøre?",
-        "answer": "Noen nettleserutvidelser injiserer utviklingskjøringer (f.eks. Plasmo/BacklinkPilot) på hver side, noe som kan ødelegge React-apper. Vennligst deaktiver disse utvidelsene på dette nettstedet og oppdater hardt (Ctrl/Cmd+Shift+R)."
-      },
-      {
         "question": "Er denne digitale bildegeneratoren med palettkontroller gratis?",
         "answer": "Ja. Image Village er et helt gratis online bildeverktøy for alle brukere. Nyt ubegrensede bildekonverteringer, egendefinerte palettkontroller og høyoppløselige nedlastinger med avanserte paletter uten kostnad."
       },
@@ -489,10 +484,6 @@
       {
         "question": "Hvilke formater kan jeg bruke med denne bildepikselatoren?",
         "answer": "Denne bildepikselatoren støtter alle vanlige nettleserformater som PNG, JPG, GIF og WEBP. Du kan enkelt konvertere en PNG til pikselbilder eller en JPG til pikselbilder. Lag pikselkunst med hvilket som helst bildeformat."
-      },
-      {
-        "question": "Hvorfor kalles dette verktøyet pixel art Village?",
-        "answer": "Vi tror at å lage grafikk er en fellesskapsaktivitet, selv når du bruker et verktøy på nettet. pixel Village er et sted hvor alle, fra nybegynnere til profesjonelle, kan samles for enkelt å lage pikselvisualiseringer med egendefinerte paletter. Lag pikselkunst med verktøyene våre og bli med i vår innbydende landsby for alle pikselentusiaster."
       }
     ]
   },

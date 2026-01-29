@@ -248,8 +248,7 @@
       "title": "Seite nicht gefunden",
       "desc": "Die gesuchte Konverterseite existiert nicht."
     },
-    "relatedHeading": "Verwandte Pixel-Art-Konverter",
-    "siteNavigationTitle": "Website-Navigation"
+    "relatedHeading": "Verwandte Pixel-Art-Konverter"
   },
   "showcase": {
     "title": "Vom Bild zu Pixeln: Sehen Sie, was unser Bildprozessor leisten kann",
@@ -522,10 +521,6 @@
     "title": "pixel art Dorf: Häufig gestellte Fragen",
     "items": [
       {
-        "question": "Die Website zeigt eine leere Seite oder stürzt ab — was soll ich tun?",
-        "answer": "Einige Browser‑Erweiterungen injizieren Entwicklungsruntimes (z. B. Plasmo/BacklinkPilot) in jede Seite, was React‑Apps beschädigen kann. Bitte deaktivieren Sie diese Erweiterungen auf dieser Seite und führen Sie einen Hard‑Refresh durch (Strg/Cmd+Shift+R)."
-      },
-      {
         "question": "Ist dieser digitale Bild-Ersteller mit Palette-Steuerungen kostenlos?",
         "answer": "Ja. Image Village ist ein komplett kostenloses Online-Bildtool für alle Benutzer. Genießen Sie unbegrenzte Bildkonvertierungen, benutzerdefinierte Palettensteuerungen und Downloads in hoher Auflösung mit erweiterten Paletten ohne jegliche Kosten."
       },
@@ -552,10 +547,6 @@
       {
         "question": "Welche Formate kann ich mit diesem Bild-Pixelator verwenden?",
         "answer": "Dieser Bildpixelator unterstützt alle gängigen Browser-Formate wie PNG, JPG, GIF und WEBP. Sie können PNG zu Pixel-Visuals oder JPG zu Pixel-Visuals mühelos konvertieren. Erstellen Sie Pixelkunst mit jedem Bildformat."
-      },
-      {
-        "question": "Warum wird dieses Tool pixel art Village genannt?",
-        "answer": "Wir glauben, dass das Erstellen von Grafiken eine gemeinschaftliche Aktivität ist, auch bei der Verwendung eines Online-Tools. pixel Village ist ein Ort, an dem sich jeder, vom Anfänger bis zum Profi, versammeln kann, um mühelos Pixel-Visuals mit benutzerdefinierten Farbpaletten zu erstellen. Erstellen Sie Pixel-Kunst mit unseren Tools und werden Sie Teil unseres einladenden Dorfes für alle Pixel-Enthusiasten."
       }
     ]
   },

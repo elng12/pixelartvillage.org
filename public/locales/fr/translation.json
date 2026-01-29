@@ -242,8 +242,7 @@
       "title": "Page du convertisseur introuvable",
       "desc": "La page du convertisseur que vous recherchez n'existe pas."
     },
-    "relatedHeading": "Convertisseurs de pixel art connexes",
-    "siteNavigationTitle": "Navigation du site"
+    "relatedHeading": "Convertisseurs de pixel art connexes"
   },
   "showcase": {
     "title": "De l'Image aux Pixels : Découvrez ce que notre Processeur d'Images peut faire",
@@ -522,10 +521,6 @@
     "title": "pixel art Village : Foire aux questions",
     "items": [
       {
-        "question": "Le site affiche une page blanche ou plante — que dois‑je faire ?",
-        "answer": "Certaines extensions de navigateur injectent des runtimes de développement (par ex. Plasmo/BacklinkPilot) dans chaque page, ce qui peut casser des applications React. Veuillez désactiver ces extensions sur ce site et faire un actualisation forcée (__REMINDER__). (Ctrl/Cmd+Shift+R)."
-      },
-      {
         "question": "Ce créateur d'images numériques avec contrôles de palette est-il gratuit ?",
         "answer": "Oui. Image Village est un outil d'image en ligne entièrement gratuit pour tous les utilisateurs. Profitez de conversions d'images illimitées, de contrôles de palette personnalisés, et de téléchargements haute résolution avec des palettes avancées sans aucun coût."
       },
@@ -552,10 +547,6 @@
       {
         "question": "Quels formats puis-je utiliser avec ce pixelateur d'images?",
         "answer": "Ce pixelateur d'image prend en charge tous les formats de navigateur courants comme PNG, JPG, GIF et WEBP. Vous pouvez convertir un PNG en visuels pixelisés ou un JPG en visuels pixelisés avec facilité. Créez des œuvres en pixel avec n'importe quel format d'image."
-      },
-      {
-        "question": "Pourquoi cet outil s'appelle-t-il pixel art Village?",
-        "answer": "Nous croyons que créer des graphiques est une activité communautaire, même en utilisant un outil en ligne. pixel Village est un endroit où chacun, du débutant au professionnel, peut se rassembler pour créer facilement des visuels pixel avec des palettes personnalisées. Créez de l'art pixel avec nos outils et rejoignez notre village accueillant pour tous les passionnés de pixel."
       }
     ]
   },

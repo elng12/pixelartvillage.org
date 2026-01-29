@@ -4,9 +4,6 @@ import { useParams } from 'react-router-dom'
 import Seo from '@/components/Seo'
 import ToolSection from '@/components/ToolSection'
 import Editor from '@/components/Editor'
-import ShowcaseSection from '@/components/ShowcaseSection'
-import WplaceFeaturesSection from '@/components/WplaceFeaturesSection'
-import FeaturesSection from '@/components/FeaturesSection'
 import HowItWorksSection from '@/components/HowItWorksSection'
 import FaqSection from '@/components/FaqSection'
 import { useLocalizedContent } from '@/hooks/useLocalizedContent'
@@ -79,6 +76,9 @@ export default function PseoPage() {
         </div>
       </section>
 
+      <ToolSection onImageUpload={setUploadedImage} headingLevel="h2" />
+      {uploadedImage ? <Editor image={uploadedImage} /> : null}
+      <HowItWorksSection />
       <section className="bg-gray-50 py-8">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('pseo.relatedHeading')}</h2>
@@ -97,38 +97,8 @@ export default function PseoPage() {
             ))}
           </div>
 
-          <div className="mt-6 pt-6 border-t border-gray-200">
-            <h3 className="text-lg font-medium text-gray-900 mb-3">{t('pseo.siteNavigationTitle')}</h3>
-            <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-              <LocalizedLink to="/" className="text-blue-600 hover:text-blue-800">
-                {t('nav.home')}
-              </LocalizedLink>
-              <LocalizedLink to="/about/" className="text-blue-600 hover:text-blue-800">
-                {t('nav.about')}
-              </LocalizedLink>
-              <LocalizedLink to="/contact/" className="text-blue-600 hover:text-blue-800">
-                {t('nav.contact')}
-              </LocalizedLink>
-              <LocalizedLink to="/privacy/" className="text-blue-600 hover:text-blue-800">
-                {t('footer.privacy')}
-              </LocalizedLink>
-              <LocalizedLink to="/terms/" className="text-blue-600 hover:text-blue-800">
-                {t('footer.terms')}
-              </LocalizedLink>
-              <LocalizedLink to="/blog/" className="text-blue-600 hover:text-blue-800">
-                {t('nav.blog')}
-              </LocalizedLink>
-            </nav>
-          </div>
         </div>
       </section>
-
-      <ToolSection onImageUpload={setUploadedImage} headingLevel="h2" />
-      {uploadedImage ? <Editor image={uploadedImage} /> : null}
-      <ShowcaseSection />
-      <WplaceFeaturesSection />
-      <FeaturesSection />
-      <HowItWorksSection />
       <FaqSection />
     </Fragment>
   )
