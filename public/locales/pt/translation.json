@@ -66,35 +66,61 @@
       "best-pixel-art-converters-compared-2025": {
         "title": "Os 10 Melhores Conversores de Pixel Art Comparados (2025) - Guia Completo",
         "excerpt": "Compare os 10 melhores conversores de pixel art baseados em privacidade, recursos, qualidade e facilidade de uso. Encontre a ferramenta perfeita para suas necessidades de pixel art, de projetos amadores a desenvolvimento profissional de jogos.",
-        "tags": ["comparação", "ferramentas", "conversor de pixel art", "melhores ferramentas", "guia"],
+        "tags": [
+          "comparação",
+          "ferramentas",
+          "conversor de pixel art",
+          "melhores ferramentas",
+          "guia"
+        ],
         "readMore": "Ler artigo completo em inglês",
         "languageNote": "Artigo completo disponível em inglês"
       },
       "how-to-get-pixel-art-version-of-image": {
         "title": "Como Obter Versão de Pixel Art de Imagem: Guia do Conversor para Imagem para Pixel Art",
         "excerpt": "Guia passo a passo do fluxo de trabalho do conversor Pixel Art Village para exportações estilo SNES, incluindo dicas de refinamento.",
-        "tags": ["imagem para pixel art", "conversor de pixel art", "snes", "tutorial"],
+        "tags": [
+          "imagem para pixel art",
+          "conversor de pixel art",
+          "snes",
+          "tutorial"
+        ],
         "readMore": "Ler artigo completo em inglês",
         "languageNote": "Artigo completo disponível em inglês"
       },
       "make-image-more-like-pixel": {
         "title": "Como Tornar Imagem Mais Parecida com Pixel: Técnicas Básicas de Edição para Imagem para Pixel Art",
         "excerpt": "Aprenda movimentos de edição simples que transformam conversões planas em visuais vibrantes de pixel art, incluindo pixelização seletiva e dicas multilíngues.",
-        "tags": ["imagem para pixel art", "edição", "melhoria de pixel", "tutorial"],
+        "tags": [
+          "imagem para pixel art",
+          "edição",
+          "melhoria de pixel",
+          "tutorial"
+        ],
         "readMore": "Ler artigo completo em inglês",
         "languageNote": "Artigo completo disponível em inglês"
       },
       "export-from-illustrator-image-to-pixel-art": {
         "title": "Como Exportar do Illustrator para que Imagens não Fiquem Pixeladas",
         "excerpt": "Fluxo de trabalho gratuito para exportar do Illustrator sem pixelização, com dicas do Canva e etapas de finalização do Pixel Art Village.",
-        "tags": ["imagem para pixel art", "illustrator", "exportação", "tutorial"],
+        "tags": [
+          "imagem para pixel art",
+          "illustrator",
+          "exportação",
+          "tutorial"
+        ],
         "readMore": "Ler artigo completo em inglês",
         "languageNote": "Artigo completo disponível em inglês"
       },
       "how-to-pixelate-an-image": {
         "title": "Como Pixelizar uma Imagem: Guia para Iniciantes",
         "excerpt": "Aprenda a converter qualquer foto em um pixel art divertido com as ferramentas gratuitas do Pixel Art Village, fluxo de trabalho passo a passo e dicas rápidas de solução de problemas.",
-        "tags": ["imagem para pixel art", "criador de pixel art", "guia para iniciantes", "tutorial"],
+        "tags": [
+          "imagem para pixel art",
+          "criador de pixel art",
+          "guia para iniciantes",
+          "tutorial"
+        ],
         "readMore": "Ler artigo completo em inglês",
         "languageNote": "Artigo completo disponível em inglês"
       }
@@ -532,70 +558,6 @@
         "answer": "Acreditamos que criar gráficos é uma atividade comunitária, mesmo ao usar uma ferramenta online. pixel Village é um lugar onde qualquer pessoa, de iniciante a profissional, pode reunir-se para criar facilmente visuais em pixel com paletas personalizadas. Crie arte em pixel com nossas ferramentas e junte-se à nossa acolhedora aldeia para todos os entusiastas de pixel."
       }
     ]
-  },
-  "related": {
-    "converters": {
-      "title": "Conversores Relacionados de Pixel Art",
-      "desc": "Explore mais ferramentas gratuitas para converter imagens em arte de pixel",
-      "items": [
-        {
-          "title": "Image to Pixel Art",
-          "href": "/conversor/imagem-para-pixel-art/",
-          "desc": "Conversor universal para todos os formatos de imagem"
-        },
-        {
-          "title": "PNG to Pixel Art",
-          "href": "/conversor/png-para-pixel-art/",
-          "desc": "Converter PNG imagens com transparência"
-        },
-        {
-          "title": "JPG to Pixel Art",
-          "href": "/conversor/jpg-para-pixel-art/",
-          "desc": "Transformar fotos em gráficos retrô"
-        },
-        {
-          "title": "Photo to Sprite",
-          "href": "/conversor/foto-para-sprite-conversor/",
-          "desc": "Criar sprites prontos para jogos a partir de fotos"
-        },
-        {
-          "title": "Gerador de Arte 8-bit",
-          "href": "/conversor/gerador-de-arte-8-bits/",
-          "desc": "Gerar arte autêntica no estilo 8-bit"
-        },
-        {
-          "title": "Pixelizar Imagem Online",
-          "href": "/conversor/pixelizar-imagem-online/",
-          "desc": "Pixelização de imagem rápida e gratuita"
-        }
-      ]
-    },
-    "guides": {
-      "title": "Tutoriais e Guias de Pixel Art",
-      "desc": "Aprenda como criar pixel art melhor com nossos tutoriais passo a passo",
-      "items": [
-        {
-          "title": "Como Pixelizar uma Imagem",
-          "href": "/blog/como-pixelizar-uma-imagem/",
-          "desc": "Guia para iniciantes de arte em pixels"
-        },
-        {
-          "title": "Exportar do Illustrator",
-          "href": "/blog/exportar-de-illustrator-imagem-para-pixel-art/",
-          "desc": "Evite problemas de pixelização ao exportar"
-        },
-        {
-          "title": "Torna a Imagem Mais Pixelizada",
-          "href": "/blog/fazer-imagem-mais-semelhante-a-pixel/",
-          "desc": "Técnicas básicas de edição para melhores resultados"
-        },
-        {
-          "title": "Obter Versão Pixel Art da Imagem",
-          "href": "/blog/como-obter-versao-pixel-art-da-imagem/",
-          "desc": "Guia completo do conversor com dicas do SNES"
-        }
-      ]
-    }
   },
   "paletteManager": {
     "createTab": "Criar Paleta",

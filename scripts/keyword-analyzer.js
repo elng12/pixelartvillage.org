@@ -63,7 +63,6 @@ function analyzeKeywords(content, keywords, label) {
     const count = matches ? matches.length : 0;
 
     // 计算关键词密度 (假设平均每个词5个字符)
-    const totalWords = contentLower.split(/\s+/).length;
     const density = ((count * keyword.length) / content.length) * 100;
 
     // 检查位置 (title, h1, h2, meta description等)

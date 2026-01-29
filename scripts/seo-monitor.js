@@ -6,7 +6,6 @@
  */
 
 import https from 'https';
-import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
@@ -72,7 +71,7 @@ function checkUrl(url, checkContent = false) {
           contentType: res.headers['content-type'],
           contentLength: data.length,
           hasContent: data.length > 0,
-          success: res.statusCode === 200 && data.length > 0
+          success: res.statusCode === 200 && (checkContent ? data.length > 0 : true)
         });
       });
     });

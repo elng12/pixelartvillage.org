@@ -14,7 +14,6 @@ import WplaceFeaturesSection from './components/WplaceFeaturesSection'
 import FeaturesSection from './components/FeaturesSection'
 import HowItWorksSection from './components/HowItWorksSection'
 import FaqSection from './components/FaqSection'
-import RelatedLinks from './components/RelatedLinks'
 import { LocaleProvider } from '@/contexts/LocaleContext'
 import { generateHreflangLinks } from '@/utils/hreflang'
 import Seo from '@/components/Seo'
@@ -67,7 +66,6 @@ function Home() {
       <FeaturesSection />
       <HowItWorksSection />
       <FaqSection />
-      <RelatedLinks currentPath="/" />
     </>
   )
 }

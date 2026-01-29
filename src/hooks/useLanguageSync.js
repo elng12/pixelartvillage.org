@@ -129,7 +129,7 @@ export function useLanguageSync() {
   const redirectToLocalizedPath = useCallback(() => {
     // 禁用自动重定向，避免与App.jsx中的逻辑冲突
     return false
-  }, [location.pathname, navigate])
+  }, [])
 
   // 自动重定向效果 - 禁用
   useEffect(() => {

@@ -125,7 +125,7 @@ function Editor({ image }) {
       el.scrollLeft = 0;
       el.scrollTop = 0;
     }
-  }, [state.readySrc]);
+  }, [state.readySrc, processedImage]);
 
   // 统一处理文件列表（PNG/JPG，大小≤10MB）
   const handleFiles = useCallback((fileList) => {

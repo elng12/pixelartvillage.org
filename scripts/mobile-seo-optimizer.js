@@ -86,7 +86,7 @@ async function checkMobileSEO() {
   return results;
 }
 
-async function runMobileCheck(checkType, config) {
+async function runMobileCheck(checkType, _config) {
   switch (checkType) {
     case 'responsive':
       return await checkResponsiveDesign();
@@ -334,7 +334,7 @@ function displayMobileSummary(results, reportPath) {
   console.log(`📱 移动端SEO分数: ${results.overallScore}/100`);
 
   console.log('\n📊 检查结果详情:');
-  for (const [key, check] of Object.entries(results.mobileSEO)) {
+  for (const [_key, check] of Object.entries(results.mobileSEO)) {
     const status = check.success ? '✅' : '❌';
     const score = check.score ? ` (${check.score}/100)` : '';
     console.log(`  ${status} ${check.name}: ${check.status}${score}`);

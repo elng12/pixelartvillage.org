@@ -1,6 +1,5 @@
 import { useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useLocation } from 'react-router-dom'
 import { SUPPORTED_LANGS as RUNTIME_LANGS } from '@/i18n'
 import useLanguageSync from '@/hooks/useLanguageSync'
 
@@ -42,7 +41,6 @@ function getLanguageLabel(code) {
 
 export default function LanguageSwitcherBalanced() {
   const { t } = useTranslation()
-  const location = useLocation()
   const { currentLang, handleLanguageChange } = useLanguageSync()
 
   const handleChange = useCallback(async (event) => {

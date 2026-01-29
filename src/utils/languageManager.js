@@ -161,7 +161,7 @@ class LanguageManager {
       const segments = normalized.split('/').filter(Boolean)
       if (segments.length > 0 && SUPPORTED_LANGS.includes(segments[0].toLowerCase())) {
         segments.shift()
-        return `/${segments.join('/')}` || '/'
+        return `/${segments.join('/')}`
       }
       return normalized
     }
@@ -183,7 +183,7 @@ class LanguageManager {
       const first = segments[0].toLowerCase()
       if (SUPPORTED_LANGS.includes(first)) {
         segments.shift()
-        result = `/${segments.join('/')}` || '/'
+        result = `/${segments.join('/')}`
       } else {
         break
       }
