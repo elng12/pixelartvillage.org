@@ -145,7 +145,7 @@
     "rejectLabel": "Reject non-essential cookies"
   },
   "tool": {
-    "title": "Image to Pixel Art Generator with Custom Palette",
+    "title": "Image to Pixel Art Converter — Free, Private, No Dimension Limits",
     "subtitle2": "adjustable pixel size and custom palettes. Perfect for sprites, icons, and retro game art with advanced palette options.",
     "subtitle": "Image to Pixel Art Converter – Turn PNG or JPG image to pixel art with instant preview and the palette controls, with image to pixel conversion.",
     "dragOrClick": "Drag your image here or",
@@ -239,7 +239,7 @@
     "relatedHeading": "Explore other converters"
   },
   "showcase": {
-    "title": "From Image to Pixels: See What Our Image Processor Can Do",
+    "title": "From Image to Pixel Art: See the Results",
     "desc": "With",
     "before": "Before",
     "after": "After",
@@ -254,7 +254,7 @@
     "title": "Select language"
   },
   "wplace": {
-    "title": "Perfect Tool for pixel art Village Users",
+    "title": "Why Choose This Image to Pixel Art Converter",
     "desc": "The ultimate companion for pixel art Village — convert any image into clean pixel visuals with real‑time preview, smart palettes, and instant export. Create pixel art with our image tools.",
     "features": {
       "free": {
@@ -262,24 +262,24 @@
         "desc": "Completely free for everyone. No hidden costs or subscriptions — create unlimited pixel visuals from any image."
       },
       "privacy": {
-        "title": "Privacy First",
+        "title": "Privacy First (Client‑Side)",
         "desc": "All processing happens in your browser. Your images never leave your device — a private, secure workflow by design."
       },
       "easy": {
-        "title": "Easy for All Players",
+        "title": "Easy for Everyone",
         "desc": "Intuitive interface and fast feedback. Convert any image to paintable pixel visuals in just a few clicks with custom palette options."
       },
       "size": {
-        "title": "No Size Limits",
+        "title": "No Dimension Limits",
         "desc": "Upload images of any size — from tiny icons to large graphics — with smooth scaling and responsive image previews using advanced palettes."
       }
     }
   },
   "features": {
-    "title": "Image to Pixel Converter with Custom Palette",
+    "title": "Image to Pixel Art Settings: Custom Palette and Grid",
     "desc": "Transform images into pixel‑perfect art. Live‑tune details with custom palettes and swatch control. Instant preview and sprite‑ready PNG export.",
     "palette": {
-      "title": "Palette control",
+      "title": "Custom palette",
       "desc": "Swap between curated palettes or build your own swatches to match any retro or brand style."
     },
     "live": {
@@ -287,7 +287,7 @@
       "desc": "Fine-tune pixel size, brightness, contrast, saturation, and dithering with instant feedback."
     },
     "clientSide": {
-      "title": "100% client-side",
+      "title": "Pixel grid control",
       "desc": "Processing runs entirely in your browser—images never leave your device."
     }
   },
@@ -512,7 +512,7 @@
     "p13": "for step-by-step instructions."
   },
   "faq": {
-    "title": "pixel art Village: Frequently Asked Questions",
+    "title": "Image to Pixel Art FAQ",
     "items": [
       {
         "question": "Is this digital image maker with palette controls free?",
