@@ -68,6 +68,7 @@ function Editor({ image }) {
   }), [state.pixelSize, state.brightness, state.contrast, state.saturation, state.palette, state.dither, state.autoPalette, state.paletteSize, state.colorDistance]);
 
   const { processedImage, isProcessing } = useImageProcessor(state.readySrc, imageSettings);
+  const canDownload = Boolean(processedImage);
 
   // Auto-compact based on viewport height
   useEffect(() => {
@@ -214,6 +215,7 @@ function Editor({ image }) {
   };
 
   const downloadImage = async () => {
+    if (!processedImage) return;
     const blob = await exportProcessedBlob(processedImage, {
       format: state.exportFormat,
       scale: state.exportScale,
@@ -257,7 +259,8 @@ function Editor({ image }) {
               <div className="flex gap-3">
                 <button
                   onClick={downloadImage}
-                  className="flex-1 bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                  disabled={!canDownload || isProcessing}
+                  className={`flex-1 text-white font-bold py-3 rounded-lg transition-colors ${!canDownload || isProcessing ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
                 >
                   {t('editor.downloadBtn')}
                 </button>
@@ -279,10 +282,17 @@ function Editor({ image }) {
 
             {/* 控制区域 */}
             <div className={`space-y-4 ${layout.height} overflow-auto`}>
-              {/* Section header */}
-              <div className="pb-2">
-                <div className="flex items-center gap-2">
+              {/* Section header + download CTA */}
+              <div className="sticky top-0 z-10 bg-white/90 backdrop-blur pb-2">
+                <div className="flex items-center gap-3">
                   <span className="inline-flex items-center border rounded px-2 py-1 text-sm bg-white">{t('editor.section.general')}</span>
+                  <button
+                    onClick={downloadImage}
+                    disabled={!canDownload || isProcessing}
+                    className={`ml-auto inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-semibold text-white transition-colors ${!canDownload || isProcessing ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
+                  >
+                    {t('editor.downloadBtn')}
+                  </button>
                 </div>
                 <div className="mt-2 h-[2px] w-full bg-gray-900/80" />
               </div>

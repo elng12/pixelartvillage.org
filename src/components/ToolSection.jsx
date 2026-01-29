@@ -6,11 +6,28 @@ import { PREVIEW_LIMIT } from '../utils/constants';
 // 常量定义
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const PASTE_GUARD_MS = 1000; // 1秒防重复
+const SUPPORTED_IMAGE_TYPES = new Set(['image/png', 'image/jpeg', 'image/gif', 'image/webp']);
+const EXTENSION_TO_MIME = {
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  gif: 'image/gif',
+  webp: 'image/webp',
+};
 const ERROR_TYPES = {
   FILE_TYPE: 'file-type',
   FILE_SIZE: 'file-size',
   PROCESSING: 'processing'
 };
+
+function normalizeImageType(file) {
+  if (!file) return '';
+  const rawType = String(file.type || '').toLowerCase();
+  if (rawType) return rawType;
+  const name = String(file.name || '');
+  const ext = name.includes('.') ? name.split('.').pop().toLowerCase() : '';
+  return EXTENSION_TO_MIME[ext] || '';
+}
 
 function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true }) {
   const { t } = useTranslation()
@@ -34,12 +51,24 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
       size: file?.size,
     });
     if (!file) return;
-    if (!file.type.startsWith('image/')) {
+    const normalizedType = normalizeImageType(file);
+    const isImageLike = file.type ? file.type.startsWith('image/') : Boolean(normalizedType);
+    if (!isImageLike) {
       setError(t('errors.onlyPngJpg'));
       log('handleFileSelect:reject-non-image', { 
         name: file.name, 
         type: file.type,
         errorType: ERROR_TYPES.FILE_TYPE 
+      });
+      return;
+    }
+    if (normalizedType && !SUPPORTED_IMAGE_TYPES.has(normalizedType)) {
+      setError(t('errors.onlyPngJpg'));
+      log('handleFileSelect:reject-unsupported', {
+        name: file.name,
+        type: file.type,
+        normalizedType,
+        errorType: ERROR_TYPES.FILE_TYPE
       });
       return;
     }
@@ -64,7 +93,7 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
       if (needsDownscale) {
         const blob = await downscaleFileToBlob(file, MAX_PREVIEW_DIM, { preferPng: file.type === 'image/png', quality: 0.9, pixelated: false });
         finalUrl = URL.createObjectURL(blob);
-        log('handleFileSelect:downscaled', { name: file.name, original: { w: img.naturalWidth, h: img.naturalHeight }, limit: MAX_PREVIEW_DIM });
+          log('handleFileSelect:downscaled', { name: file.name, original: { w: img.naturalWidth, h: img.naturalHeight }, limit: MAX_PREVIEW_DIM });
       } else {
         finalUrl = URL.createObjectURL(file);
         log('handleFileSelect:use-original', { name: file.name });
@@ -206,7 +235,7 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
             type="file"
             ref={fileInputRef}
             className="hidden"
-            accept="image/*"
+            accept="image/png,image/jpeg,image/gif,image/webp"
             aria-label={t('tool.ariaChoose')}
             disabled={isPreparing}
             onChange={handleFileInputChange}
