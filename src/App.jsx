@@ -6,7 +6,6 @@ import ScrollManager from './components/ScrollManager'
 import CompatNotice from '@/components/CompatNotice.jsx'
 import ResourcePreloader from '@/components/ResourcePreloader'
 import TranslationPreloader from '@/components/TranslationPreloader'
-import CriticalCSS from '@/components/CriticalCSS'
 import Header from './components/Header'
 import ToolSection from './components/ToolSection'
 import ShowcaseSection from './components/ShowcaseSection'
@@ -82,7 +81,6 @@ function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
 
   return (
     <LocaleProvider value={localeValue}>
-      <CriticalCSS />
       <ResourcePreloader />
       <TranslationPreloader />
       <Header />
