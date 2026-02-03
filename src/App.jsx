@@ -29,7 +29,6 @@ const Blog = lazy(() => import('./components/Blog'))
 const BlogPost = lazy(() => import('./components/BlogPost'))
 const PseoPage = lazy(() => import('./components/PseoPage'))
 const NotFound = lazy(() => import('./components/NotFound'))
-const ConsentBanner = lazy(() => import('./components/ConsentBanner'))
 
 function useAppOutletContext() {
   return useOutletContext()
@@ -97,10 +96,7 @@ function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
           <Outlet context={{ uploadedImage, setUploadedImage, currentLocale }} />
         </Suspense>
       </main>
-      <Suspense fallback={null}>
-        <ConsentBanner />
-      </Suspense>
-      <div className="bg-gray-900 min-h-[520px] md:min-h-[570px]">
+      <div className="bg-gray-900">
         <Suspense fallback={null}>
           <Footer />
         </Suspense>

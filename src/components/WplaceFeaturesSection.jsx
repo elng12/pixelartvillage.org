@@ -62,7 +62,7 @@ const IconImage = ({ className = 'h-6 w-6 text-amber-600' }) => (
 export default function WplaceFeaturesSection() {
   const { t } = useTranslation();
   return (
-    <section id="wplace-features" className="py-16 md:py-20 bg-white">
+    <section id="wplace-features" className="py-12 md:py-16 bg-white">
       <div className="container mx-auto px-4">
         {/* 标题与副标题：与当前站点层级一致 */}
         <h2 className="text-3xl md:text-4xl font-extrabold text-center text-gray-900">
@@ -73,7 +73,7 @@ export default function WplaceFeaturesSection() {
         </p>
 
         {/* 四列特性：保持等间距与卡片风格一致 */}
-        <div className="mt-10 md:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6 text-center h-full">
             <CircleIcon bg="rgba(16,185,129,0.12)" title="100% Free">
               <IconDollar />

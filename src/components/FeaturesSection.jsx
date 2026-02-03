@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 export default function FeaturesSection() {
   const { t } = useTranslation();
   return (
-    <section id="features" className="py-16 md:py-20 bg-white">
+    <section id="features" className="py-12 md:py-16 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-extrabold text-center text-gray-900">
           {t('features.title')}
@@ -17,9 +17,9 @@ export default function FeaturesSection() {
         </div>
 
         {/* 功能卡片：更大的 gap 与 padding；卡片等高，整体更疏朗 */}
-        <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 xl:gap-10">
+        <div className="mt-8 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 xl:gap-8">
           {/* Palette control */}
-          <div className="h-full rounded-xl border border-gray-200 bg-white shadow-sm p-6 md:p-8">
+          <div className="h-full rounded-xl border border-gray-200 bg-white shadow-sm p-6 md:p-7">
             <div className="flex items-start gap-4">
               <div className="shrink-0 text-2xl md:text-3xl">🎨</div>
               <div>
@@ -32,7 +32,7 @@ export default function FeaturesSection() {
           </div>
 
           {/* Live adjustments */}
-          <div className="h-full rounded-xl border border-gray-200 bg-white shadow-sm p-6 md:p-8">
+          <div className="h-full rounded-xl border border-gray-200 bg-white shadow-sm p-6 md:p-7">
             <div className="flex items-start gap-4">
               <div className="shrink-0 text-2xl md:text-3xl">⚙️</div>
               <div>
@@ -45,7 +45,7 @@ export default function FeaturesSection() {
           </div>
 
           {/* 100% client‑side */}
-          <div className="h-full rounded-xl border border-gray-200 bg-white shadow-sm p-6 md:p-8">
+          <div className="h-full rounded-xl border border-gray-200 bg-white shadow-sm p-6 md:p-7">
             <div className="flex items-start gap-4">
               <div className="shrink-0 text-2xl md:text-3xl">🔒</div>
               <div>

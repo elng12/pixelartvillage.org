@@ -77,13 +77,13 @@ function PixelStep({ n, title, children, icon }) {
 function HowItWorksSection() {
   const { t } = useTranslation();
   return (
-    <section id="how-it-works" className="py-20">
+    <section id="how-it-works" className="py-12 md:py-16">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">{t('how.title')}</h2>
-        <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
+        <p className="text-base md:text-lg text-gray-600 text-center max-w-3xl mx-auto mb-8">
           {t('how.desc')}
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
           <PixelStep n={1} title={t('how.steps.upload')} icon={<IconUpload className="w-14 h-14 text-blue-600 md:w-16 md:h-16" /> }>
             {t('how.steps.upload.desc')}
           </PixelStep>

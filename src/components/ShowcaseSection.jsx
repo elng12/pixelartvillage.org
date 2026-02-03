@@ -31,13 +31,13 @@ import showcaseAfter928Jpg from '@/assets/generated/showcase-after-w928.jpg';
 function ShowcaseSection() {
   const { t } = useTranslation();
   return (
-    <section id="showcase" className="py-20">
+    <section id="showcase" className="py-12 md:py-16">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">{t('showcase.title')}</h2>
-        <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
+        <p className="text-base md:text-lg text-gray-600 text-center max-w-3xl mx-auto mb-8">
           {t('showcase.descFull')}
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-6 md:gap-x-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-6 md:gap-x-8 items-center">
           <div className="text-center">
             <h3 className="text-xl font-semibold mb-2">{t('showcase.before')}</h3>
             <picture>
