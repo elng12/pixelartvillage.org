@@ -14,6 +14,13 @@ export function ensureAdSenseLoaded() {
       window.__adsenseLoaded = true
       return
     }
+    const existingBySrc = document.querySelector(
+      'script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]',
+    )
+    if (existingBySrc) {
+      window.__adsenseLoaded = true
+      return
+    }
     const script = document.createElement('script')
     script.async = true
     script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3219924658522446'

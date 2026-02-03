@@ -1,49 +1,88 @@
 // Consent Mode v2 lightweight initializer (no inline scripts; CSP-safe)
-// - Sets default denied
-// - Applies stored user choice if exists
-// - If已同意，延迟加载 AdSense 脚本，避免首屏未使用 JS
+// - Applies stored user choice if exists (only when CMP is not present)
+// - Watches consent updates to load optional scripts after consent
 
 import { ensureAdSenseLoaded } from './utils/loadAdSense.js'
 import { ensureClarityLoaded } from './clarity-init.js'
 
 const STORAGE_KEY = 'consent.choice.v1'
+const CONSENT_KEYS = ['ad_storage', 'analytics_storage', 'ad_user_data', 'ad_personalization']
+const consentState = Object.fromEntries(CONSENT_KEYS.map((key) => [key, 'denied']))
 
-// Ensure dataLayer exists and define gtag shim
-window.dataLayer = window.dataLayer || []
-function gtag(){ window.dataLayer.push(arguments) }
+function hasCmp() {
+  return typeof window.__tcfapi === 'function' || typeof window.__gpp === 'function' || typeof window.__cmp === 'function'
+}
 
-// Default: denied (before any Google tags, if later added)
-gtag('consent', 'default', {
-  ad_storage: 'denied',
-  analytics_storage: 'denied',
-  ad_user_data: 'denied',
-  ad_personalization: 'denied',
-  wait_for_update: 500,
-})
-
-// Apply stored choice
-try {
-  const saved = localStorage.getItem(STORAGE_KEY)
-  if (saved) {
-    const c = JSON.parse(saved)
-    const granted = c?.granted === true
-    gtag('consent', 'update', {
-      ad_storage: granted ? 'granted' : 'denied',
-      analytics_storage: granted ? 'granted' : 'denied',
-      ad_user_data: granted ? 'granted' : 'denied',
-      ad_personalization: granted ? 'granted' : 'denied',
-    })
-    if (granted) {
-      // 等待空闲后加载，避免争抢主线程/LCP
-      const loadAll = () => { try { ensureAdSenseLoaded() } catch { /* TODO: handle error */ } try { ensureClarityLoaded() } catch { /* TODO: handle error */ } }
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadAll, { timeout: 2000 })
-      } else {
-        setTimeout(loadAll, 500)
-      }
+function applyConsentUpdate(update) {
+  if (!update || typeof update !== 'object') return
+  let changed = false
+  for (const key of CONSENT_KEYS) {
+    if (key in update && update[key] !== consentState[key]) {
+      consentState[key] = update[key]
+      changed = true
     }
   }
-} catch { /* TODO: handle error */ }
+  if (!changed) return
+  if (consentState.ad_storage === 'granted') {
+    try { ensureAdSenseLoaded() } catch { /* no-op */ }
+  }
+  if (consentState.analytics_storage === 'granted') {
+    try { ensureClarityLoaded() } catch { /* no-op */ }
+  }
+}
+
+function scanExistingDataLayer() {
+  try {
+    const dl = window.dataLayer || []
+    for (const item of dl) {
+      if (item && item[0] === 'consent' && item[1] === 'update') {
+        applyConsentUpdate(item[2] || {})
+      }
+    }
+  } catch { /* no-op */ }
+}
+
+function watchConsentUpdates() {
+  try {
+    window.dataLayer = window.dataLayer || []
+    const dl = window.dataLayer
+    const originalPush = dl.push.bind(dl)
+    dl.push = (...args) => {
+      for (const arg of args) {
+        if (arg && arg[0] === 'consent' && arg[1] === 'update') {
+          applyConsentUpdate(arg[2] || {})
+        }
+      }
+      return originalPush(...args)
+    }
+  } catch { /* no-op */ }
+}
+
+// Watch consent updates from CMP/gtag
+watchConsentUpdates()
+scanExistingDataLayer()
+
+// Apply stored choice (only if no CMP is detected)
+try {
+  if (!hasCmp()) {
+    const saved = localStorage.getItem(STORAGE_KEY)
+    if (saved) {
+      const c = JSON.parse(saved)
+      const granted = c?.granted === true
+      const update = {
+        ad_storage: granted ? 'granted' : 'denied',
+        analytics_storage: granted ? 'granted' : 'denied',
+        ad_user_data: granted ? 'granted' : 'denied',
+        ad_personalization: granted ? 'granted' : 'denied',
+      }
+      try {
+        const gtag = window.gtag || (function(){ window.dataLayer = window.dataLayer || []; return function(){ window.dataLayer.push(arguments) } })()
+        gtag('consent', 'update', update)
+      } catch { /* no-op */ }
+      applyConsentUpdate(update)
+    }
+  }
+} catch { /* no-op */ }
 
 // GitHub Pages SPA fallback: if 404.html redirected here with ?p=/x&q=query#hash, fix the URL
 try {
