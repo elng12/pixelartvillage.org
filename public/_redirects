@@ -1,23 +1,6 @@
 # Netlify redirects file
 # 优化的重定向配置 - 减少不必要的重定向
-# 1. 语言首页重定向 - 只保留必要的语言代码
-/en    /   301
-/es    /   301
-/fr    /   301
-/de    /   301
-/it    /   301
-/pt    /   301
-/ja    /   301
-
-# 2. 语言子路径重定向 - 避免循环重定向
-/:lang/converter/*   /converter/:splat   301
-/:lang/blog/*        /blog/:splat        301
-/:lang/privacy       /privacy            301
-/:lang/terms         /terms              301
-/:lang/about         /about              301
-/:lang/contact       /contact            301
-
-# 3. 静态资源优先 - 避免 SPA 路由干扰
+# 1. 静态资源优先 - 避免 SPA 路由干扰
 /assets/*   /assets/:splat   200
 /*.js       /:splat          200
 /*.css      /:splat          200
@@ -26,4 +9,4 @@
 /*.svg      /:splat          200
 /*.webp     /:splat          200
 
-# 4. SPA 兜底 - Cloudflare 会提示循环；如需 SPA fallback 可再启用
+# 2. SPA 兜底 - Cloudflare 会提示循环；如需 SPA fallback 可再启用
