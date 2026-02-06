@@ -42,11 +42,41 @@ for (const f of REQUIRED_FILES) {
   }
 }
 
-['social-privacy.png', 'social-terms.png', 'social-about.png', 'social-contact.png'].forEach((img) => {
+[
+  'social-privacy.png',
+  'social-terms.png',
+  'social-about.png',
+  'social-contact.png',
+  'social-preview.png',
+  'consent-default.js',
+].forEach((img) => {
   const p = path.join(DIST, img);
   if (!fs.existsSync(p)) fail(`missing ${img} in dist`);
   else ok(`found ${img}`);
 });
+
+// Guardrails for Cloudflare Pages redirects:
+// - Keep /en/* canonicalization rule
+// - Prevent extension-stripping rewrites that caused root static assets to 404
+const redirectsPath = path.join(DIST, '_redirects');
+if (!fs.existsSync(redirectsPath)) {
+  fail('missing _redirects in dist');
+} else {
+  const redirects = fs.readFileSync(redirectsPath, 'utf8');
+  if (/^\s*\/en\/\*\s+\/:splat\s+301\b/m.test(redirects)) {
+    ok('_redirects includes /en/* canonical redirect');
+  } else {
+    fail('_redirects missing required rule: /en/* -> /:splat 301');
+  }
+
+  const dangerousRuleRegex = /^\s*\/\*\.(?:js|css|png|jpe?g|svg|webp)\s+\/:splat\s+200\b/mg;
+  const dangerousRules = redirects.match(dangerousRuleRegex) || [];
+  if (dangerousRules.length > 0) {
+    fail(`_redirects contains dangerous extension rewrite rules: ${dangerousRules.join(' | ')}`);
+  } else {
+    ok('_redirects has no extension-stripping static rewrite rules');
+  }
+}
 
 // -------- Route SEO checks --------
 function resolveRouteFile(routePath, lang = 'en') {

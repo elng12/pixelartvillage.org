@@ -42,6 +42,14 @@ export default function PseoPage() {
 
   const canonical = `https://pixelartvillage.org${buildPath(`/converter/${page.slug}/`)}`
   const relatedPages = pages.filter((entry) => entry.slug !== page.slug).slice(0, 6)
+  const siteLinks = [
+    { to: '/', label: t('nav.home') },
+    { to: '/blog/', label: t('nav.blog') },
+    { to: '/about/', label: t('nav.about') },
+    { to: '/contact/', label: t('nav.contact') },
+    { to: '/privacy/', label: t('footer.privacy') },
+    { to: '/terms/', label: t('footer.terms') },
+  ]
   const introParas = Array.isArray(page.intro) ? page.intro : [page.intro]
 
   return (
@@ -96,7 +104,20 @@ export default function PseoPage() {
               </LocalizedLink>
             ))}
           </div>
-
+          <div className="mt-8 rounded-lg border border-gray-200 bg-white p-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('footer.explore')}</h3>
+            <div className="flex flex-wrap gap-2">
+              {siteLinks.map((link) => (
+                <LocalizedLink
+                  key={link.to}
+                  to={link.to}
+                  className="rounded border border-gray-200 px-3 py-1.5 text-sm text-gray-700 hover:border-blue-300 hover:text-blue-600"
+                >
+                  {link.label}
+                </LocalizedLink>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
       <FaqSection />
