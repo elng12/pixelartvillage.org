@@ -1,12 +1,18 @@
-# Netlify redirects file
-# 优化的重定向配置 - 减少不必要的重定向
-# 1. 静态资源优先 - 避免 SPA 路由干扰
-/assets/*   /assets/:splat   200
-/*.js       /:splat          200
-/*.css      /:splat          200
-/*.png      /:splat          200
-/*.jpg      /:splat          200
-/*.svg      /:splat          200
-/*.webp     /:splat          200
+# Cloudflare Pages redirects
+# 1) Canonicalize legacy English-prefixed URLs
+/en         /               301
+/en/        /               301
+/en/*       /:splat         301
 
-# 2. SPA 兜底 - Cloudflare 会提示循环；如需 SPA fallback 可再启用
+# 2) Legacy locale code migrations
+/fil        /tl             301
+/fil/*      /tl/:splat      301
+/no         /nb             301
+/no/*       /nb/:splat      301
+
+# 3) Static assets are served directly from dist by Pages.
+# Do not rewrite extension paths like /*.png -> /:splat,
+# otherwise requests become /file (extension stripped) and 404.
+
+# 4) SPA fallback (enable only if needed for non-prerendered routes)
+# /*        /index.html      200
