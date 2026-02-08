@@ -13,6 +13,7 @@ import WplaceFeaturesSection from './components/WplaceFeaturesSection'
 import FeaturesSection from './components/FeaturesSection'
 import HowItWorksSection from './components/HowItWorksSection'
 import FaqSection from './components/FaqSection'
+import LocalizedLink from '@/components/LocalizedLink'
 import { LocaleProvider } from '@/contexts/LocaleContext'
 import { generateHreflangLinks } from '@/utils/hreflang'
 import Seo from '@/components/Seo'
@@ -38,6 +39,17 @@ function Home() {
   const { t } = useTranslation()
   const { uploadedImage, setUploadedImage, currentLocale } = useAppOutletContext()
   const IS_E2E = String(import.meta?.env?.VITE_E2E) === '1'
+  const relatedLinks = [
+    { to: '/converter/image-to-pixel-art/', label: t('footer.links.generator') },
+    { to: '/converter/photo-to-pixel-art/', label: t('footer.links.converter') },
+    { to: '/converter/png-to-pixel-art/', label: t('footer.links.png2pixel') },
+    { to: '/converter/jpg-to-pixel-art/', label: t('footer.links.jpg2pixel') },
+    { to: '/blog/', label: t('nav.blog') },
+    { to: '/about/', label: t('nav.about') },
+    { to: '/contact/', label: t('nav.contact') },
+    { to: '/privacy/', label: t('footer.privacy') },
+    { to: '/terms/', label: t('footer.terms') },
+  ]
   const canonical =
     currentLocale === CANONICAL_LOCALE
       ? 'https://pixelartvillage.org/'
@@ -63,6 +75,22 @@ function Home() {
       <WplaceFeaturesSection />
       <FeaturesSection />
       <HowItWorksSection />
+      <section className="bg-gray-50 py-8 border-y border-gray-100">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('footer.explore')}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {relatedLinks.map((link) => (
+              <LocalizedLink
+                key={link.to}
+                to={link.to}
+                className="block rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 hover:border-blue-300 hover:text-blue-600"
+              >
+                {link.label}
+              </LocalizedLink>
+            ))}
+          </div>
+        </div>
+      </section>
       <FaqSection />
     </>
   )

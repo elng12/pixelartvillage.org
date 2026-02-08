@@ -493,29 +493,12 @@ function prerender() {
       { href: ABS('/terms/'), text: 'Terms' },
       { href: ABS('/blog/'), text: 'Blog' },
     ]
-    let h1Text = r.title.replace(/\s*\|\s*Pixel Art Village$/, '').replace(/\bpixel art\b/gi, 'retro graphics')
+    // Keep prerender text semantically aligned with visible page copy.
+    let h1Text = r.title.replace(/\s*\|\s*Pixel Art Village$/, '').trim()
     const rawDesc = (r.metas.find(m => m.name === 'description') || {}).content || ''
     const descMeta = rawDesc
-      .replace(/Pixel Art Village/g, 'PAV')
-      .replace(/\bpixel art\b/gi, 'retro graphics')
-      .replace(/\bpixel\b/gi, 'grid')
-      .replace(/\bart\b/gi, 'design')
 
     let extras = r.extras || ''
-    const addExtras = (html) => {
-      extras = extras ? `${extras}${html}` : html
-    }
-    const pathKey = (r.basePath || '/').toLowerCase()
-    if (/^\/converter\//.test(pathKey)) {
-      addExtras('<p>Palette control, palette limits, palette preview – manage palettes precisely.</p>')
-      addExtras('<p>image workflow and image formats.</p>')
-    } else if (/^\/blog\//.test(pathKey)) {
-      addExtras('<p>Tips on choosing the right palette, palette examples, and image handling for your style.</p>')
-    } else if (/^\/(privacy|terms|about|contact)\//.test(pathKey)) {
-      addExtras('<p>Reference palette guidelines for creators.</p>')
-    } else if (r.basePath === '/') {
-      addExtras('<p>Explore our palette overview and palette chooser for quick starts.</p>')
-    }
 
     const navLinks = r.links && r.links.length ? r.links : defaultLinks
     out = injectHiddenH1AndNav(out, { h1: h1Text, description: descMeta, links: navLinks, extras })
