@@ -11,15 +11,62 @@ const localeConfig = require(path.join(ROOT, 'config', 'locales.json'))
 const DEFAULT_LANG = (localeConfig && localeConfig.default) || 'en'
 const SUPPORTED_LANGS = Array.from(new Set(((localeConfig && localeConfig.supported) || ['en']).filter(Boolean)))
 
-function resolveContent(baseName) {
+function sortObjectKeys(a, b) {
+  const aNum = Number(a)
+  const bNum = Number(b)
+  const aIsNum = Number.isFinite(aNum)
+  const bIsNum = Number.isFinite(bNum)
+  if (aIsNum && bIsNum) return aNum - bNum
+  if (aIsNum) return -1
+  if (bIsNum) return 1
+  return String(a).localeCompare(String(b))
+}
+
+function toArray(value) {
+  if (Array.isArray(value)) return value
+  if (value && typeof value === 'object') {
+    return Object.keys(value)
+      .sort(sortObjectKeys)
+      .map((key) => value[key])
+  }
+  return []
+}
+
+function toStringArray(value) {
+  return toArray(value)
+    .map((item) => (typeof item === 'string' ? item : String(item ?? '')))
+    .map((item) => item.trim())
+    .filter(Boolean)
+}
+
+function normalizeBlogPosts(value) {
+  return toArray(value)
+    .map((entry) => {
+      if (!entry || typeof entry !== 'object') return null
+      return {
+        ...entry,
+        tags: toStringArray(entry.tags),
+        body: toStringArray(entry.body),
+      }
+    })
+    .filter((entry) => entry && typeof entry.slug === 'string' && entry.slug.trim())
+}
+
+function normalizePseoPages(value) {
+  return toArray(value).filter((entry) => entry && typeof entry.slug === 'string' && entry.slug.trim())
+}
+
+function resolveContent(baseName, lang = DEFAULT_LANG, normalizer = toArray) {
   const paths = [
-    path.join(ROOT, 'src', 'content', `${baseName}.en.json`),
+    path.join(ROOT, 'src', 'content', `${baseName}.${lang}.json`),
+    path.join(ROOT, 'src', 'content', `${baseName}.${DEFAULT_LANG}.json`),
     path.join(ROOT, 'src', 'content', `${baseName}.json`),
   ]
   for (const filePath of paths) {
     if (fs.existsSync(filePath)) {
       try {
-        return JSON.parse(fs.readFileSync(filePath, 'utf8'))
+        const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+        return typeof normalizer === 'function' ? normalizer(parsed) : parsed
       } catch (error) {
         console.warn(`[prerender] warn: failed to parse ${path.basename(filePath)} -> ${error.message}`)
         return []
@@ -133,24 +180,6 @@ function escapeHtml(s) {
     .replace(/'/g, '&#39;')
 }
 
-function injectHiddenH1AndNav(html, { h1, description, links = [], extras = '' }) {
-  const navLinks = links.map((l) => `<li><a href="${l.href}">${escapeHtml(l.text)}</a></li>`).join('')
-  const headingLine = h1 ? `<p><strong>${escapeHtml(h1)}</strong></p>` : ''
-  const descLine = description ? `<p>${escapeHtml(description)}</p>` : ''
-  const navBlock = links.length ? `<nav><ul>${navLinks}</ul></nav>` : ''
-  const snippet = `
-    <div data-prerender-seo aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
-      <main>
-        ${headingLine}
-        ${descLine}
-        ${navBlock}
-        ${extras || ''}
-      </main>
-    </div>
-  `.replace(/\s+$/gm, '')
-  return html.replace(/<\/body>/i, `${snippet}\n\n</body>`)
-}
-
 function prerender() {
   if (!fs.existsSync(DIST)) throw new Error('dist not found')
   const base = read(INDEX)
@@ -258,8 +287,10 @@ function prerender() {
     return entry?.content || ''
   }
 
-  const posts = resolveContent('blog-posts')
-  const blogIndexExtras = renderBlogIndex(posts)
+  const blogPostsByLang = Object.fromEntries(
+    SUPPORTED_LANGS.map((lang) => [lang, resolveContent('blog-posts', lang, normalizeBlogPosts)]),
+  )
+  const defaultBlogPosts = blogPostsByLang[DEFAULT_LANG] || []
 
   const routes = [
     { path: '/', title: 'Pixel Art Village: Image to Pixel Art Place Color Converter', metas: [
@@ -322,21 +353,9 @@ function prerender() {
       { name: 'twitter:description', content: 'Support, feedback, partnerships.' },
       { name: 'twitter:image', content: ABS('/social-contact.png') },
     ]},
-    { path: '/blog', title: 'Blog | Pixel Art Village', metas: [
-      { name: 'description', content: 'Articles and updates about making pixel art, tips, and features.' },
-      { property: 'og:url', content: ABS(ensureTrailingSlash('/blog')) },
-      { property: 'og:type', content: 'website' },
-      { property: 'og:title', content: 'Blog | Pixel Art Village' },
-      { property: 'og:description', content: 'Articles and updates about making pixel art, tips, and features.' },
-      { property: 'og:image', content: ABS('/blog-og/_index.png') },
-      { name: 'twitter:card', content: 'summary' },
-      { name: 'twitter:title', content: 'Blog | Pixel Art Village' },
-      { name: 'twitter:description', content: 'Articles and updates about making pixel art, tips, and features.' },
-      { name: 'twitter:image', content: ABS('/blog-og/_index.png') },
-    ], extras: blogIndexExtras, visible: ({ lang, bundle }) => renderBlogIndexVisible(posts, lang, bundle) },
   ]
 
-  const pseoPages = resolveContent('pseo-pages')
+  const pseoPages = resolveContent('pseo-pages', DEFAULT_LANG, normalizePseoPages)
   for (const p of pseoPages) {
     if (!p || !p.slug) continue
     const url = ensureTrailingSlash(`/converter/${p.slug}`)
@@ -359,26 +378,82 @@ function prerender() {
     })
   }
 
-  for (const p of posts) {
-    if (!p || !p.slug) continue
-    routes.push({
-      path: ensureTrailingSlash(`/blog/${p.slug}`),
-      title: `${p.title} | Pixel Art Village`,
+  const blogRoutes = []
+  const blogImageExists = (slug) => fs.existsSync(path.join(ROOT, 'public', 'blog-og', `${slug}.png`))
+  const buildBlogPath = (lang, slug = '') => {
+    const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
+    if (!slug) return `${prefix}/blog/`
+    return `${prefix}/blog/${slug}/`
+  }
+
+  for (const lang of SUPPORTED_LANGS) {
+    const bundle = loadLocaleBundle(lang)
+    const localizedPosts = blogPostsByLang[lang]
+    const postsForLang = Array.isArray(localizedPosts) && localizedPosts.length ? localizedPosts : defaultBlogPosts
+    if (!postsForLang.length) continue
+
+    const siteName = pick(bundle, 'site.name') || 'Pixel Art Village'
+    const blogTitle = pick(bundle, 'blog.title') || 'Blog'
+    const blogSubtitle =
+      pick(bundle, 'blog.subtitle') || 'Articles and updates about making pixel image visuals, tutorials, and new features.'
+    const blogPath = buildBlogPath(lang)
+
+    blogRoutes.push({
+      lang,
+      path: blogPath,
+      routePath: blogPath,
+      basePath: '/blog/',
+      title: `${blogTitle} | ${siteName}`,
       metas: [
-        { name: 'description', content: p.excerpt || '' },
-        { property: 'og:url', content: ABS(ensureTrailingSlash(`/blog/${p.slug}`)) },
-        { property: 'og:type', content: 'article' },
-        { property: 'og:title', content: `${p.title} | Pixel Art Village` },
-        { property: 'og:description', content: p.excerpt || '' },
-        { property: 'og:image', content: ABS(`/blog-og/${p.slug}.png`) },
+        { name: 'description', content: blogSubtitle },
+        { property: 'og:url', content: ABS(blogPath) },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: `${blogTitle} | ${siteName}` },
+        { property: 'og:description', content: blogSubtitle },
+        { property: 'og:image', content: ABS('/blog-og/_index.png') },
         { name: 'twitter:card', content: 'summary' },
-        { name: 'twitter:title', content: `${p.title} | Pixel Art Village` },
-        { name: 'twitter:description', content: p.excerpt || '' },
-        { name: 'twitter:image', content: ABS(`/blog-og/${p.slug}.png`) },
+        { name: 'twitter:title', content: `${blogTitle} | ${siteName}` },
+        { name: 'twitter:description', content: blogSubtitle },
+        { name: 'twitter:image', content: ABS('/blog-og/_index.png') },
       ],
-      extras: renderBlogArticle(p),
-      visible: ({ lang, bundle }) => renderBlogPostVisible(p, lang, bundle),
+      extras: renderBlogIndex(postsForLang),
+      visible: renderBlogIndexVisible(postsForLang, lang, bundle),
+      alternates: [
+        { lang, href: ABS(blogPath) },
+        { lang: 'x-default', href: ABS(blogPath) },
+      ],
     })
+
+    for (const post of postsForLang) {
+      if (!post?.slug) continue
+      const postPath = buildBlogPath(lang, post.slug)
+      const ogImage = blogImageExists(post.slug) ? ABS(`/blog-og/${post.slug}.png`) : ABS('/blog-og/_index.png')
+      blogRoutes.push({
+        lang,
+        path: postPath,
+        routePath: postPath,
+        basePath: ensureTrailingSlash(`/blog/${post.slug}`),
+        title: `${post.title} | ${siteName}`,
+        metas: [
+          { name: 'description', content: post.excerpt || '' },
+          { property: 'og:url', content: ABS(postPath) },
+          { property: 'og:type', content: 'article' },
+          { property: 'og:title', content: `${post.title} | ${siteName}` },
+          { property: 'og:description', content: post.excerpt || '' },
+          { property: 'og:image', content: ogImage },
+          { name: 'twitter:card', content: 'summary' },
+          { name: 'twitter:title', content: `${post.title} | ${siteName}` },
+          { name: 'twitter:description', content: post.excerpt || '' },
+          { name: 'twitter:image', content: ogImage },
+        ],
+        extras: renderBlogArticle(post),
+        visible: renderBlogPostVisible(post, lang, bundle),
+        alternates: [
+          { lang, href: ABS(postPath) },
+          { lang: 'x-default', href: ABS(postPath) },
+        ],
+      })
+    }
   }
 
   const expandForLang = (r, lang) => {
@@ -453,25 +528,37 @@ function prerender() {
       links: r.links || null,
       visible,
       basePath,
+      alternates: null,
     }
   }
 
   const expanded = []
+  const seenPaths = new Set()
+  const appendRoute = (route) => {
+    const normalizedPath = ensureTrailingSlash(route.path || route.routePath || '/')
+    const key = `${route.lang || DEFAULT_LANG}:${normalizedPath}`
+    if (seenPaths.has(key)) return
+    seenPaths.add(key)
+    expanded.push(route)
+  }
   for (const r of routes) {
     for (const lang of SUPPORTED_LANGS) {
-      expanded.push(expandForLang(r, lang))
+      appendRoute(expandForLang(r, lang))
     }
   }
+  for (const route of blogRoutes) appendRoute(route)
 
   for (const r of expanded) {
     const canonicalPath = (r.routePath === '/' ? '/' : ensureTrailingSlash(r.routePath))
 
     const ABS = (p) => `https://pixelartvillage.org${p}`
-    const alternates = SUPPORTED_LANGS.map(l => {
-      const ensure = ensureTrailingSlash
-      const p = (l === DEFAULT_LANG) ? ensure(r.basePath) : (r.basePath === '/' ? `/${l}/` : `/${l}${ensure(r.basePath)}`)
-      return { lang: l, href: ABS(ensure(p)) }
-    }).concat([{ lang: 'x-default', href: ABS((r.basePath === '/' ? '/' : ensureTrailingSlash(r.basePath))) }])
+    const alternates = Array.isArray(r.alternates) && r.alternates.length
+      ? r.alternates
+      : SUPPORTED_LANGS.map((l) => {
+          const ensure = ensureTrailingSlash
+          const p = l === DEFAULT_LANG ? ensure(r.basePath) : (r.basePath === '/' ? `/${l}/` : `/${l}${ensure(r.basePath)}`)
+          return { lang: l, href: ABS(ensure(p)) }
+        }).concat([{ lang: 'x-default', href: ABS((r.basePath === '/' ? '/' : ensureTrailingSlash(r.basePath))) }])
 
     let out = buildHtml(base, {
       title: r.title,
@@ -482,26 +569,9 @@ function prerender() {
     })
 
     out = injectHreflang(out, alternates)
-
-    // Do not inject visible fallback content into #root to avoid pre-hydration flashes.
-
-    const defaultLinks = [
-      { href: ABS('/'), text: 'Home' },
-      { href: ABS('/about/'), text: 'About' },
-      { href: ABS('/contact/'), text: 'Contact' },
-      { href: ABS('/privacy/'), text: 'Privacy' },
-      { href: ABS('/terms/'), text: 'Terms' },
-      { href: ABS('/blog/'), text: 'Blog' },
-    ]
-    // Keep prerender text semantically aligned with visible page copy.
-    let h1Text = r.title.replace(/\s*\|\s*Pixel Art Village$/, '').trim()
-    const rawDesc = (r.metas.find(m => m.name === 'description') || {}).content || ''
-    const descMeta = rawDesc
-
-    let extras = r.extras || ''
-
-    const navLinks = r.links && r.links.length ? r.links : defaultLinks
-    out = injectHiddenH1AndNav(out, { h1: h1Text, description: descMeta, links: navLinks, extras })
+    if (r.visible) {
+      out = injectVisibleContent(out, r.visible)
+    }
 
     const file = path.join(DIST, r.path.replace(/^\//, '').replace(/\/$/, ''), 'index.html')
     write(file, out)

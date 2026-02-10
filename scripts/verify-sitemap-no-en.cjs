@@ -1,5 +1,7 @@
 #!/usr/bin/env node
-// Verify sitemap.xml only exposes canonical（英文）URL，避免语言前缀残留。
+// Verify multilingual sitemap consistency:
+// - default locale should stay unprefixed (/), no /en/* URLs
+// - non-default locale URLs should exist
 const fs = require('fs')
 const path = require('path')
 
@@ -21,29 +23,36 @@ if (!fs.existsSync(sitemapPath)) {
 
 const xml = fs.readFileSync(sitemapPath, 'utf8')
 
-// 1. Ensure no /en/ or other language-prefixed entries remain
-const LANG_PREFIX_RE = /https:\/\/pixelartvillage\.org\/[a-z]{2}\//g
-const prefixedMatches = xml.match(LANG_PREFIX_RE) || []
-const filtered = prefixedMatches.filter(url => !url.includes('/converter/')) // legacy safeguard
-if (filtered.length > 0) {
-  fail(`Found language-prefixed URLs: ${[...new Set(filtered)].join(', ')}`)
+// 1. Ensure default locale is unprefixed (no /en/)
+const enPrefixedMatches = xml.match(/https:\/\/pixelartvillage\.org\/en\//g) || []
+if (enPrefixedMatches.length > 0) {
+  fail(`Found /en/ prefixed URLs: ${[...new Set(enPrefixedMatches)].join(', ')}`)
 } else {
-  pass('No language-prefixed URLs present')
+  pass('No /en/ prefixed URLs present')
 }
 
-// 2. Ensure root URL present
+// 2. Ensure multilingual entries exist
+const nonDefaultPrefixed = xml.match(/https:\/\/pixelartvillage\.org\/(es|id|de|pl|it|pt|fr|ru|tl|vi|ja|sv|nb|nl|ar|ko|th)\//g) || []
+if (nonDefaultPrefixed.length === 0) {
+  fail('No non-default language-prefixed URLs found')
+} else {
+  pass(`Found multilingual URLs: ${[...new Set(nonDefaultPrefixed)].length} locale prefixes`)
+}
+
+// 3. Ensure root URL present
 if (!/https:\/\/pixelartvillage\.org\/<\/loc>/.test(xml)) {
   fail('Root <loc> entry missing')
 } else {
   pass('Root <loc> present')
 }
 
-// 3. Spot check关键页面存在
+// 4. Spot check关键页面存在
 const required = [
   /https:\/\/pixelartvillage\.org\/privacy\/<\/loc>/,
   /https:\/\/pixelartvillage\.org\/terms\/<\/loc>/,
   /https:\/\/pixelartvillage\.org\/converter\/png-to-pixel-art\/<\/loc>/,
   /https:\/\/pixelartvillage\.org\/blog\/<\/loc>/,
+  /https:\/\/pixelartvillage\.org\/es\/blog\/<\/loc>/,
 ]
 required.forEach((re) => {
   if (!re.test(xml)) {
@@ -52,7 +61,7 @@ required.forEach((re) => {
 })
 if (!process.exitCode) pass('Required canonical entries present')
 
-// 4. URL 数量 sanity check
+// 5. URL 数量 sanity check
 const urlCount = (xml.match(/<url>/g) || []).length
 if (urlCount < 20) {
   console.warn(`⚠️  Sitemap contains only ${urlCount} <url> entries (expected at least 20).`)
