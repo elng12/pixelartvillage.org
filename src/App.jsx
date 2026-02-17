@@ -8,11 +8,6 @@ import ResourcePreloader from '@/components/ResourcePreloader'
 import TranslationPreloader from '@/components/TranslationPreloader'
 import Header from './components/Header'
 import ToolSection from './components/ToolSection'
-import ShowcaseSection from './components/ShowcaseSection'
-import WplaceFeaturesSection from './components/WplaceFeaturesSection'
-import FeaturesSection from './components/FeaturesSection'
-import HowItWorksSection from './components/HowItWorksSection'
-import FaqSection from './components/FaqSection'
 import LocalizedLink from '@/components/LocalizedLink'
 import { LocaleProvider } from '@/contexts/LocaleContext'
 import { generateHreflangLinks } from '@/utils/hreflang'
@@ -30,6 +25,11 @@ const Blog = lazy(() => import('./components/Blog'))
 const BlogPost = lazy(() => import('./components/BlogPost'))
 const PseoPage = lazy(() => import('./components/PseoPage'))
 const NotFound = lazy(() => import('./components/NotFound'))
+const ShowcaseSection = lazy(() => import('./components/ShowcaseSection'))
+const WplaceFeaturesSection = lazy(() => import('./components/WplaceFeaturesSection'))
+const FeaturesSection = lazy(() => import('./components/FeaturesSection'))
+const HowItWorksSection = lazy(() => import('./components/HowItWorksSection'))
+const FaqSection = lazy(() => import('./components/FaqSection'))
 
 function useAppOutletContext() {
   return useOutletContext()
@@ -71,27 +71,29 @@ function Home() {
           <Editor image={uploadedImage} />
         </Suspense>
       ) : null}
-      <ShowcaseSection />
-      <WplaceFeaturesSection />
-      <FeaturesSection />
-      <HowItWorksSection />
-      <section className="bg-gray-50 py-8 border-y border-gray-100">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('footer.explore')}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {relatedLinks.map((link) => (
-              <LocalizedLink
-                key={link.to}
-                to={link.to}
-                className="block rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 hover:border-blue-300 hover:text-blue-600"
-              >
-                {link.label}
-              </LocalizedLink>
-            ))}
+      <Suspense fallback={null}>
+        <ShowcaseSection />
+        <WplaceFeaturesSection />
+        <FeaturesSection />
+        <HowItWorksSection />
+        <section className="bg-gray-50 py-8 border-y border-gray-100">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('footer.explore')}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {relatedLinks.map((link) => (
+                <LocalizedLink
+                  key={link.to}
+                  to={link.to}
+                  className="block rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 hover:border-blue-300 hover:text-blue-600"
+                >
+                  {link.label}
+                </LocalizedLink>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-      <FaqSection />
+        </section>
+        <FaqSection />
+      </Suspense>
     </>
   )
 }
@@ -110,10 +112,16 @@ function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
     <LocaleProvider value={localeValue}>
       <ResourcePreloader />
       <TranslationPreloader />
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:text-blue-700 focus:shadow"
+      >
+        {t('a11y.skipToMain', 'Skip to main content')}
+      </a>
       <Header />
       <CompatNotice />
       <ScrollManager />
-      <main>
+      <main id="main-content">
         <Suspense
           fallback={
             <div className="container mx-auto px-4 py-10 text-sm text-gray-600" role="status" aria-live="polite">

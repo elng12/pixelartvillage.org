@@ -2,7 +2,7 @@
 // - Applies stored user choice if exists (only when CMP is not present)
 // - Watches consent updates to load optional scripts after consent
 
-import { ensureAdSenseLoaded } from './utils/loadAdSense.js'
+import { scheduleAdSenseLoad } from './utils/loadAdSense.js'
 import { ensureClarityLoaded } from './clarity-init.js'
 
 const STORAGE_KEY = 'consent.choice.v1'
@@ -24,7 +24,7 @@ function applyConsentUpdate(update) {
   }
   if (!changed) return
   if (consentState.ad_storage === 'granted') {
-    try { ensureAdSenseLoaded() } catch { /* no-op */ }
+    try { scheduleAdSenseLoad({ delayMs: 2000 }) } catch { /* no-op */ }
   }
   if (consentState.analytics_storage === 'granted') {
     try { ensureClarityLoaded() } catch { /* no-op */ }

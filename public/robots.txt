@@ -10,8 +10,5 @@ Disallow: /homepage_layout_seo_optimized.html
 Disallow: /homepage_layout_v2.html
 Disallow: /design_principles.html
 
-# 指定规范域名（canonical domain）
-Host: pixelartvillage.org
-
 # Sitemap
 Sitemap: https://pixelartvillage.org/sitemap.xml

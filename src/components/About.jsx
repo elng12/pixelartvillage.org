@@ -9,6 +9,14 @@ export default function About() {
   const { currentLocale, buildPath } = useLocaleContext()
   const canonical = `https://pixelartvillage.org${buildPath('/about/')}`
   const hreflangLinks = generateHreflangLinks('/about')
+  const orgJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: t('site.name'),
+    url: 'https://pixelartvillage.org/',
+    description: t('about.seoDesc'),
+    sameAs: ['https://github.com/pixelartvillage/pixelartvillage'],
+  }
   return (
     <div className="container mx-auto px-4 py-10 max-w-3xl">
       <Seo
@@ -17,6 +25,7 @@ export default function About() {
         canonical={canonical}
         hreflang={hreflangLinks}
         lang={currentLocale}
+        jsonLd={orgJsonLd}
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },

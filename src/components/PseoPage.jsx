@@ -51,6 +51,40 @@ export default function PseoPage() {
     { to: '/terms/', label: t('footer.terms') },
   ]
   const introParas = Array.isArray(page.intro) ? page.intro : [page.intro]
+  const howToJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: page.h1 || page.title,
+    description: page.metaDescription,
+    inLanguage: currentLocale || 'en',
+    totalTime: 'PT2M',
+    supply: [
+      { '@type': 'HowToSupply', name: 'Image file (PNG/JPG/WebP/GIF/BMP)' },
+    ],
+    tool: [
+      { '@type': 'HowToTool', name: 'Pixel Art Village Converter' },
+    ],
+    step: [
+      { '@type': 'HowToStep', name: t('tool.ariaChoose', 'Upload an image') },
+      { '@type': 'HowToStep', name: t('howItWorks.steps.configure.title', 'Adjust pixel size and palette') },
+      { '@type': 'HowToStep', name: t('editor.downloadBtn', 'Download result') },
+    ],
+  }
+  const softwareJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: page.title,
+    applicationCategory: 'MultimediaApplication',
+    operatingSystem: 'Web',
+    url: canonical,
+    inLanguage: currentLocale || 'en',
+    description: page.metaDescription,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+  }
 
   return (
     <Fragment>
@@ -58,8 +92,9 @@ export default function PseoPage() {
         title={page.title}
         canonical={canonical}
         lang={currentLocale || 'en'}
+        description={page.metaDescription}
+        jsonLd={[howToJsonLd, softwareJsonLd]}
         meta={[
-          { name: 'description', content: page.metaDescription },
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
           { property: 'og:title', content: page.title },

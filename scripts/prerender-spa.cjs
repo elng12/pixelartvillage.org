@@ -136,6 +136,17 @@ function injectMeta(html, metas) {
   return html.replace(/<\/head>/i, `  ${tags}\n</head>`)
 }
 
+function injectJsonLd(html, jsonLd = []) {
+  const entries = Array.isArray(jsonLd) ? jsonLd : (jsonLd ? [jsonLd] : [])
+  if (!entries.length) return html
+  const tags = entries
+    .filter(Boolean)
+    .map((entry) => `  <script type="application/ld+json">${JSON.stringify(entry).replace(/</g, '\\u003c')}</script>`)
+    .join('\n')
+  if (!tags) return html
+  return html.replace(/<\/head>/i, `${tags}\n</head>`)
+}
+
 function injectHreflang(html, alternates = []) {
   if (!alternates || !alternates.length) return html
   const tags = alternates.map(a => `<link rel="alternate" hreflang="${a.lang}" href="${a.href}">`).join('\n  ')
@@ -145,7 +156,7 @@ function injectHreflang(html, alternates = []) {
   return html.replace(/<\/head>/i, `  ${tags}\n</head>`)
 }
 
-function buildHtml(base, { title, canonical, metas, lang, routePath }) {
+function buildHtml(base, { title, canonical, metas, lang, jsonLd }) {
   let html = base
   if (title) html = replaceTitle(html, title)
   if (canonical) html = upsertCanonical(html, canonical)
@@ -155,6 +166,7 @@ function buildHtml(base, { title, canonical, metas, lang, routePath }) {
   html = stripJsonLdTypes(html, ['FAQPage'])
   html = html.replace(/\n?\s*<div[^>]+data-prerender-seo[\s\S]*?<\/div>\s*/i, '')
   if (metas?.length) html = injectMeta(html, metas)
+  html = injectJsonLd(html, jsonLd)
   // hreflang is injected later with full alternates set
   return html
 }
@@ -260,6 +272,15 @@ function prerender() {
     .replace(/\s*–\s*Pixel Art Village\s*$/i, '')
     .trim()
 
+  const formatBlogSeoTitle = (title, siteName, maxLength = 60) => {
+    const normalizedTitle = String(title || '').trim()
+    const suffix = ` | ${siteName}`
+    const maxBaseLength = Math.max(20, maxLength - suffix.length)
+    if (normalizedTitle.length <= maxBaseLength) return `${normalizedTitle}${suffix}`
+    const trimmed = normalizedTitle.slice(0, Math.max(0, maxBaseLength - 1)).trimEnd()
+    return `${trimmed}…${suffix}`
+  }
+
   const renderBasicVisible = ({ title, description }) => {
     const heading = escapeHtml(cleanTitle(title))
     const desc = description ? `<p class="text-gray-700 mt-3 text-center max-w-2xl mx-auto">${escapeHtml(description)}</p>` : ''
@@ -340,7 +361,17 @@ function prerender() {
       { name: 'twitter:title', content: 'About | Pixel Art Village' },
       { name: 'twitter:description', content: 'A free, browser‑based pixel art maker & converter. Privacy‑first, fast, and accessible.' },
       { name: 'twitter:image', content: ABS('/social-about.png') },
-    ]},
+    ],
+      jsonLd: ({ lang, bundle }) => ({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: pick(bundle, 'site.name') || 'Pixel Art Village',
+        url: 'https://pixelartvillage.org/',
+        description: pick(bundle, 'about.seoDesc') || 'A free, browser-based pixel art maker & converter.',
+        inLanguage: lang,
+        sameAs: ['https://github.com/pixelartvillage/pixelartvillage'],
+      }),
+    },
     { path: '/contact', title: 'Contact | Pixel Art Village', metas: [
       { name: 'description', content: 'Support, feedback, partnerships.' },
       { property: 'og:url', content: ABS(ensureTrailingSlash('/contact')) },
@@ -373,6 +404,34 @@ function prerender() {
         { name: 'twitter:title', content: p.title },
         { name: 'twitter:description', content: p.metaDescription || '' },
         { name: 'twitter:image', content: ABS(`/pseo-og/${p.slug}.png`) },
+      ],
+      jsonLd: ({ lang, routePath }) => [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'HowTo',
+          name: p.h1 || p.title,
+          description: p.metaDescription || '',
+          inLanguage: lang,
+          totalTime: 'PT2M',
+          supply: [{ '@type': 'HowToSupply', name: 'Image file (PNG/JPG/WebP/GIF/BMP)' }],
+          tool: [{ '@type': 'HowToTool', name: 'Pixel Art Village Converter' }],
+          step: [
+            { '@type': 'HowToStep', name: 'Upload an image' },
+            { '@type': 'HowToStep', name: 'Adjust pixel size and palette settings' },
+            { '@type': 'HowToStep', name: 'Download your pixel art result' },
+          ],
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: p.title,
+          applicationCategory: 'MultimediaApplication',
+          operatingSystem: 'Web',
+          url: `https://pixelartvillage.org${routePath}`,
+          description: p.metaDescription || '',
+          inLanguage: lang,
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        },
       ],
       visible: () => renderPseoVisible(p),
     })
@@ -428,23 +487,39 @@ function prerender() {
       if (!post?.slug) continue
       const postPath = buildBlogPath(lang, post.slug)
       const ogImage = blogImageExists(post.slug) ? ABS(`/blog-og/${post.slug}.png`) : ABS('/blog-og/_index.png')
+      const seoTitle = formatBlogSeoTitle(post.title, siteName)
       blogRoutes.push({
         lang,
         path: postPath,
         routePath: postPath,
         basePath: ensureTrailingSlash(`/blog/${post.slug}`),
-        title: `${post.title} | ${siteName}`,
+        title: seoTitle,
         metas: [
           { name: 'description', content: post.excerpt || '' },
           { property: 'og:url', content: ABS(postPath) },
           { property: 'og:type', content: 'article' },
-          { property: 'og:title', content: `${post.title} | ${siteName}` },
+          { property: 'og:title', content: seoTitle },
           { property: 'og:description', content: post.excerpt || '' },
           { property: 'og:image', content: ogImage },
           { name: 'twitter:card', content: 'summary' },
-          { name: 'twitter:title', content: `${post.title} | ${siteName}` },
+          { name: 'twitter:title', content: seoTitle },
           { name: 'twitter:description', content: post.excerpt || '' },
           { name: 'twitter:image', content: ogImage },
+        ],
+        jsonLd: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: post.title,
+            description: post.excerpt || '',
+            datePublished: post.date || undefined,
+            dateModified: post.date || undefined,
+            inLanguage: lang,
+            mainEntityOfPage: ABS(postPath),
+            author: { '@type': 'Organization', name: siteName },
+            publisher: { '@type': 'Organization', name: siteName },
+            image: ogImage,
+          },
         ],
         extras: renderBlogArticle(post),
         visible: renderBlogPostVisible(post, lang, bundle),
@@ -516,6 +591,9 @@ function prerender() {
     const resolvedVisible = typeof r.visible === 'function'
       ? r.visible({ lang, bundle, title, description })
       : r.visible
+    const resolvedJsonLd = typeof r.jsonLd === 'function'
+      ? r.jsonLd({ lang, bundle, title, description, routePath: localizedPath })
+      : r.jsonLd
     const visible = resolvedVisible || renderBasicVisible({ title, description })
 
     return {
@@ -527,6 +605,7 @@ function prerender() {
       extras: r.extras || '',
       links: r.links || null,
       visible,
+      jsonLd: resolvedJsonLd,
       basePath,
       alternates: null,
     }
@@ -565,7 +644,7 @@ function prerender() {
       canonical: ABS(canonicalPath),
       metas: r.metas,
       lang: r.lang,
-      routePath: r.routePath,
+      jsonLd: r.jsonLd,
     })
 
     out = injectHreflang(out, alternates)

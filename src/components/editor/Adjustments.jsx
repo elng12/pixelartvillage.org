@@ -38,13 +38,14 @@ function Adjustments({ state, dispatch, customPalettes }) {
             className="btn-secondary px-2 py-1 text-xs"
             onClick={() => dispatch({ type: 'RESET_SLIDERS' })}
             title={t('adjustments.reset.tooltip')}
+            aria-label={t('adjustments.reset.all')}
           >
             {t('adjustments.reset.all')}
           </button>
-          <button type="button" className="btn-secondary px-2 py-1 text-xs" onClick={() => dispatch({ type: 'SET', field: 'pixelSize', value: 1 })} title={t('adjustments.reset.pixelSizeBtnTitle')}>▌ PS</button>
-          <button type="button" className="btn-secondary px-2 py-1 text-xs" onClick={() => dispatch({ type: 'SET', field: 'brightness', value: 0 })} title={t('adjustments.reset.brightnessBtnTitle')}>▌ BR</button>
-          <button type="button" className="btn-secondary px-2 py-1 text-xs" onClick={() => dispatch({ type: 'SET', field: 'contrast', value: 0 })} title={t('adjustments.reset.contrastBtnTitle')}>▌ CT</button>
-          <button type="button" className="btn-secondary px-2 py-1 text-xs" onClick={() => dispatch({ type: 'SET', field: 'saturation', value: 0 })} title={t('adjustments.reset.saturationBtnTitle')}>▌ SN</button>
+          <button type="button" className="btn-secondary px-2 py-1 text-xs" onClick={() => dispatch({ type: 'SET', field: 'pixelSize', value: 1 })} title={t('adjustments.reset.pixelSizeBtnTitle')} aria-label={t('adjustments.reset.pixelSizeBtnTitle')}>▌ PS</button>
+          <button type="button" className="btn-secondary px-2 py-1 text-xs" onClick={() => dispatch({ type: 'SET', field: 'brightness', value: 0 })} title={t('adjustments.reset.brightnessBtnTitle')} aria-label={t('adjustments.reset.brightnessBtnTitle')}>▌ BR</button>
+          <button type="button" className="btn-secondary px-2 py-1 text-xs" onClick={() => dispatch({ type: 'SET', field: 'contrast', value: 0 })} title={t('adjustments.reset.contrastBtnTitle')} aria-label={t('adjustments.reset.contrastBtnTitle')}>▌ CT</button>
+          <button type="button" className="btn-secondary px-2 py-1 text-xs" onClick={() => dispatch({ type: 'SET', field: 'saturation', value: 0 })} title={t('adjustments.reset.saturationBtnTitle')} aria-label={t('adjustments.reset.saturationBtnTitle')}>▌ SN</button>
         </div>
       </div>
 

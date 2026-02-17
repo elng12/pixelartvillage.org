@@ -23,6 +23,7 @@ export default function TermsOfService() {
     <div className="container mx-auto px-4 py-10">
       <Seo
         title={t('terms.seoTitle')}
+        description={t('terms.seoDesc')}
         canonical={canonical}
         lang={currentLocale}
         meta={[
