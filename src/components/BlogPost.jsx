@@ -5,6 +5,34 @@ import { useLocalizedContent } from '@/hooks/useLocalizedContent'
 import { useLocaleContext } from '@/hooks/useLocaleContext'
 import LocalizedLink from '@/components/LocalizedLink'
 
+const BLOG_OG_IMAGE_SLUGS = new Set([
+  'best-pixel-art-converters-compared-2025',
+  'export-from-illustrator-image-to-pixel-art',
+  'getting-started-pixel-art-maker',
+  'how-to-get-pixel-art-version-of-image',
+  'how-to-pixelate-an-image',
+  'image-to-pixel-art-converter-free',
+  'make-image-more-like-pixel',
+  'photo-to-sprite-converter-tips',
+  'turn-photo-into-pixel-art',
+])
+
+function buildBlogSeoTitle(title, siteName, maxLength = 60) {
+  const suffix = ` | ${siteName}`
+  const maxBaseLength = Math.max(20, maxLength - suffix.length)
+  const normalized = String(title || '').trim()
+  if (normalized.length <= maxBaseLength) return `${normalized}${suffix}`
+  const trimmed = normalized.slice(0, Math.max(0, maxBaseLength - 1)).trimEnd()
+  return `${trimmed}…${suffix}`
+}
+
+function resolveBlogOgImage(slug) {
+  if (slug && BLOG_OG_IMAGE_SLUGS.has(slug)) {
+    return `https://pixelartvillage.org/blog-og/${slug}.png`
+  }
+  return 'https://pixelartvillage.org/blog-og/_index.png'
+}
+
 export default function BlogPost() {
   const { t } = useTranslation()
   const { slug, lang: urlLang } = useParams()
@@ -26,6 +54,7 @@ export default function BlogPost() {
 
   const post = posts.find((p) => p.slug === slug)
   const canonical = `https://pixelartvillage.org${buildPath(canonicalBase)}`
+  const siteName = t('site.name')
 
   if (!post) {
     return (
@@ -43,19 +72,43 @@ export default function BlogPost() {
     )
   }
 
+  const seoTitle = buildBlogSeoTitle(post.title, siteName)
+  const articleImage = resolveBlogOgImage(slug)
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt || '',
+    datePublished: post.date || undefined,
+    dateModified: post.date || undefined,
+    inLanguage: resolvedLocale,
+    mainEntityOfPage: canonical,
+    author: {
+      '@type': 'Organization',
+      name: siteName,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteName,
+    },
+    image: articleImage,
+  }
+
   return (
     <article className="container mx-auto px-4 py-10 max-w-3xl">
       <Seo
-        title={`${post.title} | ${t('site.name')}`}
+        title={seoTitle}
         canonical={canonical}
         lang={resolvedLocale}
+        description={post.excerpt}
+        jsonLd={articleJsonLd}
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'article' },
-          { property: 'og:title', content: `${post.title} | ${t('site.name')}` },
+          { property: 'og:title', content: seoTitle },
           { property: 'og:description', content: post.excerpt },
           { name: 'twitter:card', content: 'summary' },
-          { name: 'twitter:title', content: `${post.title} | ${t('site.name')}` },
+          { name: 'twitter:title', content: seoTitle },
           { name: 'twitter:description', content: post.excerpt },
         ]}
       />
