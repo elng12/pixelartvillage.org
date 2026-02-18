@@ -72,7 +72,6 @@ const PATH_SET = new Set();
 const blogPostsByLang = Object.fromEntries(
   SUPPORTED_LANGS.map((lang) => [lang, loadLocalizedContent('blog-posts', lang, normalizeBlogPosts)])
 );
-const defaultBlogPosts = blogPostsByLang[DEFAULT_LANG] || [];
 const pseoPages = loadLocalizedContent('pseo-pages', DEFAULT_LANG, normalizePseoPages);
 
 function localizePath(p, lang) {
@@ -102,7 +101,7 @@ for (const p of BASE_PATHS) addPathForLangs(p);
 
 // 扩展博客页面（按语言各自真实 slug）
 for (const lang of SUPPORTED_LANGS) {
-  const posts = blogPostsByLang[lang] && blogPostsByLang[lang].length ? blogPostsByLang[lang] : defaultBlogPosts;
+  const posts = Array.isArray(blogPostsByLang[lang]) ? blogPostsByLang[lang] : [];
   for (const post of posts) {
     if (post && post.slug) {
       PATH_SET.add(localizePath(`/blog/${post.slug}`, lang));
@@ -127,7 +126,7 @@ const generateHreflangSitemap = () => {
       hreflangSet.add(localizePath(p, lang));
     }
 
-    const posts = blogPostsByLang[lang] && blogPostsByLang[lang].length ? blogPostsByLang[lang] : defaultBlogPosts;
+    const posts = Array.isArray(blogPostsByLang[lang]) ? blogPostsByLang[lang] : [];
     for (const post of posts) {
       if (post && post.slug) {
         hreflangSet.add(localizePath(`/blog/${post.slug}`, lang));

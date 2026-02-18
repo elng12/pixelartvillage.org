@@ -311,7 +311,6 @@ function prerender() {
   const blogPostsByLang = Object.fromEntries(
     SUPPORTED_LANGS.map((lang) => [lang, resolveContent('blog-posts', lang, normalizeBlogPosts)]),
   )
-  const defaultBlogPosts = blogPostsByLang[DEFAULT_LANG] || []
 
   const routes = [
     { path: '/', title: 'Pixel Art Village: Image to Pixel Art Place Color Converter', metas: [
@@ -444,11 +443,37 @@ function prerender() {
     if (!slug) return `${prefix}/blog/`
     return `${prefix}/blog/${slug}/`
   }
+  const blogIndexLocales = []
+  const blogLocalesBySlug = new Map()
+  for (const lang of SUPPORTED_LANGS) {
+    const posts = Array.isArray(blogPostsByLang[lang]) ? blogPostsByLang[lang] : []
+    if (posts.length > 0) blogIndexLocales.push(lang)
+    for (const post of posts) {
+      if (!post?.slug) continue
+      const locales = blogLocalesBySlug.get(post.slug) || new Set()
+      locales.add(lang)
+      blogLocalesBySlug.set(post.slug, locales)
+    }
+  }
+  const sortBySupportedLangs = (langs = []) => {
+    const set = new Set(langs)
+    return SUPPORTED_LANGS.filter((lang) => set.has(lang))
+  }
+  const buildBlogAlternates = (slug = '') => {
+    const langs = slug
+      ? sortBySupportedLangs(Array.from(blogLocalesBySlug.get(slug) || []))
+      : sortBySupportedLangs(blogIndexLocales)
+    const alternates = langs.map((lang) => ({ lang, href: ABS(buildBlogPath(lang, slug)) }))
+    const xDefaultLang = langs.includes(DEFAULT_LANG) ? DEFAULT_LANG : langs[0]
+    if (xDefaultLang) {
+      alternates.push({ lang: 'x-default', href: ABS(buildBlogPath(xDefaultLang, slug)) })
+    }
+    return alternates
+  }
 
   for (const lang of SUPPORTED_LANGS) {
     const bundle = loadLocaleBundle(lang)
-    const localizedPosts = blogPostsByLang[lang]
-    const postsForLang = Array.isArray(localizedPosts) && localizedPosts.length ? localizedPosts : defaultBlogPosts
+    const postsForLang = Array.isArray(blogPostsByLang[lang]) ? blogPostsByLang[lang] : []
     if (!postsForLang.length) continue
 
     const siteName = pick(bundle, 'site.name') || 'Pixel Art Village'
@@ -477,10 +502,7 @@ function prerender() {
       ],
       extras: renderBlogIndex(postsForLang),
       visible: renderBlogIndexVisible(postsForLang, lang, bundle),
-      alternates: [
-        { lang, href: ABS(blogPath) },
-        { lang: 'x-default', href: ABS(blogPath) },
-      ],
+      alternates: buildBlogAlternates(),
     })
 
     for (const post of postsForLang) {
@@ -523,10 +545,7 @@ function prerender() {
         ],
         extras: renderBlogArticle(post),
         visible: renderBlogPostVisible(post, lang, bundle),
-        alternates: [
-          { lang, href: ABS(postPath) },
-          { lang: 'x-default', href: ABS(postPath) },
-        ],
+        alternates: buildBlogAlternates(post.slug),
       })
     }
   }

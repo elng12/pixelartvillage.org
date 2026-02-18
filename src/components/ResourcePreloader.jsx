@@ -38,9 +38,10 @@ export default function ResourcePreloader() {
         '/': ['/converter/png-to-pixel-art/', '/converter/jpg-to-pixel-art/'],
         '/converter/png-to-pixel-art/': ['/converter/jpg-to-pixel-art/', '/converter/image-to-pixel-art/'],
         '/converter/jpg-to-pixel-art/': ['/converter/png-to-pixel-art/', '/converter/photo-to-pixel-art/'],
-        '/about/': ['/contact/', '/blog'],
+        '/about/': ['/contact/', '/blog/'],
         '/contact/': ['/about/', '/privacy/'],
-        '/blog': ['/blog/getting-started-pixel-art-maker/']
+        '/blog': ['/blog/how-to-pixelate-an-image/'],
+        '/blog/': ['/blog/how-to-pixelate-an-image/']
       }
 
       const nextPages = prefetchMap[currentPath] || []
