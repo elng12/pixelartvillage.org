@@ -119,6 +119,10 @@ function verifyRoute(routePath, lang = 'en') {
       const disk = path.join(DIST, imgPath.replace(/^\//, ''));
       if (!fs.existsSync(disk)) fail(`${routePath}: image not found in dist -> ${imgPath}`); else ok(`${routePath}: image found`);
     }
+
+    const outgoingAnchors = (html.match(/<a\s[^>]*href=["'][^"']+["'][^>]*>/ig) || []).length;
+    if (outgoingAnchors < 1) fail(`${routePath}: missing crawlable outgoing links in prerendered HTML`);
+    else ok(`${routePath}: outgoing links OK (${outgoingAnchors})`);
   }
 
   // For Blog posts, ensure og:image/twitter:image exists and file is emitted

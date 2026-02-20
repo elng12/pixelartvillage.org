@@ -176,6 +176,13 @@ function ensureTrailingSlash(p) {
   return p.endsWith('/') ? p : `${p}/`
 }
 
+function buildLocalizedPath(lang, basePath) {
+  const normalized = ensureTrailingSlash(basePath)
+  if (!lang || lang === DEFAULT_LANG) return normalized
+  if (normalized === '/') return `/${lang}/`
+  return `/${lang}${normalized}`
+}
+
 function injectVisibleContent(html, visible) {
   if (!visible) return html
   const placeholder = /<div id="root"><\/div>/
@@ -288,7 +295,7 @@ function prerender() {
     return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${desc}</main>`
   }
 
-  const renderPseoVisible = (page) => {
+  const renderPseoVisible = (page, { lang = DEFAULT_LANG, bundle = {}, pages = [] } = {}) => {
     if (!page) return ''
     const heading = escapeHtml(page.h1 || page.title || '')
     const intro = Array.isArray(page.intro) ? page.intro.slice(0, 2) : []
@@ -299,8 +306,38 @@ function prerender() {
       ? `<p class="text-gray-700 mt-3">${escapeHtml(page.metaDescription)}</p>`
       : ''
     const body = paragraphs || fallback
-    if (!heading && !body) return ''
-    return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${body}</main>`
+
+    const relatedHeading = pick(bundle, 'pseo.relatedHeading') || 'Related Converters'
+    const exploreHeading = pick(bundle, 'footer.explore') || 'Explore More'
+    const siteLinks = [
+      { href: buildLocalizedPath(lang, '/'), label: pick(bundle, 'nav.home') || 'Home' },
+      { href: buildLocalizedPath(lang, '/blog'), label: pick(bundle, 'nav.blog') || 'Blog' },
+      { href: buildLocalizedPath(lang, '/about'), label: pick(bundle, 'nav.about') || 'About' },
+      { href: buildLocalizedPath(lang, '/contact'), label: pick(bundle, 'nav.contact') || 'Contact' },
+      { href: buildLocalizedPath(lang, '/privacy'), label: pick(bundle, 'footer.privacy') || 'Privacy' },
+      { href: buildLocalizedPath(lang, '/terms'), label: pick(bundle, 'footer.terms') || 'Terms' },
+    ]
+
+    const relatedLinks = Array.isArray(pages)
+      ? pages.filter((entry) => entry && entry.slug && entry.slug !== page.slug).slice(0, 6)
+      : []
+
+    const relatedHtml = relatedLinks.length
+      ? `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${escapeHtml(relatedHeading)}</h2><ul class="mt-3 space-y-2">${relatedLinks
+          .map((entry) => {
+            const title = entry.h1 || entry.title || entry.slug
+            const href = buildLocalizedPath(lang, `/converter/${entry.slug}`)
+            return `<li><a class="text-blue-600 hover:underline" href="${escapeHtml(href)}">${escapeHtml(title)}</a></li>`
+          })
+          .join('')}</ul></section>`
+      : ''
+
+    const siteHtml = `<section class="mt-8"><h2 class="text-lg font-semibold text-gray-900">${escapeHtml(exploreHeading)}</h2><ul class="mt-3 flex flex-wrap gap-3">${siteLinks
+      .map((link) => `<li><a class="text-blue-600 hover:underline" href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a></li>`)
+      .join('')}</ul></section>`
+
+    if (!heading && !body && !relatedHtml) return ''
+    return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${body}${relatedHtml}${siteHtml}</main>`
   }
 
   const getMetaDescription = (metas = []) => {
@@ -432,7 +469,7 @@ function prerender() {
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
         },
       ],
-      visible: () => renderPseoVisible(p),
+      visible: ({ lang, bundle }) => renderPseoVisible(p, { lang, bundle, pages: pseoPages }),
     })
   }
 
