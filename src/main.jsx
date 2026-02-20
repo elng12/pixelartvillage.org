@@ -6,7 +6,6 @@ import LangRoot from './components/LangRoot.jsx'
 import i18n, { SUPPORTED_LANGS, setStoredLang } from '@/i18n'
 import { ensureClarityLoaded } from './clarity-init.js'
 import { ensureGtmLoaded, insertGtmNoScript } from './gtm-init.js'
-import { ensureGaLoaded } from './ga-init.js'
 
 const rootEl = document.getElementById('root')
 if (!rootEl) {
@@ -30,10 +29,9 @@ async function bootstrapWebVitals(reportHandler) {
 const reportWebVitals = import.meta.env.PROD ? () => {} : undefined
 bootstrapWebVitals(reportWebVitals)
 
-// Load analytics only when explicitly enabled for production
+// Load optional analytics services only when explicitly enabled for production
 const ENABLE_ANALYTICS = Boolean(import.meta.env?.PROD) && String(import.meta.env?.VITE_ENABLE_ANALYTICS) === '1'
 if (ENABLE_ANALYTICS) {
-  ensureGaLoaded('G-5RG3H97P63')
   ensureClarityLoaded()
   ensureGtmLoaded()
   insertGtmNoScript()

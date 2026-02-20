@@ -49,6 +49,7 @@ for (const f of REQUIRED_FILES) {
   'social-contact.png',
   'social-preview.png',
   'consent-default.js',
+  'ga-config.js',
 ].forEach((img) => {
   const p = path.join(DIST, img);
   if (!fs.existsSync(p)) fail(`missing ${img} in dist`);
