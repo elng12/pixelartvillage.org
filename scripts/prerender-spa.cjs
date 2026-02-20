@@ -274,6 +274,36 @@ function prerender() {
     return `<article class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${title}</h1>${date}<div class="prose prose-sm md:prose-base text-gray-800 mt-4 text-center md:text-left prose-pre:text-left prose-code:text-left prose-img:mx-0">${paragraphs || excerpt}</div><footer class="mt-8 text-center md:text-left"><a class="text-blue-600 underline" href="${backHref}">${escapeHtml(backLabel)}</a></footer></article>`
   }
 
+  const getRelatedBlogPosts = (posts = [], currentSlug, limit = 3) => {
+    const normalized = Array.isArray(posts) ? posts.filter((item) => item && item.slug) : []
+    if (normalized.length <= 1) return []
+    const max = Math.min(limit, normalized.length - 1)
+    const currentIndex = normalized.findIndex((item) => item.slug === currentSlug)
+    const startIndex = currentIndex >= 0 ? currentIndex : 0
+    const related = []
+    for (let step = 1; related.length < max && step <= normalized.length; step += 1) {
+      const candidate = normalized[(startIndex + step) % normalized.length]
+      if (!candidate || candidate.slug === currentSlug) continue
+      if (!related.some((item) => item.slug === candidate.slug)) related.push(candidate)
+    }
+    return related
+  }
+
+  const renderBlogPostWithRelatedVisible = (post, posts = [], lang = DEFAULT_LANG, bundle = {}) => {
+    if (!post || !post.slug) return ''
+    const base = renderBlogPostVisible(post, lang, bundle)
+    if (!base) return base
+    const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
+    const relatedHeading = escapeHtml(pick(bundle, 'blog.relatedHeading') || 'Related posts')
+    const related = getRelatedBlogPosts(posts, post.slug, 3)
+    if (!related.length) return base
+    const links = related
+      .map((item) => `<li><a class="text-blue-600 hover:underline" href="${prefix}/blog/${escapeHtml(item.slug)}/">${escapeHtml(item.title || item.slug)}</a></li>`)
+      .join('')
+    const relatedHtml = `<section class="mt-8 rounded-lg border border-gray-200 bg-white p-4"><h2 class="text-lg font-semibold text-gray-900">${relatedHeading}</h2><ul class="mt-3 space-y-2">${links}</ul></section>`
+    return base.replace(/<footer class="mt-8 text-center md:text-left">/i, `${relatedHtml}<footer class="mt-8 text-center md:text-left">`)
+  }
+
   const cleanTitle = (text) => String(text || '')
     .replace(/\s*\|\s*Pixel Art Village\s*$/i, '')
     .replace(/\s*–\s*Pixel Art Village\s*$/i, '')
@@ -581,7 +611,7 @@ function prerender() {
           },
         ],
         extras: renderBlogArticle(post),
-        visible: renderBlogPostVisible(post, lang, bundle),
+        visible: renderBlogPostWithRelatedVisible(post, postsForLang, lang, bundle),
         alternates: buildBlogAlternates(post.slug),
       })
     }

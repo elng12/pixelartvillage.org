@@ -33,6 +33,21 @@ function resolveBlogOgImage(slug) {
   return 'https://pixelartvillage.org/blog-og/_index.png'
 }
 
+function getRelatedPosts(posts = [], currentSlug, limit = 3) {
+  const normalized = Array.isArray(posts) ? posts.filter((p) => p && p.slug) : []
+  if (normalized.length <= 1) return []
+  const max = Math.min(limit, normalized.length - 1)
+  const currentIndex = normalized.findIndex((p) => p.slug === currentSlug)
+  const startIndex = currentIndex >= 0 ? currentIndex : 0
+  const related = []
+  for (let step = 1; related.length < max && step <= normalized.length; step += 1) {
+    const candidate = normalized[(startIndex + step) % normalized.length]
+    if (!candidate || candidate.slug === currentSlug) continue
+    if (!related.some((item) => item.slug === candidate.slug)) related.push(candidate)
+  }
+  return related
+}
+
 export default function BlogPost() {
   const { t } = useTranslation()
   const { slug, lang: urlLang } = useParams()
@@ -74,6 +89,7 @@ export default function BlogPost() {
 
   const seoTitle = buildBlogSeoTitle(post.title, siteName)
   const articleImage = resolveBlogOgImage(slug)
+  const relatedPosts = getRelatedPosts(posts, post.slug, 3)
   const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -127,6 +143,23 @@ export default function BlogPost() {
           <p key={index}>{para}</p>
         ))}
       </div>
+
+      {relatedPosts.length ? (
+        <section className="mt-8 rounded-lg border border-gray-200 bg-white p-4">
+          <h2 className="text-lg font-semibold text-gray-900">
+            {t('blog.relatedHeading', 'Related posts')}
+          </h2>
+          <ul className="mt-3 space-y-2">
+            {relatedPosts.map((related) => (
+              <li key={related.slug}>
+                <LocalizedLink className="text-blue-600 hover:underline" to={`/blog/${related.slug}/`}>
+                  {related.title}
+                </LocalizedLink>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <footer className="mt-8">
         <LocalizedLink className="text-blue-600 underline" to="/blog/">
