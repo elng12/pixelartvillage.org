@@ -103,6 +103,15 @@ function Footer() {
                 <LocalizedLink to="/about/" className="hover:text-white">{t('nav.about')}</LocalizedLink>
                 <span aria-hidden>•</span>
                 <LocalizedLink to="/contact/" className="hover:text-white">{t('nav.contact')}</LocalizedLink>
+                <span aria-hidden>•</span>
+                <a
+                  href="https://pinpointanswertoday.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white"
+                >
+                  Pinpoint Answer Today
+                </a>
               </div>
             </div>
             <div className="mt-6 text-center flex flex-wrap items-center justify-center gap-6">

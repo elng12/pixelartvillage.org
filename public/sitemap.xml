@@ -1,2321 +1,2321 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 优化站点地图：包含所有可索引语言版本 -->
-<!-- 生成时间: 2026-02-18T00:46:30.975Z -->
+<!-- 生成时间: 2026-02-24T01:43:25.315Z -->
 <!-- URL总数: 386 (全量多语言) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pixelartvillage.org/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/blog/how-to-get-pixel-art-version-of-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/how-to-get-pixel-art-version-of-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/blog/pixel-art-animation-tutorial-frame-by-frame/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/blog/pixel-art-tutorial-complete-guide-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/blog/pixel-art-animation-tutorial-frame-by-frame/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/blog/pixel-art-color-theory-comprehensive-guide/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/blog/pixel-art-techniques-mastery-guide-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/blog/pixel-art-tutorial-complete-guide-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/es/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/blog/pixel-art-animation-tutorial-frame-by-frame/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/blog/pixel-art-tutorial-complete-guide-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/blog/how-to-get-pixel-art-version-of-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/id/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/blog/how-to-get-pixel-art-version-of-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/it/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/blog/pixel-art-animation-tutorial-frame-by-frame/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/blog/pixel-art-tutorial-complete-guide-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/blog/how-to-get-pixel-art-version-of-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ko/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/blog/how-to-get-pixel-art-version-of-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/blog/how-to-get-pixel-art-version-of-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/nl/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/blog/how-to-get-pixel-art-version-of-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pl/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/blog/pixel-art-animation-tutorial-frame-by-frame/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/blog/pixel-art-tutorial-complete-guide-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/pt/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/blog/pixel-art-animation-tutorial-frame-by-frame/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/blog/pixel-art-tutorial-complete-guide-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/blog/how-to-get-pixel-art-version-of-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/sv/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/blog/how-to-get-pixel-art-version-of-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/blog/how-to-get-pixel-art-version-of-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/tl/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/about/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/blog/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/blog/best-pixel-art-converters-compared-2025/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/blog/export-from-illustrator-image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/blog/how-to-get-pixel-art-version-of-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/blog/how-to-pixelate-an-image/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/blog/make-image-more-like-pixel/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/contact/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/converter/gif-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/converter/image-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/converter/jpg-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/converter/photo-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/converter/photo-to-sprite-converter/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/converter/pixelate-image-online/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/converter/png-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/converter/retro-game-graphics-maker/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/converter/webp-to-pixel-art/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/privacy/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/terms/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
