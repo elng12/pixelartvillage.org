@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import logger from '@/utils/logger'
 import ScrollManager from './components/ScrollManager'
 import CompatNotice from '@/components/CompatNotice.jsx'
+import ConsentBanner from '@/components/ConsentBanner.jsx'
 import ResourcePreloader from '@/components/ResourcePreloader'
 import TranslationPreloader from '@/components/TranslationPreloader'
 import Header from './components/Header'
@@ -132,6 +133,7 @@ function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
           <Outlet context={{ uploadedImage, setUploadedImage, currentLocale }} />
         </Suspense>
       </main>
+      <ConsentBanner />
       <div className="bg-gray-900">
         <Suspense fallback={null}>
           <Footer />
