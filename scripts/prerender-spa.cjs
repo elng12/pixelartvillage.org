@@ -318,6 +318,22 @@ function prerender() {
     return `${trimmed}…${suffix}`
   }
 
+  const normalizeWhitespace = (text) => String(text || '').replace(/\s+/g, ' ').trim()
+
+  const shortenText = (text, maxLength = 155) => {
+    const normalized = normalizeWhitespace(text)
+    if (!normalized || normalized.length <= maxLength) return normalized
+
+    const hardLimit = Math.max(1, maxLength - 1)
+    let trimmed = normalized.slice(0, hardLimit).trimEnd()
+    const lastSpace = trimmed.lastIndexOf(' ')
+    if (lastSpace >= Math.max(40, Math.floor(maxLength * 0.6))) {
+      trimmed = trimmed.slice(0, lastSpace).trimEnd()
+    }
+
+    return `${trimmed.replace(/[.,;:!?-]+$/g, '').trimEnd()}…`
+  }
+
   const renderBasicVisible = ({ title, description }) => {
     const heading = escapeHtml(cleanTitle(title))
     const desc = description ? `<p class="text-gray-700 mt-3 text-center max-w-2xl mx-auto">${escapeHtml(description)}</p>` : ''
@@ -334,6 +350,26 @@ function prerender() {
     return `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${faqTitle}</h2><div class="mt-4 space-y-4">${faqItems
       .map((item) => `<article class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"><h3 class="text-base font-semibold text-gray-900">${escapeHtml(item.question)}</h3><p class="mt-2 text-gray-700">${escapeHtml(item.answer)}</p></article>`)
       .join('')}</div></section>`
+  }
+
+  const getPseoTopicLabel = (page) => cleanTitle(page?.h1 || page?.title || page?.slug || 'This converter')
+    .replace(/^Convert\s+/i, '')
+    .replace(/\s+\(.*?\)\s*$/g, '')
+    .replace(/:\s*/g, ' ')
+    .replace(/\s+Online$/i, '')
+    .trim()
+
+  const renderPseoTipsSection = (page) => {
+    const topicLabel = getPseoTopicLabel(page)
+    const tips = [
+      `${topicLabel} works best when you start with a clear subject, a limited palette, and a target output size in mind. Fewer colors make shapes easier to read at small resolutions and help sprites, icons, and UI graphics stay crisp.`,
+      'Before exporting, test several pixel sizes and compare silhouettes in the live preview. A slightly larger grid often keeps edges cleaner, while careful dithering can smooth gradients without making the final artwork muddy or blurry.',
+      'If your source image feels too busy, crop tighter and boost contrast before pixelating. Strong value separation, simpler forms, and fewer competing textures usually produce cleaner retro-style results and reduce the amount of manual cleanup afterward.',
+    ]
+
+    return `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">How to get cleaner pixel art</h2><div class="mt-4 space-y-4">${tips
+      .map((tip) => `<p class="text-gray-700">${escapeHtml(tip)}</p>`)
+      .join('')}</div><ol class="mt-4 space-y-3 list-decimal pl-5 text-gray-700"><li>Upload the source image with the clearest subject and silhouette.</li><li>Adjust pixel size, palette, and dithering until the shapes read cleanly.</li><li>Export a PNG and review it at the final display size before shipping or sharing.</li></ol></section>`
   }
 
   const renderPseoVisible = (page, { lang = DEFAULT_LANG, bundle = {}, pages = [] } = {}) => {
@@ -376,10 +412,11 @@ function prerender() {
     const siteHtml = `<section class="mt-8"><h2 class="text-lg font-semibold text-gray-900">${escapeHtml(exploreHeading)}</h2><ul class="mt-3 flex flex-wrap gap-3">${siteLinks
       .map((link) => `<li><a class="text-blue-600 hover:underline" href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a></li>`)
       .join('')}</ul></section>`
+    const tipsHtml = renderPseoTipsSection(page)
     const faqHtml = renderFaqCardsSection({ bundle, count: 2 })
 
     if (!heading && !body && !relatedHtml) return ''
-    return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${body}${relatedHtml}${siteHtml}${faqHtml}</main>`
+    return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${body}${tipsHtml}${relatedHtml}${siteHtml}${faqHtml}</main>`
   }
 
   const formatTemplate = (template, values = {}) => String(template || '').replace(/\{\{\s*([^}]+)\s*\}\}/g, (_, key) => {
@@ -677,6 +714,19 @@ function prerender() {
     return entry?.content || ''
   }
 
+  const syncDescriptionMetas = (metas = []) => {
+    const description = shortenText(getMetaDescription(metas))
+    if (!description) return metas
+
+    return metas.map((meta) => {
+      if (!meta) return meta
+      if (meta.name === 'description' || meta.property === 'og:description' || meta.name === 'twitter:description') {
+        return { ...meta, content: description }
+      }
+      return meta
+    })
+  }
+
   const blogPostsByLang = Object.fromEntries(
     SUPPORTED_LANGS.map((lang) => [lang, resolveContent('blog-posts', lang, normalizeBlogPosts)]),
   )
@@ -789,15 +839,15 @@ function prerender() {
       path: url,
       title: p.title,
       metas: [
-        { name: 'description', content: p.metaDescription || '' },
+        { name: 'description', content: shortenText(p.metaDescription || '') },
         { property: 'og:url', content: ABS(url) },
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: p.title },
-        { property: 'og:description', content: p.metaDescription || '' },
+        { property: 'og:description', content: shortenText(p.metaDescription || '') },
         { property: 'og:image', content: ABS(`/pseo-og/${p.slug}.png`) },
         { name: 'twitter:card', content: 'summary' },
         { name: 'twitter:title', content: p.title },
-        { name: 'twitter:description', content: p.metaDescription || '' },
+        { name: 'twitter:description', content: shortenText(p.metaDescription || '') },
         { name: 'twitter:image', content: ABS(`/pseo-og/${p.slug}.png`) },
       ],
       jsonLd: ({ lang, routePath }) => [
@@ -805,7 +855,7 @@ function prerender() {
           '@context': 'https://schema.org',
           '@type': 'HowTo',
           name: p.h1 || p.title,
-          description: p.metaDescription || '',
+          description: shortenText(p.metaDescription || ''),
           inLanguage: lang,
           totalTime: 'PT2M',
           supply: [{ '@type': 'HowToSupply', name: 'Image file (PNG/JPG/WebP/GIF/BMP)' }],
@@ -823,7 +873,7 @@ function prerender() {
           applicationCategory: 'MultimediaApplication',
           operatingSystem: 'Web',
           url: `https://pixelartvillage.org${routePath}`,
-          description: p.metaDescription || '',
+          description: shortenText(p.metaDescription || ''),
           inLanguage: lang,
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
         },
@@ -885,15 +935,15 @@ function prerender() {
       basePath: '/blog/',
       title: `${blogTitle} | ${siteName}`,
       metas: [
-        { name: 'description', content: blogSubtitle },
+        { name: 'description', content: shortenText(blogSubtitle) },
         { property: 'og:url', content: ABS(blogPath) },
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: `${blogTitle} | ${siteName}` },
-        { property: 'og:description', content: blogSubtitle },
+        { property: 'og:description', content: shortenText(blogSubtitle) },
         { property: 'og:image', content: ABS('/blog-og/_index.png') },
         { name: 'twitter:card', content: 'summary' },
         { name: 'twitter:title', content: `${blogTitle} | ${siteName}` },
-        { name: 'twitter:description', content: blogSubtitle },
+        { name: 'twitter:description', content: shortenText(blogSubtitle) },
         { name: 'twitter:image', content: ABS('/blog-og/_index.png') },
       ],
       extras: renderBlogIndex(postsForLang),
@@ -906,6 +956,7 @@ function prerender() {
       const postPath = buildBlogPath(lang, post.slug)
       const ogImage = blogImageExists(post.slug) ? ABS(`/blog-og/${post.slug}.png`) : ABS('/blog-og/_index.png')
       const seoTitle = formatBlogSeoTitle(post.title, siteName)
+      const seoDescription = shortenText(post.excerpt || '')
       blogRoutes.push({
         lang,
         path: postPath,
@@ -913,15 +964,15 @@ function prerender() {
         basePath: ensureTrailingSlash(`/blog/${post.slug}`),
         title: seoTitle,
         metas: [
-          { name: 'description', content: post.excerpt || '' },
+          { name: 'description', content: seoDescription },
           { property: 'og:url', content: ABS(postPath) },
           { property: 'og:type', content: 'article' },
           { property: 'og:title', content: seoTitle },
-          { property: 'og:description', content: post.excerpt || '' },
+          { property: 'og:description', content: seoDescription },
           { property: 'og:image', content: ogImage },
           { name: 'twitter:card', content: 'summary' },
           { name: 'twitter:title', content: seoTitle },
-          { name: 'twitter:description', content: post.excerpt || '' },
+          { name: 'twitter:description', content: seoDescription },
           { name: 'twitter:image', content: ogImage },
         ],
         jsonLd: [
@@ -929,7 +980,7 @@ function prerender() {
             '@context': 'https://schema.org',
             '@type': 'Article',
             headline: post.title,
-            description: post.excerpt || '',
+            description: seoDescription,
             datePublished: post.date || undefined,
             dateModified: post.date || undefined,
             inLanguage: lang,
@@ -996,6 +1047,8 @@ function prerender() {
       if (typeof tTitle === 'string' && tTitle) title = `${tTitle} | Pixel Art Village`
       if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
     }
+
+    metas = syncDescriptionMetas(metas)
 
     const ogUrl = `https://pixelartvillage.org${localizedPath}`
     const ogIdx = metas.findIndex(m => m && m.property === 'og:url')
