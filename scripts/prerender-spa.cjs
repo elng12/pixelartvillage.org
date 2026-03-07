@@ -370,6 +370,304 @@ function prerender() {
     return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${body}${relatedHtml}${siteHtml}</main>`
   }
 
+  const formatTemplate = (template, values = {}) => String(template || '').replace(/\{\{\s*([^}]+)\s*\}\}/g, (_, key) => {
+    const value = values[key.trim()]
+    return value == null ? '' : String(value)
+  })
+
+  const getPrimarySiteLinks = (lang = DEFAULT_LANG, bundle = {}) => ([
+    { href: buildLocalizedPath(lang, '/'), label: pick(bundle, 'nav.home') || 'Home' },
+    { href: buildLocalizedPath(lang, '/blog'), label: pick(bundle, 'nav.blog') || 'Blog' },
+    { href: buildLocalizedPath(lang, '/about'), label: pick(bundle, 'nav.about') || 'About' },
+    { href: buildLocalizedPath(lang, '/contact'), label: pick(bundle, 'nav.contact') || 'Contact' },
+    { href: buildLocalizedPath(lang, '/privacy'), label: pick(bundle, 'footer.privacy') || 'Privacy' },
+    { href: buildLocalizedPath(lang, '/terms'), label: pick(bundle, 'footer.terms') || 'Terms' },
+    { href: buildLocalizedPath(lang, '/converter/png-to-pixel-art'), label: pick(bundle, 'footer.links.png2pixel') || 'PNG to Pixel Art' },
+    { href: buildLocalizedPath(lang, '/converter/jpg-to-pixel-art'), label: pick(bundle, 'footer.links.jpg2pixel') || 'JPG to Pixel Art' },
+    { href: buildLocalizedPath(lang, '/converter/image-to-pixel-art'), label: pick(bundle, 'footer.links.imageToPixel') || 'Image to Pixel Art' },
+    { href: buildLocalizedPath(lang, '/converter/photo-to-sprite-converter'), label: pick(bundle, 'footer.links.photo2sprite') || 'Photo to Sprite Converter' },
+  ])
+
+  const renderLinkGridSection = (title, links = [], columns = 'sm:grid-cols-2') => {
+    const items = Array.isArray(links)
+      ? links.filter((link) => link && link.href && link.label)
+      : []
+    if (!items.length) return ''
+    return `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${escapeHtml(title)}</h2><ul class="mt-4 grid grid-cols-1 gap-3 ${columns}">${items
+      .map((link) => `<li><a class="block rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 hover:border-blue-300 hover:text-blue-600" href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a></li>`)
+      .join('')}</ul></section>`
+  }
+
+  const renderRecentPostsSection = ({ lang = DEFAULT_LANG, bundle = {}, posts = [], title } = {}) => {
+    const recentPosts = Array.isArray(posts) ? posts.slice(0, 3) : []
+    if (!recentPosts.length) return ''
+    return `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${escapeHtml(title || pick(bundle, 'blog.title') || 'Blog')}</h2><ul class="mt-4 space-y-3">${recentPosts
+      .map((post) => {
+        const href = buildLocalizedPath(lang, `/blog/${post.slug}`)
+        const excerpt = post.excerpt ? `<p class="mt-1 text-sm text-gray-700">${escapeHtml(post.excerpt)}</p>` : ''
+        return `<li class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"><a class="text-base font-semibold text-blue-600 hover:underline" href="${escapeHtml(href)}">${escapeHtml(post.title || post.slug)}</a>${excerpt}</li>`
+      })
+      .join('')}</ul></section>`
+  }
+
+  const renderAboutVisible = ({ lang = DEFAULT_LANG, bundle = {}, title = '', description = '', blogPosts = [] } = {}) => {
+    const heading = escapeHtml(pick(bundle, 'about.h1') || cleanTitle(title))
+    const paragraphs = ['about.p1', 'about.p2', 'about.p3']
+      .map((key) => pick(bundle, key))
+      .filter(Boolean)
+      .map((text) => `<p>${escapeHtml(text)}</p>`)
+      .join('')
+    const principles = [
+      {
+        title: pick(bundle, 'about.principles.privacy.title'),
+        desc: pick(bundle, 'about.principles.privacy.desc'),
+      },
+      {
+        title: pick(bundle, 'about.principles.performance.title'),
+        desc: pick(bundle, 'about.principles.performance.desc'),
+      },
+      {
+        title: pick(bundle, 'about.principles.accessibility.title'),
+        desc: pick(bundle, 'about.principles.accessibility.desc'),
+      },
+    ].filter((item) => item.title || item.desc)
+    const principlesHtml = principles.length
+      ? `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${escapeHtml(pick(bundle, 'about.principles.title') || 'Principles')}</h2><ul class="mt-4 space-y-3">${principles
+          .map((item) => `<li class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"><strong class="text-gray-900">${escapeHtml(item.title)}</strong> <span class="text-gray-700">${escapeHtml(item.desc)}</span></li>`)
+          .join('')}</ul></section>`
+      : ''
+    const intro = paragraphs || (description ? `<p>${escapeHtml(description)}</p>` : '')
+    const exploreHtml = renderLinkGridSection(pick(bundle, 'footer.explore') || 'Explore', getPrimarySiteLinks(lang, bundle))
+    const recentPostsHtml = renderRecentPostsSection({ lang, bundle, posts: blogPosts })
+    return `<main class="container mx-auto px-4 py-10 max-w-4xl"><section><h1 class="text-2xl font-bold text-gray-900">${heading}</h1><div class="prose prose-sm max-w-none text-gray-700 mt-4">${intro}</div></section>${principlesHtml}${exploreHtml}${recentPostsHtml}</main>`
+  }
+
+  const renderContactVisible = ({ lang = DEFAULT_LANG, bundle = {}, title = '', description = '', blogPosts = [] } = {}) => {
+    const heading = escapeHtml(pick(bundle, 'contact.h1') || cleanTitle(title))
+    const intro = pick(bundle, 'contact.p1') || description
+    const paragraphOneParts = [
+      escapeHtml(pick(bundle, 'contact.p2') || ''),
+      `<a class="text-blue-600 underline" href="${escapeHtml(buildLocalizedPath(lang, '/blog'))}">${escapeHtml(pick(bundle, 'contact.p3') || pick(bundle, 'nav.blog') || 'Blog')}</a>`,
+      escapeHtml(pick(bundle, 'contact.p4') || ''),
+      `<a class="text-blue-600 underline" href="${escapeHtml(buildLocalizedPath(lang, '/'))}">${escapeHtml(pick(bundle, 'contact.p5') || pick(bundle, 'nav.home') || 'Home')}</a>`,
+      escapeHtml(pick(bundle, 'contact.p6') || ''),
+      `<a class="text-blue-600 underline" href="${escapeHtml(buildLocalizedPath(lang, '/about'))}">${escapeHtml(pick(bundle, 'contact.p7') || pick(bundle, 'nav.about') || 'About')}</a>`,
+      escapeHtml(pick(bundle, 'contact.p8') || ''),
+    ].filter(Boolean).join(' ')
+    const paragraphTwoParts = [
+      escapeHtml(pick(bundle, 'contact.p9') || ''),
+      `<a class="text-blue-600 underline" href="${escapeHtml(buildLocalizedPath(lang, '/converter/png-to-pixel-art'))}">${escapeHtml(pick(bundle, 'contact.p10') || pick(bundle, 'footer.links.png2pixel') || 'PNG to Pixel Art')}</a>`,
+      escapeHtml(pick(bundle, 'contact.p11') || ''),
+      `<a class="text-blue-600 underline" href="${escapeHtml(buildLocalizedPath(lang, '/converter/image-to-pixel-art'))}">${escapeHtml(pick(bundle, 'contact.p12') || pick(bundle, 'footer.links.imageToPixel') || 'Image to Pixel Art')}</a>`,
+      escapeHtml(pick(bundle, 'contact.p13') || ''),
+    ].filter(Boolean).join(' ')
+    const body = [
+      intro ? `<p>${escapeHtml(intro)}</p>` : '',
+      paragraphOneParts ? `<p>${paragraphOneParts}</p>` : '',
+      paragraphTwoParts ? `<p>${paragraphTwoParts}</p>` : '',
+    ].filter(Boolean).join('')
+    const exploreHtml = renderLinkGridSection(pick(bundle, 'footer.explore') || 'Explore', getPrimarySiteLinks(lang, bundle))
+    const recentPostsHtml = renderRecentPostsSection({ lang, bundle, posts: blogPosts })
+    return `<main class="container mx-auto px-4 py-10 max-w-4xl"><section><h1 class="text-2xl font-bold text-gray-900">${heading}</h1><div class="prose prose-sm max-w-none text-gray-700 mt-4">${body}</div></section>${exploreHtml}${recentPostsHtml}</main>`
+  }
+
+  const renderPolicySection = ({ title, paragraphs = [], bullets = [] } = {}) => {
+    const textBlocks = []
+    if (title) textBlocks.push(`<h2 class="text-xl font-semibold text-gray-900">${escapeHtml(title)}</h2>`)
+    if (Array.isArray(paragraphs)) {
+      textBlocks.push(...paragraphs.filter(Boolean).map((text) => `<p class="mt-3 text-gray-700">${escapeHtml(text)}</p>`))
+    }
+    if (Array.isArray(bullets) && bullets.length) {
+      textBlocks.push(`<ul class="mt-3 list-disc space-y-2 pl-5 text-gray-700">${bullets
+        .filter(Boolean)
+        .map((text) => `<li>${escapeHtml(text)}</li>`)
+        .join('')}</ul>`)
+    }
+    if (!textBlocks.length) return ''
+    return `<section class="mt-8">${textBlocks.join('')}</section>`
+  }
+
+  const renderQuickLinksSection = ({ lang = DEFAULT_LANG, bundle = {}, baseKey } = {}) => {
+    const leftTitle = pick(bundle, `${baseKey}.quickLinks.mainSite`) || 'Explore Pixel Art Village'
+    const rightTitle = pick(bundle, `${baseKey}.quickLinks.popularConverters`) || 'Popular converters'
+    const leftLinks = [
+      { href: buildLocalizedPath(lang, '/'), label: pick(bundle, `${baseKey}.quickLinks.links.home`) || pick(bundle, 'nav.home') || 'Home' },
+      { href: buildLocalizedPath(lang, '/about'), label: pick(bundle, `${baseKey}.quickLinks.links.about`) || pick(bundle, 'nav.about') || 'About' },
+      { href: buildLocalizedPath(lang, '/contact'), label: pick(bundle, `${baseKey}.quickLinks.links.contact`) || pick(bundle, 'nav.contact') || 'Contact' },
+      { href: buildLocalizedPath(lang, '/blog'), label: pick(bundle, `${baseKey}.quickLinks.links.blog`) || pick(bundle, 'nav.blog') || 'Blog' },
+    ]
+    const rightLinks = [
+      { href: buildLocalizedPath(lang, '/converter/png-to-pixel-art'), label: pick(bundle, `${baseKey}.quickLinks.links.png`) || pick(bundle, 'footer.links.png2pixel') || 'PNG to Pixel Art' },
+      { href: buildLocalizedPath(lang, '/converter/jpg-to-pixel-art'), label: pick(bundle, `${baseKey}.quickLinks.links.jpg`) || pick(bundle, 'footer.links.jpg2pixel') || 'JPG to Pixel Art' },
+      { href: buildLocalizedPath(lang, '/converter/image-to-pixel-art'), label: pick(bundle, `${baseKey}.quickLinks.links.image`) || pick(bundle, 'footer.links.imageToPixel') || 'Image to Pixel Art' },
+      { href: buildLocalizedPath(lang, '/converter/photo-to-pixel-art'), label: pick(bundle, `${baseKey}.quickLinks.links.photo`) || pick(bundle, 'footer.links.converter') || 'Photo to Pixel Art' },
+    ]
+    const sectionTitle = pick(bundle, `${baseKey}.quickLinks.heading`) || 'Quick links'
+    return `<section class="mt-10 border-t border-gray-200 pt-8"><h2 class="text-xl font-semibold text-gray-900">${escapeHtml(sectionTitle)}</h2><div class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2"><div><h3 class="text-sm font-semibold uppercase tracking-wide text-gray-500">${escapeHtml(leftTitle)}</h3><ul class="mt-3 space-y-2">${leftLinks
+      .map((link) => `<li><a class="text-blue-600 hover:underline" href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a></li>`)
+      .join('')}</ul></div><div><h3 class="text-sm font-semibold uppercase tracking-wide text-gray-500">${escapeHtml(rightTitle)}</h3><ul class="mt-3 space-y-2">${rightLinks
+      .map((link) => `<li><a class="text-blue-600 hover:underline" href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a></li>`)
+      .join('')}</ul></div></div></section>`
+  }
+
+  const renderPrivacyVisible = ({ lang = DEFAULT_LANG, bundle = {}, title = '' } = {}) => {
+    const today = new Date().toISOString().slice(0, 10)
+    const heading = escapeHtml(pick(bundle, 'privacy.h1') || cleanTitle(title))
+    const lastUpdated = formatTemplate(pick(bundle, 'common.lastUpdated') || 'Last updated: {{date}}', { date: today })
+    const sections = [
+      renderPolicySection({
+        title: pick(bundle, 'privacy.sections.overview.title'),
+        paragraphs: [pick(bundle, 'privacy.sections.overview.p1')],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'privacy.sections.local.title'),
+        paragraphs: [pick(bundle, 'privacy.sections.local.p1')],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'privacy.sections.collect.title'),
+        paragraphs: [pick(bundle, 'privacy.sections.collect.p2')],
+        bullets: [
+          pick(bundle, 'privacy.sections.collect.li1'),
+          pick(bundle, 'privacy.sections.collect.li2'),
+          pick(bundle, 'privacy.sections.collect.li3'),
+        ],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'privacy.sections.cookies.title'),
+        paragraphs: [pick(bundle, 'privacy.sections.cookies.p1')],
+        bullets: [
+          pick(bundle, 'privacy.sections.cookies.learn'),
+          pick(bundle, 'privacy.sections.cookies.manage'),
+          pick(bundle, 'privacy.sections.cookies.more'),
+        ],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'privacy.sections.third.title'),
+        paragraphs: [pick(bundle, 'privacy.sections.third.p1')],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'privacy.sections.use.title'),
+        bullets: [
+          pick(bundle, 'privacy.sections.use.li1'),
+          pick(bundle, 'privacy.sections.use.li2'),
+          pick(bundle, 'privacy.sections.use.li3'),
+        ],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'privacy.sections.rights.title'),
+        bullets: [
+          pick(bundle, 'privacy.sections.rights.li1'),
+          pick(bundle, 'privacy.sections.rights.li2'),
+          pick(bundle, 'privacy.sections.rights.li3'),
+        ],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'privacy.sections.children.title'),
+        paragraphs: [pick(bundle, 'privacy.sections.children.p1')],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'privacy.sections.changes.title'),
+        paragraphs: [pick(bundle, 'privacy.sections.changes.p1')],
+      }),
+    ].filter(Boolean).join('')
+    const quickLinksHtml = renderQuickLinksSection({ lang, bundle, baseKey: 'privacy' })
+    return `<main class="container mx-auto px-4 py-10 max-w-4xl"><header><h1 class="text-2xl font-bold text-gray-900">${heading}</h1><p class="mt-2 text-sm text-gray-500">${escapeHtml(lastUpdated)}</p></header>${sections}${quickLinksHtml}</main>`
+  }
+
+  const renderTermsVisible = ({ lang = DEFAULT_LANG, bundle = {}, title = '' } = {}) => {
+    const today = new Date().toISOString().slice(0, 10)
+    const heading = escapeHtml(pick(bundle, 'terms.h1') || cleanTitle(title))
+    const lastUpdated = formatTemplate(pick(bundle, 'common.lastUpdated') || 'Last updated: {{date}}', { date: today })
+    const sections = [
+      renderPolicySection({
+        title: pick(bundle, 'terms.sections.acceptance.title'),
+        paragraphs: [pick(bundle, 'terms.sections.acceptance.p1')],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'terms.sections.use.title'),
+        bullets: [
+          pick(bundle, 'terms.sections.use.li1'),
+          pick(bundle, 'terms.sections.use.li2'),
+          pick(bundle, 'terms.sections.use.li3'),
+        ],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'terms.sections.ip.title'),
+        paragraphs: [pick(bundle, 'terms.sections.ip.p1')],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'terms.sections.processing.title'),
+        paragraphs: [pick(bundle, 'terms.sections.processing.p1')],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'terms.sections.disclaimer.title'),
+        paragraphs: [pick(bundle, 'terms.sections.disclaimer.p1')],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'terms.sections.liability.title'),
+        paragraphs: [pick(bundle, 'terms.sections.liability.p1')],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'terms.sections.changes.title'),
+        paragraphs: [pick(bundle, 'terms.sections.changes.p1')],
+      }),
+      renderPolicySection({
+        title: pick(bundle, 'terms.sections.law.title'),
+        paragraphs: [pick(bundle, 'terms.sections.law.p1')],
+      }),
+    ].filter(Boolean).join('')
+    const quickLinksHtml = renderQuickLinksSection({ lang, bundle, baseKey: 'terms' })
+    return `<main class="container mx-auto px-4 py-10 max-w-4xl"><header><h1 class="text-2xl font-bold text-gray-900">${heading}</h1><p class="mt-2 text-sm text-gray-500">${escapeHtml(lastUpdated)}</p></header>${sections}${quickLinksHtml}</main>`
+  }
+
+  const renderHomeVisible = ({ lang = DEFAULT_LANG, title = '', description = '', bundle = {}, blogPosts = [] } = {}) => {
+    const heading = escapeHtml(cleanTitle(title))
+    const desc = description
+      ? `<p class="text-gray-700 mt-3 text-center max-w-2xl mx-auto">${escapeHtml(description)}</p>`
+      : ''
+
+    const siteLinks = [
+      { href: buildLocalizedPath(lang, '/converter/image-to-pixel-art'), label: pick(bundle, 'footer.links.generator') || 'Image to Pixel Art Converter' },
+      { href: buildLocalizedPath(lang, '/converter/photo-to-pixel-art'), label: pick(bundle, 'footer.links.converter') || 'Photo to Pixel Art Converter' },
+      { href: buildLocalizedPath(lang, '/converter/png-to-pixel-art'), label: pick(bundle, 'footer.links.png2pixel') || 'PNG to Pixel Art' },
+      { href: buildLocalizedPath(lang, '/converter/jpg-to-pixel-art'), label: pick(bundle, 'footer.links.jpg2pixel') || 'JPG to Pixel Art' },
+      { href: buildLocalizedPath(lang, '/blog'), label: pick(bundle, 'nav.blog') || 'Blog' },
+      { href: buildLocalizedPath(lang, '/about'), label: pick(bundle, 'nav.about') || 'About' },
+      { href: buildLocalizedPath(lang, '/contact'), label: pick(bundle, 'nav.contact') || 'Contact' },
+      { href: buildLocalizedPath(lang, '/privacy'), label: pick(bundle, 'footer.privacy') || 'Privacy' },
+      { href: buildLocalizedPath(lang, '/terms'), label: pick(bundle, 'footer.terms') || 'Terms' },
+    ]
+
+    const faqTitle = escapeHtml(pick(bundle, 'faq.title') || 'Image to Pixel Art FAQ')
+    const faqItems = Array.isArray(pick(bundle, 'faq.items'))
+      ? pick(bundle, 'faq.items').filter((item) => item && item.question && item.answer).slice(0, 3)
+      : []
+    const faqHtml = faqItems.length
+      ? `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${faqTitle}</h2><div class="mt-4 space-y-4">${faqItems
+          .map((item) => `<article class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"><h3 class="text-base font-semibold text-gray-900">${escapeHtml(item.question)}</h3><p class="mt-2 text-gray-700">${escapeHtml(item.answer)}</p></article>`)
+          .join('')}</div></section>`
+      : ''
+
+    const exploreHeading = escapeHtml(pick(bundle, 'footer.explore') || 'Explore')
+    const linkHtml = `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${exploreHeading}</h2><ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">${siteLinks
+      .map((link) => `<li><a class="block rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 hover:border-blue-300 hover:text-blue-600" href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a></li>`)
+      .join('')}</ul></section>`
+
+    const recentPosts = Array.isArray(blogPosts) ? blogPosts.slice(0, 3) : []
+    const recentPostsHtml = recentPosts.length
+      ? `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${escapeHtml(pick(bundle, 'blog.title') || 'Blog')}</h2><ul class="mt-4 space-y-3">${recentPosts
+          .map((post) => {
+            const href = buildLocalizedPath(lang, `/blog/${post.slug}`)
+            const excerpt = post.excerpt ? `<p class="mt-1 text-sm text-gray-700">${escapeHtml(post.excerpt)}</p>` : ''
+            return `<li class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"><a class="text-base font-semibold text-blue-600 hover:underline" href="${escapeHtml(href)}">${escapeHtml(post.title || post.slug)}</a>${excerpt}</li>`
+          })
+          .join('')}</ul></section>`
+      : ''
+
+    if (!heading && !desc && !faqHtml && !linkHtml && !recentPostsHtml) return ''
+    return `<main class="container mx-auto px-4 py-10 max-w-4xl"><section><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${desc}</section>${linkHtml}${faqHtml}${recentPostsHtml}</main>`
+  }
+
   const getMetaDescription = (metas = []) => {
     const entry = metas.find(m => m && m.name === 'description')
     return entry?.content || ''
@@ -391,7 +689,15 @@ function prerender() {
       { name: 'twitter:title', content: 'Pixel Art Village: Image to Pixel Art Place Color Converter' },
       { name: 'twitter:description', content: 'Free Image to Pixel Art Generator & Maker | Pixel Art Village. Drag/drop photo, live preview, palettes, dithering. Place color converter: Export PNGs online!' },
       { name: 'twitter:image', content: 'https://pixelartvillage.org/social-preview.png' },
-    ]},
+    ],
+      visible: ({ lang, bundle, title, description }) => renderHomeVisible({
+        lang,
+        bundle,
+        title,
+        description,
+        blogPosts: blogPostsByLang[lang],
+      }),
+    },
     { path: '/privacy', title: 'Privacy Policy | Pixel Art Village', metas: [
       { name: 'description', content: 'Pixel Art Village privacy policy: local image processing, AdSense cookies, partners, choices and rights.' },
       { property: 'og:url', content: ABS(ensureTrailingSlash('/privacy')) },
@@ -403,7 +709,9 @@ function prerender() {
       { name: 'twitter:title', content: 'Privacy Policy | Pixel Art Village' },
       { name: 'twitter:description', content: 'Pixel Art Village privacy policy: local image processing, AdSense cookies, partners, choices and rights.' },
       { name: 'twitter:image', content: ABS('/social-privacy.png') },
-    ]},
+    ],
+      visible: ({ lang, bundle, title }) => renderPrivacyVisible({ lang, bundle, title }),
+    },
     { path: '/terms', title: 'Terms of Service | Pixel Art Village', metas: [
       { name: 'description', content: 'Usage rules, responsibilities, disclaimer, IP, governing law, contact info.' },
       { property: 'og:url', content: ABS(ensureTrailingSlash('/terms')) },
@@ -415,7 +723,9 @@ function prerender() {
       { name: 'twitter:title', content: 'Terms of Service | Pixel Art Village' },
       { name: 'twitter:description', content: 'Usage rules, responsibilities, disclaimer, IP, governing law, contact info.' },
       { name: 'twitter:image', content: ABS('/social-terms.png') },
-    ]},
+    ],
+      visible: ({ lang, bundle, title }) => renderTermsVisible({ lang, bundle, title }),
+    },
     { path: '/about', title: 'About | Pixel Art Village', metas: [
       { name: 'description', content: 'A free, browser‑based pixel art maker & converter. Privacy‑first, fast, and accessible.' },
       { property: 'og:url', content: ABS(ensureTrailingSlash('/about')) },
@@ -437,6 +747,13 @@ function prerender() {
         inLanguage: lang,
         sameAs: ['https://github.com/pixelartvillage/pixelartvillage'],
       }),
+      visible: ({ lang, bundle, title, description }) => renderAboutVisible({
+        lang,
+        bundle,
+        title,
+        description,
+        blogPosts: blogPostsByLang[lang],
+      }),
     },
     { path: '/contact', title: 'Contact | Pixel Art Village', metas: [
       { name: 'description', content: 'Support, feedback, partnerships.' },
@@ -449,7 +766,15 @@ function prerender() {
       { name: 'twitter:title', content: 'Contact | Pixel Art Village' },
       { name: 'twitter:description', content: 'Support, feedback, partnerships.' },
       { name: 'twitter:image', content: ABS('/social-contact.png') },
-    ]},
+    ],
+      visible: ({ lang, bundle, title, description }) => renderContactVisible({
+        lang,
+        bundle,
+        title,
+        description,
+        blogPosts: blogPostsByLang[lang],
+      }),
+    },
   ]
 
   const pseoPages = resolveContent('pseo-pages', DEFAULT_LANG, normalizePseoPages)

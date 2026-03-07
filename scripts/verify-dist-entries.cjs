@@ -109,6 +109,19 @@ function verifyRoute(routePath, lang = 'en') {
   const twTitle = find(/<meta[^>]+name=["']twitter:title["'][^>]+content=["']([^"']+)["'][^>]*>/i, html);
   if (!twTitle) fail(`${routePath}: missing twitter:title`); else ok(`${routePath}: twitter:title OK`);
 
+  // Homepage should expose crawlable internal links in prerendered HTML.
+  if (routePath === '/') {
+    const outgoingAnchors = (html.match(/<a\s[^>]*href=["'][^"']+["'][^>]*>/ig) || []).length;
+    if (outgoingAnchors < 5) fail(`${routePath}: missing crawlable internal links in prerendered HTML`);
+    else ok(`${routePath}: outgoing links OK (${outgoingAnchors})`);
+  }
+
+  if (['/about', '/contact', '/privacy', '/terms'].includes(routePath)) {
+    const outgoingAnchors = (html.match(/<a\s[^>]*href=["'][^"']+["'][^>]*>/ig) || []).length;
+    if (outgoingAnchors < 4) fail(`${routePath}: missing crawlable supporting links in prerendered HTML`);
+    else ok(`${routePath}: supporting links OK (${outgoingAnchors})`);
+  }
+
   // For pSEO pages, ensure og:image/twitter:image exists and file is emitted
   if (routePath.startsWith('/converter/')) {
     const ogImage = find(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["'][^>]*>/i, html);
@@ -140,7 +153,7 @@ function verifyRoute(routePath, lang = 'en') {
   }
 }
 
-const ROUTES = ['/privacy', '/terms', '/about', '/contact', '/blog'];
+const ROUTES = ['/', '/privacy', '/terms', '/about', '/contact', '/blog'];
 function loadJsonList(label, candidates) {
   for (const rel of candidates) {
     const filePath = path.resolve(__dirname, rel);
