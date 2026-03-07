@@ -242,6 +242,11 @@ function prerender() {
     const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
     const blogTitle = pick(bundle, 'blog.title') || 'Blog'
     const blogSubtitle = pick(bundle, 'blog.subtitle') || 'Articles and updates about making pixel image visuals, tutorials, and new features.'
+    const topicHeading = pick(bundle, 'blog.relatedHeading') || 'Popular topics'
+    const topics = Array.from(new Set(list.flatMap((item) => toStringArray(item?.tags))))
+      .map((tag) => normalizeWhitespace(tag))
+      .filter(Boolean)
+      .slice(0, 8)
     const items = list
       .map((item) => {
         if (!item || !item.slug) return ''
@@ -254,7 +259,8 @@ function prerender() {
       .filter(Boolean)
       .join('')
     if (!items) return ''
-    return `<div class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 mb-4 text-center">${escapeHtml(blogTitle)}</h1><p class="text-gray-700 mb-6 max-w-2xl mx-auto text-center">${escapeHtml(blogSubtitle)}</p><ul class="space-y-4 max-w-2xl mx-auto">${items}</ul></div>`
+    const guideHtml = `<section class="mb-6 max-w-2xl mx-auto rounded-lg border border-gray-200 bg-white p-4 shadow-sm"><h2 class="text-lg font-semibold text-gray-900">${escapeHtml(topicHeading)}</h2><p class="mt-2 text-gray-700">Use this hub to compare tools, learn beginner workflows, troubleshoot exports, explore animation basics, and collect practical pixel art ideas before you open the editor.</p>${topics.length ? `<ul class="mt-3 flex flex-wrap gap-2">${topics.map((tag) => `<li class="rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs text-gray-700">${escapeHtml(tag)}</li>`).join('')}</ul>` : ''}</section>`
+    return `<div class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 mb-4 text-center">${escapeHtml(blogTitle)}</h1><p class="text-gray-700 mb-6 max-w-2xl mx-auto text-center">${escapeHtml(blogSubtitle)}</p>${guideHtml}<ul class="space-y-4 max-w-2xl mx-auto">${items}</ul></div>`
   }
 
   const renderBlogPostVisible = (post, lang = DEFAULT_LANG, bundle = {}) => {
@@ -307,6 +313,7 @@ function prerender() {
   const cleanTitle = (text) => String(text || '')
     .replace(/\s*\|\s*Pixel Art Village\s*$/i, '')
     .replace(/\s*–\s*Pixel Art Village\s*$/i, '')
+    .replace(/\s*-\s*Pixel Art Village\s*$/i, '')
     .trim()
 
   const formatBlogSeoTitle = (title, siteName, maxLength = 60) => {
@@ -316,6 +323,28 @@ function prerender() {
     if (normalizedTitle.length <= maxBaseLength) return `${normalizedTitle}${suffix}`
     const trimmed = normalizedTitle.slice(0, Math.max(0, maxBaseLength - 1)).trimEnd()
     return `${trimmed}…${suffix}`
+  }
+
+  const shortenSeoTitle = (title, maxLength = 60) => {
+    const normalized = normalizeWhitespace(title)
+    if (!normalized || normalized.length <= maxLength) return normalized
+
+    for (const separator of [' | ', ' - ', ' – ']) {
+      const index = normalized.lastIndexOf(separator)
+      if (index <= 0) continue
+      const base = normalized.slice(0, index).trim()
+      const suffix = normalized.slice(index)
+      const maxBaseLength = Math.max(20, maxLength - suffix.length - 1)
+      if (base.length <= maxBaseLength) return normalized
+      let trimmed = base.slice(0, maxBaseLength).trimEnd()
+      const lastSpace = trimmed.lastIndexOf(' ')
+      if (lastSpace >= Math.max(15, Math.floor(maxBaseLength * 0.6))) {
+        trimmed = trimmed.slice(0, lastSpace).trimEnd()
+      }
+      return `${trimmed}…${suffix}`
+    }
+
+    return shortenText(normalized, maxLength)
   }
 
   const normalizeWhitespace = (text) => String(text || '').replace(/\s+/g, ' ').trim()
@@ -1048,6 +1077,7 @@ function prerender() {
       if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
     }
 
+    title = shortenSeoTitle(title)
     metas = syncDescriptionMetas(metas)
 
     const ogUrl = `https://pixelartvillage.org${localizedPath}`
