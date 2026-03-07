@@ -756,6 +756,19 @@ function prerender() {
     })
   }
 
+  const syncTitleMetas = (metas = [], title = '') => {
+    const normalizedTitle = shortenSeoTitle(title)
+    if (!normalizedTitle) return metas
+
+    return metas.map((meta) => {
+      if (!meta) return meta
+      if (meta.property === 'og:title' || meta.name === 'twitter:title') {
+        return { ...meta, content: normalizedTitle }
+      }
+      return meta
+    })
+  }
+
   const blogPostsByLang = Object.fromEntries(
     SUPPORTED_LANGS.map((lang) => [lang, resolveContent('blog-posts', lang, normalizeBlogPosts)]),
   )
@@ -953,6 +966,7 @@ function prerender() {
 
     const siteName = pick(bundle, 'site.name') || 'Pixel Art Village'
     const blogTitle = pick(bundle, 'blog.title') || 'Blog'
+    const blogSeoTitle = pick(bundle, 'blog.seoTitle') || `${blogTitle} | ${siteName}`
     const blogSubtitle =
       pick(bundle, 'blog.subtitle') || 'Articles and updates about making pixel image visuals, tutorials, and new features.'
     const blogPath = buildBlogPath(lang)
@@ -962,16 +976,16 @@ function prerender() {
       path: blogPath,
       routePath: blogPath,
       basePath: '/blog/',
-      title: `${blogTitle} | ${siteName}`,
+      title: blogSeoTitle,
       metas: [
         { name: 'description', content: shortenText(blogSubtitle) },
         { property: 'og:url', content: ABS(blogPath) },
         { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: `${blogTitle} | ${siteName}` },
+        { property: 'og:title', content: blogSeoTitle },
         { property: 'og:description', content: shortenText(blogSubtitle) },
         { property: 'og:image', content: ABS('/blog-og/_index.png') },
         { name: 'twitter:card', content: 'summary' },
-        { name: 'twitter:title', content: `${blogTitle} | ${siteName}` },
+        { name: 'twitter:title', content: blogSeoTitle },
         { name: 'twitter:description', content: shortenText(blogSubtitle) },
         { name: 'twitter:image', content: ABS('/blog-og/_index.png') },
       ],
@@ -1071,14 +1085,15 @@ function prerender() {
       if (typeof tTitle === 'string' && tTitle) title = tTitle
       if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
     } else if (basePath === '/blog/') {
-      const tTitle = pick(bundle, 'blog.title')
+      const tTitle = pick(bundle, 'blog.seoTitle') || `${pick(bundle, 'blog.title') || 'Blog'} | Pixel Art Village`
       const tDesc = pick(bundle, 'blog.subtitle')
-      if (typeof tTitle === 'string' && tTitle) title = `${tTitle} | Pixel Art Village`
+      if (typeof tTitle === 'string' && tTitle) title = tTitle
       if (typeof tDesc === 'string' && tDesc) upsertDesc(tDesc)
     }
 
     title = shortenSeoTitle(title)
     metas = syncDescriptionMetas(metas)
+    metas = syncTitleMetas(metas, title)
 
     const ogUrl = `https://pixelartvillage.org${localizedPath}`
     const ogIdx = metas.findIndex(m => m && m.property === 'og:url')

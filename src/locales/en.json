@@ -63,6 +63,7 @@
   },
   "blog": {
     "title": "Blog",
+    "seoTitle": "Pixel Art Blog & Tutorials | Pixel Art Village",
     "subtitle": "Articles and updates about making pixel image visuals, tutorials, and new features.",
     "back": "Back to Blog",
     "notFound": {
@@ -84,7 +85,7 @@
         "languageNote": "Full article available in English"
       },
       "how-to-get-pixel-art-version-of-image": {
-        "title": "How to Get Pixel Art Version of Image: Converter Guide for Image to Pixel Art",
+        "title": "How to Turn an Image Into Pixel Art",
         "excerpt": "Step-by-step Pixel Art Village converter workflow for SNES-style pixel exports, including refinement tips.",
         "tags": [
           "image to pixel art",
@@ -96,7 +97,7 @@
         "languageNote": "Full article available in English"
       },
       "make-image-more-like-pixel": {
-        "title": "How to Make Image More Like Pixel: Basic Editing Techniques for Image to Pixel Art",
+        "title": "How to Make an Image More Like Pixel Art",
         "excerpt": "Learn simple editing moves that turn flat conversions into vibrant Image to Pixel Art, including selective pixelation and multilingual tips.",
         "tags": [
           "image to pixel art",
@@ -455,7 +456,7 @@
     }
   },
   "about": {
-    "seoTitle": "About | pixel art Village",
+    "seoTitle": "About Pixel Art Village | Privacy-First Pixel Art Tool",
     "seoDesc": "About pixel art Village: a free, browser‑based pixel art maker & converter. Privacy‑first, fast, and accessible.",
     "h1": "About pixel art Village",
     "p1": "pixel art Village is a free, browser‑based pixel image maker & converter. Upload a PNG/JPG image, tweak pixel size and palettes, preview instantly, and export crisp image results.",
@@ -479,9 +480,9 @@
       "p1": "See the Contact page for support and inquiries. You can also email us directly at",
       "emailTitle": "Email Pixel Art Village"
     },
-    "ogTitle": "About | Pixel Art Village",
+    "ogTitle": "About Pixel Art Village | Privacy-First Pixel Art Tool",
     "ogDesc": "Learn about Pixel Art Village, the privacy-first pixel art maker built for creators.",
-    "twitterTitle": "About | Pixel Art Village",
+    "twitterTitle": "About Pixel Art Village | Privacy-First Pixel Art Tool",
     "twitterDesc": "Discover how Pixel Art Village helps you create pixel art in the browser with full palette control.",
     "p2": "We focus on real-time previews, palette craftsmanship, and accessible controls so creators can stay in flow.",
     "p3": "No logins required—open the tool, drop an image, iterate instantly, and keep every file on your device."
@@ -491,11 +492,11 @@
     "p1": "We’d love to hear from you. For support, feedback, or partnership inquiries, reach out via email.",
     "emailLabel": "Email:",
     "note": "Replace the email placeholder with your official contact address to meet AdSense review requirements.",
-    "seoTitle": "Contact | Pixel Art Village",
+    "seoTitle": "Contact Pixel Art Village | Support & Feedback",
     "seoDesc": "Get support or partnership info for Pixel Art Village. Email the team directly for questions about the pixel art maker.",
-    "ogTitle": "Contact | Pixel Art Village",
+    "ogTitle": "Contact Pixel Art Village | Support & Feedback",
     "ogDesc": "Reach the Pixel Art Village team for support, feedback, or collaborations.",
-    "twitterTitle": "Contact | Pixel Art Village",
+    "twitterTitle": "Contact Pixel Art Village | Support & Feedback",
     "twitterDesc": "Contact Pixel Art Village to discuss support, feedback, or partnership ideas.",
     "emailTitle": "Email Pixel Art Village",
     "p2": "Looking for product updates? Visit the",

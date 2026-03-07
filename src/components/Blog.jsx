@@ -12,11 +12,13 @@ export default function Blog() {
   const { currentLocale, buildPath } = useLocaleContext()
   const { data: posts, fallback } = useLocalizedContent('blog-posts')
   const canonical = `https://pixelartvillage.org${buildPath('/blog/')}`
+  const siteName = t('site.name')
+  const blogSeoTitle = t('blog.seoTitle', { defaultValue: `${t('blog.title')} | ${siteName}` })
 
   if (!posts) {
     return (
       <div className="container mx-auto px-4 py-10 max-w-3xl">
-        <Seo title={`${t('blog.title')} | ${t('site.name')}`} canonical={canonical} lang={rawLang} />
+        <Seo title={blogSeoTitle} canonical={canonical} lang={rawLang} />
         <p className="text-sm text-gray-600">{t('common.loading')}</p>
       </div>
     )
@@ -25,16 +27,16 @@ export default function Blog() {
   return (
     <div className="container mx-auto px-4 py-10 max-w-3xl">
       <Seo
-        title={`${t('blog.title')} | ${t('site.name')}`}
+        title={blogSeoTitle}
         canonical={canonical}
         lang={currentLocale || rawLang}
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
-          { property: 'og:title', content: `${t('blog.title')} | ${t('site.name')}` },
+          { property: 'og:title', content: blogSeoTitle },
           { property: 'og:description', content: t('blog.subtitle') },
           { name: 'twitter:card', content: 'summary' },
-          { name: 'twitter:title', content: `${t('blog.title')} | ${t('site.name')}` },
+          { name: 'twitter:title', content: blogSeoTitle },
           { name: 'twitter:description', content: t('blog.subtitle') },
         ]}
       />
