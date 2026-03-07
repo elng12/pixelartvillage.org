@@ -325,10 +325,21 @@ function prerender() {
     return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${desc}</main>`
   }
 
+  const renderFaqCardsSection = ({ bundle = {}, title, count = 3 } = {}) => {
+    const faqTitle = escapeHtml(title || pick(bundle, 'faq.title') || 'Image to Pixel Art FAQ')
+    const faqItems = Array.isArray(pick(bundle, 'faq.items'))
+      ? pick(bundle, 'faq.items').filter((item) => item && item.question && item.answer).slice(0, count)
+      : []
+    if (!faqItems.length) return ''
+    return `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${faqTitle}</h2><div class="mt-4 space-y-4">${faqItems
+      .map((item) => `<article class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"><h3 class="text-base font-semibold text-gray-900">${escapeHtml(item.question)}</h3><p class="mt-2 text-gray-700">${escapeHtml(item.answer)}</p></article>`)
+      .join('')}</div></section>`
+  }
+
   const renderPseoVisible = (page, { lang = DEFAULT_LANG, bundle = {}, pages = [] } = {}) => {
     if (!page) return ''
     const heading = escapeHtml(page.h1 || page.title || '')
-    const intro = Array.isArray(page.intro) ? page.intro.slice(0, 2) : []
+    const intro = Array.isArray(page.intro) ? page.intro : []
     const paragraphs = intro.length
       ? intro.map((para) => `<p class="text-gray-700 mt-3">${escapeHtml(para)}</p>`).join('')
       : ''
@@ -365,9 +376,10 @@ function prerender() {
     const siteHtml = `<section class="mt-8"><h2 class="text-lg font-semibold text-gray-900">${escapeHtml(exploreHeading)}</h2><ul class="mt-3 flex flex-wrap gap-3">${siteLinks
       .map((link) => `<li><a class="text-blue-600 hover:underline" href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a></li>`)
       .join('')}</ul></section>`
+    const faqHtml = renderFaqCardsSection({ bundle, count: 2 })
 
     if (!heading && !body && !relatedHtml) return ''
-    return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${body}${relatedHtml}${siteHtml}</main>`
+    return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${body}${relatedHtml}${siteHtml}${faqHtml}</main>`
   }
 
   const formatTemplate = (template, values = {}) => String(template || '').replace(/\{\{\s*([^}]+)\s*\}\}/g, (_, key) => {
@@ -638,15 +650,7 @@ function prerender() {
       { href: buildLocalizedPath(lang, '/terms'), label: pick(bundle, 'footer.terms') || 'Terms' },
     ]
 
-    const faqTitle = escapeHtml(pick(bundle, 'faq.title') || 'Image to Pixel Art FAQ')
-    const faqItems = Array.isArray(pick(bundle, 'faq.items'))
-      ? pick(bundle, 'faq.items').filter((item) => item && item.question && item.answer).slice(0, 3)
-      : []
-    const faqHtml = faqItems.length
-      ? `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${faqTitle}</h2><div class="mt-4 space-y-4">${faqItems
-          .map((item) => `<article class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"><h3 class="text-base font-semibold text-gray-900">${escapeHtml(item.question)}</h3><p class="mt-2 text-gray-700">${escapeHtml(item.answer)}</p></article>`)
-          .join('')}</div></section>`
-      : ''
+    const faqHtml = renderFaqCardsSection({ bundle, count: 3 })
 
     const exploreHeading = escapeHtml(pick(bundle, 'footer.explore') || 'Explore')
     const linkHtml = `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${exploreHeading}</h2><ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">${siteLinks
