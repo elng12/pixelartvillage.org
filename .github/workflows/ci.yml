@@ -19,4 +19,4 @@ jobs:
       - name: Build
         run: npm run build
       - name: Run CSP test
-        run: ./test.sh
+        run: bash ./test.sh
