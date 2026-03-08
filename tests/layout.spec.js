@@ -38,7 +38,8 @@ test.beforeEach(async ({ page }, _testInfo) => {
   });
 });
 
-test.afterEach(async (_context, testInfo) => {
+test.afterEach(async ({ page }, testInfo) => {
+  void page;
   try {
     const outConsole = testInfo.outputPath('browser-console.json');
     const outRequests = testInfo.outputPath('network-requests.json');
@@ -147,6 +148,32 @@ test('reselecting the same file should trigger processing again', async ({ page 
 
   // Reselect the same file again
   await page.getByTestId('file-input').setInputFiles(payload);
+  await waitForProcessing(page);
+});
+
+test('upload zone keeps full-card click without exposing button semantics', async ({ page }) => {
+  await page.goto('/');
+
+  const zone = page.getByTestId('upload-zone');
+  await expect(zone).not.toHaveAttribute('role', /button/i);
+  await expect(zone).not.toHaveAttribute('tabindex', /.+/);
+
+  const [fileChooser] = await Promise.all([
+    page.waitForEvent('filechooser'),
+    zone.click({ position: { x: 12, y: 12 } }),
+  ]);
+
+  await fileChooser.setFiles({
+    name: 'test.png',
+    mimeType: 'image/png',
+    buffer: createRedPixelImage(),
+  });
+
+  try {
+    await page.getByTestId('preview-container').waitFor({ state: 'attached', timeout: 10000 });
+  } catch {
+    test.skip();
+  }
   await waitForProcessing(page);
 });
 

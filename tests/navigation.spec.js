@@ -31,8 +31,7 @@ test.describe('Navigation buttons scroll behavior', () => {
     } else {
       await page.goto('/#tool')
     }
-    const hero = page.locator('#tool, #editor')
-    await expect(hero).toBeVisible()
+    await expect(page.locator('#tool')).toBeVisible()
   })
 
   test('cross-page: from blog to features via anchor', async ({ page }) => {

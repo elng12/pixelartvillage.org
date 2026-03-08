@@ -168,7 +168,7 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
     return () => window.removeEventListener('paste', onPaste);
   }, [handleFileSelect, enablePaste, log]);
 
-  const handleClick = useCallback(() => {
+  const openFilePicker = useCallback(() => {
     if (isPreparing) return;
     setError('');
     fileInputRef.current?.click();
@@ -186,14 +186,17 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
     }
   }, [handleFileSelect, isPreparing, log]);
 
-  const handleKeyDown = useCallback((e) => {
+  const handleZoneClick = useCallback((e) => {
     if (isPreparing) return;
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      log('keydown-activate', { key: e.key });
-      handleClick();
-    }
-  }, [handleClick, isPreparing, log]);
+    if (e.target instanceof Element && e.target.closest('button')) return;
+    openFilePicker();
+  }, [isPreparing, openFilePicker]);
+
+  const handleChooseFileClick = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    openFilePicker();
+  }, [openFilePicker]);
 
   return (
     <section id="tool" className="bg-gray-50 py-6">
@@ -218,35 +221,35 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
           </p>
         </div>
         <div 
-          className={`upload-zone relative max-w-3xl mx-auto bg-white p-6 md:p-8 border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50 ${isPreparing ? 'cursor-not-allowed opacity-80 ring-1 ring-blue-200' : ''}`}
+          className={`upload-zone relative max-w-3xl mx-auto bg-white p-6 md:p-8 border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50 ${isPreparing ? 'cursor-not-allowed opacity-80 ring-1 ring-blue-200' : 'cursor-pointer'}`}
           style={{ padding: '1.5rem', minHeight: '16rem', borderWidth: '2px', borderStyle: 'dashed', borderColor: '#d1d5db', borderRadius: '0.75rem', backgroundColor: '#fff' }}
-          role="button"
-          tabIndex={0}
-          aria-labelledby="upload-instructions"
-          aria-disabled={isPreparing}
           aria-busy={isPreparing}
-          onKeyDown={handleKeyDown}
-          onClick={handleClick}
+          onClick={handleZoneClick}
           onDragOver={(e) => e.preventDefault()}
           onDrop={handleDrop}
           data-testid="upload-zone"
         >
           <input
             type="file"
+            id="file-input"
             ref={fileInputRef}
             className="hidden"
             accept="image/png,image/jpeg,image/gif,image/webp"
             aria-label={t('tool.ariaChoose')}
             disabled={isPreparing}
             onChange={handleFileInputChange}
-              data-testid="file-input"
+            data-testid="file-input"
           />
           <div className="text-center">
             <svg className="mx-auto h-12 w-12 text-gray-400" width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 16a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v5a4 4 0 01-4 4H7z" /></svg>
             <h2 id="upload-instructions" className="mt-4 text-xl font-semibold text-gray-700" style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginTop: '1rem', marginBottom: 0 }}>
               {t('tool.dragOrClick')} <span className="text-blue-600">{t('tool.clickToChoose')}</span>
             </h2>
-            <p className="mt-1 text-sm text-gray-500" style={{ fontSize: '0.875rem', lineHeight: '1.25rem', marginTop: '0.25rem', marginBottom: 0 }}>
+            <p
+              id="upload-supports"
+              className="mt-1 text-sm text-gray-500"
+              style={{ fontSize: '0.875rem', lineHeight: '1.25rem', marginTop: '0.25rem', marginBottom: 0 }}
+            >
               {t('tool.supports')}
             </p>
             {error && (
@@ -258,10 +261,8 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
                 className={`btn-primary ${isPreparing ? 'opacity-60 cursor-not-allowed' : ''}`}
                 style={{ padding: '0.5rem 1rem', borderRadius: '0.5rem', backgroundColor: '#2563eb', color: '#fff' }}
                 data-testid="choose-file-btn"
-                onClick={(e) => {
-                  e.stopPropagation(); // 阻止事件冒泡
-                  handleClick();
-                }}
+                aria-describedby="upload-instructions upload-supports"
+                onClick={handleChooseFileClick}
                 disabled={isPreparing}
               >
                 {t('tool.chooseFile')}
