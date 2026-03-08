@@ -12,6 +12,16 @@
       "settings": {
         "preset": "desktop"
       }
+    },
+    "assert": {
+      "assertions": {
+        "categories:accessibility": [
+          "error",
+          {
+            "minScore": 0.94
+          }
+        ]
+      }
     }
   }
 }
