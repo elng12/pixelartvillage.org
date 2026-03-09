@@ -59,6 +59,51 @@ function normalizeContent(baseName, value) {
   return toArray(value)
 }
 
+function normalizePathname(pathname = '/') {
+  if (!pathname || pathname === '/') return '/'
+  return pathname.endsWith('/') ? pathname : `${pathname}/`
+}
+
+function getInitialContentState(baseName, preferredLocale) {
+  if (typeof document === 'undefined' || typeof window === 'undefined') {
+    return { data: null, locale: null, fallback: false }
+  }
+
+  const el = document.getElementById('pv-initial-content')
+  if (!el?.textContent) {
+    return { data: null, locale: null, fallback: false }
+  }
+
+  try {
+    const payload = JSON.parse(el.textContent)
+    if (!payload || payload.baseName !== baseName) {
+      return { data: null, locale: null, fallback: false }
+    }
+
+    const currentPath = normalizePathname(window.location.pathname)
+    const payloadPath = normalizePathname(payload.path || '/')
+    if (payloadPath !== currentPath) {
+      return { data: null, locale: null, fallback: false }
+    }
+
+    const data = normalizeContent(baseName, payload.data)
+    if (!data.length) {
+      return { data: null, locale: null, fallback: false }
+    }
+
+    const locales = getLocaleFallbackChain(preferredLocale || CANONICAL_LOCALE)
+    const locale = typeof payload.locale === 'string' ? payload.locale : null
+
+    return {
+      data,
+      locale,
+      fallback: Boolean(locale && locale !== locales[0]),
+    }
+  } catch {
+    return { data: null, locale: null, fallback: false }
+  }
+}
+
 function findLoader(loaders, locale) {
   return Object.entries(loaders).find(([path]) => {
     const match = path.match(LOCALE_PATTERN)
@@ -68,7 +113,7 @@ function findLoader(loaders, locale) {
 
 export function useLocalizedContent(baseName) {
   const { i18n } = useTranslation()
-  const [state, setState] = useState({ data: null, locale: null, fallback: false })
+  const [state, setState] = useState(() => getInitialContentState(baseName, i18n.language))
 
   useEffect(() => {
     let cancelled = false

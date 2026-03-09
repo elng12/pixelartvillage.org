@@ -187,7 +187,18 @@ function injectVisibleContent(html, visible) {
   if (!visible) return html
   const placeholder = /<div id="root"><\/div>/
   if (!placeholder.test(html)) return html
-  return html.replace(placeholder, `<div id="root">${visible}</div>`)
+  const shell = `<div id="root"><div data-prerender-shell><div aria-hidden="true" class="h-20 border-b border-gray-200 bg-white/80"></div>${visible}</div></div>`
+  return html.replace(placeholder, shell)
+}
+
+function injectInitialContent(html, payload) {
+  if (!payload) return html
+  const serialized = JSON.stringify(payload).replace(/</g, '\\u003c')
+  const tag = `<script id="pv-initial-content" type="application/json">${serialized}</script>`
+  if (/<script[^>]+id=["']pv-initial-content["'][^>]*>[\s\S]*?<\/script>/i.test(html)) {
+    html = html.replace(/<script[^>]+id=["']pv-initial-content["'][^>]*>[\s\S]*?<\/script>/i, tag)
+  }
+  return html.replace(/<\/body>/i, `  ${tag}\n</body>`)
 }
 
 function escapeHtml(s) {
@@ -921,6 +932,12 @@ function prerender() {
         },
       ],
       visible: ({ lang, bundle }) => renderPseoVisible(p, { lang, bundle, pages: pseoPages }),
+      initialContent: ({ routePath }) => ({
+        baseName: 'pseo-pages',
+        locale: DEFAULT_LANG,
+        path: routePath,
+        data: pseoPages,
+      }),
     })
   }
 
@@ -992,6 +1009,12 @@ function prerender() {
       extras: renderBlogIndex(postsForLang),
       visible: renderBlogIndexVisible(postsForLang, lang, bundle),
       alternates: buildBlogAlternates(),
+      initialContent: {
+        baseName: 'blog-posts',
+        locale: lang,
+        path: blogPath,
+        data: postsForLang,
+      },
     })
 
     for (const post of postsForLang) {
@@ -1036,6 +1059,12 @@ function prerender() {
         extras: renderBlogArticle(post),
         visible: renderBlogPostWithRelatedVisible(post, postsForLang, lang, bundle),
         alternates: buildBlogAlternates(post.slug),
+        initialContent: {
+          baseName: 'blog-posts',
+          locale: lang,
+          path: postPath,
+          data: postsForLang,
+        },
       })
     }
   }
@@ -1107,6 +1136,9 @@ function prerender() {
     const resolvedJsonLd = typeof r.jsonLd === 'function'
       ? r.jsonLd({ lang, bundle, title, description, routePath: localizedPath })
       : r.jsonLd
+    const resolvedInitialContent = typeof r.initialContent === 'function'
+      ? r.initialContent({ lang, bundle, title, description, routePath: localizedPath })
+      : r.initialContent
     const visible = resolvedVisible || renderBasicVisible({ title, description })
 
     return {
@@ -1119,6 +1151,7 @@ function prerender() {
       links: r.links || null,
       visible,
       jsonLd: resolvedJsonLd,
+      initialContent: resolvedInitialContent,
       basePath,
       alternates: null,
     }
@@ -1163,6 +1196,9 @@ function prerender() {
     out = injectHreflang(out, alternates)
     if (r.visible) {
       out = injectVisibleContent(out, r.visible)
+    }
+    if (r.initialContent) {
+      out = injectInitialContent(out, r.initialContent)
     }
 
     const file = path.join(DIST, r.path.replace(/^\//, '').replace(/\/$/, ''), 'index.html')

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { extractLocaleFromPath } from '@/utils/locale'
 
 // 资源预加载组件，用于提前加载关键资源
 export default function ResourcePreloader() {
@@ -8,14 +9,14 @@ export default function ResourcePreloader() {
   useEffect(() => {
     // 预加载关键资源
     const preloadResources = () => {
-      // 根据当前路由预加载相应的语言包
-      const pathSegments = location.pathname.split('/')
-      const currentLang = pathSegments[1] || 'en'
+      const currentLang = extractLocaleFromPath(location.pathname)
 
-      if (currentLang !== 'en') {
+      if (currentLang && currentLang !== 'en') {
+        const href = `/locales/${currentLang}/translation.json`
+        if (document.head.querySelector(`link[rel="preload"][href="${href}"]`)) return
         const langPreload = document.createElement('link')
         langPreload.rel = 'preload'
-        langPreload.href = `/locales/${currentLang}/translation.json`
+        langPreload.href = href
         langPreload.as = 'fetch'
         langPreload.crossOrigin = 'anonymous'
         document.head.appendChild(langPreload)

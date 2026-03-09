@@ -9,6 +9,15 @@ import ResourcePreloader from '@/components/ResourcePreloader'
 import TranslationPreloader from '@/components/TranslationPreloader'
 import Header from './components/Header'
 import ToolSection from './components/ToolSection'
+import Footer from './components/Footer'
+import PrivacyPolicy from './components/policy/PrivacyPolicy'
+import TermsOfService from './components/policy/TermsOfService'
+import About from './components/About'
+import Contact from './components/Contact'
+import Blog from './components/Blog'
+import BlogPost from './components/BlogPost'
+import PseoPage from './components/PseoPage'
+import NotFound from './components/NotFound'
 import LocalizedLink from '@/components/LocalizedLink'
 import { LocaleProvider } from '@/contexts/LocaleContext'
 import { generateHreflangLinks } from '@/utils/hreflang'
@@ -17,15 +26,6 @@ import i18n, { CANONICAL_LOCALE, setStoredLang } from '@/i18n'
 import { buildLocalizedPath, extractLocaleFromPath, RUNTIME_LANGS } from '@/utils/locale'
 
 const Editor = lazy(() => import('./components/Editor'))
-const Footer = lazy(() => import('./components/Footer'))
-const PrivacyPolicy = lazy(() => import('./components/policy/PrivacyPolicy'))
-const TermsOfService = lazy(() => import('./components/policy/TermsOfService'))
-const About = lazy(() => import('./components/About'))
-const Contact = lazy(() => import('./components/Contact'))
-const Blog = lazy(() => import('./components/Blog'))
-const BlogPost = lazy(() => import('./components/BlogPost'))
-const PseoPage = lazy(() => import('./components/PseoPage'))
-const NotFound = lazy(() => import('./components/NotFound'))
 const ShowcaseSection = lazy(() => import('./components/ShowcaseSection'))
 const WplaceFeaturesSection = lazy(() => import('./components/WplaceFeaturesSection'))
 const FeaturesSection = lazy(() => import('./components/FeaturesSection'))
@@ -135,9 +135,7 @@ function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
       </main>
       <ConsentBanner />
       <div className="bg-gray-900">
-        <Suspense fallback={null}>
-          <Footer />
-        </Suspense>
+        <Footer />
       </div>
     </LocaleProvider>
   )
