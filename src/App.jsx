@@ -18,6 +18,11 @@ import Blog from './components/Blog'
 import BlogPost from './components/BlogPost'
 import PseoPage from './components/PseoPage'
 import NotFound from './components/NotFound'
+import ShowcaseSection from './components/ShowcaseSection'
+import WplaceFeaturesSection from './components/WplaceFeaturesSection'
+import FeaturesSection from './components/FeaturesSection'
+import HowItWorksSection from './components/HowItWorksSection'
+import FaqSection from './components/FaqSection'
 import LocalizedLink from '@/components/LocalizedLink'
 import { LocaleProvider } from '@/contexts/LocaleContext'
 import { generateHreflangLinks } from '@/utils/hreflang'
@@ -26,11 +31,6 @@ import i18n, { CANONICAL_LOCALE, setStoredLang } from '@/i18n'
 import { buildLocalizedPath, extractLocaleFromPath, RUNTIME_LANGS } from '@/utils/locale'
 
 const Editor = lazy(() => import('./components/Editor'))
-const ShowcaseSection = lazy(() => import('./components/ShowcaseSection'))
-const WplaceFeaturesSection = lazy(() => import('./components/WplaceFeaturesSection'))
-const FeaturesSection = lazy(() => import('./components/FeaturesSection'))
-const HowItWorksSection = lazy(() => import('./components/HowItWorksSection'))
-const FaqSection = lazy(() => import('./components/FaqSection'))
 
 function useAppOutletContext() {
   return useOutletContext()
@@ -72,29 +72,27 @@ function Home() {
           <Editor image={uploadedImage} />
         </Suspense>
       ) : null}
-      <Suspense fallback={null}>
-        <ShowcaseSection />
-        <WplaceFeaturesSection />
-        <FeaturesSection />
-        <HowItWorksSection />
-        <section className="bg-gray-50 py-8 border-y border-gray-100">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('footer.explore')}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {relatedLinks.map((link) => (
-                <LocalizedLink
-                  key={link.to}
-                  to={link.to}
-                  className="block rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 hover:border-blue-300 hover:text-blue-600"
-                >
-                  {link.label}
-                </LocalizedLink>
-              ))}
-            </div>
+      <ShowcaseSection />
+      <WplaceFeaturesSection />
+      <FeaturesSection />
+      <HowItWorksSection />
+      <section className="bg-gray-50 py-8 border-y border-gray-100">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('footer.explore')}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {relatedLinks.map((link) => (
+              <LocalizedLink
+                key={link.to}
+                to={link.to}
+                className="block rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 hover:border-blue-300 hover:text-blue-600"
+              >
+                {link.label}
+              </LocalizedLink>
+            ))}
           </div>
-        </section>
-        <FaqSection />
-      </Suspense>
+        </div>
+      </section>
+      <FaqSection />
     </>
   )
 }
