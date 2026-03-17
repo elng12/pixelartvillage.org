@@ -94,6 +94,39 @@ function resolveRouteFile(routePath, lang = 'en') {
 
 function find(re, html) { const m = re.exec(html); return m && m[1] ? m[1] : null }
 
+function countMatches(html, re) {
+  return (html.match(re) || []).length;
+}
+
+function stripHtmlTags(value) {
+  return String(value || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function flattenJsonLdEntries(value) {
+  if (!value) return [];
+  if (Array.isArray(value)) return value.flatMap(flattenJsonLdEntries);
+  if (typeof value === 'object') return [value];
+  return [];
+}
+
+function extractJsonLdEntries(html) {
+  const matches = [...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/ig)];
+  const entries = [];
+
+  for (const match of matches) {
+    const raw = match && match[1];
+    if (!raw) continue;
+    try {
+      const parsed = JSON.parse(raw);
+      entries.push(...flattenJsonLdEntries(parsed));
+    } catch (error) {
+      fail(`invalid JSON-LD payload: ${error.message}`);
+    }
+  }
+
+  return entries;
+}
+
 // 默认校验英文版路由；若 dist 根目录存在同名页面，则优先使用根目录
 function verifyRoute(routePath, lang = 'en') {
   const file = resolveRouteFile(routePath, lang);
@@ -108,6 +141,44 @@ function verifyRoute(routePath, lang = 'en') {
   if (!ogTitle) fail(`${routePath}: missing og:title`); else ok(`${routePath}: og:title OK`);
   const twTitle = find(/<meta[^>]+name=["']twitter:title["'][^>]+content=["']([^"']+)["'][^>]*>/i, html);
   if (!twTitle) fail(`${routePath}: missing twitter:title`); else ok(`${routePath}: twitter:title OK`);
+
+  const uniqueHeadChecks = [
+    { label: 'canonical', count: countMatches(html, /<link[^>]+rel=["']canonical["'][^>]*>/ig) },
+    { label: 'meta description', count: countMatches(html, /<meta[^>]+name=["']description["'][^>]*>/ig) },
+    { label: 'og:title', count: countMatches(html, /<meta[^>]+property=["']og:title["'][^>]*>/ig) },
+    { label: 'og:description', count: countMatches(html, /<meta[^>]+property=["']og:description["'][^>]*>/ig) },
+    { label: 'og:url', count: countMatches(html, /<meta[^>]+property=["']og:url["'][^>]*>/ig) },
+    { label: 'twitter:title', count: countMatches(html, /<meta[^>]+name=["']twitter:title["'][^>]*>/ig) },
+    { label: 'twitter:description', count: countMatches(html, /<meta[^>]+name=["']twitter:description["'][^>]*>/ig) },
+  ];
+
+  for (const check of uniqueHeadChecks) {
+    if (check.count > 1) fail(`${routePath}: duplicate ${check.label} tags (${check.count})`);
+  }
+
+  const jsonLdEntries = extractJsonLdEntries(html);
+  const jsonLdTypeCounts = new Map();
+  for (const entry of jsonLdEntries) {
+    const types = Array.isArray(entry && entry['@type']) ? entry['@type'] : [entry && entry['@type']];
+    for (const type of types.filter(Boolean)) {
+      jsonLdTypeCounts.set(type, (jsonLdTypeCounts.get(type) || 0) + 1);
+    }
+  }
+  for (const [type, count] of jsonLdTypeCounts.entries()) {
+    if (count > 1) fail(`${routePath}: duplicate JSON-LD type ${type} (${count})`);
+  }
+
+  if (/"@type"\s*:\s*"AggregateRating"/.test(html)) fail(`${routePath}: prohibited AggregateRating found`);
+  if (/"@type"\s*:\s*"SearchAction"/.test(html)) fail(`${routePath}: prohibited SearchAction found`);
+  if (routePath === '/about' && /about\.(cta|specializedLinks|moreInfoRich)\b/.test(html)) {
+    fail('/about: unresolved i18n key leaked into HTML');
+  }
+  if (routePath === '/blog') {
+    const blogH1 = stripHtmlTags(find(/<h1[^>]*>([\s\S]*?)<\/h1>/i, html));
+    if (!blogH1) fail('/blog: missing visible H1');
+    if (/^blog$/i.test(blogH1)) fail('/blog: generic H1 still equals "Blog"');
+    else ok(`/blog: H1 OK (${blogH1})`);
+  }
 
   // Homepage should expose crawlable internal links in prerendered HTML.
   if (routePath === '/') {

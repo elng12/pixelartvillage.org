@@ -132,7 +132,8 @@
         "readMore": "Read full article",
         "languageNote": "Full article available in English"
       }
-    }
+    },
+    "h1": "Pixel Art Tutorials & Guides"
   },
   "consent": {
     "title": "Privacy & Cookies",
@@ -460,6 +461,9 @@
     "seoDesc": "About pixel art Village: a free, browser‑based pixel art maker & converter. Privacy‑first, fast, and accessible.",
     "h1": "About pixel art Village",
     "p1": "pixel art Village is a free, browser‑based pixel image maker & converter. Upload a PNG/JPG image, tweak pixel size and palettes, preview instantly, and export crisp image results.",
+    "cta": "Start in the <tool>converter</tool> or explore practical tips on the <blog>blog</blog>.",
+    "specializedLinks": "Need a specific workflow? Try <png>PNG to pixel art</png>, <jpg>JPG to pixel art</jpg>, or the <photo>photo to sprite converter</photo>.",
+    "moreInfoRich": "For more details, review the <privacy>Privacy Policy</privacy> and <terms>Terms of Service</terms>.",
     "principles": {
       "title": "Principles",
       "privacy": {
@@ -546,8 +550,39 @@
     ]
   },
   "home": {
-    "seoTitle": "Image to Pixel Art Converter & Maker - Pixel Art Village",
-    "seoDescription": "Image to pixel art online with Pixel Art Village. Adjust pixel size and palettes, preview live, and export crisp sprites, icons, or retro graphics in seconds."
+    "seoTitle": "Pixel Art Village | Free Image to Pixel Art & Sprite Tools",
+    "seoDescription": "Use Pixel Art Village to convert images to pixel art, pixelate photos, build sprites, and open PNG, JPG, or GIF tools with live preview and private browser-based processing.",
+    "heroTitle": "Pixel Art Village: Free Image to Pixel Art Tools",
+    "heroSubtitle": "Start with the main editor to convert images to pixel art with live preview, custom palettes, and private browser-based processing.",
+    "heroSubtitle2": "Need a specific workflow? Jump to dedicated tools for image to pixel art, photo to pixel art, PNG, JPG, GIF, sprites, and 8-bit graphics.",
+    "exploreHeading": "Open the exact tool you need",
+    "exploreIntro": "Start on the homepage for the full editor, or jump straight to a dedicated converter page for the exact workflow you need.",
+    "cards": {
+      "mainConverter": {
+        "title": "Image to Pixel Art Converter",
+        "description": "Best fit for general image-to-pixel-art conversions across PNG, JPG, GIF, WEBP, and BMP files."
+      },
+      "photoToPixel": {
+        "title": "Photo to Pixel Art",
+        "description": "Built for turning photos into readable retro pixel art with cleaner edges and palette control."
+      },
+      "photoToSprite": {
+        "title": "Photo to Sprite Converter",
+        "description": "Use when you need smaller game-ready sprites with simplified shapes and tighter color limits."
+      },
+      "pngToPixel": {
+        "title": "PNG to Pixel Art",
+        "description": "Ideal for PNG files, transparency, and crisp source artwork that needs clean pixel edges."
+      },
+      "jpgToPixel": {
+        "title": "JPG to Pixel Art",
+        "description": "A better landing page for compressed JPG uploads, profile photos, and camera images."
+      },
+      "gifToPixel": {
+        "title": "GIF to Pixel Art",
+        "description": "Open this page when your source file is GIF and you want a dedicated GIF-to-pixel workflow."
+      }
+    }
   },
   "header": {
     "mainNav": "Main navigation",

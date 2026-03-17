@@ -61,7 +61,8 @@
     "notFound": {
       "title": "Không tìm thấy bài viết",
       "desc": "Bài viết bạn tìm không tồn tại. Quay lại blog."
-    }
+    },
+    "h1": "Huong dan va cam nang pixel art"
   },
   "consent": {
     "title": "Quyền riêng tư & Cookies",

@@ -24,13 +24,13 @@
   },
   {
     "slug": "image-to-pixel-art",
-    "title": "Image to Pixel Art | 8-bit Maker | Pixel Art Village",
-    "metaDescription": "Use Pixel Art Village's main converter to turn PNG, JPG, GIF, WEBP, or BMP files into crisp 8-bit art with live preview and private export.",
-    "h1": "Image to Pixel Art: Make 8‑bit Art Online",
+    "title": "Image to Pixel Art Converter | Free Online Pixel Art Tool",
+    "metaDescription": "Convert PNG, JPG, GIF, WEBP, or BMP files to pixel art with live preview, custom palettes, and private in-browser processing.",
+    "h1": "Image to Pixel Art Converter",
     "intro": [
-      "Upload any image and turn it into 8‑bit style pixel art with clean edges. Our universal image to pixel art converter supports all major formats including PNG, JPG, GIF, WebP, and BMP, making it your one-stop solution for pixel art creation.",
-      "Adjust pixels and palettes live — export results for retro game graphics and sprites. The real-time preview lets you experiment with different pixel sizes and color schemes instantly, ensuring perfect results every time.",
-      "Whether you're creating assets for indie games, designing social media avatars, or exploring digital art styles, our tool provides the flexibility and control needed to achieve professional pixel art results without any software installation."
+      "Use this image to pixel art converter to turn PNG, JPG, GIF, WEBP, or BMP files into clean 8-bit graphics with crisp edges and controlled palettes.",
+      "Preview every pixel change live, tune palette and dithering settings, and export results for sprites, icons, UI art, or retro game graphics.",
+      "If your source is a photo, open Photo to Pixel Art for a more photo-specific workflow. If you want the broader tool hub, start from the Pixel Art Village homepage."
     ]
   },
   {
@@ -68,13 +68,13 @@
   },
   {
     "slug": "photo-to-pixel-art",
-    "title": "Photo to Pixel Art | Image Pixelator | Pixel Art Village",
-    "metaDescription": "Pixelate any photo online with clean, crisp edges. Adjust pixel size and custom palettes, preview live, and export professional results.",
-    "h1": "Photo to Pixel Art: Pixelate Image Online",
+    "title": "Photo to Pixel Art Converter | Pixelate Photos Online",
+    "metaDescription": "Turn photos into pixel art online with live preview, palette controls, and private browser-based processing.",
+    "h1": "Photo to Pixel Art Converter",
     "intro": [
-      "Turn any photo into a readable, 8‑bit style pixel artwork. Our photo to pixel art converter intelligently handles photographic details, preserving essential features while applying consistent pixelation that maintains the subject's recognizability.",
-      "Control pixels and palettes with live preview to fit your retro game or icon needs. Perfect for creating profile pictures, character portraits, or background elements that require a balance between detail recognition and pixel art aesthetics.",
-      "Photographs present unique challenges for pixel art conversion due to their complex color gradients and fine details. Our tool addresses these challenges with advanced algorithms that optimize color reduction while preserving important visual information and maintaining artistic integrity."
+      "Turn photos into readable 8-bit artwork with a workflow tuned for portraits, scenes, and camera images that carry more detail than flat graphics.",
+      "Control pixels, contrast, and palettes with live preview so your photo still reads clearly after it becomes retro pixel art.",
+      "If your source is already a clean illustration or transparent asset, the Image to Pixel Art Converter is the better general-purpose landing page."
     ]
   },
   {

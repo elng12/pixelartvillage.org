@@ -6,19 +6,24 @@ import { useLocaleContext } from '@/hooks/useLocaleContext'
 import LocalizedLink from '@/components/LocalizedLink'
 
 export default function Blog() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const params = useParams()
   const rawLang = params.lang || 'en'
   const { currentLocale, buildPath } = useLocaleContext()
   const { data: posts, fallback } = useLocalizedContent('blog-posts')
   const canonical = `https://pixelartvillage.org${buildPath('/blog/')}`
+  const resolvedLocale = currentLocale || rawLang
   const siteName = t('site.name')
-  const blogSeoTitle = t('blog.seoTitle', { defaultValue: `${t('blog.title')} | ${siteName}` })
+  const localizedBlogSeoTitle = i18n.getResource(resolvedLocale, 'translation', 'blog.seoTitle')
+  const blogSeoTitle = typeof localizedBlogSeoTitle === 'string' && localizedBlogSeoTitle.trim()
+    ? localizedBlogSeoTitle
+    : `${t('blog.title')} | ${siteName}`
+  const blogHeading = t('blog.h1', { defaultValue: 'Pixel Art Tutorials & Guides' })
 
   if (!posts) {
     return (
       <div className="container mx-auto px-4 py-10 max-w-3xl">
-        <Seo title={blogSeoTitle} canonical={canonical} lang={rawLang} />
+        <Seo title={blogSeoTitle} canonical={canonical} lang={resolvedLocale} />
         <p className="text-sm text-gray-600">{t('common.loading')}</p>
       </div>
     )
@@ -29,7 +34,7 @@ export default function Blog() {
       <Seo
         title={blogSeoTitle}
         canonical={canonical}
-        lang={currentLocale || rawLang}
+        lang={resolvedLocale}
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
@@ -41,7 +46,7 @@ export default function Blog() {
         ]}
       />
 
-      <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">{t('blog.title')}</h1>
+      <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">{blogHeading}</h1>
       <p className="text-gray-700 mb-6 max-w-2xl mx-auto text-center">{t('blog.subtitle')}</p>
       {fallback ? (
         <p className="mb-6 text-center text-xs text-gray-500">{t('content.fallbackNotice')}</p>

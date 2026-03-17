@@ -9,11 +9,6 @@ export function ensureAdSenseLoaded() {
       window.__adsenseLoaded = true
       return
     }
-    const existing = document.querySelector('script[data-origin="adsbygoogle"]')
-    if (existing) {
-      window.__adsenseLoaded = true
-      return
-    }
     const existingBySrc = document.querySelector(
       'script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]',
     )
@@ -25,7 +20,6 @@ export function ensureAdSenseLoaded() {
     script.async = true
     script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3219924658522446'
     script.crossOrigin = 'anonymous'
-    script.setAttribute('data-origin', 'adsbygoogle')
     script.addEventListener('load', () => { window.__adsenseLoaded = true })
     document.head.appendChild(script)
   } catch { /* no-op */ }

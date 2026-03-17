@@ -61,7 +61,8 @@
     "notFound": {
       "title": "Bericht niet gevonden",
       "desc": "Het artikel dat u zoekt bestaat niet. Ga terug naar de blog"
-    }
+    },
+    "h1": "Pixelart-tutorials en gidsen"
   },
   "consent": {
     "title": "Privacy en cookies",

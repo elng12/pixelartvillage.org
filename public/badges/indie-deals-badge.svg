@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="180" height="60" viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="badgeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e6f0fc" />
+    </linearGradient>
+  </defs>
+
+  <rect width="180" height="60" rx="10" fill="url(#badgeGradient)"/>
+  <rect x="0.75" y="0.75" width="178.5" height="58.5" rx="9.25" fill="none" stroke="#0070f3" stroke-width="1.5" stroke-opacity="0.3"/>
+
+  <!-- local logo to satisfy CSP -->
+  <image href="/indie-deals-logo.png" x="14.4" y="12" width="36" height="36" preserveAspectRatio="xMidYMid meet"/>
+
+  <text x="120.6" y="22.8" text-anchor="middle" dominant-baseline="middle"
+        font-family="system-ui, -apple-system, sans-serif" font-size="10.8"
+        font-weight="normal" fill="#4b5563" letter-spacing="0.01em">
+    Find us on
+  </text>
+  <text x="120.6" y="39" text-anchor="middle" dominant-baseline="middle"
+        font-family="system-ui, -apple-system, sans-serif" font-size="13.2"
+        font-weight="700" fill="#0070f3" letter-spacing="0.01em">
+    Indie.Deals
+  </text>
+</svg>

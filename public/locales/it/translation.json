@@ -61,7 +61,8 @@
     "notFound": {
       "title": "Articolo non trovato",
       "desc": "L'articolo che cerchi non esiste. Torna al blog."
-    }
+    },
+    "h1": "Tutorial e guide sulla pixel art"
   },
   "consent": {
     "title": "Privacy e cookie",

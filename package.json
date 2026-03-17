@@ -8,7 +8,7 @@
     "dev": "node scripts/dev.cjs",
     "prebuild": "node scripts/embed-en-locale.cjs && node scripts/gen-social-preview.cjs && node scripts/gen-showcase.cjs && node scripts/generate-sitemap.cjs && node scripts/gen-pseo-og.cjs",
     "build": "vite build && node scripts/prerender-spa.cjs",
-    "postbuild": "node scripts/inline-critical-css.cjs && node scripts/seo-check.js",
+    "postbuild": "node scripts/inline-critical-css.cjs && node scripts/seo-check.js && node scripts/verify-dist-entries.cjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",

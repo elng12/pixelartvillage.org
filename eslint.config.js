@@ -15,7 +15,12 @@ export default defineConfig([
     ],
     languageOptions: {
       ecmaVersion: 'latest',
-      globals: { ...globals.browser, __BUILD_ID__: 'readonly' },
+      globals: {
+        ...globals.browser,
+        __BUILD_ID__: 'readonly',
+        __BUILD_DATE__: 'readonly',
+        __BUILD_YEAR__: 'readonly',
+      },
       parserOptions: {
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
@@ -60,6 +65,17 @@ export default defineConfig([
       ecmaVersion: 'latest',
       globals: globals.node,
       sourceType: 'module',
+    },
+  },
+  {
+    files: ['src/entry-server.jsx'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      globals: globals.node,
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
     },
   },
 ])

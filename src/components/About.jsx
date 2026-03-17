@@ -47,6 +47,7 @@ export default function About() {
         <p>
           <Trans
             i18nKey="about.cta"
+            defaults="Start in the <tool>converter</tool> or explore practical tips on the <blog>blog</blog>."
             components={{
               tool: <LocalizedLink to="/" className="text-blue-600 underline" />,
               blog: <LocalizedLink to="/blog/" className="text-blue-600 underline" />,
@@ -56,6 +57,7 @@ export default function About() {
         <p>
           <Trans
             i18nKey="about.specializedLinks"
+            defaults="Need a specific workflow? Try <png>PNG to pixel art</png>, <jpg>JPG to pixel art</jpg>, or the <photo>photo to sprite converter</photo>."
             components={{
               png: <LocalizedLink to="/converter/png-to-pixel-art/" className="text-blue-600 underline" />,
               jpg: <LocalizedLink to="/converter/jpg-to-pixel-art/" className="text-blue-600 underline" />,
@@ -72,6 +74,7 @@ export default function About() {
         <p>
           <Trans
             i18nKey="about.moreInfoRich"
+            defaults="For more details, review the <privacy>Privacy Policy</privacy> and <terms>Terms of Service</terms>."
             components={{
               privacy: <LocalizedLink to="/privacy/" className="text-blue-600 underline" />,
               terms: <LocalizedLink to="/terms/" className="text-blue-600 underline" />,

@@ -8,7 +8,7 @@ export function useDebouncedEffect(effect, deps, delay) {
       try {
         effect()
       } catch (e) {
-        if (import.meta?.env?.DEV) {
+        if (import.meta.env.DEV) {
           logger.error('useDebouncedEffect error:', e)
         }
       }

@@ -61,7 +61,8 @@
     "notFound": {
       "title": "Inlägget hittades inte",
       "desc": "Artikeln du letar efter finns inte. Gå tillbaka till bloggen"
-    }
+    },
+    "h1": "Pixelkonstguider och handledningar"
   },
   "consent": {
     "title": "Sekretess och cookies",

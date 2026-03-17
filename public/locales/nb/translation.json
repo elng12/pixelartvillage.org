@@ -61,7 +61,8 @@
     "notFound": {
       "title": "Can't find the post",
       "desc": "Artikkelen du leter etter eksisterer ikke. Gå tilbake til bloggen"
-    }
+    },
+    "h1": "Veiledninger og guider for pikselkunst"
   },
   "consent": {
     "title": "Personvern og informasjonskapsler",

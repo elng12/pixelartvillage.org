@@ -44,7 +44,7 @@ export function useImageProcessor(image, settings) {
         if (err?.name === 'AbortError') {
           // ignore
         } else {
-          if (import.meta.env?.DEV) logger.error('Image processing failed:', err);
+          if (import.meta.env.DEV) logger.error('Image processing failed:', err);
           setError(err?.message || 'Image processing failed');
           if (!signal.aborted) setProcessedImage(image);
         }

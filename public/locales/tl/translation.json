@@ -67,7 +67,8 @@
     "notFound": {
       "title": "Hindi natagpuan ang post",
       "desc": "Walang ganitong artikulo. Bumalik sa <a href=\"/\">{{ TERM_0 }}</a>"
-    }
+    },
+    "h1": "Mga tutorial at gabay sa pixel art"
   },
   "consent": {
     "title": "Privacy at Cookies",

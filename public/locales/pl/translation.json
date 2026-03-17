@@ -67,7 +67,8 @@
     "notFound": {
       "title": "Nie znaleziono wpisu",
       "desc": "Szukany artykuł nie istnieje. Wróć do bloga"
-    }
+    },
+    "h1": "Poradniki i przewodniki po pixel arcie"
   },
   "consent": {
     "title": "Prywatność i pliki cookie",

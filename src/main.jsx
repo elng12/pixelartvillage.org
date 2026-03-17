@@ -1,6 +1,6 @@
 import logger from '@/utils/logger'
 import React, { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import './index.css'
 import LangRoot from './components/LangRoot.jsx'
 import i18n, { SUPPORTED_LANGS, setStoredLang } from '@/i18n'
@@ -19,7 +19,7 @@ async function bootstrapWebVitals(reportHandler) {
       initWebVitals(reportHandler)
     }
   } catch (error) {
-    if (import.meta.env?.DEV) {
+    if (import.meta.env.DEV) {
       console.debug('initWebVitals bootstrap failed:', error?.message)
     }
   }
@@ -30,7 +30,7 @@ const reportWebVitals = import.meta.env.PROD ? () => {} : undefined
 bootstrapWebVitals(reportWebVitals)
 
 // Load optional analytics services only when explicitly enabled for production
-const ENABLE_ANALYTICS = Boolean(import.meta.env?.PROD) && String(import.meta.env?.VITE_ENABLE_ANALYTICS) === '1'
+const ENABLE_ANALYTICS = Boolean(import.meta.env.PROD) && String(import.meta.env.VITE_ENABLE_ANALYTICS) === '1'
 if (ENABLE_ANALYTICS) {
   ensureClarityLoaded()
   ensureGtmLoaded()
@@ -49,13 +49,13 @@ async function ensureInitialLanguage() {
       try {
         setStoredLang(target)
       } catch (error) {
-        if (import.meta.env?.DEV) {
+        if (import.meta.env.DEV) {
           logger.warn('Failed to persist language preference:', error)
         }
       }
     }
   } catch (error) {
-    if (import.meta.env?.DEV) {
+    if (import.meta.env.DEV) {
       logger.warn('ensureInitialLanguage failed:', error)
     }
   }
@@ -67,15 +67,22 @@ async function ensureInitialLanguage() {
     // 最小改动：在挂载前确保翻译命名空间已加载，避免键名闪现
     await i18n.loadNamespaces('translation')
   } catch (error) {
-    if (import.meta.env?.DEV) {
+    if (import.meta.env.DEV) {
       logger.warn('i18n loadNamespaces failed:', error)
     }
   }
-  createRoot(rootEl).render(
+  const app = (
     <StrictMode>
       <LangRoot />
     </StrictMode>
   )
+  const shouldHydrate = rootEl.hasAttribute('data-ssr-root') && rootEl.hasChildNodes()
+  if (shouldHydrate) {
+    hydrateRoot(rootEl, app)
+    return
+  }
+
+  createRoot(rootEl).render(app)
 })()
 
 // 保持验证/外链块永久隐藏，不再在运行时显示，避免任何刷新闪屏

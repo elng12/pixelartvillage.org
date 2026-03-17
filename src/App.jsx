@@ -39,17 +39,38 @@ function useAppOutletContext() {
 function Home() {
   const { t } = useTranslation()
   const { uploadedImage, setUploadedImage, currentLocale } = useAppOutletContext()
-  const IS_E2E = String(import.meta?.env?.VITE_E2E) === '1'
-  const relatedLinks = [
-    { to: '/converter/image-to-pixel-art/', label: t('footer.links.generator') },
-    { to: '/converter/photo-to-pixel-art/', label: t('footer.links.converter') },
-    { to: '/converter/png-to-pixel-art/', label: t('footer.links.png2pixel') },
-    { to: '/converter/jpg-to-pixel-art/', label: t('footer.links.jpg2pixel') },
-    { to: '/blog/', label: t('nav.blog') },
-    { to: '/about/', label: t('nav.about') },
-    { to: '/contact/', label: t('nav.contact') },
-    { to: '/privacy/', label: t('footer.privacy') },
-    { to: '/terms/', label: t('footer.terms') },
+  const IS_E2E = String(import.meta.env.VITE_E2E) === '1'
+  const featuredTools = [
+    {
+      to: '/converter/image-to-pixel-art/',
+      title: t('home.cards.mainConverter.title'),
+      description: t('home.cards.mainConverter.description'),
+    },
+    {
+      to: '/converter/photo-to-pixel-art/',
+      title: t('home.cards.photoToPixel.title'),
+      description: t('home.cards.photoToPixel.description'),
+    },
+    {
+      to: '/converter/photo-to-sprite-converter/',
+      title: t('home.cards.photoToSprite.title'),
+      description: t('home.cards.photoToSprite.description'),
+    },
+    {
+      to: '/converter/png-to-pixel-art/',
+      title: t('home.cards.pngToPixel.title'),
+      description: t('home.cards.pngToPixel.description'),
+    },
+    {
+      to: '/converter/jpg-to-pixel-art/',
+      title: t('home.cards.jpgToPixel.title'),
+      description: t('home.cards.jpgToPixel.description'),
+    },
+    {
+      to: '/converter/gif-to-pixel-art/',
+      title: t('home.cards.gifToPixel.title'),
+      description: t('home.cards.gifToPixel.description'),
+    },
   ]
   const canonical =
     currentLocale === CANONICAL_LOCALE
@@ -66,7 +87,13 @@ function Home() {
         hreflang={hreflangLinks}
         lang={currentLocale}
       />
-      <ToolSection onImageUpload={setUploadedImage} enablePaste={!uploadedImage} />
+      <ToolSection
+        onImageUpload={setUploadedImage}
+        enablePaste={!uploadedImage}
+        titleText={t('home.heroTitle')}
+        subtitleText={t('home.heroSubtitle')}
+        subtitleText2={t('home.heroSubtitle2')}
+      />
       {(uploadedImage || IS_E2E) ? (
         <Suspense fallback={null}>
           <Editor image={uploadedImage} />
@@ -78,15 +105,17 @@ function Home() {
       <HowItWorksSection />
       <section className="bg-gray-50 py-8 border-y border-gray-100">
         <div className="container mx-auto px-4 max-w-5xl">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('footer.explore')}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {relatedLinks.map((link) => (
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('home.exploreHeading')}</h2>
+          <p className="text-sm text-gray-600 mb-4 max-w-3xl">{t('home.exploreIntro')}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {featuredTools.map((tool) => (
               <LocalizedLink
-                key={link.to}
-                to={link.to}
-                className="block rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 hover:border-blue-300 hover:text-blue-600"
+                key={tool.to}
+                to={tool.to}
+                className="block rounded-lg border border-gray-200 bg-white px-4 py-4 hover:border-blue-300 hover:shadow-sm"
               >
-                {link.label}
+                <h3 className="text-sm font-semibold text-gray-900 mb-1">{tool.title}</h3>
+                <p className="text-sm text-gray-600 leading-6">{tool.description}</p>
               </LocalizedLink>
             ))}
           </div>
@@ -121,15 +150,7 @@ function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
       <CompatNotice />
       <ScrollManager />
       <main id="main-content">
-        <Suspense
-          fallback={
-            <div className="container mx-auto px-4 py-10 text-sm text-gray-600" role="status" aria-live="polite">
-              {t('common.loading')}
-            </div>
-          }
-        >
-          <Outlet context={{ uploadedImage, setUploadedImage, currentLocale }} />
-        </Suspense>
+        <Outlet context={{ uploadedImage, setUploadedImage, currentLocale }} />
       </main>
       <ConsentBanner />
       <div className="bg-gray-900">
@@ -146,7 +167,7 @@ function BaseLayout(props) {
   useEffect(() => {
     // 完全禁用自动语言重定向，防止刷新后跳转到日语
     // 用户必须手动选择语言或通过URL访问
-    if (import.meta?.env?.DEV) {
+    if (import.meta.env.DEV) {
       console.log('[BaseLayout] 自动语言重定向已禁用')
     }
 

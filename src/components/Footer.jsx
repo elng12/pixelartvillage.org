@@ -1,11 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import LocalizedLink from '@/components/LocalizedLink';
-import aiDirsBadge from '@/assets/badges/ai-dirs-badge.svg';
-import fazierBadge from '@/assets/badges/fazier-badge.svg';
-import indieDealsBadge from '@/assets/badges/indie-deals-badge.svg';
-import startupFameBadge from '@/assets/badges/startupfame-badge.webp';
-import turbo0Badge from '@/assets/badges/turbo0-badge.svg';
-import twelveToolsBadge from '@/assets/badges/twelve-tools-badge.svg';
+
+const aiDirsBadge = '/badges/ai-dirs-badge.svg';
+const fazierBadge = '/badges/fazier-badge.svg';
+const indieDealsBadge = '/badges/indie-deals-badge.svg';
+const startupFameBadge = '/badges/startupfame-badge.webp';
+const turbo0Badge = '/badges/turbo0-badge.svg';
+const twelveToolsBadge = '/badges/twelve-tools-badge.svg';
+const buildYear = typeof __BUILD_YEAR__ !== 'undefined' ? __BUILD_YEAR__ : new Date().getFullYear();
 
 function GitHubIcon({ className }) {
   return (
@@ -94,7 +96,7 @@ function Footer() {
 
           {/* 底部信息栏 */}
             <div className="mt-10 pt-6 border-t border-gray-700/60 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <p className="text-xs text-gray-400">{t('footer.copy', { year: new Date().getFullYear() })}</p>
+              <p className="text-xs text-gray-400">{t('footer.copy', { year: buildYear })}</p>
               <div className="flex items-center gap-4 text-xs text-gray-400">
                 <LocalizedLink to="/terms/" className="hover:text-white">{t('footer.terms')}</LocalizedLink>
                 <span aria-hidden>•</span>

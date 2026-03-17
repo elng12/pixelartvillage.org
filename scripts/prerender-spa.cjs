@@ -83,6 +83,31 @@ function write(file, content) {
   fs.writeFileSync(file, content, 'utf8')
 }
 
+async function loadSsrRenderer() {
+  const { createServer } = await import('vite')
+  const vite = await createServer({
+    root: ROOT,
+    mode: 'production',
+    appType: 'custom',
+    logLevel: 'error',
+    server: {
+      middlewareMode: true,
+    },
+    optimizeDeps: {
+      noDiscovery: true,
+    },
+  })
+  const mod = await vite.ssrLoadModule('/src/entry-server.jsx')
+  if (typeof mod.renderApp !== 'function') {
+    await vite.close()
+    throw new Error('SSR renderer missing renderApp export')
+  }
+  return {
+    renderApp: mod.renderApp,
+    close: () => vite.close(),
+  }
+}
+
 function replaceTitle(html, title) {
   return html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${title}</title>`)
 }
@@ -112,19 +137,8 @@ function stripMetaDescription(html) {
   return html.replace(/\n?\s*<meta[^>]+name=["']description["'][^>]*>\s*/ig, '')
 }
 
-function stripJsonLdTypes(html, types = []) {
-  if (!types.length) return html
-  return html.replace(/<script[^>]+type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/ig, (m) => {
-    try {
-      const jsonText = m.replace(/^[\s\S]*?<script[^>]*>/i, '').replace(/<\/script>[\s\S]*$/i, '')
-      const parsed = JSON.parse(jsonText)
-      const typesFound = Array.isArray(parsed) ? parsed.flatMap(x => x && x['@type']) : [parsed && parsed['@type']]
-      const has = (Array.isArray(typesFound) ? typesFound : [typesFound]).some(v => v && types.includes(v))
-      return has ? '' : m
-    } catch {
-      return m
-    }
-  })
+function stripJsonLd(html) {
+  return html.replace(/\n?\s*<script[^>]+type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>\s*/ig, '')
 }
 
 function injectMeta(html, metas) {
@@ -163,7 +177,7 @@ function buildHtml(base, { title, canonical, metas, lang, jsonLd }) {
   html = stripOgTwitter(html)
   html = stripMetaDescription(html)
   if (lang) html = setHtmlLang(html, lang)
-  html = stripJsonLdTypes(html, ['FAQPage'])
+  html = stripJsonLd(html)
   html = html.replace(/\n?\s*<div[^>]+data-prerender-seo[\s\S]*?<\/div>\s*/i, '')
   if (metas?.length) html = injectMeta(html, metas)
   html = injectJsonLd(html, jsonLd)
@@ -191,6 +205,38 @@ function injectVisibleContent(html, visible) {
   return html.replace(placeholder, shell)
 }
 
+function injectHeadTags(html, tags = []) {
+  if (!Array.isArray(tags) || !tags.length) return html
+  return html.replace(/<\/head>/i, `  ${tags.join('\n  ')}\n</head>`)
+}
+
+function injectAppContent(html, appHtml) {
+  if (!appHtml) return html
+  const placeholder = /<div id="root"><\/div>/
+  if (!placeholder.test(html)) return html
+  return html.replace(placeholder, `<div id="root" data-ssr-root="1">${appHtml}</div>`)
+}
+
+function extractHydrationUnsafeHeadTags(appHtml) {
+  if (!appHtml) {
+    return { appHtml: '', headTags: [] }
+  }
+
+  const headTags = []
+  const cleanedHtml = appHtml.replace(
+    /<link\b[^>]*rel=["'](?:preload|modulepreload|preconnect|dns-prefetch)["'][^>]*>/ig,
+    (match) => {
+      headTags.push(match)
+      return ''
+    },
+  )
+
+  return {
+    appHtml: cleanedHtml.trimStart(),
+    headTags: Array.from(new Set(headTags)),
+  }
+}
+
 function injectInitialContent(html, payload) {
   if (!payload) return html
   const serialized = JSON.stringify(payload).replace(/</g, '\\u003c')
@@ -210,11 +256,13 @@ function escapeHtml(s) {
     .replace(/'/g, '&#39;')
 }
 
-function prerender() {
+async function prerender() {
   if (!fs.existsSync(DIST)) throw new Error('dist not found')
   const base = read(INDEX)
   const ABS = (p) => `https://pixelartvillage.org${p}`
+  const ssr = await loadSsrRenderer()
 
+  try {
   const renderBlogIndex = (list = []) => {
     if (!Array.isArray(list) || !list.length) return ''
     const items = list
@@ -251,7 +299,7 @@ function prerender() {
   const renderBlogIndexVisible = (list = [], lang = DEFAULT_LANG, bundle = {}) => {
     if (!Array.isArray(list) || !list.length) return ''
     const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
-    const blogTitle = pick(bundle, 'blog.title') || 'Blog'
+    const blogHeading = pick(bundle, 'blog.h1') || 'Pixel Art Tutorials & Guides'
     const blogSubtitle = pick(bundle, 'blog.subtitle') || 'Articles and updates about making pixel image visuals, tutorials, and new features.'
     const topicHeading = pick(bundle, 'blog.relatedHeading') || 'Popular topics'
     const topics = Array.from(new Set(list.flatMap((item) => toStringArray(item?.tags))))
@@ -271,7 +319,7 @@ function prerender() {
       .join('')
     if (!items) return ''
     const guideHtml = `<section class="mb-6 max-w-2xl mx-auto rounded-lg border border-gray-200 bg-white p-4 shadow-sm"><h2 class="text-lg font-semibold text-gray-900">${escapeHtml(topicHeading)}</h2><p class="mt-2 text-gray-700">Use this hub to compare tools, learn beginner workflows, troubleshoot exports, explore animation basics, and collect practical pixel art ideas before you open the editor.</p>${topics.length ? `<ul class="mt-3 flex flex-wrap gap-2">${topics.map((tag) => `<li class="rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs text-gray-700">${escapeHtml(tag)}</li>`).join('')}</ul>` : ''}</section>`
-    return `<div class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 mb-4 text-center">${escapeHtml(blogTitle)}</h1><p class="text-gray-700 mb-6 max-w-2xl mx-auto text-center">${escapeHtml(blogSubtitle)}</p>${guideHtml}<ul class="space-y-4 max-w-2xl mx-auto">${items}</ul></div>`
+    return `<div class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 mb-4 text-center">${escapeHtml(blogHeading)}</h1><p class="text-gray-700 mb-6 max-w-2xl mx-auto text-center">${escapeHtml(blogSubtitle)}</p>${guideHtml}<ul class="space-y-4 max-w-2xl mx-auto">${items}</ul></div>`
   }
 
   const renderBlogPostVisible = (post, lang = DEFAULT_LANG, bundle = {}) => {
@@ -749,6 +797,76 @@ function prerender() {
     return `<main class="container mx-auto px-4 py-10 max-w-4xl"><section><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${desc}</section>${linkHtml}${faqHtml}${recentPostsHtml}</main>`
   }
 
+  const buildFaqJsonLd = (bundle = {}) => {
+    const items = Array.isArray(pick(bundle, 'faq.items'))
+      ? pick(bundle, 'faq.items').filter((item) => item && item.question && item.answer)
+      : []
+    if (!items.length) return null
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: items.map((item) => ({
+        '@type': 'Question',
+        name: normalizeWhitespace(item.question),
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: normalizeWhitespace(item.answer),
+        },
+      })),
+    }
+  }
+
+  const buildHomeJsonLd = ({ lang = DEFAULT_LANG, bundle = {}, title = '', description = '' } = {}) => {
+    const siteName = pick(bundle, 'site.name') || 'Pixel Art Village'
+    const homeTitle = normalizeWhitespace(title || pick(bundle, 'home.seoTitle') || `${siteName} | Image to Pixel Art Converter`)
+    const homeDescription = shortenText(
+      description || pick(bundle, 'home.seoDescription') || 'Image to pixel art online with live preview, palettes, and private export.',
+    )
+    const faqJsonLd = buildFaqJsonLd(bundle)
+
+    return [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: homeTitle,
+        url: 'https://pixelartvillage.org/',
+        applicationCategory: 'MultimediaApplication',
+        operatingSystem: 'Web',
+        description: homeDescription,
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD',
+        },
+        inLanguage: SUPPORTED_LANGS,
+        browserRequirements: 'HTML5, JavaScript enabled',
+        softwareVersion: '2.0',
+        author: {
+          '@type': 'Organization',
+          name: siteName,
+        },
+        screenshot: ABS('/social-preview.png'),
+      },
+      faqJsonLd,
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://pixelartvillage.org/' },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: siteName,
+        url: 'https://pixelartvillage.org/',
+        description: homeDescription,
+        inLanguage: SUPPORTED_LANGS,
+      },
+    ].filter(Boolean)
+  }
+
   const getMetaDescription = (metas = []) => {
     const entry = metas.find(m => m && m.name === 'description')
     return entry?.content || ''
@@ -797,6 +915,7 @@ function prerender() {
       { name: 'twitter:description', content: 'Free Image to Pixel Art Generator & Maker | Pixel Art Village. Drag/drop photo, live preview, palettes, dithering. Place color converter: Export PNGs online!' },
       { name: 'twitter:image', content: 'https://pixelartvillage.org/social-preview.png' },
     ],
+      jsonLd: ({ lang, bundle, title, description }) => buildHomeJsonLd({ lang, bundle, title, description }),
       visible: ({ lang, bundle, title, description }) => renderHomeVisible({
         lang,
         bundle,
@@ -1194,7 +1313,20 @@ function prerender() {
     })
 
     out = injectHreflang(out, alternates)
-    if (r.visible) {
+    let appHtml = ''
+    try {
+      appHtml = await ssr.renderApp(r.path, {
+        lang: r.lang || DEFAULT_LANG,
+        initialContent: r.initialContent || null,
+      })
+    } catch (error) {
+      console.warn(`[prerender] warn: SSR failed for ${r.path} -> ${error.message}`)
+    }
+    if (appHtml) {
+      const normalizedSsr = extractHydrationUnsafeHeadTags(appHtml)
+      out = injectHeadTags(out, normalizedSsr.headTags)
+      out = injectAppContent(out, normalizedSsr.appHtml)
+    } else if (r.visible) {
       out = injectVisibleContent(out, r.visible)
     }
     if (r.initialContent) {
@@ -1204,6 +1336,9 @@ function prerender() {
     const file = path.join(DIST, r.path.replace(/^\//, '').replace(/\/$/, ''), 'index.html')
     write(file, out)
     console.log('[prerender]', r.path, '→', path.relative(DIST, file))
+  }
+  } finally {
+    await ssr.close()
   }
 }
 
@@ -1226,8 +1361,14 @@ function pick(obj, pathStr) {
 }
 
 try {
-  prerender()
-  console.log('[prerender] done')
+  Promise.resolve(prerender())
+    .then(() => {
+      console.log('[prerender] done')
+    })
+    .catch((e) => {
+      console.error('[prerender] failed:', e && e.stack || e)
+      process.exit(1)
+    })
 } catch (e) {
   console.error('[prerender] failed:', e && e.stack || e)
   process.exit(1)

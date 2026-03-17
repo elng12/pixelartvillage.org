@@ -12,7 +12,7 @@ import { usePaletteStorage } from '../hooks/usePaletteStorage';
 
 function Editor({ image }) {
   const { t } = useTranslation()
-  const IS_E2E = String(import.meta?.env?.VITE_E2E) === '1'
+  const IS_E2E = String(import.meta.env.VITE_E2E) === '1'
   const initial = {
     pixelSize: 1,
     brightness: 0,
@@ -183,7 +183,7 @@ function Editor({ image }) {
     i.decoding = 'async';
     i.src = image;
     const onReady = async () => {
-      try { await i.decode(); } catch (e) { if (import.meta?.env?.DEV) logger.error('Image decode failed', e); }
+      try { await i.decode(); } catch (e) { if (import.meta.env.DEV) logger.error('Image decode failed', e); }
       const iw = i.naturalWidth || 1;
       const ih = i.naturalHeight || 1;
       dispatch({ type: 'SET', field: 'imgDim', value: { w: iw, h: ih } });

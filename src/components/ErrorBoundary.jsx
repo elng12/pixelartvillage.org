@@ -12,7 +12,7 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, info) {
-    if (import.meta?.env?.DEV) {
+    if (import.meta.env.DEV) {
       // 仅在开发环境输出详细错误，避免污染生产环境控制台
       logger.error('ErrorBoundary caught:', error, info)
     }
@@ -35,7 +35,7 @@ class ErrorBoundary extends React.Component {
       const hardRefresh = () => {
         logger.debug('ErrorBoundary: 自动刷新已禁用，避免文件上传问题')
         // 在开发环境中不自动刷新，只记录错误
-        if (!import.meta?.env?.DEV) {
+        if (!import.meta.env.DEV) {
           try {
             const u = new URL(window.location.href)
             u.searchParams.set('_r', String(Date.now()))

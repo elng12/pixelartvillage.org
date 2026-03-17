@@ -17,7 +17,7 @@ export default function TermsOfService() {
   const { t } = useTranslation()
   const { currentLocale, buildPath } = useLocaleContext()
   const canonical = `https://pixelartvillage.org${buildPath('/terms/')}`
-  const today = new Date().toISOString().slice(0, 10)
+  const today = typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : new Date().toISOString().slice(0, 10)
 
   return (
     <div className="container mx-auto px-4 py-10">

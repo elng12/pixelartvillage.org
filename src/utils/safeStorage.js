@@ -16,6 +16,9 @@ class SafeStorage {
    * 测试localStorage是否可用
    */
   _testLocalStorage() {
+    if (typeof localStorage === 'undefined' || typeof localStorage.setItem !== 'function' || typeof localStorage.removeItem !== 'function') {
+      return false
+    }
     try {
       const testKey = '__storage_test__'
       localStorage.setItem(testKey, 'test')
@@ -31,6 +34,9 @@ class SafeStorage {
    * 测试sessionStorage是否可用
    */
   _testSessionStorage() {
+    if (typeof sessionStorage === 'undefined' || typeof sessionStorage.setItem !== 'function' || typeof sessionStorage.removeItem !== 'function') {
+      return false
+    }
     try {
       const testKey = '__storage_test__'
       sessionStorage.setItem(testKey, 'test')

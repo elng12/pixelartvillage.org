@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
   try {
     gitHash = execSync('git rev-parse --short HEAD', { stdio: ['ignore','pipe','ignore'] }).toString().trim()
   } catch { /* ignore */ void 0 }
+  const buildDate = new Date().toISOString().slice(0, 10)
   const BUILD_ID = mode === 'production'
     ? (process.env.GIT_COMMIT || gitHash || new Date().toISOString().replace(/[:.]/g, '-'))
     : 'dev'
@@ -21,6 +22,8 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       __BUILD_ID__: JSON.stringify(BUILD_ID),
+      __BUILD_DATE__: JSON.stringify(buildDate),
+      __BUILD_YEAR__: JSON.stringify(Number(buildDate.slice(0, 4))),
     },
     // 性能优化配置
     build: {

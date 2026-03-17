@@ -67,7 +67,8 @@
     "notFound": {
       "title": "Post not found",
       "desc": "Artikel yang Anda cari tidak ada. Kembali ke"
-    }
+    },
+    "h1": "Tutorial dan panduan pixel art"
   },
   "consent": {
     "title": "Privasi & Cookie",

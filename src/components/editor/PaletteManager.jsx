@@ -74,7 +74,7 @@ function PaletteManager({ onSavePalette, onDeletePalette, onApplyPalette }) {
     onSavePalette?.(lospecName, paletteColors)
     onApplyPalette?.(lospecName)
     // 移除确认弹窗，直接应用调色板
-    if (import.meta?.env?.DEV) {
+    if (import.meta.env.DEV) {
       console.log(`[PaletteManager] 已应用调色板: ${paletteInfo.name}`)
     }
   }

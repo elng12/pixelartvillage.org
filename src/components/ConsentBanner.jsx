@@ -29,7 +29,7 @@ export default function ConsentBanner() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const IS_E2E = String(import.meta?.env?.VITE_E2E) === '1'
+    const IS_E2E = String(import.meta.env.VITE_E2E) === '1'
     if (IS_E2E) return
     if (hasCmp()) return
 

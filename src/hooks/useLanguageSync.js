@@ -14,15 +14,6 @@ export function useLanguageSync() {
 
   // 获取当前语言
   const currentLang = useMemo(() => {
-    // 存储的语言优先
-    const stored = languageManager.getStoredLanguage()
-    if (stored) {
-      if (import.meta.env.DEV) {
-        console.log('[useLanguageSync] 使用存储语言:', stored)
-      }
-      return stored
-    }
-
     // 路由参数语言
     const routeLang = (params.lang || '').toLowerCase()
     if (SUPPORTED_LANGS.includes(routeLang)) {
@@ -48,6 +39,15 @@ export function useLanguageSync() {
         console.log('[useLanguageSync] 使用i18n语言:', i18nLang)
       }
       return i18nLang
+    }
+
+    // 存储的语言作为兜底，避免根路径和服务端首屏出现不一致
+    const stored = languageManager.getStoredLanguage()
+    if (stored) {
+      if (import.meta.env.DEV) {
+        console.log('[useLanguageSync] 使用存储语言:', stored)
+      }
+      return stored
     }
 
     // 默认语言

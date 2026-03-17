@@ -29,7 +29,14 @@ function normalizeImageType(file) {
   return EXTENSION_TO_MIME[ext] || '';
 }
 
-function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true }) {
+function ToolSection({
+  onImageUpload,
+  headingLevel = 'h1',
+  enablePaste = true,
+  titleText,
+  subtitleText,
+  subtitleText2,
+}) {
   const { t } = useTranslation()
   const fileInputRef = useRef(null);
   const uploadLiveRef = useRef(null); // 替代getElementById
@@ -40,6 +47,10 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
   const log = useCallback((event, payload = {}) => {
     logger.debug(`[ToolSection] ${event}`, payload);
   }, []);
+
+  const resolvedTitle = titleText || t('tool.title')
+  const resolvedSubtitle = subtitleText || t('tool.subtitle')
+  const resolvedSubtitle2 = subtitleText2 || t('tool.subtitle2')
 
   const handleFileSelect = useCallback(async (file) => {
     if (isPreparing) return;
@@ -208,17 +219,19 @@ function ToolSection({ onImageUpload, headingLevel = 'h1', enablePaste = true })
               className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-gray-800 mb-3 text-center"
               style={{ fontSize: 'clamp(1.5rem, 2.2vw + 1rem, 3rem)', lineHeight: 1.1, marginBottom: '0.75rem' }}
             >
-              {t('tool.title')}
+              {resolvedTitle}
             </HeadingTag>
           );
         })()}
         <div className="mb-6 max-w-4xl md:max-w-5xl mx-auto" style={{ marginBottom: '1.5rem' }}>
           <p className="text-sm sm:text-base text-gray-600 mb-2" style={{ lineHeight: 1.5, marginBottom: '0.5rem' }}>
-            {t('tool.subtitle')}
+            {resolvedSubtitle}
           </p>
-          <p className="text-sm sm:text-base text-gray-600" style={{ lineHeight: 1.5 }}>
-            {t('tool.subtitle2')}
-          </p>
+          {resolvedSubtitle2 ? (
+            <p className="text-sm sm:text-base text-gray-600" style={{ lineHeight: 1.5 }}>
+              {resolvedSubtitle2}
+            </p>
+          ) : null}
         </div>
         <div 
           className={`upload-zone relative max-w-3xl mx-auto bg-white p-6 md:p-8 border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50 ${isPreparing ? 'cursor-not-allowed opacity-80 ring-1 ring-blue-200' : 'cursor-pointer'}`}

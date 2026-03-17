@@ -116,7 +116,7 @@ export async function processPixelArt(imageData, options, signal) {
     imageProcessor.setLast(outCanvas);
     return outCanvas.toDataURL();
   } catch (error) {
-    if (import.meta?.env?.DEV) logger.error('Pixel art processing error:', error);
+    if (import.meta.env.DEV) logger.error('Pixel art processing error:', error);
     throw error;
   }
 }

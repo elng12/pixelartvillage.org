@@ -64,23 +64,38 @@ function normalizePathname(pathname = '/') {
   return pathname.endsWith('/') ? pathname : `${pathname}/`
 }
 
-function getInitialContentState(baseName, preferredLocale) {
-  if (typeof document === 'undefined' || typeof window === 'undefined') {
-    return { data: null, locale: null, fallback: false }
+function readEmbeddedInitialPayload() {
+  if (typeof document !== 'undefined') {
+    const el = document.getElementById('pv-initial-content')
+    if (!el?.textContent) return null
+    try {
+      return JSON.parse(el.textContent)
+    } catch {
+      return null
+    }
   }
 
-  const el = document.getElementById('pv-initial-content')
-  if (!el?.textContent) {
+  if (typeof globalThis !== 'undefined' && globalThis.__PV_INITIAL_CONTENT__) {
+    return globalThis.__PV_INITIAL_CONTENT__
+  }
+
+  return null
+}
+
+function getInitialContentState(baseName, preferredLocale) {
+  const payload = readEmbeddedInitialPayload()
+  if (!payload) {
     return { data: null, locale: null, fallback: false }
   }
 
   try {
-    const payload = JSON.parse(el.textContent)
     if (!payload || payload.baseName !== baseName) {
       return { data: null, locale: null, fallback: false }
     }
 
-    const currentPath = normalizePathname(window.location.pathname)
+    const currentPath = typeof window !== 'undefined'
+      ? normalizePathname(window.location.pathname)
+      : normalizePathname(payload.path || '/')
     const payloadPath = normalizePathname(payload.path || '/')
     if (payloadPath !== currentPath) {
       return { data: null, locale: null, fallback: false }

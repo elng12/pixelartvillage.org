@@ -4,6 +4,7 @@ import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import HttpBackend from 'i18next-http-backend'
 import localeConfig from '../config/locales.json'
+import fallbackEn from './locales/en.json'
 import safeStorage from './utils/safeStorage'
 import logger from './utils/logger'
 
@@ -21,6 +22,7 @@ export const SUPPORTED_LANGS = (() => {
 
 const STORAGE_KEY = 'pv_lang'
 const STORAGE_TTL = 365 * 24 * 60 * 60 * 1000 // 1 year
+const IS_BROWSER = typeof window !== 'undefined'
 
 export function getStoredLang() {
   try {
@@ -87,29 +89,47 @@ export function detectBrowserLang() {
   return 'en'
 }
 
-// Initialize i18n
-i18n
-  .use(HttpBackend)
-  .use(initReactI18next)
-  .init({
+// 服务端渲染只需要一个最小的英文实例，避免在 Node 里请求浏览器本地资源。
+if (!i18n.isInitialized) {
+  const commonConfig = {
     lng: 'en', // 强制使用英语作为初始语言
     fallbackLng: DEFAULT_LOCALE,
     supportedLngs: SUPPORTED_LANGS,
     ns: ['translation'],
     defaultNS: 'translation',
     load: 'languageOnly',
-    backend: {
-      loadPath: '/locales/{{lng}}/translation.json',
-    },
     interpolation: { escapeValue: false },
-    // 禁用自动语言检测
     detection: {
-      order: ['none'], // 禁用所有自动检测
+      order: ['none'],
       caches: [],
     },
-    // 启用 Suspense：在资源未就绪时由 <Suspense> 兜底，避免闪现键名
-    react: { useSuspense: true },
-  })
+  }
+
+  if (IS_BROWSER) {
+    i18n
+      .use(HttpBackend)
+      .use(initReactI18next)
+      .init({
+        ...commonConfig,
+        backend: {
+          loadPath: '/locales/{{lng}}/translation.json',
+        },
+        react: { useSuspense: true },
+      })
+  } else {
+    i18n
+      .use(initReactI18next)
+      .init({
+        ...commonConfig,
+        resources: {
+          en: {
+            translation: fallbackEn,
+          },
+        },
+        react: { useSuspense: false },
+      })
+  }
+}
 
 // 改进的缺失键处理 - 提供更好的调试信息
 try {
