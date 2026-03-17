@@ -58,7 +58,8 @@
       "turbo0": "insignia de colección Turbo0",
       "indieDeals": "Insignia del directorio de ofertas indie",
       "aiDirs": "Insignia de directorio AI Dirs"
-    }
+    },
+    "mediaFeaturedIn": "Media & Featured In"
   },
   "blog": {
     "title": "Blog",

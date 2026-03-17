@@ -58,7 +58,8 @@
       "turbo0": "Abzeichen der Turbo0-Sammlung",
       "indieDeals": "Abzeichen für das Indie-Deals-Verzeichnis",
       "aiDirs": "AI Dirs-Verzeichnisabzeichen"
-    }
+    },
+    "mediaFeaturedIn": "Media & Featured In"
   },
   "blog": {
     "title": "Blog",

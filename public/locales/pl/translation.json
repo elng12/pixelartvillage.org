@@ -58,7 +58,8 @@
       "turbo0": "Turbo0 collection badge",
       "indieDeals": "Indie Deals directory badge",
       "aiDirs": "AI Dirs directory badge"
-    }
+    },
+    "mediaFeaturedIn": "Media & Featured In"
   },
   "blog": {
     "title": "Blog",

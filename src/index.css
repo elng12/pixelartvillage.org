@@ -154,6 +154,26 @@
       image-rendering: pixelated;
     }
   }
+
+  .footer-badge-scroller {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, 0.9) rgba(255, 255, 255, 0.08);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .footer-badge-scroller::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .footer-badge-scroller::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+  }
+
+  .footer-badge-scroller::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #64748b, #94a3b8);
+    border-radius: 9999px;
+  }
 }
 
 /* Language switcher styles */

@@ -8,6 +8,50 @@ const startupFameBadge = '/badges/startupfame-badge.webp';
 const turbo0Badge = '/badges/turbo0-badge.svg';
 const twelveToolsBadge = '/badges/twelve-tools-badge.svg';
 const buildYear = typeof __BUILD_YEAR__ !== 'undefined' ? __BUILD_YEAR__ : new Date().getFullYear();
+const footerBadges = [
+  {
+    key: 'twelveTools',
+    href: 'https://twelve.tools',
+    src: twelveToolsBadge,
+    width: 200,
+    height: 54,
+  },
+  {
+    key: 'fazier',
+    href: 'https://fazier.com/launches/pixelartvillage.org',
+    src: fazierBadge,
+    width: 250,
+    height: 54,
+  },
+  {
+    key: 'startupFame',
+    href: 'https://startupfa.me/s/pixel-art-village?utm_source=pixelartvillage.org',
+    src: startupFameBadge,
+    width: 171,
+    height: 54,
+  },
+  {
+    key: 'turbo0',
+    href: 'https://turbo0.com/item/pixel-art-village',
+    src: turbo0Badge,
+    width: 180,
+    height: 54,
+  },
+  {
+    key: 'indieDeals',
+    href: 'https://indie.deals?ref=https%3A%2F%2Fpixelartvillage.org%2F',
+    src: indieDealsBadge,
+    width: 180,
+    height: 54,
+  },
+  {
+    key: 'aiDirs',
+    href: 'https://backlinkdirs.com',
+    src: aiDirsBadge,
+    width: 180,
+    height: 54,
+  },
+];
 
 function GitHubIcon({ className }) {
   return (
@@ -94,83 +138,69 @@ function Footer() {
             </div>
           </div>
 
-          {/* 底部信息栏 */}
-            <div className="mt-10 pt-6 border-t border-gray-700/60 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <p className="text-xs text-gray-400">{t('footer.copy', { year: buildYear })}</p>
-              <div className="flex items-center gap-4 text-xs text-gray-400">
-                <LocalizedLink to="/terms/" className="hover:text-white">{t('footer.terms')}</LocalizedLink>
-                <span aria-hidden>•</span>
-                <LocalizedLink to="/privacy/" className="hover:text-white">{t('footer.privacy')}</LocalizedLink>
-                <span aria-hidden>•</span>
-                <LocalizedLink to="/about/" className="hover:text-white">{t('nav.about')}</LocalizedLink>
-                <span aria-hidden>•</span>
-                <LocalizedLink to="/contact/" className="hover:text-white">{t('nav.contact')}</LocalizedLink>
-                <span aria-hidden>•</span>
-                <a
-                  href="https://pinpointanswertoday.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white"
-                >
-                  Pinpoint Answer Today
-                </a>
+          <section aria-label={t('footer.mediaFeaturedIn')} className="mt-10 border-t border-gray-700/60 pt-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-400">
+              {t('footer.mediaFeaturedIn')}
+            </p>
+            <div className="relative mt-4">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-10 bg-gradient-to-r from-gray-900 via-gray-900/90 to-transparent sm:block"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-10 bg-gradient-to-l from-gray-900 via-gray-900/90 to-transparent sm:block"
+              />
+              <div className="footer-badge-scroller -mx-4 overflow-x-auto px-4 pb-3 sm:mx-0 sm:px-0">
+                <ul className="flex snap-x snap-mandatory gap-3 md:gap-4">
+                  {footerBadges.map((badge) => (
+                    <li key={badge.key} className="shrink-0 snap-start">
+                      <a
+                        href={badge.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={t(`footer.badges.${badge.key}`)}
+                        className="group flex h-[80px] w-[214px] items-center justify-center rounded-[24px] border border-slate-200/80 bg-gradient-to-b from-white to-slate-50 px-5 py-3 shadow-[0_10px_28px_rgba(15,23,42,0.18)] transition duration-200 hover:-translate-y-0.5 hover:border-blue-300/70 hover:shadow-[0_14px_36px_rgba(37,99,235,0.16)] sm:w-[228px]"
+                      >
+                        <img
+                          src={badge.src}
+                          alt={t(`footer.badges.${badge.key}`)}
+                          width={badge.width}
+                          height={badge.height}
+                          loading="lazy"
+                          fetchPriority="low"
+                          decoding="async"
+                          className="max-h-[44px] w-auto max-w-[182px] object-contain opacity-90 transition duration-200 group-hover:opacity-100"
+                        />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-            <div className="mt-6 text-center flex flex-wrap items-center justify-center gap-6">
-              <a href="https://twelve.tools" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
-                <img
-                  src={twelveToolsBadge}
-                  alt={t('footer.badges.twelveTools')}
-                  width="200"
-                  height="54"
-                  className="inline-block h-[54px] w-auto object-contain"
-                />
+          </section>
+
+          {/* 底部信息栏 */}
+          <div className="mt-10 pt-6 border-t border-gray-700/60 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <p className="text-xs text-gray-400">{t('footer.copy', { year: buildYear })}</p>
+            <div className="flex flex-wrap items-center gap-4 text-xs text-gray-400">
+              <LocalizedLink to="/terms/" className="hover:text-white">{t('footer.terms')}</LocalizedLink>
+              <span aria-hidden>•</span>
+              <LocalizedLink to="/privacy/" className="hover:text-white">{t('footer.privacy')}</LocalizedLink>
+              <span aria-hidden>•</span>
+              <LocalizedLink to="/about/" className="hover:text-white">{t('nav.about')}</LocalizedLink>
+              <span aria-hidden>•</span>
+              <LocalizedLink to="/contact/" className="hover:text-white">{t('nav.contact')}</LocalizedLink>
+              <span aria-hidden>•</span>
+              <a
+                href="https://pinpointanswertoday.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white"
+              >
+                Pinpoint Answer Today
               </a>
-              <a href="https://fazier.com/launches/pixelartvillage.org" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
-                <img
-                  src={fazierBadge}
-                  alt={t('footer.badges.fazier')}
-                  width="250"
-                  height="54"
-                  className="inline-block h-[54px] w-auto object-contain"
-                />
-              </a>
-              <a href="https://startupfa.me/s/pixel-art-village?utm_source=pixelartvillage.org" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
-                <img
-                  src={startupFameBadge}
-                  alt={t('footer.badges.startupFame')}
-                  width="171"
-                  height="54"
-                  className="inline-block h-[54px] w-auto object-contain"
-                />
-              </a>
-              <a href="https://turbo0.com/item/pixel-art-village" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
-                <img
-                  src={turbo0Badge}
-                  alt={t('footer.badges.turbo0')}
-                  width="180"
-                  height="54"
-                  className="inline-block h-[54px] w-auto object-contain"
-                />
-              </a>
-              <a href="https://indie.deals?ref=https%3A%2F%2Fpixelartvillage.org%2F" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
-                <img
-                  src={indieDealsBadge}
-                  alt={t('footer.badges.indieDeals')}
-                  width="180"
-                  height="54"
-                  className="inline-block h-[54px] w-auto object-contain"
-                />
-              </a>
-              <a href="https://backlinkdirs.com" target="_blank" rel="noopener noreferrer" className="w-1/2 md:w-auto flex justify-center">
-                <img
-                  src={aiDirsBadge}
-                  alt={t('footer.badges.aiDirs')}
-                  width="180"
-                  height="54"
-                  className="inline-block h-[54px] w-auto object-contain"
-                />
-              </a>
+            </div>
           </div>
         </div>
       </div>
