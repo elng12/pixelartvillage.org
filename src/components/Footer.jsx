@@ -145,14 +145,14 @@ function Footer() {
             <div className="relative mt-4">
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-10 bg-gradient-to-r from-gray-900 via-gray-900/90 to-transparent sm:block"
+                className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-7 bg-gradient-to-r from-gray-900 via-gray-900/92 to-transparent sm:block"
               />
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-10 bg-gradient-to-l from-gray-900 via-gray-900/90 to-transparent sm:block"
+                className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-7 bg-gradient-to-l from-gray-900 via-gray-900/92 to-transparent sm:block"
               />
               <div className="footer-badge-scroller -mx-4 overflow-x-auto px-4 pb-3 sm:mx-0 sm:px-0">
-                <ul className="flex snap-x snap-mandatory gap-3 md:gap-4">
+                <ul className="flex snap-x snap-mandatory gap-3">
                   {footerBadges.map((badge) => (
                     <li key={badge.key} className="shrink-0 snap-start">
                       <a
@@ -160,7 +160,7 @@ function Footer() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={t(`footer.badges.${badge.key}`)}
-                        className="group flex h-[80px] w-[214px] items-center justify-center rounded-[24px] border border-slate-200/80 bg-gradient-to-b from-white to-slate-50 px-5 py-3 shadow-[0_10px_28px_rgba(15,23,42,0.18)] transition duration-200 hover:-translate-y-0.5 hover:border-blue-300/70 hover:shadow-[0_14px_36px_rgba(37,99,235,0.16)] sm:w-[228px]"
+                        className="group flex h-[66px] w-[186px] items-center justify-center rounded-[20px] border border-slate-200/85 bg-gradient-to-b from-white to-slate-50 px-4 py-2.5 shadow-[0_6px_18px_rgba(15,23,42,0.14)] transition duration-200 hover:-translate-y-0.5 hover:border-blue-300/65 hover:shadow-[0_10px_24px_rgba(37,99,235,0.12)] sm:w-[196px]"
                       >
                         <img
                           src={badge.src}
@@ -170,7 +170,7 @@ function Footer() {
                           loading="lazy"
                           fetchPriority="low"
                           decoding="async"
-                          className="max-h-[44px] w-auto max-w-[182px] object-contain opacity-90 transition duration-200 group-hover:opacity-100"
+                          className="max-h-[36px] w-auto max-w-[152px] object-contain opacity-90 transition duration-200 group-hover:opacity-100"
                         />
                       </a>
                     </li>
