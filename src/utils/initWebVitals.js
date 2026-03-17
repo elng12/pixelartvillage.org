@@ -1,47 +1,56 @@
-export function initWebVitals(report = () => {}) {
-  try {
-    const metrics = {};
-    const observers = [];
-    const add = (type, handler, opts) => {
-      try {
-        const po = new PerformanceObserver(handler)
-        po.observe({ type, buffered: true, ...opts })
-        observers.push(po)
-      } catch (err) {
-        if (import.meta.env.DEV) {
-          // 某些浏览器/环境不支持对应的 PerformanceObserver 类型
-          console.debug('[web-vitals] observer unsupported:', type, err?.message)
-        }
-      }
-    };
-    // LCP
-    add('largest-contentful-paint', (list) => {
-      const last = list.getEntries().at(-1);
-      if (last) metrics.lcp = Math.round(last.startTime);
-    });
-    // CLS
-    let cls = 0;
-    add('layout-shift', (list) => {
-      for (const e of list.getEntries()) if (!e.hadRecentInput) cls += e.value;
-      metrics.cls = Number(cls.toFixed(3));
-    });
-    // INP approx (event timing)
-    add('event', (list) => {
-      let max = metrics.inp || 0;
-      for (const e of list.getEntries()) if (e.name === 'event') max = Math.max(max, e.duration || 0);
-      metrics.inp = Math.round(max);
-    }, { durationThreshold: 40 });
+import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals/attribution'
 
-    const flush = () => {
-      report({ t: Date.now(), ...metrics });
-      observers.forEach((po) => {
-        try { po.disconnect(); } catch (err) {
-          if (import.meta.env.DEV) console.debug('[web-vitals] disconnect failed:', err?.message)
-        }
-      });
-    };
-    addEventListener('pagehide', flush, { once: true });
-  } catch (err) {
-    if (import.meta.env.DEV) console.debug('[web-vitals] init disabled:', err?.message)
+let hasInitialized = false
+
+function generateMetricTarget(node) {
+  if (!(node instanceof Element)) return null
+  if (node.id) return `#${node.id}`
+  if (node instanceof HTMLElement && node.dataset?.testid) {
+    return `[data-testid="${node.dataset.testid}"]`
+  }
+  if (node instanceof HTMLElement && node.dataset?.track) {
+    return `[data-track="${node.dataset.track}"]`
+  }
+
+  const tagName = node.tagName?.toLowerCase()
+  if (!tagName) return null
+
+  const ariaLabel = node.getAttribute('aria-label')
+  if (ariaLabel) {
+    return `${tagName}[aria-label="${ariaLabel.slice(0, 48)}"]`
+  }
+
+  return tagName
+}
+
+function buildReporter(report) {
+  return (metric) => {
+    try {
+      report(metric)
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        console.debug('[web-vitals] report failed:', error?.message)
+      }
+    }
+  }
+}
+
+export function initWebVitals(report = () => {}) {
+  if (hasInitialized) return
+  hasInitialized = true
+
+  try {
+    const reportMetric = buildReporter(report)
+    const options = { generateTarget: generateMetricTarget }
+
+    onCLS(reportMetric, options)
+    onINP(reportMetric, options)
+    onLCP(reportMetric, options)
+    onFCP(reportMetric, options)
+    onTTFB(reportMetric, options)
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      console.debug('[web-vitals] init disabled:', error?.message)
+    }
   }
 }

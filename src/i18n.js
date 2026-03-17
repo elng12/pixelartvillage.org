@@ -24,6 +24,22 @@ const STORAGE_KEY = 'pv_lang'
 const STORAGE_TTL = 365 * 24 * 60 * 60 * 1000 // 1 year
 const IS_BROWSER = typeof window !== 'undefined'
 
+function readInitialI18nPayload() {
+  if (!IS_BROWSER) return null
+  try {
+    const el = document.getElementById('pv-initial-i18n')
+    if (!el || !el.textContent) return null
+    const payload = JSON.parse(el.textContent)
+    const lang = SUPPORTED_LANGS.includes(payload?.lang) ? payload.lang : null
+    const resources = payload?.resources
+    if (!lang || !resources || typeof resources !== 'object') return null
+    if (!resources[lang]?.translation) return null
+    return { lang, resources }
+  } catch {
+    return null
+  }
+}
+
 export function getStoredLang() {
   try {
     const raw = safeStorage.get(STORAGE_KEY)
@@ -106,11 +122,19 @@ if (!i18n.isInitialized) {
   }
 
   if (IS_BROWSER) {
+    const initialPayload = readInitialI18nPayload()
     i18n
       .use(HttpBackend)
       .use(initReactI18next)
       .init({
         ...commonConfig,
+        lng: initialPayload?.lang || DEFAULT_LOCALE,
+        resources: initialPayload?.resources || {
+          [DEFAULT_LOCALE]: {
+            translation: fallbackEn,
+          },
+        },
+        partialBundledLanguages: true,
         backend: {
           loadPath: '/locales/{{lng}}/translation.json',
         },

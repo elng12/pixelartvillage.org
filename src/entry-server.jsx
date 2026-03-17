@@ -7,6 +7,8 @@ import { I18nextProvider, initReactI18next } from 'react-i18next'
 import { createInstance } from 'i18next'
 import App from './App.jsx'
 import { DEFAULT_LOCALE, SUPPORTED_LANGS } from './i18n'
+import { preloadDeferredUiForSsr } from './deferredUi.js'
+import { preloadRoutePagesForSsr } from './routePages.js'
 
 const ROOT = process.cwd()
 const translationCache = new Map()
@@ -54,6 +56,15 @@ async function createServerI18n(lang) {
 export async function renderApp(url, { lang = DEFAULT_LOCALE, initialContent = null } = {}) {
   const i18n = await createServerI18n(lang)
   const previousInitialContent = globalThis.__PV_INITIAL_CONTENT__
+  const previousSsrRoutePages = globalThis.__PV_SSR_ROUTE_PAGES__
+  const previousSsrDeferredUi = globalThis.__PV_SSR_DEFERRED_UI__
+  const [ssrRoutePages, ssrDeferredUi] = await Promise.all([
+    preloadRoutePagesForSsr(url),
+    preloadDeferredUiForSsr(url),
+  ])
+
+  globalThis.__PV_SSR_ROUTE_PAGES__ = ssrRoutePages
+  globalThis.__PV_SSR_DEFERRED_UI__ = ssrDeferredUi
 
   if (initialContent) {
     globalThis.__PV_INITIAL_CONTENT__ = initialContent
@@ -74,6 +85,16 @@ export async function renderApp(url, { lang = DEFAULT_LOCALE, initialContent = n
       delete globalThis.__PV_INITIAL_CONTENT__
     } else {
       globalThis.__PV_INITIAL_CONTENT__ = previousInitialContent
+    }
+    if (typeof previousSsrRoutePages === 'undefined') {
+      delete globalThis.__PV_SSR_ROUTE_PAGES__
+    } else {
+      globalThis.__PV_SSR_ROUTE_PAGES__ = previousSsrRoutePages
+    }
+    if (typeof previousSsrDeferredUi === 'undefined') {
+      delete globalThis.__PV_SSR_DEFERRED_UI__
+    } else {
+      globalThis.__PV_SSR_DEFERRED_UI__ = previousSsrDeferredUi
     }
   }
 }

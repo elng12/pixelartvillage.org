@@ -2,7 +2,7 @@
 /*
   Inline critical CSS for all built HTML files in dist/ using Critters.
   - Minimal, safe defaults: keep external CSS (pruneSource=false)
-  - Preload strategy: swap
+  - Convert remaining stylesheet links to async preload to avoid blocking paint
   - Compress inlined CSS
 */
 
@@ -55,7 +55,7 @@ async function main() {
       try {
         const html = fs.readFileSync(file, 'utf8');
         const inlined = await critters.process(html);
-        fs.writeFileSync(file, inlined);
+        fs.writeFileSync(file, rewriteAsyncStylesheetLinks(inlined), 'utf8');
         ok++;
       } catch (e) {
         console.error(`[critters] failed: ${file}\n  ${e?.message || e}`);
@@ -113,4 +113,28 @@ function withCrittersLogsDedup(fn) {
     finalize();
     throw e;
   }
+}
+
+function rewriteAsyncStylesheetLinks(html) {
+  const stylesheetLinkPattern = /<link rel="stylesheet"([^>]*?)href="([^"]+\.css)"([^>]*?)>/g;
+
+  return html.replace(stylesheetLinkPattern, (fullMatch, beforeHref, href, afterHref) => {
+    if (fullMatch.includes('data-async-css')) {
+      return fullMatch;
+    }
+
+    const attrs = `${beforeHref}${afterHref}`;
+    const cleanedAttrs = attrs
+      .replace(/\srel="stylesheet"/g, '')
+      .replace(/\shref="[^"]+\.css"/g, '')
+      .replace(/\sonload="[^"]*"/g, '')
+      .replace(/\smedia="[^"]*"/g, '')
+      .trim();
+    const attrSuffix = cleanedAttrs ? ` ${cleanedAttrs}` : '';
+    const asyncLink =
+      `<link rel="preload" as="style" href="${href}"${attrSuffix} data-async-css onload="this.onload=null;this.rel='stylesheet'">`;
+    const noscriptLink = `<noscript><link rel="stylesheet" href="${href}"${attrSuffix}></noscript>`;
+
+    return `${asyncLink}${noscriptLink}`;
+  });
 }

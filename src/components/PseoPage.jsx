@@ -1,14 +1,15 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, lazy, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import Seo from '@/components/Seo'
 import ToolSection from '@/components/ToolSection'
-import Editor from '@/components/Editor'
 import HowItWorksSection from '@/components/HowItWorksSection'
 import FaqSection from '@/components/FaqSection'
 import { useLocalizedContent } from '@/hooks/useLocalizedContent'
 import { useLocaleContext } from '@/hooks/useLocaleContext'
 import LocalizedLink from '@/components/LocalizedLink'
+
+const Editor = lazy(() => import('@/components/Editor'))
 
 export default function PseoPage() {
   const { t } = useTranslation()
@@ -120,7 +121,11 @@ export default function PseoPage() {
       </section>
 
       <ToolSection onImageUpload={setUploadedImage} headingLevel="h2" />
-      {uploadedImage ? <Editor image={uploadedImage} /> : null}
+      {uploadedImage ? (
+        <Suspense fallback={null}>
+          <Editor image={uploadedImage} />
+        </Suspense>
+      ) : null}
       <HowItWorksSection />
       <section className="bg-gray-50 py-8">
         <div className="container mx-auto px-4 max-w-4xl">

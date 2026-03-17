@@ -28,15 +28,45 @@ export default defineConfig(({ mode }) => {
     // 性能优化配置
     build: {
       sourcemap: mode === 'production',
+      modulePreload: {
+        resolveDependencies(_filename, deps, context) {
+          if (context.hostType === 'html') {
+            return deps.filter((dep) => !dep.includes('deferred-ui-'))
+          }
+          return deps
+        },
+      },
       // 启用代码分割
       rollupOptions: {
         output: {
-          manualChunks: {
-            // 将React相关库分离成单独的chunk
-            'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-            // 将i18n相关库分离
-            'i18n-vendor': ['react-i18next', 'i18next', 'i18next-http-backend'],
-            // 其他第三方库（当前暂无额外拆分）
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              if (
+                id.includes('/node_modules/react/') ||
+                id.includes('/node_modules/react-dom/') ||
+                id.includes('/node_modules/react-router-dom/')
+              ) {
+                return 'react-vendor'
+              }
+              if (
+                id.includes('/node_modules/react-i18next/') ||
+                id.includes('/node_modules/i18next/') ||
+                id.includes('/node_modules/i18next-http-backend/')
+              ) {
+                return 'i18n-vendor'
+              }
+              return undefined
+            }
+
+            if (
+              id.includes('/src/components/HomeBelowFold.jsx') ||
+              id.includes('/src/components/Footer.jsx') ||
+              id.includes('/src/components/FaqSection.jsx')
+            ) {
+              return 'deferred-ui'
+            }
+
+            return undefined
           }
         }
       },

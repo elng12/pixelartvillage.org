@@ -2,23 +2,64 @@
   "ci": {
     "collect": {
       "url": [
-        "http://localhost:4173/",
-        "http://localhost:4173/pvb/codes/2025/",
-        "http://localhost:4173/pvb/bosses/",
-        "http://localhost:4173/blog/",
-        "http://localhost:4173/pvb/codes/"
+        "http://127.0.0.1:4173/",
+        "http://127.0.0.1:4173/blog/",
+        "http://127.0.0.1:4173/converter/png-to-pixel-art/"
       ],
-      "numberOfRuns": 2,
-      "settings": {
-        "preset": "desktop"
-      }
+      "numberOfRuns": 3
     },
     "assert": {
       "assertions": {
+        "categories:performance": [
+          "error",
+          {
+            "minScore": 0.85
+          }
+        ],
         "categories:accessibility": [
           "error",
           {
-            "minScore": 0.94
+            "minScore": 0.95
+          }
+        ],
+        "categories:seo": [
+          "error",
+          {
+            "minScore": 0.95
+          }
+        ],
+        "largest-contentful-paint": [
+          "error",
+          {
+            "maxNumericValue": 2500,
+            "aggregationMethod": "median-run"
+          }
+        ],
+        "cumulative-layout-shift": [
+          "error",
+          {
+            "maxNumericValue": 0.1,
+            "aggregationMethod": "pessimistic"
+          }
+        ],
+        "total-blocking-time": [
+          "error",
+          {
+            "maxNumericValue": 200,
+            "aggregationMethod": "median-run"
+          }
+        ],
+        "first-contentful-paint": [
+          "warn",
+          {
+            "maxNumericValue": 2000,
+            "aggregationMethod": "median-run"
+          }
+        ],
+        "unused-javascript": [
+          "warn",
+          {
+            "maxLength": 0
           }
         ]
       }

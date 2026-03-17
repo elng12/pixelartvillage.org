@@ -1,38 +1,32 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { extractLocaleFromPath } from '@/utils/locale'
+
+const PREFETCH_DELAY_MS = 1200
+const PREFETCH_FALLBACK_MS = 7000
+
+function canSpeculativelyPrefetch() {
+  if (typeof navigator === 'undefined') return false
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection
+  if (!connection) return true
+  if (connection.saveData) return false
+  return !['slow-2g', '2g', '3g'].includes(connection.effectiveType)
+}
+
+function normalizePathname(pathname) {
+  if (!pathname || pathname === '/') return '/'
+  return pathname.endsWith('/') ? pathname : `${pathname}/`
+}
 
 // 资源预加载组件，用于提前加载关键资源
 export default function ResourcePreloader() {
   const location = useLocation()
 
-  useEffect(() => {
-    // 预加载关键资源
-    const preloadResources = () => {
-      const currentLang = extractLocaleFromPath(location.pathname)
-
-      if (currentLang && currentLang !== 'en') {
-        const href = `/locales/${currentLang}/translation.json`
-        if (document.head.querySelector(`link[rel="preload"][href="${href}"]`)) return
-        const langPreload = document.createElement('link')
-        langPreload.rel = 'preload'
-        langPreload.href = href
-        langPreload.as = 'fetch'
-        langPreload.crossOrigin = 'anonymous'
-        document.head.appendChild(langPreload)
-      }
-    }
-
-    // 延迟执行预加载，避免阻塞初始渲染
-    const timer = setTimeout(preloadResources, 100)
-
-    return () => clearTimeout(timer)
-  }, [location.pathname])
-
   // 预加载下一个可能访问的页面
   useEffect(() => {
+    if (!canSpeculativelyPrefetch()) return undefined
+
     const prefetchNextPages = () => {
-      const currentPath = location.pathname
+      const currentPath = normalizePathname(location.pathname)
 
       // 根据当前页面预加载相关页面
       const prefetchMap = {
@@ -46,20 +40,94 @@ export default function ResourcePreloader() {
       }
 
       const nextPages = prefetchMap[currentPath] || []
+      if (!nextPages.length) return
 
-      nextPages.forEach(page => {
+      const existingPrefetches = new Set(
+        Array.from(document.head.querySelectorAll('link[rel="prefetch"][href]')).map((link) => link.href),
+      )
+
+      nextPages.forEach((page) => {
+        const resolvedHref = new URL(page, window.location.origin).href
+        if (existingPrefetches.has(resolvedHref)) return
         const link = document.createElement('link')
         link.rel = 'prefetch'
+        link.as = 'document'
         link.href = page
         document.head.appendChild(link)
       })
     }
 
-    // 在空闲时间预加载
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(prefetchNextPages)
+    let idleId = null
+    let delayTimer = null
+    let fallbackTimer = null
+    let loadGateListener = null
+    let fallbackLoadListener = null
+    let scheduled = false
+    let pageLoaded = document.readyState === 'complete'
+
+    const cleanupIntentListeners = () => {
+      window.removeEventListener('pointerdown', onFirstIntent)
+      window.removeEventListener('keydown', onFirstIntent)
+      window.removeEventListener('touchstart', onFirstIntent)
+      window.removeEventListener('scroll', onFirstIntent)
+    }
+
+    const runWhenIdle = () => {
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(prefetchNextPages, { timeout: 2000 })
+        return
+      }
+      prefetchNextPages()
+    }
+
+    const schedulePrefetch = () => {
+      if (scheduled) return
+      scheduled = true
+      cleanupIntentListeners()
+      const startDelay = () => {
+        delayTimer = window.setTimeout(runWhenIdle, PREFETCH_DELAY_MS)
+      }
+      if (pageLoaded) {
+        startDelay()
+        return
+      }
+      if (loadGateListener) return
+      loadGateListener = () => {
+        pageLoaded = true
+        loadGateListener = null
+        startDelay()
+      }
+      window.addEventListener('load', loadGateListener, { once: true })
+    }
+
+    function onFirstIntent() {
+      schedulePrefetch()
+    }
+
+    window.addEventListener('pointerdown', onFirstIntent, { passive: true, once: true })
+    window.addEventListener('keydown', onFirstIntent, { once: true })
+    window.addEventListener('touchstart', onFirstIntent, { passive: true, once: true })
+    window.addEventListener('scroll', onFirstIntent, { passive: true, once: true })
+
+    if (document.readyState === 'complete') {
+      fallbackTimer = window.setTimeout(schedulePrefetch, PREFETCH_FALLBACK_MS)
     } else {
-      setTimeout(prefetchNextPages, 2000)
+      fallbackLoadListener = () => {
+        pageLoaded = true
+        fallbackTimer = window.setTimeout(schedulePrefetch, PREFETCH_FALLBACK_MS)
+      }
+      window.addEventListener('load', fallbackLoadListener, { once: true })
+    }
+
+    return () => {
+      cleanupIntentListeners()
+      if (loadGateListener) window.removeEventListener('load', loadGateListener)
+      if (fallbackLoadListener) window.removeEventListener('load', fallbackLoadListener)
+      if (delayTimer) window.clearTimeout(delayTimer)
+      if (fallbackTimer) window.clearTimeout(fallbackTimer)
+      if (idleId && 'cancelIdleCallback' in window) {
+        window.cancelIdleCallback(idleId)
+      }
     }
   }, [location.pathname])
 

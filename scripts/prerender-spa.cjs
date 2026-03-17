@@ -233,7 +233,9 @@ function extractHydrationUnsafeHeadTags(appHtml) {
 
   return {
     appHtml: cleanedHtml.trimStart(),
-    headTags: Array.from(new Set(headTags)),
+    headTags: Array.from(new Set(headTags)).filter(
+      (tag) => !/<link\b[^>]*rel=["']modulepreload["'][^>]*href=["'][^"']*\/assets\/deferred-ui-[^"']+\.js["'][^>]*>/i.test(tag),
+    ),
   }
 }
 
@@ -243,6 +245,16 @@ function injectInitialContent(html, payload) {
   const tag = `<script id="pv-initial-content" type="application/json">${serialized}</script>`
   if (/<script[^>]+id=["']pv-initial-content["'][^>]*>[\s\S]*?<\/script>/i.test(html)) {
     html = html.replace(/<script[^>]+id=["']pv-initial-content["'][^>]*>[\s\S]*?<\/script>/i, tag)
+  }
+  return html.replace(/<\/body>/i, `  ${tag}\n</body>`)
+}
+
+function injectInitialI18n(html, payload) {
+  if (!payload) return html
+  const serialized = JSON.stringify(payload).replace(/</g, '\\u003c')
+  const tag = `<script id="pv-initial-i18n" type="application/json">${serialized}</script>`
+  if (/<script[^>]+id=["']pv-initial-i18n["'][^>]*>[\s\S]*?<\/script>/i.test(html)) {
+    html = html.replace(/<script[^>]+id=["']pv-initial-i18n["'][^>]*>[\s\S]*?<\/script>/i, tag)
   }
   return html.replace(/<\/body>/i, `  ${tag}\n</body>`)
 }
@@ -1332,6 +1344,7 @@ async function prerender() {
     if (r.initialContent) {
       out = injectInitialContent(out, r.initialContent)
     }
+    out = injectInitialI18n(out, buildInitialI18nPayload(r.lang || DEFAULT_LANG))
 
     const file = path.join(DIST, r.path.replace(/^\//, '').replace(/\/$/, ''), 'index.html')
     write(file, out)
@@ -1350,6 +1363,26 @@ function loadLocaleBundle(lang) {
     }
   } catch {}
   return {}
+}
+
+function buildInitialI18nPayload(lang) {
+  const resolvedLang = SUPPORTED_LANGS.includes(lang) ? lang : DEFAULT_LANG
+  if (resolvedLang === DEFAULT_LANG) return null
+
+  const activeTranslation = loadLocaleBundle(resolvedLang)
+  if (!activeTranslation || !Object.keys(activeTranslation).length) return null
+
+  return {
+    lang: resolvedLang,
+    resources: {
+      [DEFAULT_LANG]: {
+        translation: loadLocaleBundle(DEFAULT_LANG),
+      },
+      [resolvedLang]: {
+        translation: activeTranslation,
+      },
+    },
+  }
 }
 
 function pick(obj, pathStr) {

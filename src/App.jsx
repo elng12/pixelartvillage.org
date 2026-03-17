@@ -9,28 +9,37 @@ import ResourcePreloader from '@/components/ResourcePreloader'
 import TranslationPreloader from '@/components/TranslationPreloader'
 import Header from './components/Header'
 import ToolSection from './components/ToolSection'
-import Footer from './components/Footer'
-import PrivacyPolicy from './components/policy/PrivacyPolicy'
-import TermsOfService from './components/policy/TermsOfService'
-import About from './components/About'
-import Contact from './components/Contact'
-import Blog from './components/Blog'
-import BlogPost from './components/BlogPost'
-import PseoPage from './components/PseoPage'
-import NotFound from './components/NotFound'
-import ShowcaseSection from './components/ShowcaseSection'
-import WplaceFeaturesSection from './components/WplaceFeaturesSection'
-import FeaturesSection from './components/FeaturesSection'
-import HowItWorksSection from './components/HowItWorksSection'
-import FaqSection from './components/FaqSection'
-import LocalizedLink from '@/components/LocalizedLink'
 import { LocaleProvider } from '@/contexts/LocaleContext'
 import { generateHreflangLinks } from '@/utils/hreflang'
 import Seo from '@/components/Seo'
 import i18n, { CANONICAL_LOCALE, setStoredLang } from '@/i18n'
 import { buildLocalizedPath, extractLocaleFromPath, RUNTIME_LANGS } from '@/utils/locale'
+import { getDeferredUiComponent } from './deferredUi.js'
+import { getDeferredRoutePage } from './routePages.js'
 
 const Editor = lazy(() => import('./components/Editor'))
+const FOOTER_SHELL_STYLE = {
+  contentVisibility: 'auto',
+  containIntrinsicSize: '720px',
+}
+
+function DeferredRoutePage({ name }) {
+  const Component = getDeferredRoutePage(name)
+  return (
+    <Suspense fallback={null}>
+      <Component />
+    </Suspense>
+  )
+}
+
+function DeferredUi({ name, ...props }) {
+  const Component = getDeferredUiComponent(name)
+  return (
+    <Suspense fallback={null}>
+      <Component {...props} />
+    </Suspense>
+  )
+}
 
 function useAppOutletContext() {
   return useOutletContext()
@@ -40,38 +49,6 @@ function Home() {
   const { t } = useTranslation()
   const { uploadedImage, setUploadedImage, currentLocale } = useAppOutletContext()
   const IS_E2E = String(import.meta.env.VITE_E2E) === '1'
-  const featuredTools = [
-    {
-      to: '/converter/image-to-pixel-art/',
-      title: t('home.cards.mainConverter.title'),
-      description: t('home.cards.mainConverter.description'),
-    },
-    {
-      to: '/converter/photo-to-pixel-art/',
-      title: t('home.cards.photoToPixel.title'),
-      description: t('home.cards.photoToPixel.description'),
-    },
-    {
-      to: '/converter/photo-to-sprite-converter/',
-      title: t('home.cards.photoToSprite.title'),
-      description: t('home.cards.photoToSprite.description'),
-    },
-    {
-      to: '/converter/png-to-pixel-art/',
-      title: t('home.cards.pngToPixel.title'),
-      description: t('home.cards.pngToPixel.description'),
-    },
-    {
-      to: '/converter/jpg-to-pixel-art/',
-      title: t('home.cards.jpgToPixel.title'),
-      description: t('home.cards.jpgToPixel.description'),
-    },
-    {
-      to: '/converter/gif-to-pixel-art/',
-      title: t('home.cards.gifToPixel.title'),
-      description: t('home.cards.gifToPixel.description'),
-    },
-  ]
   const canonical =
     currentLocale === CANONICAL_LOCALE
       ? 'https://pixelartvillage.org/'
@@ -99,29 +76,7 @@ function Home() {
           <Editor image={uploadedImage} />
         </Suspense>
       ) : null}
-      <ShowcaseSection />
-      <WplaceFeaturesSection />
-      <FeaturesSection />
-      <HowItWorksSection />
-      <section className="bg-gray-50 py-8 border-y border-gray-100">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('home.exploreHeading')}</h2>
-          <p className="text-sm text-gray-600 mb-4 max-w-3xl">{t('home.exploreIntro')}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {featuredTools.map((tool) => (
-              <LocalizedLink
-                key={tool.to}
-                to={tool.to}
-                className="block rounded-lg border border-gray-200 bg-white px-4 py-4 hover:border-blue-300 hover:shadow-sm"
-              >
-                <h3 className="text-sm font-semibold text-gray-900 mb-1">{tool.title}</h3>
-                <p className="text-sm text-gray-600 leading-6">{tool.description}</p>
-              </LocalizedLink>
-            ))}
-          </div>
-        </div>
-      </section>
-      <FaqSection />
+      <DeferredUi name="HomeBelowFold" />
     </>
   )
 }
@@ -153,8 +108,8 @@ function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
         <Outlet context={{ uploadedImage, setUploadedImage, currentLocale }} />
       </main>
       <ConsentBanner />
-      <div className="bg-gray-900">
-        <Footer />
+      <div className="bg-gray-900" style={FOOTER_SHELL_STYLE}>
+        <DeferredUi name="Footer" />
       </div>
     </LocaleProvider>
   )
@@ -252,28 +207,28 @@ export default function App() {
         element={<BaseLayout uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />}
       >
         <Route index element={<Home />} />
-        <Route path="privacy" element={<PrivacyPolicy />} />
-        <Route path="terms" element={<TermsOfService />} />
-        <Route path="about" element={<About />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="blog" element={<Blog />} />
-        <Route path="blog/:slug" element={<BlogPost />} />
-        <Route path="converter/:slug" element={<PseoPage />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="privacy" element={<DeferredRoutePage name="PrivacyPolicy" />} />
+        <Route path="terms" element={<DeferredRoutePage name="TermsOfService" />} />
+        <Route path="about" element={<DeferredRoutePage name="About" />} />
+        <Route path="contact" element={<DeferredRoutePage name="Contact" />} />
+        <Route path="blog" element={<DeferredRoutePage name="Blog" />} />
+        <Route path="blog/:slug" element={<DeferredRoutePage name="BlogPost" />} />
+        <Route path="converter/:slug" element={<DeferredRoutePage name="PseoPage" />} />
+        <Route path="*" element={<DeferredRoutePage name="NotFound" />} />
       </Route>
       <Route
         path=":lang"
         element={<LocaleLayout uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />}
       >
         <Route index element={<Home />} />
-        <Route path="privacy" element={<PrivacyPolicy />} />
-        <Route path="terms" element={<TermsOfService />} />
-        <Route path="about" element={<About />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="blog" element={<Blog />} />
-        <Route path="blog/:slug" element={<BlogPost />} />
-        <Route path="converter/:slug" element={<PseoPage />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="privacy" element={<DeferredRoutePage name="PrivacyPolicy" />} />
+        <Route path="terms" element={<DeferredRoutePage name="TermsOfService" />} />
+        <Route path="about" element={<DeferredRoutePage name="About" />} />
+        <Route path="contact" element={<DeferredRoutePage name="Contact" />} />
+        <Route path="blog" element={<DeferredRoutePage name="Blog" />} />
+        <Route path="blog/:slug" element={<DeferredRoutePage name="BlogPost" />} />
+        <Route path="converter/:slug" element={<DeferredRoutePage name="PseoPage" />} />
+        <Route path="*" element={<DeferredRoutePage name="NotFound" />} />
       </Route>
     </Routes>
   )

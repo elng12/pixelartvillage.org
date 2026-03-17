@@ -30,8 +30,8 @@ jobs:
           timeout 30 bash -lc 'until curl -sSf http://127.0.0.1:4173 >/dev/null; do sleep 1; done'
         shell: bash
 
-      - name: Run Lighthouse CI (accessibility assertions)
-        run: npx @lhci/cli@0.13.x autorun
+      - name: Run Lighthouse CI budgets
+        run: npm run perf:lighthouse
         env:
           # 可选：若配置了 GitHub App，可自动在 PR 评论报告
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

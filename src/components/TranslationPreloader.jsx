@@ -24,6 +24,13 @@ export default function TranslationPreloader() {
     }
 
     try {
+      if (i18nInstance.hasResourceBundle(targetLang, 'translation')) {
+        if (i18nInstance.language !== targetLang) {
+          await i18nInstance.changeLanguage(targetLang)
+        }
+        return true
+      }
+
       await i18nInstance.loadLanguages(targetLang)
 
       if (i18nInstance.language !== targetLang) {

@@ -38,30 +38,71 @@ function ensurePreconnect(href) {
 
 export function scheduleAdSenseLoad({ delayMs = 4000 } = {}) {
   try {
-    if (window.__adsenseLoaded) return
-    ensurePreconnect('https://pagead2.googlesyndication.com')
-    ensurePreconnect('https://securepubads.g.doubleclick.net')
+    if (window.__adsenseLoaded || window.__adsenseLoadScheduled) return
+    window.__adsenseLoadScheduled = true
     let settled = false
     let timer = null
+    let loadTimer = null
+    let loadListener = null
+    let pageLoaded = document.readyState === 'complete'
+    let pendingInteraction = false
     const cleanup = () => {
       if (timer) clearTimeout(timer)
+      if (loadTimer) clearTimeout(loadTimer)
       window.removeEventListener('scroll', onInteract)
       window.removeEventListener('pointerdown', onInteract)
+      window.removeEventListener('touchstart', onInteract)
       window.removeEventListener('keydown', onInteract)
+      if (loadListener) window.removeEventListener('load', loadListener)
     }
     const trigger = () => {
       if (settled) return
       settled = true
       cleanup()
+      window.__adsenseLoadScheduled = false
       ensureAdSenseLoaded()
     }
-    const onInteract = () => trigger()
+    const scheduleInteractionLoad = () => {
+      if (settled) return
+      if (!pageLoaded) {
+        pendingInteraction = true
+        return
+      }
+      ensurePreconnect('https://pagead2.googlesyndication.com')
+      ensurePreconnect('https://securepubads.g.doubleclick.net')
+      if (timer) clearTimeout(timer)
+      timer = setTimeout(trigger, 600)
+    }
+    const onInteract = () => {
+      scheduleInteractionLoad()
+    }
     window.addEventListener('scroll', onInteract, { passive: true })
     window.addEventListener('pointerdown', onInteract, { passive: true })
+    window.addEventListener('touchstart', onInteract, { passive: true })
     window.addEventListener('keydown', onInteract)
-    timer = setTimeout(trigger, delayMs)
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(trigger, { timeout: delayMs })
+
+    const scheduleFallback = () => {
+      if (settled) return
+      ensurePreconnect('https://pagead2.googlesyndication.com')
+      ensurePreconnect('https://securepubads.g.doubleclick.net')
+      loadTimer = setTimeout(trigger, delayMs)
     }
-  } catch { /* no-op */ }
+
+    if (document.readyState === 'complete') {
+      scheduleFallback()
+    } else {
+      loadListener = () => {
+        pageLoaded = true
+        if (pendingInteraction) {
+          pendingInteraction = false
+          scheduleInteractionLoad()
+          return
+        }
+        scheduleFallback()
+      }
+      window.addEventListener('load', loadListener, { once: true })
+    }
+  } catch {
+    window.__adsenseLoadScheduled = false
+  }
 }

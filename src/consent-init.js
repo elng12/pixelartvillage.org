@@ -4,13 +4,42 @@
 
 import { scheduleAdSenseLoad } from './utils/loadAdSense.js'
 import { ensureClarityLoaded } from './clarity-init.js'
+import { ensureGaLoaded } from './ga-init.js'
+import { ensureGtmLoaded, insertGtmNoScript } from './gtm-init.js'
 
 const STORAGE_KEY = 'consent.choice.v1'
 const CONSENT_KEYS = ['ad_storage', 'analytics_storage', 'ad_user_data', 'ad_personalization']
 const consentState = Object.fromEntries(CONSENT_KEYS.map((key) => [key, 'denied']))
+const ENABLE_ANALYTICS = Boolean(import.meta.env.PROD) && String(import.meta.env.VITE_ENABLE_ANALYTICS) === '1'
+const CONSENT_EVENT_NAME = 'pv:analytics-consent'
 
 function hasCmp() {
   return typeof window.__tcfapi === 'function' || typeof window.__gpp === 'function' || typeof window.__cmp === 'function'
+}
+
+function ensureConsentDefaults() {
+  try {
+    if (window.__pvConsentDefaultApplied) return
+    window.dataLayer = window.dataLayer || []
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments) }
+    window.gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500,
+    })
+    window.__pvAnalyticsConsentGranted = false
+    window.__pvConsentDefaultApplied = true
+  } catch { /* no-op */ }
+}
+
+function syncAnalyticsConsentFlag(granted) {
+  try {
+    if (window.__pvAnalyticsConsentGranted === granted) return
+    window.__pvAnalyticsConsentGranted = granted
+    window.dispatchEvent(new CustomEvent(CONSENT_EVENT_NAME, { detail: { granted } }))
+  } catch { /* no-op */ }
 }
 
 function applyConsentUpdate(update) {
@@ -23,11 +52,16 @@ function applyConsentUpdate(update) {
     }
   }
   if (!changed) return
+  const analyticsGranted = consentState.analytics_storage === 'granted'
+  syncAnalyticsConsentFlag(analyticsGranted)
   if (consentState.ad_storage === 'granted') {
-    try { scheduleAdSenseLoad({ delayMs: 2000 }) } catch { /* no-op */ }
+    try { scheduleAdSenseLoad({ delayMs: 8000 }) } catch { /* no-op */ }
   }
-  if (consentState.analytics_storage === 'granted') {
+  if (analyticsGranted && ENABLE_ANALYTICS) {
+    try { ensureGaLoaded() } catch { /* no-op */ }
     try { ensureClarityLoaded() } catch { /* no-op */ }
+    try { ensureGtmLoaded() } catch { /* no-op */ }
+    try { insertGtmNoScript() } catch { /* no-op */ }
   }
 }
 
@@ -59,6 +93,7 @@ function watchConsentUpdates() {
 }
 
 // Watch consent updates from CMP/gtag
+ensureConsentDefaults()
 watchConsentUpdates()
 scanExistingDataLayer()
 

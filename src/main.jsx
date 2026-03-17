@@ -4,8 +4,7 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 import './index.css'
 import LangRoot from './components/LangRoot.jsx'
 import i18n, { SUPPORTED_LANGS, setStoredLang } from '@/i18n'
-import { ensureClarityLoaded } from './clarity-init.js'
-import { ensureGtmLoaded, insertGtmNoScript } from './gtm-init.js'
+import { createWebVitalsReporter } from './utils/reportWebVitals.js'
 
 const rootEl = document.getElementById('root')
 if (!rootEl) {
@@ -25,16 +24,34 @@ async function bootstrapWebVitals(reportHandler) {
   }
 }
 
-// Initialize Web Vitals tracking once，根据环境决定回调
-const reportWebVitals = import.meta.env.PROD ? () => {} : undefined
-bootstrapWebVitals(reportWebVitals)
+function scheduleWebVitalsBootstrap(reportHandler) {
+  const run = () => {
+    bootstrapWebVitals(reportHandler)
+  }
 
-// Load optional analytics services only when explicitly enabled for production
-const ENABLE_ANALYTICS = Boolean(import.meta.env.PROD) && String(import.meta.env.VITE_ENABLE_ANALYTICS) === '1'
-if (ENABLE_ANALYTICS) {
-  ensureClarityLoaded()
-  ensureGtmLoaded()
-  insertGtmNoScript()
+  const start = () => {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(run, { timeout: 2500 })
+      return
+    }
+    window.setTimeout(run, 1200)
+  }
+
+  if (document.readyState === 'complete') {
+    start()
+    return
+  }
+
+  window.addEventListener('load', start, { once: true })
+}
+
+const ENABLE_WEB_VITALS =
+  import.meta.env.DEV ||
+  (import.meta.env.PROD && String(import.meta.env.VITE_ENABLE_WEB_VITALS) !== '0')
+
+if (ENABLE_WEB_VITALS) {
+  const reportWebVitals = createWebVitalsReporter({ debug: import.meta.env.DEV })
+  scheduleWebVitalsBootstrap(reportWebVitals)
 }
 
 async function ensureInitialLanguage() {
@@ -64,11 +81,9 @@ async function ensureInitialLanguage() {
 ;(async () => {
   try {
     await ensureInitialLanguage()
-    // 最小改动：在挂载前确保翻译命名空间已加载，避免键名闪现
-    await i18n.loadNamespaces('translation')
   } catch (error) {
     if (import.meta.env.DEV) {
-      logger.warn('i18n loadNamespaces failed:', error)
+      logger.warn('ensureInitialLanguage bootstrap failed:', error)
     }
   }
   const app = (
