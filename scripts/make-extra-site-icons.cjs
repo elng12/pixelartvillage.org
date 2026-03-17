@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-// Generate 96x96 favicon from existing pixel icons
+// Generate 96x96 favicon from the current exported app icon
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 (async () => {
   const srcDir = path.resolve('public','icons','png');
   const out = path.resolve('public','favicon-96x96.png');
-  const candidates = ['icon-feedback-pixel-512.png','icon-feedback-pixel-192.png','icon-feedback-line-512.png'];
+  const candidates = ['web-app-manifest-512x512.png','web-app-manifest-192x192.png','1.png','icon-feedback-pixel-512.png','icon-feedback-pixel-192.png','icon-feedback-line-512.png'];
   let input = null;
   for (const c of candidates) {
     const p = path.join(srcDir, c);

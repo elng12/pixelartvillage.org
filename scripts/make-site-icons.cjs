@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Generate site icons (favicon-16/32, apple-touch-icon.png) from public/icons/png
- * Priority: pixel > line > flat > neumorphic
+ * Priority: current exported app icon > legacy feedback icons
  */
 const fs = require('fs');
 const path = require('path');
@@ -10,37 +10,28 @@ const sharp = require('sharp');
 const SRC_DIR = path.resolve('public', 'icons', 'png');
 const OUT_DIR = path.resolve('public');
 
-const CANDIDATE_BASES = [
-  'icon-feedback-pixel',
-  'icon-feedback-line',
-  'icon-feedback-flat',
-  'icon-feedback-neumorphic',
+const CANDIDATE_FILES = [
+  'web-app-manifest-512x512.png',
+  'web-app-manifest-192x192.png',
+  'favicon-96x96.png',
+  '1.png',
+  'icon-feedback-pixel-512.png',
+  'icon-feedback-pixel-192.png',
+  'icon-feedback-line-512.png',
+  'icon-feedback-flat-512.png',
+  'icon-feedback-neumorphic-512.png',
 ];
 
-function pickSource(name) {
-  const files = [
-    path.join(SRC_DIR, `${name}-512.png`),
-    path.join(SRC_DIR, `${name}-192.png`),
-    path.join(SRC_DIR, `${name}-64.png`),
-    path.join(SRC_DIR, `${name}-32.png`),
-  ];
-  for (const f of files) {
-    if (fs.existsSync(f)) return f;
+function pickSource() {
+  for (const file of CANDIDATE_FILES) {
+    const resolved = path.join(SRC_DIR, file);
+    if (fs.existsSync(resolved)) return resolved;
   }
   return null;
 }
 
 (async () => {
-  let input = null;
-  let chosenBase = null;
-  for (const base of CANDIDATE_BASES) {
-    const p = pickSource(base);
-    if (p) {
-      input = p;
-      chosenBase = base;
-      break;
-    }
-  }
+  const input = pickSource();
   if (!input) {
     console.error('[site-icons] No source icon found in', SRC_DIR);
     process.exit(1);
@@ -65,7 +56,7 @@ function pickSource(name) {
   console.log('-', path.relative(process.cwd(), outF16));
   console.log('-', path.relative(process.cwd(), outF32));
   console.log('-', path.relative(process.cwd(), outApple));
-  console.log('[site-icons] source =', path.relative(process.cwd(), input), 'base =', chosenBase);
+  console.log('[site-icons] source =', path.relative(process.cwd(), input), 'base =', path.basename(input));
 })().catch((e) => {
   console.error('[site-icons] fail', e);
   process.exit(1);
