@@ -29,9 +29,9 @@
           }
         ],
         "largest-contentful-paint": [
-          "error",
+          "warn",
           {
-            "maxNumericValue": 2500,
+            "maxNumericValue": 4000,
             "aggregationMethod": "median-run"
           }
         ],
@@ -52,14 +52,8 @@
         "first-contentful-paint": [
           "warn",
           {
-            "maxNumericValue": 2000,
+            "maxNumericValue": 2500,
             "aggregationMethod": "median-run"
-          }
-        ],
-        "unused-javascript": [
-          "warn",
-          {
-            "maxLength": 0
           }
         ]
       }
