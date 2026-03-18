@@ -168,7 +168,7 @@ function Footer() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={t(`footer.badges.${badge.key}`)}
-                        className="group flex h-[66px] w-[186px] items-center justify-center rounded-[20px] border border-slate-200/85 bg-gradient-to-b from-white to-slate-50 px-4 py-2.5 shadow-[0_6px_18px_rgba(15,23,42,0.14)] transition duration-200 hover:-translate-y-0.5 hover:border-blue-300/65 hover:shadow-[0_10px_24px_rgba(37,99,235,0.12)] sm:w-[196px]"
+                        className="group flex items-center justify-center transition duration-200 hover:-translate-y-0.5"
                       >
                         <img
                           src={badge.src}
@@ -178,7 +178,7 @@ function Footer() {
                           loading="lazy"
                           fetchPriority="low"
                           decoding="async"
-                          className="max-h-[36px] w-auto max-w-[152px] object-contain opacity-90 transition duration-200 group-hover:opacity-100"
+                          className="h-auto w-auto max-h-[54px] max-w-none object-contain opacity-95 transition duration-200 group-hover:opacity-100"
                         />
                       </a>
                     </li>
