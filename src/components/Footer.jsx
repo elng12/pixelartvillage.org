@@ -5,6 +5,7 @@ const aiDirsBadge = '/badges/ai-dirs-badge.svg';
 const fazierBadge = '/badges/fazier-badge.svg';
 const indieDealsBadge = '/badges/indie-deals-badge.svg';
 const projectHuntBadge = '/badges/projecthunt-badge.svg';
+const saasFameBadge = '/badges/saasfame-badge-light.svg';
 const submitoBadge = '/badges/submito-badge-light.svg';
 const startupFameBadge = '/badges/startupfame-badge.webp';
 const toolFameBadge = '/badges/toolfame-badge-light.svg';
@@ -53,6 +54,13 @@ const footerBadges = [
     src: submitoBadge,
     width: 210,
     height: 60,
+  },
+  {
+    key: 'saasFame',
+    href: 'https://saasfame.com/item/pixel-art-village',
+    src: saasFameBadge,
+    width: 220,
+    height: 54,
   },
   {
     key: 'turbo0',
