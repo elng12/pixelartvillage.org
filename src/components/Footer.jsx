@@ -7,6 +7,7 @@ const fazierBadge = '/badges/fazier-badge.svg';
 const indieDealsBadge = '/badges/indie-deals-badge.svg';
 const projectHuntBadge = '/badges/projecthunt-badge.svg';
 const saasFameBadge = '/badges/saasfame-badge-light.svg';
+const submitAiToolsBadge = '/badges/submitaitools-badge.png';
 const submitoBadge = '/badges/submito-badge-light.svg';
 const startupFameBadge = '/badges/startupfame-badge.webp';
 const toolFameBadge = '/badges/toolfame-badge-light.svg';
@@ -69,6 +70,13 @@ const footerBadges = [
     src: saasFameBadge,
     width: 220,
     height: 54,
+  },
+  {
+    key: 'submitAiTools',
+    href: 'https://submitaitools.org',
+    src: submitAiToolsBadge,
+    width: 200,
+    height: 60,
   },
   {
     key: 'turbo0',
