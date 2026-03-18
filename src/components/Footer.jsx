@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import LocalizedLink from '@/components/LocalizedLink';
 
 const aiDirsBadge = '/badges/ai-dirs-badge.svg';
+const acidToolsBadge = '/badges/acidtools-badge.png';
 const fazierBadge = '/badges/fazier-badge.svg';
 const indieDealsBadge = '/badges/indie-deals-badge.svg';
 const projectHuntBadge = '/badges/projecthunt-badge.svg';
@@ -25,6 +26,13 @@ const footerBadges = [
     href: 'https://fazier.com/launches/pixelartvillage.org',
     src: fazierBadge,
     width: 250,
+    height: 54,
+  },
+  {
+    key: 'acidTools',
+    href: 'https://acidtools.com',
+    src: acidToolsBadge,
+    width: 175,
     height: 54,
   },
   {
