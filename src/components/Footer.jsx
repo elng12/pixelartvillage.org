@@ -6,6 +6,7 @@ const fazierBadge = '/badges/fazier-badge.svg';
 const indieDealsBadge = '/badges/indie-deals-badge.svg';
 const projectHuntBadge = '/badges/projecthunt-badge.svg';
 const startupFameBadge = '/badges/startupfame-badge.webp';
+const toolFameBadge = '/badges/toolfame-badge-light.svg';
 const turbo0Badge = '/badges/turbo0-badge.svg';
 const twelveToolsBadge = '/badges/twelve-tools-badge.svg';
 const buildYear = typeof __BUILD_YEAR__ !== 'undefined' ? __BUILD_YEAR__ : new Date().getFullYear();
@@ -37,6 +38,13 @@ const footerBadges = [
     src: projectHuntBadge,
     width: 180,
     height: 48,
+  },
+  {
+    key: 'toolFame',
+    href: 'https://toolfame.com/item/pixel-art-village',
+    src: toolFameBadge,
+    width: 220,
+    height: 54,
   },
   {
     key: 'turbo0',
