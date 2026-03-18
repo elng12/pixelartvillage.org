@@ -5,6 +5,7 @@ const aiDirsBadge = '/badges/ai-dirs-badge.svg';
 const fazierBadge = '/badges/fazier-badge.svg';
 const indieDealsBadge = '/badges/indie-deals-badge.svg';
 const projectHuntBadge = '/badges/projecthunt-badge.svg';
+const submitoBadge = '/badges/submito-badge-light.svg';
 const startupFameBadge = '/badges/startupfame-badge.webp';
 const toolFameBadge = '/badges/toolfame-badge-light.svg';
 const turbo0Badge = '/badges/turbo0-badge.svg';
@@ -45,6 +46,13 @@ const footerBadges = [
     src: toolFameBadge,
     width: 220,
     height: 54,
+  },
+  {
+    key: 'submito',
+    href: 'https://submito.net',
+    src: submitoBadge,
+    width: 210,
+    height: 60,
   },
   {
     key: 'turbo0',
