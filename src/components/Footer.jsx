@@ -4,6 +4,7 @@ import LocalizedLink from '@/components/LocalizedLink';
 const aiDirsBadge = '/badges/ai-dirs-badge.svg';
 const fazierBadge = '/badges/fazier-badge.svg';
 const indieDealsBadge = '/badges/indie-deals-badge.svg';
+const projectHuntBadge = '/badges/projecthunt-badge.svg';
 const startupFameBadge = '/badges/startupfame-badge.webp';
 const turbo0Badge = '/badges/turbo0-badge.svg';
 const twelveToolsBadge = '/badges/twelve-tools-badge.svg';
@@ -29,6 +30,13 @@ const footerBadges = [
     src: startupFameBadge,
     width: 171,
     height: 54,
+  },
+  {
+    key: 'projectHunt',
+    href: 'https://projecthunt.me',
+    src: projectHuntBadge,
+    width: 180,
+    height: 48,
   },
   {
     key: 'turbo0',

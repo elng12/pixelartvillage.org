@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="180" height="48" viewBox="0 0 180 48" xmlns="http://www.w3.org/2000/svg">
+  <title>Featured on projecthunt.me</title>
+  <rect width="180" height="48" rx="4" fill="#FFFFFF" stroke="#E85C0D" stroke-width="1.5"/>
+  <image href="/badges/projecthunt-favicon.png" x="10" y="8" width="32" height="32" preserveAspectRatio="xMidYMid meet"/>
+  <text x="50" y="22" fill="#666666" font-family="Verdana,Geneva,'DejaVu Sans',sans-serif" font-size="13" font-weight="500">Featured on</text>
+  <text x="50" y="38" fill="#E85C0D" font-family="Verdana,Geneva,'DejaVu Sans',sans-serif" font-size="14" font-weight="600">projecthunt.me</text>
+</svg>
