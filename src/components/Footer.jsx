@@ -13,6 +13,7 @@ const startupFameBadge = '/badges/startupfame-badge.webp';
 const toolFameBadge = '/badges/toolfame-badge-light.svg';
 const turbo0Badge = '/badges/turbo0-badge.svg';
 const twelveToolsBadge = '/badges/twelve-tools-badge.svg';
+const yoDirectoryBadge = '/badges/yodirectory-badge.png';
 const buildYear = typeof __BUILD_YEAR__ !== 'undefined' ? __BUILD_YEAR__ : new Date().getFullYear();
 const footerBadges = [
   {
@@ -77,6 +78,13 @@ const footerBadges = [
     src: submitAiToolsBadge,
     width: 200,
     height: 60,
+  },
+  {
+    key: 'yoDirectory',
+    href: 'https://yo.directory/',
+    src: yoDirectoryBadge,
+    width: 150,
+    height: 54,
   },
   {
     key: 'turbo0',
