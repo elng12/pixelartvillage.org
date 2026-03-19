@@ -6,6 +6,7 @@ const acidToolsBadge = '/badges/acidtools-badge.png';
 const fazierBadge = '/badges/fazier-badge.svg';
 const indieDealsBadge = '/badges/indie-deals-badge.svg';
 const justSimpleToolsBadge = '/badges/justsimpletools-badge.svg';
+const microSaasExamplesBadge = '/badges/microsaasexamples-badge.svg';
 const mossAiBadge = '/badges/mossai-badge.svg';
 const productHuntBadge = '/badges/product-hunt-badge.svg';
 const projectHuntBadge = '/badges/projecthunt-badge.svg';
@@ -95,6 +96,13 @@ const footerBadges = [
     href: 'https://yo.directory/',
     src: yoDirectoryBadge,
     width: 150,
+    height: 54,
+  },
+  {
+    key: 'microSaasExamples',
+    href: 'https://www.microsaasexamples.com/',
+    src: microSaasExamplesBadge,
+    width: 220,
     height: 54,
   },
   {

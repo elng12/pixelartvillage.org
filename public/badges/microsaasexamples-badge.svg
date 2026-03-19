@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="54" viewBox="0 0 220 54" role="img" aria-label="Featured on Micro SaaS Examples">
+  <title>Featured on Micro SaaS Examples</title>
+  <rect x="0.5" y="0.5" width="219" height="53" rx="10" fill="#FFFFFF" stroke="#1F7A8C"/>
+  <circle cx="27" cy="27" r="16" fill="#1F7A8C"/>
+  <text x="27" y="32" text-anchor="middle" font-family="Verdana,Geneva,sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">MS</text>
+  <text x="53" y="20" font-family="Helvetica,Arial,sans-serif" font-size="9" font-weight="700" fill="#1F7A8C">FEATURED ON</text>
+  <text x="53" y="37" font-family="Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#194E59">Micro SaaS Examples</text>
+</svg>
