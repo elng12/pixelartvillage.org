@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="54" viewBox="0 0 200 54" role="img" aria-label="Featured on MossAI Tools">
+  <title>Featured on MossAI Tools</title>
+  <rect x="0.5" y="0.5" width="199" height="53" rx="10" fill="#FFFFFF" stroke="#3A8F63"/>
+  <circle cx="27" cy="27" r="16" fill="#3A8F63"/>
+  <text x="27" y="32" text-anchor="middle" font-family="Verdana,Geneva,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">M</text>
+  <text x="53" y="20" font-family="Helvetica,Arial,sans-serif" font-size="9" font-weight="700" fill="#3A8F63">FEATURED ON</text>
+  <text x="53" y="37" font-family="Helvetica,Arial,sans-serif" font-size="17" font-weight="700" fill="#2F4F3E">MossAI Tools</text>
+</svg>

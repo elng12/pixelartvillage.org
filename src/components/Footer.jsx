@@ -5,6 +5,7 @@ const aiDirsBadge = '/badges/ai-dirs-badge.svg';
 const acidToolsBadge = '/badges/acidtools-badge.png';
 const fazierBadge = '/badges/fazier-badge.svg';
 const indieDealsBadge = '/badges/indie-deals-badge.svg';
+const mossAiBadge = '/badges/mossai-badge.svg';
 const projectHuntBadge = '/badges/projecthunt-badge.svg';
 const saasFameBadge = '/badges/saasfame-badge-light.svg';
 const submitAiToolsBadge = '/badges/submitaitools-badge.png';
@@ -84,6 +85,13 @@ const footerBadges = [
     href: 'https://yo.directory/',
     src: yoDirectoryBadge,
     width: 150,
+    height: 54,
+  },
+  {
+    key: 'mossAi',
+    href: 'https://mossai.org',
+    src: mossAiBadge,
+    width: 200,
     height: 54,
   },
   {
