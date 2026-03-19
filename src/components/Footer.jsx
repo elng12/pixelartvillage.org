@@ -5,6 +5,7 @@ const aiDirsBadge = '/badges/ai-dirs-badge.svg';
 const acidToolsBadge = '/badges/acidtools-badge.png';
 const fazierBadge = '/badges/fazier-badge.svg';
 const indieDealsBadge = '/badges/indie-deals-badge.svg';
+const justSimpleToolsBadge = '/badges/justsimpletools-badge.svg';
 const mossAiBadge = '/badges/mossai-badge.svg';
 const productHuntBadge = '/badges/product-hunt-badge.svg';
 const projectHuntBadge = '/badges/projecthunt-badge.svg';
@@ -101,6 +102,13 @@ const footerBadges = [
     src: productHuntBadge,
     width: 250,
     height: 54,
+  },
+  {
+    key: 'justSimpleTools',
+    href: 'https://www.justsimple.tools',
+    src: justSimpleToolsBadge,
+    width: 150,
+    height: 44,
   },
   {
     key: 'turbo0',
