@@ -3,6 +3,7 @@ import LocalizedLink from '@/components/LocalizedLink';
 
 const aiDirsBadge = '/badges/ai-dirs-badge.svg';
 const acidToolsBadge = '/badges/acidtools-badge.png';
+const deepLaunchBadge = '/badges/deeplaunch-badge-light.svg';
 const fazierBadge = '/badges/fazier-badge.svg';
 const indieDealsBadge = '/badges/indie-deals-badge.svg';
 const justSimpleToolsBadge = '/badges/justsimpletools-badge.svg';
@@ -82,6 +83,13 @@ const footerBadges = [
     href: 'https://saastoolsdir.com',
     src: saasToolsDirBadge,
     width: 213,
+    height: 54,
+  },
+  {
+    key: 'deepLaunch',
+    href: 'https://deeplaunch.io',
+    src: deepLaunchBadge,
+    width: 200,
     height: 54,
   },
   {
