@@ -73,6 +73,11 @@
       "indieDeals": "Indie Deals directory badge",
       "aiDirs": "AI Dirs directory badge"
     },
+    "badgeGroups": {
+      "featured": "Featured",
+      "directory": "Directories & Listings"
+    },
+    "badgeSwipeHint": "Swipe to browse",
     "mediaFeaturedIn": "Media & Featured In"
   },
   "blog": {

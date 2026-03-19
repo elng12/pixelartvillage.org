@@ -159,6 +159,8 @@
     scrollbar-width: thin;
     scrollbar-color: rgba(148, 163, 184, 0.9) rgba(255, 255, 255, 0.08);
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: 1rem;
   }
 
   .footer-badge-scroller::-webkit-scrollbar {

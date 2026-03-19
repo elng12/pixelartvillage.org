@@ -21,6 +21,7 @@ const turbo0Badge = '/badges/turbo0-badge.svg';
 const twelveToolsBadge = '/badges/twelve-tools-badge.svg';
 const yoDirectoryBadge = '/badges/yodirectory-badge.png';
 const buildYear = typeof __BUILD_YEAR__ !== 'undefined' ? __BUILD_YEAR__ : new Date().getFullYear();
+
 const footerBadges = [
   {
     key: 'twelveTools',
@@ -157,6 +158,39 @@ const footerBadges = [
   },
 ];
 
+const footerBadgeLookup = Object.fromEntries(footerBadges.map((badge) => [badge.key, badge]));
+const footerBadgeGroups = [
+  {
+    key: 'featured',
+    badges: [
+      'productHunt',
+      'projectHunt',
+      'deepLaunch',
+      'toolFame',
+      'saasFame',
+      'twelveTools',
+      'fazier',
+      'startupFame',
+      'microSaasExamples',
+      'mossAi',
+    ].map((key) => footerBadgeLookup[key]),
+  },
+  {
+    key: 'directory',
+    badges: [
+      'acidTools',
+      'saasToolsDir',
+      'submitAiTools',
+      'submito',
+      'justSimpleTools',
+      'yoDirectory',
+      'turbo0',
+      'indieDeals',
+      'aiDirs',
+    ].map((key) => footerBadgeLookup[key]),
+  },
+];
+
 function GitHubIcon({ className }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
@@ -246,41 +280,58 @@ function Footer() {
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-400">
               {t('footer.mediaFeaturedIn')}
             </p>
-            <div className="relative mt-4">
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-7 bg-gradient-to-r from-gray-900 via-gray-900/92 to-transparent sm:block"
-              />
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-7 bg-gradient-to-l from-gray-900 via-gray-900/92 to-transparent sm:block"
-              />
-              <div className="footer-badge-scroller -mx-4 overflow-x-auto px-4 pb-3 sm:mx-0 sm:px-0">
-                <ul className="flex snap-x snap-mandatory gap-3">
-                  {footerBadges.map((badge) => (
-                    <li key={badge.key} className="shrink-0 snap-start">
-                      <a
-                        href={badge.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={t(`footer.badges.${badge.key}`)}
-                        className="group flex items-center justify-center transition duration-200 hover:-translate-y-0.5"
-                      >
-                        <img
-                          src={badge.src}
-                          alt={t(`footer.badges.${badge.key}`)}
-                          width={badge.width}
-                          height={badge.height}
-                          loading="lazy"
-                          fetchPriority="low"
-                          decoding="async"
-                          className="h-auto w-auto max-h-[54px] max-w-none object-contain opacity-95 transition duration-200 group-hover:opacity-100"
-                        />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <p className="mt-2 text-[11px] text-gray-500 sm:hidden">
+              {t('footer.badgeSwipeHint')}
+            </p>
+            <div className="mt-4 grid gap-4 xl:grid-cols-[minmax(0,1.18fr)_minmax(0,0.92fr)]">
+              {footerBadgeGroups.map((group) => (
+                <div key={group.key} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 backdrop-blur-sm">
+                  <div className="mb-3 flex items-center justify-between gap-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">
+                      {t(`footer.badgeGroups.${group.key}`)}
+                    </p>
+                    <span className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] font-medium text-gray-500">
+                      {group.badges.length}
+                    </span>
+                  </div>
+                  <div className="relative">
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-6 bg-gradient-to-r from-[#0f172a] via-[#0f172a]/92 to-transparent sm:block xl:hidden"
+                    />
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-6 bg-gradient-to-l from-[#0f172a] via-[#0f172a]/92 to-transparent sm:block xl:hidden"
+                    />
+                    <div className="footer-badge-scroller -mx-1 overflow-x-auto px-1 pb-3 xl:mx-0 xl:overflow-visible xl:px-0 xl:pb-0">
+                      <ul className="flex snap-x snap-mandatory gap-3 xl:flex-wrap xl:gap-3.5">
+                        {group.badges.map((badge) => (
+                          <li key={badge.key} className="shrink-0 snap-start">
+                            <a
+                              href={badge.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={t(`footer.badges.${badge.key}`)}
+                              className="group flex min-h-[62px] items-center justify-center rounded-xl px-1.5 py-2 transition duration-200 hover:-translate-y-0.5 hover:bg-white/[0.04]"
+                            >
+                              <img
+                                src={badge.src}
+                                alt={t(`footer.badges.${badge.key}`)}
+                                width={badge.width}
+                                height={badge.height}
+                                loading="lazy"
+                                fetchPriority="low"
+                                decoding="async"
+                                className="h-auto w-auto max-h-[54px] max-w-none object-contain opacity-95 transition duration-200 group-hover:opacity-100"
+                              />
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
 
