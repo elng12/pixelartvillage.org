@@ -6,6 +6,7 @@ const acidToolsBadge = '/badges/acidtools-badge.png';
 const fazierBadge = '/badges/fazier-badge.svg';
 const indieDealsBadge = '/badges/indie-deals-badge.svg';
 const mossAiBadge = '/badges/mossai-badge.svg';
+const productHuntBadge = '/badges/product-hunt-badge.svg';
 const projectHuntBadge = '/badges/projecthunt-badge.svg';
 const saasFameBadge = '/badges/saasfame-badge-light.svg';
 const submitAiToolsBadge = '/badges/submitaitools-badge.png';
@@ -92,6 +93,13 @@ const footerBadges = [
     href: 'https://mossai.org',
     src: mossAiBadge,
     width: 200,
+    height: 54,
+  },
+  {
+    key: 'productHunt',
+    href: 'https://www.producthunt.com/products/pixel-art-village?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-pixel-art-village',
+    src: productHuntBadge,
+    width: 250,
     height: 54,
   },
   {
