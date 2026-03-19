@@ -10,6 +10,7 @@ const mossAiBadge = '/badges/mossai-badge.svg';
 const productHuntBadge = '/badges/product-hunt-badge.svg';
 const projectHuntBadge = '/badges/projecthunt-badge.svg';
 const saasFameBadge = '/badges/saasfame-badge-light.svg';
+const saasToolsDirBadge = '/badges/saastoolsdir-badge.png';
 const submitAiToolsBadge = '/badges/submitaitools-badge.png';
 const submitoBadge = '/badges/submito-badge-light.svg';
 const startupFameBadge = '/badges/startupfame-badge.webp';
@@ -73,6 +74,13 @@ const footerBadges = [
     href: 'https://saasfame.com/item/pixel-art-village',
     src: saasFameBadge,
     width: 220,
+    height: 54,
+  },
+  {
+    key: 'saasToolsDir',
+    href: 'https://saastoolsdir.com',
+    src: saasToolsDirBadge,
+    width: 213,
     height: 54,
   },
   {
