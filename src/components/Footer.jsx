@@ -12,6 +12,7 @@ const justSimpleToolsBadge = '/badges/justsimpletools-badge.svg';
 const microSaasExamplesBadge = '/badges/microsaasexamples-badge.svg';
 const mossAiBadge = '/badges/mossai-badge.svg';
 const productHuntBadge = '/badges/product-hunt-badge.svg';
+const promoteBusinessDirectoryBadge = '/badges/promotebusinessdirectory-badge.svg';
 const projectHuntBadge = '/badges/projecthunt-badge.svg';
 const saasFameBadge = '/badges/saasfame-badge-light.svg';
 const saasToolsDirBadge = '/badges/saastoolsdir-badge.png';
@@ -114,6 +115,13 @@ const footerBadges = [
     href: 'https://goodaitools.com',
     src: goodAiToolsBadge,
     width: 207,
+    height: 54,
+  },
+  {
+    key: 'promoteBusinessDirectory',
+    href: 'https://www.promotebusinessdirectory.com/',
+    src: promoteBusinessDirectoryBadge,
+    width: 240,
     height: 54,
   },
   {
