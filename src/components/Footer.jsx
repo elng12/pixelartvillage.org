@@ -330,8 +330,9 @@ function Footer() {
               <LocalizedLink to="/contact/" className="hover:text-white">{t('nav.contact')}</LocalizedLink>
               <span aria-hidden>•</span>
               <a
-                href="https://aitooltrek.com"
-                title="AI Tool Trek"
+                href="https://aitooltrek.com/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-white"
               >
                 AI Tool Trek
