@@ -3,7 +3,6 @@ import LocalizedLink from '@/components/LocalizedLink';
 
 const aiDirsBadge = '/badges/ai-dirs-badge.svg';
 const acidToolsBadge = '/badges/acidtools-badge.png';
-const aiToolTrekBadge = '/badges/ai-tool-trek-badge.svg';
 const deepLaunchBadge = '/badges/deeplaunch-badge-light.svg';
 const fazierBadge = '/badges/fazier-badge.svg';
 const findlyToolsBadge = '/badges/findly-tools-badge-light.svg';
@@ -130,13 +129,6 @@ const footerBadges = [
     key: 'zImage',
     href: 'https://z-image.net/',
     src: zImageBadge,
-    width: 180,
-    height: 54,
-  },
-  {
-    key: 'aiToolTrek',
-    href: 'https://aitooltrek.com',
-    src: aiToolTrekBadge,
     width: 180,
     height: 54,
   },
