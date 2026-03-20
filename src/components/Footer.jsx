@@ -5,6 +5,7 @@ const aiDirsBadge = '/badges/ai-dirs-badge.svg';
 const acidToolsBadge = '/badges/acidtools-badge.png';
 const deepLaunchBadge = '/badges/deeplaunch-badge-light.svg';
 const fazierBadge = '/badges/fazier-badge.svg';
+const findlyToolsBadge = '/badges/findly-tools-badge-light.svg';
 const indieDealsBadge = '/badges/indie-deals-badge.svg';
 const justSimpleToolsBadge = '/badges/justsimpletools-badge.svg';
 const microSaasExamplesBadge = '/badges/microsaasexamples-badge.svg';
@@ -101,6 +102,13 @@ const footerBadges = [
     height: 60,
   },
   {
+    key: 'findlyTools',
+    href: 'https://findly.tools/pixel-art-village?utm_source=pixel-art-village',
+    src: findlyToolsBadge,
+    width: 175,
+    height: 55,
+  },
+  {
     key: 'yoDirectory',
     href: 'https://yo.directory/',
     src: yoDirectoryBadge,
@@ -181,6 +189,7 @@ const footerBadgeGroups = [
       'acidTools',
       'saasToolsDir',
       'submitAiTools',
+      'findlyTools',
       'submito',
       'justSimpleTools',
       'yoDirectory',
