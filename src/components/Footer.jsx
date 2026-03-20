@@ -6,6 +6,7 @@ const acidToolsBadge = '/badges/acidtools-badge.png';
 const deepLaunchBadge = '/badges/deeplaunch-badge-light.svg';
 const fazierBadge = '/badges/fazier-badge.svg';
 const findlyToolsBadge = '/badges/findly-tools-badge-light.svg';
+const goodAiToolsBadge = '/badges/goodaitools-badge.png';
 const indieDealsBadge = '/badges/indie-deals-badge.svg';
 const justSimpleToolsBadge = '/badges/justsimpletools-badge.svg';
 const microSaasExamplesBadge = '/badges/microsaasexamples-badge.svg';
@@ -107,6 +108,13 @@ const footerBadges = [
     src: findlyToolsBadge,
     width: 175,
     height: 55,
+  },
+  {
+    key: 'goodAiTools',
+    href: 'https://goodaitools.com',
+    src: goodAiToolsBadge,
+    width: 207,
+    height: 54,
   },
   {
     key: 'yoDirectory',
