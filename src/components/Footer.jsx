@@ -23,6 +23,7 @@ const toolFameBadge = '/badges/toolfame-badge-light.svg';
 const turbo0Badge = '/badges/turbo0-badge.svg';
 const twelveToolsBadge = '/badges/twelve-tools-badge.svg';
 const yoDirectoryBadge = '/badges/yodirectory-badge.png';
+const zImageBadge = '/badges/z-image-badge.svg';
 const buildYear = typeof __BUILD_YEAR__ !== 'undefined' ? __BUILD_YEAR__ : new Date().getFullYear();
 
 const footerBadges = [
@@ -122,6 +123,13 @@ const footerBadges = [
     href: 'https://www.promotebusinessdirectory.com/',
     src: promoteBusinessDirectoryBadge,
     width: 240,
+    height: 54,
+  },
+  {
+    key: 'zImage',
+    href: 'https://z-image.net/',
+    src: zImageBadge,
+    width: 180,
     height: 54,
   },
   {
