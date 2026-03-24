@@ -769,44 +769,68 @@ async function prerender() {
     return `<main class="container mx-auto px-4 py-10 max-w-4xl"><header><h1 class="text-2xl font-bold text-gray-900">${heading}</h1><p class="mt-2 text-sm text-gray-500">${escapeHtml(lastUpdated)}</p></header>${sections}${quickLinksHtml}</main>`
   }
 
-  const renderHomeVisible = ({ lang = DEFAULT_LANG, title = '', description = '', bundle = {}, blogPosts = [] } = {}) => {
-    const heading = escapeHtml(cleanTitle(title))
-    const desc = description
-      ? `<p class="text-gray-700 mt-3 text-center max-w-2xl mx-auto">${escapeHtml(description)}</p>`
-      : ''
+  const renderHomeVisible = ({ lang = DEFAULT_LANG, title = '', description = '', bundle = {} } = {}) => {
+    const heading = escapeHtml(
+      pick(bundle, 'home.heroTitle')
+        || cleanTitle(title)
+        || pick(bundle, 'home.seoTitle')
+        || 'Image to Pixel Art Converter',
+    )
+    const introParts = [
+      pick(bundle, 'home.heroSubtitle') || description,
+      pick(bundle, 'home.heroSubtitle2'),
+    ].filter(Boolean)
+    const introHtml = introParts
+      .map((text) => `<p class="text-gray-700 mt-3 text-center max-w-2xl mx-auto">${escapeHtml(text)}</p>`)
+      .join('')
+    const primaryCtaLabel = pick(bundle, 'home.primaryCtaLabel') || 'Open the full image to pixel art converter'
+    const primaryCtaHelp = pick(bundle, 'home.primaryCtaHelp')
+    const primaryCtaHref = buildLocalizedPath(lang, '/converter/image-to-pixel-art')
+    const primaryCtaHtml = `<div class="mt-5 flex flex-col items-center gap-2"><a class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white" href="${escapeHtml(primaryCtaHref)}">${escapeHtml(primaryCtaLabel)}</a>${primaryCtaHelp ? `<p class="text-sm text-gray-600">${escapeHtml(primaryCtaHelp)}</p>` : ''}</div>`
 
-    const siteLinks = [
-      { href: buildLocalizedPath(lang, '/converter/image-to-pixel-art'), label: pick(bundle, 'footer.links.generator') || 'Image to Pixel Art Converter' },
-      { href: buildLocalizedPath(lang, '/converter/photo-to-pixel-art'), label: pick(bundle, 'footer.links.converter') || 'Photo to Pixel Art Converter' },
-      { href: buildLocalizedPath(lang, '/converter/png-to-pixel-art'), label: pick(bundle, 'footer.links.png2pixel') || 'PNG to Pixel Art' },
-      { href: buildLocalizedPath(lang, '/converter/jpg-to-pixel-art'), label: pick(bundle, 'footer.links.jpg2pixel') || 'JPG to Pixel Art' },
-      { href: buildLocalizedPath(lang, '/blog'), label: pick(bundle, 'nav.blog') || 'Blog' },
-      { href: buildLocalizedPath(lang, '/about'), label: pick(bundle, 'nav.about') || 'About' },
-      { href: buildLocalizedPath(lang, '/contact'), label: pick(bundle, 'nav.contact') || 'Contact' },
-      { href: buildLocalizedPath(lang, '/privacy'), label: pick(bundle, 'footer.privacy') || 'Privacy' },
-      { href: buildLocalizedPath(lang, '/terms'), label: pick(bundle, 'footer.terms') || 'Terms' },
-    ]
+    const featuredTools = [
+      {
+        href: buildLocalizedPath(lang, '/converter/image-to-pixel-art'),
+        title: pick(bundle, 'home.cards.mainConverter.title') || 'Image to Pixel Art Converter',
+        description: pick(bundle, 'home.cards.mainConverter.description') || 'Best fit for general image-to-pixel-art conversions.',
+      },
+      {
+        href: buildLocalizedPath(lang, '/converter/photo-to-pixel-art'),
+        title: pick(bundle, 'home.cards.photoToPixel.title') || 'Photo to Pixel Art',
+        description: pick(bundle, 'home.cards.photoToPixel.description') || 'Built for turning photos into readable retro pixel art.',
+      },
+      {
+        href: buildLocalizedPath(lang, '/converter/photo-to-sprite-converter'),
+        title: pick(bundle, 'home.cards.photoToSprite.title') || 'Photo to Sprite Converter',
+        description: pick(bundle, 'home.cards.photoToSprite.description') || 'Use when you need smaller game-ready sprites.',
+      },
+      {
+        href: buildLocalizedPath(lang, '/converter/png-to-pixel-art'),
+        title: pick(bundle, 'home.cards.pngToPixel.title') || 'PNG to Pixel Art',
+        description: pick(bundle, 'home.cards.pngToPixel.description') || 'Ideal for PNG files and crisp source artwork.',
+      },
+      {
+        href: buildLocalizedPath(lang, '/converter/jpg-to-pixel-art'),
+        title: pick(bundle, 'home.cards.jpgToPixel.title') || 'JPG to Pixel Art',
+        description: pick(bundle, 'home.cards.jpgToPixel.description') || 'A better landing page for compressed JPG uploads and camera images.',
+      },
+      {
+        href: buildLocalizedPath(lang, '/converter/gif-to-pixel-art'),
+        title: pick(bundle, 'home.cards.gifToPixel.title') || 'GIF to Pixel Art',
+        description: pick(bundle, 'home.cards.gifToPixel.description') || 'Open this page when your source file is GIF.',
+      },
+    ].filter((tool) => tool.href && tool.title)
 
-    const faqHtml = renderFaqCardsSection({ bundle, count: 3 })
-
-    const exploreHeading = escapeHtml(pick(bundle, 'footer.explore') || 'Explore')
-    const linkHtml = `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${exploreHeading}</h2><ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">${siteLinks
-      .map((link) => `<li><a class="block rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 hover:border-blue-300 hover:text-blue-600" href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a></li>`)
-      .join('')}</ul></section>`
-
-    const recentPosts = Array.isArray(blogPosts) ? blogPosts.slice(0, 3) : []
-    const recentPostsHtml = recentPosts.length
-      ? `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${escapeHtml(pick(bundle, 'blog.title') || 'Blog')}</h2><ul class="mt-4 space-y-3">${recentPosts
-          .map((post) => {
-            const href = buildLocalizedPath(lang, `/blog/${post.slug}`)
-            const excerpt = post.excerpt ? `<p class="mt-1 text-sm text-gray-700">${escapeHtml(post.excerpt)}</p>` : ''
-            return `<li class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"><a class="text-base font-semibold text-blue-600 hover:underline" href="${escapeHtml(href)}">${escapeHtml(post.title || post.slug)}</a>${excerpt}</li>`
-          })
+    const exploreHeading = escapeHtml(pick(bundle, 'home.exploreHeading') || 'Open the exact tool you need')
+    const exploreIntro = pick(bundle, 'home.exploreIntro')
+    const toolsHtml = featuredTools.length
+      ? `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${exploreHeading}</h2>${exploreIntro ? `<p class="text-sm text-gray-700 mt-2 max-w-3xl">${escapeHtml(exploreIntro)}</p>` : ''}<ul class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">${featuredTools
+          .map((tool) => `<li><a class="block rounded-lg border border-gray-200 bg-white p-4 shadow-sm hover:border-blue-300" href="${escapeHtml(tool.href)}"><h3 class="text-base font-semibold text-gray-900">${escapeHtml(tool.title)}</h3>${tool.description ? `<p class="mt-2 text-sm text-gray-700">${escapeHtml(tool.description)}</p>` : ''}</a></li>`)
           .join('')}</ul></section>`
       : ''
 
-    if (!heading && !desc && !faqHtml && !linkHtml && !recentPostsHtml) return ''
-    return `<main class="container mx-auto px-4 py-10 max-w-4xl"><section><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${desc}</section>${linkHtml}${faqHtml}${recentPostsHtml}</main>`
+    if (!heading && !introHtml && !toolsHtml) return ''
+    return `<main class="container mx-auto px-4 py-10 max-w-4xl"><section><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${introHtml}${primaryCtaHtml}</section>${toolsHtml}</main>`
   }
 
   const buildFaqJsonLd = (bundle = {}) => {
@@ -831,11 +855,10 @@ async function prerender() {
 
   const buildHomeJsonLd = ({ lang = DEFAULT_LANG, bundle = {}, title = '', description = '' } = {}) => {
     const siteName = pick(bundle, 'site.name') || 'Pixel Art Village'
-    const homeTitle = normalizeWhitespace(title || pick(bundle, 'home.seoTitle') || `${siteName} | Image to Pixel Art Converter`)
+    const homeTitle = normalizeWhitespace(title || pick(bundle, 'home.seoTitle') || `${siteName} | Private Pixel Art Tools & Converters`)
     const homeDescription = shortenText(
       description || pick(bundle, 'home.seoDescription') || 'Image to pixel art online with live preview, palettes, and private export.',
     )
-    const faqJsonLd = buildFaqJsonLd(bundle)
 
     return [
       {
@@ -860,7 +883,6 @@ async function prerender() {
         },
         screenshot: ABS('/social-preview.png'),
       },
-      faqJsonLd,
       {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
@@ -915,16 +937,16 @@ async function prerender() {
   )
 
   const routes = [
-    { path: '/', title: 'Pixel Art Village: Image to Pixel Art Place Color Converter', metas: [
-      { name: 'description', content: 'Free Image to Pixel Art Generator & Maker | Pixel Art Village. Drag/drop photo, live preview, palettes, dithering. Place color converter: Export PNGs online!' },
+    { path: '/', title: 'Image to Pixel Art Converter & Maker | Pixel Art Village', metas: [
+      { name: 'description', content: 'Turn images into pixel art with live preview, palette controls, and private browser-based processing.' },
       { property: 'og:url', content: 'https://pixelartvillage.org/' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:title', content: 'Pixel Art Village: Image to Pixel Art Place Color Converter' },
-      { property: 'og:description', content: 'Free Image to Pixel Art Generator & Maker | Pixel Art Village. Drag/drop photo, live preview, palettes, dithering. Place color converter: Export PNGs online!' },
+      { property: 'og:title', content: 'Image to Pixel Art Converter & Maker | Pixel Art Village' },
+      { property: 'og:description', content: 'Turn images into pixel art with live preview, palette controls, and private browser-based processing.' },
       { property: 'og:image', content: 'https://pixelartvillage.org/social-preview.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Pixel Art Village: Image to Pixel Art Place Color Converter' },
-      { name: 'twitter:description', content: 'Free Image to Pixel Art Generator & Maker | Pixel Art Village. Drag/drop photo, live preview, palettes, dithering. Place color converter: Export PNGs online!' },
+      { name: 'twitter:title', content: 'Image to Pixel Art Converter & Maker | Pixel Art Village' },
+      { name: 'twitter:description', content: 'Turn images into pixel art with live preview, palette controls, and private browser-based processing.' },
       { name: 'twitter:image', content: 'https://pixelartvillage.org/social-preview.png' },
     ],
       jsonLd: ({ lang, bundle, title, description }) => buildHomeJsonLd({ lang, bundle, title, description }),

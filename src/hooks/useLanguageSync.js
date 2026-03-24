@@ -32,30 +32,12 @@ export function useLanguageSync() {
       return pathLang
     }
 
-    // i18n语言
-    const i18nLang = (i18n.language || '').toLowerCase()
-    if (SUPPORTED_LANGS.includes(i18nLang)) {
-      if (import.meta.env.DEV) {
-        console.log('[useLanguageSync] 使用i18n语言:', i18nLang)
-      }
-      return i18nLang
-    }
-
-    // 存储的语言作为兜底，避免根路径和服务端首屏出现不一致
-    const stored = languageManager.getStoredLanguage()
-    if (stored) {
-      if (import.meta.env.DEV) {
-        console.log('[useLanguageSync] 使用存储语言:', stored)
-      }
-      return stored
-    }
-
-    // 默认语言
+    // 没有语言前缀的路径一律视为默认语言，避免根路径受浏览器语言或存储语言影响
     if (import.meta.env.DEV) {
-      console.log('[useLanguageSync] 使用默认语言:', CANONICAL_LOCALE)
+      console.log('[useLanguageSync] 无语言前缀，固定使用默认语言:', CANONICAL_LOCALE)
     }
     return CANONICAL_LOCALE
-  }, [params.lang, location.pathname, i18n.language])
+  }, [params.lang, location.pathname])
 
   // 语言切换处理
   const handleLanguageChange = useCallback(async (targetLang) => {
@@ -94,7 +76,6 @@ export function useLanguageSync() {
 
       // 保留查询参数和哈希
       const searchParams = new URLSearchParams(location.search || '')
-      searchParams.delete('forceLang') // 清理强制语言参数
 
       const keepHash = (() => {
         try {
@@ -115,8 +96,8 @@ export function useLanguageSync() {
         console.log('[useLanguageSync] 导航到:', nextUrl)
       }
 
-      // 使用replace避免历史堆积
-      navigate(nextUrl, { replace: true })
+      // 手动切换语言时保留历史记录，行为更接近普通链接导航
+      navigate(nextUrl)
 
       return true
     } catch (error) {

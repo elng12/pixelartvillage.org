@@ -16,7 +16,6 @@ import i18n, { CANONICAL_LOCALE, setStoredLang } from '@/i18n'
 import { buildLocalizedPath, extractLocaleFromPath, RUNTIME_LANGS } from '@/utils/locale'
 import { getDeferredUiComponent } from './deferredUi.js'
 import { getDeferredRoutePage } from './routePages.js'
-
 const Editor = lazy(() => import('./components/Editor'))
 const FOOTER_SHELL_STYLE = {
   contentVisibility: 'auto',

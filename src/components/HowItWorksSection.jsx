@@ -74,24 +74,33 @@ function PixelStep({ n, title, children, icon }) {
   )
 }
 
-function HowItWorksSection() {
+function HowItWorksSection({ title, description, steps, sectionId = 'how-it-works' }) {
   const { t } = useTranslation();
+  const resolvedTitle = title || t('how.title');
+  const resolvedDescription = description || t('how.desc');
+  const resolvedSteps = Array.isArray(steps) && steps.length === 3
+    ? steps
+    : [
+        { title: t('how.steps.upload'), description: t('how.steps.upload.desc') },
+        { title: t('how.steps.adjust'), description: t('how.steps.adjust.desc') },
+        { title: t('how.steps.download'), description: t('how.steps.download.desc') },
+      ];
   return (
-    <section id="how-it-works" className="py-12 md:py-16">
+    <section id={sectionId} className="py-12 md:py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">{t('how.title')}</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">{resolvedTitle}</h2>
         <p className="text-base md:text-lg text-gray-600 text-center max-w-3xl mx-auto mb-8">
-          {t('how.desc')}
+          {resolvedDescription}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-          <PixelStep n={1} title={t('how.steps.upload')} icon={<IconUpload className="w-14 h-14 text-blue-600 md:w-16 md:h-16" /> }>
-            {t('how.steps.upload.desc')}
+          <PixelStep n={1} title={resolvedSteps[0]?.title} icon={<IconUpload className="w-14 h-14 text-blue-600 md:w-16 md:h-16" /> }>
+            {resolvedSteps[0]?.description}
           </PixelStep>
-          <PixelStep n={2} title={t('how.steps.adjust')} icon={<IconAdjust className="w-14 h-14 text-blue-600 md:w-16 md:h-16" /> }>
-            {t('how.steps.adjust.desc')}
+          <PixelStep n={2} title={resolvedSteps[1]?.title} icon={<IconAdjust className="w-14 h-14 text-blue-600 md:w-16 md:h-16" /> }>
+            {resolvedSteps[1]?.description}
           </PixelStep>
-          <PixelStep n={3} title={t('how.steps.download')} icon={<IconDownload className="w-14 h-14 text-blue-600 md:w-16 md:h-16" /> }>
-            {t('how.steps.download.desc')}
+          <PixelStep n={3} title={resolvedSteps[2]?.title} icon={<IconDownload className="w-14 h-14 text-blue-600 md:w-16 md:h-16" /> }>
+            {resolvedSteps[2]?.description}
           </PixelStep>
         </div>
       </div>

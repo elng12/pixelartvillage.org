@@ -1,6 +1,6 @@
-import React, { useState, Fragment, lazy, Suspense } from 'react'
+import React, { Fragment, lazy, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useParams, useOutletContext } from 'react-router-dom'
 import Seo from '@/components/Seo'
 import ToolSection from '@/components/ToolSection'
 import HowItWorksSection from '@/components/HowItWorksSection'
@@ -11,12 +11,88 @@ import LocalizedLink from '@/components/LocalizedLink'
 
 const Editor = lazy(() => import('@/components/Editor'))
 
+function buildFaqJsonLd(items = []) {
+  const faqItems = Array.isArray(items)
+    ? items.filter((item) => item && item.question && item.answer)
+    : []
+
+  if (!faqItems.length) return null
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }
+}
+
+function ConverterSupportBlock({ title, body = [], ctaLabel, ctaTo = '#tool' }) {
+  if (!title && (!Array.isArray(body) || !body.length)) return null
+
+  return (
+    <article className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+      {title ? <h2 className="text-xl font-semibold text-gray-900">{title}</h2> : null}
+      <div className="mt-3 space-y-3 text-gray-700">
+        {(Array.isArray(body) ? body : []).map((paragraph, index) => (
+          <p key={index}>{paragraph}</p>
+        ))}
+      </div>
+      {ctaLabel ? (
+        <div className="mt-5">
+          <LocalizedLink
+            to={ctaTo}
+            className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700"
+          >
+            {ctaLabel}
+          </LocalizedLink>
+        </div>
+      ) : null}
+    </article>
+  )
+}
+
+function MainConverterCallout({ callout, testId }) {
+  if (!callout?.title && !Array.isArray(callout?.body)) return null
+
+  return (
+    <article
+      data-testid={testId}
+      className="rounded-2xl border border-blue-200 bg-blue-50/80 p-5 shadow-sm"
+    >
+      {callout.title ? (
+        <h2 className="text-xl font-semibold text-gray-900">{callout.title}</h2>
+      ) : null}
+      <div className="mt-3 space-y-3 text-gray-700">
+        {(Array.isArray(callout.body) ? callout.body : []).map((paragraph, index) => (
+          <p key={index}>{paragraph}</p>
+        ))}
+      </div>
+      {callout.ctaLabel ? (
+        <div className="mt-5">
+          <LocalizedLink
+            to={callout.ctaTo || '/converter/image-to-pixel-art/'}
+            className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700"
+          >
+            {callout.ctaLabel}
+          </LocalizedLink>
+        </div>
+      ) : null}
+    </article>
+  )
+}
+
 export default function PseoPage() {
   const { t } = useTranslation()
   const { slug } = useParams()
+  const { uploadedImage, setUploadedImage } = useOutletContext()
   const { currentLocale, buildPath } = useLocaleContext()
   const { data: pages, fallback } = useLocalizedContent('pseo-pages')
-  const [uploadedImage, setUploadedImage] = useState(null)
 
   if (!pages) {
     const canonical = `https://pixelartvillage.org${buildPath(`/converter/${slug || ''}/`)}`
@@ -42,7 +118,12 @@ export default function PseoPage() {
   }
 
   const canonical = `https://pixelartvillage.org${buildPath(`/converter/${page.slug}/`)}`
-  const relatedPages = pages.filter((entry) => entry.slug !== page.slug).slice(0, 6)
+  const isPrimaryConverter = page.slug === 'image-to-pixel-art'
+  const relatedPages = pages
+    .filter((entry) => entry.slug !== page.slug)
+    .sort((a, b) => Number(b.slug === 'image-to-pixel-art') - Number(a.slug === 'image-to-pixel-art'))
+    .slice(0, 6)
+  const faqItems = t('faq.items', { returnObjects: true }) || []
   const siteLinks = [
     { to: '/', label: t('nav.home') },
     { to: '/blog/', label: t('nav.blog') },
@@ -52,6 +133,7 @@ export default function PseoPage() {
     { to: '/terms/', label: t('footer.terms') },
   ]
   const introParas = Array.isArray(page.intro) ? page.intro : [page.intro]
+  const faqJsonLd = buildFaqJsonLd(faqItems)
   const howToJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
@@ -94,7 +176,7 @@ export default function PseoPage() {
         canonical={canonical}
         lang={currentLocale || 'en'}
         description={page.metaDescription}
-        jsonLd={[howToJsonLd, softwareJsonLd]}
+        jsonLd={[howToJsonLd, softwareJsonLd, faqJsonLd].filter(Boolean)}
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'website' },
@@ -106,27 +188,94 @@ export default function PseoPage() {
         ]}
       />
 
-      <section className="bg-white py-8">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h1 className="text-2xl font-bold text-gray-900 mb-3">{page.h1}</h1>
-          {fallback ? (
-            <p className="text-xs text-gray-500 mb-3">{t('content.fallbackNotice')}</p>
+      {isPrimaryConverter ? (
+        <Fragment>
+          <ToolSection
+            onImageUpload={setUploadedImage}
+            headingLevel="h1"
+            titleText={page.h1}
+            subtitleText={page.heroSubtitle || introParas[0] || page.metaDescription}
+            subtitleText2={page.heroSubtitle2 || ''}
+          />
+          {uploadedImage ? (
+            <Suspense fallback={null}>
+              <Editor image={uploadedImage} />
+            </Suspense>
           ) : null}
-          {introParas.map((para, index) => (
-            <p key={index} className="text-gray-700 mb-3">
-              {para}
-            </p>
-          ))}
-        </div>
-      </section>
-
-      <ToolSection onImageUpload={setUploadedImage} headingLevel="h2" />
-      {uploadedImage ? (
-        <Suspense fallback={null}>
-          <Editor image={uploadedImage} />
-        </Suspense>
-      ) : null}
+          <section className="bg-white py-8">
+            <div className="container mx-auto px-4 max-w-4xl">
+              {fallback ? (
+                <p className="text-xs text-gray-500 mb-3">{t('content.fallbackNotice')}</p>
+              ) : null}
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                {page.detailsHeading || 'When to use this converter'}
+              </h2>
+              {introParas.map((para, index) => (
+                <p key={index} className="text-gray-700 mb-3">
+                  {para}
+                </p>
+              ))}
+            </div>
+          </section>
+          <section className="bg-gray-50 py-8">
+            <div className="container mx-auto px-4 max-w-4xl grid grid-cols-1 gap-4 lg:grid-cols-2">
+              <ConverterSupportBlock
+                title={page.minecraftBlock?.title}
+                body={page.minecraftBlock?.body}
+                ctaLabel={page.minecraftBlock?.ctaLabel}
+                ctaTo={page.minecraftBlock?.ctaTo}
+              />
+              <ConverterSupportBlock
+                title={page.aiBlock?.title}
+                body={page.aiBlock?.body}
+                ctaLabel={page.aiBlock?.ctaLabel}
+                ctaTo={page.aiBlock?.ctaTo}
+              />
+            </div>
+          </section>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <section className="bg-white py-8">
+            <div className="container mx-auto px-4 max-w-3xl">
+              <h1 className="text-2xl font-bold text-gray-900 mb-3">{page.h1}</h1>
+              {fallback ? (
+                <p className="text-xs text-gray-500 mb-3">{t('content.fallbackNotice')}</p>
+              ) : null}
+              {introParas.map((para, index) => (
+                <p key={index} className="text-gray-700 mb-3">
+                  {para}
+                </p>
+              ))}
+              {page.topCallout ? (
+                <div className="mt-6">
+                  <MainConverterCallout callout={page.topCallout} testId="primary-converter-callout-top" />
+                </div>
+              ) : null}
+            </div>
+          </section>
+          <ToolSection
+            onImageUpload={setUploadedImage}
+            headingLevel="h2"
+            titleText={page.toolHeading}
+            subtitleText={page.toolSubtitle}
+            subtitleText2={page.toolSubtitle2}
+          />
+          {uploadedImage ? (
+            <Suspense fallback={null}>
+              <Editor image={uploadedImage} />
+            </Suspense>
+          ) : null}
+        </Fragment>
+      )}
       <HowItWorksSection />
+      {!isPrimaryConverter && page.bottomCallout ? (
+        <section className="bg-white py-8">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <MainConverterCallout callout={page.bottomCallout} testId="primary-converter-callout-bottom" />
+          </div>
+        </section>
+      ) : null}
       <section className="bg-gray-50 py-8">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('pseo.relatedHeading')}</h2>
@@ -160,7 +309,7 @@ export default function PseoPage() {
           </div>
         </div>
       </section>
-      <FaqSection />
+      <FaqSection items={faqItems} />
     </Fragment>
   )
 }

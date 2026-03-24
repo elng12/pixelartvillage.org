@@ -15,11 +15,6 @@ export default function HomeBelowFold() {
   const { t } = useTranslation()
   const featuredTools = [
     {
-      to: '/converter/image-to-pixel-art/',
-      title: t('home.cards.mainConverter.title'),
-      description: t('home.cards.mainConverter.description'),
-    },
-    {
       to: '/converter/photo-to-pixel-art/',
       title: t('home.cards.photoToPixel.title'),
       description: t('home.cards.photoToPixel.description'),

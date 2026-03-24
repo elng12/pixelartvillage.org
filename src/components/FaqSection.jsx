@@ -1,12 +1,13 @@
 import { useTranslation } from 'react-i18next';
 
-function FaqSection() {
+function FaqSection({ title, items, sectionId = 'faq', backgroundClassName = 'bg-gray-50' }) {
   const { t } = useTranslation();
-  const faqs = t('faq.items', { returnObjects: true }) || [];
+  const resolvedTitle = title || t('faq.title');
+  const faqs = items || t('faq.items', { returnObjects: true }) || [];
   return (
-    <section id="faq" className="py-12 md:py-16 bg-gray-50">
+    <section id={sectionId} className={`py-12 md:py-16 ${backgroundClassName}`}>
       <div className="container mx-auto px-4 max-w-3xl">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">{t('faq.title')}</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">{resolvedTitle}</h2>
         <div className="space-y-3">
           {(Array.isArray(faqs) ? faqs : []).map((faq, index) => (
             <article key={index} className="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">

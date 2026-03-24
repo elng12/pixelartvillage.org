@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import logger from '@/utils/logger';
+import LocalizedLink from '@/components/LocalizedLink';
 import { PREVIEW_LIMIT } from '../utils/constants';
 
 // 常量定义
@@ -36,6 +37,11 @@ function ToolSection({
   titleText,
   subtitleText,
   subtitleText2,
+  actionTo,
+  actionLabel,
+  actionHint,
+  chooseFileLabel,
+  supportsText,
 }) {
   const { t } = useTranslation()
   const fileInputRef = useRef(null);
@@ -51,6 +57,8 @@ function ToolSection({
   const resolvedTitle = titleText || t('tool.title')
   const resolvedSubtitle = subtitleText || t('tool.subtitle')
   const resolvedSubtitle2 = subtitleText2 || t('tool.subtitle2')
+  const resolvedChooseFileLabel = chooseFileLabel || t('tool.chooseFile')
+  const resolvedSupportsText = supportsText || t('tool.supports')
 
   const handleFileSelect = useCallback(async (file) => {
     if (isPreparing) return;
@@ -232,6 +240,21 @@ function ToolSection({
               {resolvedSubtitle2}
             </p>
           ) : null}
+          {actionTo && actionLabel ? (
+            <div className="mt-4 flex flex-col items-center gap-2">
+              <LocalizedLink
+                to={actionTo}
+                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700"
+              >
+                {actionLabel}
+              </LocalizedLink>
+              {actionHint ? (
+                <p className="text-xs sm:text-sm text-gray-500">
+                  {actionHint}
+                </p>
+              ) : null}
+            </div>
+          ) : null}
         </div>
         <div 
           className={`upload-zone relative max-w-3xl mx-auto bg-white p-6 md:p-8 border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50 ${isPreparing ? 'cursor-not-allowed opacity-80 ring-1 ring-blue-200' : 'cursor-pointer'}`}
@@ -263,7 +286,7 @@ function ToolSection({
               className="mt-1 text-sm text-gray-500"
               style={{ fontSize: '0.875rem', lineHeight: '1.25rem', marginTop: '0.25rem', marginBottom: 0 }}
             >
-              {t('tool.supports')}
+              {resolvedSupportsText}
             </p>
             {error && (
               <p className="mt-3 text-sm text-red-600" role="alert" aria-live="polite">{error}</p>
@@ -278,7 +301,7 @@ function ToolSection({
                 onClick={handleChooseFileClick}
                 disabled={isPreparing}
               >
-                {t('tool.chooseFile')}
+                {resolvedChooseFileLabel}
               </button>
             </div>
             <p ref={uploadLiveRef} className="sr-only" aria-live="polite" />

@@ -5,10 +5,28 @@
     "metaDescription": "Convert PNG to pixel art online. Adjust pixel size and palettes with instant preview, then export crisp results — free and private.",
     "h1": "Convert PNG to Pixel Art Online",
     "intro": [
-      "Turn any PNG into clean, grid‑friendly pixel art in your browser. PNG files with their lossless compression and transparency support make them ideal sources for pixel art conversion, preserving image quality while maintaining crisp edges and accurate colors.",
-      "Tweak pixel size and color palettes with instant preview, then export a crisp PNG for sprites, icons, or retro graphics. The real-time preview allows you to experiment with different pixelation levels and color schemes, ensuring perfect results for your specific use case.",
-      "PNG format's support for alpha channels and true color makes it particularly suitable for pixel art projects requiring transparency or precise color control. Our converter leverages these advantages to create professional-quality pixel art assets that integrate seamlessly with modern design workflows and game development pipelines."
-    ]
+      "Use this page when your source file is already a PNG and you want a format-specific start. PNG files usually keep edges, flat color areas, and transparency cleaner than lossy formats, which makes them a strong input for pixel art.",
+      "Upload the PNG, tune pixel size and palette, and export a clean result for sprites, icons, tiles, or UI art. If you need the broadest control set for mixed file types or general-purpose work, use the main image to pixel art converter."
+    ],
+    "toolHeading": "Upload a PNG and tune the pixel conversion",
+    "toolSubtitle": "Best when your source already has clean edges, transparency, or interface-style artwork.",
+    "toolSubtitle2": "Need the broadest workflow for mixed sources or deeper cleanup? Open the main image to pixel art converter.",
+    "topCallout": {
+      "title": "Need the full image to pixel art workflow?",
+      "body": [
+        "This PNG page is a focused starting point, but the main converter is the better destination when you want the complete set of palette, dithering, preview, and export controls."
+      ],
+      "ctaLabel": "Open the full image to pixel art converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    },
+    "bottomCallout": {
+      "title": "Finished testing the PNG workflow?",
+      "body": [
+        "Move into the main converter when you want to compare palette options, refine mixed-source artwork, or keep one consistent workflow across multiple file types."
+      ],
+      "ctaLabel": "Continue in the main converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    }
   },
   {
     "slug": "jpg-to-pixel-art",
@@ -16,22 +34,62 @@
     "metaDescription": "Convert JPG to pixel art online instantly. Fine‑tune pixels and palettes with real-time preview, then export clean results — fast, free, and privacy‑first.",
     "h1": "Convert JPG to Pixel Art Online",
     "intro": [
-      "Pixelate any JPG with precise control over pixel size, dithering, and palettes. Our JPG to pixel art converter handles compressed images gracefully, preserving important details while creating clean, grid-friendly results that enhance your digital artwork.",
-      "Follow an image to pixel art process with live preview, then export clean results for sprites or icons. Perfect for transforming photos into retro game assets, profile pictures, or digital art with authentic pixel aesthetics. The real-time preview allows you to experiment with different settings instantly.",
-      "JPG files often contain compression artifacts that can affect pixel art conversion. Our tool intelligently processes these artifacts, ensuring smooth color transitions and crisp pixel boundaries that maintain visual quality at any resolution. This advanced processing creates professional-quality results.",
-      "Whether you're creating game sprites, social media avatars, or digital illustrations, our JPG converter provides the flexibility and control needed to achieve stunning pixel art. The intuitive interface makes it easy to get perfect results every time."
-    ]
+      "Use this page when your source is a JPG photo, screenshot, or compressed graphic and you want a focused entry point. JPG files usually need a little more cleanup because compression can soften edges before the pixel conversion even starts.",
+      "Upload the JPG, adjust pixel size and palette, then export a cleaner result for avatars, posters, references, or retro graphics. If you want the broadest workflow for mixed sources, use the main image to pixel art converter."
+    ],
+    "toolHeading": "Upload a JPG and clean up the pixel conversion",
+    "toolSubtitle": "A narrower workflow for photo-heavy or compressed JPG sources.",
+    "toolSubtitle2": "For the full palette, dithering, and export workflow across any file type, use the main image to pixel art converter.",
+    "topCallout": {
+      "title": "Want the full converter instead of a JPG-first route?",
+      "body": [
+        "This page is useful when you already know the source is a JPG. For broader image-to-pixel-art work, the main converter is the better long-term workflow."
+      ],
+      "ctaLabel": "Open the full image to pixel art converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    },
+    "bottomCallout": {
+      "title": "Need more control after the first JPG pass?",
+      "body": [
+        "Switch to the main converter when you want to compare results across different source types or keep the same workflow for screenshots, logos, and illustrations too."
+      ],
+      "ctaLabel": "Continue in the main converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    }
   },
   {
     "slug": "image-to-pixel-art",
-    "title": "Image to Pixel Art Converter | Free Online Pixel Art Tool",
-    "metaDescription": "Convert PNG, JPG, GIF, WEBP, or BMP files to pixel art with live preview, custom palettes, and private in-browser processing.",
+    "title": "Image to Pixel Art Converter | Turn Any Image Into Pixel Art",
+    "metaDescription": "Turn PNG, JPG, GIF, WEBP, or BMP files into pixel art with live preview, palette controls, dithering, and private browser-based processing.",
     "h1": "Image to Pixel Art Converter",
+    "detailsHeading": "When to use the main converter",
+    "heroSubtitle": "Upload PNG, JPG, GIF, WEBP, or BMP files and turn them into clean pixel art with live preview, palette controls, and private browser-based processing.",
+    "heroSubtitle2": "Adjust pixel size, dithering, and colors in the full editor, then download sprites, icons, UI art, and retro graphics.",
     "intro": [
-      "Use this image to pixel art converter to turn PNG, JPG, GIF, WEBP, or BMP files into clean 8-bit graphics with crisp edges and controlled palettes.",
-      "Preview every pixel change live, tune palette and dithering settings, and export results for sprites, icons, UI art, or retro game graphics.",
-      "If your source is a photo, open Photo to Pixel Art for a more photo-specific workflow. If you want the broader tool hub, start from the Pixel Art Village homepage."
-    ]
+      "Use the main converter when you need the full image-to-pixel-art workflow in one place, from upload and live preview to palette control, dithering, and export.",
+      "It works best for screenshots, logos, illustrations, interface art, mixed-source graphics, and general-purpose conversions that need more than a narrow file-format landing page.",
+      "If your source is mostly a camera photo, start with Photo to Pixel Art. If you need a format-specific workflow, open the PNG, JPG, GIF, WEBP, or BMP converter pages from the homepage."
+    ],
+    "minecraftBlock": {
+      "title": "Convert Image to Minecraft Pixel Art",
+      "body": [
+        "Use the main converter when you want to turn reference art, logos, or screenshots into block-friendly Minecraft pixel art before rebuilding them in-game.",
+        "Lower pixel size, tighter palettes, and visible grid structure make it easier to read the result as a block layout instead of a soft illustration.",
+        "Start the conversion here, then tune colors and detail until the shape reads clearly at Minecraft build scale."
+      ],
+      "ctaLabel": "Start in the main converter",
+      "ctaTo": "#tool"
+    },
+    "aiBlock": {
+      "title": "Is this an AI pixel art generator?",
+      "body": [
+        "No. This page is a rule-based image to pixel art converter, not an AI image generator.",
+        "That means you keep direct control over the source image, pixel size, palette, dithering, and export result instead of asking a model to invent a new image.",
+        "For creators who need repeatable outputs, sprites, icons, and UI art, that control is usually more reliable than an AI-style generation workflow."
+      ],
+      "ctaLabel": "Open the full editor",
+      "ctaTo": "#tool"
+    }
   },
   {
     "slug": "gif-to-pixel-art",
@@ -39,10 +97,28 @@
     "metaDescription": "Convert GIF to pixel art online. Preview pixel size and palettes instantly, then export clean frames for sprites and icons.",
     "h1": "Convert GIF to Pixel Art Online",
     "intro": [
-      "Turn GIF images into crisp pixel art with a grid‑friendly look. Our GIF to pixel art converter preserves animation frames while applying consistent pixelation across all frames, maintaining the animated nature of your original GIF.",
-      "Use our image to pixel art approach to adjust size and palettes, then export clean results for game assets. Perfect for creating animated sprites, loading animations, or decorative pixel art elements for websites and applications.",
-      "GIF animations often require careful color optimization to maintain file size while achieving the desired pixel art aesthetic. Our tool handles this complexity automatically, ensuring smooth animations with optimized color palettes."
-    ]
+      "Use this page when your source is a GIF and you want a focused route into pixel art. GIF files are already limited in color compared with PNG or JPG, so the best results usually come from keeping the shape readable instead of chasing extra detail.",
+      "Upload the GIF, preview the pixel treatment, and export clean results for animated references, decorative assets, or simple retro graphics. If you need the broadest image-to-pixel-art workflow, move to the main converter."
+    ],
+    "toolHeading": "Upload a GIF and preview the pixel treatment",
+    "toolSubtitle": "A format-specific starting point for simple animated or limited-color GIF sources.",
+    "toolSubtitle2": "For the broadest editor workflow across mixed sources, use the main image to pixel art converter.",
+    "topCallout": {
+      "title": "Need the main converter for more than GIF files?",
+      "body": [
+        "This GIF page is a narrow route in. Use the main converter when you want the full editor workflow and broader source support in one place."
+      ],
+      "ctaLabel": "Open the full image to pixel art converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    },
+    "bottomCallout": {
+      "title": "Want to keep working in the full editor?",
+      "body": [
+        "Open the main converter when the GIF result needs deeper palette tuning, more flexible cleanup, or a workflow that matches your other image-to-pixel-art jobs."
+      ],
+      "ctaLabel": "Continue in the main converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    }
   },
   {
     "slug": "webp-to-pixel-art",
@@ -50,10 +126,28 @@
     "metaDescription": "Convert WEBP to pixel art online instantly. Fine‑tune pixels and palettes in real time — free, fast, and completely privacy‑first.",
     "h1": "Convert WEBP to Pixel Art Online",
     "intro": [
-      "Upload WEBP images and pixelate them with precise, repeatable controls. WEBP format combines excellent compression with quality, making it ideal for modern web graphics that need to be converted to pixel art for retro projects.",
-      "Preview every change live in an image to pixel art flow, then export clean results for sprites or retro graphics. Whether you're working with static WEBP images or animated variants, our tool maintains quality while applying authentic pixelation effects.",
-      "Modern web development increasingly relies on WEBP for its superior compression and quality characteristics. Converting these images to pixel art opens up creative possibilities for retro-style web design, game development, and digital art projects."
-    ]
+      "Use this page when your source is a WEBP file and you want a focused starting point. WEBP is common in modern product images, web graphics, and exported illustrations, so this route helps when you already know the input format.",
+      "Upload the WEBP, tune pixel size and palette, and export a clean result for icons, references, or retro graphics. If you want the main all-purpose workflow, open the image to pixel art converter instead."
+    ],
+    "toolHeading": "Upload a WEBP and preview the pixel conversion",
+    "toolSubtitle": "Best for modern web graphics or exported illustrations that already arrive as WEBP.",
+    "toolSubtitle2": "For mixed file types and the broadest control set, use the main image to pixel art converter.",
+    "topCallout": {
+      "title": "Need the all-purpose converter instead?",
+      "body": [
+        "This WEBP page is a format-focused entry point. Use the main converter when your workflow spans multiple file types or you want one consistent editor for everything."
+      ],
+      "ctaLabel": "Open the full image to pixel art converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    },
+    "bottomCallout": {
+      "title": "Ready to move beyond the WEBP entry point?",
+      "body": [
+        "The main converter is the better destination when you want one repeatable workflow for screenshots, logos, photos, and other sources alongside WEBP files."
+      ],
+      "ctaLabel": "Continue in the main converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    }
   },
   {
     "slug": "bmp-to-pixel-art",
@@ -61,10 +155,28 @@
     "metaDescription": "Convert BMP to pixel art online easily. Adjust pixel size, palette, and dithering with instant preview and clean export results.",
     "h1": "Convert BMP to Pixel Art Online",
     "intro": [
-      "Bring legacy BMP images into a modern pixel art workflow. BMP files, with their uncompressed nature and straightforward structure, provide excellent source material for pixel art conversion without compression artifacts affecting the final result.",
-      "Apply a consistent image to pixel art process: tune pixel size and palettes instantly, then export crisp results for sprites and tiles. The lossless quality of BMP images ensures clean color transitions and accurate detail preservation during pixelation.",
-      "Many archives and legacy projects contain valuable assets in BMP format. Our converter helps modernize these resources by transforming them into optimized pixel art suitable for contemporary game engines, web applications, and digital art projects."
-    ]
+      "Use this page when your source is a BMP file from an archive, legacy app, or older asset pipeline. BMP files often arrive with clean raw pixel data, which makes them useful reference inputs for retro conversion work.",
+      "Upload the BMP, set the pixel treatment, and export a cleaner modern result. If you need the broadest workflow for current screenshots, logos, photos, or mixed sources, open the main image to pixel art converter."
+    ],
+    "toolHeading": "Upload a BMP and modernize it into pixel art",
+    "toolSubtitle": "A focused route for older BMP assets and archived reference graphics.",
+    "toolSubtitle2": "For current file types and the full editor workflow, use the main image to pixel art converter.",
+    "topCallout": {
+      "title": "Need the full converter instead of a BMP-first route?",
+      "body": [
+        "This page is useful when you already know the input is BMP. For broader image-to-pixel-art work, start from the main converter."
+      ],
+      "ctaLabel": "Open the full image to pixel art converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    },
+    "bottomCallout": {
+      "title": "Want one workflow for more than legacy BMP assets?",
+      "body": [
+        "Open the main converter when you want the same editor setup for modern screenshots, logos, interface art, and other source types too."
+      ],
+      "ctaLabel": "Continue in the main converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    }
   },
   {
     "slug": "photo-to-pixel-art",
@@ -72,10 +184,28 @@
     "metaDescription": "Turn photos into pixel art online with live preview, palette controls, and private browser-based processing.",
     "h1": "Photo to Pixel Art Converter",
     "intro": [
-      "Turn photos into readable 8-bit artwork with a workflow tuned for portraits, scenes, and camera images that carry more detail than flat graphics.",
-      "Control pixels, contrast, and palettes with live preview so your photo still reads clearly after it becomes retro pixel art.",
-      "If your source is already a clean illustration or transparent asset, the Image to Pixel Art Converter is the better general-purpose landing page."
-    ]
+      "Use this page when the source is a camera photo and you want a narrower route than the main converter. Photos usually carry more texture and soft gradients than flat graphics, so the first goal is readability, not maximum detail.",
+      "Upload the photo, simplify the shapes, and use palette and contrast controls until the result reads clearly. If your source is already a clean illustration, logo, or interface asset, the main image to pixel art converter is the better default page."
+    ],
+    "toolHeading": "Upload a photo and simplify it into readable pixel art",
+    "toolSubtitle": "A photo-first route for portraits, scenery, and camera images that need more simplification.",
+    "toolSubtitle2": "For general-purpose image to pixel art work across many source types, use the main image to pixel art converter.",
+    "topCallout": {
+      "title": "Need the broader converter instead of the photo-first route?",
+      "body": [
+        "This page is tuned for photos. Use the main converter when your source might also be a screenshot, logo, illustration, or mixed graphic."
+      ],
+      "ctaLabel": "Open the full image to pixel art converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    },
+    "bottomCallout": {
+      "title": "Want the full editor after testing a photo?",
+      "body": [
+        "Continue in the main converter when you need one consistent workflow for photos and non-photo sources in the same project."
+      ],
+      "ctaLabel": "Continue in the main converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    }
   },
   {
     "slug": "photo-to-sprite-converter",
@@ -83,10 +213,28 @@
     "metaDescription": "Convert photos to game sprites instantly. Limit color palettes, adjust pixel size, and export clean PNG sprites ready for your game engine.",
     "h1": "Photo to Sprite Converter",
     "intro": [
-      "Create readable sprites from photos by limiting colors and simplifying shapes. Our photo to sprite converter specializes in transforming complex photographic images into clean, game-ready sprite assets with optimized color palettes and crisp pixel boundaries.",
-      "Use the grid and live controls to keep silhouettes crisp at your target size. The real-time preview ensures your sprites will look perfect at their intended display size, whether for character sprites, item icons, or environmental elements.",
-      "Game development requires sprites that are not only visually appealing but also technically optimized for performance. Our converter creates sprites with limited color palettes and clean edges that integrate seamlessly with popular game engines and development frameworks."
-    ]
+      "Use this page when you want to reduce a photo into a sprite-friendly shape rather than keep full photographic detail. It works best as a narrow starting point for character ideas, item references, or quick mockups that need cleaner silhouettes.",
+      "Upload the photo, simplify the palette, and tune the size until the subject reads like a sprite. If you are doing broader image-to-pixel-art work beyond sprite-shaped outputs, the main converter is the better default workflow."
+    ],
+    "toolHeading": "Upload a photo and shape it into a sprite-friendly result",
+    "toolSubtitle": "A narrower workflow for sprite references, character mockups, and simplified photo-based assets.",
+    "toolSubtitle2": "For broader image-to-pixel-art work, use the main image to pixel art converter.",
+    "topCallout": {
+      "title": "Need the main converter for general image-to-pixel-art work?",
+      "body": [
+        "This page is best when your end goal is a sprite-like result. For general-purpose conversions, the main converter is the stronger page."
+      ],
+      "ctaLabel": "Open the full image to pixel art converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    },
+    "bottomCallout": {
+      "title": "Want more than a sprite-focused starting point?",
+      "body": [
+        "Move into the main converter when you want the full editor workflow for screenshots, icons, interface art, or mixed-source graphics alongside sprite work."
+      ],
+      "ctaLabel": "Continue in the main converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    }
   },
   {
     "slug": "pixelate-image-online",
@@ -94,10 +242,28 @@
     "metaDescription": "Pixelate any image online for free instantly. Adjust pixel size, palettes, and dithering with real-time preview and clean export results.",
     "h1": "Pixelate Image Online (Free)",
     "intro": [
-      "A fast, private way to pixelate any image right in your browser. Our free online pixelate tool processes images locally on your device, ensuring complete privacy while delivering professional-quality pixel art results without any cost.",
-      "Preview changes instantly and export clean results — with an image to pixel art pipeline optimized for sprites, icons, and retro graphics. The intuitive interface makes it easy to experiment with different settings until you achieve the perfect look.",
-      "Whether you're a professional game developer, digital artist, or hobbyist exploring creative projects, our tool provides the accessibility and functionality needed to transform any image into stunning pixel art without software installation or registration requirements."
-    ]
+      "Use this page when you want a quick browser-based pixelation entry point without deciding on a narrower file-format workflow first. It is a simple route for fast mockups, social posts, rough retro treatments, and first-pass experiments.",
+      "Upload the image, test the pixel look, and export a clean result. If you know you need the full set of palette, dithering, preview, and export controls, go straight to the main image to pixel art converter."
+    ],
+    "toolHeading": "Upload any image for a quick pixel treatment",
+    "toolSubtitle": "A fast starting point for simple online pixelation and first-pass experiments.",
+    "toolSubtitle2": "For the full workflow and deeper controls, use the main image to pixel art converter.",
+    "topCallout": {
+      "title": "Need the full image to pixel art workflow?",
+      "body": [
+        "This page is a quick-start route. The main converter is the better page when you already know you want full palette, dithering, and export control."
+      ],
+      "ctaLabel": "Open the full image to pixel art converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    },
+    "bottomCallout": {
+      "title": "Ready to move from quick pixelation to the full editor?",
+      "body": [
+        "Open the main converter when you want a more repeatable workflow for screenshots, photos, logos, sprites, and other image-to-pixel-art jobs."
+      ],
+      "ctaLabel": "Continue in the main converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    }
   },
   {
     "slug": "8-bit-art-generator",
@@ -105,10 +271,28 @@
     "metaDescription": "Create authentic 8‑bit pixel art online instantly. Control pixel size and color palettes with live preview, then export crisp PNG results.",
     "h1": "8‑bit Art Generator (Online)",
     "intro": [
-      "Generate 8‑bit style pixel art with consistent palettes and clean edges. Our 8-bit art generator captures the nostalgic aesthetic of classic gaming systems, creating authentic retro artwork that evokes the golden age of arcade and console gaming.",
-      "Ideal for retro game graphics, spritesheets, and icons. The specialized algorithms ensure your artwork maintains the characteristic limitations and charm of genuine 8-bit graphics, including restricted color palettes and pixel-perfect alignment.",
-      "The 8-bit aesthetic remains popular in modern game development, digital art, and web design for its distinctive visual style and efficient performance characteristics. Our tool makes it easy to create authentic retro artwork that honors the technical constraints and artistic traditions of classic computing."
-    ]
+      "Use this page when you already know you want an 8-bit style direction. It is a themed entry point for pushing an image toward simpler palettes, chunkier shapes, and a more classic low-resolution feel.",
+      "Upload the image, tune the pixel look, and export a cleaner retro result. If you want the full image-to-pixel-art workflow without locking yourself into an 8-bit framing first, use the main converter."
+    ],
+    "toolHeading": "Upload an image and steer it toward an 8-bit look",
+    "toolSubtitle": "A theme-first route for classic low-resolution aesthetics and simple retro treatments.",
+    "toolSubtitle2": "For the broadest image-to-pixel-art workflow, use the main image to pixel art converter.",
+    "topCallout": {
+      "title": "Need the broader converter instead of an 8-bit-first route?",
+      "body": [
+        "This page is for a specific visual direction. The main converter is the better page when you want to start neutral and decide on style later."
+      ],
+      "ctaLabel": "Open the full image to pixel art converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    },
+    "bottomCallout": {
+      "title": "Want the full editor after testing an 8-bit look?",
+      "body": [
+        "Continue in the main converter when you want the same workflow to handle 8-bit experiments, cleaner sprites, and general-purpose pixel art in one place."
+      ],
+      "ctaLabel": "Continue in the main converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    }
   },
   {
     "slug": "retro-game-graphics-maker",
@@ -116,9 +300,27 @@
     "metaDescription": "Design retro game graphics online professionally. Pixelate images, constrain palettes, and export clean assets for your game engine.",
     "h1": "Retro Game Graphics Maker",
     "intro": [
-      "Create retro‑style graphics with limited palettes and crisp pixel clusters. Our retro game graphics maker combines modern convenience with authentic retro aesthetics, allowing you to create period-accurate artwork for various gaming eras from 8-bit to 16-bit and beyond.",
-      "Export assets ready for engines and editors, from sprites to UI icons. The comprehensive output options ensure compatibility with popular game development tools, making it easy to integrate your retro graphics into projects built with Unity, Godot, GameMaker, and other development environments.",
-      "Retro game graphics require careful attention to technical constraints and artistic conventions that defined each gaming era. Our tool incorporates these historical considerations, helping you create graphics that not only look retro but also honor the technical limitations and design principles that made classic games visually distinctive and memorable."
-    ]
+      "Use this page when your end goal is specifically retro game-style graphics rather than general image conversion. It is a themed route for sprites, UI pieces, mockups, and other game-facing assets that need limited palettes and readable shapes.",
+      "Upload the source art, simplify the result, and export a cleaner retro asset. If you want the main all-purpose editor for screenshots, logos, and broader image-to-pixel-art work, open the main converter."
+    ],
+    "toolHeading": "Upload source art and shape it into retro game graphics",
+    "toolSubtitle": "A theme-first workflow for game-facing assets, mockups, interface art, and retro graphics.",
+    "toolSubtitle2": "For broader image-to-pixel-art work across many source types, use the main image to pixel art converter.",
+    "topCallout": {
+      "title": "Need the full converter instead of a retro-game-first route?",
+      "body": [
+        "This page is a themed entry point. The main converter is the better home when you want one workflow for general conversions, sprites, icons, and interface art."
+      ],
+      "ctaLabel": "Open the full image to pixel art converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    },
+    "bottomCallout": {
+      "title": "Want the broader editor after testing the retro route?",
+      "body": [
+        "Continue in the main converter when you want to compare game-focused outputs with more general image-to-pixel-art workflows inside the same editor."
+      ],
+      "ctaLabel": "Continue in the main converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    }
   }
 ]

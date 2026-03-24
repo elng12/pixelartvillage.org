@@ -19,7 +19,7 @@ function createRedPixelImage() {
 }
 
 test('auto palette triggers preview reprocessing when palette size changes', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/converter/image-to-pixel-art/')
 
   // Upload via hidden input for cross-browser stability.
   const fileInput = page.getByTestId('file-input')

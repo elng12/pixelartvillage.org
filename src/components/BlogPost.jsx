@@ -48,6 +48,223 @@ function getRelatedPosts(posts = [], currentSlug, limit = 3) {
   return related
 }
 
+const INLINE_TOKEN_RE = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|https?:\/\/[^\s]+)/g
+
+function normalizeInlineHref(href) {
+  const normalized = String(href || '').trim()
+  if (!normalized) return '#'
+  try {
+    const url = new URL(normalized)
+    if (url.origin === 'https://pixelartvillage.org') {
+      return `${url.pathname}${url.search}${url.hash}`
+    }
+  } catch {
+    return normalized
+  }
+  return normalized
+}
+
+function parseHeadingLine(line) {
+  const match = String(line || '').trim().match(/^(#{1,6})\s+(.+)$/)
+  if (!match) return null
+
+  let content = match[2].trim()
+  let id = null
+  const idMatch = content.match(/\s+\{#([A-Za-z0-9_-]+)\}$/)
+  if (idMatch) {
+    id = idMatch[1]
+    content = content.replace(/\s+\{#([A-Za-z0-9_-]+)\}$/, '').trim()
+  }
+
+  return {
+    level: Math.min(6, Math.max(2, match[1].length)),
+    content,
+    id,
+  }
+}
+
+function parseBlogBody(lines = []) {
+  const blocks = []
+  let activeList = null
+
+  const flushList = () => {
+    if (activeList) {
+      blocks.push(activeList)
+      activeList = null
+    }
+  }
+
+  for (const rawLine of Array.isArray(lines) ? lines : []) {
+    const line = String(rawLine || '')
+    const trimmed = line.trim()
+
+    if (!trimmed) {
+      flushList()
+      continue
+    }
+
+    if (/^---+$/.test(trimmed)) {
+      flushList()
+      blocks.push({ type: 'divider' })
+      continue
+    }
+
+    const heading = parseHeadingLine(trimmed)
+    if (heading) {
+      flushList()
+      blocks.push({ type: 'heading', ...heading })
+      continue
+    }
+
+    const unorderedItem = trimmed.match(/^[-•]\s+(.+)$/)
+    if (unorderedItem) {
+      if (!activeList || activeList.type !== 'unordered-list') {
+        flushList()
+        activeList = { type: 'unordered-list', items: [] }
+      }
+      activeList.items.push(unorderedItem[1])
+      continue
+    }
+
+    const orderedItem = trimmed.match(/^\d+\.\s+(.+)$/)
+    if (orderedItem) {
+      if (!activeList || activeList.type !== 'ordered-list') {
+        flushList()
+        activeList = { type: 'ordered-list', items: [] }
+      }
+      activeList.items.push(orderedItem[1])
+      continue
+    }
+
+    flushList()
+    blocks.push({ type: 'paragraph', content: trimmed })
+  }
+
+  flushList()
+  return blocks
+}
+
+function renderInlineContent(text, keyPrefix = 'inline') {
+  const source = String(text || '')
+  if (!source) return null
+
+  const nodes = []
+  let lastIndex = 0
+  let tokenIndex = 0
+
+  for (const match of source.matchAll(INLINE_TOKEN_RE)) {
+    const token = match[0]
+    const start = match.index ?? 0
+
+    if (start > lastIndex) {
+      nodes.push(source.slice(lastIndex, start))
+    }
+
+    if (token.startsWith('**') && token.endsWith('**')) {
+      nodes.push(
+        <strong key={`${keyPrefix}-strong-${tokenIndex}`}>
+          {token.slice(2, -2)}
+        </strong>
+      )
+    } else if (token.startsWith('[')) {
+      const linkMatch = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
+      if (linkMatch) {
+        const [, label, rawHref] = linkMatch
+        const href = normalizeInlineHref(rawHref)
+        const className = 'text-blue-600 underline underline-offset-2 hover:text-blue-700'
+
+        if (href.startsWith('/')) {
+          nodes.push(
+            <LocalizedLink key={`${keyPrefix}-link-${tokenIndex}`} to={href} className={className}>
+              {label}
+            </LocalizedLink>
+          )
+        } else {
+          nodes.push(
+            <a key={`${keyPrefix}-link-${tokenIndex}`} href={href} className={className}>
+              {label}
+            </a>
+          )
+        }
+      } else {
+        nodes.push(token)
+      }
+    } else {
+      const href = normalizeInlineHref(token)
+      const className = 'text-blue-600 underline underline-offset-2 hover:text-blue-700 break-all'
+      if (href.startsWith('/')) {
+        nodes.push(
+          <LocalizedLink key={`${keyPrefix}-url-${tokenIndex}`} to={href} className={className}>
+            {token}
+          </LocalizedLink>
+        )
+      } else {
+        nodes.push(
+          <a key={`${keyPrefix}-url-${tokenIndex}`} href={href} className={className}>
+            {token}
+          </a>
+        )
+      }
+    }
+
+    lastIndex = start + token.length
+    tokenIndex += 1
+  }
+
+  if (lastIndex < source.length) {
+    nodes.push(source.slice(lastIndex))
+  }
+
+  return nodes
+}
+
+function renderBlogBlocks(blocks = []) {
+  return blocks.map((block, index) => {
+    if (block.type === 'heading') {
+      const Tag = `h${block.level}`
+      return (
+        <Tag key={`heading-${index}`} id={block.id || undefined}>
+          {renderInlineContent(block.content, `heading-${index}`)}
+        </Tag>
+      )
+    }
+
+    if (block.type === 'unordered-list') {
+      return (
+        <ul key={`ul-${index}`}>
+          {block.items.map((item, itemIndex) => (
+            <li key={`ul-${index}-${itemIndex}`}>
+              {renderInlineContent(item, `ul-${index}-${itemIndex}`)}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    if (block.type === 'ordered-list') {
+      return (
+        <ol key={`ol-${index}`}>
+          {block.items.map((item, itemIndex) => (
+            <li key={`ol-${index}-${itemIndex}`}>
+              {renderInlineContent(item, `ol-${index}-${itemIndex}`)}
+            </li>
+          ))}
+        </ol>
+      )
+    }
+
+    if (block.type === 'divider') {
+      return <hr key={`divider-${index}`} className="my-8 border-gray-200" />
+    }
+
+    return (
+      <p key={`p-${index}`}>
+        {renderInlineContent(block.content, `p-${index}`)}
+      </p>
+    )
+  })
+}
+
 export default function BlogPost() {
   const { t } = useTranslation()
   const { slug, lang: urlLang } = useParams()
@@ -90,6 +307,7 @@ export default function BlogPost() {
   const seoTitle = buildBlogSeoTitle(post.title, siteName)
   const articleImage = resolveBlogOgImage(slug)
   const relatedPosts = getRelatedPosts(posts, post.slug, 3)
+  const renderedBody = parseBlogBody(post.body)
   const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -129,19 +347,17 @@ export default function BlogPost() {
         ]}
       />
 
-      <header className="text-center md:text-left">
-        <h1 className="text-2xl font-bold text-gray-900 text-center">{post.title}</h1>
-        <p className="text-xs text-gray-500 mt-1 text-center md:text-left">{post.date}</p>
+      <header>
+        <h1 className="text-3xl font-bold text-gray-900 text-center">{post.title}</h1>
+        <p className="text-xs text-gray-500 mt-2 text-left">{post.date}</p>
       </header>
 
       {fallback ? (
         <p className="mt-4 text-center text-xs text-gray-500">{t('content.fallbackNotice')}</p>
       ) : null}
 
-      <div className="prose prose-sm md:prose-base text-gray-800 mt-4 text-center md:text-left prose-pre:text-left prose-code:text-left prose-img:mx-0">
-        {post.body.map((para, index) => (
-          <p key={index}>{para}</p>
-        ))}
+      <div className="prose prose-sm md:prose-base max-w-none text-gray-800 mt-6 text-left prose-headings:text-gray-900 prose-a:no-underline prose-pre:text-left prose-code:text-left prose-img:mx-0">
+        {renderBlogBlocks(renderedBody)}
       </div>
 
       {relatedPosts.length ? (

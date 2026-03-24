@@ -87,7 +87,7 @@ function createRedPixelImage() {
 }
 
 test('preview container should not change size during processing', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/converter/image-to-pixel-art/');
 
   // Upload via hidden input for stability across browsers
   const fileInput = page.getByTestId('file-input');
@@ -138,7 +138,7 @@ test('preview container should not change size during processing', async ({ page
 });
 
 test('reselecting the same file should trigger processing again', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/converter/image-to-pixel-art/');
 
   // First selection via hidden input (more stable)
   const payload = { name: 'test.png', mimeType: 'image/png', buffer: createRedPixelImage() };
@@ -152,7 +152,7 @@ test('reselecting the same file should trigger processing again', async ({ page 
 });
 
 test('upload zone keeps full-card click without exposing button semantics', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/converter/image-to-pixel-art/');
 
   const zone = page.getByTestId('upload-zone');
   await expect(zone).not.toHaveAttribute('role', /button/i);
@@ -178,7 +178,7 @@ test('upload zone keeps full-card click without exposing button semantics', asyn
 });
 
 test('clicking the inner choose-file button opens file chooser and processes once', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/converter/image-to-pixel-art/');
   const btn = page.getByTestId('choose-file-btn');
   await btn.click();
   await page.getByTestId('file-input').setInputFiles({ name: 'test.png', mimeType: 'image/png', buffer: createRedPixelImage() });

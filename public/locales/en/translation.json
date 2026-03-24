@@ -13,7 +13,7 @@
     "start": "Start now"
   },
   "site": {
-    "tagline": "Online image generator • image to pixel converter • image palette maker • image processor • image editor",
+    "tagline": "Pixel Art Village is a free browser-based image to pixel art converter with custom palettes, private image processing, and direct image export",
     "name": "Pixel Art Village",
     "homeLinkAria": "Go to the Pixel Art Village home page"
   },
@@ -32,16 +32,16 @@
     },
     "copy": "© {{year}} pixel art Village. All rights reserved.",
     "links": {
-      "generator": "Digital image converter and image generator with the palette",
-      "converter": "Image to pixel art converter with custom palette",
-      "imageToPixel": "Image to pixel art with palettes",
-      "makePixelArt": "Make / create pixel image visuals with the palette controls",
-      "png2pixel": "PNG to pixel art with the palette",
-      "jpg2pixel": "JPG to pixel art with custom palettes",
-      "img2pixel": "IMG to pixel art with the palette options",
+      "generator": "Image to pixel art converter",
+      "converter": "Photo to pixel art",
+      "imageToPixel": "Image to pixel art",
+      "makePixelArt": "Make pixel art",
+      "png2pixel": "PNG to pixel art",
+      "jpg2pixel": "JPG to pixel art",
+      "img2pixel": "IMG to pixel art",
       "gridPreview": "Pixel grid preview",
       "how": "How it works",
-      "start": "Start in pixel art Village",
+      "start": "Open the main editor",
       "tips": "Tips & palettes",
       "privacyLocal": "Privacy & local processing",
       "gif2pixel": "GIF to pixel art",
@@ -90,8 +90,8 @@
     },
     "posts": {
       "best-pixel-art-converters-compared-2025": {
-        "title": "10 Best Pixel Art Converters Compared (2025) - Complete Guide",
-        "excerpt": "Compare the top 10 pixel art converters based on privacy, features, quality, and ease of use. Find the perfect tool for your pixel art needs, from hobby projects to professional game development.",
+        "title": "Best Pixel Art Converters Compared (2025)",
+        "excerpt": "A practical comparison of popular pixel art converters, with notes on privacy, output control, and who each tool fits best.",
         "tags": [
           "comparison",
           "tools",
@@ -103,8 +103,8 @@
         "languageNote": "Full article available in English"
       },
       "how-to-get-pixel-art-version-of-image": {
-        "title": "How to Turn an Image Into Pixel Art",
-        "excerpt": "Step-by-step Pixel Art Village converter workflow for SNES-style pixel exports, including refinement tips.",
+        "title": "How to Turn a Photo Into Pixel Art (SNES-Style Workflow)",
+        "excerpt": "A practical SNES-style workflow for turning a photo into pixel art, with palette, size, and cleanup tips.",
         "tags": [
           "image to pixel art",
           "pixel art converter",
@@ -115,8 +115,8 @@
         "languageNote": "Full article available in English"
       },
       "make-image-more-like-pixel": {
-        "title": "How to Make an Image More Like Pixel Art",
-        "excerpt": "Learn simple editing moves that turn flat conversions into vibrant Image to Pixel Art, including selective pixelation and multilingual tips.",
+        "title": "How to Make an Image Look More Like Pixel Art",
+        "excerpt": "Simple editing moves that help a first conversion look cleaner, sharper, and more intentionally retro.",
         "tags": [
           "image to pixel art",
           "editing",
@@ -127,8 +127,8 @@
         "languageNote": "Full article available in English"
       },
       "export-from-illustrator-image-to-pixel-art": {
-        "title": "How to Export from Illustrator So Images Aren't Pixelated",
-        "excerpt": "Free workflow for exporting from Illustrator without pixelation, with Canva tips and Pixel Art Village finishing steps.",
+        "title": "How to Export from Illustrator for Cleaner Pixel Art",
+        "excerpt": "Illustrator export settings that keep edges clean before you finish the image in a pixel art converter.",
         "tags": [
           "image to pixel art",
           "illustrator",
@@ -139,8 +139,8 @@
         "languageNote": "Full article available in English"
       },
       "how-to-pixelate-an-image": {
-        "title": "How to Pixelate an Image: Beginner Guide",
-        "excerpt": "Learn how to turn any photo into playful pixel art with Pixel Art Village's free tools, step-by-step workflow, and quick troubleshooting tips.",
+        "title": "How to Pixelate an Image: Beginner Workflow",
+        "excerpt": "A beginner-friendly walkthrough for uploading a photo, adjusting pixel size, and exporting a clean pixel art version.",
         "tags": [
           "image to pixel art",
           "pixel art maker",
@@ -165,9 +165,9 @@
     "rejectLabel": "Reject non-essential cookies"
   },
   "tool": {
-    "title": "Image to Pixel Art Converter — Free, Private, No Dimension Limits",
-    "subtitle2": "adjustable pixel size and custom palettes. Perfect for sprites, icons, and retro game art with advanced palette options.",
-    "subtitle": "Image to Pixel Art Converter – Turn PNG or JPG image to pixel art with instant preview and the palette controls, with image to pixel conversion.",
+    "title": "Image to Pixel Art Converter",
+    "subtitle2": "Adjust pixel size, colors, dithering, and grid settings, then export sprites, icons, and retro-style graphics.",
+    "subtitle": "Upload a PNG, JPG, GIF, or WEBP image and turn it into pixel art with live preview, palette controls, and instant local processing.",
     "dragOrClick": "Drag your image here or",
     "clickToChoose": "click to choose",
     "supports": "Supports PNG, JPG, GIF — up to 10MB",
@@ -259,68 +259,68 @@
     "relatedHeading": "Explore other converters"
   },
   "showcase": {
-    "title": "From Image to Pixel Art: See the Results",
+    "title": "See the Before and After",
     "desc": "With",
     "before": "Before",
     "after": "After",
     "alt": {
       "before": "Original image before conversion to pixel art",
-      "after": "A landscape image converted into 8-bit style pixel art by the pixel art Village generator"
+      "after": "A landscape image converted into retro-style pixel art with Pixel Art Village"
     },
-    "descFull": "Compare the original image with our pixel art output. See how palettes, dithering, and resolution choices reshape your artwork."
+    "descFull": "Compare the source image with the final image result and see how palette, dithering, and size settings change the image output."
   },
   "lang": {
     "label": "Language",
     "title": "Select language"
   },
   "wplace": {
-    "title": "Why Choose This Image to Pixel Art Converter",
-    "desc": "The ultimate companion for pixel art Village — convert any image into clean pixel visuals with real‑time preview, smart palettes, and instant export. Create pixel art with our image tools.",
+    "title": "Why creators use Pixel Art Village",
+    "desc": "Pixel Art Village makes the core image to pixel art workflow simple: upload an image, tune the look, and export a clean image result without leaving the browser. Pixel Art Village keeps every image step in one place.",
     "features": {
       "free": {
         "title": "100% Free",
-        "desc": "Completely free for everyone. No hidden costs or subscriptions — create unlimited pixel visuals from any image."
+        "desc": "Use the editor, palettes, and exports for free. No account, credit card, or download limit."
       },
       "privacy": {
         "title": "Privacy First (Client‑Side)",
-        "desc": "All processing happens in your browser. Your images never leave your device — a private, secure workflow by design."
+        "desc": "All processing happens in your browser. Your images stay on your device unless you choose to share them."
       },
       "easy": {
         "title": "Easy for Everyone",
-        "desc": "Intuitive interface and fast feedback. Convert any image to paintable pixel visuals in just a few clicks with custom palette options."
+        "desc": "The editor is built for quick iteration, so you can test image styles, palettes, and sizes without a steep learning curve."
       },
       "size": {
         "title": "No Dimension Limits",
-        "desc": "Upload images of any size — from tiny icons to large graphics — with smooth scaling and responsive image previews using advanced palettes."
+        "desc": "Work with anything from small icons to large reference images, then scale the final image export for your project."
       }
     }
   },
   "features": {
-    "title": "Image to Pixel Art Settings: Custom Palette and Grid",
-    "desc": "Transform images into pixel‑perfect art. Live‑tune details with custom palettes and swatch control. Instant preview and sprite‑ready PNG export.",
+    "title": "Pixel Art Converter Controls",
+    "desc": "This image to pixel art converter lets you control how your image looks with palette, pixel size, dithering, and cleanup settings before you export.",
     "palette": {
       "title": "Custom palette",
-      "desc": "Swap between curated palettes or build your own swatches to match any retro or brand style."
+      "desc": "Switch between built-in palettes or create your own to match a retro system, a game project, or an image style."
     },
     "live": {
       "title": "Live adjustments",
-      "desc": "Fine-tune pixel size, brightness, contrast, saturation, and dithering with instant feedback."
+      "desc": "Change pixel size, brightness, contrast, saturation, and dithering and see the image result update immediately in the image preview."
     },
     "clientSide": {
-      "title": "Pixel grid control",
-      "desc": "Processing runs entirely in your browser—images never leave your device."
+      "title": "Private processing",
+      "desc": "Your image stays in the browser while you edit, preview, and export."
     }
   },
   "how": {
-    "title": "How pixel art Village works",
-    "desc": "Use pixel art Village to convert image to pixel art in three simple steps.",
+    "title": "How to Convert Image to Pixel Art",
+    "desc": "Use the image to pixel art converter to upload an image, adjust image pixels and palette, then export a clean image result.",
     "steps": {
-      "upload": "Upload",
-      "adjust": "Adjust",
-      "download": "Download",
-      "upload.desc": "Choose or drag your image (PNG, JPG) into the image processor for image conversion.",
-      "adjust.desc": "Use live controls to fine‑tune pixel size, palette, and the pixel grid with custom palettes.",
-      "download.desc": "One click to export from the image generator and share your image creation."
+      "upload": "Upload your image",
+      "adjust": "Adjust pixels and palette",
+      "download": "Download the result",
+      "upload.desc": "Upload or drag in an image file such as PNG, JPG, GIF, or WEBP to start the full converter workflow.",
+      "adjust.desc": "Tune pixel size, palette, dithering, and other controls while the preview updates in the editor.",
+      "download.desc": "Export the result as PNG, JPEG, or WebP for sprites, icons, UI art, or retro graphics."
     }
   },
   "common": {
@@ -535,72 +535,113 @@
     "p13": "for step-by-step instructions."
   },
   "faq": {
-    "title": "Image to Pixel Art FAQ",
+    "title": "Image to pixel art FAQ",
     "items": [
       {
-        "question": "Is this digital image maker with palette controls free?",
-        "answer": "Yes. Image Village is a completely free online image tool for all users. Enjoy unlimited image conversions, custom palette controls, and high-resolution downloads with advanced palettes without any cost."
+        "question": "Is this image to pixel art tool free to use?",
+        "answer": "Yes. This image to pixel art tool is free. You can upload an image, adjust the image settings, and download the image result for free."
       },
       {
-        "question": "Is my image private? Do you upload image files?",
-        "answer": "Your image privacy is guaranteed. Your image files never leave your device as all image processing is done locally in your browser. Image Village cannot access your image files, making it a secure digital image creator from your images with palette options."
+        "question": "Do you upload images to a server?",
+        "answer": "No. This image to pixel art tool runs in your browser, so your source image and final image stay on your device."
       },
       {
-        "question": "How do I turn a image into a game sprite with custom palette?",
-        "answer": "Our digital image maker with palette controls is perfect for creating game sprites. Upload your character's image, adjust the size to match your game's visual style, and use the custom palette controls to fit your engine's color limits. Create pixel art with advanced palettes to help you make the perfect sprite as a transparent PNG."
+        "question": "Can I convert PNG, JPG, GIF, or photo files here?",
+        "answer": "Yes. You can convert PNG, JPG, GIF, and WEBP image files here, and you can open a dedicated photo workflow from the homepage."
       },
       {
-        "question": "Can I adjust the pixel grid on my image?",
-        "answer": "Absolutely. The live editor includes a \"Show grid\" option. This pixel grid overlay helps you see the individual pixels clearly, which is useful for fine-tuning your art or for learning how the pixelation effect works on your image."
+        "question": "Is this an AI pixel art generator?",
+        "answer": "No. This page is a rule-based image to pixel art tool, not an AI pixel art generator, so you keep direct control over the source image, palette, and pixel settings."
       },
       {
-        "question": "What is the best way to convert a image to pixel art?",
-        "answer": "For best results when you convert a image to pixel visuals, start with a high-contrast image. Use the pixel size slider to find a level of detail you like with custom palette settings. Create pixel art with larger sizes for a more abstract, 8-bit look, while smaller sizes retain more detail from the original image with advanced palettes."
+        "question": "How do I get cleaner pixel art results?",
+        "answer": "Start with a clear source image, reduce extra detail, then convert image to pixel art with the palette and pixel size that best match your final export."
       },
       {
-        "question": "Can I use the generated pixel art commercially?",
-        "answer": "Yes. You own the rights to your original uploads and to the generated results. You can use graphics made with pixel Village for any purpose, including commercial projects. Create pixel art with our tools for unlimited commercial use."
-      },
-      {
-        "question": "Which formats can I use with this image pixelator?",
-        "answer": "This image pixelator supports all common browser formats like PNG, JPG, GIF, and WEBP. You can convert a PNG to pixel visuals or a JPG to pixel visuals with ease. Create pixel art with any image format."
+        "question": "Is this also a pixel art maker?",
+        "answer": "Yes. It works well as an image-based pixel art maker and pixel art converter when you want to refine an existing image instead of starting from scratch."
       }
     ]
   },
   "home": {
-    "seoTitle": "Pixel Art Village | Free Image to Pixel Art & Sprite Tools",
-    "seoDescription": "Use Pixel Art Village to convert images to pixel art, pixelate photos, build sprites, and open PNG, JPG, or GIF tools with live preview and private browser-based processing.",
-    "heroTitle": "Pixel Art Village: Free Image to Pixel Art Tools",
-    "heroSubtitle": "Start with the main editor to convert images to pixel art with live preview, custom palettes, and private browser-based processing.",
-    "heroSubtitle2": "Need a specific workflow? Jump to dedicated tools for image to pixel art, photo to pixel art, PNG, JPG, GIF, sprites, and 8-bit graphics.",
-    "exploreHeading": "Open the exact tool you need",
-    "exploreIntro": "Start on the homepage for the full editor, or jump straight to a dedicated converter page for the exact workflow you need.",
+    "seoTitle": "Image to Pixel Art Converter | Pixel Art Village",
+    "seoDescription": "Turn any image or PNG, JPG, GIF, and WEBP image file into pixel art with live preview, custom palettes, dithering, and private browser-based processing.",
+    "heroTitle": "Image to Pixel Art Converter | Pixel Art Village",
+    "heroSubtitle": "Pixel Art Village is an image to pixel art converter for any image or PNG, JPG, GIF, and WEBP image file, with live preview, custom palettes, private browser-based image processing, and direct image export.",
+    "heroSubtitle2": "Upload an image below to start editing in Pixel Art Village, compare the image live, keep the image preview visible, or explore dedicated photo, PNG, JPG, GIF, and sprite workflows lower on the page.",
+    "primaryCtaLabel": "Open the full image to pixel art converter",
+    "primaryCtaHelp": "Need the complete editor right away? Start in the main converter.",
+    "primaryCalloutTitle": "Start with the main converter when you need the full workflow",
+    "primaryCalloutDescription": "Use the main image to pixel art converter for live preview, palette control, dithering, and export. Dedicated pages are best when you already know you need a photo or format-specific workflow.",
+    "entryChooseFile": "Upload image and continue",
+    "entrySupports": "Supports PNG, JPG, GIF, and WEBP — the full editor opens on the next page.",
+    "exploreHeading": "Explore Pixel Art Village workflows",
+    "exploreIntro": "Need a narrower image workflow? Stay in the main image to pixel art editor for general image work, or open the photo, PNG, JPG, GIF, sprite, or other dedicated image converter pages.",
     "cards": {
       "mainConverter": {
         "title": "Image to Pixel Art Converter",
-        "description": "Best fit for general image-to-pixel-art conversions across PNG, JPG, GIF, WEBP, and BMP files."
+        "description": "The Pixel Art Village main editor is the image to pixel art converter for general PNG, JPG, GIF, WEBP, and BMP image files in one image workspace."
       },
       "photoToPixel": {
-        "title": "Photo to Pixel Art",
-        "description": "Built for turning photos into readable retro pixel art with cleaner edges and palette control."
+        "title": "Photo Pixel Converter",
+        "description": "Best when your source is a photo and you want a more photo-specific route into readable retro pixel art."
       },
       "photoToSprite": {
         "title": "Photo to Sprite Converter",
         "description": "Use when you need smaller game-ready sprites with simplified shapes and tighter color limits."
       },
       "pngToPixel": {
-        "title": "PNG to Pixel Art",
+        "title": "PNG Pixel Converter",
         "description": "Ideal for PNG files, transparency, and crisp source artwork that needs clean pixel edges."
       },
       "jpgToPixel": {
-        "title": "JPG to Pixel Art",
+        "title": "JPG Pixel Converter",
         "description": "A better landing page for compressed JPG uploads, profile photos, and camera images."
       },
       "gifToPixel": {
-        "title": "GIF to Pixel Art",
+        "title": "GIF Pixel Converter",
         "description": "Open this page when your source file is GIF and you want a dedicated GIF-to-pixel workflow."
       }
     }
+  },
+  "homeHow": {
+    "title": "Start with the right workflow",
+    "desc": "Use the homepage to choose the best entry point, then finish the full conversion in the main editor or a dedicated tool page.",
+    "steps": [
+      {
+        "title": "Choose a workflow",
+        "description": "Pick the main converter for most images, or open a photo or format-specific page when your source needs a more focused workflow."
+      },
+      {
+        "title": "Open the full editor",
+        "description": "Use the main image to pixel art converter when you want the complete set of pixel, palette, dithering, and export controls."
+      },
+      {
+        "title": "Adjust and export",
+        "description": "Finish the conversion in the editor, then download clean pixel art for sprites, icons, UI art, and retro graphics."
+      }
+    ]
+  },
+  "homeFaq": {
+    "title": "Pixel Art Village FAQ",
+    "items": [
+      {
+        "question": "What is Pixel Art Village?",
+        "answer": "Pixel Art Village is a browser-based tool hub for image to pixel art conversion, photo cleanup, sprite refinement, and retro image export without sending files to a server. Pixel Art Village keeps processing private and direct."
+      },
+      {
+        "question": "Should I start with the main converter or a dedicated page?",
+        "answer": "Start with the main image to pixel art converter for general image work. Open a dedicated page when your source image is clearly a photo, PNG, JPG, GIF, or another specific image workflow."
+      },
+      {
+        "question": "Does the full editor keep images private?",
+        "answer": "Yes. Image processing happens in your browser, so your image files, image preview, and exported image stay on your device while you preview and export."
+      },
+      {
+        "question": "Which image file types can I start with?",
+        "answer": "You can start with common browser image formats including PNG, JPG, GIF, and WEBP in Pixel Art Village."
+      }
+    ]
   },
   "header": {
     "mainNav": "Main navigation",

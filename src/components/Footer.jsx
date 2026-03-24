@@ -265,7 +265,7 @@ function Footer() {
               <ul className="space-y-2 text-sm">
                 <li><LocalizedLink to="/#tool" className="hover:text-white">{t('footer.links.start')}</LocalizedLink></li>
                 <li><LocalizedLink to="/#features" className="hover:text-white">{t('footer.links.tips')}</LocalizedLink></li>
-                <li><LocalizedLink to="/#faq" className="hover:text-white">{t('footer.links.privacyLocal')}</LocalizedLink></li>
+                <li><LocalizedLink to="/privacy/" className="hover:text-white">{t('footer.links.privacyLocal')}</LocalizedLink></li>
                 <li>
                   <a href="https://github.com/pixelartvillage/pixelartvillage" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-white" aria-label={t('footer.github')}>
                     <GitHubIcon className="w-4 h-4" /> {t('footer.github')}
