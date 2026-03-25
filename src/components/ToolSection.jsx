@@ -277,7 +277,7 @@ function ToolSection({
             data-testid="file-input"
           />
           <div className="text-center">
-            <svg className="mx-auto h-12 w-12 text-gray-400" width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 16a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v5a4 4 0 01-4 4H7z" /></svg>
+            <svg className="mx-auto h-12 w-12 text-gray-400" width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 16a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v5a4 4 0 01-4 4H7z" /></svg>
             <h2 id="upload-instructions" className="mt-4 text-xl font-semibold text-gray-700" style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginTop: '1rem', marginBottom: 0 }}>
               {t('tool.dragOrClick')} <span className="text-blue-600">{t('tool.clickToChoose')}</span>
             </h2>

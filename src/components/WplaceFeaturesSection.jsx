@@ -27,6 +27,7 @@ function CircleIcon({ bg, children, title }) {
 // 内联简洁图标（与截图风格一致：线性/简约）
 const IconDollar = ({ className = 'h-6 w-6 text-emerald-600' }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       aria-hidden="true" focusable="false"
        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <path d="M12 1v22" />
     <path d="M17 5c0 2.5-2.5 3.5-5 3.8S7 9.6 7 12s2.5 3.5 5 3.8 5 1.3 5 3.7" />
@@ -35,6 +36,7 @@ const IconDollar = ({ className = 'h-6 w-6 text-emerald-600' }) => (
 
 const IconLock = ({ className = 'h-6 w-6 text-blue-600' }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       aria-hidden="true" focusable="false"
        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <rect x="4" y="11" width="16" height="9" rx="2" />
     <path d="M8 11V8a4 4 0 0 1 8 0v3" />
@@ -43,6 +45,7 @@ const IconLock = ({ className = 'h-6 w-6 text-blue-600' }) => (
 
 const IconSmile = ({ className = 'h-6 w-6 text-violet-600' }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       aria-hidden="true" focusable="false"
        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <circle cx="12" cy="12" r="10" />
     <path d="M8 14s1.5 2 4 2 4-2 4-2" />
@@ -52,6 +55,7 @@ const IconSmile = ({ className = 'h-6 w-6 text-violet-600' }) => (
 
 const IconImage = ({ className = 'h-6 w-6 text-amber-600' }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       aria-hidden="true" focusable="false"
        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <rect x="3" y="3" width="18" height="14" rx="2" />
     <path d="M8 11l3-3 5 6H6l2-3z" />
