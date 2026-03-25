@@ -20,7 +20,7 @@ function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, isProc
     >
       <img
         src={processedImage || null}
-        alt={t('preview.alt')}
+        alt={t('preview.alt', { defaultValue: 'Pixel art preview' })}
         className={`transition-opacity ${isProcessing ? 'opacity-50' : 'opacity-100'} max-w-none`}
         style={{
           imageRendering: 'pixelated',

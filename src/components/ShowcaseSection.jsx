@@ -83,6 +83,13 @@ function DeferredShowcaseImage({ alt, jpgSrcSet, webpSrcSet, src }) {
 
 function ShowcaseSection() {
   const { t } = useTranslation();
+  const beforeAlt = t('showcase.alt.before', {
+    defaultValue: 'Original image before conversion to pixel art',
+  });
+  const afterAlt = t('showcase.alt.after', {
+    defaultValue: 'A landscape image converted into retro-style pixel art with Pixel Art Village',
+  });
+
   return (
     <section id="showcase" className="py-12 md:py-16">
       <div className="container mx-auto px-4">
@@ -94,7 +101,7 @@ function ShowcaseSection() {
           <div className="text-center">
             <h3 className="text-xl font-semibold mb-2">{t('showcase.before')}</h3>
             <DeferredShowcaseImage
-              alt={t('showcase.alt.before')}
+              alt={beforeAlt}
               jpgSrcSet={showcaseBeforeJpgSrcSet}
               webpSrcSet={showcaseBeforeWebpSrcSet}
               src="/showcase-before-w928.jpg"
@@ -103,7 +110,7 @@ function ShowcaseSection() {
           <div className="text-center">
             <h3 className="text-xl font-semibold mb-2">{t('showcase.after')}</h3>
             <DeferredShowcaseImage
-              alt={t('showcase.alt.after')}
+              alt={afterAlt}
               jpgSrcSet={showcaseAfterJpgSrcSet}
               webpSrcSet={showcaseAfterWebpSrcSet}
               src="/showcase-after-w928.jpg"

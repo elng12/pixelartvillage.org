@@ -26,6 +26,32 @@ const yoDirectoryBadge = '/badges/yodirectory-badge.png';
 const zImageBadge = '/badges/z-image-badge.svg';
 const buildYear = typeof __BUILD_YEAR__ !== 'undefined' ? __BUILD_YEAR__ : new Date().getFullYear();
 
+const footerBadgeFallbackLabels = {
+  twelveTools: 'Featured on Twelve.tools',
+  fazier: 'Featured on Fazier launches',
+  acidTools: 'Featured on Acid Tools',
+  startupFame: 'Listed on StartupFa.me',
+  projectHunt: 'Featured on projecthunt.me',
+  toolFame: 'Featured on ToolFame.com',
+  submito: 'Listed on Submito',
+  saasFame: 'Featured on SaaSFame.com',
+  saasToolsDir: 'Featured on SaaS Tools Dir',
+  deepLaunch: 'Featured on DeepLaunch.io',
+  submitAiTools: 'Featured on Submit AI Tools',
+  findlyTools: 'Featured on Findly.tools',
+  goodAiTools: 'Featured on Good AI Tools',
+  promoteBusinessDirectory: 'Listed on Promote Business Directory',
+  zImage: 'Listed on Z-Image',
+  yoDirectory: 'Featured on yo.directory',
+  microSaasExamples: 'Featured on Micro SaaS Examples',
+  mossAi: 'Featured on MossAI Tools',
+  productHunt: 'Featured on Product Hunt',
+  justSimpleTools: 'Listed on JustSimple Tools',
+  turbo0: 'Turbo0 collection badge',
+  indieDeals: 'Indie Deals directory badge',
+  aiDirs: 'AI Dirs directory badge',
+};
+
 const footerBadges = [
   {
     key: 'twelveTools',
@@ -190,6 +216,14 @@ const footerBadges = [
   },
 ];
 
+function getSafeTranslation(t, key, fallback) {
+  const translated = t(key, { defaultValue: fallback });
+  if (typeof translated !== 'string') return fallback;
+  const normalized = translated.trim();
+  if (!normalized || normalized === key) return fallback;
+  return normalized;
+}
+
 function GitHubIcon({ className }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
@@ -290,28 +324,36 @@ function Footer() {
               />
               <div className="footer-badge-scroller -mx-4 overflow-x-auto px-4 pb-3 sm:mx-0 sm:px-0">
                 <ul className="flex snap-x snap-mandatory gap-3">
-                  {footerBadges.map((badge) => (
-                    <li key={badge.key} className="shrink-0 snap-start">
-                      <a
-                        href={badge.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={t(`footer.badges.${badge.key}`)}
-                        className="group flex items-center justify-center transition duration-200 hover:-translate-y-0.5"
-                      >
-                        <img
-                          src={badge.src}
-                          alt={t(`footer.badges.${badge.key}`)}
-                          width={badge.width}
-                          height={badge.height}
-                          loading="lazy"
-                          fetchPriority="low"
-                          decoding="async"
-                          className="h-auto w-auto max-h-[54px] max-w-none object-contain opacity-95 transition duration-200 group-hover:opacity-100"
-                        />
-                      </a>
-                    </li>
-                  ))}
+                  {footerBadges.map((badge) => {
+                    const badgeLabel = getSafeTranslation(
+                      t,
+                      `footer.badges.${badge.key}`,
+                      footerBadgeFallbackLabels[badge.key] || 'Pixel Art Village directory badge'
+                    );
+
+                    return (
+                      <li key={badge.key} className="shrink-0 snap-start">
+                        <a
+                          href={badge.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={badgeLabel}
+                          className="group flex items-center justify-center transition duration-200 hover:-translate-y-0.5"
+                        >
+                          <img
+                            src={badge.src}
+                            alt={badgeLabel}
+                            width={badge.width}
+                            height={badge.height}
+                            loading="lazy"
+                            fetchPriority="low"
+                            decoding="async"
+                            className="h-auto w-auto max-h-[54px] max-w-none object-contain opacity-95 transition duration-200 group-hover:opacity-100"
+                          />
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </div>
