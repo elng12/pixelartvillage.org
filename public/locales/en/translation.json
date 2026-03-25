@@ -568,7 +568,7 @@
     "seoDescription": "Turn any image or PNG, JPG, GIF, and WEBP image file into pixel art with live preview, custom palettes, dithering, and private browser-based processing.",
     "heroTitle": "Image to Pixel Art Converter | Pixel Art Village",
     "heroSubtitle": "Pixel Art Village is an image to pixel art converter for any image or PNG, JPG, GIF, and WEBP image file, with live preview, custom palettes, private browser-based image processing, and direct image export in one pixel art converter.",
-    "heroSubtitle2": "Upload an image below to start editing in Pixel Art Village, compare the image live, keep the image preview visible, or explore dedicated photo, PNG, JPG, GIF, and sprite workflows lower on the page.",
+    "heroSubtitle2": "Upload an image below to start editing in the Pixel Art Village pixel art converter, compare the image live, keep the image preview visible, or explore dedicated photo, PNG, JPG, GIF, and sprite workflows lower on the page.",
     "primaryCtaLabel": "Open the full image to pixel art converter",
     "primaryCtaHelp": "Need the complete editor right away? Start in the main converter.",
     "primaryCalloutTitle": "Start with the main converter when you need the full workflow",
@@ -627,7 +627,7 @@
     "items": [
       {
         "question": "What is Pixel Art Village?",
-        "answer": "Pixel Art Village is a browser-based tool hub for image to pixel art conversion, photo cleanup, sprite refinement, and retro image export without sending files to a server. Pixel Art Village keeps processing private and direct."
+        "answer": "Pixel Art Village is a browser-based pixel art converter hub for image to pixel art conversion, photo cleanup, sprite refinement, and retro image export without sending files to a server. Pixel Art Village keeps processing private and direct."
       },
       {
         "question": "Should I start with the main converter or a dedicated page?",
@@ -635,7 +635,7 @@
       },
       {
         "question": "Does the full editor keep images private?",
-        "answer": "Yes. Image processing happens in your browser, so your image files, image preview, and exported image stay on your device while you preview and export."
+        "answer": "Yes. Image processing happens in your browser, so your image files, image preview, and exported image stay on your device while you preview and export in the pixel art converter."
       },
       {
         "question": "Which image file types can I start with?",

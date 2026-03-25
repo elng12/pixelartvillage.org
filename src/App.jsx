@@ -69,6 +69,7 @@ function Home() {
         titleText={t('home.heroTitle')}
         subtitleText={t('home.heroSubtitle')}
         subtitleText2={t('home.heroSubtitle2')}
+        supportsText={t('home.entrySupports')}
       />
       {(uploadedImage || IS_E2E) ? (
         <Suspense fallback={null}>
