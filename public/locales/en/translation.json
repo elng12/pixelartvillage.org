@@ -572,15 +572,15 @@
     "primaryCtaLabel": "Open the full image to pixel art converter",
     "primaryCtaHelp": "Need the complete editor right away? Start in the main converter.",
     "primaryCalloutTitle": "Start with the main converter when you need the full workflow",
-    "primaryCalloutDescription": "Use the main image to pixel art converter for live preview, palette control, dithering, and export. This pixel art converter is best for general image work, while dedicated pages are better when you already know you need a photo or format-specific workflow.",
+    "primaryCalloutDescription": "Use the main converter for live preview, palette control, dithering, and export. This pixel art converter is best for general image work, while dedicated pages are better when you already know you need a photo or format-specific workflow.",
     "entryChooseFile": "Upload image and continue",
     "entrySupports": "Supports PNG, JPG, GIF, and WEBP — the full pixel art converter opens on the next page.",
     "exploreHeading": "Explore Pixel Art Village workflows",
-    "exploreIntro": "Need a narrower image workflow? Stay in the main image to pixel art editor for general image work, or use the main pixel art converter before opening the photo, PNG, JPG, GIF, sprite, or other dedicated image converter pages.",
+    "exploreIntro": "Need a narrower image workflow? Stay in the main editor for general image work, or use the main pixel art converter before opening the photo, PNG, JPG, GIF, sprite, or other dedicated image converter pages.",
     "cards": {
       "mainConverter": {
         "title": "Image to Pixel Art Converter",
-        "description": "The Pixel Art Village main editor is the image to pixel art converter for general PNG, JPG, GIF, WEBP, and BMP image files in one image workspace and one pixel art converter."
+        "description": "The Pixel Art Village main editor is the main converter for general PNG, JPG, GIF, WEBP, and BMP image files in one image workspace and one pixel art converter."
       },
       "photoToPixel": {
         "title": "Photo Pixel Converter",
@@ -606,7 +606,7 @@
   },
   "homeHow": {
     "title": "Start with the right workflow",
-    "desc": "Use the homepage to choose the best entry point, then finish the full conversion in the main editor or a dedicated tool page inside the main pixel art converter workflow.",
+    "desc": "Use the homepage to choose the best entry point, then finish the full conversion in the main editor or a dedicated tool page inside the main converter workflow.",
     "steps": [
       {
         "title": "Choose a workflow",
@@ -614,7 +614,7 @@
       },
       {
         "title": "Open the full editor",
-        "description": "Use the main image to pixel art converter when you want the complete set of pixel, palette, dithering, and export controls."
+        "description": "Use the main converter when you want the complete set of pixel, palette, dithering, and export controls."
       },
       {
         "title": "Adjust and export",
@@ -627,11 +627,11 @@
     "items": [
       {
         "question": "What is Pixel Art Village?",
-        "answer": "Pixel Art Village is a browser-based pixel art converter hub for image to pixel art conversion, photo cleanup, sprite refinement, and retro image export without sending files to a server. Pixel Art Village keeps processing private and direct."
+        "answer": "Pixel Art Village is a browser-based pixel art converter hub for image conversion into pixel art, photo cleanup, sprite refinement, and retro image export without sending files to a server. Pixel Art Village keeps processing private and direct."
       },
       {
         "question": "Should I start with the main converter or a dedicated page?",
-        "answer": "Start with the main image to pixel art converter for general image work. This pixel art converter is the right starting point before you open a dedicated page for a photo, PNG, JPG, GIF, or another specific image workflow."
+        "answer": "Start with the main converter for general image work. This pixel art converter is the right starting point before you open a dedicated page for a photo, PNG, JPG, GIF, or another specific image workflow."
       },
       {
         "question": "Does the full editor keep images private?",
