@@ -11,6 +11,7 @@ function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, on
   const [activeTab, setActiveTab] = useState('create') // 'create' | 'lospec'
   const tabOrder = ['create', 'lospec']
   const tabRefs = useRef({})
+  const clearAllLabel = t('paletteManager.clearAll', { defaultValue: 'Clear all custom palettes' })
   const importedSourceLabels = useMemo(() => ({
     lospec: 'Lospec',
     pixilart: 'PixilArt',
@@ -61,7 +62,10 @@ function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, on
 
   const handleClearAllPalettes = () => {
     if (customPaletteCount <= 0) return
-    const message = t('paletteManager.clearAllConfirm', { count: customPaletteCount })
+    const message = t('paletteManager.clearAllConfirm', {
+      count: customPaletteCount,
+      defaultValue: 'Delete all {{count}} custom palettes? Built-in palettes will stay.',
+    })
     if (typeof window !== 'undefined' && !window.confirm(message)) return
     onClearAllPalettes?.()
     handleResetForm()
@@ -206,7 +210,7 @@ function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, on
                 className="btn-secondary text-red-700 hover:text-red-800"
                 onClick={handleClearAllPalettes}
               >
-                {t('paletteManager.clearAll')}
+                {clearAllLabel}
               </button>
             ) : null}
           </div>
