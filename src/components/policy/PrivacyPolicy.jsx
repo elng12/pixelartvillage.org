@@ -177,18 +177,13 @@ export default function PrivacyPolicy() {
                 </LocalizedLink>
               </li>
               <li>
-                <LocalizedLink to="/converter/jpg-to-pixel-art/" className="text-blue-600 hover:text-blue-800">
-                  {t('privacy.quickLinks.links.jpg')}
-                </LocalizedLink>
-              </li>
-              <li>
                 <LocalizedLink to="/converter/image-to-pixel-art/" className="text-blue-600 hover:text-blue-800">
                   {t('privacy.quickLinks.links.image')}
                 </LocalizedLink>
               </li>
               <li>
                 <LocalizedLink to="/converter/photo-to-pixel-art/" className="text-blue-600 hover:text-blue-800">
-                  {t('privacy.quickLinks.links.photo')}
+                  {t('footer.links.converter')}
                 </LocalizedLink>
               </li>
             </ul>

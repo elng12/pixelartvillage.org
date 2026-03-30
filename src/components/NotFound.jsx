@@ -34,7 +34,7 @@ function NotFound() {
             <nav className="mt-4 space-y-2">
               <Link to={buildPath('/')} className="block text-blue-500 hover:text-blue-600">{t('notFound.links.home')}</Link>
               <Link to={buildPath('/converter/png-to-pixel-art/')} className="block text-blue-500 hover:text-blue-600">{t('notFound.links.pngConverter')}</Link>
-              <Link to={buildPath('/converter/jpg-to-pixel-art/')} className="block text-blue-500 hover:text-blue-600">{t('notFound.links.jpgConverter')}</Link>
+              <Link to={buildPath('/converter/image-to-pixel-art/')} className="block text-blue-500 hover:text-blue-600">{t('footer.links.generator')}</Link>
               <Link to={buildPath('/about/')} className="block text-blue-500 hover:text-blue-600">{t('notFound.links.about')}</Link>
             </nav>
           </div>

@@ -534,7 +534,6 @@ async function prerender() {
     { href: buildLocalizedPath(lang, '/privacy'), label: pick(bundle, 'footer.privacy') || 'Privacy' },
     { href: buildLocalizedPath(lang, '/terms'), label: pick(bundle, 'footer.terms') || 'Terms' },
     { href: buildLocalizedPath(lang, '/converter/png-to-pixel-art'), label: pick(bundle, 'footer.links.png2pixel') || 'PNG to Pixel Art' },
-    { href: buildLocalizedPath(lang, '/converter/jpg-to-pixel-art'), label: pick(bundle, 'footer.links.jpg2pixel') || 'JPG to Pixel Art' },
     { href: buildLocalizedPath(lang, '/converter/image-to-pixel-art'), label: pick(bundle, 'footer.links.imageToPixel') || 'Image to Pixel Art' },
     { href: buildLocalizedPath(lang, '/converter/photo-to-sprite-converter'), label: pick(bundle, 'footer.links.photo2sprite') || 'Photo to Sprite Converter' },
   ])
@@ -649,7 +648,6 @@ async function prerender() {
     ]
     const rightLinks = [
       { href: buildLocalizedPath(lang, '/converter/png-to-pixel-art'), label: pick(bundle, `${baseKey}.quickLinks.links.png`) || pick(bundle, 'footer.links.png2pixel') || 'PNG to Pixel Art' },
-      { href: buildLocalizedPath(lang, '/converter/jpg-to-pixel-art'), label: pick(bundle, `${baseKey}.quickLinks.links.jpg`) || pick(bundle, 'footer.links.jpg2pixel') || 'JPG to Pixel Art' },
       { href: buildLocalizedPath(lang, '/converter/image-to-pixel-art'), label: pick(bundle, `${baseKey}.quickLinks.links.image`) || pick(bundle, 'footer.links.imageToPixel') || 'Image to Pixel Art' },
       { href: buildLocalizedPath(lang, '/converter/photo-to-pixel-art'), label: pick(bundle, `${baseKey}.quickLinks.links.photo`) || pick(bundle, 'footer.links.converter') || 'Photo to Pixel Art' },
     ]
@@ -810,11 +808,6 @@ async function prerender() {
         href: buildLocalizedPath(lang, '/converter/png-to-pixel-art'),
         title: pick(bundle, 'home.cards.pngToPixel.title') || 'PNG to Pixel Art',
         description: pick(bundle, 'home.cards.pngToPixel.description') || 'Ideal for PNG files and crisp source artwork.',
-      },
-      {
-        href: buildLocalizedPath(lang, '/converter/jpg-to-pixel-art'),
-        title: pick(bundle, 'home.cards.jpgToPixel.title') || 'JPG to Pixel Art',
-        description: pick(bundle, 'home.cards.jpgToPixel.description') || 'A better landing page for compressed JPG uploads and camera images.',
       },
       {
         href: buildLocalizedPath(lang, '/converter/gif-to-pixel-art'),

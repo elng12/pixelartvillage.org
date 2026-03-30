@@ -30,11 +30,6 @@ export default function HomeBelowFold() {
       description: t('home.cards.pngToPixel.description'),
     },
     {
-      to: '/converter/jpg-to-pixel-art/',
-      title: t('home.cards.jpgToPixel.title'),
-      description: t('home.cards.jpgToPixel.description'),
-    },
-    {
       to: '/converter/gif-to-pixel-art/',
       title: t('home.cards.gifToPixel.title'),
       description: t('home.cards.gifToPixel.description'),

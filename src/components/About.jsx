@@ -54,17 +54,6 @@ export default function About() {
             }}
           />
         </p>
-        <p>
-          <Trans
-            i18nKey="about.specializedLinks"
-            defaults="Need a specific workflow? Try <png>PNG to pixel art</png>, <jpg>JPG to pixel art</jpg>, or the <photo>photo to sprite converter</photo>."
-            components={{
-              png: <LocalizedLink to="/converter/png-to-pixel-art/" className="text-blue-600 underline" />,
-              jpg: <LocalizedLink to="/converter/jpg-to-pixel-art/" className="text-blue-600 underline" />,
-              photo: <LocalizedLink to="/converter/photo-to-sprite-converter/" className="text-blue-600 underline" />,
-            }}
-          />
-        </p>
         <h2>{t('about.principles.title')}</h2>
         <ul>
           <li><strong>{t('about.principles.privacy.title')}</strong> {t('about.principles.privacy.desc')}</li>

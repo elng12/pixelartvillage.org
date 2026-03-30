@@ -30,8 +30,8 @@ export default function ResourcePreloader() {
 
       // 根据当前页面预加载相关页面
       const prefetchMap = {
-        '/': ['/converter/png-to-pixel-art/', '/converter/jpg-to-pixel-art/'],
-        '/converter/png-to-pixel-art/': ['/converter/jpg-to-pixel-art/', '/converter/image-to-pixel-art/'],
+        '/': ['/converter/image-to-pixel-art/', '/converter/photo-to-pixel-art/'],
+        '/converter/png-to-pixel-art/': ['/converter/image-to-pixel-art/', '/converter/photo-to-pixel-art/'],
         '/converter/jpg-to-pixel-art/': ['/converter/png-to-pixel-art/', '/converter/photo-to-pixel-art/'],
         '/about/': ['/contact/', '/blog/'],
         '/contact/': ['/about/', '/privacy/'],
