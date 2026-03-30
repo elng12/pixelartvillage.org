@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import LospecPalettePicker from '../LospecPalettePicker'
 
@@ -11,6 +11,10 @@ function PaletteManager({ onSavePalette, onDeletePalette, onApplyPalette }) {
   const [activeTab, setActiveTab] = useState('create') // 'create' | 'lospec'
   const tabOrder = ['create', 'lospec']
   const tabRefs = useRef({})
+  const importedSourceLabels = useMemo(() => ({
+    lospec: 'Lospec',
+    pixilart: 'PixilArt',
+  }), [])
 
   const tabId = (tab) => `palette-tab-${tab}`
   const panelId = (tab) => `palette-panel-${tab}`
@@ -68,14 +72,15 @@ function PaletteManager({ onSavePalette, onDeletePalette, onApplyPalette }) {
     setSelectedIndex(-1)
   }
 
-  const handleLospecPaletteSelect = (paletteColors, paletteInfo) => {
+  const handleImportedPaletteSelect = (paletteColors, paletteInfo) => {
     if (!paletteInfo) return
-    const lospecName = `${paletteInfo.name} (Lospec)`
-    onSavePalette?.(lospecName, paletteColors)
-    onApplyPalette?.(lospecName)
-    // 移除确认弹窗，直接应用调色板
+    const baseName = String(paletteInfo.name || t('paletteManager.defaultImportedName')).trim() || t('paletteManager.defaultImportedName')
+    const sourceLabel = importedSourceLabels[paletteInfo.source] || ''
+    const savedName = sourceLabel ? `${baseName} (${sourceLabel})` : baseName
+    onSavePalette?.(savedName, paletteColors)
+    onApplyPalette?.(savedName)
     if (import.meta.env.DEV) {
-      console.log(`[PaletteManager] 已应用调色板: ${paletteInfo.name}`)
+      console.log(`[PaletteManager] 已应用调色板: ${savedName}`)
     }
   }
 
@@ -193,19 +198,8 @@ function PaletteManager({ onSavePalette, onDeletePalette, onApplyPalette }) {
       {activeTab === 'lospec' && (
         <div role="tabpanel" id={panelId('lospec')} aria-labelledby={tabId('lospec')}>
           <h3 className="mb-3 text-base font-semibold">{t('paletteManager.importTitle')}</h3>
-          <p className="mb-4 text-sm text-gray-600">
-            {t('paletteManager.importDesc')}{' '}
-            <a
-              href="https://lospec.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
-            >
-              Lospec.com
-            </a>
-            {t('paletteManager.importDescSuffix')}
-          </p>
-          <LospecPalettePicker onSelectPalette={handleLospecPaletteSelect} />
+          <p className="mb-4 text-sm text-gray-600">{t('paletteManager.importDesc')}</p>
+          <LospecPalettePicker onSelectPalette={handleImportedPaletteSelect} />
         </div>
       )}
     </div>

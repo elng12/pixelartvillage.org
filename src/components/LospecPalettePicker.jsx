@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import palettesData from '@/data/lospec-palettes.json'
+import { importPaletteFromInput } from '@/utils/palette-import'
 
 const CURATED_PALETTES = palettesData.map((palette) => ({
   ...palette,
@@ -64,6 +65,10 @@ export default function LospecPalettePicker({ onSelectPalette }) {
   const [colorFilter, setColorFilter] = useState(null)
   const [selectedSlug, setSelectedSlug] = useState(null)
   const [copyHint, setCopyHint] = useState('')
+  const [directImportInput, setDirectImportInput] = useState('')
+  const [directImportName, setDirectImportName] = useState('')
+  const [importFeedback, setImportFeedback] = useState(null)
+  const [isImporting, setIsImporting] = useState(false)
 
   const filteredPalettes = useMemo(() => {
     const byQuery = CURATED_PALETTES.filter((palette) => {
@@ -105,8 +110,117 @@ export default function LospecPalettePicker({ onSelectPalette }) {
     }
   }
 
+  const handleDirectImport = async () => {
+    if (!directImportInput.trim()) {
+      setImportFeedback({ tone: 'error', text: t('paletteManager.emptyImportInput') })
+      return
+    }
+
+    setIsImporting(true)
+    setImportFeedback(null)
+
+    try {
+      const imported = await importPaletteFromInput(directImportInput, { nameHint: directImportName })
+      if (imported.slug) {
+        setSelectedSlug(imported.slug)
+      } else {
+        setSelectedSlug(null)
+      }
+      onSelectPalette?.(imported.colors, {
+        ...imported,
+        colorCount: imported.colors.length,
+      })
+      const feedbackText = imported.usedFallbackName
+        ? t('paletteManager.importSuccessGeneric')
+        : t('paletteManager.importSuccess', { name: imported.name })
+      setImportFeedback({ tone: 'success', text: feedbackText })
+    } catch (error) {
+      let message = t('paletteManager.noColorsFound')
+      if (error?.code === 'PIXILART_BLOCKED') message = t('paletteManager.pixilartBlocked')
+      else if (error?.code === 'UNSUPPORTED_URL') message = t('paletteManager.unsupportedUrl')
+      else if (error?.code === 'LOSPEC_FETCH_FAILED') message = t('paletteManager.fetchFailed')
+      else if (error?.code === 'EMPTY_INPUT') message = t('paletteManager.emptyImportInput')
+      setImportFeedback({ tone: 'error', text: message })
+    } finally {
+      setIsImporting(false)
+    }
+  }
+
   return (
     <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+      <div className="mb-6 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+        <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+          <div>
+            <h4 className="text-sm font-semibold text-slate-900">{t('paletteManager.directImportTitle')}</h4>
+            <p className="mt-1 text-sm text-slate-500">
+              {t('paletteManager.directImportDesc')}{' '}
+              <a className="text-blue-600 hover:underline" href="https://lospec.com/palette-list" target="_blank" rel="noopener noreferrer">
+                Lospec
+              </a>
+              {' / '}
+              <a className="text-blue-600 hover:underline" href="https://www.pixilart.com/palettes/" target="_blank" rel="noopener noreferrer">
+                PixilArt
+              </a>
+              .
+            </p>
+          </div>
+          <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-medium text-slate-500">
+            {t('paletteManager.directImportBadge')}
+          </span>
+        </div>
+
+        <div className="mt-4">
+          <label htmlFor="palette-import-input" className="text-xs font-medium text-slate-500">
+            {t('paletteManager.directImportLabel')}
+          </label>
+          <textarea
+            id="palette-import-input"
+            data-testid="palette-import-input"
+            rows="3"
+            className="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            placeholder={t('paletteManager.directImportPlaceholder')}
+            value={directImportInput}
+            onChange={(event) => setDirectImportInput(event.target.value)}
+          />
+        </div>
+
+        <div className="mt-3 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+          <div>
+            <label htmlFor="palette-import-name" className="text-xs font-medium text-slate-500">
+              {t('paletteManager.directImportNameLabel')}
+            </label>
+            <input
+              id="palette-import-name"
+              data-testid="palette-import-name"
+              className="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              placeholder={t('paletteManager.directImportNamePlaceholder')}
+              value={directImportName}
+              onChange={(event) => setDirectImportName(event.target.value)}
+            />
+          </div>
+          <button
+            type="button"
+            data-testid="palette-import-submit"
+            disabled={isImporting || !directImportInput.trim()}
+            className={`rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors ${isImporting || !directImportInput.trim() ? 'cursor-not-allowed bg-slate-300' : 'bg-blue-600 hover:bg-blue-700'}`}
+            onClick={handleDirectImport}
+          >
+            {isImporting ? t('paletteManager.importing') : t('paletteManager.importButton')}
+          </button>
+        </div>
+
+        {importFeedback ? (
+          <p
+            role={importFeedback.tone === 'error' ? 'alert' : 'status'}
+            className={`mt-3 text-sm ${importFeedback.tone === 'error' ? 'text-rose-600' : 'text-emerald-600'}`}
+          >
+            {importFeedback.text}
+          </p>
+        ) : null}
+
+        <p className="mt-3 text-xs text-slate-500">{t('paletteManager.pixilartHint')}</p>
+      </div>
+
       <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-1 flex-col gap-2">
           <label htmlFor="lospec-search" className="text-xs font-medium text-slate-500">
@@ -143,6 +257,7 @@ export default function LospecPalettePicker({ onSelectPalette }) {
         </div>
       </div>
 
+      <div className="mb-3 text-sm font-semibold text-slate-700">{t('paletteManager.curatedHeading')}</div>
       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         {filteredPalettes.map((palette) => (
           <PaletteCard

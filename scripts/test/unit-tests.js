@@ -1,16 +1,26 @@
 #!/usr/bin/env node
 // Minimal unit assertions (no extra deps)
 import assert from 'node:assert'
+import fs from 'node:fs'
+import path from 'node:path'
 
 import { inferAutoPaletteSize } from '../../src/utils/palette-utils.js'
 import { hexToRgb } from '../../src/utils/palette-helpers.js'
 import { clamp255, rgbToLab } from '../../src/utils/color-utils.js'
 import { nearestColorIndex, applyPaletteToCtx } from '../../src/utils/palette-helpers.js'
 import { getKMeansPalette } from '../../src/utils/kmeans-bridge.js'
+import {
+  extractPaletteHexColors,
+  fetchLospecPalette,
+  importPaletteFromInput,
+  parsePaletteImportInput,
+  normalizeHexColor,
+} from '../../src/utils/palette-import.js'
 
+const tests = []
 let failed = 0
 function test(name, fn) {
-  try { fn(); console.log(`✓ ${name}`) } catch (e) { failed++; console.error(`✗ ${name}:`, e.message) }
+  tests.push({ name, fn })
 }
 
 // inferAutoPaletteSize
@@ -28,6 +38,94 @@ test('inferAutoPaletteSize falls back by name map', () => {
 test('hexToRgb works with full and short form', () => {
   assert.deepStrictEqual(hexToRgb('#ffffff'), [255, 255, 255])
   assert.deepStrictEqual(hexToRgb('#000'), [0, 0, 0])
+})
+
+// palette-import helpers
+test('normalizeHexColor expands and uppercases hex values', () => {
+  assert.strictEqual(normalizeHexColor('#abc'), '#AABBCC')
+  assert.strictEqual(normalizeHexColor('123456'), '#123456')
+  assert.strictEqual(normalizeHexColor('bad-value'), null)
+})
+
+test('extractPaletteHexColors dedupes and preserves order', () => {
+  assert.deepStrictEqual(
+    extractPaletteHexColors('#abc #ABC 123456 #654321'),
+    ['#AABBCC', '#123456', '#654321'],
+  )
+})
+
+test('parsePaletteImportInput recognizes Lospec URLs and manual hex lists', () => {
+  const lospec = parsePaletteImportInput('https://lospec.com/palette-list/greyt-bit')
+  const manual = parsePaletteImportInput('#112233 #445566 #778899')
+  const pixilart = parsePaletteImportInput('https://www.pixilart.com/palettes/pastel-rainbow-90879')
+
+  assert.deepStrictEqual(lospec, {
+    type: 'lospec-url',
+    url: 'https://lospec.com/palette-list/greyt-bit',
+    jsonUrl: 'https://lospec.com/palette-list/greyt-bit.json',
+  })
+  assert.deepStrictEqual(manual, {
+    type: 'hex-list',
+    colors: ['#112233', '#445566', '#778899'],
+  })
+  assert.deepStrictEqual(pixilart, {
+    type: 'pixilart-url',
+    url: 'https://www.pixilart.com/palettes/pastel-rainbow-90879',
+  })
+})
+
+test('importPaletteFromInput falls back to default name when name hint is blank', async () => {
+  const imported = await importPaletteFromInput('#112233 #445566', { nameHint: '   ' })
+  assert.strictEqual(imported.name, 'Imported Palette')
+})
+
+test('fetchLospecPalette maps thrown fetch errors to LOSPEC_FETCH_FAILED', async () => {
+  await assert.rejects(
+    () => fetchLospecPalette('https://lospec.com/palette-list/test.json', async () => {
+      throw new TypeError('Failed to fetch')
+    }),
+    (error) => error?.code === 'LOSPEC_FETCH_FAILED',
+  )
+})
+
+test('palette import locale keys exist in every shipped locale', () => {
+  const requiredKeys = [
+    'importSuccess',
+    'importTab',
+    'importTitle',
+    'importDesc',
+    'defaultImportedName',
+    'directImportTitle',
+    'directImportDesc',
+    'directImportBadge',
+    'directImportLabel',
+    'directImportPlaceholder',
+    'directImportNameLabel',
+    'directImportNamePlaceholder',
+    'importButton',
+    'importing',
+    'emptyImportInput',
+    'unsupportedUrl',
+    'fetchFailed',
+    'noColorsFound',
+    'pixilartBlocked',
+    'curatedHeading',
+    'pixilartHint',
+    'importSuccessGeneric',
+  ]
+  const localesDir = path.resolve('public/locales')
+
+  for (const lang of fs.readdirSync(localesDir)) {
+    const file = path.join(localesDir, lang, 'translation.json')
+    if (!fs.existsSync(file)) continue
+    const json = JSON.parse(fs.readFileSync(file, 'utf8'))
+    for (const key of requiredKeys) {
+      assert.ok(
+        typeof json?.paletteManager?.[key] === 'string' && json.paletteManager[key].trim().length > 0,
+        `Missing paletteManager.${key} in ${lang}`,
+      )
+    }
+  }
 })
 
 // clamp255
@@ -74,9 +172,19 @@ test('getKMeansPalette exists (smoke)', () => {
   assert.strictEqual(typeof getKMeansPalette, 'function')
 })
 
+for (const { name, fn } of tests) {
+  try {
+    await fn()
+    console.log(`✓ ${name}`)
+  } catch (e) {
+    failed++
+    console.error(`✗ ${name}:`, e.message)
+  }
+}
+
 if (failed) {
   console.error(`\nUnit tests failed: ${failed}`)
   process.exit(1)
-} else {
-  console.log('\nAll unit tests passed.')
 }
+
+console.log('\nAll unit tests passed.')

@@ -12,6 +12,28 @@ async function waitForProcessing(page) {
   await expect(container).toHaveAttribute('aria-busy', 'false', { timeout: 10000 })
 }
 
+async function openEditorWithFixture(page) {
+  const buffer = await sharp({
+    create: {
+      width: 64,
+      height: 64,
+      channels: 4,
+      background: { r: 214, g: 126, b: 44, alpha: 1 },
+    },
+  })
+    .png()
+    .toBuffer()
+
+  await page.goto('/')
+  await page.getByTestId('file-input').setInputFiles({
+    name: 'export-fixture.png',
+    mimeType: 'image/png',
+    buffer,
+  })
+  await expect(page.getByRole('heading', { name: 'Online Pixel Art Maker' })).toBeVisible()
+  await waitForProcessing(page)
+}
+
 async function setPixelSize(page, value) {
   const slider = page.getByRole('slider', { name: /^Pixel Size:/ })
   await slider.evaluate((element, nextValue) => {
@@ -47,11 +69,7 @@ async function downloadCurrentExport(page) {
 }
 
 test('demo image unlocks real export options and grid color controls', async ({ page }) => {
-  await page.goto('/')
-
-  await page.getByRole('button', { name: 'Landscape photo' }).click()
-  await expect(page.getByRole('heading', { name: 'Online Pixel Art Maker' })).toBeVisible()
-  await waitForProcessing(page)
+  await openEditorWithFixture(page)
 
   await expect(page.getByRole('button', { name: 'Pixel size', exact: true })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Original size', exact: true })).toBeVisible()
