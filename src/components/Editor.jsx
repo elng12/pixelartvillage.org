@@ -9,6 +9,7 @@ import ExportPanel from './editor/ExportPanel';
 import PaletteManager from './editor/PaletteManager';
 import Adjustments from './editor/Adjustments';
 import { usePaletteStorage } from '../hooks/usePaletteStorage';
+import { clampZoom, snapZoom } from '../utils/zoom-utils';
 
 function Editor({ image }) {
   const { t } = useTranslation()
@@ -51,6 +52,7 @@ function Editor({ image }) {
   const [errorMsg, setErrorMsg] = useState('')
   const previewRef = useRef(null);
   const fileInputRef = useRef(null);
+  const manualZoomRef = useRef(false)
   const { palettes: customPalettes, upsertPalette, deletePalette, clearAllPalettes, renamePalette } = usePaletteStorage();
 
   // 限制最大文件大小（MB）
@@ -80,18 +82,25 @@ function Editor({ image }) {
   }, []);
 
   // 计算缩放以完整放入容器，留出内边距余量
-  const fitToScreenDims = useCallback((iw, ih) => {
+  const fitToScreenDims = useCallback((iw, ih, options = {}) => {
+    const { force = false } = options
     const container = previewRef.current;
     if (!container || !iw || !ih) return;
+    if (manualZoomRef.current && !force) return
     const cs = getComputedStyle(container);
     const px = (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
     const py = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
     const cw = Math.max(1, (container.clientWidth || 1) - px);
     const ch = Math.max(1, (container.clientHeight || 1) - py);
     const scale = Math.min(cw / iw, ch / ih);
-    const clamped = Math.min(8, scale);
-    dispatch({ type: 'SET', field: 'zoom', value: clamped });
+    const fittedZoom = scale >= 1 ? clampZoom(scale) : snapZoom(scale, 'down')
+    dispatch({ type: 'SET', field: 'zoom', value: fittedZoom });
   }, []);
+
+  const handleZoomChange = useCallback((value) => {
+    manualZoomRef.current = true
+    dispatch({ type: 'SET', field: 'zoom', value: snapZoom(value) })
+  }, [])
 
   // 不再依赖 <img> 的 onload 测量，统一使用解码得到的尺寸 + 容器尺寸自适应
 
@@ -153,8 +162,9 @@ function Editor({ image }) {
         try { await img.decode(); } catch (e) { logger.error(e); }
         const iw = img.naturalWidth || 1;
         const ih = img.naturalHeight || 1;
+        manualZoomRef.current = false
         dispatch({ type: 'SET', field: 'imgDim', value: { w: iw, h: ih } });
-        fitToScreenDims(iw, ih);
+        fitToScreenDims(iw, ih, { force: true });
         dispatch({ type: 'SET', field: 'readySrc', value: src });
       };
       if (img.complete) onReady(); else img.onload = onReady;
@@ -187,8 +197,9 @@ function Editor({ image }) {
       try { await i.decode(); } catch (e) { if (import.meta.env.DEV) logger.error('Image decode failed', e); }
       const iw = i.naturalWidth || 1;
       const ih = i.naturalHeight || 1;
+      manualZoomRef.current = false
       dispatch({ type: 'SET', field: 'imgDim', value: { w: iw, h: ih } });
-      fitToScreenDims(iw, ih);
+      fitToScreenDims(iw, ih, { force: true });
       dispatch({ type: 'SET', field: 'readySrc', value: image });
     };
     if (i.complete) onReady(); else i.onload = onReady;
@@ -319,7 +330,7 @@ function Editor({ image }) {
                 </div>
                 <div className="mt-2 h-[2px] w-full bg-gray-900/80" />
               </div>
-              <Adjustments state={state} dispatch={dispatch} customPalettes={customPalettes} />
+              <Adjustments state={state} dispatch={dispatch} customPalettes={customPalettes} onZoomChange={handleZoomChange} />
               <ExportPanel
                 exportFormat={state.exportFormat}
                 setExportFormat={(value)=>dispatch({type:'SET', field:'exportFormat', value})}

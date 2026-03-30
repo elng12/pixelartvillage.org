@@ -1,8 +1,9 @@
 import React, { useRef, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { PALETTES } from '../../utils/constants'
+import { clampZoom, formatZoomLabel, MAX_ZOOM, MIN_ZOOM, ZOOM_STEP } from '../../utils/zoom-utils'
 
-function Adjustments({ state, dispatch, customPalettes }) {
+function Adjustments({ state, dispatch, customPalettes, onZoomChange }) {
   const { t } = useTranslation()
   // Use rAF-throttled setter so slider drag is smooth; coalesce multiple events per frame
   const rafId = useRef(0)
@@ -11,11 +12,12 @@ function Adjustments({ state, dispatch, customPalettes }) {
     // Commit all pending field updates in a single reducer pass per frame
     const entries = Object.entries(pending.current)
     for (const [field, value] of entries) {
-      dispatch({ type: 'SET', field, value })
+      if (field === 'zoom' && typeof onZoomChange === 'function') onZoomChange(value)
+      else dispatch({ type: 'SET', field, value })
     }
     pending.current = {}
     rafId.current = 0
-  }, [dispatch])
+  }, [dispatch, onZoomChange])
 
   const set = (field) => (e) => {
     const raw = e?.target?.value
@@ -114,8 +116,8 @@ function Adjustments({ state, dispatch, customPalettes }) {
         </div>
 
         <div>
-          <label htmlFor="zoom-slider" className="block text-sm font-medium mb-2">{t('adjustments.zoom', { value: state.zoom })}</label>
-          <input id="zoom-slider" type="range" min="0.05" max="8" step="0.05" value={state.zoom} onChange={set('zoom')} className="w-full" />
+          <label htmlFor="zoom-slider" className="block text-sm font-medium mb-2">{t('adjustments.zoom', { value: formatZoomLabel(state.zoom) })}</label>
+          <input id="zoom-slider" type="range" min={MIN_ZOOM} max={MAX_ZOOM} step={ZOOM_STEP} value={clampZoom(state.zoom)} onChange={set('zoom')} className="w-full" />
           <div className="flex items-center gap-3 mt-2">
             <input id="grid-toggle" type="checkbox" className="h-4 w-4" checked={state.showGrid} onChange={setBool('showGrid')} />
             <label htmlFor="grid-toggle" className="text-sm">{t('adjustments.grid')}</label>

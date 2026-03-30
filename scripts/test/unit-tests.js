@@ -5,6 +5,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 import { inferAutoPaletteSize } from '../../src/utils/palette-utils.js'
+import { clampZoom, formatZoomLabel, snapZoom } from '../../src/utils/zoom-utils.js'
 import { hexToRgb } from '../../src/utils/palette-helpers.js'
 import { clamp255, rgbToLab } from '../../src/utils/color-utils.js'
 import { nearestColorIndex, applyPaletteToCtx } from '../../src/utils/palette-helpers.js'
@@ -196,6 +197,15 @@ test('retired BMP converter stays redirected to the main converter', () => {
     const pattern = new RegExp(`^${escapeRegExp(from)}\\s+${escapeRegExp(to)}\\s+301$`, 'm')
     assert.match(redirects, pattern, `Missing redirect: ${from} -> ${to}`)
   }
+})
+
+test('zoom helpers clamp, snap, and format values predictably', () => {
+  assert.strictEqual(clampZoom(0.001), 0.05)
+  assert.strictEqual(clampZoom(12), 8)
+  assert.strictEqual(snapZoom(0.5677165354330709), 0.55)
+  assert.strictEqual(snapZoom(0.5677165354330709, 'down'), 0.55)
+  assert.strictEqual(formatZoomLabel(0.5677165354330709), '0.55')
+  assert.strictEqual(formatZoomLabel(2), '2')
 })
 
 // clamp255
