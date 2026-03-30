@@ -49,6 +49,9 @@ test('auto palette triggers preview reprocessing when palette size changes', asy
   // Enable auto palette and adjust palette size so the preview reprocesses.
   await page.locator('#auto-palette').check()
   const size = page.locator('#palette-size')
+  await expect(size).toBeVisible()
+  // Wait for the React-controlled range input to mount and settle before changing it.
+  await expect(size).toHaveValue('16')
   await size.evaluate((el) => {
     const setter = Object.getOwnPropertyDescriptor(globalThis.HTMLInputElement.prototype, 'value')?.set
     if (setter) {
