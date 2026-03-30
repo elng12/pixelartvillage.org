@@ -2,7 +2,7 @@ import React, { useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import LospecPalettePicker from '../LospecPalettePicker'
 
-function PaletteManager({ onSavePalette, onDeletePalette, onApplyPalette }) {
+function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, onApplyPalette, customPaletteCount = 0 }) {
   const { t } = useTranslation()
   const [paletteName, setPaletteName] = useState('')
   const [colors, setColors] = useState([])
@@ -57,6 +57,14 @@ function PaletteManager({ onSavePalette, onDeletePalette, onApplyPalette }) {
     const name = paletteName.trim()
     if (!name) return
     onDeletePalette?.(name)
+  }
+
+  const handleClearAllPalettes = () => {
+    if (customPaletteCount <= 0) return
+    const message = t('paletteManager.clearAllConfirm', { count: customPaletteCount })
+    if (typeof window !== 'undefined' && !window.confirm(message)) return
+    onClearAllPalettes?.()
+    handleResetForm()
   }
 
   const handleAddColor = () => {
@@ -191,6 +199,16 @@ function PaletteManager({ onSavePalette, onDeletePalette, onApplyPalette }) {
             <button type="button" className="btn-secondary" onClick={handleDeletePalette}>
               {t('paletteManager.delete')}
             </button>
+            {customPaletteCount > 0 ? (
+              <button
+                type="button"
+                data-testid="palette-clear-all"
+                className="btn-secondary text-red-700 hover:text-red-800"
+                onClick={handleClearAllPalettes}
+              >
+                {t('paletteManager.clearAll')}
+              </button>
+            ) : null}
           </div>
         </div>
       )}

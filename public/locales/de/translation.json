@@ -611,7 +611,9 @@
     "pixilartBlocked": "PixilArt blockiert derzeit den direkten Palettenabruf. Öffne die Palettenseite, kopiere die Hex-Farben und füge sie hier ein.",
     "curatedHeading": "Ausgewählte Lospec-Paletten",
     "pixilartHint": "Tipp: Lospec-URLs lassen sich direkt importieren. PixilArt blockiert oft automatischen Zugriff, kopiere daher die Hex-Liste von der Seite, wenn die URL selbst nicht importiert wird.",
-    "importSuccessGeneric": "Palette importiert."
+    "importSuccessGeneric": "Palette importiert.",
+    "clearAll": "Alle benutzerdefinierten Paletten löschen",
+    "clearAllConfirm": "Alle {{count}} benutzerdefinierten Paletten löschen? Die integrierten Paletten bleiben erhalten."
   },
   "home": {
     "seoTitle": "Bild zu Pixel Art Konverter | Pixel Art Village",

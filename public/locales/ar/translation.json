@@ -548,7 +548,9 @@
     "pixilartBlocked": "يحظر PixilArt جلب اللوحات مباشرة حالياً. افتح صفحة اللوحة وانسخ ألوان hex ثم الصقها هنا.",
     "curatedHeading": "اختيارات Lospec المميزة",
     "pixilartHint": "نصيحة: يمكن استيراد روابط Lospec مباشرة. غالباً ما يحظر PixilArt الوصول الآلي، لذا انسخ قائمة hex من الصفحة إذا لم يعمل الرابط نفسه.",
-    "importSuccessGeneric": "تم استيراد اللوحة."
+    "importSuccessGeneric": "تم استيراد اللوحة.",
+    "clearAll": "مسح كل اللوحات المخصصة",
+    "clearAllConfirm": "هل تريد حذف كل اللوحات المخصصة وعددها {{count}}؟ ستبقى اللوحات المدمجة كما هي."
   },
   "home": {
     "seoTitle": "محول الصورة إلى فن البيكسل | Pixel Art Village",

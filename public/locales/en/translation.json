@@ -721,7 +721,9 @@
     "curatedTip": "This picker includes a curated set of popular Lospec palettes. For more palettes, visit the",
     "paletteListLink": "Lospec Palette List",
     "pixilartHint": "Tip: Lospec URLs import directly. PixilArt often blocks automated page access, so copy the hex list from the page if the URL itself does not import.",
-    "importSuccessGeneric": "Palette imported."
+    "importSuccessGeneric": "Palette imported.",
+    "clearAll": "Clear all custom palettes",
+    "clearAllConfirm": "Delete all {{count}} custom palettes? Built-in palettes will stay."
   },
   "preview": {
     "alt": "Pixel art preview",

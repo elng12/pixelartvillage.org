@@ -548,7 +548,9 @@
     "pixilartBlocked": "PixilArt blokkeert directe paletophaling op dit moment. Open de paletpagina, kopieer de hex-kleuren en plak ze hier.",
     "curatedHeading": "Geselecteerde Lospec-paletten",
     "pixilartHint": "Tip: Lospec-URL’s importeren direct. PixilArt blokkeert vaak geautomatiseerde toegang, dus kopieer de hexlijst van de pagina als de URL zelf niet importeert.",
-    "importSuccessGeneric": "Palet geïmporteerd."
+    "importSuccessGeneric": "Palet geïmporteerd.",
+    "clearAll": "Alle aangepaste paletten wissen",
+    "clearAllConfirm": "Alle {{count}} aangepaste paletten verwijderen? De ingebouwde paletten blijven behouden."
   },
   "home": {
     "seoTitle": "Afbeelding naar Pixelart Converter | Pixel Art Village",

@@ -548,7 +548,9 @@
     "pixilartBlocked": "PixilArt는 현재 팔레트 직접 가져오기를 차단하고 있습니다. 팔레트 페이지를 열어 hex 색상을 복사한 뒤 여기에 붙여넣으세요.",
     "curatedHeading": "추천 Lospec 팔레트",
     "pixilartHint": "팁: Lospec URL은 바로 가져올 수 있습니다. PixilArt는 자동 접근을 자주 차단하므로 URL로 가져오지 못하면 페이지에서 hex 목록을 복사하세요.",
-    "importSuccessGeneric": "팔레트를 가져왔습니다."
+    "importSuccessGeneric": "팔레트를 가져왔습니다.",
+    "clearAll": "사용자 지정 팔레트 모두 지우기",
+    "clearAllConfirm": "사용자 지정 팔레트 {{count}}개를 모두 삭제할까요? 기본 제공 팔레트는 그대로 유지됩니다."
   },
   "home": {
     "seoTitle": "이미지 픽셀아트 변환기 | Pixel Art Village",

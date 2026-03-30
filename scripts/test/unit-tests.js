@@ -16,6 +16,7 @@ import {
   parsePaletteImportInput,
   normalizeHexColor,
 } from '../../src/utils/palette-import.js'
+import { clearCustomPalettes, loadCustomPalettes, saveCustomPalettes } from '../../src/utils/palette-storage.js'
 
 const tests = []
 let failed = 0
@@ -112,6 +113,13 @@ test('fetchLospecPalette maps thrown fetch errors to LOSPEC_FETCH_FAILED', async
   )
 })
 
+test('clearCustomPalettes removes saved palettes', () => {
+  saveCustomPalettes([{ name: 'Temporary Test Palette', colors: ['#112233', '#445566'] }])
+  assert.strictEqual(loadCustomPalettes().length, 1)
+  clearCustomPalettes()
+  assert.deepStrictEqual(loadCustomPalettes(), [])
+})
+
 test('palette import locale keys exist in every shipped locale', () => {
   const requiredKeys = [
     'importSuccess',
@@ -136,6 +144,8 @@ test('palette import locale keys exist in every shipped locale', () => {
     'curatedHeading',
     'pixilartHint',
     'importSuccessGeneric',
+    'clearAll',
+    'clearAllConfirm',
   ]
   assertLocaleStrings('paletteManager', requiredKeys)
 })

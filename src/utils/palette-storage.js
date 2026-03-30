@@ -26,6 +26,14 @@ export function saveCustomPalettes(palettes) {
   }
 }
 
+export function clearCustomPalettes() {
+  try {
+    safeStorage.remove(STORAGE_KEY)
+  } catch {
+    // ignore
+  }
+}
+
 export function getCustomPaletteByName(name) {
   const list = loadCustomPalettes()
   const hit = list.find((p) => p.name === name)

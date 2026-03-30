@@ -611,7 +611,9 @@
     "pixilartBlocked": "PixilArt は現在パレットの直接取得をブロックしています。パレットページを開いて16進カラーをコピーし、ここに貼り付けてください。",
     "curatedHeading": "厳選 Lospec パレット",
     "pixilartHint": "ヒント: Lospec の URL は直接読み込めます。PixilArt は自動アクセスをブロックすることが多いため、URL で読み込めない場合はページから16進リストをコピーしてください。",
-    "importSuccessGeneric": "パレットを読み込みました。"
+    "importSuccessGeneric": "パレットを読み込みました。",
+    "clearAll": "カスタムパレットをすべて削除",
+    "clearAllConfirm": "{{count}} 個のカスタムパレットをすべて削除しますか？内蔵パレットは残ります。"
   },
   "home": {
     "seoTitle": "画像をピクセルアートに変換 | Pixel Art Village",

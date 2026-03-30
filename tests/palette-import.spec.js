@@ -70,6 +70,32 @@ test('manual palette import falls back to the default name when the custom name 
   await expect.poll(() => getPaletteOptions(page)).toContain('Imported Palette')
 })
 
+test('clear all custom palettes removes imported palettes and resets the active selection', async ({ page }) => {
+  await openEditorWithFixture(page)
+
+  await page.getByRole('tab', { name: 'Import palette', exact: true }).click()
+  await page.getByTestId('palette-import-input').fill('#112233 #445566 #778899')
+  await page.getByTestId('palette-import-name').fill('Evening Mix')
+  await page.getByTestId('palette-import-submit').click()
+
+  await expect(page.getByText('Imported Evening Mix.')).toBeVisible()
+  await expect.poll(() => getPaletteOptions(page)).toContain('Evening Mix')
+
+  await page.locator('#palette-select').selectOption('Evening Mix')
+  await expect(page.locator('#palette-select')).toHaveValue('Evening Mix')
+
+  page.once('dialog', async (dialog) => {
+    await expect(dialog.message()).toContain('Delete all 1 custom palettes?')
+    await dialog.accept()
+  })
+
+  await page.getByRole('tab', { name: 'Create palette', exact: true }).click()
+  await page.getByTestId('palette-clear-all').click()
+
+  await expect.poll(() => getPaletteOptions(page)).not.toContain('Evening Mix')
+  await expect(page.locator('#palette-select')).toHaveValue('none')
+})
+
 test('Lospec network failures surface a fetch-specific message', async ({ page }) => {
   await page.route('https://lospec.com/palette-list/broken-fetch.json', async (route) => {
     await route.abort('failed')

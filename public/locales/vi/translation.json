@@ -548,7 +548,9 @@
     "pixilartBlocked": "PixilArt hiện chặn việc lấy bảng màu trực tiếp. Hãy mở trang bảng màu, sao chép các màu hex rồi dán vào đây.",
     "curatedHeading": "Các bảng màu Lospec chọn lọc",
     "pixilartHint": "Mẹo: URL Lospec có thể nhập trực tiếp. PixilArt thường chặn truy cập tự động, vì vậy hãy sao chép danh sách hex từ trang nếu URL không nhập được.",
-    "importSuccessGeneric": "Đã nhập bảng màu."
+    "importSuccessGeneric": "Đã nhập bảng màu.",
+    "clearAll": "Xóa tất cả bảng màu tùy chỉnh",
+    "clearAllConfirm": "Xóa toàn bộ {{count}} bảng màu tùy chỉnh? Các bảng màu có sẵn vẫn sẽ được giữ lại."
   },
   "home": {
     "seoTitle": "Công cụ chuyển đổi hình ảnh thành Pixel Art | Pixel Art Village",

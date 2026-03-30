@@ -51,7 +51,7 @@ function Editor({ image }) {
   const [errorMsg, setErrorMsg] = useState('')
   const previewRef = useRef(null);
   const fileInputRef = useRef(null);
-  const { palettes: customPalettes, upsertPalette, deletePalette } = usePaletteStorage();
+  const { palettes: customPalettes, upsertPalette, deletePalette, clearAllPalettes } = usePaletteStorage();
 
   // 限制最大文件大小（MB）
   const MAX_FILE_MB = 10;
@@ -241,6 +241,14 @@ function Editor({ image }) {
 
   const layout = state.compact ? LAYOUT_TOKENS.compact : LAYOUT_TOKENS.normal;
 
+  const handleClearAllPalettes = () => {
+    const resetActivePalette = customPalettes.some((palette) => palette.name === state.palette)
+    clearAllPalettes()
+    if (resetActivePalette) {
+      dispatch({ type: 'SET', field: 'palette', value: 'none' })
+    }
+  }
+
   return (
     <section id="editor" className="py-8 bg-white">
       <div className="container mx-auto px-4">
@@ -318,6 +326,8 @@ function Editor({ image }) {
               <PaletteManager 
                 onSavePalette={upsertPalette} 
                 onDeletePalette={deletePalette}
+                onClearAllPalettes={handleClearAllPalettes}
+                customPaletteCount={customPalettes.length}
                 onApplyPalette={(paletteName) => dispatch({type:'SET', field:'palette', value:paletteName})}
               />
             </div>

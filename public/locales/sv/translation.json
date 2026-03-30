@@ -548,7 +548,9 @@
     "pixilartBlocked": "PixilArt blockerar direkt hämtning av paletter just nu. Öppna palettsidan, kopiera hexfärgerna och klistra in dem här i stället.",
     "curatedHeading": "Utvalda Lospec-paletter",
     "pixilartHint": "Tips: Lospec-URL:er importeras direkt. PixilArt blockerar ofta automatiserad åtkomst, så kopiera hexlistan från sidan om URL:en inte går att importera.",
-    "importSuccessGeneric": "Paletten importerades."
+    "importSuccessGeneric": "Paletten importerades.",
+    "clearAll": "Rensa alla egna paletter",
+    "clearAllConfirm": "Ta bort alla {{count}} egna paletter? De inbyggda paletterna blir kvar."
   },
   "home": {
     "seoTitle": "Bild till pixelkonst-omvandlare | Pixel Art Village",

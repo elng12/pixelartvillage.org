@@ -611,7 +611,9 @@
     "pixilartBlocked": "O PixilArt bloqueia a busca direta de paletas no momento. Abra a página da paleta, copie as cores hexadecimais e cole aqui.",
     "curatedHeading": "Seleções do Lospec",
     "pixilartHint": "Dica: URLs do Lospec importam diretamente. O PixilArt costuma bloquear o acesso automatizado, então copie a lista hex da página se a URL não importar.",
-    "importSuccessGeneric": "Paleta importada."
+    "importSuccessGeneric": "Paleta importada.",
+    "clearAll": "Limpar todas as paletas personalizadas",
+    "clearAllConfirm": "Excluir todas as {{count}} paletas personalizadas? As paletas integradas serão mantidas."
   },
   "home": {
     "seoTitle": "Conversor de Imagem para Arte em Pixel | Pixel Art Village",

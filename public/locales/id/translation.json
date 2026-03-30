@@ -548,7 +548,9 @@
     "pixilartBlocked": "PixilArt saat ini memblokir pengambilan palet langsung. Buka halaman paletnya, salin warna heksadesimalnya, lalu tempel di sini.",
     "curatedHeading": "Pilihan Lospec terkurasi",
     "pixilartHint": "Tips: URL Lospec bisa diimpor langsung. PixilArt sering memblokir akses otomatis, jadi salin daftar heksadesimal dari halamannya jika URL tidak bisa diimpor.",
-    "importSuccessGeneric": "Palet berhasil diimpor."
+    "importSuccessGeneric": "Palet berhasil diimpor.",
+    "clearAll": "Hapus semua palet kustom",
+    "clearAllConfirm": "Hapus semua {{count}} palet kustom? Palet bawaan akan tetap ada."
   },
   "home": {
     "seoTitle": "Konverter Gambar ke Pixel Art | Pixel Art Village",
