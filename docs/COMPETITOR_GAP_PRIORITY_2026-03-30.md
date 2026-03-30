@@ -4,9 +4,9 @@ Date: 2026-03-30
 
 ## One-line conclusion
 
-Our biggest remaining gap is repeat-use palette management, not core editor capability.
+Our biggest remaining gap is onboarding and palette portability, not core editor trust or cleanup.
 
-The editor already covers fixed built-in palettes, direct Lospec import, true export modes, grid export, visible support contact, and a top-level feedback path. The most valuable next work is to improve cleanup and repeat-use workflows around imported palettes.
+The editor already covers fixed built-in palettes, direct Lospec import, true export modes, grid export, visible support contact, a top-level feedback path, and the core custom-palette cleanup flow. The most valuable next work is to improve onboarding and help repeat users carry palette libraries across sessions or devices.
 
 ## Priority rules
 
@@ -47,75 +47,61 @@ The editor already covers fixed built-in palettes, direct Lospec import, true ex
 - Mobile navigation also exposes the same action.
 - The current destination is a real Google Form, so the "missing visible feedback path" point is closed.
 
+### Palette cleanup basics are now live
+
+- Users can delete one custom palette at a time.
+- Users can clear all custom palettes with confirmation.
+- Duplicate palette names now ask before overwrite.
+- Selected custom palettes can be renamed directly inside the manager.
+
 ### Homepage example buttons are not a confirmed bug
 
-- The homepage currently does not expose sample shortcut buttons.
-- This looks like a product-direction decision, not a broken implementation.
+- The homepage already includes showcase/example imagery.
+- Shortcut buttons are not a missing core workflow by themselves.
 - Do not re-add examples by default just because the competitor has them.
 
 ### There is no open P0 right now
 
 - The format-signal cleanup is done.
 - The visible feedback-path gap is also closed.
+- The palette cleanup basics are also closed.
 - The remaining backlog starts at P1.
 
 ## P1
 
-### 1. Add `Clear all custom palettes`
+### 1. Add palette-library export/import
 
 Problem:
-- Palette import is now strong enough that repeat users can accumulate a messy local library.
-- Current management supports overwrite-by-name and single deletion, but not a full reset flow.
+- Repeat users can now clean up and rename palettes, but they still cannot back them up or move them between browsers/devices.
+- This becomes more noticeable now that the local palette workflow is actually worth keeping.
 
 Why this matters:
-- This is the main missing piece in the current palette workflow.
-- It matters most for repeat creators, not first-time visitors.
+- It protects creator work from feeling trapped inside one browser profile.
+- It is the clearest remaining repeat-user workflow win.
 
 What to build:
-- Add `Clear all custom palettes`.
-- Keep per-palette delete for finer cleanup.
-- Require a lightweight confirmation step before destructive removal.
+- Let users export their custom palette library.
+- Let users import a previously exported library.
+- Keep overwrite behavior explicit when imported names collide.
 
 Acceptance:
-- User can clear the imported/custom palette library in one action.
+- User can export custom palettes from one browser and import them into another.
 - Built-in palettes remain intact.
-- The action is easy to find but hard to trigger by accident.
+- Import collisions are clear and predictable.
 
 Expected impact:
 - Medium to high repeat-user workflow win.
 
-### 2. Improve palette library UX after clear-all exists
-
-What to improve:
-- Prevent confusing duplicates more explicitly.
-- Make imported palette names easier to rename.
-- Keep source labels like `Lospec` visible and consistent.
-- Add palette-library export/import only after cleanup basics feel solid.
-
-## P2
-
-### 3. Revisit homepage example images as an experiment, not a default backlog item
-
-Why:
-- Example images may improve first-use activation.
-- But the site recently moved away from shortcut buttons, so this is not an automatic "missing feature."
-
-How to treat it:
-- Run it as a deliberate product experiment.
-- If it returns, make it stronger than a plain list of buttons.
-- Measure whether it increases editor activation and first export completion.
-
-Acceptance:
-- Reintroduction is tied to a clear UX hypothesis and a simple measurement plan.
-
-### 4. Add richer onboarding and creator presets
+### 2. Add richer onboarding and creator presets
 
 What to improve:
 - Before/after examples tied to real use cases.
 - Short presets like `best for portraits`, `best for sprites`, or `best for retro UI`.
 - More guided onboarding inside the tool flow, not only in long-form content.
 
-### 5. Consider advanced creator controls only after the trust layer is clean
+## P2
+
+### 3. Consider advanced creator controls only after the trust layer is clean
 
 Ideas:
 - Grid thickness.
@@ -123,7 +109,7 @@ Ideas:
 - Sprite-sheet-friendly export options.
 - Edge cleanup or outline-assist features.
 
-### 6. Treat PixilArt direct URL parity as blocked, not urgent
+### 4. Treat PixilArt direct URL parity as blocked, not urgent
 
 Why:
 - The current blocker is source-site access, not local implementation effort.
@@ -133,40 +119,38 @@ Why:
 
 ### Week 1
 
-- P1.1 add `Clear all custom palettes`
-- P1.2 tighten palette library UX
+- P1.1 add palette-library export/import
 
 ### Week 2
 
-- P2.3 decide whether homepage examples deserve an experiment
-- P2.4 add lightweight onboarding or presets
+- P1.2 add lightweight onboarding or presets
 
 ### Week 3
 
-- P2.5 consider advanced creator controls
-- P2.6 keep PixilArt URL parity as blocked unless source conditions change
+- P2.3 consider advanced creator controls
+- P2.4 keep PixilArt URL parity as blocked unless source conditions change
 
 ## Best next step if we only do one thing first
 
-- Add `Clear all custom palettes`
+- Add palette-library export/import
 
 Reason:
-- It is now the clearest remaining workflow gap for repeat users.
-- Palette import is already strong enough that cleanup quality matters more.
-- It improves day-two retention more than another round of signaling cleanup.
+- It is the clearest remaining workflow gap for repeat users.
+- Palette cleanup is now solid enough that portability matters more.
+- It improves trust that saved work will not get trapped in one browser.
 
 ## Best next step if we want the fastest visible win
 
-- Add `Clear all custom palettes`
+- Add richer onboarding and creator presets
 
 Reason:
-- It is easy to explain and immediately useful for people who import multiple palettes.
-- It closes the most obvious missing control in the current palette manager.
+- It is the easiest improvement for first-time users to notice immediately.
+- It can raise activation without changing the core processing stack.
 
 ## Best next step if we want the strongest repeat-user workflow win
 
-- Add `Clear all custom palettes`
+- Add palette-library export/import
 
 Reason:
-- Palette import is already good enough to justify better library cleanup.
-- This closes the most obvious remaining gap in the palette workflow.
+- Palette import and cleanup are already good enough to justify portability.
+- This closes the most obvious remaining gap for creators who come back repeatedly.
