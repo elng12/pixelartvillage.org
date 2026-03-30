@@ -26,9 +26,10 @@ function Editor({ image }) {
     quality: 0.92,
     autoPalette: false,
     paletteSize: 16,
-    exportScale: 1,
+    exportSize: 'source',
     colorDistance: 'rgb',
     transparentBG: true,
+    gridColor: '#475569',
     // UI state managed in reducer
     compact: false,
     imgDim: { w: 0, h: 0 },
@@ -133,7 +134,7 @@ function Editor({ image }) {
     const file = fileList?.[0];
     if (!file) return;
     setErrorMsg('');
-    if (!/^image\/(png|jpeg)$/.test(file.type)) {
+    if (!/^image\/(png|jpeg|gif|webp)$/.test(file.type)) {
       setErrorMsg(t('errors.onlyPngJpg'));
       return;
     }
@@ -218,15 +219,21 @@ function Editor({ image }) {
     if (!processedImage) return;
     const blob = await exportProcessedBlob(processedImage, {
       format: state.exportFormat,
-      scale: state.exportScale,
+      size: state.exportSize,
       quality: state.quality,
       transparentBG: state.transparentBG,
+      showGrid: state.showGrid,
+      gridColor: state.gridColor,
     });
+    if (!blob) return
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.download = `pixel-art.${state.exportFormat}`;
+    link.download = `pixel-art-${state.exportSize}.${state.exportFormat}`;
     link.href = url;
+    link.style.display = 'none'
+    document.body.appendChild(link)
     link.click();
+    link.remove()
     setTimeout(() => URL.revokeObjectURL(url), 0);
   };
 
@@ -252,6 +259,7 @@ function Editor({ image }) {
                   zoom={state.zoom}
                   pixelSize={state.pixelSize}
                   showGrid={state.showGrid}
+                  gridColor={state.gridColor}
                   isProcessing={isProcessing || !state.readySrc}
                   imgDim={state.imgDim}
                 />
@@ -273,7 +281,7 @@ function Editor({ image }) {
                 <input
                   ref={fileInputRef}
                   type="file"
-                  accept="image/png,image/jpeg"
+                  accept="image/png,image/jpeg,image/gif,image/webp"
                   className="hidden"
                   onChange={onFileSelected}
                 />
@@ -299,13 +307,13 @@ function Editor({ image }) {
               <Adjustments state={state} dispatch={dispatch} customPalettes={customPalettes} />
               <ExportPanel
                 exportFormat={state.exportFormat}
-                setExportFormat={(e)=>dispatch({type:'SET', field:'exportFormat', value:e.target.value})}
-                exportScale={state.exportScale}
-                setExportScale={(v)=>dispatch({type:'SET', field:'exportScale', value:v})}
+                setExportFormat={(value)=>dispatch({type:'SET', field:'exportFormat', value})}
+                exportSize={state.exportSize}
+                setExportSize={(value)=>dispatch({type:'SET', field:'exportSize', value})}
                 transparentBG={state.transparentBG}
                 setTransparentBG={(v)=>dispatch({type:'SET', field:'transparentBG', value:v})}
                 quality={state.quality}
-                setQuality={(e)=>dispatch({type:'SET', field:'quality', value:Number(e.target.value)})}
+                setQuality={(value)=>dispatch({type:'SET', field:'quality', value})}
               />
               <PaletteManager 
                 onSavePalette={upsertPalette} 

@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import palettesData from '@/data/lospec-palettes.json'
 
 const CURATED_PALETTES = palettesData.map((palette) => ({
@@ -13,6 +14,8 @@ const COLOR_FILTERS = Array.from(new Set(CURATED_PALETTES.map((palette) => palet
 )
 
 function PaletteCard({ palette, isSelected, onSelect }) {
+  const { t } = useTranslation()
+
   return (
     <button
       type="button"
@@ -26,7 +29,7 @@ function PaletteCard({ palette, isSelected, onSelect }) {
             {palette.colorCount} colors{palette.author ? ` · ${palette.author}` : ''}
           </div>
         </div>
-        <span className="rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-600">Lospec</span>
+        <span className="rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-600">{t('paletteManager.sourceBadge')}</span>
       </div>
       <div className="mt-3 flex overflow-hidden rounded">
         {palette.colors.slice(0, 12).map((color) => (
@@ -38,6 +41,8 @@ function PaletteCard({ palette, isSelected, onSelect }) {
 }
 
 function ColorSwatch({ color, onCopy }) {
+  const { t } = useTranslation()
+
   return (
     <button
       type="button"
@@ -48,12 +53,13 @@ function ColorSwatch({ color, onCopy }) {
         <span className="h-5 w-5 rounded border border-slate-200" style={{ backgroundColor: color }} />
         {color.toUpperCase()}
       </span>
-      <span className="text-xs text-slate-400">复制</span>
+      <span className="text-xs text-slate-400">{t('paletteManager.copyColor')}</span>
     </button>
   )
 }
 
 export default function LospecPalettePicker({ onSelectPalette }) {
+  const { t } = useTranslation()
   const [query, setQuery] = useState('')
   const [colorFilter, setColorFilter] = useState(null)
   const [selectedSlug, setSelectedSlug] = useState(null)
@@ -91,10 +97,10 @@ export default function LospecPalettePicker({ onSelectPalette }) {
       if (navigator?.clipboard?.writeText) {
         await navigator.clipboard.writeText(color)
       }
-      setCopyHint(`${color.toUpperCase()} 已复制到剪贴板`)
+      setCopyHint(t('paletteManager.copied', { color: color.toUpperCase() }))
       setTimeout(() => setCopyHint(''), 2000)
     } catch {
-      setCopyHint('复制失败，请手动复制颜色值')
+      setCopyHint(t('paletteManager.copyFailed'))
       setTimeout(() => setCopyHint(''), 3000)
     }
   }
@@ -104,13 +110,13 @@ export default function LospecPalettePicker({ onSelectPalette }) {
       <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-1 flex-col gap-2">
           <label htmlFor="lospec-search" className="text-xs font-medium text-slate-500">
-            搜索Lospec调色板（名称、作者或Slug）
+            {t('paletteManager.searchLabel')}
           </label>
           <div className="flex gap-2">
             <input
               id="lospec-search"
               className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-              placeholder="例如：pico-8 / dawnbringer"
+              placeholder={t('paletteManager.searchPlaceholder')}
               value={query}
               onChange={(event) => setQuery(event.target.value)}
             />
@@ -119,7 +125,7 @@ export default function LospecPalettePicker({ onSelectPalette }) {
               className="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-500 hover:border-slate-400"
               onClick={() => setQuery('')}
             >
-              清除
+              {t('paletteManager.clearSearch')}
             </button>
           </div>
         </div>
@@ -148,7 +154,7 @@ export default function LospecPalettePicker({ onSelectPalette }) {
         ))}
         {filteredPalettes.length === 0 && (
           <div className="rounded-lg border border-dashed border-slate-200 bg-white p-6 text-sm text-slate-500">
-            未找到匹配的调色板，请调整搜索关键词或筛选条件。
+            {t('paletteManager.emptyState')}
           </div>
         )}
       </div>
@@ -168,7 +174,7 @@ export default function LospecPalettePicker({ onSelectPalette }) {
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline"
                 >
-                  在 Lospec.com 查看
+                  {t('paletteManager.viewOnLospec')}
                 </a>
               </div>
             </div>
@@ -177,7 +183,7 @@ export default function LospecPalettePicker({ onSelectPalette }) {
               className="rounded-lg border border-blue-500 px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-50"
               onClick={() => handleSelect(selectedPalette)}
             >
-              再次导入该调色板
+              {t('paletteManager.importAgain')}
             </button>
           </div>
           <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -190,11 +196,11 @@ export default function LospecPalettePicker({ onSelectPalette }) {
       )}
 
       <p className="mt-6 text-xs text-slate-500">
-        提示：Lospec 官方 API 限制跨域调用，因此这里提供精选的热门调色板集合。若需检索更多调色板，可访问{' '}
+        {t('paletteManager.curatedTip')}{' '}
         <a className="text-blue-600 hover:underline" href="https://lospec.com/palette-list" target="_blank" rel="noopener noreferrer">
-          Lospec Palette List
+          {t('paletteManager.paletteListLink')}
         </a>
-        。如需扩展，请考虑部署后端代理以访问完整 API。
+        .
       </p>
     </div>
   )

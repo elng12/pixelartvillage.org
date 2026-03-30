@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-function ExportPanel({ exportFormat, setExportFormat, exportScale, setExportScale, transparentBG, setTransparentBG, quality, setQuality }) {
+function ExportPanel({ exportFormat, setExportFormat, exportSize, setExportSize, transparentBG, setTransparentBG, quality, setQuality }) {
   const { t } = useTranslation()
   return (
     <div className="border-t pt-4">
@@ -13,12 +13,13 @@ function ExportPanel({ exportFormat, setExportFormat, exportScale, setExportScal
       </select>
       <div className="mt-3">
         <label htmlFor="scale-select" className="block text-sm font-medium mb-2">{t('export.label.size')}</label>
-        <div className="flex gap-2">
-          <button type="button" className={`btn-secondary ${exportScale===0.5?'ring-1 ring-blue-500':''}`} onClick={() => setExportScale(0.5)}>{t('export.size.xs')}</button>
-          <button type="button" className={`btn-secondary ${exportScale===1?'ring-1 ring-blue-500':''}`} onClick={() => setExportScale(1)}>{t('export.size.sm')}</button>
-          <button type="button" className={`btn-secondary ${exportScale===2?'ring-1 ring-blue-500':''}`} onClick={() => setExportScale(2)}>{t('export.size.lg')}</button>
-          <button type="button" className={`btn-secondary ${exportScale===4?'ring-1 ring-blue-500':''}`} onClick={() => setExportScale(4)}>{t('export.size.xl')}</button>
+        <div className="flex flex-wrap gap-2">
+          <button type="button" className={`btn-secondary ${exportSize==='pixel'?'ring-1 ring-blue-500':''}`} onClick={() => setExportSize('pixel')}>{t('export.size.pixel')}</button>
+          <button type="button" className={`btn-secondary ${exportSize==='source'?'ring-1 ring-blue-500':''}`} onClick={() => setExportSize('source')}>{t('export.size.source')}</button>
+          <button type="button" className={`btn-secondary ${exportSize==='double'?'ring-1 ring-blue-500':''}`} onClick={() => setExportSize('double')}>{t('export.size.double')}</button>
+          <button type="button" className={`btn-secondary ${exportSize==='quad'?'ring-1 ring-blue-500':''}`} onClick={() => setExportSize('quad')}>{t('export.size.quad')}</button>
         </div>
+        <p className="mt-2 text-xs text-gray-500">{t('export.note')}</p>
       </div>
       <div className="flex items-center gap-3 mt-3">
         <input id="transparent-bg" type="checkbox" className="h-4 w-4" checked={transparentBG} onChange={(e)=>setTransparentBG(e.target.checked)} />

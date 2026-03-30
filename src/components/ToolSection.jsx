@@ -42,6 +42,9 @@ function ToolSection({
   actionHint,
   chooseFileLabel,
   supportsText,
+  exampleImages = [],
+  exampleLabel,
+  exampleHint,
 }) {
   const { t } = useTranslation()
   const fileInputRef = useRef(null);
@@ -59,6 +62,22 @@ function ToolSection({
   const resolvedSubtitle2 = subtitleText2 || t('tool.subtitle2')
   const resolvedChooseFileLabel = chooseFileLabel || t('tool.chooseFile')
   const resolvedSupportsText = supportsText || t('tool.supports')
+  const hasExamples = exampleImages.length > 0
+
+  const revokeLastObjectUrl = useCallback(() => {
+    if (!lastUrlRef.current || typeof lastUrlRef.current !== 'string' || !lastUrlRef.current.startsWith('blob:')) {
+      lastUrlRef.current = null
+      return
+    }
+    try {
+      URL.revokeObjectURL(lastUrlRef.current)
+    } catch (e) {
+      if (import.meta.env.DEV) {
+        log('revokeObjectURL:failed', { error: e?.message })
+      }
+    }
+    lastUrlRef.current = null
+  }, [log])
 
   const handleFileSelect = useCallback(async (file) => {
     if (isPreparing) return;
@@ -117,15 +136,7 @@ function ToolSection({
         finalUrl = URL.createObjectURL(file);
         log('handleFileSelect:use-original', { name: file.name });
       }
-      if (lastUrlRef.current) {
-        try { 
-          URL.revokeObjectURL(lastUrlRef.current); 
-        } catch (e) { 
-          if (import.meta.env.DEV) {
-            log('revokeObjectURL:failed', { error: e?.message });
-          }
-        }
-      }
+      revokeLastObjectUrl()
       lastUrlRef.current = finalUrl;
       log('onImageUpload:call', { finalUrl });
       onImageUpload(finalUrl);
@@ -153,7 +164,18 @@ function ToolSection({
       setIsPreparing(false);
       log('handleFileSelect:complete', { name: file?.name });
     }
-  }, [isPreparing, log, onImageUpload, t]);
+  }, [isPreparing, log, onImageUpload, revokeLastObjectUrl, t]);
+
+  const handleExampleSelect = useCallback((example) => {
+    if (isPreparing || !example?.src) return
+    setError('')
+    revokeLastObjectUrl()
+    onImageUpload(example.src)
+    log('example-select', { id: example.id, src: example.src })
+    if (uploadLiveRef.current) {
+      uploadLiveRef.current.textContent = t('upload.selectedExample', { name: example.label })
+    }
+  }, [isPreparing, log, onImageUpload, revokeLastObjectUrl, t])
 
   const handleDrop = useCallback((e) => {
     e.preventDefault();
@@ -279,7 +301,7 @@ function ToolSection({
           <div className="text-center">
             <svg className="mx-auto h-12 w-12 text-gray-400" width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 16a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v5a4 4 0 01-4 4H7z" /></svg>
             <h2 id="upload-instructions" className="mt-4 text-xl font-semibold text-gray-700" style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginTop: '1rem', marginBottom: 0 }}>
-              {t('tool.dragOrClick')} <span className="text-blue-600">{t('tool.clickToChoose')}</span>
+              {t('tool.dragOrClick')}{' '}<span className="text-blue-600">{t('tool.clickToChoose')}</span>
             </h2>
             <p
               id="upload-supports"
@@ -288,6 +310,34 @@ function ToolSection({
             >
               {resolvedSupportsText}
             </p>
+            {hasExamples ? (
+              <div className="mt-4" style={{ marginTop: '1rem' }}>
+                <p className="text-sm font-medium text-gray-600">
+                  {exampleLabel}
+                </p>
+                {exampleHint ? (
+                  <p className="mt-1 text-sm text-gray-500">
+                    {exampleHint}
+                  </p>
+                ) : null}
+                <div className="mt-3 flex flex-wrap justify-center gap-2">
+                  {exampleImages.map((example) => (
+                    <button
+                      key={example.id}
+                      type="button"
+                      className="rounded-full border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:border-blue-500 hover:text-blue-600"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        handleExampleSelect(example)
+                      }}
+                    >
+                      {example.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : null}
             {error && (
               <p className="mt-3 text-sm text-red-600" role="alert" aria-live="polite">{error}</p>
             )}

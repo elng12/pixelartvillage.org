@@ -2,7 +2,7 @@ import logger from '@/utils/logger'
 // Image processing utilities — pixel art conversion
 class ImageProcessor {
   constructor() { this.last = null; }
-  setLast(canvas) { this.last = canvas; }
+  setLast(payload) { this.last = payload; }
   getLast() { return this.last; }
 }
 export const imageProcessor = new ImageProcessor();
@@ -60,6 +60,36 @@ function createCanvas(w, h) {
   return c;
 }
 
+function normalizeHexColor(hexColor) {
+  const normalized = String(hexColor || '').trim().replace('#', '')
+  return /^[0-9a-fA-F]{6}$/.test(normalized) ? `#${normalized}` : '#475569'
+}
+
+function toGridStrokeColor(hexColor, alpha = 0.34) {
+  const [r, g, b] = hexToRgb(normalizeHexColor(hexColor))
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`
+}
+
+function drawExportGrid(ctx, { width, height, columns, rows, color }) {
+  if (!columns || !rows) return
+  const cellWidth = width / columns
+  const cellHeight = height / rows
+  if (!Number.isFinite(cellWidth) || !Number.isFinite(cellHeight) || Math.min(cellWidth, cellHeight) < 2) return
+
+  const thickness = Math.max(1, Math.round(Math.min(cellWidth, cellHeight) * 0.08))
+  ctx.save()
+  ctx.fillStyle = color
+  for (let x = 1; x < columns; x++) {
+    const xpos = Math.round(x * cellWidth - thickness / 2)
+    ctx.fillRect(xpos, 0, thickness, height)
+  }
+  for (let y = 1; y < rows; y++) {
+    const ypos = Math.round(y * cellHeight - thickness / 2)
+    ctx.fillRect(0, ypos, width, thickness)
+  }
+  ctx.restore()
+}
+
 async function resolvePalette({ autoPalette, palette, paletteSize }, sourceCanvas, signal) {
   let paletteColors = null;
   if (autoPalette) {
@@ -107,14 +137,23 @@ export async function processPixelArt(imageData, options, signal) {
     // If pixel size is too big so scaled dimensions are <= 0, fall back to plain draw
     const scaledWidth = Math.floor(width / pixelSize)
     const scaledHeight = Math.floor(height / pixelSize)
-    let outCanvas;
+    let previewCanvas
+    let pixelCanvas
     if (pixelSize > 1 && scaledWidth > 0 && scaledHeight > 0) {
-      outCanvas = await processPixelatePath({ src, width, height, scaledWidth, scaledHeight, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal)
+      ({ previewCanvas, pixelCanvas } = await processPixelatePath({ src, width, height, scaledWidth, scaledHeight, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal))
     } else {
-      outCanvas = await processDirectPath({ src, width, height, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal)
+      previewCanvas = await processDirectPath({ src, width, height, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal)
+      pixelCanvas = previewCanvas
     }
-    imageProcessor.setLast(outCanvas);
-    return outCanvas.toDataURL();
+    imageProcessor.setLast({
+      previewCanvas,
+      pixelCanvas,
+      sourceWidth: width,
+      sourceHeight: height,
+      pixelWidth: pixelCanvas.width,
+      pixelHeight: pixelCanvas.height,
+    })
+    return previewCanvas.toDataURL();
   } catch (error) {
     if (import.meta.env.DEV) logger.error('Pixel art processing error:', error);
     throw error;
@@ -140,7 +179,7 @@ async function processPixelatePath({ src, width, height, scaledWidth, scaledHeig
   ctx.imageSmoothingEnabled = false
   ctx.filter = 'none'
   ctx.drawImage(tempCanvas, 0, 0, scaledWidth, scaledHeight, 0, 0, width, height)
-  return canvas
+  return { previewCanvas: canvas, pixelCanvas: tempCanvas }
 }
 
 async function processDirectPath({ src, width, height, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal) {
@@ -188,12 +227,30 @@ function mimeFromFormat(fmt) {
   return fmt === 'png' ? 'image/png' : fmt === 'jpeg' ? 'image/jpeg' : 'image/webp'
 }
 
-export async function exportProcessedBlob(processedDataUrl, { format = 'png', scale = 1, quality = 0.92, transparentBG = true } = {}) {
-  const source = imageProcessor.getLast();
-  let srcW, srcH;
-  if (source && source.width && source.height) {
-    srcW = source.width; srcH = source.height;
+function resolveExportSource(cache, size) {
+  if (!cache) return null
+  const previewCanvas = cache.previewCanvas || null
+  const pixelCanvas = cache.pixelCanvas || previewCanvas
+  const pixelWidth = cache.pixelWidth || pixelCanvas?.width || previewCanvas?.width || 0
+  const pixelHeight = cache.pixelHeight || pixelCanvas?.height || previewCanvas?.height || 0
+  switch (size) {
+    case 'pixel':
+      return { canvas: pixelCanvas, multiplier: 1, pixelWidth, pixelHeight }
+    case 'double':
+      return { canvas: previewCanvas, multiplier: 2, pixelWidth, pixelHeight }
+    case 'quad':
+      return { canvas: previewCanvas, multiplier: 4, pixelWidth, pixelHeight }
+    case 'source':
+    default:
+      return { canvas: previewCanvas, multiplier: 1, pixelWidth, pixelHeight }
   }
+}
+
+export async function exportProcessedBlob(
+  processedDataUrl,
+  { format = 'png', size = 'source', quality = 0.92, transparentBG = true, showGrid = false, gridColor = '#475569' } = {},
+) {
+  const cache = imageProcessor.getLast()
 
   const out = document.createElement('canvas');
   const ctx = out.getContext('2d');
@@ -205,21 +262,31 @@ export async function exportProcessedBlob(processedDataUrl, { format = 'png', sc
 
   const mime = mimeFromFormat(format);
 
-  if (srcW && srcH) {
-    out.width = Math.max(1, Math.round(srcW * scale));
-    out.height = Math.max(1, Math.round(srcH * scale));
+  const resolved = resolveExportSource(cache, size)
+  if (resolved?.canvas?.width && resolved?.canvas?.height) {
+    out.width = Math.max(1, Math.round(resolved.canvas.width * resolved.multiplier))
+    out.height = Math.max(1, Math.round(resolved.canvas.height * resolved.multiplier))
     if (mime !== 'image/png' || !transparentBG) {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, out.width, out.height);
     }
-    ctx.drawImage(source, 0, 0, out.width, out.height);
-    return await toBlobAsync(out, mime, format === 'png' ? undefined : quality);
+    ctx.drawImage(resolved.canvas, 0, 0, out.width, out.height)
+    if (showGrid) {
+      drawExportGrid(ctx, {
+        width: out.width,
+        height: out.height,
+        columns: resolved.pixelWidth,
+        rows: resolved.pixelHeight,
+        color: toGridStrokeColor(gridColor),
+      })
+    }
+    return await toBlobAsync(out, mime, format === 'png' ? undefined : quality)
   }
 
   // Fallback: decode from data URL if cache is missing
   const img = await loadImage(processedDataUrl);
-  out.width = Math.max(1, Math.round(img.naturalWidth * scale || img.width * scale));
-  out.height = Math.max(1, Math.round(img.naturalHeight * scale || img.height * scale));
+  out.width = Math.max(1, Math.round(img.naturalWidth || img.width));
+  out.height = Math.max(1, Math.round(img.naturalHeight || img.height));
   if (mime !== 'image/png' || !transparentBG) {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, out.width, out.height);
