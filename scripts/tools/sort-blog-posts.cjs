@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const postsPath = path.join(__dirname, '../src/content/blog-posts.json');
+const postsPath = path.join(process.cwd(), 'src', 'content', 'blog-posts.json');
 
 // 读取现有博客文章
 const posts = JSON.parse(fs.readFileSync(postsPath, 'utf8'));

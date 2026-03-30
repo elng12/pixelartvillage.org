@@ -3,7 +3,9 @@
  * 在生产环境中自动禁用调试日志
  */
 
-const isDev = import.meta.env.DEV || import.meta.env.MODE === 'development'
+const viteEnv = import.meta.env
+const nodeEnv = globalThis.process?.env?.NODE_ENV
+const isDev = Boolean((viteEnv && (viteEnv.DEV || viteEnv.MODE === 'development')) || nodeEnv === 'development')
 
 export const logger = {
   /**

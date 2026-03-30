@@ -56,7 +56,7 @@ Normal English Text
 然后运行：
 ```powershell
 # 修复代码后，同步翻译键
-node scripts/sync-translation-keys.cjs
+node scripts/i18n/sync-translation-keys.cjs
 
 # 重新生成伪本地化
 npm run i18n:pseudo

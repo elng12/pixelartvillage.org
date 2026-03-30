@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 
 async function main() {
-  const distDir = path.resolve(__dirname, '..', 'dist');
+  const distDir = path.resolve(process.cwd(), 'dist');
   if (!fs.existsSync(distDir)) {
     console.error('[critters] dist/ not found, skip');
     process.exit(0);

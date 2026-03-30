@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const DOMAIN = 'https://pixelartvillage.org/';
-const localeConfig = require(path.resolve(__dirname, '..', 'config', 'locales.json'));
+const localeConfig = require(path.resolve(process.cwd(), 'config', 'locales.json'));
 const DEFAULT_LANG = (localeConfig && localeConfig.default) || 'en';
 const SUPPORTED_LANGS = Array.from(new Set((localeConfig && localeConfig.supported) || [DEFAULT_LANG]));
 const OTHER_LANGS = SUPPORTED_LANGS.filter((lang) => lang && lang !== DEFAULT_LANG);
@@ -41,9 +41,9 @@ function normalizePseoPages(value) {
 
 function loadLocalizedContent(baseName, lang, normalizer = toArray) {
   const attempts = [
-    path.resolve(__dirname, `../src/content/${baseName}.${lang}.json`),
-    path.resolve(__dirname, `../src/content/${baseName}.${DEFAULT_LANG}.json`),
-    path.resolve(__dirname, `../src/content/${baseName}.json`),
+    path.resolve(process.cwd(), 'src', 'content', `${baseName}.${lang}.json`),
+    path.resolve(process.cwd(), 'src', 'content', `${baseName}.${DEFAULT_LANG}.json`),
+    path.resolve(process.cwd(), 'src', 'content', `${baseName}.json`),
   ];
   for (const filePath of attempts) {
     if (fs.existsSync(filePath)) {

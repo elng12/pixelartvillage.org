@@ -1,13 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
 import { langs } from './langs.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const PROJECT_ROOT = path.resolve(__dirname, '..');
+const PROJECT_ROOT = process.cwd();
 const PUBLIC_DIR = path.resolve(PROJECT_ROOT, 'public');
 const DOMAIN = 'https://pixelartvillage.org';
 

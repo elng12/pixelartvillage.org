@@ -227,7 +227,7 @@ function verifyRoute(routePath, lang = 'en') {
 const ROUTES = ['/', '/privacy', '/terms', '/about', '/contact', '/blog'];
 function loadJsonList(label, candidates) {
   for (const rel of candidates) {
-    const filePath = path.resolve(__dirname, rel);
+    const filePath = path.resolve(process.cwd(), rel);
     if (!fs.existsSync(filePath)) continue;
     try {
       const raw = fs.readFileSync(filePath, 'utf8');
@@ -243,16 +243,16 @@ function loadJsonList(label, candidates) {
 }
 
 const posts = loadJsonList('blog-posts', [
-  '../src/content/blog-posts.json',
-  '../src/content/blog-posts.en.json',
+  'src/content/blog-posts.json',
+  'src/content/blog-posts.en.json',
 ]);
 for (const p of posts) {
   if (p && p.slug) ROUTES.push(`/blog/${p.slug}`);
 }
 
 const pseo = loadJsonList('pseo-pages', [
-  '../src/content/pseo-pages.json',
-  '../src/content/pseo-pages.en.json',
+  'src/content/pseo-pages.json',
+  'src/content/pseo-pages.en.json',
 ]);
 for (const p of pseo) {
   if (p && p.slug) ROUTES.push(`/converter/${p.slug}`);

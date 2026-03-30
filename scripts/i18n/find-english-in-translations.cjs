@@ -53,7 +53,7 @@ function findEnglishText(obj, path = '', results = []) {
 }
 
 function checkLanguage(lang) {
-  const filePath = path.join(__dirname, '..', 'public', 'locales', lang, 'translation.json');
+  const filePath = path.join(process.cwd(), 'public', 'locales', lang, 'translation.json');
   
   if (!fs.existsSync(filePath)) {
     console.log(`❌ File not found: ${filePath}`);
@@ -105,4 +105,3 @@ console.log(`Total issues found: ${totalIssues}`);
 console.log('='.repeat(60));
 
 process.exit(totalIssues > 0 ? 1 : 0);
-

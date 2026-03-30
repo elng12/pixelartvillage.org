@@ -14,7 +14,7 @@
 
 - 线上真实值：`dist/index.html`
 - 首页文案来源：`src/locales/en.json`
-- 构建时写入 SEO 的脚本：`scripts/prerender-spa.cjs`
+- 构建时写入 SEO 的脚本：`scripts/build/prerender-spa.cjs`
 - 运行时 SEO 辅助组件：`src/components/Seo.jsx`
 
 这意味着团队应该把预渲染产物当作首页 SEO 的真实来源，而不是根目录的 `index.html` 模板。
@@ -103,4 +103,4 @@
 - `src/locales/en.json`
 - `index.html`
 - `dist/index.html`
-- `scripts/prerender-spa.cjs`
+- `scripts/build/prerender-spa.cjs`

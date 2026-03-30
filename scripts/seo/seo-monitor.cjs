@@ -16,7 +16,7 @@ const fs = require('fs');
 const path = require('path');
 
 const SITE_URL = 'https://pixelartvillage.org';
-const LOG_FILE = path.join(__dirname, '../data/seo-metrics.csv');
+const LOG_FILE = path.join(process.cwd(), 'data', 'seo-metrics.csv');
 
 // 目标关键词列表
 const TARGET_KEYWORDS = [

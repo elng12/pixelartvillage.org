@@ -415,7 +415,7 @@
 
 - `src/components/PseoPage.jsx`
 - `src/components/Seo.jsx`
-- `scripts/prerender-spa.cjs`
+- `scripts/build/prerender-spa.cjs`
 
 ### 8.2 可抓取性
 
@@ -427,8 +427,8 @@
 
 涉及文件：
 
-- `scripts/prerender-spa.cjs`
-- `scripts/verify-dist-entries.cjs`
+- `scripts/build/prerender-spa.cjs`
+- `scripts/build/verify-dist-entries.cjs`
 - `scripts/seo-check.js`
 
 ### 8.3 内链可抓取性

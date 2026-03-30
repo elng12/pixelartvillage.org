@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const localesDir = path.join(__dirname, '../public/locales');
+const localesDir = path.join(process.cwd(), 'public', 'locales');
 const languages = ['es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'ru', 'tl', 'vi', 'ja', 'sv', 'nb', 'nl', 'ar', 'ko', 'th'];
 
 console.log('🔍 检查所有语言的占位符污染问题...\n');

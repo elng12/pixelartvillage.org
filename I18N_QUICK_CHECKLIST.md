@@ -6,7 +6,7 @@
 - [ ] 在 `public/locales/en/translation.json` 中添加翻译键
 - [ ] 在组件中使用 `t('your.key')` 而非硬编码
 - [ ] 运行 `npm run i18n:check` 确认键一致性
-- [ ] 运行 `node scripts/sync-translation-keys.cjs` 同步到其他语言
+- [ ] 运行 `node scripts/i18n/sync-translation-keys.cjs` 同步到其他语言
 
 ### 添加新组件时
 - [ ] 导入 `useTranslation`: `import { useTranslation } from 'react-i18next'`
@@ -74,13 +74,13 @@ npm run i18n:pseudo
 
 ### 同步翻译键
 ```bash
-node scripts/sync-translation-keys.cjs
+node scripts/i18n/sync-translation-keys.cjs
 ```
 **作用**: 将英文的新键同步到所有其他语言
 
 ### 导出翻译审查
 ```bash
-node scripts/export-review-md.cjs
+node scripts/i18n/export-review-md.cjs
 ```
 **输出**: `i18n/review.md` - 列出所有"same as English"的条目
 

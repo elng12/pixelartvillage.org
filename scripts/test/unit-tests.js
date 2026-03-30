@@ -2,11 +2,11 @@
 // Minimal unit assertions (no extra deps)
 import assert from 'node:assert'
 
-import { inferAutoPaletteSize } from '../src/utils/palette-utils.js'
-import { hexToRgb } from '../src/utils/palette-helpers.js'
-import { clamp255, rgbToLab } from '../src/utils/color-utils.js'
-import { nearestColorIndex, applyPaletteToCtx } from '../src/utils/palette-helpers.js'
-import { getKMeansPalette } from '../src/utils/kmeans-bridge.js'
+import { inferAutoPaletteSize } from '../../src/utils/palette-utils.js'
+import { hexToRgb } from '../../src/utils/palette-helpers.js'
+import { clamp255, rgbToLab } from '../../src/utils/color-utils.js'
+import { nearestColorIndex, applyPaletteToCtx } from '../../src/utils/palette-helpers.js'
+import { getKMeansPalette } from '../../src/utils/kmeans-bridge.js'
 
 let failed = 0
 function test(name, fn) {

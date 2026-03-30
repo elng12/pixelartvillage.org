@@ -10,7 +10,7 @@
 - `public/locales/{lang}/translation.json`：每种语言的文案 JSON。
 - `src/i18n.js`：i18n 初始化（按需加载、fallback、本地存储记忆）。
 - `src/contexts/LocaleContext.jsx`：提供 `currentLocale` 与 `buildPath`，供导航等组件生成语言化 URL。
-- `scripts/prerender-spa.cjs`、`scripts/generate-sitemap.cjs`：多语言静态页与 sitemap 生成脚本。
+- `scripts/build/prerender-spa.cjs`、`scripts/seo/generate-sitemap.cjs`：多语言静态页与 sitemap 生成脚本。
 
 ## 路由规范
 - 客户端路由结构：`/:lang/*`（其中 `lang` 来源于配置文件，默认语言可省略前缀）。
@@ -24,8 +24,8 @@
 ## SEO 与构建
 - `npm run build` 会执行：
   1. Vite 构建；
-  2. `scripts/prerender-spa.cjs` 为每个语言/路由组合生成静态 HTML，注入 canonical、hreflang、隐藏内容；
-  3. `scripts/generate-sitemap.cjs` 输出多语言 `sitemap.xml` 与参考文件；
+  2. `scripts/build/prerender-spa.cjs` 为每个语言/路由组合生成静态 HTML，注入 canonical、hreflang、隐藏内容；
+  3. `scripts/seo/generate-sitemap.cjs` 输出多语言 `sitemap.xml` 与参考文件；
   4. `scripts/seo-check.js` 验证 meta、结构化数据、robots 等。
 - `public/_redirects` 仅保留静态资源直出与 SPA 兜底，不再强制重定向语言路径。
 

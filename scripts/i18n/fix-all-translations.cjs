@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const localesDir = path.join(__dirname, '../public/locales');
+const localesDir = path.join(process.cwd(), 'public', 'locales');
 const languages = ['es', 'id', 'de', 'pl', 'it', 'pt', 'fr', 'tl', 'vi', 'sv', 'nb', 'nl'];
 
 // 读取英文基准文件

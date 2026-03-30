@@ -111,7 +111,7 @@
 
 ### P1 (medium)
 4) 优化 Showcase 图片分辨率
-- `scripts/gen-showcase.cjs` 添加 520w/640w
+- `scripts/build/gen-showcase.cjs` 添加 520w/640w
 - 禁止 1200w 放大 (`withoutEnlargement: true`)
 
 5) 修复线上 badge 404
@@ -136,7 +136,7 @@
 - `src/components/Footer.jsx`
 - `src/components/CriticalCSS.jsx`
 - `src/components/ResourcePreloader.jsx`
-- `scripts/gen-showcase.cjs`
+- `scripts/build/gen-showcase.cjs`
 - `index.html`
 
 ---

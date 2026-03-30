@@ -37,12 +37,12 @@ ANTHROPIC_BASE_URL=https://api.minimaxi.com/anthropic
 
 ```bash
 # 翻译所有三种语言（ko, ja, fr）
-node scripts/force-retranslate.cjs
+node scripts/i18n/force-retranslate.cjs
 
 # 或者只翻译特定语言
-node scripts/force-retranslate.cjs ko
-node scripts/force-retranslate.cjs ja
-node scripts/force-retranslate.cjs fr
+node scripts/i18n/force-retranslate.cjs ko
+node scripts/i18n/force-retranslate.cjs ja
+node scripts/i18n/force-retranslate.cjs fr
 ```
 
 #### 优点：
@@ -70,7 +70,7 @@ TRANSLATE_PROVIDER=libre
 LIBRETRANSLATE_URL=http://localhost:5000/translate
 
 # 运行翻译
-node scripts/force-retranslate.cjs
+node scripts/i18n/force-retranslate.cjs
 ```
 
 ---
@@ -83,13 +83,13 @@ node scripts/force-retranslate.cjs
 
 ```bash
 # 查看韩语中的英文残留
-node scripts/find-english-in-translations.cjs ko
+node scripts/i18n/find-english-in-translations.cjs ko
 
 # 查看日语中的英文残留
-node scripts/find-english-in-translations.cjs ja
+node scripts/i18n/find-english-in-translations.cjs ja
 
 # 查看法语中的英文残留
-node scripts/find-english-in-translations.cjs fr
+node scripts/i18n/find-english-in-translations.cjs fr
 ```
 
 #### 手动编辑文件：
@@ -146,10 +146,10 @@ echo "ANTHROPIC_AUTH_TOKEN=your_key_here" >> .env
 echo "ANTHROPIC_BASE_URL=https://api.minimaxi.com/anthropic" >> .env
 
 # 2. 运行翻译（预计 10-20 分钟）
-node scripts/force-retranslate.cjs
+node scripts/i18n/force-retranslate.cjs
 
 # 3. 验证结果
-node scripts/find-english-in-translations.cjs ko ja fr
+node scripts/i18n/find-english-in-translations.cjs ko ja fr
 
 # 4. 测试
 npm run dev
@@ -184,4 +184,3 @@ npm run dev
 3. **方案 3**: 我想先手动翻译最关键的 UI 部分
 
 或者你有其他想法？
-
