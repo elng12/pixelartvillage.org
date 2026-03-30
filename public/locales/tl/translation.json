@@ -76,7 +76,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "Kailangan mo ba ng tulong o gusto mong makipag-ugnayan sa team?",
+    "supportDesc": "Gamitin ang support inbox namin para sa mga tanong sa produkto, bug report, at partnership inquiry."
   },
   "blog": {
     "title": "Blog",
@@ -471,7 +473,11 @@
     "ogDesc": "Kontakin ang Pixel Art Village para sa suporta, feedback, pakikipagtulungan, at karagdagang resources.",
     "twitterTitle": "Makipag-ugnayan | Pixel Art Village",
     "twitterDesc": "Kailangan mo ng tulong sa Pixel Art Village? Makipag-ugnayan para sa suporta, feedback, o kolaborasyon.",
-    "emailTitle": "I-email ang Pixel Art Village"
+    "emailTitle": "I-email ang Pixel Art Village",
+    "supportEyebrow": "Support inbox",
+    "supportTitle": "Makipag-ugnayan sa team ng Pixel Art Village",
+    "emailCta": "Magpadala ng email",
+    "emailHint": "Ito ang pinakamabilis na paraan para mag-ulat ng sirang page, magtanong tungkol sa workflow, o pag-usapan ang partnership."
   },
   "faq": {
     "title": "pixel art Village: Mga Madalas na Tanong",

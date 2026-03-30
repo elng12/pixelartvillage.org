@@ -70,7 +70,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "Нужна помощь или хотите связаться с командой?",
+    "supportDesc": "Используйте наш почтовый ящик поддержки для вопросов о продукте, сообщений об ошибках и запросов о партнёрстве."
   },
   "blog": {
     "title": "Блог",
@@ -534,7 +536,11 @@
     "p11": "или",
     "p12": "руководством «Изображение в пиксель-арт»",
     "p13": "из нашей библиотеки.",
-    "emailTitle": "Написать в Pixel Art Village"
+    "emailTitle": "Написать в Pixel Art Village",
+    "supportEyebrow": "Почта поддержки",
+    "supportTitle": "Связаться с командой Pixel Art Village",
+    "emailCta": "Отправить письмо",
+    "emailHint": "Этот ящик — самый быстрый способ сообщить о сломанной странице, задать вопрос по рабочему процессу или обсудить партнёрство."
   },
   "faq": {
     "title": "Пиксельная деревня: Часто задаваемые вопросы",

@@ -48,18 +48,6 @@ function Home() {
   const { t } = useTranslation()
   const { uploadedImage, setUploadedImage, currentLocale } = useAppOutletContext()
   const IS_E2E = String(import.meta.env.VITE_E2E) === '1'
-  const homeExampleImages = [
-    {
-      id: 'landscape-photo',
-      label: t('home.examples.landscape'),
-      src: '/showcase-before.jpg',
-    },
-    {
-      id: 'pixel-scene',
-      label: t('home.examples.pixelScene'),
-      src: '/showcase-after.jpg',
-    },
-  ]
   const canonical =
     currentLocale === CANONICAL_LOCALE
       ? 'https://pixelartvillage.org/'
@@ -82,9 +70,6 @@ function Home() {
         subtitleText={t('home.heroSubtitle')}
         subtitleText2={t('home.heroSubtitle2')}
         supportsText={t('home.entrySupports')}
-        exampleImages={homeExampleImages}
-        exampleLabel={t('home.examplesLabel')}
-        exampleHint={t('home.examplesHint')}
       />
       {(uploadedImage || IS_E2E) ? (
         <Suspense fallback={null}>

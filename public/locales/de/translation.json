@@ -76,7 +76,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "Brauchen Sie Hilfe oder möchten Sie das Team erreichen?",
+    "supportDesc": "Verwenden Sie unser Support-Postfach für Produktfragen, Fehlermeldungen und Partnerschaftsanfragen."
   },
   "blog": {
     "title": "Blog",
@@ -534,7 +536,11 @@
     "p11": "oder",
     "p12": "den Leitfaden „Bild zu Pixel Art“",
     "p13": "aus unserer Sammlung.",
-    "emailTitle": "E-Mail an Pixel Art Village"
+    "emailTitle": "E-Mail an Pixel Art Village",
+    "supportEyebrow": "Support-Postfach",
+    "supportTitle": "Kontaktieren Sie das Pixel Art Village-Team",
+    "emailCta": "E-Mail senden",
+    "emailHint": "Dieses Postfach ist der schnellste Weg, eine defekte Seite zu melden, eine Frage zum Ablauf zu stellen oder eine Partnerschaft zu besprechen."
   },
   "faq": {
     "title": "pixel art Dorf: Häufig gestellte Fragen",

@@ -76,7 +76,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "¿Necesitas ayuda o quieres contactar con el equipo?",
+    "supportDesc": "Usa nuestro buzón de soporte para preguntas sobre el producto, informes de errores y consultas de colaboración."
   },
   "blog": {
     "title": "Blog",
@@ -534,7 +536,11 @@
     "p11": "o",
     "p12": "la guía Imagen a pixel art",
     "p13": "de nuestra biblioteca.",
-    "emailTitle": "Enviar correo a Pixel Art Village"
+    "emailTitle": "Enviar correo a Pixel Art Village",
+    "supportEyebrow": "Buzón de soporte",
+    "supportTitle": "Contacta con el equipo de Pixel Art Village",
+    "emailCta": "Enviar un correo",
+    "emailHint": "Este buzón es la forma más rápida de informar de una página rota, hacer una pregunta sobre el flujo de trabajo o hablar de una colaboración."
   },
   "faq": {
     "title": "Pixel Art Village: preguntas frecuentes",

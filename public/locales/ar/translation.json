@@ -70,7 +70,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "تحتاج إلى مساعدة أو تريد التواصل مع الفريق؟",
+    "supportDesc": "استخدم بريد الدعم لدينا لأسئلة المنتج، وتقارير الأعطال، واستفسارات الشراكة."
   },
   "blog": {
     "title": "مدونة",
@@ -471,7 +473,11 @@
     "ogDesc": "تواصل مع Pixel Art Village: الدعم، الملاحظات، استفسارات الشراكة، والموارد الإضافية.",
     "twitterTitle": "اتصل | Pixel Art Village",
     "twitterDesc": "هل تحتاج مساعدة بخصوص Pixel Art Village؟ تواصل معنا للدعم أو الملاحظات أو التعاون.",
-    "emailTitle": "البريد الإلكتروني Pixel Art Village"
+    "emailTitle": "البريد الإلكتروني Pixel Art Village",
+    "supportEyebrow": "صندوق الدعم",
+    "supportTitle": "تواصل مع فريق Pixel Art Village",
+    "emailCta": "أرسل بريدًا إلكترونيًا",
+    "emailHint": "هذا الصندوق هو أسرع طريقة للإبلاغ عن صفحة معطلة أو طرح سؤال عن سير العمل أو مناقشة شراكة."
   },
   "faq": {
     "title": "قرية الفن بكسل: الأسئلة المتداولة",

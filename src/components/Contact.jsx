@@ -4,6 +4,7 @@ import Seo from '@/components/Seo'
 import { generateHreflangLinks } from '@/utils/hreflang'
 import { useLocaleContext } from '@/hooks/useLocaleContext'
 import LocalizedLink from '@/components/LocalizedLink'
+import { SUPPORT_EMAIL, SUPPORT_EMAIL_HREF } from '@/utils/site-links'
 
 export default function Contact() {
   const { t } = useTranslation()
@@ -34,6 +35,31 @@ export default function Contact() {
         ]}
       />
       <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('contact.h1')}</h1>
+      <section className="mb-8 rounded-2xl border border-blue-100 bg-blue-50/80 p-6 shadow-sm">
+        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-700 mb-2">
+          {t('contact.supportEyebrow')}
+        </p>
+        <h2 className="text-xl font-semibold text-gray-900">{t('contact.supportTitle')}</h2>
+        <p className="mt-2 text-sm text-gray-700">{t('contact.p1')}</p>
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a
+            href={SUPPORT_EMAIL_HREF}
+            className="inline-flex items-center justify-center rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-800"
+            aria-label={t('contact.emailTitle')}
+            data-testid="contact-email-link"
+          >
+            {t('contact.emailCta')}
+          </a>
+          <a
+            href={SUPPORT_EMAIL_HREF}
+            className="text-sm font-medium text-blue-700 underline underline-offset-4"
+            aria-label={t('contact.emailTitle')}
+          >
+            {SUPPORT_EMAIL}
+          </a>
+        </div>
+        <p className="mt-3 text-sm text-gray-600">{t('contact.emailHint')}</p>
+      </section>
       <div className="prose prose-sm text-gray-700">
         <p>
           {t('contact.p2')}{' '}

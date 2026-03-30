@@ -23,6 +23,22 @@ function test(name, fn) {
   tests.push({ name, fn })
 }
 
+function assertLocaleStrings(section, requiredKeys) {
+  const localesDir = path.resolve('public/locales')
+
+  for (const lang of fs.readdirSync(localesDir)) {
+    const file = path.join(localesDir, lang, 'translation.json')
+    if (!fs.existsSync(file)) continue
+    const json = JSON.parse(fs.readFileSync(file, 'utf8'))
+    for (const key of requiredKeys) {
+      assert.ok(
+        typeof json?.[section]?.[key] === 'string' && json[section][key].trim().length > 0,
+        `Missing ${section}.${key} in ${lang}`,
+      )
+    }
+  }
+}
+
 // inferAutoPaletteSize
 test('inferAutoPaletteSize parses trailing number', () => {
   assert.strictEqual(inferAutoPaletteSize('Custom 12'), 12)
@@ -113,19 +129,12 @@ test('palette import locale keys exist in every shipped locale', () => {
     'pixilartHint',
     'importSuccessGeneric',
   ]
-  const localesDir = path.resolve('public/locales')
+  assertLocaleStrings('paletteManager', requiredKeys)
+})
 
-  for (const lang of fs.readdirSync(localesDir)) {
-    const file = path.join(localesDir, lang, 'translation.json')
-    if (!fs.existsSync(file)) continue
-    const json = JSON.parse(fs.readFileSync(file, 'utf8'))
-    for (const key of requiredKeys) {
-      assert.ok(
-        typeof json?.paletteManager?.[key] === 'string' && json.paletteManager[key].trim().length > 0,
-        `Missing paletteManager.${key} in ${lang}`,
-      )
-    }
-  }
+test('support locale keys exist in every shipped locale', () => {
+  assertLocaleStrings('footer', ['supportTitle', 'supportDesc'])
+  assertLocaleStrings('contact', ['supportEyebrow', 'supportTitle', 'emailCta', 'emailHint'])
 })
 
 // clamp255

@@ -76,7 +76,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "Potrzebujesz pomocy lub chcesz skontaktować się z zespołem?",
+    "supportDesc": "Skorzystaj z naszej skrzynki wsparcia w sprawach produktu, zgłoszeń błędów i współpracy."
   },
   "blog": {
     "title": "Blog",
@@ -482,7 +484,11 @@
     "p13": "from our library",
     "emailLabel": "E-mail:",
     "emailTitle": "Napisz do Pixel Art Village",
-    "note": "Zastąp tymczasowy adres oficjalnym kontaktem, aby spełnić wymagania weryfikacji AdSense."
+    "note": "Zastąp tymczasowy adres oficjalnym kontaktem, aby spełnić wymagania weryfikacji AdSense.",
+    "supportEyebrow": "Skrzynka wsparcia",
+    "supportTitle": "Skontaktuj się z zespołem Pixel Art Village",
+    "emailCta": "Wyślij e-mail",
+    "emailHint": "Ta skrzynka to najszybszy sposób, aby zgłosić uszkodzoną stronę, zapytać o sposób działania lub porozmawiać o współpracy."
   },
   "faq": {
     "title": "pixel art Village: Często Zadawane Pytania",

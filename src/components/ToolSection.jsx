@@ -325,12 +325,13 @@ function ToolSection({
                     <button
                       key={example.id}
                       type="button"
-                      className="rounded-full border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:border-blue-500 hover:text-blue-600"
+                      className="inline-flex items-center justify-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm transition-colors hover:border-blue-500 hover:bg-blue-100 hover:text-blue-700"
                       onClick={(e) => {
                         e.preventDefault()
                         e.stopPropagation()
                         handleExampleSelect(example)
                       }}
+                      data-testid={`example-btn-${example.id}`}
                     >
                       {example.label}
                     </button>

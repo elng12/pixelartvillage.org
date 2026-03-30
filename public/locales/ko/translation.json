@@ -76,7 +76,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "도움이 필요하거나 팀에 연락하고 싶으신가요?",
+    "supportDesc": "제품 문의, 버그 제보, 파트너십 문의는 지원 메일함을 이용해 주세요."
   },
   "blog": {
     "title": "블로그",
@@ -471,7 +473,11 @@
     "ogDesc": "Pixel Art Village: 지원, 피드백, 파트너십 문의, 추가 리소스.",
     "twitterTitle": "연락처 | Pixel Art Village",
     "twitterDesc": "도움이 필요하신가요 Pixel Art Village? 지원, 피드백 또는 협업을 위해 연락해 주세요.",
-    "emailTitle": "이메일 Pixel Art Village"
+    "emailTitle": "이메일 Pixel Art Village",
+    "supportEyebrow": "지원 메일함",
+    "supportTitle": "Pixel Art Village 팀에 문의하기",
+    "emailCta": "이메일 보내기",
+    "emailHint": "이 메일함은 깨진 페이지를 신고하거나 작업 흐름을 묻거나 파트너십을 논의하는 가장 빠른 방법입니다."
   },
   "faq": {
     "title": "픽셀아트 빌리지: 자주 묻는 질문",

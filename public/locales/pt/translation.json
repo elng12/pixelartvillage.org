@@ -70,7 +70,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "Precisa de ajuda ou quer falar com a equipe?",
+    "supportDesc": "Use nossa caixa de suporte para dúvidas sobre o produto, relatos de bugs e pedidos de parceria."
   },
   "blog": {
     "title": "Blog",
@@ -534,7 +536,11 @@
     "p11": "ou",
     "p12": "o guia Imagem para pixel art",
     "p13": "da nossa biblioteca.",
-    "emailTitle": "Enviar e-mail para Pixel Art Village"
+    "emailTitle": "Enviar e-mail para Pixel Art Village",
+    "supportEyebrow": "Caixa de suporte",
+    "supportTitle": "Fale com a equipe do Pixel Art Village",
+    "emailCta": "Enviar e-mail",
+    "emailHint": "Esta caixa é a forma mais rápida de relatar uma página com problema, fazer uma pergunta sobre o fluxo de trabalho ou discutir uma parceria."
   },
   "faq": {
     "title": "pixel art Aldeia: Perguntas Frequentes",

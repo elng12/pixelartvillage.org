@@ -70,7 +70,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "ต้องการความช่วยเหลือหรือต้องการติดต่อทีมไหม?",
+    "supportDesc": "ใช้กล่องข้อความฝ่ายสนับสนุนของเราสำหรับคำถามเกี่ยวกับสินค้า การรายงานบั๊ก และการติดต่อเรื่องพาร์ตเนอร์"
   },
   "blog": {
     "title": "บล็อก",
@@ -471,7 +473,11 @@
     "ogDesc": "ติดต่อ Pixel Art Village: การสนับสนุน ความคิดเห็น การสอบถามความร่วมมือ และแหล่งข้อมูลเพิ่มเติม",
     "twitterTitle": "ติดต่อ | Pixel Art Village",
     "twitterDesc": "ต้องการความช่วยเหลือเกี่ยวกับ Pixel Art Village? ติดต่อเราเพื่อขอความสนับสนุน ข้อเสนอแนะ หรือการร่วมมือ.",
-    "emailTitle": "อีเมล Pixel Art Village"
+    "emailTitle": "อีเมล Pixel Art Village",
+    "supportEyebrow": "กล่องข้อความฝ่ายสนับสนุน",
+    "supportTitle": "ติดต่อทีม Pixel Art Village",
+    "emailCta": "ส่งอีเมล",
+    "emailHint": "กล่องข้อความนี้เป็นวิธีที่เร็วที่สุดในการแจ้งหน้าที่เสีย ถามเรื่องขั้นตอนการใช้งาน หรือคุยเรื่องพาร์ตเนอร์"
   },
   "faq": {
     "title": "หมู่บ้านศิลปะพิกเซล: คำถามที่พบบ่อย",

@@ -70,7 +70,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "サポートが必要ですか？チームに連絡しますか？",
+    "supportDesc": "製品に関する質問、不具合報告、提携のご相談はサポート窓口をご利用ください。"
   },
   "blog": {
     "title": "ブログ",
@@ -534,7 +536,11 @@
     "p11": "または",
     "p12": "画像からピクセルアートのガイド",
     "p13": "をご参照ください。",
-    "emailTitle": "Pixel Art Village へメールする"
+    "emailTitle": "Pixel Art Village へメールする",
+    "supportEyebrow": "サポート窓口",
+    "supportTitle": "Pixel Art Village チームに連絡する",
+    "emailCta": "メールを送る",
+    "emailHint": "この窓口は、壊れたページの報告、ワークフローの質問、提携の相談をする最も早い方法です。"
   },
   "faq": {
     "title": "ピクセルアート Village: よくある質問",

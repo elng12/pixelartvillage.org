@@ -70,7 +70,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "Hulp nodig of wil je het team bereiken?",
+    "supportDesc": "Gebruik onze support-inbox voor productvragen, bugmeldingen en partnerverzoeken."
   },
   "blog": {
     "title": "Bloggen",
@@ -471,7 +473,11 @@
     "ogDesc": "Neem contact op met Pixel Art Village: ondersteuning, feedback, partnership aanvragen, en extra bronnen.",
     "twitterTitle": "Contact | Pixel Art Village",
     "twitterDesc": "Hulp nodig met Pixel Art Village? Neem contact met ons op voor ondersteuning, feedback of samenwerking.",
-    "emailTitle": "E-mail Pixel Art Village"
+    "emailTitle": "E-mail Pixel Art Village",
+    "supportEyebrow": "Support-inbox",
+    "supportTitle": "Neem contact op met het Pixel Art Village-team",
+    "emailCta": "E-mail sturen",
+    "emailHint": "Deze inbox is de snelste manier om een kapotte pagina te melden, een vraag over de workflow te stellen of een samenwerking te bespreken."
   },
   "faq": {
     "title": "pixelart Village: veelgestelde vragen",

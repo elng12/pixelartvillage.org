@@ -70,7 +70,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "Hai bisogno di aiuto o vuoi contattare il team?",
+    "supportDesc": "Usa la nostra casella di supporto per domande sul prodotto, segnalazioni di bug e richieste di collaborazione."
   },
   "blog": {
     "title": "Blog",
@@ -471,7 +473,11 @@
     "ogDesc": "Mettiti in contatto con Pixel Art Village: supporto, feedback, richieste di partnership e risorse aggiuntive.",
     "twitterTitle": "Contatto | Pixel Art Village",
     "twitterDesc": "Hai bisogno di aiuto con Pixel Art Village? Contattaci per assistenza, feedback o collaborazione.",
-    "emailTitle": "Email Pixel Art Village"
+    "emailTitle": "Email Pixel Art Village",
+    "supportEyebrow": "Casella di supporto",
+    "supportTitle": "Contatta il team di Pixel Art Village",
+    "emailCta": "Invia un’e-mail",
+    "emailHint": "Questa casella è il modo più rapido per segnalare una pagina non funzionante, fare una domanda sul flusso di lavoro o parlare di una collaborazione."
   },
   "faq": {
     "title": "pixel art Villaggio: Domande Frequenti",

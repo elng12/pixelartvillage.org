@@ -1,6 +1,14 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Static pages visibility', () => {
+  test('Home page keeps upload flow without sample shortcut buttons', async ({ page }) => {
+    await page.goto('/')
+    await expect(page.getByTestId('upload-zone')).toBeVisible()
+    await expect(page.getByTestId('choose-file-btn')).toBeVisible()
+    await expect(page.getByRole('button', { name: /Open landscape sample/i })).toHaveCount(0)
+    await expect(page.getByRole('button', { name: /Open pixel art sample/i })).toHaveCount(0)
+  })
+
   test('Privacy page renders content', async ({ page }) => {
     await page.goto('/privacy')
     await expect(page.getByRole('heading', { level: 1, name: /Privacy Policy/i })).toBeVisible()
@@ -24,5 +32,8 @@ test.describe('Static pages visibility', () => {
     await expect(page.getByRole('heading', { level: 1, name: /Contact/i })).toBeVisible()
     const main = page.getByRole('main')
     await expect(main.getByRole('link', { name: /blog/i })).toBeVisible()
+    await expect(page.getByTestId('contact-email-link')).toHaveAttribute('href', 'mailto:2296744453m@gmail.com')
+    await expect(page.getByTestId('footer-email-link')).toHaveAttribute('href', 'mailto:2296744453m@gmail.com')
+    await expect(page.locator('footer a[href="https://github.com/pixelartvillage/pixelartvillage"]')).toHaveCount(0)
   })
 })

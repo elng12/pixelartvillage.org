@@ -70,7 +70,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "Besoin d’aide ou envie de joindre l’équipe ?",
+    "supportDesc": "Utilisez notre boîte de support pour les questions produit, les signalements de bugs et les demandes de partenariat."
   },
   "blog": {
     "title": "Blogue",
@@ -534,7 +536,11 @@
     "p11": "ou",
     "p12": "le guide de conversion d'image en pixel art",
     "p13": "dans notre bibliothèque.",
-    "emailTitle": "Envoyer un e-mail à Pixel Art Village"
+    "emailTitle": "Envoyer un e-mail à Pixel Art Village",
+    "supportEyebrow": "Boîte de support",
+    "supportTitle": "Contacter l’équipe Pixel Art Village",
+    "emailCta": "Envoyer un e-mail",
+    "emailHint": "Cette boîte est le moyen le plus rapide de signaler une page cassée, poser une question sur le workflow ou parler d’un partenariat."
   },
   "faq": {
     "title": "pixel art Village : Foire aux questions",

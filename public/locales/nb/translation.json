@@ -70,7 +70,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "Trenger du hjelp eller vil du kontakte teamet?",
+    "supportDesc": "Bruk supportinnboksen vår for produktspørsmål, feilrapporter og samarbeidsforespørsler."
   },
   "blog": {
     "title": "Blogg",
@@ -471,7 +473,11 @@
     "ogDesc": "Ta kontakt med Pixel Art Village: støtte, tilbakemeldinger, partnerskapsforespørsler og tilleggsressurser.",
     "twitterTitle": "Kontakt | Pixel Art Village",
     "twitterDesc": "Trenger du hjelp med Pixel Art Village? Kontakt oss for støtte, tilbakemelding eller samarbeid.",
-    "emailTitle": "E-post Pixel Art Village"
+    "emailTitle": "E-post Pixel Art Village",
+    "supportEyebrow": "Supportinnboks",
+    "supportTitle": "Kontakt Pixel Art Village-teamet",
+    "emailCta": "Send e-post",
+    "emailHint": "Denne innboksen er den raskeste måten å rapportere en ødelagt side, stille et spørsmål om arbeidsflyten eller diskutere et samarbeid."
   },
   "faq": {
     "title": "pixel art Village: Ofte stilte spørsmål",

@@ -70,7 +70,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "Cần hỗ trợ hoặc muốn liên hệ với đội ngũ?",
+    "supportDesc": "Hãy dùng hộp thư hỗ trợ của chúng tôi cho câu hỏi về sản phẩm, báo lỗi và yêu cầu hợp tác."
   },
   "blog": {
     "title": "Blog",
@@ -471,7 +473,11 @@
     "ogDesc": "Liên hệ với Pixel Art Village: hỗ trợ, phản hồi, câu hỏi hợp tác và các tài nguyên bổ sung.",
     "twitterTitle": "Liên hệ | Pixel Art Village",
     "twitterDesc": "Bạn cần trợ giúp với Pixel Art Village? Liên hệ chúng tôi để được hỗ trợ, phản hồi hoặc hợp tác.",
-    "emailTitle": "Email Pixel Art Village"
+    "emailTitle": "Email Pixel Art Village",
+    "supportEyebrow": "Hộp thư hỗ trợ",
+    "supportTitle": "Liên hệ với đội ngũ Pixel Art Village",
+    "emailCta": "Gửi email",
+    "emailHint": "Đây là cách nhanh nhất để báo một trang bị lỗi, hỏi về quy trình làm việc hoặc trao đổi về hợp tác."
   },
   "faq": {
     "title": "pixel art Village: Câu hỏi thường gặp",

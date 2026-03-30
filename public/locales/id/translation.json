@@ -76,7 +76,9 @@
       "productHunt": "Featured on Product Hunt",
       "justSimpleTools": "Listed on JustSimple Tools"
     },
-    "mediaFeaturedIn": "Media & Featured In"
+    "mediaFeaturedIn": "Media & Featured In",
+    "supportTitle": "Butuh bantuan atau ingin menghubungi tim?",
+    "supportDesc": "Gunakan kotak masuk dukungan kami untuk pertanyaan produk, laporan bug, dan pertanyaan kemitraan."
   },
   "blog": {
     "title": "Blog",
@@ -471,7 +473,11 @@
     "ogDesc": "Hubungi Pixel Art Village: dukungan, umpan balik, pertanyaan kemitraan, dan sumber daya tambahan.",
     "twitterTitle": "Kontak | Pixel Art Village",
     "twitterDesc": "Butuh bantuan dengan Pixel Art Village? Hubungi kami untuk dukungan, masukan, atau kolaborasi.",
-    "emailTitle": "Surel Pixel Art Village"
+    "emailTitle": "Surel Pixel Art Village",
+    "supportEyebrow": "Kotak masuk dukungan",
+    "supportTitle": "Hubungi tim Pixel Art Village",
+    "emailCta": "Kirim email",
+    "emailHint": "Kotak masuk ini adalah cara tercepat untuk melaporkan halaman yang rusak, menanyakan alur kerja, atau membahas kemitraan."
   },
   "faq": {
     "title": "pixel art Desa: Pertanyaan yang Sering Diajukan",

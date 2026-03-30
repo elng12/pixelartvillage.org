@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import LocalizedLink from '@/components/LocalizedLink';
+import { SUPPORT_EMAIL, SUPPORT_EMAIL_HREF } from '@/utils/site-links';
 
 const aiDirsBadge = '/badges/ai-dirs-badge.svg';
 const acidToolsBadge = '/badges/acidtools-badge.png';
@@ -224,14 +225,6 @@ function getSafeTranslation(t, key, fallback) {
   return normalized;
 }
 
-function GitHubIcon({ className }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
-      <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.61-3.37-1.18-3.37-1.18-.46-1.18-1.12-1.5-1.12-1.5-.92-.63.07-.62.07-.62 1.02.07 1.56 1.05 1.56 1.05.9 1.55 2.36 1.1 2.94.84.09-.65.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.03a9.56 9.56 0 0 1 5 0c1.9-1.3 2.74-1.03 2.74-1.03.56 1.37.21 2.39.11 2.64.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.69.93.69 1.88v2.79c0 .26.18.58.69.48A10 10 0 0 0 12 2Z" />
-    </svg>
-  )
-}
-
 function Footer() {
   const { t } = useTranslation()
   return (
@@ -300,11 +293,6 @@ function Footer() {
                 <li><LocalizedLink to="/#tool" className="hover:text-white">{t('footer.links.start')}</LocalizedLink></li>
                 <li><LocalizedLink to="/#features" className="hover:text-white">{t('footer.links.tips')}</LocalizedLink></li>
                 <li><LocalizedLink to="/privacy/" className="hover:text-white">{t('footer.links.privacyLocal')}</LocalizedLink></li>
-                <li>
-                  <a href="https://github.com/pixelartvillage/pixelartvillage" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-white" aria-label={t('footer.github')}>
-                    <GitHubIcon className="w-4 h-4" /> {t('footer.github')}
-                  </a>
-                </li>
               </ul>
             </div>
           </div>
@@ -357,6 +345,20 @@ function Footer() {
                 </ul>
               </div>
             </div>
+          </section>
+
+          <section className="mt-10 rounded-2xl border border-gray-700/80 bg-gray-800/70 p-5 sm:flex sm:items-center sm:justify-between sm:gap-6">
+            <div>
+              <p className="text-sm font-semibold text-white">{t('footer.supportTitle')}</p>
+              <p className="mt-1 text-sm text-gray-400">{t('footer.supportDesc')}</p>
+            </div>
+            <a
+              href={SUPPORT_EMAIL_HREF}
+              className="mt-4 inline-flex items-center justify-center rounded-lg border border-blue-400/60 px-4 py-2 text-sm font-semibold text-blue-200 transition hover:border-blue-300 hover:text-white sm:mt-0"
+              data-testid="footer-email-link"
+            >
+              {SUPPORT_EMAIL}
+            </a>
           </section>
 
           {/* 底部信息栏 */}
