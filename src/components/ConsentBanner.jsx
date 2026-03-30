@@ -60,24 +60,27 @@ export default function ConsentBanner() {
       className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-200 bg-white/95 backdrop-blur"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
-      <div className="container mx-auto flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center">
-        <div className="text-sm text-gray-700">
+      <div className="container mx-auto flex flex-col gap-2 px-3 py-2 sm:flex-row sm:items-center sm:gap-3 sm:px-4 sm:py-3">
+        <div className="text-xs text-gray-700 sm:text-sm">
           <p className="font-semibold text-gray-900">{t('consent.title')}</p>
-          <p className="mt-1">
+          <p className="mt-0.5 leading-snug sm:mt-1 sm:leading-normal">
             {t('consent.desc')}{' '}
             <LocalizedLink to="/privacy" className="underline underline-offset-2">
               {t('consent.privacy')}
-            </LocalizedLink>{' '}
-            {t('consent.andManage')}{' '}
-            <a
-              className="underline underline-offset-2"
-              href={AD_CENTER_URL}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-            >
-              Google Ads Settings
-            </a>
-            .
+            </LocalizedLink>
+            <span className="hidden sm:inline">
+              {' '}
+              {t('consent.andManage')}{' '}
+              <a
+                className="underline underline-offset-2"
+                href={AD_CENTER_URL}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+              >
+                Google Ads Settings
+              </a>
+              .
+            </span>
           </p>
         </div>
         <div className="flex gap-2 sm:ml-auto">

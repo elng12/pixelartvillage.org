@@ -22,7 +22,7 @@ export default function Blog() {
 
   if (!posts) {
     return (
-      <div className="container mx-auto px-4 py-10 max-w-3xl">
+      <div className="container mx-auto px-4 py-10 max-w-5xl">
         <Seo title={blogSeoTitle} canonical={canonical} lang={resolvedLocale} />
         <p className="text-sm text-gray-600">{t('common.loading')}</p>
       </div>
@@ -30,7 +30,7 @@ export default function Blog() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-10 max-w-3xl">
+    <div className="container mx-auto px-4 py-10 max-w-5xl">
       <Seo
         title={blogSeoTitle}
         canonical={canonical}
@@ -47,14 +47,14 @@ export default function Blog() {
       />
 
       <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">{blogHeading}</h1>
-      <p className="text-gray-700 mb-6 max-w-2xl mx-auto text-center">{t('blog.subtitle')}</p>
+      <p className="text-gray-700 mb-6 max-w-3xl mx-auto text-center">{t('blog.subtitle')}</p>
       {fallback ? (
         <p className="mb-6 text-center text-xs text-gray-500">{t('content.fallbackNotice')}</p>
       ) : null}
 
-      <ul className="space-y-4 max-w-2xl mx-auto">
+      <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {posts.map((p) => (
-          <li key={p.slug} className="p-4 rounded-lg border border-gray-200 bg-white shadow-sm">
+          <li key={p.slug} className="h-full p-4 rounded-lg border border-gray-200 bg-white shadow-sm">
             <h2 className="text-lg font-semibold text-gray-900 text-center">
               <LocalizedLink to={`/blog/${p.slug}`} className="hover:text-blue-600">
                 {p.title}

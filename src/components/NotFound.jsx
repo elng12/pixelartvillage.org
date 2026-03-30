@@ -1,12 +1,11 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Seo from '@/components/Seo';
 import { useLocaleContext } from '@/hooks/useLocaleContext';
 
 function NotFound() {
   const { t } = useTranslation();
-  const { lang } = useParams();
-  const { buildPath } = useLocaleContext();
+  const { currentLocale, buildPath } = useLocaleContext();
   
   return (
     <>
@@ -14,7 +13,7 @@ function NotFound() {
         title={t('notFound.seoTitle')}
         description={t('notFound.desc')}
         noindex={true}
-        lang={lang || 'en'}
+        lang={currentLocale || 'en'}
       />
       <div className="min-h-screen flex items-center justify-center bg-white px-4">
         <div className="text-center max-w-lg">

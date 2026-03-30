@@ -387,13 +387,15 @@ async function prerender() {
     .replace(/\s*-\s*Pixel Art Village\s*$/i, '')
     .trim()
 
-  const formatBlogSeoTitle = (title, siteName, maxLength = 60) => {
+  const formatBlogSeoTitle = (title, siteName) => {
     const normalizedTitle = String(title || '').trim()
-    const suffix = ` | ${siteName}`
-    const maxBaseLength = Math.max(20, maxLength - suffix.length)
-    if (normalizedTitle.length <= maxBaseLength) return `${normalizedTitle}${suffix}`
-    const trimmed = normalizedTitle.slice(0, Math.max(0, maxBaseLength - 1)).trimEnd()
-    return `${trimmed}…${suffix}`
+    const normalizedSiteName = String(siteName || '').trim()
+
+    if (!normalizedTitle && !normalizedSiteName) return ''
+    if (!normalizedTitle) return normalizedSiteName
+    if (!normalizedSiteName) return normalizedTitle
+
+    return `${normalizedTitle} | ${normalizedSiteName}`
   }
 
   const shortenSeoTitle = (title, maxLength = 60) => {
@@ -1051,7 +1053,7 @@ async function prerender() {
         { property: 'og:title', content: p.title },
         { property: 'og:description', content: shortenText(p.metaDescription || '') },
         { property: 'og:image', content: ABS(`/pseo-og/${p.slug}.png`) },
-        { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: p.title },
         { name: 'twitter:description', content: shortenText(p.metaDescription || '') },
         { name: 'twitter:image', content: ABS(`/pseo-og/${p.slug}.png`) },
@@ -1154,7 +1156,7 @@ async function prerender() {
         { property: 'og:title', content: blogSeoTitle },
         { property: 'og:description', content: shortenText(blogSubtitle) },
         { property: 'og:image', content: ABS('/blog-og/_index.png') },
-        { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: blogSeoTitle },
         { name: 'twitter:description', content: shortenText(blogSubtitle) },
         { name: 'twitter:image', content: ABS('/blog-og/_index.png') },
@@ -1189,7 +1191,7 @@ async function prerender() {
           { property: 'og:title', content: seoTitle },
           { property: 'og:description', content: seoDescription },
           { property: 'og:image', content: ogImage },
-          { name: 'twitter:card', content: 'summary' },
+          { name: 'twitter:card', content: 'summary_large_image' },
           { name: 'twitter:title', content: seoTitle },
           { name: 'twitter:description', content: seoDescription },
           { name: 'twitter:image', content: ogImage },

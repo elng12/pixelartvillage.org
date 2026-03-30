@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test'
 const KNOWN_CSP_VIOLATIONS = /(pagead2\.googlesyndication|adsbygoogle|securepubads|adtrafficquality|doubleclick|googletagmanager|clarity\.ms|gtag)/i
 
 test.describe('CSP verification', () => {
-  test('root has CSP meta and no console CSP violations', async ({ page }) => {
+  test('root has CSP header and no console CSP violations', async ({ page }) => {
     const logs = []
     page.on('console', (msg) => {
       const text = msg.text()
@@ -14,14 +14,16 @@ test.describe('CSP verification', () => {
       logs.push({ type: msg.type(), text })
     })
 
-    await page.goto('/')
+    const response = await page.goto('/')
+    expect(response).toBeTruthy()
 
-    // meta CSP exists
-    const cspMeta = page.locator('meta[http-equiv="Content-Security-Policy"]')
-    await expect(cspMeta).toHaveCount(1)
-    const cspText = await cspMeta.getAttribute('content')
+    const cspText = response.headers()['content-security-policy']
     expect(cspText).toBeTruthy()
     expect(cspText).toContain("default-src 'self'")
+    expect(cspText).toContain("frame-ancestors 'none'")
+
+    // CSP should be managed via headers (meta does not support frame-ancestors)
+    await expect(page.locator('meta[http-equiv="Content-Security-Policy"]')).toHaveCount(0)
 
     // no CSP violation messages in console
     const violations = logs.filter((l) =>
@@ -40,7 +42,9 @@ test.describe('CSP verification', () => {
       }
       logs.push({ type: msg.type(), text })
     })
-    await page.goto('/blog')
+    const response = await page.goto('/blog')
+    expect(response).toBeTruthy()
+    expect(response.headers()['content-security-policy']).toBeTruthy()
     const violations = logs.filter((l) =>
       /content security policy|violat(es|ed) the following|refused to (load|connect|execute)/i.test(l.text) &&
       !KNOWN_CSP_VIOLATIONS.test(l.text)

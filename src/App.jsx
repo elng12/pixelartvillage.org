@@ -135,22 +135,19 @@ function BaseLayout(props) {
   return <SharedLayout {...props} currentLocale={CANONICAL_LOCALE} />
 }
 
-function LocaleLayout(props) {
-  const { lang } = useParams()
+function LocaleLayout({ routeLang, ...props }) {
+  const params = useParams()
+  const lang = routeLang || params.lang
   const navigate = useNavigate()
   const location = useLocation()
 
   useEffect(() => {
-    if (!lang) return
-    if (!RUNTIME_LANGS.includes(lang)) {
-      navigate('/', { replace: true })
-      return
-    }
+    if (!lang || !RUNTIME_LANGS.includes(lang)) return
     if (i18n.language !== lang) {
       i18n.changeLanguage(lang)
     }
     setStoredLang(lang)
-  }, [lang, navigate])
+  }, [lang])
 
   useEffect(() => {
     const localeFromPath = extractLocaleFromPath(location.pathname)
@@ -216,20 +213,23 @@ export default function App() {
         <Route path="converter/:slug" element={<DeferredRoutePage name="PseoPage" />} />
         <Route path="*" element={<DeferredRoutePage name="NotFound" />} />
       </Route>
-      <Route
-        path=":lang"
-        element={<LocaleLayout uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />}
-      >
-        <Route index element={<Home />} />
-        <Route path="privacy" element={<DeferredRoutePage name="PrivacyPolicy" />} />
-        <Route path="terms" element={<DeferredRoutePage name="TermsOfService" />} />
-        <Route path="about" element={<DeferredRoutePage name="About" />} />
-        <Route path="contact" element={<DeferredRoutePage name="Contact" />} />
-        <Route path="blog" element={<DeferredRoutePage name="Blog" />} />
-        <Route path="blog/:slug" element={<DeferredRoutePage name="BlogPost" />} />
-        <Route path="converter/:slug" element={<DeferredRoutePage name="PseoPage" />} />
-        <Route path="*" element={<DeferredRoutePage name="NotFound" />} />
-      </Route>
+      {RUNTIME_LANGS.map((routeLang) => (
+        <Route
+          key={routeLang}
+          path={routeLang}
+          element={<LocaleLayout routeLang={routeLang} uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />}
+        >
+          <Route index element={<Home />} />
+          <Route path="privacy" element={<DeferredRoutePage name="PrivacyPolicy" />} />
+          <Route path="terms" element={<DeferredRoutePage name="TermsOfService" />} />
+          <Route path="about" element={<DeferredRoutePage name="About" />} />
+          <Route path="contact" element={<DeferredRoutePage name="Contact" />} />
+          <Route path="blog" element={<DeferredRoutePage name="Blog" />} />
+          <Route path="blog/:slug" element={<DeferredRoutePage name="BlogPost" />} />
+          <Route path="converter/:slug" element={<DeferredRoutePage name="PseoPage" />} />
+          <Route path="*" element={<DeferredRoutePage name="NotFound" />} />
+        </Route>
+      ))}
     </Routes>
   )
 }

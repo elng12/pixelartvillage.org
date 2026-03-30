@@ -57,10 +57,10 @@ export default function LanguageSwitcherBalanced() {
 
   return (
     <div
-      className="language-switcher-balanced inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm text-gray-700 shadow-sm transition hover:bg-gray-50 hover:border-gray-300 hover:shadow-md"
+      className="language-switcher-balanced inline-flex items-center gap-1 px-2 py-1 bg-white border border-gray-200 rounded-lg text-sm text-gray-700 shadow-sm transition hover:bg-gray-50 hover:border-gray-300 hover:shadow-md sm:gap-1.5 sm:px-3 sm:py-1.5"
       title={t('lang.title', 'Select language')}
     >
-      <span className="text-sm text-gray-500 font-medium whitespace-nowrap">
+      <span className="hidden sm:inline text-sm text-gray-500 font-medium whitespace-nowrap">
         🌍
       </span>
 
@@ -70,9 +70,10 @@ export default function LanguageSwitcherBalanced() {
 
       <select
         id="language-switcher"
+        aria-label={t('lang.title', 'Select language')}
         value={currentLang}
         onChange={handleChange}
-        className="min-w-[130px] h-7 px-2 py-1 border border-gray-300 rounded bg-white text-gray-700 text-sm font-medium cursor-pointer outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+        className="w-[120px] h-7 px-2 py-1 border border-gray-300 rounded bg-white text-gray-700 text-sm font-medium cursor-pointer outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 sm:w-[150px] md:w-[170px]"
       >
         {options.map(({ code, label }) => (
           <option key={code} value={code}>
@@ -81,7 +82,7 @@ export default function LanguageSwitcherBalanced() {
         ))}
       </select>
 
-      <div className="text-xs text-gray-700 font-medium whitespace-nowrap">
+      <div className="hidden md:block text-xs text-gray-700 font-medium whitespace-nowrap">
         {currentLang === 'en' ? 'EN' :
          currentLang === 'ja' ? '日本語' :
          currentLang === 'ko' ? '한국어' :

@@ -50,7 +50,12 @@ test('auto palette triggers preview reprocessing when palette size changes', asy
   await page.locator('#auto-palette').check()
   const size = page.locator('#palette-size')
   await size.evaluate((el) => {
-    el.value = '2'
+    const setter = Object.getOwnPropertyDescriptor(globalThis.HTMLInputElement.prototype, 'value')?.set
+    if (setter) {
+      setter.call(el, '2')
+    } else {
+      el.value = '2'
+    }
     el.dispatchEvent(new globalThis.Event('input', { bubbles: true }))
     el.dispatchEvent(new globalThis.Event('change', { bubbles: true }))
   })

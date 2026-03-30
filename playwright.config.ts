@@ -6,7 +6,7 @@ export default defineConfig({
   expect: { timeout: 20000 },
   retries: 2,
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: 'http://localhost:4173',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -21,8 +21,8 @@ export default defineConfig({
   ],
   webServer: {
     // Disable analytics and enable E2E preview container during preview build
-    command: 'VITE_ENABLE_ANALYTICS=0 VITE_E2E=1 npm run build && npx vite preview --port 5173 --strictPort',
-    url: 'http://localhost:5173',
+    command: 'VITE_ENABLE_ANALYTICS=0 VITE_E2E=1 npm run build && node scripts/serve-dist.cjs --port 4173 --strictPort',
+    url: 'http://localhost:4173',
     reuseExistingServer: true,
     timeout: 180000,
   },

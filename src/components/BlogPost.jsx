@@ -17,13 +17,15 @@ const BLOG_OG_IMAGE_SLUGS = new Set([
   'turn-photo-into-pixel-art',
 ])
 
-function buildBlogSeoTitle(title, siteName, maxLength = 60) {
-  const suffix = ` | ${siteName}`
-  const maxBaseLength = Math.max(20, maxLength - suffix.length)
-  const normalized = String(title || '').trim()
-  if (normalized.length <= maxBaseLength) return `${normalized}${suffix}`
-  const trimmed = normalized.slice(0, Math.max(0, maxBaseLength - 1)).trimEnd()
-  return `${trimmed}…${suffix}`
+function buildBlogSeoTitle(title, siteName) {
+  const normalizedTitle = String(title || '').trim()
+  const normalizedSiteName = String(siteName || '').trim()
+
+  if (!normalizedTitle && !normalizedSiteName) return ''
+  if (!normalizedTitle) return normalizedSiteName
+  if (!normalizedSiteName) return normalizedTitle
+
+  return `${normalizedTitle} | ${normalizedSiteName}`
 }
 
 function resolveBlogOgImage(slug) {
@@ -341,7 +343,7 @@ export default function BlogPost() {
           { property: 'og:type', content: 'article' },
           { property: 'og:title', content: seoTitle },
           { property: 'og:description', content: post.excerpt },
-          { name: 'twitter:card', content: 'summary' },
+          { name: 'twitter:card', content: 'summary_large_image' },
           { name: 'twitter:title', content: seoTitle },
           { name: 'twitter:description', content: post.excerpt },
         ]}
