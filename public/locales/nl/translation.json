@@ -7,7 +7,8 @@
     "blog": "Bloggen",
     "home": "Thuis",
     "about": "Over",
-    "contact": "Contact"
+    "contact": "Contact",
+    "feedback": "Feedback sturen"
   },
   "cta": {
     "start": "Begin nu"

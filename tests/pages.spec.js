@@ -5,6 +5,8 @@ test.describe('Static pages visibility', () => {
     await page.goto('/')
     await expect(page.getByTestId('upload-zone')).toBeVisible()
     await expect(page.getByTestId('choose-file-btn')).toBeVisible()
+    await expect(page.getByTestId('header-feedback-link')).toHaveAttribute('href', 'https://docs.google.com/forms/d/e/1FAIpQLSdjw5_Q-QmCChechdq3bjsxoSzQ5kYgnyCZ7tpIMSND6CbniA/viewform?usp=header')
+    await expect(page.getByTestId('header-feedback-link')).toHaveText(/Send feedback/i)
     await expect(page.getByRole('button', { name: /Open landscape sample/i })).toHaveCount(0)
     await expect(page.getByRole('button', { name: /Open pixel art sample/i })).toHaveCount(0)
   })

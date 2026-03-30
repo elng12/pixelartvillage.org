@@ -7,7 +7,8 @@
     "blog": "Blog",
     "home": "Beranda",
     "about": "Tentang",
-    "contact": "Kontak"
+    "contact": "Kontak",
+    "feedback": "Kirim masukan"
   },
   "common": {
     "loading": "Memuat...",

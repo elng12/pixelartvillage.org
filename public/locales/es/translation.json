@@ -7,7 +7,8 @@
     "blog": "Blog",
     "home": "Inicio",
     "about": "Acerca de",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "feedback": "Enviar comentarios"
   },
   "common": {
     "loading": "Cargando...",

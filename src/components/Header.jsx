@@ -4,6 +4,7 @@ import Avatar from './Avatar';
 import { useTranslation } from 'react-i18next';
 import LocalizedLink from '@/components/LocalizedLink';
 import LanguageSwitcherBalanced from './LanguageSwitcherBalanced';
+import { FEEDBACK_FORM_URL } from '@/utils/site-links';
 
 function Header() {
   const { t } = useTranslation()
@@ -103,6 +104,17 @@ function Header() {
             <div className="flex items-center gap-2 order-2">
               <LanguageSwitcherBalanced />
             </div>
+            <a
+              href={FEEDBACK_FORM_URL}
+              target="_blank"
+              rel="noreferrer"
+              data-testid="header-feedback-link"
+              aria-label={t('nav.feedback')}
+              title={t('nav.feedback')}
+              className="hidden md:inline-flex items-center rounded-md border border-blue-200 bg-blue-50 px-3 py-2 text-sm font-medium text-blue-700 shadow-sm transition hover:border-blue-300 hover:bg-blue-100"
+            >
+              {t('nav.feedback')}
+            </a>
             <div className="hidden lg:flex items-center order-3">
               <Avatar size={40} userId="guest" title={t('header.userAvatarTitle')} />
             </div>
@@ -128,6 +140,15 @@ function Header() {
                   </LocalizedLink>
                 )
               })}
+              <a
+                href={FEEDBACK_FORM_URL}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-md px-3 py-2 text-gray-700 hover:bg-gray-50"
+              >
+                {t('nav.feedback')}
+              </a>
             </nav>
           </div>
         ) : null}

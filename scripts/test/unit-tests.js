@@ -145,6 +145,10 @@ test('support locale keys exist in every shipped locale', () => {
   assertLocaleStrings('contact', ['supportEyebrow', 'supportTitle', 'emailCta', 'emailHint'])
 })
 
+test('header feedback key exists in every shipped locale', () => {
+  assertLocaleStrings('nav', ['feedback'])
+})
+
 test('main converter copy only lists supported upload formats', () => {
   const en = loadJson('public/locales/en/translation.json')
   const pseoPages = loadJson('src/content/pseo-pages.en.json')
