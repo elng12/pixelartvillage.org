@@ -1,9 +1,10 @@
-import { useParams } from 'react-router-dom'
 import Seo from '@/components/Seo'
-import { useTranslation } from 'react-i18next'
+import LocalizedLink from '@/components/LocalizedLink'
 import { useLocalizedContent } from '@/hooks/useLocalizedContent'
 import { useLocaleContext } from '@/hooks/useLocaleContext'
-import LocalizedLink from '@/components/LocalizedLink'
+import { estimateBlogReadTime, getBlogCoverImages, getBlogPresentationMeta } from '@/utils/blogPresentation'
+import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 
 const BLOG_OG_IMAGE_SLUGS = new Set([
   'best-pixel-art-converters-compared-2025',
@@ -16,6 +17,8 @@ const BLOG_OG_IMAGE_SLUGS = new Set([
   'photo-to-sprite-converter-tips',
   'turn-photo-into-pixel-art',
 ])
+
+const INLINE_TOKEN_RE = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|https?:\/\/[^\s]+)/g
 
 function buildBlogSeoTitle(title, siteName) {
   const normalizedTitle = String(title || '').trim()
@@ -35,26 +38,29 @@ function resolveBlogOgImage(slug) {
   return 'https://pixelartvillage.org/blog-og/_index.png'
 }
 
-function getRelatedPosts(posts = [], currentSlug, limit = 3) {
-  const normalized = Array.isArray(posts) ? posts.filter((p) => p && p.slug) : []
+function getRelatedPosts(posts = [], currentSlug, limit = 2) {
+  const normalized = Array.isArray(posts) ? posts.filter((post) => post && post.slug) : []
   if (normalized.length <= 1) return []
-  const max = Math.min(limit, normalized.length - 1)
-  const currentIndex = normalized.findIndex((p) => p.slug === currentSlug)
+
+  const currentIndex = normalized.findIndex((post) => post.slug === currentSlug)
   const startIndex = currentIndex >= 0 ? currentIndex : 0
   const related = []
-  for (let step = 1; related.length < max && step <= normalized.length; step += 1) {
+
+  for (let step = 1; related.length < Math.min(limit, normalized.length - 1) && step <= normalized.length; step += 1) {
     const candidate = normalized[(startIndex + step) % normalized.length]
     if (!candidate || candidate.slug === currentSlug) continue
-    if (!related.some((item) => item.slug === candidate.slug)) related.push(candidate)
+    if (!related.some((item) => item.slug === candidate.slug)) {
+      related.push(candidate)
+    }
   }
+
   return related
 }
-
-const INLINE_TOKEN_RE = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|https?:\/\/[^\s]+)/g
 
 function normalizeInlineHref(href) {
   const normalized = String(href || '').trim()
   if (!normalized) return '#'
+
   try {
     const url = new URL(normalized)
     if (url.origin === 'https://pixelartvillage.org') {
@@ -63,7 +69,18 @@ function normalizeInlineHref(href) {
   } catch {
     return normalized
   }
+
   return normalized
+}
+
+function slugifyHeading(text = '') {
+  const slug = String(text)
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+  return slug || 'section'
 }
 
 function parseHeadingLine(line) {
@@ -146,6 +163,38 @@ function parseBlogBody(lines = []) {
   return blocks
 }
 
+function assignHeadingIds(blocks = []) {
+  const usedIds = new Map()
+
+  return blocks.map((block) => {
+    if (block.type !== 'heading') return block
+
+    const baseId = block.id || slugifyHeading(block.content)
+    const nextCount = (usedIds.get(baseId) || 0) + 1
+    usedIds.set(baseId, nextCount)
+
+    return {
+      ...block,
+      id: nextCount === 1 ? baseId : `${baseId}-${nextCount}`,
+    }
+  })
+}
+
+function getEditorialNoteIndex(blocks = []) {
+  return blocks.findIndex(
+    (block) => block.type === 'paragraph' && /^Updated\b/i.test(String(block.content || '')),
+  )
+}
+
+function getTableOfContents(blocks = []) {
+  return blocks
+    .filter((block) => block.type === 'heading' && block.level === 2 && block.id)
+    .map((block) => ({
+      id: block.id,
+      label: block.content,
+    }))
+}
+
 function renderInlineContent(text, keyPrefix = 'inline') {
   const source = String(text || '')
   if (!source) return null
@@ -166,26 +215,26 @@ function renderInlineContent(text, keyPrefix = 'inline') {
       nodes.push(
         <strong key={`${keyPrefix}-strong-${tokenIndex}`}>
           {token.slice(2, -2)}
-        </strong>
+        </strong>,
       )
     } else if (token.startsWith('[')) {
       const linkMatch = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
       if (linkMatch) {
         const [, label, rawHref] = linkMatch
         const href = normalizeInlineHref(rawHref)
-        const className = 'text-blue-600 underline underline-offset-2 hover:text-blue-700'
+        const className = 'text-blue-700 underline underline-offset-4 transition-colors hover:text-blue-800'
 
         if (href.startsWith('/')) {
           nodes.push(
             <LocalizedLink key={`${keyPrefix}-link-${tokenIndex}`} to={href} className={className}>
               {label}
-            </LocalizedLink>
+            </LocalizedLink>,
           )
         } else {
           nodes.push(
             <a key={`${keyPrefix}-link-${tokenIndex}`} href={href} className={className}>
               {label}
-            </a>
+            </a>,
           )
         }
       } else {
@@ -193,18 +242,18 @@ function renderInlineContent(text, keyPrefix = 'inline') {
       }
     } else {
       const href = normalizeInlineHref(token)
-      const className = 'text-blue-600 underline underline-offset-2 hover:text-blue-700 break-all'
+      const className = 'text-blue-700 underline underline-offset-4 transition-colors hover:text-blue-800 break-all'
       if (href.startsWith('/')) {
         nodes.push(
           <LocalizedLink key={`${keyPrefix}-url-${tokenIndex}`} to={href} className={className}>
             {token}
-          </LocalizedLink>
+          </LocalizedLink>,
         )
       } else {
         nodes.push(
           <a key={`${keyPrefix}-url-${tokenIndex}`} href={href} className={className}>
             {token}
-          </a>
+          </a>,
         )
       }
     }
@@ -220,12 +269,18 @@ function renderInlineContent(text, keyPrefix = 'inline') {
   return nodes
 }
 
-function renderBlogBlocks(blocks = []) {
+function renderBlogBlocks(blocks = [], editorialNoteIndex = -1) {
   return blocks.map((block, index) => {
+    if (index === editorialNoteIndex) return null
+
     if (block.type === 'heading') {
       const Tag = `h${block.level}`
+      const className = block.level === 2
+        ? 'scroll-mt-28 text-3xl font-semibold tracking-tight text-slate-950 md:text-[2.2rem]'
+        : 'scroll-mt-28 text-2xl font-semibold tracking-tight text-slate-900'
+
       return (
-        <Tag key={`heading-${index}`} id={block.id || undefined}>
+        <Tag key={`heading-${index}`} id={block.id || undefined} className={className}>
           {renderInlineContent(block.content, `heading-${index}`)}
         </Tag>
       )
@@ -233,7 +288,10 @@ function renderBlogBlocks(blocks = []) {
 
     if (block.type === 'unordered-list') {
       return (
-        <ul key={`ul-${index}`}>
+        <ul
+          key={`ul-${index}`}
+          className="list-disc space-y-3 pl-6 text-[1.04rem] leading-8 text-slate-700 marker:text-slate-400"
+        >
           {block.items.map((item, itemIndex) => (
             <li key={`ul-${index}-${itemIndex}`}>
               {renderInlineContent(item, `ul-${index}-${itemIndex}`)}
@@ -245,7 +303,10 @@ function renderBlogBlocks(blocks = []) {
 
     if (block.type === 'ordered-list') {
       return (
-        <ol key={`ol-${index}`}>
+        <ol
+          key={`ol-${index}`}
+          className="list-decimal space-y-3 pl-6 text-[1.04rem] leading-8 text-slate-700 marker:text-slate-400"
+        >
           {block.items.map((item, itemIndex) => (
             <li key={`ol-${index}-${itemIndex}`}>
               {renderInlineContent(item, `ol-${index}-${itemIndex}`)}
@@ -256,15 +317,55 @@ function renderBlogBlocks(blocks = []) {
     }
 
     if (block.type === 'divider') {
-      return <hr key={`divider-${index}`} className="my-8 border-gray-200" />
+      return <hr key={`divider-${index}`} className="my-8 border-slate-200" />
     }
 
     return (
-      <p key={`p-${index}`}>
-        {renderInlineContent(block.content, `p-${index}`)}
+      <p key={`paragraph-${index}`} className="text-[1.05rem] leading-8 text-slate-700">
+        {renderInlineContent(block.content, `paragraph-${index}`)}
       </p>
     )
   })
+}
+
+function BlogPostCover({ post }) {
+  const coverImages = getBlogCoverImages()
+  const presentation = getBlogPresentationMeta(post)
+
+  return (
+    <section className="blog-cover-shell mt-7" aria-label="Article cover preview">
+      <div className="blog-cover-grid">
+        <figure className="blog-cover-panel">
+          <img
+            src={coverImages.before}
+            alt="Original source image preview"
+            className="blog-cover-image"
+            loading="eager"
+          />
+          <figcaption className="blog-cover-label">Source image</figcaption>
+        </figure>
+
+        <figure className="blog-cover-panel">
+          <img
+            src={coverImages.after}
+            alt={`${post.title} pixel art preview`}
+            className="blog-cover-image"
+            loading="eager"
+          />
+          <figcaption className="blog-cover-label">Pixel art result</figcaption>
+        </figure>
+      </div>
+
+      <div className="blog-cover-note">
+        <span className={`inline-flex items-center rounded-full border px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.16em] ${presentation.chipClass}`}>
+          {presentation.badge}
+        </span>
+        <p className="text-sm leading-7 text-slate-600 md:text-[0.98rem]">
+          {presentation.bestFor}
+        </p>
+      </div>
+    </section>
+  )
 }
 
 export default function BlogPost() {
@@ -273,46 +374,46 @@ export default function BlogPost() {
   const { currentLocale, buildPath } = useLocaleContext()
   const { data: posts, fallback } = useLocalizedContent('blog-posts')
   const resolvedLocale = currentLocale || urlLang || 'en'
-
   const canonicalBase = slug ? `/blog/${slug}` : '/blog/'
 
   if (!posts) {
     const canonical = `https://pixelartvillage.org${buildPath(canonicalBase)}`
     return (
-      <div className="container mx-auto px-4 py-10 max-w-3xl">
+      <div className="container mx-auto max-w-4xl px-4 py-12">
         <Seo title={`${t('blog.title')} | ${t('site.name')}`} canonical={canonical} lang={resolvedLocale} />
         <p className="text-sm text-gray-600">{t('common.loading')}</p>
       </div>
     )
   }
 
-  const post = posts.find((p) => p.slug === slug)
+  const post = posts.find((entry) => entry.slug === slug)
   const canonical = `https://pixelartvillage.org${buildPath(canonicalBase)}`
   const siteName = t('site.name')
 
   if (!post) {
     return (
-      <div className="container mx-auto px-4 py-10 max-w-3xl">
-        <Seo title={`${t('blog.notFound.title')} | ${t('site.name')}`} canonical={canonical} lang={resolvedLocale} />
-        <h1 className="text-2xl font-bold text-gray-900 mb-4 text-center">{t('blog.notFound.title')}</h1>
-        <p className="text-gray-700">
-          {t('blog.notFound.desc')}{' '}
-          <LocalizedLink className="text-blue-600 underline" to="/blog/">
-            {t('blog.back')}
-          </LocalizedLink>
-          .
+      <div className="container mx-auto max-w-4xl px-4 py-12">
+        <Seo title={`${t('blog.notFound.title')} | ${siteName}`} canonical={canonical} lang={resolvedLocale} />
+        <h1 className="text-center text-3xl font-semibold text-slate-950">{t('blog.notFound.title')}</h1>
+        <p className="mt-4 text-center text-slate-600">
+          {t('blog.notFound.desc')}
         </p>
       </div>
     )
   }
 
   const seoTitle = buildBlogSeoTitle(post.title, siteName)
-  const articleImage = resolveBlogOgImage(slug)
-  const relatedPosts = getRelatedPosts(posts, post.slug, 3)
-  const renderedBody = parseBlogBody(post.body)
+  const articleImage = resolveBlogOgImage(post.slug)
+  const renderedBody = assignHeadingIds(parseBlogBody(post.body))
+  const editorialNoteIndex = getEditorialNoteIndex(renderedBody)
+  const editorialNote = editorialNoteIndex >= 0 ? renderedBody[editorialNoteIndex] : null
+  const tableOfContents = getTableOfContents(renderedBody)
+  const relatedPosts = getRelatedPosts(posts, post.slug, 2)
+  const readTime = estimateBlogReadTime(post)
+
   const articleJsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt || '',
     datePublished: post.date || undefined,
@@ -330,60 +431,145 @@ export default function BlogPost() {
     image: articleImage,
   }
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://pixelartvillage.org/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: t('blog.title'),
+        item: `https://pixelartvillage.org${buildPath('/blog/')}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: canonical,
+      },
+    ],
+  }
+
   return (
-    <article className="container mx-auto px-4 py-10 max-w-3xl">
+    <article className="container mx-auto max-w-4xl px-4 py-14 md:py-20">
       <Seo
         title={seoTitle}
         canonical={canonical}
         lang={resolvedLocale}
         description={post.excerpt}
-        jsonLd={articleJsonLd}
+        jsonLd={[articleJsonLd, breadcrumbJsonLd]}
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'article' },
           { property: 'og:title', content: seoTitle },
           { property: 'og:description', content: post.excerpt },
+          { property: 'og:image', content: articleImage },
+          { property: 'og:image:alt', content: `${post.title} article preview` },
+          { property: 'og:site_name', content: siteName },
           { name: 'twitter:card', content: 'summary_large_image' },
           { name: 'twitter:title', content: seoTitle },
           { name: 'twitter:description', content: post.excerpt },
+          { name: 'twitter:image', content: articleImage },
+          { name: 'twitter:image:alt', content: `${post.title} article preview` },
         ]}
       />
 
-      <header>
-        <h1 className="text-3xl font-bold text-gray-900 text-center">{post.title}</h1>
-        <p className="text-xs text-gray-500 mt-2 text-left">{post.date}</p>
-      </header>
+      <div className="mx-auto max-w-3xl">
+        <div className="text-center">
+          <LocalizedLink
+            to="/blog/"
+            className="inline-flex items-center gap-2 text-sm font-medium text-blue-700 transition-colors hover:text-blue-800"
+          >
+            <span aria-hidden="true">←</span>
+            {t('blog.back')}
+          </LocalizedLink>
+        </div>
 
-      {fallback ? (
-        <p className="mt-4 text-center text-xs text-gray-500">{t('content.fallbackNotice')}</p>
-      ) : null}
+        <section className="blog-article-card mt-6 px-6 py-8 md:px-12 md:py-12">
+          <header className="text-center">
+            <div className="flex flex-wrap items-center justify-center gap-3 text-sm text-slate-500">
+              <span>{post.date}</span>
+              <span aria-hidden="true" className="text-slate-300">•</span>
+              <span>{readTime}</span>
+            </div>
+            <h1 className="mx-auto mt-4 max-w-xl text-balance text-[1.82rem] font-semibold tracking-tight text-slate-950 md:text-[2.02rem] md:leading-[1.14]">
+              {post.title}
+            </h1>
 
-      <div className="prose prose-sm md:prose-base max-w-none text-gray-800 mt-6 text-left prose-headings:text-gray-900 prose-a:no-underline prose-pre:text-left prose-code:text-left prose-img:mx-0">
-        {renderBlogBlocks(renderedBody)}
-      </div>
+            <BlogPostCover post={post} />
 
-      {relatedPosts.length ? (
-        <section className="mt-8 rounded-lg border border-gray-200 bg-white p-4">
-          <h2 className="text-lg font-semibold text-gray-900">
-            {t('blog.relatedHeading', 'Related posts')}
-          </h2>
-          <ul className="mt-3 space-y-2">
-            {relatedPosts.map((related) => (
-              <li key={related.slug}>
-                <LocalizedLink className="text-blue-600 hover:underline" to={`/blog/${related.slug}/`}>
-                  {related.title}
-                </LocalizedLink>
-              </li>
-            ))}
-          </ul>
+            <p className="mx-auto mt-7 max-w-[42rem] text-[1.05rem] leading-8 text-slate-600 md:text-[1.1rem]">
+              {post.excerpt}
+            </p>
+          </header>
+
+          {fallback ? (
+            <p className="mt-6 text-center text-xs text-gray-500">{t('content.fallbackNotice')}</p>
+          ) : null}
+
+          {tableOfContents.length ? (
+            <nav className="mt-10 flex flex-wrap justify-center gap-2">
+              {tableOfContents.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className="blog-anchor-chip"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          ) : null}
+
+          <div className="blog-article-prose mt-12">
+            {editorialNote ? (
+              <p className="text-sm leading-7 text-slate-500">
+                {renderInlineContent(editorialNote.content, 'editorial-note')}
+              </p>
+            ) : null}
+            {renderBlogBlocks(renderedBody, editorialNoteIndex)}
+          </div>
         </section>
-      ) : null}
 
-      <footer className="mt-8">
-        <LocalizedLink className="text-blue-600 underline" to="/blog/">
-          ← {t('blog.back')}
-        </LocalizedLink>
-      </footer>
+        {relatedPosts.length ? (
+          <section className="mt-12">
+            <h2 className="text-xl font-semibold tracking-tight text-slate-950">Related Articles</h2>
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              {relatedPosts.map((related) => (
+                <article key={related.slug} className="blog-simple-card px-5 py-5">
+                  <h3 className="text-lg font-semibold tracking-tight text-slate-950">
+                    <LocalizedLink to={`/blog/${related.slug}/`} className="transition-colors hover:text-blue-700">
+                      {related.title}
+                    </LocalizedLink>
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{related.excerpt}</p>
+                  <div className="mt-4">
+                    <LocalizedLink
+                      to={`/blog/${related.slug}/`}
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 transition-colors hover:text-blue-800"
+                    >
+                      Read more
+                      <span aria-hidden="true">→</span>
+                    </LocalizedLink>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        <div className="mt-8 text-center">
+          <LocalizedLink to="/blog/" className="btn-primary inline-flex items-center justify-center">
+            Back to Blog
+          </LocalizedLink>
+        </div>
+      </div>
     </article>
   )
 }

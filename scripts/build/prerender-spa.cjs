@@ -308,47 +308,400 @@ async function prerender() {
     return `<article><header><h2>${title}</h2>${date}${tags}</header>${body}</article>`
   }
 
-  const renderBlogIndexVisible = (list = [], lang = DEFAULT_LANG, bundle = {}) => {
-    if (!Array.isArray(list) || !list.length) return ''
-    const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
-    const blogHeading = pick(bundle, 'blog.h1') || 'Pixel Art Tutorials & Guides'
-    const blogSubtitle = pick(bundle, 'blog.subtitle') || 'Articles and updates about making pixel image visuals, tutorials, and new features.'
-    const topicHeading = pick(bundle, 'blog.relatedHeading') || 'Popular topics'
-    const topics = Array.from(new Set(list.flatMap((item) => toStringArray(item?.tags))))
-      .map((tag) => normalizeWhitespace(tag))
-      .filter(Boolean)
-      .slice(0, 8)
-    const items = list
-      .map((item) => {
-        if (!item || !item.slug) return ''
-        const title = escapeHtml(item.title || '')
-        const date = item.date ? `<p class="text-xs text-gray-500 mt-1 text-left">${escapeHtml(item.date)}</p>` : ''
-        const excerpt = item.excerpt ? `<p class="text-gray-700 mt-2 text-left">${escapeHtml(item.excerpt)}</p>` : ''
-        const href = `${prefix}/blog/${escapeHtml(item.slug)}/`
-        return `<li class="p-4 rounded-lg border border-gray-200 bg-white shadow-sm"><h2 class="text-lg font-semibold text-gray-900 text-center"><a href="${href}" class="hover:text-blue-600">${title}</a></h2>${date}${excerpt}</li>`
+  const BLOG_POST_META = {
+    'best-pixel-art-converters-compared-2025': {
+      badge: 'Comparison',
+      chipClass: 'border-amber-200 bg-amber-50 text-amber-800',
+      sectionId: 'compare-tools',
+      bestFor: 'Choosing the right converter before you invest time in one workflow.',
+      whyRead: 'Use this as the hub page when you want the clearest overview of privacy, control, and output tradeoffs.',
+      nextStep: 'Read the beginner guide next if you want to test one workflow immediately after comparing tools.',
+    },
+    'how-to-pixelate-an-image': {
+      badge: 'Beginner',
+      chipClass: 'border-sky-200 bg-sky-50 text-sky-800',
+      sectionId: 'start-here',
+      bestFor: 'First-time users who need a clean, low-friction starting workflow.',
+      whyRead: 'This guide explains the main knobs in the simplest order: size first, palette second, cleanup third.',
+      nextStep: 'If the result still feels weak after the first pass, move to the cleanup guide.',
+    },
+    'how-to-get-pixel-art-version-of-image': {
+      badge: 'SNES-style',
+      chipClass: 'border-cyan-200 bg-cyan-50 text-cyan-800',
+      sectionId: 'turn-photos',
+      bestFor: 'Turning a real photo into something that feels more like retro scene art.',
+      whyRead: 'This workflow focuses on simplifying shapes and palette early so the result feels intentional, not filter-heavy.',
+      nextStep: 'Pair it with the beginner guide if you want a more basic explanation of the controls first.',
+    },
+    'make-image-more-like-pixel': {
+      badge: 'Cleanup',
+      chipClass: 'border-emerald-200 bg-emerald-50 text-emerald-800',
+      sectionId: 'fix-results',
+      bestFor: 'Fixing blurry edges, muddy colors, and noisy dithering after the first conversion.',
+      whyRead: 'Read this when your image is already pixelated but still does not look crisp or deliberate enough.',
+      nextStep: 'If the source came from Illustrator, review the export guide before re-running the conversion.',
+    },
+    'export-from-illustrator-image-to-pixel-art': {
+      badge: 'Illustrator',
+      chipClass: 'border-rose-200 bg-rose-50 text-rose-800',
+      sectionId: 'workflow-export',
+      bestFor: 'Preparing vector artwork so it stays sharper before you convert it to pixel art.',
+      whyRead: 'This guide helps you fix problems upstream, which is usually faster than trying to rescue blur later.',
+      nextStep: 'After exporting cleanly, run the beginner workflow to dial in size, palette, and cleanup.',
+    },
+  }
+
+  const INLINE_TOKEN_RE = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|https?:\/\/[^\s]+)/g
+
+  const buildBlogPresentationMeta = (post = {}) => ({
+    badge: 'Guide',
+    chipClass: 'border-slate-200 bg-slate-50 text-slate-700',
+    sectionId: 'start-here',
+    bestFor: 'A focused walkthrough for image-to-pixel workflows.',
+    whyRead: post.excerpt || 'Use this guide to improve the next conversion you run.',
+    nextStep: 'Open the main converter and test the workflow on a real image.',
+    ...(BLOG_POST_META[post.slug] || {}),
+  })
+
+  const getVisibleBlogCoverImages = () => ({
+    before: ABS('/showcase-before-w640.jpg'),
+    after: ABS('/showcase-after-w640.jpg'),
+  })
+
+  const countWords = (text = '') => String(text)
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .length
+
+  const estimateVisibleBlogReadTime = (post = {}) => {
+    const excerptWords = countWords(post.excerpt)
+    const bodyWords = Array.isArray(post.body)
+      ? post.body.reduce((total, line) => total + countWords(line), 0)
+      : 0
+    const minutes = Math.max(3, Math.ceil((excerptWords + bodyWords) / 210))
+    return `${minutes} min read`
+  }
+
+  const localizeVisibleHref = (href, prefix = '') => {
+    const normalized = String(href || '').trim()
+    if (!normalized) return '#'
+
+    try {
+      const url = new URL(normalized)
+      if (url.origin === 'https://pixelartvillage.org') {
+        return localizeVisibleHref(`${url.pathname}${url.search}${url.hash}`, prefix)
+      }
+      return normalized
+    } catch {
+      if (!normalized.startsWith('/')) return normalized
+      if (!prefix) return normalized
+      if (normalized === '/') return `${prefix}/`
+      if (normalized.startsWith(`${prefix}/`) || normalized === prefix) return normalized
+      return `${prefix}${normalized}`
+    }
+  }
+
+  const renderVisibleInlineContent = (text, prefix = '') => {
+    const source = String(text || '')
+    if (!source) return ''
+
+    let output = ''
+    let lastIndex = 0
+
+    for (const match of source.matchAll(INLINE_TOKEN_RE)) {
+      const token = match[0]
+      const start = match.index ?? 0
+      if (start > lastIndex) {
+        output += escapeHtml(source.slice(lastIndex, start))
+      }
+
+      if (token.startsWith('**') && token.endsWith('**')) {
+        output += `<strong>${escapeHtml(token.slice(2, -2))}</strong>`
+      } else if (token.startsWith('[')) {
+        const linkMatch = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
+        if (linkMatch) {
+          const [, label, rawHref] = linkMatch
+          const href = localizeVisibleHref(rawHref, prefix)
+          output += `<a href="${escapeHtml(href)}" class="text-blue-700 underline underline-offset-4 transition-colors hover:text-blue-800">${escapeHtml(label)}</a>`
+        } else {
+          output += escapeHtml(token)
+        }
+      } else {
+        const href = localizeVisibleHref(token, prefix)
+        output += `<a href="${escapeHtml(href)}" class="text-blue-700 underline underline-offset-4 transition-colors hover:text-blue-800 break-all">${escapeHtml(token)}</a>`
+      }
+
+      lastIndex = start + token.length
+    }
+
+    if (lastIndex < source.length) {
+      output += escapeHtml(source.slice(lastIndex))
+    }
+
+    return output
+  }
+
+  const parseVisibleHeadingLine = (line) => {
+    const match = String(line || '').trim().match(/^(#{1,6})\s+(.+)$/)
+    if (!match) return null
+
+    let content = match[2].trim()
+    let id = null
+    const idMatch = content.match(/\s+\{#([A-Za-z0-9_-]+)\}$/)
+    if (idMatch) {
+      id = idMatch[1]
+      content = content.replace(/\s+\{#([A-Za-z0-9_-]+)\}$/, '').trim()
+    }
+
+    return {
+      level: Math.min(6, Math.max(2, match[1].length)),
+      content,
+      id,
+    }
+  }
+
+  const slugifyVisibleHeading = (text = '') => {
+    const slug = String(text)
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+    return slug || 'section'
+  }
+
+  const parseVisibleBlogBody = (lines = []) => {
+    const blocks = []
+    let activeList = null
+
+    const flushList = () => {
+      if (activeList) {
+        blocks.push(activeList)
+        activeList = null
+      }
+    }
+
+    for (const rawLine of Array.isArray(lines) ? lines : []) {
+      const line = String(rawLine || '')
+      const trimmed = line.trim()
+
+      if (!trimmed) {
+        flushList()
+        continue
+      }
+
+      if (/^---+$/.test(trimmed)) {
+        flushList()
+        blocks.push({ type: 'divider' })
+        continue
+      }
+
+      const heading = parseVisibleHeadingLine(trimmed)
+      if (heading) {
+        flushList()
+        blocks.push({ type: 'heading', ...heading })
+        continue
+      }
+
+      const unorderedItem = trimmed.match(/^[-•]\s+(.+)$/)
+      if (unorderedItem) {
+        if (!activeList || activeList.type !== 'unordered-list') {
+          flushList()
+          activeList = { type: 'unordered-list', items: [] }
+        }
+        activeList.items.push(unorderedItem[1])
+        continue
+      }
+
+      const orderedItem = trimmed.match(/^\d+\.\s+(.+)$/)
+      if (orderedItem) {
+        if (!activeList || activeList.type !== 'ordered-list') {
+          flushList()
+          activeList = { type: 'ordered-list', items: [] }
+        }
+        activeList.items.push(orderedItem[1])
+        continue
+      }
+
+      flushList()
+      blocks.push({ type: 'paragraph', content: trimmed })
+    }
+
+    flushList()
+    return blocks
+  }
+
+  const assignVisibleHeadingIds = (blocks = []) => {
+    const usedIds = new Map()
+
+    return blocks.map((block) => {
+      if (block.type !== 'heading') return block
+
+      const baseId = block.id || slugifyVisibleHeading(block.content)
+      const nextCount = (usedIds.get(baseId) || 0) + 1
+      usedIds.set(baseId, nextCount)
+
+      return {
+        ...block,
+        id: nextCount === 1 ? baseId : `${baseId}-${nextCount}`,
+      }
+    })
+  }
+
+  const getVisibleEditorialNoteIndex = (blocks = []) => blocks.findIndex(
+    (block) => block.type === 'paragraph' && /^Updated\b/i.test(String(block.content || '')),
+  )
+
+  const getVisibleTocItems = (blocks = []) => blocks
+    .filter((block) => block.type === 'heading' && block.level === 2 && block.id)
+    .map((block) => ({ id: block.id, label: block.content }))
+
+  const renderVisibleBlogBodyBlocks = (blocks = [], { skipIndexes = [], prefix = '' } = {}) => {
+    const hidden = new Set(skipIndexes)
+
+    return blocks
+      .map((block, index) => {
+        if (hidden.has(index)) return ''
+
+        if (block.type === 'heading') {
+          const tag = `h${block.level}`
+          const className = block.level === 2
+            ? 'scroll-mt-28 text-2xl font-semibold tracking-tight text-slate-950 md:text-[2rem]'
+            : 'scroll-mt-28 text-xl font-semibold tracking-tight text-slate-900 md:text-[1.35rem]'
+          return `<${tag} id="${escapeHtml(block.id || '')}" class="${className}">${renderVisibleInlineContent(block.content, prefix)}</${tag}>`
+        }
+
+        if (block.type === 'unordered-list') {
+          return `<ul class="list-disc space-y-3 pl-5 text-[1.02rem] leading-8 text-slate-700 marker:text-slate-400">${block.items
+            .map((item) => `<li>${renderVisibleInlineContent(item, prefix)}</li>`)
+            .join('')}</ul>`
+        }
+
+        if (block.type === 'ordered-list') {
+          return `<ol class="list-decimal space-y-3 pl-5 text-[1.02rem] leading-8 text-slate-700 marker:text-slate-400">${block.items
+            .map((item) => `<li>${renderVisibleInlineContent(item, prefix)}</li>`)
+            .join('')}</ol>`
+        }
+
+        if (block.type === 'divider') {
+          return '<hr class="my-6 border-slate-200">'
+        }
+
+        return `<p class="text-[1.04rem] leading-8 text-slate-700">${renderVisibleInlineContent(block.content, prefix)}</p>`
       })
       .filter(Boolean)
       .join('')
-    if (!items) return ''
-    const guideHtml = `<section class="mb-6 max-w-2xl mx-auto rounded-lg border border-gray-200 bg-white p-4 shadow-sm"><h2 class="text-lg font-semibold text-gray-900">${escapeHtml(topicHeading)}</h2><p class="mt-2 text-gray-700">Use this hub to compare tools, learn beginner workflows, troubleshoot exports, explore animation basics, and collect practical pixel art ideas before you open the editor.</p>${topics.length ? `<ul class="mt-3 flex flex-wrap gap-2">${topics.map((tag) => `<li class="rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs text-gray-700">${escapeHtml(tag)}</li>`).join('')}</ul>` : ''}</section>`
-    return `<div class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 mb-4 text-center">${escapeHtml(blogHeading)}</h1><p class="text-gray-700 mb-6 max-w-2xl mx-auto text-center">${escapeHtml(blogSubtitle)}</p>${guideHtml}<ul class="space-y-4 max-w-2xl mx-auto">${items}</ul></div>`
   }
 
-  const renderBlogPostVisible = (post, lang = DEFAULT_LANG, bundle = {}) => {
+  const renderVisibleBlogCard = (post, prefix = '') => {
+    if (!post || !post.slug) return ''
+    const href = `${prefix}/blog/${escapeHtml(post.slug)}/`
+    const presentation = buildBlogPresentationMeta(post)
+    return `<article class="blog-simple-card px-6 py-6 md:px-8 md:py-8">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="inline-flex items-center rounded-full border px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.16em] ${escapeHtml(presentation.chipClass)}">${escapeHtml(presentation.badge)}</span>
+      </div>
+      <h2 class="mt-4 max-w-3xl text-balance text-[1.24rem] font-semibold tracking-tight text-slate-950 md:text-[1.45rem] md:leading-[1.24]"><a href="${href}" class="transition-colors hover:text-blue-700">${escapeHtml(post.title || '')}</a></h2>
+      <p class="mt-4 text-[0.98rem] leading-8 text-slate-600">${escapeHtml(post.excerpt || '')}</p>
+      <div class="mt-5 flex flex-wrap items-center gap-3 text-sm text-slate-500">
+        <span>${escapeHtml(post.date || '')}</span>
+        <span aria-hidden="true" class="text-slate-300">•</span>
+        <span>${escapeHtml(estimateVisibleBlogReadTime(post))}</span>
+      </div>
+      <div class="mt-6"><a href="${href}" class="inline-flex items-center gap-2 text-base font-semibold text-blue-700 transition-colors hover:text-blue-800">Read more<span aria-hidden="true">→</span></a></div>
+    </article>`
+  }
+
+  const renderBlogIndexVisible = (list = [], lang = DEFAULT_LANG, bundle = {}) => {
+    if (!Array.isArray(list) || !list.length) return ''
+    const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
+    const blogHeading = pick(bundle, 'blog.title') || 'Blog'
+    const blogKeywordHeading = pick(bundle, 'blog.h1') || 'Pixel Art Tutorials and Converter Guides'
+    const blogSubtitle = pick(bundle, 'blog.subtitle') || 'Learn how to pixelate images, turn photos into pixel art, compare pixel art converters, and fix blurry or muddy retro-style results.'
+    const listHtml = list.map((post) => renderVisibleBlogCard(post, prefix)).join('')
+
+    return `<div class="container mx-auto max-w-4xl px-4 py-14 md:py-20">
+      <header class="mx-auto max-w-3xl text-center">
+        <h1 class="text-3xl font-semibold tracking-tight text-slate-950 md:text-[2.35rem] md:leading-[1.08]">${escapeHtml(blogHeading)}<span class="sr-only"> — ${escapeHtml(blogKeywordHeading)}</span></h1>
+        <p class="mt-4 text-[0.98rem] leading-8 text-slate-600 md:text-[1.05rem] md:leading-8">${escapeHtml(blogSubtitle)}</p>
+      </header>
+      <section class="mt-12 space-y-7">
+        ${listHtml}
+      </section>
+    </div>`
+  }
+
+  const renderBlogPostVisible = (post, lang = DEFAULT_LANG, bundle = {}, relatedHtml = '') => {
     if (!post || !post.slug) return ''
     const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
-    const title = escapeHtml(post.title || '')
-    const date = post.date ? `<p class="text-xs text-gray-500 mt-1 text-center md:text-left">${escapeHtml(post.date)}</p>` : ''
-    const paragraphs = Array.isArray(post.body)
-      ? post.body
-          .filter((para) => typeof para === 'string')
-          .map((para) => `<p>${escapeHtml(para)}</p>`)
-          .join('')
-      : ''
-    const excerpt = post.excerpt ? `<p class="text-gray-700 mt-2 text-left">${escapeHtml(post.excerpt)}</p>` : ''
     const backLabel = pick(bundle, 'blog.back') || 'Back to Blog'
-    const backHref = `${prefix}/blog/`
-    return `<article class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${title}</h1>${date}<div class="prose prose-sm md:prose-base text-gray-800 mt-4 text-center md:text-left prose-pre:text-left prose-code:text-left prose-img:mx-0">${paragraphs || excerpt}</div><footer class="mt-8 text-center md:text-left"><a class="text-blue-600 underline" href="${backHref}">${escapeHtml(backLabel)}</a></footer></article>`
+    const bodyBlocks = assignVisibleHeadingIds(parseVisibleBlogBody(post.body))
+    const editorialNoteIndex = getVisibleEditorialNoteIndex(bodyBlocks)
+    const editorialNote = editorialNoteIndex >= 0 ? bodyBlocks[editorialNoteIndex] : null
+    const tocItems = getVisibleTocItems(bodyBlocks)
+    const tocHtml = tocItems.length
+      ? `<nav class="mt-8 flex flex-wrap justify-center gap-2">
+          ${tocItems.map((item) => `<a href="#${escapeHtml(item.id)}" class="blog-anchor-chip">${escapeHtml(item.label)}</a>`).join('')}
+        </nav>`
+      : ''
+
+    const contentHtml = renderVisibleBlogBodyBlocks(bodyBlocks, {
+      skipIndexes: [editorialNoteIndex].filter((index) => index >= 0),
+      prefix,
+    })
+
+    const presentation = buildBlogPresentationMeta(post)
+    const coverImages = getVisibleBlogCoverImages()
+    const coverHtml = `<section class="blog-cover-shell mt-7" aria-label="Article cover preview">
+      <div class="blog-cover-grid">
+        <figure class="blog-cover-panel">
+          <img src="${escapeHtml(coverImages.before)}" alt="Original source image preview" class="blog-cover-image" loading="eager">
+          <figcaption class="blog-cover-label">Source image</figcaption>
+        </figure>
+        <figure class="blog-cover-panel">
+          <img src="${escapeHtml(coverImages.after)}" alt="${escapeHtml(post.title || '')} pixel art preview" class="blog-cover-image" loading="eager">
+          <figcaption class="blog-cover-label">Pixel art result</figcaption>
+        </figure>
+      </div>
+      <div class="blog-cover-note">
+        <span class="inline-flex items-center rounded-full border px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.16em] ${escapeHtml(presentation.chipClass)}">${escapeHtml(presentation.badge)}</span>
+        <p class="text-sm leading-7 text-slate-600 md:text-[0.98rem]">${escapeHtml(presentation.bestFor)}</p>
+      </div>
+    </section>`
+
+    return `<article class="container mx-auto max-w-4xl px-4 py-14 md:py-20">
+      <div class="mx-auto max-w-3xl">
+        <div class="text-center">
+          <a href="${prefix}/blog/" class="inline-flex items-center gap-2 text-sm font-medium text-blue-700 transition-colors hover:text-blue-800"><span aria-hidden="true">←</span>${escapeHtml(backLabel)}</a>
+        </div>
+
+        <section class="blog-article-card mt-6 px-6 py-8 md:px-12 md:py-12">
+          <header class="text-center">
+            <div class="flex flex-wrap items-center justify-center gap-3 text-sm text-slate-500">
+              <span>${escapeHtml(post.date || '')}</span>
+              <span aria-hidden="true" class="text-slate-300">•</span>
+              <span>${escapeHtml(estimateVisibleBlogReadTime(post))}</span>
+            </div>
+            <h1 class="mx-auto mt-4 max-w-xl text-balance text-[1.82rem] font-semibold tracking-tight text-slate-950 md:text-[2.02rem] md:leading-[1.14]">${escapeHtml(post.title || '')}</h1>
+            ${coverHtml}
+            <p class="mx-auto mt-7 max-w-[42rem] text-[1.05rem] leading-8 text-slate-600 md:text-[1.1rem]">${escapeHtml(post.excerpt || '')}</p>
+          </header>
+
+          ${tocHtml}
+
+          <div class="blog-article-prose mt-12">
+            ${editorialNote ? `<p class="text-sm leading-7 text-slate-500">${renderVisibleInlineContent(editorialNote.content, prefix)}</p>` : ''}
+            ${contentHtml}
+          </div>
+        </section>
+
+        ${relatedHtml}
+
+        <div class="mt-8 text-center">
+          <a href="${prefix}/blog/" class="btn-primary inline-flex items-center justify-center">Back to Blog</a>
+        </div>
+      </div>
+    </article>`
   }
 
   const getRelatedBlogPosts = (posts = [], currentSlug, limit = 3) => {
@@ -368,17 +721,22 @@ async function prerender() {
 
   const renderBlogPostWithRelatedVisible = (post, posts = [], lang = DEFAULT_LANG, bundle = {}) => {
     if (!post || !post.slug) return ''
-    const base = renderBlogPostVisible(post, lang, bundle)
-    if (!base) return base
     const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
-    const relatedHeading = escapeHtml(pick(bundle, 'blog.relatedHeading') || 'Related posts')
     const related = getRelatedBlogPosts(posts, post.slug, 3)
-    if (!related.length) return base
-    const links = related
-      .map((item) => `<li><a class="text-blue-600 hover:underline" href="${prefix}/blog/${escapeHtml(item.slug)}/">${escapeHtml(item.title || item.slug)}</a></li>`)
-      .join('')
-    const relatedHtml = `<section class="mt-8 rounded-lg border border-gray-200 bg-white p-4"><h2 class="text-lg font-semibold text-gray-900">${relatedHeading}</h2><ul class="mt-3 space-y-2">${links}</ul></section>`
-    return base.replace(/<footer class="mt-8 text-center md:text-left">/i, `${relatedHtml}<footer class="mt-8 text-center md:text-left">`)
+    const relatedHtml = related.length
+      ? `<section class="mt-12">
+          <h2 class="text-xl font-semibold tracking-tight text-slate-950">Related Articles</h2>
+          <div class="mt-4 grid gap-4 md:grid-cols-2">
+            ${related.slice(0, 2).map((item) => `<article class="blog-simple-card px-5 py-5">
+              <h3 class="text-lg font-semibold tracking-tight text-slate-950"><a href="${prefix}/blog/${escapeHtml(item.slug)}/" class="transition-colors hover:text-blue-700">${escapeHtml(item.title || item.slug)}</a></h3>
+              <p class="mt-3 text-sm leading-7 text-slate-600">${escapeHtml(item.excerpt || '')}</p>
+              <div class="mt-4"><a href="${prefix}/blog/${escapeHtml(item.slug)}/" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 transition-colors hover:text-blue-800">Read more<span aria-hidden="true">→</span></a></div>
+            </article>`).join('')}
+          </div>
+        </section>`
+      : ''
+
+    return renderBlogPostVisible(post, lang, bundle, relatedHtml)
   }
 
   const cleanTitle = (text) => String(text || '')
@@ -1135,6 +1493,40 @@ async function prerender() {
     const blogSubtitle =
       pick(bundle, 'blog.subtitle') || 'Articles and updates about making pixel image visuals, tutorials, and new features.'
     const blogPath = buildBlogPath(lang)
+    const blogIndexJsonLd = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: pick(bundle, 'blog.h1') || 'Pixel Art Tutorials and Converter Guides',
+        description: shortenText(blogSubtitle),
+        url: ABS(blogPath),
+        inLanguage: lang,
+        isPartOf: {
+          '@type': 'WebSite',
+          name: siteName,
+          url: 'https://pixelartvillage.org/',
+        },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        itemListElement: postsForLang.map((post, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          url: ABS(buildBlogPath(lang, post.slug)),
+          name: post.title,
+          description: shortenText(post.excerpt || ''),
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://pixelartvillage.org/' },
+          { '@type': 'ListItem', position: 2, name: pick(bundle, 'blog.h1') || 'Blog', item: ABS(blogPath) },
+        ],
+      },
+    ]
 
     blogRoutes.push({
       lang,
@@ -1149,11 +1541,15 @@ async function prerender() {
         { property: 'og:title', content: blogSeoTitle },
         { property: 'og:description', content: shortenText(blogSubtitle) },
         { property: 'og:image', content: ABS('/blog-og/_index.png') },
+        { property: 'og:image:alt', content: 'Pixel Art Village blog preview' },
+        { property: 'og:site_name', content: siteName },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: blogSeoTitle },
         { name: 'twitter:description', content: shortenText(blogSubtitle) },
         { name: 'twitter:image', content: ABS('/blog-og/_index.png') },
+        { name: 'twitter:image:alt', content: 'Pixel Art Village blog preview' },
       ],
+      jsonLd: blogIndexJsonLd,
       extras: renderBlogIndex(postsForLang),
       visible: renderBlogIndexVisible(postsForLang, lang, bundle),
       alternates: buildBlogAlternates(),
@@ -1171,6 +1567,7 @@ async function prerender() {
       const ogImage = blogImageExists(post.slug) ? ABS(`/blog-og/${post.slug}.png`) : ABS('/blog-og/_index.png')
       const seoTitle = formatBlogSeoTitle(post.title, siteName)
       const seoDescription = shortenText(post.excerpt || '')
+      const postMeta = buildBlogPresentationMeta(post)
       blogRoutes.push({
         lang,
         path: postPath,
@@ -1184,24 +1581,37 @@ async function prerender() {
           { property: 'og:title', content: seoTitle },
           { property: 'og:description', content: seoDescription },
           { property: 'og:image', content: ogImage },
+          { property: 'og:image:alt', content: `${post.title} article preview` },
+          { property: 'og:site_name', content: siteName },
           { name: 'twitter:card', content: 'summary_large_image' },
           { name: 'twitter:title', content: seoTitle },
           { name: 'twitter:description', content: seoDescription },
           { name: 'twitter:image', content: ogImage },
+          { name: 'twitter:image:alt', content: `${post.title} article preview` },
         ],
         jsonLd: [
           {
             '@context': 'https://schema.org',
-            '@type': 'Article',
+            '@type': 'BlogPosting',
             headline: post.title,
             description: seoDescription,
             datePublished: post.date || undefined,
             dateModified: post.date || undefined,
             inLanguage: lang,
+            articleSection: postMeta.badge,
             mainEntityOfPage: ABS(postPath),
             author: { '@type': 'Organization', name: siteName },
             publisher: { '@type': 'Organization', name: siteName },
             image: ogImage,
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://pixelartvillage.org/' },
+              { '@type': 'ListItem', position: 2, name: pick(bundle, 'blog.h1') || 'Blog', item: ABS(blogPath) },
+              { '@type': 'ListItem', position: 3, name: post.title, item: ABS(postPath) },
+            ],
           },
         ],
         extras: renderBlogArticle(post),
