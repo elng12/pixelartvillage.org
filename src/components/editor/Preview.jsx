@@ -1,10 +1,23 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, isProcessing, imgDim, onDropFiles }) {
+function toGridOverlayColor(hexColor) {
+  const normalized = String(hexColor || '').trim().replace('#', '')
+  if (!/^[0-9a-fA-F]{6}$/.test(normalized)) return 'rgba(71, 85, 105, 0.28)'
+  const r = parseInt(normalized.slice(0, 2), 16)
+  const g = parseInt(normalized.slice(2, 4), 16)
+  const b = parseInt(normalized.slice(4, 6), 16)
+  return `rgba(${r}, ${g}, ${b}, 0.28)`
+}
+
+function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, gridColor, isProcessing, imgDim, onDropFiles }) {
   const { t } = useTranslation()
   const scaledW = imgDim?.w && imgDim?.h ? Math.max(1, Math.round(imgDim.w * zoom)) : undefined
   const scaledH = imgDim?.w && imgDim?.h ? Math.max(1, Math.round(imgDim.h * zoom)) : undefined
+  const gridColumns = imgDim?.w && pixelSize > 1 ? Math.max(1, Math.floor(imgDim.w / pixelSize)) : imgDim?.w
+  const gridRows = imgDim?.h && pixelSize > 1 ? Math.max(1, Math.floor(imgDim.h / pixelSize)) : imgDim?.h
+  const gridStepX = scaledW && gridColumns ? Math.max(1, scaledW / gridColumns) : Math.max(1, pixelSize) * zoom
+  const gridStepY = scaledH && gridRows ? Math.max(1, scaledH / gridRows) : Math.max(1, pixelSize) * zoom
   return (
     <div
       ref={previewRef}
@@ -33,8 +46,8 @@ function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, isProc
       </div>
       {showGrid && (
         <div aria-hidden className="pointer-events-none absolute inset-2 rounded" style={{
-          backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.12) 1px, transparent 1px)',
-          backgroundSize: `${Math.max(1, pixelSize) * zoom}px ${Math.max(1, pixelSize) * zoom}px`,
+          backgroundImage: `linear-gradient(to right, ${toGridOverlayColor(gridColor)} 1px, transparent 1px), linear-gradient(to bottom, ${toGridOverlayColor(gridColor)} 1px, transparent 1px)`,
+          backgroundSize: `${gridStepX}px ${gridStepY}px`,
         }} />
       )}
       {isProcessing && (

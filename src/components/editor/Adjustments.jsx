@@ -120,6 +120,15 @@ function Adjustments({ state, dispatch, customPalettes }) {
             <input id="grid-toggle" type="checkbox" className="h-4 w-4" checked={state.showGrid} onChange={setBool('showGrid')} />
             <label htmlFor="grid-toggle" className="text-sm">{t('adjustments.grid')}</label>
           </div>
+          {state.showGrid ? (
+            <div className="mt-3">
+              <label htmlFor="grid-color" className="block text-sm font-medium mb-2">{t('adjustments.gridColor')}</label>
+              <div className="flex items-center gap-3">
+                <input id="grid-color" type="color" className="h-10 w-14 rounded border" value={state.gridColor} onChange={set('gridColor')} />
+                <span className="text-sm text-gray-500">{state.gridColor.toUpperCase()}</span>
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
     </>
