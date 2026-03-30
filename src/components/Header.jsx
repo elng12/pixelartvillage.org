@@ -16,15 +16,11 @@ function Header() {
   // 支持锚点型（id）与路由型（to）链接；直接在渲染期取文案，避免首次渲染时资源未就绪导致标签停留在 key
   const NAV_LINKS = [
     { id: 'tool', label: t('nav.home') },
-    { id: 'showcase', label: t('nav.examples') },
-    { id: 'features', label: t('nav.features') },
-    { id: 'how-it-works', label: t('nav.how') },
-    { id: 'faq', label: t('nav.faq') },
     { to: 'blog', label: t('nav.blog') },
   ]
 
   useEffect(() => {
-    const observeIds = ['tool', 'showcase', 'features', 'how-it-works', 'faq'];
+    const observeIds = ['tool'];
     const sections = observeIds
       .map((id) => document.querySelector(`#${id}`))
       .filter(Boolean);
@@ -100,21 +96,21 @@ function Header() {
                   </LocalizedLink>
                 )
               })}
+              <a
+                href={FEEDBACK_FORM_URL}
+                target="_blank"
+                rel="noreferrer"
+                data-testid="header-feedback-link"
+                aria-label={t('nav.feedback')}
+                title={t('nav.feedback')}
+                className="inline-flex items-center rounded-md border border-blue-200 bg-blue-50 px-3 py-2 text-sm font-medium text-blue-700 shadow-sm transition hover:border-blue-300 hover:bg-blue-100 whitespace-nowrap"
+              >
+                {t('nav.feedback')}
+              </a>
             </nav>
             <div className="flex items-center gap-2 order-2">
               <LanguageSwitcherBalanced />
             </div>
-            <a
-              href={FEEDBACK_FORM_URL}
-              target="_blank"
-              rel="noreferrer"
-              data-testid="header-feedback-link"
-              aria-label={t('nav.feedback')}
-              title={t('nav.feedback')}
-              className="hidden md:inline-flex items-center rounded-md border border-blue-200 bg-blue-50 px-3 py-2 text-sm font-medium text-blue-700 shadow-sm transition hover:border-blue-300 hover:bg-blue-100"
-            >
-              {t('nav.feedback')}
-            </a>
             <div className="hidden lg:flex items-center order-3">
               <Avatar size={40} userId="guest" title={t('header.userAvatarTitle')} />
             </div>
