@@ -273,7 +273,6 @@ function Footer() {
                 <li><LocalizedLink to="/converter/jpg-to-pixel-art/" className="hover:text-white">{t('footer.links.jpg2pixel')}</LocalizedLink></li>
                 <li><LocalizedLink to="/converter/gif-to-pixel-art/" className="hover:text-white">{t('footer.links.gif2pixel')}</LocalizedLink></li>
                 <li><LocalizedLink to="/converter/webp-to-pixel-art/" className="hover:text-white">{t('footer.links.webp2pixel')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/bmp-to-pixel-art/" className="hover:text-white">{t('footer.links.bmp2pixel')}</LocalizedLink></li>
               </ul>
             </div>
             <div>

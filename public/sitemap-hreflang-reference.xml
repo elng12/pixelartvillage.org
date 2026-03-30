@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- hreflang 参考站点地图（仅供开发参考，不要提交给搜索引擎） -->
-<!-- 生成时间: 2026-03-30T05:53:55.142Z -->
-<!-- URL总数: 364 (包含非规范版本) -->
+<!-- 生成时间: 2026-03-30T09:09:50.386Z -->
+<!-- URL总数: 347 (包含非规范版本) -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://pixelartvillage.org/ar/</loc>
@@ -59,12 +59,6 @@
   </url>
   <url>
     <loc>https://pixelartvillage.org/ar/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://pixelartvillage.org/ar/converter/bmp-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -179,12 +173,6 @@
   </url>
   <url>
     <loc>https://pixelartvillage.org/de/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://pixelartvillage.org/de/converter/bmp-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -316,12 +304,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/es/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://pixelartvillage.org/es/converter/gif-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -431,12 +413,6 @@
   </url>
   <url>
     <loc>https://pixelartvillage.org/fr/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://pixelartvillage.org/fr/converter/bmp-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -568,12 +544,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/id/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://pixelartvillage.org/id/converter/gif-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -700,12 +670,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/it/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://pixelartvillage.org/it/converter/gif-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -815,12 +779,6 @@
   </url>
   <url>
     <loc>https://pixelartvillage.org/ja/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://pixelartvillage.org/ja/converter/bmp-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -952,12 +910,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/ko/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://pixelartvillage.org/ko/converter/gif-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -1079,12 +1031,6 @@
   </url>
   <url>
     <loc>https://pixelartvillage.org/nb/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://pixelartvillage.org/nb/converter/bmp-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1216,12 +1162,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/nl/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://pixelartvillage.org/nl/converter/gif-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -1348,12 +1288,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/pl/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://pixelartvillage.org/pl/converter/gif-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -1468,12 +1402,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/pt/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://pixelartvillage.org/pt/converter/gif-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -1583,12 +1511,6 @@
   </url>
   <url>
     <loc>https://pixelartvillage.org/ru/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://pixelartvillage.org/ru/converter/bmp-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1720,12 +1642,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/sv/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://pixelartvillage.org/sv/converter/gif-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -1847,12 +1763,6 @@
   </url>
   <url>
     <loc>https://pixelartvillage.org/th/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://pixelartvillage.org/th/converter/bmp-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1984,12 +1894,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://pixelartvillage.org/tl/converter/bmp-to-pixel-art/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://pixelartvillage.org/tl/converter/gif-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -2111,12 +2015,6 @@
   </url>
   <url>
     <loc>https://pixelartvillage.org/vi/converter/8-bit-art-generator/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://pixelartvillage.org/vi/converter/bmp-to-pixel-art/</loc>
     <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>

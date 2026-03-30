@@ -188,23 +188,42 @@
 # 5) Retired converter slug canonicalization
 /converter/vector-to-pixel-art      /converter/image-to-pixel-art      301
 /converter/vector-to-pixel-art/     /converter/image-to-pixel-art/     301
+/converter/bmp-to-pixel-art      /converter/image-to-pixel-art      301
+/converter/bmp-to-pixel-art/     /converter/image-to-pixel-art/     301
 /es/converter/vector-to-pixel-art/     /es/converter/image-to-pixel-art/     301
+/es/converter/bmp-to-pixel-art/     /es/converter/image-to-pixel-art/     301
 /id/converter/vector-to-pixel-art/     /id/converter/image-to-pixel-art/     301
+/id/converter/bmp-to-pixel-art/     /id/converter/image-to-pixel-art/     301
 /de/converter/vector-to-pixel-art/     /de/converter/image-to-pixel-art/     301
+/de/converter/bmp-to-pixel-art/     /de/converter/image-to-pixel-art/     301
 /pl/converter/vector-to-pixel-art/     /pl/converter/image-to-pixel-art/     301
+/pl/converter/bmp-to-pixel-art/     /pl/converter/image-to-pixel-art/     301
 /it/converter/vector-to-pixel-art/     /it/converter/image-to-pixel-art/     301
+/it/converter/bmp-to-pixel-art/     /it/converter/image-to-pixel-art/     301
 /pt/converter/vector-to-pixel-art/     /pt/converter/image-to-pixel-art/     301
+/pt/converter/bmp-to-pixel-art/     /pt/converter/image-to-pixel-art/     301
 /fr/converter/vector-to-pixel-art/     /fr/converter/image-to-pixel-art/     301
+/fr/converter/bmp-to-pixel-art/     /fr/converter/image-to-pixel-art/     301
 /ru/converter/vector-to-pixel-art/     /ru/converter/image-to-pixel-art/     301
+/ru/converter/bmp-to-pixel-art/     /ru/converter/image-to-pixel-art/     301
 /tl/converter/vector-to-pixel-art/     /tl/converter/image-to-pixel-art/     301
+/tl/converter/bmp-to-pixel-art/     /tl/converter/image-to-pixel-art/     301
 /vi/converter/vector-to-pixel-art/     /vi/converter/image-to-pixel-art/     301
+/vi/converter/bmp-to-pixel-art/     /vi/converter/image-to-pixel-art/     301
 /ja/converter/vector-to-pixel-art/     /ja/converter/image-to-pixel-art/     301
+/ja/converter/bmp-to-pixel-art/     /ja/converter/image-to-pixel-art/     301
 /sv/converter/vector-to-pixel-art/     /sv/converter/image-to-pixel-art/     301
+/sv/converter/bmp-to-pixel-art/     /sv/converter/image-to-pixel-art/     301
 /nb/converter/vector-to-pixel-art/     /nb/converter/image-to-pixel-art/     301
+/nb/converter/bmp-to-pixel-art/     /nb/converter/image-to-pixel-art/     301
 /nl/converter/vector-to-pixel-art/     /nl/converter/image-to-pixel-art/     301
+/nl/converter/bmp-to-pixel-art/     /nl/converter/image-to-pixel-art/     301
 /ar/converter/vector-to-pixel-art/     /ar/converter/image-to-pixel-art/     301
+/ar/converter/bmp-to-pixel-art/     /ar/converter/image-to-pixel-art/     301
 /ko/converter/vector-to-pixel-art/     /ko/converter/image-to-pixel-art/     301
+/ko/converter/bmp-to-pixel-art/     /ko/converter/image-to-pixel-art/     301
 /th/converter/vector-to-pixel-art/     /th/converter/image-to-pixel-art/     301
+/th/converter/bmp-to-pixel-art/     /th/converter/image-to-pixel-art/     301
 
 # 6) Static assets are served directly from dist by Pages.
 # Do not rewrite extension paths like /*.png -> /:splat,

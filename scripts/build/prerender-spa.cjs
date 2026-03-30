@@ -1066,7 +1066,7 @@ async function prerender() {
           description: shortenText(p.metaDescription || ''),
           inLanguage: lang,
           totalTime: 'PT2M',
-          supply: [{ '@type': 'HowToSupply', name: 'Image file (PNG/JPG/WebP/GIF/BMP)' }],
+          supply: [{ '@type': 'HowToSupply', name: 'Image file (PNG/JPG/GIF/WEBP)' }],
           tool: [{ '@type': 'HowToTool', name: 'Pixel Art Village Converter' }],
           step: [
             { '@type': 'HowToStep', name: 'Upload an image' },

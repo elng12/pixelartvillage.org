@@ -142,7 +142,7 @@ export default function PseoPage() {
     inLanguage: currentLocale || 'en',
     totalTime: 'PT2M',
     supply: [
-      { '@type': 'HowToSupply', name: 'Image file (PNG/JPG/WebP/GIF/BMP)' },
+      { '@type': 'HowToSupply', name: 'Image file (PNG/JPG/GIF/WEBP)' },
     ],
     tool: [
       { '@type': 'HowToTool', name: 'Pixel Art Village Converter' },

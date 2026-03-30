@@ -60,15 +60,15 @@
   {
     "slug": "image-to-pixel-art",
     "title": "Image to Pixel Art Converter | Turn Any Image Into Pixel Art",
-    "metaDescription": "Turn PNG, JPG, GIF, WEBP, or BMP files into pixel art with live preview, palette controls, dithering, and private browser-based processing.",
+    "metaDescription": "Turn PNG, JPG, GIF, or WEBP files into pixel art with live preview, palette controls, dithering, and private browser-based processing.",
     "h1": "Image to Pixel Art Converter",
     "detailsHeading": "When to use the main converter",
-    "heroSubtitle": "Upload PNG, JPG, GIF, WEBP, or BMP files and turn them into clean pixel art with live preview, palette controls, and private browser-based processing.",
+    "heroSubtitle": "Upload PNG, JPG, GIF, or WEBP files and turn them into clean pixel art with live preview, palette controls, and private browser-based processing.",
     "heroSubtitle2": "Adjust pixel size, dithering, and colors in the full editor, then download sprites, icons, UI art, and retro graphics.",
     "intro": [
       "Use the main converter when you need the full image-to-pixel-art workflow in one place, from upload and live preview to palette control, dithering, and export.",
       "It works best for screenshots, logos, illustrations, interface art, mixed-source graphics, and general-purpose conversions that need more than a narrow file-format landing page.",
-      "If your source is mostly a camera photo, start with Photo to Pixel Art. If you need a format-specific workflow, open the PNG, JPG, GIF, WEBP, or BMP converter pages from the homepage."
+      "If your source is mostly a camera photo, start with Photo to Pixel Art. If you need a format-specific workflow, open the PNG, JPG, GIF, or WEBP converter pages from the homepage."
     ],
     "minecraftBlock": {
       "title": "Convert Image to Minecraft Pixel Art",
@@ -144,35 +144,6 @@
       "title": "Ready to move beyond the WEBP entry point?",
       "body": [
         "The main converter is the better destination when you want one repeatable workflow for screenshots, logos, photos, and other sources alongside WEBP files."
-      ],
-      "ctaLabel": "Continue in the main converter",
-      "ctaTo": "/converter/image-to-pixel-art/"
-    }
-  },
-  {
-    "slug": "bmp-to-pixel-art",
-    "title": "BMP to Pixel Art | Online Tool | Pixel Art Village",
-    "metaDescription": "Convert BMP to pixel art online easily. Adjust pixel size, palette, and dithering with instant preview and clean export results.",
-    "h1": "Convert BMP to Pixel Art Online",
-    "intro": [
-      "Use this page when your source is a BMP file from an archive, legacy app, or older asset pipeline. BMP files often arrive with clean raw pixel data, which makes them useful reference inputs for retro conversion work.",
-      "Upload the BMP, set the pixel treatment, and export a cleaner modern result. If you need the broadest workflow for current screenshots, logos, photos, or mixed sources, open the main image to pixel art converter."
-    ],
-    "toolHeading": "Upload a BMP and modernize it into pixel art",
-    "toolSubtitle": "A focused route for older BMP assets and archived reference graphics.",
-    "toolSubtitle2": "For current file types and the full editor workflow, use the main image to pixel art converter.",
-    "topCallout": {
-      "title": "Need the full converter instead of a BMP-first route?",
-      "body": [
-        "This page is useful when you already know the input is BMP. For broader image-to-pixel-art work, start from the main converter."
-      ],
-      "ctaLabel": "Open the full image to pixel art converter",
-      "ctaTo": "/converter/image-to-pixel-art/"
-    },
-    "bottomCallout": {
-      "title": "Want one workflow for more than legacy BMP assets?",
-      "body": [
-        "Open the main converter when you want the same editor setup for modern screenshots, logos, interface art, and other source types too."
       ],
       "ctaLabel": "Continue in the main converter",
       "ctaTo": "/converter/image-to-pixel-art/"

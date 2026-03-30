@@ -39,6 +39,14 @@ function assertLocaleStrings(section, requiredKeys) {
   }
 }
 
+function loadJson(filePath) {
+  return JSON.parse(fs.readFileSync(path.resolve(filePath), 'utf8'))
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
 // inferAutoPaletteSize
 test('inferAutoPaletteSize parses trailing number', () => {
   assert.strictEqual(inferAutoPaletteSize('Custom 12'), 12)
@@ -135,6 +143,34 @@ test('palette import locale keys exist in every shipped locale', () => {
 test('support locale keys exist in every shipped locale', () => {
   assertLocaleStrings('footer', ['supportTitle', 'supportDesc'])
   assertLocaleStrings('contact', ['supportEyebrow', 'supportTitle', 'emailCta', 'emailHint'])
+})
+
+test('main converter copy only lists supported upload formats', () => {
+  const en = loadJson('public/locales/en/translation.json')
+  const pseoPages = loadJson('src/content/pseo-pages.en.json')
+  const mainConverter = pseoPages.find((page) => page.slug === 'image-to-pixel-art')
+
+  assert.ok(mainConverter, 'Missing image-to-pixel-art page config')
+  assert.ok(!/BMP/i.test(en?.home?.cards?.mainConverter?.description || ''), 'Home copy still promises BMP')
+  assert.ok(!/BMP/i.test(mainConverter.metaDescription || ''), 'pSEO meta description still promises BMP')
+  assert.ok(!/BMP/i.test(mainConverter.heroSubtitle || ''), 'pSEO hero subtitle still promises BMP')
+})
+
+test('retired BMP converter stays redirected to the main converter', () => {
+  const pseoPages = loadJson('src/content/pseo-pages.en.json')
+  const redirects = fs.readFileSync(path.resolve('public/_redirects'), 'utf8')
+  const redirectPairs = [
+    ['/converter/bmp-to-pixel-art', '/converter/image-to-pixel-art'],
+    ['/converter/bmp-to-pixel-art/', '/converter/image-to-pixel-art/'],
+    ['/es/converter/bmp-to-pixel-art/', '/es/converter/image-to-pixel-art/'],
+    ['/ja/converter/bmp-to-pixel-art/', '/ja/converter/image-to-pixel-art/'],
+  ]
+
+  assert.ok(!pseoPages.some((page) => page.slug === 'bmp-to-pixel-art'), 'BMP converter page is still in pSEO content')
+  for (const [from, to] of redirectPairs) {
+    const pattern = new RegExp(`^${escapeRegExp(from)}\\s+${escapeRegExp(to)}\\s+301$`, 'm')
+    assert.match(redirects, pattern, `Missing redirect: ${from} -> ${to}`)
+  }
 })
 
 // clamp255

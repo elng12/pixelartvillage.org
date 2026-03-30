@@ -48,7 +48,6 @@
       "privacyLocal": "Privacy & local processing",
       "gif2pixel": "GIF to pixel art",
       "webp2pixel": "WEBP to pixel art",
-      "bmp2pixel": "BMP to pixel art",
       "photo2sprite": "Photo to sprite converter",
       "retroMaker": "Retro game graphics maker",
       "pixelate": "Pixelate image online",
@@ -595,7 +594,7 @@
     "cards": {
       "mainConverter": {
         "title": "Image to Pixel Art Converter",
-        "description": "The Pixel Art Village main editor is the main converter for general PNG, JPG, GIF, WEBP, and BMP image files in one image workspace and one pixel art converter."
+        "description": "The Pixel Art Village main editor is the main converter for general PNG, JPG, GIF, and WEBP image files in one image workspace and one pixel art converter."
       },
       "photoToPixel": {
         "title": "Photo Pixel Converter",
