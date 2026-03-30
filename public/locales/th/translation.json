@@ -553,7 +553,18 @@
     "clearAllConfirm": "ต้องการลบพาเลตที่กำหนดเองทั้งหมด {{count}} รายการหรือไม่? พาเลตที่มากับระบบจะยังคงอยู่",
     "overwriteConfirm": "มีพาเลตแบบกำหนดเองชื่อ \"{{name}}\" อยู่แล้ว ต้องการแทนที่หรือไม่?",
     "renameSelected": "เปลี่ยนชื่อพาเลตที่เลือก",
-    "renameHint": "พาเลตกำหนดเองที่เลือก: {{name}}"
+    "renameHint": "พาเลตกำหนดเองที่เลือก: {{name}}",
+    "exportLibrary": "ส่งออกคลัง",
+    "exportLibrarySuccess": "ดาวน์โหลดคลังพาเลตแบบกำหนดเองของคุณแล้ว",
+    "exportLibraryFailed": "เราไม่สามารถดาวน์โหลดคลังพาเลตนี้ได้ในตอนนี้",
+    "importLibrary": "นำเข้าคลัง",
+    "importLibrarySuccess": "นำเข้าพาเลตแบบกำหนดเอง {{count}} ชุดแล้ว",
+    "importLibrarySuccessReplaced": "นำเข้าพาเลตแบบกำหนดเอง {{count}} ชุดแล้ว และแทนที่รายการที่บันทึกไว้เดิม {{replaced}} รายการ",
+    "importLibraryInvalid": "ไฟล์นี้ไม่ใช่คลังพาเลตของ Pixel Art Village ที่ถูกต้อง",
+    "importLibraryEmpty": "ไฟล์นี้ไม่มีพาเลตแบบกำหนดเอง",
+    "importLibraryOverwriteConfirm": "คลังนี้จะเขียนทับรายการพาเลตที่บันทึกไว้ {{count}} รายการ ดำเนินการต่อหรือไม่?",
+    "importLibraryReadFailed": "เราไม่สามารถอ่านไฟล์นั้นได้ โปรดลองอีกครั้ง",
+    "importLibraryCanceled": "ยกเลิกการนำเข้าแล้ว"
   },
   "home": {
     "seoTitle": "ตัวแปลงรูปภาพเป็นพิกเซลอาร์ต | Pixel Art Village",

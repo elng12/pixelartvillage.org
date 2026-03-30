@@ -1,3 +1,5 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import { test, expect } from '@playwright/test'
 
 async function waitForProcessing(page) {
@@ -178,4 +180,84 @@ test('Lospec network failures surface a fetch-specific message', async ({ page }
   await expect(
     page.getByText('We could not fetch that Lospec palette right now. Please check the link and try again.'),
   ).toBeVisible()
+})
+
+test('custom palette libraries can be exported and imported back', async ({ page }, testInfo) => {
+  await openEditorWithFixture(page)
+
+  await page.locator('#palette-name-input').fill('Evening Mix')
+  await page.locator('#palette-color-input').fill('#112233')
+  await page.getByRole('button', { name: 'Add color', exact: true }).click()
+  await page.getByRole('button', { name: 'Save palette', exact: true }).click()
+
+  const downloadPromise = page.waitForEvent('download')
+  await page.getByTestId('palette-export-library').click()
+  const download = await downloadPromise
+  const filePath = path.join(testInfo.outputDir, download.suggestedFilename())
+  await download.saveAs(filePath)
+
+  const exported = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+  expect(exported.palettes).toEqual([{ name: 'Evening Mix', colors: ['#112233'] }])
+  await expect(page.getByText('Downloaded your custom palette library.')).toBeVisible()
+
+  page.once('dialog', async (dialog) => {
+    await expect(dialog.message()).toContain('Delete all 1 custom palettes?')
+    await dialog.accept()
+  })
+  await page.getByTestId('palette-clear-all').click()
+  await expect.poll(() => getStoredCustomPalettes(page)).toEqual([])
+
+  await page.getByTestId('palette-import-file').setInputFiles(filePath)
+
+  await expect(page.getByText('Imported 1 custom palettes.')).toBeVisible()
+  await expect.poll(() => getStoredCustomPalettes(page)).toEqual([
+    { name: 'Evening Mix', colors: ['#112233'] },
+  ])
+})
+
+test('importing a library asks before replacing duplicate custom palette names', async ({ page }) => {
+  await openEditorWithFixture(page)
+
+  await page.locator('#palette-name-input').fill('Evening Mix')
+  await page.locator('#palette-color-input').fill('#112233')
+  await page.getByRole('button', { name: 'Add color', exact: true }).click()
+  await page.getByRole('button', { name: 'Save palette', exact: true }).click()
+
+  const libraryBuffer = Buffer.from(JSON.stringify({
+    palettes: [
+      { name: 'Evening Mix', colors: ['#445566'] },
+      { name: 'Sunset Mix', colors: ['#778899'] },
+    ],
+  }, null, 2))
+
+  page.once('dialog', async (dialog) => {
+    await expect(dialog.message()).toContain('This library would replace 1 saved palette entries.')
+    await dialog.dismiss()
+  })
+  await page.getByTestId('palette-import-file').setInputFiles({
+    name: 'duplicate-library.json',
+    mimeType: 'application/json',
+    buffer: libraryBuffer,
+  })
+
+  await expect(page.getByText('Import canceled.')).toBeVisible()
+  await expect.poll(() => getStoredCustomPalettes(page)).toEqual([
+    { name: 'Evening Mix', colors: ['#112233'] },
+  ])
+
+  page.once('dialog', async (dialog) => {
+    await expect(dialog.message()).toContain('This library would replace 1 saved palette entries.')
+    await dialog.accept()
+  })
+  await page.getByTestId('palette-import-file').setInputFiles({
+    name: 'duplicate-library.json',
+    mimeType: 'application/json',
+    buffer: libraryBuffer,
+  })
+
+  await expect(page.getByText('Imported 2 custom palettes. Replaced 1 existing saved entries.')).toBeVisible()
+  await expect.poll(() => getStoredCustomPalettes(page)).toEqual([
+    { name: 'Evening Mix', colors: ['#445566'] },
+    { name: 'Sunset Mix', colors: ['#778899'] },
+  ])
 })

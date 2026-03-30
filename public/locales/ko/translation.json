@@ -553,7 +553,18 @@
     "clearAllConfirm": "사용자 지정 팔레트 {{count}}개를 모두 삭제할까요? 기본 제공 팔레트는 그대로 유지됩니다.",
     "overwriteConfirm": "\"{{name}}\"라는 사용자 지정 팔레트가 이미 있습니다. 덮어쓸까요?",
     "renameSelected": "선택한 팔레트 이름 변경",
-    "renameHint": "현재 선택한 사용자 지정 팔레트: {{name}}"
+    "renameHint": "현재 선택한 사용자 지정 팔레트: {{name}}",
+    "exportLibrary": "라이브러리 내보내기",
+    "exportLibrarySuccess": "사용자 지정 팔레트 라이브러리를 다운로드했습니다.",
+    "exportLibraryFailed": "지금은 해당 팔레트 라이브러리를 다운로드할 수 없습니다.",
+    "importLibrary": "라이브러리 가져오기",
+    "importLibrarySuccess": "사용자 지정 팔레트 {{count}}개를 가져왔습니다.",
+    "importLibrarySuccessReplaced": "사용자 지정 팔레트 {{count}}개를 가져왔습니다. 기존 저장 항목 {{replaced}}개를 바꿨습니다.",
+    "importLibraryInvalid": "이 파일은 올바른 Pixel Art Village 팔레트 라이브러리가 아닙니다.",
+    "importLibraryEmpty": "이 파일에는 사용자 지정 팔레트가 없습니다.",
+    "importLibraryOverwriteConfirm": "이 라이브러리를 가져오면 저장된 팔레트 항목 {{count}}개를 덮어씁니다. 계속할까요?",
+    "importLibraryReadFailed": "그 파일을 읽을 수 없습니다. 다시 시도해 주세요.",
+    "importLibraryCanceled": "가져오기를 취소했습니다."
   },
   "home": {
     "seoTitle": "이미지 픽셀아트 변환기 | Pixel Art Village",

@@ -616,7 +616,18 @@
     "clearAllConfirm": "Supprimer les {{count}} palettes personnalisées ? Les palettes intégrées seront conservées.",
     "overwriteConfirm": "Une palette personnalisée nommée \"{{name}}\" existe déjà. La remplacer ?",
     "renameSelected": "Renommer la palette sélectionnée",
-    "renameHint": "Palette personnalisée sélectionnée : {{name}}"
+    "renameHint": "Palette personnalisée sélectionnée : {{name}}",
+    "exportLibrary": "Exporter la bibliothèque",
+    "exportLibrarySuccess": "Votre bibliothèque de palettes personnalisées a été téléchargée.",
+    "exportLibraryFailed": "Nous n’avons pas pu télécharger cette bibliothèque de palettes pour le moment.",
+    "importLibrary": "Importer une bibliothèque",
+    "importLibrarySuccess": "{{count}} palettes personnalisées importées.",
+    "importLibrarySuccessReplaced": "{{count}} palettes personnalisées importées. {{replaced}} entrées enregistrées existantes remplacées.",
+    "importLibraryInvalid": "Ce fichier n’est pas une bibliothèque de palettes Pixel Art Village valide.",
+    "importLibraryEmpty": "Ce fichier ne contient aucune palette personnalisée.",
+    "importLibraryOverwriteConfirm": "Cette bibliothèque remplacera {{count}} entrées de palette enregistrées. Continuer ?",
+    "importLibraryReadFailed": "Nous n’avons pas pu lire ce fichier. Veuillez réessayer.",
+    "importLibraryCanceled": "Importation annulée."
   },
   "home": {
     "seoTitle": "Convertisseur d'Image en Art Pixel | Pixel Art Village",

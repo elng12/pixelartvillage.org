@@ -616,7 +616,18 @@
     "clearAllConfirm": "Удалить все пользовательские палитры ({{count}})? Встроенные палитры останутся.",
     "overwriteConfirm": "Пользовательская палитра «{{name}}» уже существует. Заменить её?",
     "renameSelected": "Переименовать выбранную палитру",
-    "renameHint": "Выбранная пользовательская палитра: {{name}}"
+    "renameHint": "Выбранная пользовательская палитра: {{name}}",
+    "exportLibrary": "Экспортировать библиотеку",
+    "exportLibrarySuccess": "Библиотека ваших пользовательских палитр скачана.",
+    "exportLibraryFailed": "Сейчас не удалось скачать эту библиотеку палитр.",
+    "importLibrary": "Импортировать библиотеку",
+    "importLibrarySuccess": "Импортировано {{count}} пользовательских палитр.",
+    "importLibrarySuccessReplaced": "Импортировано {{count}} пользовательских палитр. Заменено {{replaced}} существующих сохранённых записей.",
+    "importLibraryInvalid": "Этот файл не является допустимой библиотекой палитр Pixel Art Village.",
+    "importLibraryEmpty": "Этот файл не содержит пользовательских палитр.",
+    "importLibraryOverwriteConfirm": "Эта библиотека заменит {{count}} сохранённых записей палитр. Продолжить?",
+    "importLibraryReadFailed": "Не удалось прочитать этот файл. Попробуйте ещё раз.",
+    "importLibraryCanceled": "Импорт отменён."
   },
   "home": {
     "seoTitle": "Конвертер изображений в пиксель-арт | Pixel Art Village",

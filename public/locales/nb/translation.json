@@ -553,7 +553,18 @@
     "clearAllConfirm": "Slette alle {{count}} egendefinerte paletter? De innebygde palettene blir beholdt.",
     "overwriteConfirm": "En egendefinert palett med navnet \"{{name}}\" finnes allerede. Erstatte den?",
     "renameSelected": "Gi nytt navn til valgt palett",
-    "renameHint": "Valgt egendefinert palett: {{name}}"
+    "renameHint": "Valgt egendefinert palett: {{name}}",
+    "exportLibrary": "Eksporter bibliotek",
+    "exportLibrarySuccess": "Det tilpassede palettbiblioteket ditt ble lastet ned.",
+    "exportLibraryFailed": "Vi kunne ikke laste ned dette palettbiblioteket akkurat nå.",
+    "importLibrary": "Importer bibliotek",
+    "importLibrarySuccess": "Importerte {{count}} egendefinerte paletter.",
+    "importLibrarySuccessReplaced": "Importerte {{count}} egendefinerte paletter. Erstattet {{replaced}} eksisterende lagrede oppføringer.",
+    "importLibraryInvalid": "Denne filen er ikke et gyldig palettbibliotek for Pixel Art Village.",
+    "importLibraryEmpty": "Denne filen inneholder ingen egendefinerte paletter.",
+    "importLibraryOverwriteConfirm": "Dette biblioteket vil erstatte {{count}} lagrede palettoppføringer. Fortsette?",
+    "importLibraryReadFailed": "Vi kunne ikke lese den filen. Prøv igjen.",
+    "importLibraryCanceled": "Import avbrutt."
   },
   "home": {
     "seoTitle": "Bilde til Pixel Art-konverterer | Pixel Art Village",

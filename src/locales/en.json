@@ -726,7 +726,18 @@
     "clearAllConfirm": "Delete all {{count}} custom palettes? Built-in palettes will stay.",
     "overwriteConfirm": "A custom palette named \"{{name}}\" already exists. Replace it?",
     "renameSelected": "Rename selected palette",
-    "renameHint": "Selected custom palette: {{name}}"
+    "renameHint": "Selected custom palette: {{name}}",
+    "exportLibrary": "Export library",
+    "exportLibrarySuccess": "Downloaded your custom palette library.",
+    "exportLibraryFailed": "We could not download that palette library right now.",
+    "importLibrary": "Import library",
+    "importLibrarySuccess": "Imported {{count}} custom palettes.",
+    "importLibrarySuccessReplaced": "Imported {{count}} custom palettes. Replaced {{replaced}} existing saved entries.",
+    "importLibraryInvalid": "This file is not a valid Pixel Art Village palette library.",
+    "importLibraryEmpty": "This file does not contain any custom palettes.",
+    "importLibraryOverwriteConfirm": "This library would replace {{count}} saved palette entries. Continue?",
+    "importLibraryReadFailed": "We could not read that file. Please try again.",
+    "importLibraryCanceled": "Import canceled."
   },
   "preview": {
     "alt": "Pixel art preview",

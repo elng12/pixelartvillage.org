@@ -553,7 +553,18 @@
     "clearAllConfirm": "Xóa toàn bộ {{count}} bảng màu tùy chỉnh? Các bảng màu có sẵn vẫn sẽ được giữ lại.",
     "overwriteConfirm": "Đã có bảng màu tùy chỉnh tên \"{{name}}\". Bạn có muốn thay thế không?",
     "renameSelected": "Đổi tên bảng màu đã chọn",
-    "renameHint": "Bảng màu tùy chỉnh đang chọn: {{name}}"
+    "renameHint": "Bảng màu tùy chỉnh đang chọn: {{name}}",
+    "exportLibrary": "Xuất thư viện",
+    "exportLibrarySuccess": "Da tai xuong thu vien bang mau tuy chinh cua ban.",
+    "exportLibraryFailed": "Hien tai chung toi khong the tai xuong thu vien bang mau do.",
+    "importLibrary": "Nhap thư viện",
+    "importLibrarySuccess": "Da nhap {{count}} bang mau tuy chinh.",
+    "importLibrarySuccessReplaced": "Da nhap {{count}} bang mau tuy chinh. Da thay the {{replaced}} muc da luu hien co.",
+    "importLibraryInvalid": "Tep nay khong phai la thu vien bang mau Pixel Art Village hop le.",
+    "importLibraryEmpty": "Tep nay khong chua bang mau tuy chinh nao.",
+    "importLibraryOverwriteConfirm": "Thu vien nay se thay the {{count}} muc bang mau da luu. Tiep tuc?",
+    "importLibraryReadFailed": "Chung toi khong the doc tep do. Vui long thu lai.",
+    "importLibraryCanceled": "Da huy nhap."
   },
   "home": {
     "seoTitle": "Công cụ chuyển đổi hình ảnh thành Pixel Art | Pixel Art Village",

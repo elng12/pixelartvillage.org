@@ -616,7 +616,18 @@
     "clearAllConfirm": "Alle {{count}} benutzerdefinierten Paletten löschen? Die integrierten Paletten bleiben erhalten.",
     "overwriteConfirm": "Eine benutzerdefinierte Palette mit dem Namen \"{{name}}\" existiert bereits. Ersetzen?",
     "renameSelected": "Ausgewählte Palette umbenennen",
-    "renameHint": "Ausgewählte benutzerdefinierte Palette: {{name}}"
+    "renameHint": "Ausgewählte benutzerdefinierte Palette: {{name}}",
+    "exportLibrary": "Bibliothek exportieren",
+    "exportLibrarySuccess": "Deine benutzerdefinierte Palettenbibliothek wurde heruntergeladen.",
+    "exportLibraryFailed": "Diese Palettenbibliothek konnte gerade nicht heruntergeladen werden.",
+    "importLibrary": "Bibliothek importieren",
+    "importLibrarySuccess": "{{count}} benutzerdefinierte Paletten importiert.",
+    "importLibrarySuccessReplaced": "{{count}} benutzerdefinierte Paletten importiert. {{replaced}} bestehende gespeicherte Einträge ersetzt.",
+    "importLibraryInvalid": "Diese Datei ist keine gültige Pixel Art Village-Palettenbibliothek.",
+    "importLibraryEmpty": "Diese Datei enthält keine benutzerdefinierten Paletten.",
+    "importLibraryOverwriteConfirm": "Diese Bibliothek würde {{count}} gespeicherte Paletteneinträge ersetzen. Fortfahren?",
+    "importLibraryReadFailed": "Diese Datei konnte nicht gelesen werden. Bitte versuche es erneut.",
+    "importLibraryCanceled": "Import abgebrochen."
   },
   "home": {
     "seoTitle": "Bild zu Pixel Art Konverter | Pixel Art Village",

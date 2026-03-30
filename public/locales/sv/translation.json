@@ -553,7 +553,18 @@
     "clearAllConfirm": "Ta bort alla {{count}} egna paletter? De inbyggda paletterna blir kvar.",
     "overwriteConfirm": "Det finns redan en egen palett med namnet \"{{name}}\". Ersätta den?",
     "renameSelected": "Byt namn på vald palett",
-    "renameHint": "Vald egen palett: {{name}}"
+    "renameHint": "Vald egen palett: {{name}}",
+    "exportLibrary": "Exportera bibliotek",
+    "exportLibrarySuccess": "Ditt bibliotek med egna paletter har laddats ner.",
+    "exportLibraryFailed": "Vi kunde inte ladda ner det palettbiblioteket just nu.",
+    "importLibrary": "Importera bibliotek",
+    "importLibrarySuccess": "Importerade {{count}} egna paletter.",
+    "importLibrarySuccessReplaced": "Importerade {{count}} egna paletter. Ersatte {{replaced}} befintliga sparade poster.",
+    "importLibraryInvalid": "Den här filen är inte ett giltigt palettbibliotek för Pixel Art Village.",
+    "importLibraryEmpty": "Den här filen innehåller inga egna paletter.",
+    "importLibraryOverwriteConfirm": "Det här biblioteket kommer att ersätta {{count}} sparade palettposter. Fortsätta?",
+    "importLibraryReadFailed": "Vi kunde inte läsa den filen. Försök igen.",
+    "importLibraryCanceled": "Import avbruten."
   },
   "home": {
     "seoTitle": "Bild till pixelkonst-omvandlare | Pixel Art Village",

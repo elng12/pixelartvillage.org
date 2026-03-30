@@ -17,7 +17,16 @@ import {
   parsePaletteImportInput,
   normalizeHexColor,
 } from '../../src/utils/palette-import.js'
-import { clearCustomPalettes, loadCustomPalettes, renameCustomPalette, saveCustomPalettes } from '../../src/utils/palette-storage.js'
+import {
+  buildCustomPaletteLibraryFilename,
+  clearCustomPalettes,
+  importCustomPaletteLibrary,
+  loadCustomPalettes,
+  parseCustomPaletteLibrary,
+  renameCustomPalette,
+  saveCustomPalettes,
+  serializeCustomPaletteLibrary,
+} from '../../src/utils/palette-storage.js'
 
 const tests = []
 let failed = 0
@@ -129,6 +138,40 @@ test('renameCustomPalette renames a saved palette and keeps colors', () => {
   clearCustomPalettes()
 })
 
+test('custom palette libraries round-trip through export and import helpers', () => {
+  saveCustomPalettes([{ name: 'Evening Mix', colors: ['#112233', '#445566'] }])
+  const serialized = serializeCustomPaletteLibrary()
+  const parsed = parseCustomPaletteLibrary(serialized)
+
+  assert.deepStrictEqual(parsed, [{ name: 'Evening Mix', colors: ['#112233', '#445566'] }])
+  assert.strictEqual(buildCustomPaletteLibraryFilename(new Date('2026-03-30T00:00:00Z')), 'pixel-art-village-palettes-2026-03-30.json')
+  clearCustomPalettes()
+})
+
+test('importCustomPaletteLibrary asks for confirmation before replacing existing names', () => {
+  saveCustomPalettes([{ name: 'Evening Mix', colors: ['#112233'] }])
+  const library = JSON.stringify({
+    palettes: [
+      { name: 'Evening Mix', colors: ['#445566'] },
+      { name: 'Sunset Mix', colors: ['#778899'] },
+    ],
+  })
+
+  const pending = importCustomPaletteLibrary(library)
+  assert.strictEqual(pending.needsConfirmation, true)
+  assert.deepStrictEqual(pending.collisions, ['Evening Mix'])
+  assert.deepStrictEqual(loadCustomPalettes(), [{ name: 'Evening Mix', colors: ['#112233'] }])
+
+  const imported = importCustomPaletteLibrary(library, { replaceExisting: true })
+  assert.strictEqual(imported.needsConfirmation, false)
+  assert.strictEqual(imported.replacedCount, 1)
+  assert.deepStrictEqual(loadCustomPalettes(), [
+    { name: 'Evening Mix', colors: ['#445566'] },
+    { name: 'Sunset Mix', colors: ['#778899'] },
+  ])
+  clearCustomPalettes()
+})
+
 test('palette import locale keys exist in every shipped locale', () => {
   const requiredKeys = [
     'importSuccess',
@@ -158,6 +201,17 @@ test('palette import locale keys exist in every shipped locale', () => {
     'overwriteConfirm',
     'renameSelected',
     'renameHint',
+    'exportLibrary',
+    'exportLibrarySuccess',
+    'exportLibraryFailed',
+    'importLibrary',
+    'importLibrarySuccess',
+    'importLibrarySuccessReplaced',
+    'importLibraryInvalid',
+    'importLibraryEmpty',
+    'importLibraryOverwriteConfirm',
+    'importLibraryReadFailed',
+    'importLibraryCanceled',
   ]
   assertLocaleStrings('paletteManager', requiredKeys)
 })

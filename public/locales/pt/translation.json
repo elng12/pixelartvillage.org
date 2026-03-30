@@ -616,7 +616,18 @@
     "clearAllConfirm": "Excluir todas as {{count}} paletas personalizadas? As paletas integradas serão mantidas.",
     "overwriteConfirm": "Já existe uma paleta personalizada chamada \"{{name}}\". Deseja substituí-la?",
     "renameSelected": "Renomear a paleta selecionada",
-    "renameHint": "Paleta personalizada selecionada: {{name}}"
+    "renameHint": "Paleta personalizada selecionada: {{name}}",
+    "exportLibrary": "Exportar biblioteca",
+    "exportLibrarySuccess": "Sua biblioteca de paletas personalizadas foi baixada.",
+    "exportLibraryFailed": "Não foi possível baixar essa biblioteca de paletas agora.",
+    "importLibrary": "Importar biblioteca",
+    "importLibrarySuccess": "{{count}} paletas personalizadas importadas.",
+    "importLibrarySuccessReplaced": "{{count}} paletas personalizadas importadas. {{replaced}} entradas salvas existentes substituídas.",
+    "importLibraryInvalid": "Este arquivo não é uma biblioteca de paletas válida do Pixel Art Village.",
+    "importLibraryEmpty": "Este arquivo não contém paletas personalizadas.",
+    "importLibraryOverwriteConfirm": "Esta biblioteca substituirá {{count}} entradas de paleta salvas. Continuar?",
+    "importLibraryReadFailed": "Não foi possível ler esse arquivo. Tente novamente.",
+    "importLibraryCanceled": "Importação cancelada."
   },
   "home": {
     "seoTitle": "Conversor de Imagem para Arte em Pixel | Pixel Art Village",

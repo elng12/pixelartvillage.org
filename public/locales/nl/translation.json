@@ -553,7 +553,18 @@
     "clearAllConfirm": "Alle {{count}} aangepaste paletten verwijderen? De ingebouwde paletten blijven behouden.",
     "overwriteConfirm": "Er bestaat al een aangepaste palet met de naam \"{{name}}\". Vervangen?",
     "renameSelected": "Geselecteerde palet hernoemen",
-    "renameHint": "Geselecteerde aangepaste palet: {{name}}"
+    "renameHint": "Geselecteerde aangepaste palet: {{name}}",
+    "exportLibrary": "Bibliotheek exporteren",
+    "exportLibrarySuccess": "Je aangepaste palettenbibliotheek is gedownload.",
+    "exportLibraryFailed": "We konden die palettenbibliotheek nu niet downloaden.",
+    "importLibrary": "Bibliotheek importeren",
+    "importLibrarySuccess": "{{count}} aangepaste paletten geïmporteerd.",
+    "importLibrarySuccessReplaced": "{{count}} aangepaste paletten geïmporteerd. {{replaced}} bestaande opgeslagen items vervangen.",
+    "importLibraryInvalid": "Dit bestand is geen geldige Pixel Art Village-palettenbibliotheek.",
+    "importLibraryEmpty": "Dit bestand bevat geen aangepaste paletten.",
+    "importLibraryOverwriteConfirm": "Deze bibliotheek vervangt {{count}} opgeslagen paletitems. Doorgaan?",
+    "importLibraryReadFailed": "We konden dat bestand niet lezen. Probeer het opnieuw.",
+    "importLibraryCanceled": "Import geannuleerd."
   },
   "home": {
     "seoTitle": "Afbeelding naar Pixelart Converter | Pixel Art Village",

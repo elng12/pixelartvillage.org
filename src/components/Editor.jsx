@@ -9,6 +9,7 @@ import ExportPanel from './editor/ExportPanel';
 import PaletteManager from './editor/PaletteManager';
 import Adjustments from './editor/Adjustments';
 import { usePaletteStorage } from '../hooks/usePaletteStorage';
+import { buildCustomPaletteLibraryFilename } from '../utils/constants';
 import { clampZoom, snapZoom } from '../utils/zoom-utils';
 
 function Editor({ image }) {
@@ -53,7 +54,15 @@ function Editor({ image }) {
   const previewRef = useRef(null);
   const fileInputRef = useRef(null);
   const manualZoomRef = useRef(false)
-  const { palettes: customPalettes, upsertPalette, deletePalette, clearAllPalettes, renamePalette } = usePaletteStorage();
+  const {
+    palettes: customPalettes,
+    upsertPalette,
+    deletePalette,
+    clearAllPalettes,
+    renamePalette,
+    exportPaletteLibrary,
+    importPaletteLibrary,
+  } = usePaletteStorage();
 
   // 限制最大文件大小（MB）
   const MAX_FILE_MB = 10;
@@ -68,7 +77,8 @@ function Editor({ image }) {
     autoPalette: state.autoPalette,
     paletteSize: state.paletteSize,
     colorDistance: state.colorDistance,
-  }), [state.pixelSize, state.brightness, state.contrast, state.saturation, state.palette, state.dither, state.autoPalette, state.paletteSize, state.colorDistance]);
+    paletteFingerprint: JSON.stringify(customPalettes),
+  }), [state.pixelSize, state.brightness, state.contrast, state.saturation, state.palette, state.dither, state.autoPalette, state.paletteSize, state.colorDistance, customPalettes]);
 
   const { processedImage, isProcessing } = useImageProcessor(state.readySrc, imageSettings);
   const canDownload = Boolean(processedImage);
@@ -248,6 +258,11 @@ function Editor({ image }) {
     setTimeout(() => URL.revokeObjectURL(url), 0);
   };
 
+  const handleExportPaletteLibrary = useCallback(() => ({
+    fileName: buildCustomPaletteLibraryFilename(),
+    json: exportPaletteLibrary(),
+  }), [exportPaletteLibrary])
+
   if (!image && !IS_E2E) return null;
 
   const layout = state.compact ? LAYOUT_TOKENS.compact : LAYOUT_TOKENS.normal;
@@ -346,6 +361,8 @@ function Editor({ image }) {
                 onDeletePalette={deletePalette}
                 onRenamePalette={handleRenamePalette}
                 onClearAllPalettes={handleClearAllPalettes}
+                onExportPaletteLibrary={handleExportPaletteLibrary}
+                onImportPaletteLibrary={importPaletteLibrary}
                 customPalettes={customPalettes}
                 activePaletteName={state.palette}
                 onApplyPalette={(paletteName) => dispatch({type:'SET', field:'palette', value:paletteName})}

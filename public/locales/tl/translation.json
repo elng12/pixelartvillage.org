@@ -553,7 +553,18 @@
     "clearAllConfirm": "Burahin ang lahat ng {{count}} custom palette? Mananatili ang mga built-in palette.",
     "overwriteConfirm": "May custom palette nang pangalang \"{{name}}\" na. Palitan ito?",
     "renameSelected": "Palitan ang pangalan ng napiling palette",
-    "renameHint": "Napiling custom palette: {{name}}"
+    "renameHint": "Napiling custom palette: {{name}}",
+    "exportLibrary": "I-export ang library",
+    "exportLibrarySuccess": "Na-download ang iyong custom palette library.",
+    "exportLibraryFailed": "Hindi namin ma-download ang palette library na iyon ngayon.",
+    "importLibrary": "I-import ang library",
+    "importLibrarySuccess": "Na-import ang {{count}} custom palettes.",
+    "importLibrarySuccessReplaced": "Na-import ang {{count}} custom palettes. Napalitan ang {{replaced}} umiiral na naka-save na entry.",
+    "importLibraryInvalid": "Hindi valid na Pixel Art Village palette library ang file na ito.",
+    "importLibraryEmpty": "Walang custom palette sa file na ito.",
+    "importLibraryOverwriteConfirm": "Papalitan ng library na ito ang {{count}} naka-save na palette entry. Magpatuloy?",
+    "importLibraryReadFailed": "Hindi namin mabasa ang file na iyon. Pakisubukang muli.",
+    "importLibraryCanceled": "Kinansela ang pag-import."
   },
   "home": {
     "seoTitle": "Larawan sa Pixel Art Converter | Pixel Art Village",

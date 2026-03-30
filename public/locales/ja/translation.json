@@ -616,7 +616,18 @@
     "clearAllConfirm": "{{count}} 個のカスタムパレットをすべて削除しますか？内蔵パレットは残ります。",
     "overwriteConfirm": "「{{name}}」というカスタムパレットはすでにあります。置き換えますか？",
     "renameSelected": "選択中のパレット名を変更",
-    "renameHint": "選択中のカスタムパレット: {{name}}"
+    "renameHint": "選択中のカスタムパレット: {{name}}",
+    "exportLibrary": "ライブラリを書き出す",
+    "exportLibrarySuccess": "カスタムパレットのライブラリをダウンロードしました。",
+    "exportLibraryFailed": "このパレットライブラリは今はダウンロードできませんでした。",
+    "importLibrary": "ライブラリを読み込む",
+    "importLibrarySuccess": "カスタムパレットを{{count}}件読み込みました。",
+    "importLibrarySuccessReplaced": "カスタムパレットを{{count}}件読み込みました。既存の保存項目を{{replaced}}件置き換えました。",
+    "importLibraryInvalid": "このファイルは有効な Pixel Art Village のパレットライブラリではありません。",
+    "importLibraryEmpty": "このファイルにはカスタムパレットが含まれていません。",
+    "importLibraryOverwriteConfirm": "このライブラリを読み込むと保存済みパレット項目を{{count}}件置き換えます。続行しますか？",
+    "importLibraryReadFailed": "このファイルを読み取れませんでした。もう一度お試しください。",
+    "importLibraryCanceled": "読み込みをキャンセルしました。"
   },
   "home": {
     "seoTitle": "画像をピクセルアートに変換 | Pixel Art Village",

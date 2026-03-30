@@ -553,7 +553,18 @@
     "clearAllConfirm": "Hapus semua {{count}} palet kustom? Palet bawaan akan tetap ada.",
     "overwriteConfirm": "Palet kustom bernama \"{{name}}\" sudah ada. Ganti?",
     "renameSelected": "Ganti nama palet yang dipilih",
-    "renameHint": "Palet kustom yang dipilih: {{name}}"
+    "renameHint": "Palet kustom yang dipilih: {{name}}",
+    "exportLibrary": "Ekspor pustaka",
+    "exportLibrarySuccess": "Pustaka palet kustom Anda sudah diunduh.",
+    "exportLibraryFailed": "Kami tidak dapat mengunduh pustaka palet itu sekarang.",
+    "importLibrary": "Impor pustaka",
+    "importLibrarySuccess": "{{count}} palet kustom diimpor.",
+    "importLibrarySuccessReplaced": "{{count}} palet kustom diimpor. {{replaced}} entri tersimpan yang ada diganti.",
+    "importLibraryInvalid": "Berkas ini bukan pustaka palet Pixel Art Village yang valid.",
+    "importLibraryEmpty": "Berkas ini tidak berisi palet kustom apa pun.",
+    "importLibraryOverwriteConfirm": "Pustaka ini akan mengganti {{count}} entri palet tersimpan. Lanjutkan?",
+    "importLibraryReadFailed": "Kami tidak dapat membaca berkas itu. Silakan coba lagi.",
+    "importLibraryCanceled": "Impor dibatalkan."
   },
   "home": {
     "seoTitle": "Konverter Gambar ke Pixel Art | Pixel Art Village",

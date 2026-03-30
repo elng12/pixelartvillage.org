@@ -553,7 +553,18 @@
     "clearAllConfirm": "هل تريد حذف كل اللوحات المخصصة وعددها {{count}}؟ ستبقى اللوحات المدمجة كما هي.",
     "overwriteConfirm": "توجد لوحة مخصصة باسم \"{{name}}\" بالفعل. هل تريد استبدالها؟",
     "renameSelected": "إعادة تسمية اللوحة المحددة",
-    "renameHint": "اللوحة المخصصة المحددة: {{name}}"
+    "renameHint": "اللوحة المخصصة المحددة: {{name}}",
+    "exportLibrary": "تصدير المكتبة",
+    "exportLibrarySuccess": "تم تنزيل مكتبة لوحاتك المخصصة.",
+    "exportLibraryFailed": "تعذر تنزيل مكتبة اللوحات هذه الآن.",
+    "importLibrary": "استيراد مكتبة",
+    "importLibrarySuccess": "تم استيراد {{count}} لوحة مخصصة.",
+    "importLibrarySuccessReplaced": "تم استيراد {{count}} لوحة مخصصة. وتم استبدال {{replaced}} من الإدخالات المحفوظة الحالية.",
+    "importLibraryInvalid": "هذا الملف ليس مكتبة لوحات صالحة من Pixel Art Village.",
+    "importLibraryEmpty": "هذا الملف لا يحتوي على أي لوحات مخصصة.",
+    "importLibraryOverwriteConfirm": "ستستبدل هذه المكتبة {{count}} من إدخالات اللوحات المحفوظة. هل تريد المتابعة؟",
+    "importLibraryReadFailed": "تعذر قراءة هذا الملف. حاول مرة أخرى.",
+    "importLibraryCanceled": "تم إلغاء الاستيراد."
   },
   "home": {
     "seoTitle": "محول الصورة إلى فن البيكسل | Pixel Art Village",

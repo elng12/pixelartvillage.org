@@ -564,7 +564,18 @@
     "clearAllConfirm": "[!! Delete all {{count}} custom palettes? Built-in palettes will stay. !!]",
     "overwriteConfirm": "[!! A custom palette named \"{{name}}\" already exists. Replace it? !!]",
     "renameSelected": "[!! Rename selected palette !!]",
-    "renameHint": "[!! Selected custom palette: {{name}} !!]"
+    "renameHint": "[!! Selected custom palette: {{name}} !!]",
+    "exportLibrary": "[Êxþøřţ ļîɓřåřÿ]",
+    "exportLibrarySuccess": "[Ðøŵñļøåđéđ ŷøûř çûšţøm þåļéţţé ļîɓřåřÿ.]",
+    "exportLibraryFailed": "[Ŵé çøûļđ ñøţ đøŵñļøåđ ţħåţ þåļéţţé ļîɓřåřÿ řîĝħţ ñøŵ.]",
+    "importLibrary": "[Îmþøřţ ļîɓřåřÿ]",
+    "importLibrarySuccess": "[Îmþøřţéđ {{count}} çûšţøm þåļéţţéš.]",
+    "importLibrarySuccessReplaced": "[Îmþøřţéđ {{count}} çûšţøm þåļéţţéš. Řéþļåçéđ {{replaced}} é×îšţîñĝ šåṽéđ éñţřîéš.]",
+    "importLibraryInvalid": "[Ţħîš ƒîļé îš ñøţ å ṽåļîđ Þî×éļ Åřţ Vîļļåĝé þåļéţţé ļîɓřåřÿ.]",
+    "importLibraryEmpty": "[Ţħîš ƒîļé đøéš ñøţ çøñţåîñ åñÿ çûšţøm þåļéţţéš.]",
+    "importLibraryOverwriteConfirm": "[Ţħîš ļîɓřåřÿ ŵøûļđ řéþļåçé {{count}} šåṽéđ þåļéţţé éñţřîéš. Çøñţîñûé?]",
+    "importLibraryReadFailed": "[Ŵé çøûļđ ñøţ řéåđ ţħåţ ƒîļé. Þļéåšé ţřÿ åĝåîñ.]",
+    "importLibraryCanceled": "[Îmþøřţ çåñçéļéđ.]"
   },
   "preview": {
     "alt": "Pixel art preview",

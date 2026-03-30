@@ -2,15 +2,27 @@ import React, { useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import LospecPalettePicker from '../LospecPalettePicker'
 
-function PaletteManager({ onSavePalette, onDeletePalette, onRenamePalette, onClearAllPalettes, onApplyPalette, customPalettes = [], activePaletteName = 'none' }) {
+function PaletteManager({
+  onSavePalette,
+  onDeletePalette,
+  onRenamePalette,
+  onClearAllPalettes,
+  onExportPaletteLibrary,
+  onImportPaletteLibrary,
+  onApplyPalette,
+  customPalettes = [],
+  activePaletteName = 'none',
+}) {
   const { t } = useTranslation()
   const [paletteName, setPaletteName] = useState('')
   const [colors, setColors] = useState([])
   const [colorInput, setColorInput] = useState('#000000')
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const [activeTab, setActiveTab] = useState('create') // 'create' | 'lospec'
+  const [libraryNotice, setLibraryNotice] = useState(null)
   const tabOrder = ['create', 'lospec']
   const tabRefs = useRef({})
+  const importFileRef = useRef(null)
   const customPaletteCount = customPalettes.length
   const clearAllLabel = t('paletteManager.clearAll', { defaultValue: 'Clear all custom palettes' })
   const renameSelectedLabel = t('paletteManager.renameSelected', { defaultValue: 'Rename selected palette' })
@@ -25,6 +37,7 @@ function PaletteManager({ onSavePalette, onDeletePalette, onRenamePalette, onCle
 
   const tabId = (tab) => `palette-tab-${tab}`
   const panelId = (tab) => `palette-panel-${tab}`
+  const setLibraryFeedback = (tone, message) => setLibraryNotice(message ? { tone, message } : null)
 
   const confirmOverwrite = (name, ignoreName = '') => {
     const targetName = String(name || '').trim()
@@ -96,6 +109,93 @@ function PaletteManager({ onSavePalette, onDeletePalette, onRenamePalette, onCle
     if (typeof window !== 'undefined' && !window.confirm(message)) return
     onClearAllPalettes?.()
     handleResetForm()
+  }
+
+  const handleExportLibrary = () => {
+    if (customPaletteCount <= 0) return
+    try {
+      const payload = onExportPaletteLibrary?.()
+      if (!payload?.json) {
+        throw new Error('PALETTE_LIBRARY_EXPORT_FAILED')
+      }
+      const blob = new Blob([payload.json], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = payload.fileName || 'pixel-art-village-palettes.json'
+      link.style.display = 'none'
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      setTimeout(() => URL.revokeObjectURL(url), 0)
+      setLibraryFeedback('success', t('paletteManager.exportLibrarySuccess', {
+        defaultValue: 'Downloaded your custom palette library.',
+      }))
+    } catch {
+      setLibraryFeedback('error', t('paletteManager.exportLibraryFailed', {
+        defaultValue: 'We could not download that palette library right now.',
+      }))
+    }
+  }
+
+  const handleImportLibraryClick = () => {
+    importFileRef.current?.click()
+  }
+
+  const handleImportLibraryChange = async (event) => {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+
+    try {
+      const rawText = await file.text()
+      let result = onImportPaletteLibrary?.(rawText)
+      if (!result) return
+
+      if (result.needsConfirmation) {
+        const message = t('paletteManager.importLibraryOverwriteConfirm', {
+          count: result.collisions.length,
+          defaultValue: 'This library would replace {{count}} saved palette entries. Continue?',
+        })
+        if (typeof window !== 'undefined' && !window.confirm(message)) {
+          setLibraryFeedback('info', t('paletteManager.importLibraryCanceled', {
+            defaultValue: 'Import canceled.',
+          }))
+          return
+        }
+        result = onImportPaletteLibrary?.(rawText, { replaceExisting: true })
+        if (!result) return
+      }
+
+      const message = result.replacedCount > 0
+        ? t('paletteManager.importLibrarySuccessReplaced', {
+          count: result.importedCount,
+          replaced: result.replacedCount,
+          defaultValue: 'Imported {{count}} custom palettes. Replaced {{replaced}} existing saved entries.',
+        })
+        : t('paletteManager.importLibrarySuccess', {
+          count: result.importedCount,
+          defaultValue: 'Imported {{count}} custom palettes.',
+        })
+      setLibraryFeedback('success', message)
+    } catch (error) {
+      const errorCode = error?.code
+      if (errorCode === 'PALETTE_LIBRARY_EMPTY') {
+        setLibraryFeedback('error', t('paletteManager.importLibraryEmpty', {
+          defaultValue: 'This file does not contain any custom palettes.',
+        }))
+        return
+      }
+      if (errorCode === 'PALETTE_LIBRARY_INVALID_JSON' || errorCode === 'PALETTE_LIBRARY_INVALID_FORMAT') {
+        setLibraryFeedback('error', t('paletteManager.importLibraryInvalid', {
+          defaultValue: 'This file is not a valid Pixel Art Village palette library.',
+        }))
+        return
+      }
+      setLibraryFeedback('error', t('paletteManager.importLibraryReadFailed', {
+        defaultValue: 'We could not read that file. Please try again.',
+      }))
+    }
   }
 
   const handleAddColor = () => {
@@ -261,7 +361,48 @@ function PaletteManager({ onSavePalette, onDeletePalette, onRenamePalette, onCle
                 {clearAllLabel}
               </button>
             ) : null}
+            {customPaletteCount > 0 ? (
+              <button
+                type="button"
+                data-testid="palette-export-library"
+                className="btn-secondary"
+                onClick={handleExportLibrary}
+              >
+                {t('paletteManager.exportLibrary', { defaultValue: 'Export library' })}
+              </button>
+            ) : null}
+            <button
+              type="button"
+              data-testid="palette-import-library"
+              className="btn-secondary"
+              onClick={handleImportLibraryClick}
+            >
+              {t('paletteManager.importLibrary', { defaultValue: 'Import library' })}
+            </button>
+            <input
+              ref={importFileRef}
+              data-testid="palette-import-file"
+              type="file"
+              accept=".json,application/json"
+              className="hidden"
+              onChange={handleImportLibraryChange}
+            />
           </div>
+          {libraryNotice ? (
+            <p
+              className={`mt-3 text-sm ${
+                libraryNotice.tone === 'error'
+                  ? 'text-red-700'
+                  : libraryNotice.tone === 'success'
+                    ? 'text-green-700'
+                    : 'text-gray-600'
+              }`}
+              role="status"
+              aria-live="polite"
+            >
+              {libraryNotice.message}
+            </p>
+          ) : null}
         </div>
       )}
 

@@ -564,7 +564,18 @@
     "clearAllConfirm": "Usunąć wszystkie własne palety ({{count}})? Wbudowane palety pozostaną bez zmian.",
     "overwriteConfirm": "Paleta niestandardowa o nazwie „{{name}}” już istnieje. Zastąpić ją?",
     "renameSelected": "Zmień nazwę wybranej palety",
-    "renameHint": "Wybrana paleta niestandardowa: {{name}}"
+    "renameHint": "Wybrana paleta niestandardowa: {{name}}",
+    "exportLibrary": "Eksportuj bibliotekę",
+    "exportLibrarySuccess": "Pobrano Twoją bibliotekę niestandardowych palet.",
+    "exportLibraryFailed": "Nie udało się teraz pobrać tej biblioteki palet.",
+    "importLibrary": "Importuj bibliotekę",
+    "importLibrarySuccess": "Zaimportowano {{count}} niestandardowych palet.",
+    "importLibrarySuccessReplaced": "Zaimportowano {{count}} niestandardowych palet. Zastąpiono {{replaced}} istniejących zapisanych wpisów.",
+    "importLibraryInvalid": "Ten plik nie jest prawidłową biblioteką palet Pixel Art Village.",
+    "importLibraryEmpty": "Ten plik nie zawiera żadnych niestandardowych palet.",
+    "importLibraryOverwriteConfirm": "Ta biblioteka zastąpi {{count}} zapisanych wpisów palet. Kontynuować?",
+    "importLibraryReadFailed": "Nie udało się odczytać tego pliku. Spróbuj ponownie.",
+    "importLibraryCanceled": "Import anulowano."
   },
   "preview": {
     "alt": "Pixel art preview",

@@ -1,5 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
-import { clearCustomPalettes, loadCustomPalettes, renameCustomPalette, saveCustomPalettes } from '../utils/constants'
+import {
+  clearCustomPalettes,
+  importCustomPaletteLibrary,
+  loadCustomPalettes,
+  renameCustomPalette,
+  saveCustomPalettes,
+  serializeCustomPaletteLibrary,
+} from '../utils/constants'
 
 // 统一封装调色板的持久化访问，屏蔽具体存储实现（当前为 localStorage）
 export function usePaletteStorage() {
@@ -45,5 +52,22 @@ export function usePaletteStorage() {
     return true
   }, [])
 
-  return { palettes, upsertPalette, deletePalette, clearAllPalettes, renamePalette, reload }
+  const exportPaletteLibrary = useCallback(() => serializeCustomPaletteLibrary(loadCustomPalettes()), [])
+
+  const importPaletteLibrary = useCallback((rawText, options = {}) => {
+    const result = importCustomPaletteLibrary(rawText, options)
+    setPalettes(result.palettes)
+    return result
+  }, [])
+
+  return {
+    palettes,
+    upsertPalette,
+    deletePalette,
+    clearAllPalettes,
+    renamePalette,
+    exportPaletteLibrary,
+    importPaletteLibrary,
+    reload,
+  }
 }
