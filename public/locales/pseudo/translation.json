@@ -561,7 +561,10 @@
     "curatedHeading": "Curated Lospec picks",
     "pixilartHint": "Tip: Lospec URLs import directly. PixilArt often blocks automated page access, so copy the hex list from the page if the URL itself does not import.",
     "clearAll": "[!! Clear all custom palettes !!]",
-    "clearAllConfirm": "[!! Delete all {{count}} custom palettes? Built-in palettes will stay. !!]"
+    "clearAllConfirm": "[!! Delete all {{count}} custom palettes? Built-in palettes will stay. !!]",
+    "overwriteConfirm": "[!! A custom palette named \"{{name}}\" already exists. Replace it? !!]",
+    "renameSelected": "[!! Rename selected palette !!]",
+    "renameHint": "[!! Selected custom palette: {{name}} !!]"
   },
   "preview": {
     "alt": "Pixel art preview",

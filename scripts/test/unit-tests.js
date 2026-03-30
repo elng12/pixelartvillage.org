@@ -16,7 +16,7 @@ import {
   parsePaletteImportInput,
   normalizeHexColor,
 } from '../../src/utils/palette-import.js'
-import { clearCustomPalettes, loadCustomPalettes, saveCustomPalettes } from '../../src/utils/palette-storage.js'
+import { clearCustomPalettes, loadCustomPalettes, renameCustomPalette, saveCustomPalettes } from '../../src/utils/palette-storage.js'
 
 const tests = []
 let failed = 0
@@ -120,6 +120,14 @@ test('clearCustomPalettes removes saved palettes', () => {
   assert.deepStrictEqual(loadCustomPalettes(), [])
 })
 
+test('renameCustomPalette renames a saved palette and keeps colors', () => {
+  saveCustomPalettes([{ name: 'Evening Mix', colors: ['#112233', '#445566'] }])
+  const next = renameCustomPalette('Evening Mix', 'Sunset Mix')
+  assert.deepStrictEqual(next, [{ name: 'Sunset Mix', colors: ['#112233', '#445566'] }])
+  assert.deepStrictEqual(loadCustomPalettes(), [{ name: 'Sunset Mix', colors: ['#112233', '#445566'] }])
+  clearCustomPalettes()
+})
+
 test('palette import locale keys exist in every shipped locale', () => {
   const requiredKeys = [
     'importSuccess',
@@ -146,6 +154,9 @@ test('palette import locale keys exist in every shipped locale', () => {
     'importSuccessGeneric',
     'clearAll',
     'clearAllConfirm',
+    'overwriteConfirm',
+    'renameSelected',
+    'renameHint',
   ]
   assertLocaleStrings('paletteManager', requiredKeys)
 })

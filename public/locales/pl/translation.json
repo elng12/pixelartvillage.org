@@ -561,7 +561,10 @@
     "pixilartHint": "Wskazówka: adresy URL Lospec importują się bezpośrednio. PixilArt często blokuje automatyczny dostęp, więc skopiuj listę hex ze strony, jeśli sam URL się nie importuje.",
     "importSuccessGeneric": "Paleta została zaimportowana.",
     "clearAll": "Wyczyść wszystkie własne palety",
-    "clearAllConfirm": "Usunąć wszystkie własne palety ({{count}})? Wbudowane palety pozostaną bez zmian."
+    "clearAllConfirm": "Usunąć wszystkie własne palety ({{count}})? Wbudowane palety pozostaną bez zmian.",
+    "overwriteConfirm": "Paleta niestandardowa o nazwie „{{name}}” już istnieje. Zastąpić ją?",
+    "renameSelected": "Zmień nazwę wybranej palety",
+    "renameHint": "Wybrana paleta niestandardowa: {{name}}"
   },
   "preview": {
     "alt": "Pixel art preview",

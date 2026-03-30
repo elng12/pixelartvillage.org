@@ -550,7 +550,10 @@
     "pixilartHint": "Tips: URL Lospec bisa diimpor langsung. PixilArt sering memblokir akses otomatis, jadi salin daftar heksadesimal dari halamannya jika URL tidak bisa diimpor.",
     "importSuccessGeneric": "Palet berhasil diimpor.",
     "clearAll": "Hapus semua palet kustom",
-    "clearAllConfirm": "Hapus semua {{count}} palet kustom? Palet bawaan akan tetap ada."
+    "clearAllConfirm": "Hapus semua {{count}} palet kustom? Palet bawaan akan tetap ada.",
+    "overwriteConfirm": "Palet kustom bernama \"{{name}}\" sudah ada. Ganti?",
+    "renameSelected": "Ganti nama palet yang dipilih",
+    "renameHint": "Palet kustom yang dipilih: {{name}}"
   },
   "home": {
     "seoTitle": "Konverter Gambar ke Pixel Art | Pixel Art Village",

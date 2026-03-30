@@ -550,7 +550,10 @@
     "pixilartHint": "Tip: Lospec-URL’s importeren direct. PixilArt blokkeert vaak geautomatiseerde toegang, dus kopieer de hexlijst van de pagina als de URL zelf niet importeert.",
     "importSuccessGeneric": "Palet geïmporteerd.",
     "clearAll": "Alle aangepaste paletten wissen",
-    "clearAllConfirm": "Alle {{count}} aangepaste paletten verwijderen? De ingebouwde paletten blijven behouden."
+    "clearAllConfirm": "Alle {{count}} aangepaste paletten verwijderen? De ingebouwde paletten blijven behouden.",
+    "overwriteConfirm": "Er bestaat al een aangepaste palet met de naam \"{{name}}\". Vervangen?",
+    "renameSelected": "Geselecteerde palet hernoemen",
+    "renameHint": "Geselecteerde aangepaste palet: {{name}}"
   },
   "home": {
     "seoTitle": "Afbeelding naar Pixelart Converter | Pixel Art Village",

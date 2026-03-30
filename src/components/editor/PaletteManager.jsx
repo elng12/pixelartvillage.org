@@ -2,7 +2,7 @@ import React, { useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import LospecPalettePicker from '../LospecPalettePicker'
 
-function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, onApplyPalette, customPalettes = [] }) {
+function PaletteManager({ onSavePalette, onDeletePalette, onRenamePalette, onClearAllPalettes, onApplyPalette, customPalettes = [], activePaletteName = 'none' }) {
   const { t } = useTranslation()
   const [paletteName, setPaletteName] = useState('')
   const [colors, setColors] = useState([])
@@ -13,18 +13,23 @@ function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, on
   const tabRefs = useRef({})
   const customPaletteCount = customPalettes.length
   const clearAllLabel = t('paletteManager.clearAll', { defaultValue: 'Clear all custom palettes' })
+  const renameSelectedLabel = t('paletteManager.renameSelected', { defaultValue: 'Rename selected palette' })
   const importedSourceLabels = useMemo(() => ({
     lospec: 'Lospec',
     pixilart: 'PixilArt',
   }), [])
+  const activeCustomPalette = useMemo(
+    () => customPalettes.find((palette) => palette?.name === activePaletteName) || null,
+    [activePaletteName, customPalettes],
+  )
 
   const tabId = (tab) => `palette-tab-${tab}`
   const panelId = (tab) => `palette-panel-${tab}`
 
-  const confirmOverwrite = (name) => {
+  const confirmOverwrite = (name, ignoreName = '') => {
     const targetName = String(name || '').trim()
     if (!targetName) return false
-    const alreadyExists = customPalettes.some((palette) => palette?.name === targetName)
+    const alreadyExists = customPalettes.some((palette) => palette?.name === targetName && palette?.name !== ignoreName)
     if (!alreadyExists) return true
     const message = t('paletteManager.overwriteConfirm', {
       name: targetName,
@@ -73,6 +78,13 @@ function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, on
     const name = paletteName.trim()
     if (!name) return
     onDeletePalette?.(name)
+  }
+
+  const handleRenamePalette = () => {
+    const nextName = paletteName.trim()
+    if (!activeCustomPalette || !nextName || nextName === activeCustomPalette.name) return
+    if (!confirmOverwrite(nextName, activeCustomPalette.name)) return
+    onRenamePalette?.(activeCustomPalette.name, nextName)
   }
 
   const handleClearAllPalettes = () => {
@@ -174,6 +186,14 @@ function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, on
             onChange={(event) => setPaletteName(event.target.value)}
             placeholder={t('paletteManager.namePlaceholder')}
           />
+          {activeCustomPalette ? (
+            <p className="mb-3 text-xs text-gray-500">
+              {t('paletteManager.renameHint', {
+                name: activeCustomPalette.name,
+                defaultValue: 'Selected custom palette: {{name}}',
+              })}
+            </p>
+          ) : null}
 
           <p className="mb-1 block text-sm font-medium" id="palette-colors-label">
             {t('paletteManager.colorsLabel')}
@@ -214,6 +234,17 @@ function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, on
             <button type="button" className="btn-primary" onClick={handleSavePalette}>
               {t('paletteManager.save')}
             </button>
+            {activeCustomPalette ? (
+              <button
+                type="button"
+                data-testid="palette-rename"
+                className="btn-secondary"
+                disabled={!paletteName.trim() || paletteName.trim() === activeCustomPalette.name}
+                onClick={handleRenamePalette}
+              >
+                {renameSelectedLabel}
+              </button>
+            ) : null}
             <button type="button" className="btn-secondary" onClick={handleResetForm}>
               {t('paletteManager.reset')}
             </button>

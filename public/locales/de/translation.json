@@ -613,7 +613,10 @@
     "pixilartHint": "Tipp: Lospec-URLs lassen sich direkt importieren. PixilArt blockiert oft automatischen Zugriff, kopiere daher die Hex-Liste von der Seite, wenn die URL selbst nicht importiert wird.",
     "importSuccessGeneric": "Palette importiert.",
     "clearAll": "Alle benutzerdefinierten Paletten löschen",
-    "clearAllConfirm": "Alle {{count}} benutzerdefinierten Paletten löschen? Die integrierten Paletten bleiben erhalten."
+    "clearAllConfirm": "Alle {{count}} benutzerdefinierten Paletten löschen? Die integrierten Paletten bleiben erhalten.",
+    "overwriteConfirm": "Eine benutzerdefinierte Palette mit dem Namen \"{{name}}\" existiert bereits. Ersetzen?",
+    "renameSelected": "Ausgewählte Palette umbenennen",
+    "renameHint": "Ausgewählte benutzerdefinierte Palette: {{name}}"
   },
   "home": {
     "seoTitle": "Bild zu Pixel Art Konverter | Pixel Art Village",

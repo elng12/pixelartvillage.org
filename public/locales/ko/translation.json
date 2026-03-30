@@ -550,7 +550,10 @@
     "pixilartHint": "팁: Lospec URL은 바로 가져올 수 있습니다. PixilArt는 자동 접근을 자주 차단하므로 URL로 가져오지 못하면 페이지에서 hex 목록을 복사하세요.",
     "importSuccessGeneric": "팔레트를 가져왔습니다.",
     "clearAll": "사용자 지정 팔레트 모두 지우기",
-    "clearAllConfirm": "사용자 지정 팔레트 {{count}}개를 모두 삭제할까요? 기본 제공 팔레트는 그대로 유지됩니다."
+    "clearAllConfirm": "사용자 지정 팔레트 {{count}}개를 모두 삭제할까요? 기본 제공 팔레트는 그대로 유지됩니다.",
+    "overwriteConfirm": "\"{{name}}\"라는 사용자 지정 팔레트가 이미 있습니다. 덮어쓸까요?",
+    "renameSelected": "선택한 팔레트 이름 변경",
+    "renameHint": "현재 선택한 사용자 지정 팔레트: {{name}}"
   },
   "home": {
     "seoTitle": "이미지 픽셀아트 변환기 | Pixel Art Village",

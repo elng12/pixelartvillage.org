@@ -613,7 +613,10 @@
     "pixilartHint": "ヒント: Lospec の URL は直接読み込めます。PixilArt は自動アクセスをブロックすることが多いため、URL で読み込めない場合はページから16進リストをコピーしてください。",
     "importSuccessGeneric": "パレットを読み込みました。",
     "clearAll": "カスタムパレットをすべて削除",
-    "clearAllConfirm": "{{count}} 個のカスタムパレットをすべて削除しますか？内蔵パレットは残ります。"
+    "clearAllConfirm": "{{count}} 個のカスタムパレットをすべて削除しますか？内蔵パレットは残ります。",
+    "overwriteConfirm": "「{{name}}」というカスタムパレットはすでにあります。置き換えますか？",
+    "renameSelected": "選択中のパレット名を変更",
+    "renameHint": "選択中のカスタムパレット: {{name}}"
   },
   "home": {
     "seoTitle": "画像をピクセルアートに変換 | Pixel Art Village",

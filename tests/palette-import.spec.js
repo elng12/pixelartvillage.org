@@ -112,6 +112,32 @@ test('saving a duplicate custom palette asks before replacing it', async ({ page
   ])
 })
 
+test('renaming a selected custom palette updates the library and active selection', async ({ page }) => {
+  await openEditorWithFixture(page)
+
+  await page.locator('#palette-name-input').fill('Evening Mix')
+  await page.locator('#palette-color-input').fill('#112233')
+  await page.getByRole('button', { name: 'Add color', exact: true }).click()
+  await page.getByRole('button', { name: 'Save palette', exact: true }).click()
+
+  await expect.poll(() => getStoredCustomPalettes(page)).toEqual([
+    { name: 'Evening Mix', colors: ['#112233'] },
+  ])
+
+  await page.locator('#palette-select').selectOption('Evening Mix')
+  await expect(page.locator('#palette-select')).toHaveValue('Evening Mix')
+
+  await page.locator('#palette-name-input').fill('Sunset Mix')
+  await page.getByTestId('palette-rename').click()
+
+  await expect.poll(() => getStoredCustomPalettes(page)).toEqual([
+    { name: 'Sunset Mix', colors: ['#112233'] },
+  ])
+  await expect.poll(() => getPaletteOptions(page)).toContain('Sunset Mix')
+  await expect.poll(() => getPaletteOptions(page)).not.toContain('Evening Mix')
+  await expect(page.locator('#palette-select')).toHaveValue('Sunset Mix')
+})
+
 test('clear all custom palettes removes imported palettes and resets the active selection', async ({ page }) => {
   await openEditorWithFixture(page)
 

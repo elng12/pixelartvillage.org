@@ -550,7 +550,10 @@
     "pixilartHint": "Tip: Direktang nai-import ang mga Lospec URL. Madalas i-block ng PixilArt ang automated access, kaya kopyahin ang hex list mula sa page kung hindi ma-import ang URL mismo.",
     "importSuccessGeneric": "Na-import ang palette.",
     "clearAll": "Burahin ang lahat ng custom palette",
-    "clearAllConfirm": "Burahin ang lahat ng {{count}} custom palette? Mananatili ang mga built-in palette."
+    "clearAllConfirm": "Burahin ang lahat ng {{count}} custom palette? Mananatili ang mga built-in palette.",
+    "overwriteConfirm": "May custom palette nang pangalang \"{{name}}\" na. Palitan ito?",
+    "renameSelected": "Palitan ang pangalan ng napiling palette",
+    "renameHint": "Napiling custom palette: {{name}}"
   },
   "home": {
     "seoTitle": "Larawan sa Pixel Art Converter | Pixel Art Village",

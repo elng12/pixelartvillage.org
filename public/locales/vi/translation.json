@@ -550,7 +550,10 @@
     "pixilartHint": "Mẹo: URL Lospec có thể nhập trực tiếp. PixilArt thường chặn truy cập tự động, vì vậy hãy sao chép danh sách hex từ trang nếu URL không nhập được.",
     "importSuccessGeneric": "Đã nhập bảng màu.",
     "clearAll": "Xóa tất cả bảng màu tùy chỉnh",
-    "clearAllConfirm": "Xóa toàn bộ {{count}} bảng màu tùy chỉnh? Các bảng màu có sẵn vẫn sẽ được giữ lại."
+    "clearAllConfirm": "Xóa toàn bộ {{count}} bảng màu tùy chỉnh? Các bảng màu có sẵn vẫn sẽ được giữ lại.",
+    "overwriteConfirm": "Đã có bảng màu tùy chỉnh tên \"{{name}}\". Bạn có muốn thay thế không?",
+    "renameSelected": "Đổi tên bảng màu đã chọn",
+    "renameHint": "Bảng màu tùy chỉnh đang chọn: {{name}}"
   },
   "home": {
     "seoTitle": "Công cụ chuyển đổi hình ảnh thành Pixel Art | Pixel Art Village",

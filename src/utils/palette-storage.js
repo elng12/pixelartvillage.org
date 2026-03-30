@@ -34,6 +34,24 @@ export function clearCustomPalettes() {
   }
 }
 
+export function renameCustomPalette(oldName, nextName) {
+  const fromName = String(oldName || '').trim()
+  const toName = String(nextName || '').trim()
+  if (!fromName || !toName) return null
+
+  const palettes = loadCustomPalettes()
+  const sourceIndex = palettes.findIndex((palette) => palette.name === fromName)
+  if (sourceIndex < 0) return null
+  if (fromName === toName) return palettes
+
+  const sourcePalette = palettes[sourceIndex]
+  const nextPalettes = palettes.filter((_, index) => index !== sourceIndex && palettes[index]?.name !== toName)
+  const insertIndex = Math.min(sourceIndex, nextPalettes.length)
+  nextPalettes.splice(insertIndex, 0, { name: toName, colors: sourcePalette.colors })
+  saveCustomPalettes(nextPalettes)
+  return nextPalettes
+}
+
 export function getCustomPaletteByName(name) {
   const list = loadCustomPalettes()
   const hit = list.find((p) => p.name === name)

@@ -550,7 +550,10 @@
     "pixilartHint": "Tips: Lospec-URL:er importeras direkt. PixilArt blockerar ofta automatiserad åtkomst, så kopiera hexlistan från sidan om URL:en inte går att importera.",
     "importSuccessGeneric": "Paletten importerades.",
     "clearAll": "Rensa alla egna paletter",
-    "clearAllConfirm": "Ta bort alla {{count}} egna paletter? De inbyggda paletterna blir kvar."
+    "clearAllConfirm": "Ta bort alla {{count}} egna paletter? De inbyggda paletterna blir kvar.",
+    "overwriteConfirm": "Det finns redan en egen palett med namnet \"{{name}}\". Ersätta den?",
+    "renameSelected": "Byt namn på vald palett",
+    "renameHint": "Vald egen palett: {{name}}"
   },
   "home": {
     "seoTitle": "Bild till pixelkonst-omvandlare | Pixel Art Village",

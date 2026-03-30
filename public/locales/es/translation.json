@@ -613,7 +613,10 @@
     "pixilartHint": "Consejo: las URL de Lospec se importan directamente. PixilArt suele bloquear el acceso automatizado, así que copia la lista hexadecimal desde la página si la URL no se importa.",
     "importSuccessGeneric": "Paleta importada.",
     "clearAll": "Borrar todas las paletas personalizadas",
-    "clearAllConfirm": "¿Eliminar las {{count}} paletas personalizadas? Las paletas integradas se conservarán."
+    "clearAllConfirm": "¿Eliminar las {{count}} paletas personalizadas? Las paletas integradas se conservarán.",
+    "overwriteConfirm": "Ya existe una paleta personalizada llamada \"{{name}}\". ¿Quieres reemplazarla?",
+    "renameSelected": "Renombrar la paleta seleccionada",
+    "renameHint": "Paleta personalizada seleccionada: {{name}}"
   },
   "home": {
     "seoTitle": "Convertidor de Imagen a Arte Píxel | Pixel Art Village",
