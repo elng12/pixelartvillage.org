@@ -327,7 +327,7 @@ function Editor({ image }) {
                 onSavePalette={upsertPalette} 
                 onDeletePalette={deletePalette}
                 onClearAllPalettes={handleClearAllPalettes}
-                customPaletteCount={customPalettes.length}
+                customPalettes={customPalettes}
                 onApplyPalette={(paletteName) => dispatch({type:'SET', field:'palette', value:paletteName})}
               />
             </div>

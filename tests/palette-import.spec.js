@@ -17,6 +17,10 @@ async function getPaletteOptions(page) {
   )
 }
 
+async function getStoredCustomPalettes(page) {
+  return page.evaluate(() => JSON.parse(window.localStorage.getItem('customPalettes') || '[]'))
+}
+
 function createRedPixelImage() {
   const b64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGMAAQAABQABDQotAAAAAElFTkSuQmCC'
   return Buffer.from(b64, 'base64')
@@ -68,6 +72,44 @@ test('manual palette import falls back to the default name when the custom name 
 
   await expect(page.getByText('Palette imported.')).toBeVisible()
   await expect.poll(() => getPaletteOptions(page)).toContain('Imported Palette')
+})
+
+test('saving a duplicate custom palette asks before replacing it', async ({ page }) => {
+  await openEditorWithFixture(page)
+
+  await page.locator('#palette-name-input').fill('Evening Mix')
+  await page.locator('#palette-color-input').fill('#112233')
+  await page.getByRole('button', { name: 'Add color', exact: true }).click()
+  await page.getByRole('button', { name: 'Save palette', exact: true }).click()
+
+  await expect.poll(() => getStoredCustomPalettes(page)).toEqual([
+    { name: 'Evening Mix', colors: ['#112233'] },
+  ])
+
+  await page.getByRole('button', { name: 'Reset form', exact: true }).click()
+  await page.locator('#palette-name-input').fill('Evening Mix')
+  await page.locator('#palette-color-input').fill('#445566')
+  await page.getByRole('button', { name: 'Add color', exact: true }).click()
+
+  page.once('dialog', async (dialog) => {
+    await expect(dialog.message()).toContain('A custom palette named "Evening Mix" already exists.')
+    await dialog.dismiss()
+  })
+  await page.getByRole('button', { name: 'Save palette', exact: true }).click()
+
+  await expect.poll(() => getStoredCustomPalettes(page)).toEqual([
+    { name: 'Evening Mix', colors: ['#112233'] },
+  ])
+
+  page.once('dialog', async (dialog) => {
+    await expect(dialog.message()).toContain('A custom palette named "Evening Mix" already exists.')
+    await dialog.accept()
+  })
+  await page.getByRole('button', { name: 'Save palette', exact: true }).click()
+
+  await expect.poll(() => getStoredCustomPalettes(page)).toEqual([
+    { name: 'Evening Mix', colors: ['#445566'] },
+  ])
 })
 
 test('clear all custom palettes removes imported palettes and resets the active selection', async ({ page }) => {

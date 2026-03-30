@@ -2,7 +2,7 @@ import React, { useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import LospecPalettePicker from '../LospecPalettePicker'
 
-function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, onApplyPalette, customPaletteCount = 0 }) {
+function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, onApplyPalette, customPalettes = [] }) {
   const { t } = useTranslation()
   const [paletteName, setPaletteName] = useState('')
   const [colors, setColors] = useState([])
@@ -11,6 +11,7 @@ function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, on
   const [activeTab, setActiveTab] = useState('create') // 'create' | 'lospec'
   const tabOrder = ['create', 'lospec']
   const tabRefs = useRef({})
+  const customPaletteCount = customPalettes.length
   const clearAllLabel = t('paletteManager.clearAll', { defaultValue: 'Clear all custom palettes' })
   const importedSourceLabels = useMemo(() => ({
     lospec: 'Lospec',
@@ -19,6 +20,19 @@ function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, on
 
   const tabId = (tab) => `palette-tab-${tab}`
   const panelId = (tab) => `palette-panel-${tab}`
+
+  const confirmOverwrite = (name) => {
+    const targetName = String(name || '').trim()
+    if (!targetName) return false
+    const alreadyExists = customPalettes.some((palette) => palette?.name === targetName)
+    if (!alreadyExists) return true
+    const message = t('paletteManager.overwriteConfirm', {
+      name: targetName,
+      defaultValue: 'A custom palette named "{{name}}" already exists. Replace it?',
+    })
+    if (typeof window === 'undefined') return true
+    return window.confirm(message)
+  }
 
   const handleTabKeyDown = (event) => {
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return
@@ -44,6 +58,7 @@ function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, on
   const handleSavePalette = () => {
     const name = paletteName.trim()
     if (!name || colors.length === 0) return
+    if (!confirmOverwrite(name)) return
     onSavePalette?.(name, colors)
   }
 
@@ -89,11 +104,13 @@ function PaletteManager({ onSavePalette, onDeletePalette, onClearAllPalettes, on
     const baseName = String(paletteInfo.name || t('paletteManager.defaultImportedName')).trim() || t('paletteManager.defaultImportedName')
     const sourceLabel = importedSourceLabels[paletteInfo.source] || ''
     const savedName = sourceLabel ? `${baseName} (${sourceLabel})` : baseName
+    if (!confirmOverwrite(savedName)) return false
     onSavePalette?.(savedName, paletteColors)
     onApplyPalette?.(savedName)
     if (import.meta.env.DEV) {
       console.log(`[PaletteManager] 已应用调色板: ${savedName}`)
     }
+    return true
   }
 
   return (

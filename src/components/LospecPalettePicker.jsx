@@ -86,8 +86,7 @@ export default function LospecPalettePicker({ onSelectPalette }) {
   }, [selectedSlug])
 
   const handleSelect = (palette) => {
-    setSelectedSlug(palette.slug)
-    onSelectPalette?.(palette.colors, {
+    const didApply = onSelectPalette?.(palette.colors, {
       name: palette.name,
       slug: palette.slug,
       author: palette.author,
@@ -95,6 +94,8 @@ export default function LospecPalettePicker({ onSelectPalette }) {
       url: palette.url,
       source: 'lospec',
     })
+    if (didApply === false) return
+    setSelectedSlug(palette.slug)
   }
 
   const handleCopy = async (color) => {
@@ -121,15 +122,16 @@ export default function LospecPalettePicker({ onSelectPalette }) {
 
     try {
       const imported = await importPaletteFromInput(directImportInput, { nameHint: directImportName })
+      const didApply = onSelectPalette?.(imported.colors, {
+        ...imported,
+        colorCount: imported.colors.length,
+      })
+      if (didApply === false) return
       if (imported.slug) {
         setSelectedSlug(imported.slug)
       } else {
         setSelectedSlug(null)
       }
-      onSelectPalette?.(imported.colors, {
-        ...imported,
-        colorCount: imported.colors.length,
-      })
       const feedbackText = imported.usedFallbackName
         ? t('paletteManager.importSuccessGeneric')
         : t('paletteManager.importSuccess', { name: imported.name })
