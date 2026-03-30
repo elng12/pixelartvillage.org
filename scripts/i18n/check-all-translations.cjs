@@ -41,7 +41,7 @@ console.log('=' .repeat(80));
 const results = [];
 
 for (const lang of RUNTIME_LANGS) {
-  const filePath = path.join(__dirname, '..', 'public', 'locales', lang, 'translation.json');
+  const filePath = path.join(process.cwd(), 'public', 'locales', lang, 'translation.json');
   
   if (!fs.existsSync(filePath)) {
     console.log(`${lang.padEnd(15)}${'File not found'.padEnd(20)}❌`);

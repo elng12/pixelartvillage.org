@@ -12,7 +12,7 @@ function spawnProc(cmd, args, name) {
   return p;
 }
 
-const watcher = spawnProc(process.execPath, [path.join(process.cwd(), 'scripts', 'watch-social-preview.cjs')], 'watch');
+const watcher = spawnProc(process.execPath, [path.join(process.cwd(), 'scripts', 'build', 'watch-social-preview.cjs')], 'watch');
 const viteBin = path.join(process.cwd(), 'node_modules', 'vite', 'bin', 'vite.js');
 // Forward CLI args (e.g., --host, --port) to Vite so custom bindings take effect
 const extraArgs = process.argv.slice(2);

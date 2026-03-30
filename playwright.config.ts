@@ -21,7 +21,7 @@ export default defineConfig({
   ],
   webServer: {
     // Disable analytics and enable E2E preview container during preview build
-    command: 'VITE_ENABLE_ANALYTICS=0 VITE_E2E=1 npm run build && node scripts/serve-dist.cjs --port 4173 --strictPort',
+    command: 'VITE_ENABLE_ANALYTICS=0 VITE_E2E=1 npm run build && node scripts/build/serve-dist.cjs --port 4173 --strictPort',
     url: 'http://localhost:4173',
     reuseExistingServer: true,
     timeout: 180000,

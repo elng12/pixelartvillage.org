@@ -172,7 +172,7 @@ const languages = [
 
 // 为每种语言创建博客文件
 languages.forEach(lang => {
-  const filePath = path.join(__dirname, '..', 'src', 'content', `blog-posts.${lang.code}.json`);
+  const filePath = path.join(process.cwd(), 'src', 'content', `blog-posts.${lang.code}.json`);
 
   // 映射文章内容
   const articles = lang.articles.map(article => ({

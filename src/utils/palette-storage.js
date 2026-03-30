@@ -1,5 +1,5 @@
-import logger from '@/utils/logger'
-import safeStorage from '@/utils/safeStorage'
+import logger from './logger.js'
+import safeStorage from './safeStorage.js'
 // 负责持久化（localStorage）访问与兼容处理
 const STORAGE_KEY = 'customPalettes'
 
@@ -31,4 +31,3 @@ export function getCustomPaletteByName(name) {
   const hit = list.find((p) => p.name === name)
   return hit ? hit.colors : null
 }
-

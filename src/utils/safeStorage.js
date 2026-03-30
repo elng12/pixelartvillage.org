@@ -3,7 +3,7 @@
  * 提供localStorage的降级方案,在隐私模式或存储配额满时使用内存存储
  */
 
-import logger from './logger'
+import logger from './logger.js'
 
 class SafeStorage {
   constructor() {

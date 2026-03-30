@@ -65,7 +65,7 @@ Image to Pixel Art Converter
 2. 在 `public/locales/en/translation.json` 中添加翻译键
 3. 替换硬编码文本为 `t('translation.key')`
 4. 运行 `npm run i18n:check` 验证
-5. 运行 `node scripts/sync-translation-keys.cjs` 同步到其他语言
+5. 运行 `node scripts/i18n/sync-translation-keys.cjs` 同步到其他语言
 
 ## 最佳实践
 
