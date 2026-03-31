@@ -11,6 +11,7 @@ const BLOG_OG_IMAGE_SLUGS = new Set([
   'export-from-illustrator-image-to-pixel-art',
   'getting-started-pixel-art-maker',
   'how-to-get-pixel-art-version-of-image',
+  'how-to-make-pixel-art-in-photoshop',
   'how-to-pixelate-an-image',
   'image-to-pixel-art-converter-free',
   'make-image-more-like-pixel',
@@ -193,6 +194,66 @@ function getTableOfContents(blocks = []) {
       id: block.id,
       label: block.content,
     }))
+}
+
+function stripInlineMarkdown(text = '') {
+  return String(text || '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function extractFaqItems(blocks = []) {
+  const items = []
+  let inFaqSection = false
+  let activeQuestion = null
+  let answerParts = []
+
+  const pushActiveItem = () => {
+    if (!activeQuestion || !answerParts.length) return
+    items.push({
+      question: activeQuestion,
+      answer: answerParts.join(' ').trim(),
+    })
+  }
+
+  for (const block of blocks) {
+    if (block.type === 'heading' && block.level === 2) {
+      if (inFaqSection) pushActiveItem()
+      inFaqSection = /^faq$/i.test(String(block.content || '').trim())
+      activeQuestion = null
+      answerParts = []
+      continue
+    }
+
+    if (!inFaqSection) continue
+
+    if (block.type === 'heading' && block.level === 3) {
+      pushActiveItem()
+      activeQuestion = stripInlineMarkdown(block.content)
+      answerParts = []
+      continue
+    }
+
+    if (!activeQuestion) continue
+
+    if (block.type === 'paragraph') {
+      const normalized = stripInlineMarkdown(block.content)
+      if (normalized) answerParts.push(normalized)
+    }
+
+    if (block.type === 'unordered-list' || block.type === 'ordered-list') {
+      const normalized = block.items
+        .map((item) => stripInlineMarkdown(item))
+        .filter(Boolean)
+        .join(' ')
+      if (normalized) answerParts.push(normalized)
+    }
+  }
+
+  if (inFaqSection) pushActiveItem()
+  return items
 }
 
 function renderInlineContent(text, keyPrefix = 'inline') {
@@ -408,8 +469,10 @@ export default function BlogPost() {
   const editorialNoteIndex = getEditorialNoteIndex(renderedBody)
   const editorialNote = editorialNoteIndex >= 0 ? renderedBody[editorialNoteIndex] : null
   const tableOfContents = getTableOfContents(renderedBody)
+  const faqItems = extractFaqItems(renderedBody)
   const relatedPosts = getRelatedPosts(posts, post.slug, 2)
   const readTime = estimateBlogReadTime(post)
+  const presentation = getBlogPresentationMeta(post)
 
   const articleJsonLd = {
     '@context': 'https://schema.org',
@@ -419,6 +482,8 @@ export default function BlogPost() {
     datePublished: post.date || undefined,
     dateModified: post.date || undefined,
     inLanguage: resolvedLocale,
+    articleSection: presentation.badge,
+    keywords: Array.isArray(post.tags) && post.tags.length ? post.tags.join(', ') : undefined,
     mainEntityOfPage: canonical,
     author: {
       '@type': 'Organization',
@@ -430,6 +495,19 @@ export default function BlogPost() {
     },
     image: articleImage,
   }
+
+  const faqJsonLd = faqItems.length ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  } : null
 
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
@@ -463,7 +541,7 @@ export default function BlogPost() {
         canonical={canonical}
         lang={resolvedLocale}
         description={post.excerpt}
-        jsonLd={[articleJsonLd, breadcrumbJsonLd]}
+        jsonLd={[articleJsonLd, breadcrumbJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])]}
         meta={[
           { property: 'og:url', content: canonical },
           { property: 'og:type', content: 'article' },

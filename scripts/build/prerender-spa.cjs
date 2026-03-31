@@ -317,6 +317,14 @@ async function prerender() {
       whyRead: 'Use this as the hub page when you want the clearest overview of privacy, control, and output tradeoffs.',
       nextStep: 'Read the beginner guide next if you want to test one workflow immediately after comparing tools.',
     },
+    'how-to-make-pixel-art-in-photoshop': {
+      badge: 'Photoshop',
+      chipClass: 'border-indigo-200 bg-indigo-50 text-indigo-800',
+      sectionId: 'workflow-export',
+      bestFor: 'Making cleaner pixel art in Photoshop without soft edges or blurry export.',
+      whyRead: 'This guide focuses on resizing, hard edges, anti-aliasing, and color control instead of filter-heavy shortcuts.',
+      nextStep: 'If you want faster testing, compare the Photoshop workflow with the browser converter next.',
+    },
     'how-to-pixelate-an-image': {
       badge: 'Beginner',
       chipClass: 'border-sky-200 bg-sky-50 text-sky-800',
@@ -555,6 +563,65 @@ async function prerender() {
   const getVisibleTocItems = (blocks = []) => blocks
     .filter((block) => block.type === 'heading' && block.level === 2 && block.id)
     .map((block) => ({ id: block.id, label: block.content }))
+
+  const stripVisibleInlineMarkdown = (text = '') => String(text || '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+  const extractVisibleFaqItems = (lines = []) => {
+    const blocks = assignVisibleHeadingIds(parseVisibleBlogBody(lines))
+    const items = []
+    let inFaqSection = false
+    let activeQuestion = null
+    let answerParts = []
+
+    const pushActiveItem = () => {
+      if (!activeQuestion || !answerParts.length) return
+      items.push({
+        question: activeQuestion,
+        answer: answerParts.join(' ').trim(),
+      })
+    }
+
+    for (const block of blocks) {
+      if (block.type === 'heading' && block.level === 2) {
+        if (inFaqSection) pushActiveItem()
+        inFaqSection = /^faq$/i.test(String(block.content || '').trim())
+        activeQuestion = null
+        answerParts = []
+        continue
+      }
+
+      if (!inFaqSection) continue
+
+      if (block.type === 'heading' && block.level === 3) {
+        pushActiveItem()
+        activeQuestion = stripVisibleInlineMarkdown(block.content)
+        answerParts = []
+        continue
+      }
+
+      if (!activeQuestion) continue
+
+      if (block.type === 'paragraph') {
+        const normalized = stripVisibleInlineMarkdown(block.content)
+        if (normalized) answerParts.push(normalized)
+      }
+
+      if (block.type === 'unordered-list' || block.type === 'ordered-list') {
+        const normalized = block.items
+          .map((item) => stripVisibleInlineMarkdown(item))
+          .filter(Boolean)
+          .join(' ')
+        if (normalized) answerParts.push(normalized)
+      }
+    }
+
+    if (inFaqSection) pushActiveItem()
+    return items
+  }
 
   const renderVisibleBlogBodyBlocks = (blocks = [], { skipIndexes = [], prefix = '' } = {}) => {
     const hidden = new Set(skipIndexes)
@@ -1568,6 +1635,7 @@ async function prerender() {
       const seoTitle = formatBlogSeoTitle(post.title, siteName)
       const seoDescription = shortenText(post.excerpt || '')
       const postMeta = buildBlogPresentationMeta(post)
+      const faqItems = extractVisibleFaqItems(post.body)
       blogRoutes.push({
         lang,
         path: postPath,
@@ -1599,6 +1667,7 @@ async function prerender() {
             dateModified: post.date || undefined,
             inLanguage: lang,
             articleSection: postMeta.badge,
+            keywords: Array.isArray(post.tags) && post.tags.length ? post.tags.join(', ') : undefined,
             mainEntityOfPage: ABS(postPath),
             author: { '@type': 'Organization', name: siteName },
             publisher: { '@type': 'Organization', name: siteName },
@@ -1613,6 +1682,18 @@ async function prerender() {
               { '@type': 'ListItem', position: 3, name: post.title, item: ABS(postPath) },
             ],
           },
+          ...(faqItems.length ? [{
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: faqItems.map((item) => ({
+              '@type': 'Question',
+              name: item.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: item.answer,
+              },
+            })),
+          }] : []),
         ],
         extras: renderBlogArticle(post),
         visible: renderBlogPostWithRelatedVisible(post, postsForLang, lang, bundle),

@@ -4,6 +4,11 @@ const BLOG_POST_META = {
     chipClass: 'border-amber-200 bg-amber-50 text-amber-800',
     bestFor: 'Choose the right converter before you invest time in one workflow.',
   },
+  'how-to-make-pixel-art-in-photoshop': {
+    badge: 'Photoshop',
+    chipClass: 'border-indigo-200 bg-indigo-50 text-indigo-800',
+    bestFor: 'Make cleaner pixel art in Photoshop without soft edges, muddy color, or blurry export.',
+  },
   'how-to-pixelate-an-image': {
     badge: 'Beginner',
     chipClass: 'border-sky-200 bg-sky-50 text-sky-800',
