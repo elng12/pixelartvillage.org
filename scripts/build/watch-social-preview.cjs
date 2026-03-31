@@ -13,7 +13,7 @@ function log(msg) {
 
 function runGen() {
   return new Promise((resolve) => {
-    const p = spawn(process.execPath, [path.join(ROOT, 'scripts', 'gen-social-preview.cjs')], {
+    const p = spawn(process.execPath, [path.join(ROOT, 'scripts', 'build', 'gen-social-preview.cjs')], {
       stdio: 'inherit',
     });
     p.on('exit', () => resolve());
