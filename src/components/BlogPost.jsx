@@ -10,13 +10,17 @@ const BLOG_OG_IMAGE_SLUGS = new Set([
   'best-pixel-art-converters-compared-2025',
   'export-from-illustrator-image-to-pixel-art',
   'getting-started-pixel-art-maker',
+  'how-many-pixels-do-you-need-for-a-4x6-photo-or-banner',
   'how-to-get-pixel-art-version-of-image',
+  'how-many-pixels-is-4k-and-8k',
   'how-to-make-pixel-art-in-photoshop',
   'how-to-pixelate-an-image',
   'image-to-pixel-art-converter-free',
   'make-image-more-like-pixel',
   'photo-to-sprite-converter-tips',
   'turn-photo-into-pixel-art',
+  'what-does-96-pixels-per-inch-really-mean',
+  'what-is-resolution-in-pixels',
 ])
 
 const INLINE_TOKEN_RE = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|https?:\/\/[^\s]+)/g

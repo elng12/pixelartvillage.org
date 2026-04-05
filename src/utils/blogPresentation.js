@@ -4,6 +4,26 @@ const BLOG_POST_META = {
     chipClass: 'border-amber-200 bg-amber-50 text-amber-800',
     bestFor: 'Choose the right converter before you invest time in one workflow.',
   },
+  'how-many-pixels-do-you-need-for-a-4x6-photo-or-banner': {
+    badge: 'Print Size',
+    chipClass: 'border-fuchsia-200 bg-fuchsia-50 text-fuchsia-800',
+    bestFor: 'Get concrete pixel targets for 4x6 prints, web banners, and large-format banners before you export.',
+  },
+  'what-does-96-pixels-per-inch-really-mean': {
+    badge: '96 PPI',
+    chipClass: 'border-lime-200 bg-lime-50 text-lime-800',
+    bestFor: 'Understand why 96 PPI is only a density label, not a guarantee that an image is ready for print or web.',
+  },
+  'how-many-pixels-is-4k-and-8k': {
+    badge: '4K & 8K',
+    chipClass: 'border-violet-200 bg-violet-50 text-violet-800',
+    bestFor: 'Compare 4K and 8K pixel dimensions before you resize, export, or choose a source image.',
+  },
+  'what-is-resolution-in-pixels': {
+    badge: 'Resolution',
+    chipClass: 'border-teal-200 bg-teal-50 text-teal-800',
+    bestFor: 'Understand pixel size before you resize, print, or convert an image.',
+  },
   'how-to-make-pixel-art-in-photoshop': {
     badge: 'Photoshop',
     chipClass: 'border-indigo-200 bg-indigo-50 text-indigo-800',
