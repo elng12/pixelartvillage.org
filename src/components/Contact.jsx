@@ -4,7 +4,7 @@ import Seo from '@/components/Seo'
 import { generateHreflangLinks } from '@/utils/hreflang'
 import { useLocaleContext } from '@/hooks/useLocaleContext'
 import LocalizedLink from '@/components/LocalizedLink'
-import { FEEDBACK_FORM_URL, SUPPORT_EMAIL } from '@/utils/site-links'
+import { FEEDBACK_FORM_URL } from '@/utils/site-links'
 
 export default function Contact() {
   const { t } = useTranslation()
@@ -53,13 +53,6 @@ export default function Contact() {
           >
             {t('nav.feedback')}
           </a>
-          <span
-            className="text-sm font-medium text-blue-700 break-all"
-            aria-label={t('contact.emailTitle')}
-            data-testid="contact-email-text"
-          >
-            {SUPPORT_EMAIL}
-          </span>
         </div>
         <p className="mt-3 text-sm text-gray-600">{t('contact.emailHint')}</p>
       </section>

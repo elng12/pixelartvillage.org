@@ -1,7 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import LocalizedLink from '@/components/LocalizedLink';
-import { SUPPORT_EMAIL } from '@/utils/site-links';
-
 const aiDirsBadge = '/badges/ai-dirs-badge.svg';
 const acidToolsBadge = '/badges/acidtools-badge.png';
 const deepLaunchBadge = '/badges/deeplaunch-badge-light.svg';
@@ -358,7 +356,6 @@ function Footer() {
               >
                 {t('nav.contact')}
               </LocalizedLink>
-              <span className="text-sm text-gray-400 break-all" data-testid="footer-email-text">{SUPPORT_EMAIL}</span>
             </div>
           </section>
 
