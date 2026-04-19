@@ -56,6 +56,7 @@ export default function Contact() {
           <span
             className="text-sm font-medium text-blue-700 break-all"
             aria-label={t('contact.emailTitle')}
+            data-testid="contact-email-text"
           >
             {SUPPORT_EMAIL}
           </span>

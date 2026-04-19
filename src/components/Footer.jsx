@@ -358,7 +358,7 @@ function Footer() {
               >
                 {t('nav.contact')}
               </LocalizedLink>
-              <span className="text-sm text-gray-400 break-all">{SUPPORT_EMAIL}</span>
+              <span className="text-sm text-gray-400 break-all" data-testid="footer-email-text">{SUPPORT_EMAIL}</span>
             </div>
           </section>
 
