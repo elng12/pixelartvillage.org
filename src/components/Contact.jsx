@@ -4,7 +4,7 @@ import Seo from '@/components/Seo'
 import { generateHreflangLinks } from '@/utils/hreflang'
 import { useLocaleContext } from '@/hooks/useLocaleContext'
 import LocalizedLink from '@/components/LocalizedLink'
-import { SUPPORT_EMAIL, SUPPORT_EMAIL_HREF } from '@/utils/site-links'
+import { FEEDBACK_FORM_URL, SUPPORT_EMAIL } from '@/utils/site-links'
 
 export default function Contact() {
   const { t } = useTranslation()
@@ -43,20 +43,22 @@ export default function Contact() {
         <p className="mt-2 text-sm text-gray-700">{t('contact.p1')}</p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
           <a
-            href={SUPPORT_EMAIL_HREF}
+            href={FEEDBACK_FORM_URL}
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center justify-center rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-800"
-            aria-label={t('contact.emailTitle')}
-            data-testid="contact-email-link"
+            aria-label={t('nav.feedback')}
+            title={t('nav.feedback')}
+            data-testid="contact-feedback-link"
           >
-            {t('contact.emailCta')}
+            {t('nav.feedback')}
           </a>
-          <a
-            href={SUPPORT_EMAIL_HREF}
-            className="text-sm font-medium text-blue-700 underline underline-offset-4"
+          <span
+            className="text-sm font-medium text-blue-700 break-all"
             aria-label={t('contact.emailTitle')}
           >
             {SUPPORT_EMAIL}
-          </a>
+          </span>
         </div>
         <p className="mt-3 text-sm text-gray-600">{t('contact.emailHint')}</p>
       </section>

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import LocalizedLink from '@/components/LocalizedLink';
-import { SUPPORT_EMAIL, SUPPORT_EMAIL_HREF } from '@/utils/site-links';
+import { SUPPORT_EMAIL } from '@/utils/site-links';
 
 const aiDirsBadge = '/badges/ai-dirs-badge.svg';
 const acidToolsBadge = '/badges/acidtools-badge.png';
@@ -350,13 +350,16 @@ function Footer() {
               <p className="text-sm font-semibold text-white">{t('footer.supportTitle')}</p>
               <p className="mt-1 text-sm text-gray-400">{t('footer.supportDesc')}</p>
             </div>
-            <a
-              href={SUPPORT_EMAIL_HREF}
-              className="mt-4 inline-flex items-center justify-center rounded-lg border border-blue-400/60 px-4 py-2 text-sm font-semibold text-blue-200 transition hover:border-blue-300 hover:text-white sm:mt-0"
-              data-testid="footer-email-link"
-            >
-              {SUPPORT_EMAIL}
-            </a>
+            <div className="mt-4 flex flex-col items-start gap-2 sm:mt-0 sm:items-end">
+              <LocalizedLink
+                to="/contact/"
+                className="inline-flex items-center justify-center rounded-lg border border-blue-400/60 px-4 py-2 text-sm font-semibold text-blue-200 transition hover:border-blue-300 hover:text-white"
+                data-testid="footer-contact-link"
+              >
+                {t('nav.contact')}
+              </LocalizedLink>
+              <span className="text-sm text-gray-400 break-all">{SUPPORT_EMAIL}</span>
+            </div>
           </section>
 
           {/* 底部信息栏 */}

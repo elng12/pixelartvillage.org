@@ -24,6 +24,9 @@ const BLOG_OG_IMAGE_SLUGS = new Set([
 ])
 
 const INLINE_TOKEN_RE = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|https?:\/\/[^\s]+)/g
+const INLINE_HREF_ALIASES = {
+  'link-to-first-post': '/blog/how-to-pixelate-an-image/',
+}
 
 function buildBlogSeoTitle(title, siteName) {
   const normalizedTitle = String(title || '').trim()
@@ -65,6 +68,7 @@ function getRelatedPosts(posts = [], currentSlug, limit = 2) {
 function normalizeInlineHref(href) {
   const normalized = String(href || '').trim()
   if (!normalized) return '#'
+  if (INLINE_HREF_ALIASES[normalized]) return INLINE_HREF_ALIASES[normalized]
 
   try {
     const url = new URL(normalized)
