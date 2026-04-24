@@ -56,25 +56,16 @@ function normalizePseoPages(value) {
   return toArray(value).filter((entry) => entry && typeof entry.slug === 'string' && entry.slug.trim())
 }
 
-function resolveContent(baseName, lang = DEFAULT_LANG, normalizer = toArray) {
-  const paths = [
-    path.join(ROOT, 'src', 'content', `${baseName}.${lang}.json`),
-    path.join(ROOT, 'src', 'content', `${baseName}.${DEFAULT_LANG}.json`),
-    path.join(ROOT, 'src', 'content', `${baseName}.json`),
-  ]
-  for (const filePath of paths) {
-    if (fs.existsSync(filePath)) {
-      try {
-        const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'))
-        return typeof normalizer === 'function' ? normalizer(parsed) : parsed
-      } catch (error) {
-        console.warn(`[prerender] warn: failed to parse ${path.basename(filePath)} -> ${error.message}`)
-        return []
-      }
-    }
+function resolveExactContent(baseName, lang = DEFAULT_LANG, normalizer = toArray) {
+  const filePath = path.join(ROOT, 'src', 'content', `${baseName}.${lang}.json`)
+  if (!fs.existsSync(filePath)) return []
+  try {
+    const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+    return typeof normalizer === 'function' ? normalizer(parsed) : parsed
+  } catch (error) {
+    console.warn(`[prerender] warn: failed to parse ${path.basename(filePath)} -> ${error.message}`)
+    return []
   }
-  console.warn(`[prerender] warn: content source not found for ${baseName}`)
-  return []
 }
 
 function read(file) { return fs.readFileSync(file, 'utf8') }
@@ -1385,7 +1376,10 @@ async function prerender() {
   }
 
   const blogPostsByLang = Object.fromEntries(
-    SUPPORTED_LANGS.map((lang) => [lang, resolveContent('blog-posts', lang, normalizeBlogPosts)]),
+    SUPPORTED_LANGS.map((lang) => [lang, resolveExactContent('blog-posts', lang, normalizeBlogPosts)]),
+  )
+  const pseoPagesByLang = Object.fromEntries(
+    SUPPORTED_LANGS.map((lang) => [lang, resolveExactContent('pseo-pages', lang, normalizePseoPages)]),
   )
 
   const routes = [
@@ -1489,61 +1483,102 @@ async function prerender() {
     },
   ]
 
-  const pseoPages = resolveContent('pseo-pages', DEFAULT_LANG, normalizePseoPages)
-  for (const p of pseoPages) {
-    if (!p || !p.slug) continue
-    const url = ensureTrailingSlash(`/converter/${p.slug}`)
-    routes.push({
-      path: url,
-      title: p.title,
-      metas: [
-        { name: 'description', content: shortenText(p.metaDescription || '') },
-        { property: 'og:url', content: ABS(url) },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: p.title },
-        { property: 'og:description', content: shortenText(p.metaDescription || '') },
-        { property: 'og:image', content: ABS(`/pseo-og/${p.slug}.png`) },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: p.title },
-        { name: 'twitter:description', content: shortenText(p.metaDescription || '') },
-        { name: 'twitter:image', content: ABS(`/pseo-og/${p.slug}.png`) },
-      ],
-      jsonLd: ({ lang, routePath }) => [
-        {
-          '@context': 'https://schema.org',
-          '@type': 'HowTo',
-          name: p.h1 || p.title,
-          description: shortenText(p.metaDescription || ''),
-          inLanguage: lang,
-          totalTime: 'PT2M',
-          supply: [{ '@type': 'HowToSupply', name: 'Image file (PNG/JPG/GIF/WEBP)' }],
-          tool: [{ '@type': 'HowToTool', name: 'Pixel Art Village Converter' }],
-          step: [
-            { '@type': 'HowToStep', name: 'Upload an image' },
-            { '@type': 'HowToStep', name: 'Adjust pixel size and palette settings' },
-            { '@type': 'HowToStep', name: 'Download your pixel art result' },
-          ],
-        },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'SoftwareApplication',
-          name: p.title,
-          applicationCategory: 'MultimediaApplication',
-          operatingSystem: 'Web',
-          url: `https://pixelartvillage.org${routePath}`,
-          description: shortenText(p.metaDescription || ''),
-          inLanguage: lang,
-          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        },
-      ],
-      visible: ({ lang, bundle }) => renderPseoVisible(p, { lang, bundle, pages: pseoPages }),
-      initialContent: ({ routePath }) => ({
-        baseName: 'pseo-pages',
-        locale: DEFAULT_LANG,
+  const pseoLocalesBySlug = new Map()
+  for (const lang of SUPPORTED_LANGS) {
+    const pages = Array.isArray(pseoPagesByLang[lang]) ? pseoPagesByLang[lang] : []
+    for (const page of pages) {
+      if (!page?.slug) continue
+      const locales = pseoLocalesBySlug.get(page.slug) || new Set()
+      locales.add(lang)
+      pseoLocalesBySlug.set(page.slug, locales)
+    }
+  }
+
+  const sortBySupportedLangs = (langs = []) => {
+    const set = new Set(langs)
+    return SUPPORTED_LANGS.filter((lang) => set.has(lang))
+  }
+
+  const buildPseoPath = (lang, slug) => {
+    const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
+    return `${prefix}/converter/${slug}/`
+  }
+
+  const buildPseoAlternates = (slug) => {
+    const langs = sortBySupportedLangs(Array.from(pseoLocalesBySlug.get(slug) || []))
+    const alternates = langs.map((lang) => ({ lang, href: ABS(buildPseoPath(lang, slug)) }))
+    const xDefaultLang = langs.includes(DEFAULT_LANG) ? DEFAULT_LANG : langs[0]
+    if (xDefaultLang) {
+      alternates.push({ lang: 'x-default', href: ABS(buildPseoPath(xDefaultLang, slug)) })
+    }
+    return alternates
+  }
+
+  const pseoRoutes = []
+  for (const lang of SUPPORTED_LANGS) {
+    const pagesForLang = Array.isArray(pseoPagesByLang[lang]) ? pseoPagesByLang[lang] : []
+    if (!pagesForLang.length) continue
+    const bundle = loadLocaleBundle(lang)
+    for (const p of pagesForLang) {
+      if (!p?.slug) continue
+      const routePath = buildPseoPath(lang, p.slug)
+      const description = shortenText(p.metaDescription || '')
+      pseoRoutes.push({
+        lang,
         path: routePath,
-        data: pseoPages,
-      }),
-    })
+        routePath,
+        basePath: ensureTrailingSlash(`/converter/${p.slug}`),
+        title: p.title,
+        metas: [
+          { name: 'description', content: description },
+          { property: 'og:url', content: ABS(routePath) },
+          { property: 'og:type', content: 'website' },
+          { property: 'og:title', content: p.title },
+          { property: 'og:description', content: description },
+          { property: 'og:image', content: ABS(`/pseo-og/${p.slug}.png`) },
+          { name: 'twitter:card', content: 'summary_large_image' },
+          { name: 'twitter:title', content: p.title },
+          { name: 'twitter:description', content: description },
+          { name: 'twitter:image', content: ABS(`/pseo-og/${p.slug}.png`) },
+        ],
+        jsonLd: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'HowTo',
+            name: p.h1 || p.title,
+            description,
+            inLanguage: lang,
+            totalTime: 'PT2M',
+            supply: [{ '@type': 'HowToSupply', name: 'Image file (PNG/JPG/GIF/WEBP)' }],
+            tool: [{ '@type': 'HowToTool', name: 'Pixel Art Village Converter' }],
+            step: [
+              { '@type': 'HowToStep', name: 'Upload an image' },
+              { '@type': 'HowToStep', name: 'Adjust pixel size and palette settings' },
+              { '@type': 'HowToStep', name: 'Download your pixel art result' },
+            ],
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'SoftwareApplication',
+            name: p.title,
+            applicationCategory: 'MultimediaApplication',
+            operatingSystem: 'Web',
+            url: ABS(routePath),
+            description,
+            inLanguage: lang,
+            offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+          },
+        ],
+        visible: renderPseoVisible(p, { lang, bundle, pages: pagesForLang }),
+        alternates: buildPseoAlternates(p.slug),
+        initialContent: {
+          baseName: 'pseo-pages',
+          locale: lang,
+          path: routePath,
+          data: pagesForLang,
+        },
+      })
+    }
   }
 
   const blogRoutes = []
@@ -1564,10 +1599,6 @@ async function prerender() {
       locales.add(lang)
       blogLocalesBySlug.set(post.slug, locales)
     }
-  }
-  const sortBySupportedLangs = (langs = []) => {
-    const set = new Set(langs)
-    return SUPPORTED_LANGS.filter((lang) => set.has(lang))
   }
   const buildBlogAlternates = (slug = '') => {
     const langs = slug
@@ -1842,6 +1873,7 @@ async function prerender() {
       appendRoute(expandForLang(r, lang))
     }
   }
+  for (const route of pseoRoutes) appendRoute(route)
   for (const route of blogRoutes) appendRoute(route)
 
   for (const r of expanded) {

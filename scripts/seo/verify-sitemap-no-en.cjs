@@ -7,6 +7,10 @@ const path = require('path')
 
 const PUBLIC_DIR = path.resolve(process.cwd(), 'public')
 const sitemapPath = path.join(PUBLIC_DIR, 'sitemap.xml')
+const localeConfig = require(path.resolve(process.cwd(), 'config', 'locales.json'))
+const DEFAULT_LANG = (localeConfig && localeConfig.default) || 'en'
+const SUPPORTED_LANGS = Array.from(new Set((localeConfig && localeConfig.supported) || [DEFAULT_LANG]))
+const OTHER_LANGS = SUPPORTED_LANGS.filter((lang) => lang && lang !== DEFAULT_LANG)
 
 function fail(msg) {
   console.error('❌ ' + msg)
@@ -22,9 +26,40 @@ if (!fs.existsSync(sitemapPath)) {
 }
 
 const xml = fs.readFileSync(sitemapPath, 'utf8')
+const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])
+const paths = urls.map((url) => {
+  try {
+    return new URL(url).pathname
+  } catch {
+    fail(`Invalid sitemap URL: ${url}`)
+    return ''
+  }
+}).filter(Boolean)
+
+function toArray(value) {
+  if (Array.isArray(value)) return value
+  if (value && typeof value === 'object') return Object.values(value)
+  return []
+}
+
+function loadPseoSlugs(lang) {
+  const filePath = path.resolve(process.cwd(), 'src', 'content', `pseo-pages.${lang}.json`)
+  if (!fs.existsSync(filePath)) return new Set()
+  try {
+    const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+    return new Set(toArray(parsed).map((entry) => entry && entry.slug).filter(Boolean))
+  } catch (error) {
+    fail(`Cannot parse ${path.relative(process.cwd(), filePath)}: ${error.message}`)
+    return new Set()
+  }
+}
+
+const pseoSlugsByLang = Object.fromEntries(
+  SUPPORTED_LANGS.map((lang) => [lang, loadPseoSlugs(lang)])
+)
 
 // 1. Ensure default locale is unprefixed (no /en/)
-const enPrefixedMatches = xml.match(/https:\/\/pixelartvillage\.org\/en\//g) || []
+const enPrefixedMatches = paths.filter((pathname) => pathname === '/en/' || pathname.startsWith('/en/'))
 if (enPrefixedMatches.length > 0) {
   fail(`Found /en/ prefixed URLs: ${[...new Set(enPrefixedMatches)].join(', ')}`)
 } else {
@@ -32,11 +67,15 @@ if (enPrefixedMatches.length > 0) {
 }
 
 // 2. Ensure multilingual entries exist
-const nonDefaultPrefixed = xml.match(/https:\/\/pixelartvillage\.org\/(es|id|de|pl|it|pt|fr|ru|tl|vi|ja|sv|nb|nl|ar|ko|th)\//g) || []
+const nonDefaultPrefixed = paths.filter((pathname) => {
+  const lang = pathname.split('/').filter(Boolean)[0]
+  return OTHER_LANGS.includes(lang)
+})
 if (nonDefaultPrefixed.length === 0) {
   fail('No non-default language-prefixed URLs found')
 } else {
-  pass(`Found multilingual URLs: ${[...new Set(nonDefaultPrefixed)].length} locale prefixes`)
+  const prefixes = new Set(nonDefaultPrefixed.map((pathname) => pathname.split('/').filter(Boolean)[0]))
+  pass(`Found multilingual URLs: ${prefixes.size} locale prefixes`)
 }
 
 // 3. Ensure root URL present
@@ -61,7 +100,35 @@ required.forEach((re) => {
 })
 if (!process.exitCode) pass('Required canonical entries present')
 
-// 5. URL 数量 sanity check
+// 5. pSEO converter pages must not use English fallback as localized indexable URLs
+const illegalLocalizedPseo = []
+for (const pathname of paths) {
+  const parts = pathname.split('/').filter(Boolean)
+  if (parts.length !== 3) continue
+  const [lang, section, slug] = parts
+  if (!OTHER_LANGS.includes(lang) || section !== 'converter') continue
+  if (!pseoSlugsByLang[lang]?.has(slug)) {
+    illegalLocalizedPseo.push(pathname)
+  }
+}
+
+if (illegalLocalizedPseo.length) {
+  fail(`Found localized converter URLs without matching pSEO content: ${illegalLocalizedPseo.slice(0, 20).join(', ')}${illegalLocalizedPseo.length > 20 ? '...' : ''}`)
+} else {
+  pass('No fallback-English localized converter URLs in sitemap')
+}
+
+for (const lang of SUPPORTED_LANGS) {
+  const slugs = pseoSlugsByLang[lang]
+  if (!slugs || slugs.size === 0) continue
+  for (const slug of slugs) {
+    const expected = lang === DEFAULT_LANG ? `/converter/${slug}/` : `/${lang}/converter/${slug}/`
+    if (!paths.includes(expected)) fail(`Missing pSEO sitemap entry for real content: ${expected}`)
+  }
+}
+if (!process.exitCode) pass('All real pSEO content entries are present')
+
+// 6. URL 数量 sanity check
 const urlCount = (xml.match(/<url>/g) || []).length
 if (urlCount < 20) {
   console.warn(`⚠️  Sitemap contains only ${urlCount} <url> entries (expected at least 20).`)

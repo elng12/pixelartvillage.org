@@ -8,6 +8,10 @@ const fs = require('fs');
 const path = require('path');
 
 const DIST = path.resolve(process.cwd(), 'dist');
+const localeConfig = require(path.resolve(process.cwd(), 'config', 'locales.json'));
+const DEFAULT_LANG = (localeConfig && localeConfig.default) || 'en';
+const SUPPORTED_LANGS = Array.from(new Set((localeConfig && localeConfig.supported) || [DEFAULT_LANG]));
+const OTHER_LANGS = SUPPORTED_LANGS.filter((lang) => lang && lang !== DEFAULT_LANG);
 const REQUIRED_FILES = ['index.html', '404.html'];
 
 function fail(msg) {
@@ -18,6 +22,28 @@ function fail(msg) {
 function ok(msg) {
   console.log('[verify-dist] OK  :', msg);
 }
+
+function toArray(value) {
+  if (Array.isArray(value)) return value;
+  if (value && typeof value === 'object') return Object.values(value);
+  return [];
+}
+
+function loadPseoSlugs(lang) {
+  const filePath = path.resolve(process.cwd(), 'src', 'content', `pseo-pages.${lang}.json`);
+  if (!fs.existsSync(filePath)) return new Set();
+  try {
+    const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    return new Set(toArray(parsed).map((entry) => entry && entry.slug).filter(Boolean));
+  } catch (error) {
+    fail(`cannot parse ${path.relative(process.cwd(), filePath)}: ${error.message}`);
+    return new Set();
+  }
+}
+
+const pseoSlugsByLang = Object.fromEntries(
+  SUPPORTED_LANGS.map((lang) => [lang, loadPseoSlugs(lang)])
+);
 
 if (!fs.existsSync(DIST)) {
   fail('dist directory not found');
@@ -76,6 +102,18 @@ if (!fs.existsSync(redirectsPath)) {
     fail(`_redirects contains dangerous extension rewrite rules: ${dangerousRules.join(' | ')}`);
   } else {
     ok('_redirects has no extension-stripping static rewrite rules');
+  }
+
+  for (const lang of OTHER_LANGS) {
+    const hasLocalizedPseo = (pseoSlugsByLang[lang]?.size || 0) > 0;
+    const localizedConverterRedirect = new RegExp(`^\\s*\\/${lang}\\/converter\\/\\*\\s+\\/converter\\/:splat\\s+301\\b`, 'm').test(redirects);
+    if (hasLocalizedPseo && localizedConverterRedirect) {
+      fail(`_redirects canonicalizes /${lang}/converter/* even though pSEO content exists for ${lang}`);
+    } else if (!hasLocalizedPseo && !localizedConverterRedirect) {
+      fail(`_redirects missing fallback-English converter canonicalization for ${lang}: /${lang}/converter/* -> /converter/:splat 301`);
+    } else {
+      ok(`_redirects localized converter rule OK for ${lang}`);
+    }
   }
 }
 
@@ -258,6 +296,52 @@ for (const p of pseo) {
   if (p && p.slug) ROUTES.push(`/converter/${p.slug}`);
 }
 
+function verifySitemapPseoLocales() {
+  const sitemapPath = path.join(DIST, 'sitemap.xml');
+  if (!fs.existsSync(sitemapPath)) {
+    fail('missing sitemap.xml in dist');
+    return;
+  }
+
+  const xml = fs.readFileSync(sitemapPath, 'utf8');
+  const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+  const sitemapPaths = locs.map((url) => {
+    try {
+      return new URL(url).pathname;
+    } catch {
+      fail(`invalid sitemap URL: ${url}`);
+      return '';
+    }
+  }).filter(Boolean);
+
+  const illegalLocalizedPseo = [];
+  for (const pathname of sitemapPaths) {
+    const parts = pathname.split('/').filter(Boolean);
+    if (parts.length !== 3) continue;
+    const [lang, section, slug] = parts;
+    if (!OTHER_LANGS.includes(lang) || section !== 'converter') continue;
+    if (!pseoSlugsByLang[lang]?.has(slug)) {
+      illegalLocalizedPseo.push(pathname);
+    }
+  }
+
+  if (illegalLocalizedPseo.length) {
+    fail(`sitemap includes fallback-English localized converter URLs: ${illegalLocalizedPseo.slice(0, 20).join(', ')}${illegalLocalizedPseo.length > 20 ? '...' : ''}`);
+  } else {
+    ok('sitemap has no fallback-English localized converter URLs');
+  }
+
+  for (const lang of SUPPORTED_LANGS) {
+    const slugs = pseoSlugsByLang[lang];
+    if (!slugs || slugs.size === 0) continue;
+    for (const slug of slugs) {
+      const expected = lang === DEFAULT_LANG ? `/converter/${slug}/` : `/${lang}/converter/${slug}/`;
+      if (!sitemapPaths.includes(expected)) fail(`sitemap missing real pSEO URL: ${expected}`);
+    }
+  }
+}
+
+verifySitemapPseoLocales();
 ROUTES.forEach((r) => verifyRoute(r, 'en'));
 
 // Extra: verify blog index has image meta

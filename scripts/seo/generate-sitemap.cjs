@@ -1,5 +1,5 @@
 // Auto-generate sitemap.xml at build time with current date as lastmod (CommonJS)
-// 优化：包含所有可索引语言版本，保证多语言页面可被收录
+// Keep the sitemap limited to URLs with real localized content sources.
 const fs = require('fs');
 const path = require('path');
 
@@ -39,25 +39,16 @@ function normalizePseoPages(value) {
   return toArray(value).filter((entry) => entry && typeof entry.slug === 'string' && entry.slug.trim());
 }
 
-function loadLocalizedContent(baseName, lang, normalizer = toArray) {
-  const attempts = [
-    path.resolve(process.cwd(), 'src', 'content', `${baseName}.${lang}.json`),
-    path.resolve(process.cwd(), 'src', 'content', `${baseName}.${DEFAULT_LANG}.json`),
-    path.resolve(process.cwd(), 'src', 'content', `${baseName}.json`),
-  ];
-  for (const filePath of attempts) {
-    if (fs.existsSync(filePath)) {
-      try {
-        const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-        return typeof normalizer === 'function' ? normalizer(parsed) : parsed;
-      } catch (error) {
-        console.warn(`[sitemap] warn: failed to parse ${path.basename(filePath)} -> ${error.message}`);
-        return [];
-      }
-    }
+function loadExactLocalizedContent(baseName, lang, normalizer = toArray) {
+  const filePath = path.resolve(process.cwd(), 'src', 'content', `${baseName}.${lang}.json`);
+  if (!fs.existsSync(filePath)) return [];
+  try {
+    const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    return typeof normalizer === 'function' ? normalizer(parsed) : parsed;
+  } catch (error) {
+    console.warn(`[sitemap] warn: failed to parse ${path.basename(filePath)} -> ${error.message}`);
+    return [];
   }
-  console.warn(`[sitemap] warn: content source not found for ${baseName}.${lang}`);
-  return [];
 }
 
 // ISO date YYYY-MM-DD
@@ -70,9 +61,11 @@ const PATH_SET = new Set();
 
 // Include blog posts & pSEO pages (用于扩展多语言路径)
 const blogPostsByLang = Object.fromEntries(
-  SUPPORTED_LANGS.map((lang) => [lang, loadLocalizedContent('blog-posts', lang, normalizeBlogPosts)])
+  SUPPORTED_LANGS.map((lang) => [lang, loadExactLocalizedContent('blog-posts', lang, normalizeBlogPosts)])
 );
-const pseoPages = loadLocalizedContent('pseo-pages', DEFAULT_LANG, normalizePseoPages);
+const pseoPagesByLang = Object.fromEntries(
+  SUPPORTED_LANGS.map((lang) => [lang, loadExactLocalizedContent('pseo-pages', lang, normalizePseoPages)])
+);
 
 function localizePath(p, lang) {
   const clean = p.startsWith('/') ? p : `/${p}`;
@@ -109,10 +102,13 @@ for (const lang of SUPPORTED_LANGS) {
   }
 }
 
-// 扩展 pSEO 页面到所有语言版本
-for (const p of pseoPages) {
-  if (!p || !p.slug) continue;
-  addPathForLangs(`/converter/${p.slug}`);
+// 扩展 pSEO 页面：只包含该语言真实存在的内容文件，禁止把英文 fallback 当作多语言页面提交
+for (const lang of SUPPORTED_LANGS) {
+  const pages = Array.isArray(pseoPagesByLang[lang]) ? pseoPagesByLang[lang] : [];
+  for (const p of pages) {
+    if (!p || !p.slug) continue;
+    PATH_SET.add(localizePath(`/converter/${p.slug}`, lang));
+  }
 }
 
 const PATHS = Array.from(PATH_SET).sort((a, b) => a.localeCompare(b));
@@ -133,7 +129,8 @@ const generateHreflangSitemap = () => {
       }
     }
 
-    for (const pseo of pseoPages) {
+    const pages = Array.isArray(pseoPagesByLang[lang]) ? pseoPagesByLang[lang] : [];
+    for (const pseo of pages) {
       if (pseo && pseo.slug) {
         hreflangSet.add(localizePath(`/converter/${pseo.slug}`, lang));
       }
