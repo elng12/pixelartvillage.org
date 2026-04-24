@@ -10,7 +10,11 @@
 /no         /nb             301
 /no/*       /nb/:splat      301
 
-# 3) Retired blog slug canonicalization
+# 3) Canonicalize non-localized converter pages to the English source content.
+# Keep this early: Cloudflare Pages applies only the first 100 dynamic _redirects rules.
+/:lang/converter/*      /converter/:splat      301
+
+# 4) Retired blog slug canonicalization
 /blog/best-image-to-pixel-art-converters-2025      /blog/best-pixel-art-converters-compared-2025      301
 /blog/best-image-to-pixel-art-converters-2025/     /blog/best-pixel-art-converters-compared-2025/     301
 /blog/how-to-convert-image-to-pixel-art-step-by-step      /blog/best-pixel-art-converters-compared-2025      301
@@ -30,7 +34,7 @@
 /blog/eksport-z-illustratora-obrazu-do-pikseloartu      /blog/best-pixel-art-converters-compared-2025      301
 /blog/eksport-z-illustratora-obrazu-do-pikseloartu/     /blog/best-pixel-art-converters-compared-2025/     301
 
-# 4) Localized retired blog slug canonicalization
+# 5) Localized retired blog slug canonicalization
 /es/blog/best-image-to-pixel-art-converters-2025/     /es/blog/best-pixel-art-converters-compared-2025/     301
 /id/blog/best-image-to-pixel-art-converters-2025/     /id/blog/best-pixel-art-converters-compared-2025/     301
 /de/blog/best-image-to-pixel-art-converters-2025/     /de/blog/best-pixel-art-converters-compared-2025/     301
@@ -185,7 +189,7 @@
 /ko/blog/eksport-z-illustratora-obrazu-do-pikseloartu/     /ko/blog/best-pixel-art-converters-compared-2025/     301
 /th/blog/eksport-z-illustratora-obrazu-do-pikseloartu/     /th/blog/best-pixel-art-converters-compared-2025/     301
 
-# 5) Retired converter slug canonicalization
+# 6) Retired converter slug canonicalization
 /converter/vector-to-pixel-art      /converter/image-to-pixel-art      301
 /converter/vector-to-pixel-art/     /converter/image-to-pixel-art/     301
 /converter/bmp-to-pixel-art      /converter/image-to-pixel-art      301
@@ -224,26 +228,6 @@
 /ko/converter/bmp-to-pixel-art/     /ko/converter/image-to-pixel-art/     301
 /th/converter/vector-to-pixel-art/     /th/converter/image-to-pixel-art/     301
 /th/converter/bmp-to-pixel-art/     /th/converter/image-to-pixel-art/     301
-
-# 6) Canonicalize non-localized converter pages to the English source content.
-# Only keep language-prefixed converter URLs when matching pSEO content exists.
-/es/converter/*      /converter/:splat      301
-/id/converter/*      /converter/:splat      301
-/de/converter/*      /converter/:splat      301
-/pl/converter/*      /converter/:splat      301
-/it/converter/*      /converter/:splat      301
-/pt/converter/*      /converter/:splat      301
-/fr/converter/*      /converter/:splat      301
-/ru/converter/*      /converter/:splat      301
-/tl/converter/*      /converter/:splat      301
-/vi/converter/*      /converter/:splat      301
-/ja/converter/*      /converter/:splat      301
-/sv/converter/*      /converter/:splat      301
-/nb/converter/*      /converter/:splat      301
-/nl/converter/*      /converter/:splat      301
-/ar/converter/*      /converter/:splat      301
-/ko/converter/*      /converter/:splat      301
-/th/converter/*      /converter/:splat      301
 
 # 7) Static assets are served directly from dist by Pages.
 # Do not rewrite extension paths like /*.png -> /:splat,

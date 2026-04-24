@@ -104,16 +104,14 @@ if (!fs.existsSync(redirectsPath)) {
     ok('_redirects has no extension-stripping static rewrite rules');
   }
 
-  for (const lang of OTHER_LANGS) {
-    const hasLocalizedPseo = (pseoSlugsByLang[lang]?.size || 0) > 0;
-    const localizedConverterRedirect = new RegExp(`^\\s*\\/${lang}\\/converter\\/\\*\\s+\\/converter\\/:splat\\s+301\\b`, 'm').test(redirects);
-    if (hasLocalizedPseo && localizedConverterRedirect) {
-      fail(`_redirects canonicalizes /${lang}/converter/* even though pSEO content exists for ${lang}`);
-    } else if (!hasLocalizedPseo && !localizedConverterRedirect) {
-      fail(`_redirects missing fallback-English converter canonicalization for ${lang}: /${lang}/converter/* -> /converter/:splat 301`);
-    } else {
-      ok(`_redirects localized converter rule OK for ${lang}`);
-    }
+  const wildcardLocalizedConverterRedirect = /^\s*\/:lang\/converter\/\*\s+\/converter\/:splat\s+301\b/m.test(redirects);
+  const localizedPseoLangs = OTHER_LANGS.filter((lang) => (pseoSlugsByLang[lang]?.size || 0) > 0);
+  if (localizedPseoLangs.length && wildcardLocalizedConverterRedirect) {
+    fail(`_redirects wildcard would canonicalize real localized pSEO content: ${localizedPseoLangs.join(', ')}`);
+  } else if (!localizedPseoLangs.length && !wildcardLocalizedConverterRedirect) {
+    fail('_redirects missing wildcard fallback-English converter canonicalization: /:lang/converter/* -> /converter/:splat 301');
+  } else {
+    ok('_redirects localized converter canonicalization OK');
   }
 }
 
