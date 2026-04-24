@@ -2,6 +2,38 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'node:url'
 import { execSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
+
+function readPreviewHeaders() {
+  try {
+    const headersFile = fileURLToPath(new URL('./public/_headers', import.meta.url))
+    const headers = {}
+    let inGlobalBlock = false
+
+    for (const rawLine of readFileSync(headersFile, 'utf8').split(/\r?\n/)) {
+      const trimmed = rawLine.trim()
+      if (!trimmed) {
+        continue
+      }
+
+      if (!rawLine.startsWith(' ') && !rawLine.startsWith('\t')) {
+        inGlobalBlock = trimmed === '/*'
+        continue
+      }
+
+      if (inGlobalBlock) {
+        const separatorIndex = trimmed.indexOf(':')
+        if (separatorIndex > 0) {
+          headers[trimmed.slice(0, separatorIndex)] = trimmed.slice(separatorIndex + 1).trim()
+        }
+      }
+    }
+
+    return headers
+  } catch {
+    return {}
+  }
+}
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
@@ -82,6 +114,10 @@ export default defineConfig(({ mode }) => {
     // 开发服务器优化
     server: {
       preTransformRequests: true,
+    },
+    // Keep vite preview aligned with Cloudflare Pages security headers for CSP tests.
+    preview: {
+      headers: readPreviewHeaders(),
     },
     // 预加载优化
     optimizeDeps: {
