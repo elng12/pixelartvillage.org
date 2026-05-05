@@ -574,16 +574,16 @@
   },
   "home": {
     "seoTitle": "Image to Pixel Art Converter | Pixel Art Village",
-    "seoDescription": "Turn any image or PNG, JPG, GIF, and WEBP image file into pixel art with live preview, custom palettes, dithering, and private browser-based processing.",
-    "heroTitle": "Image to Pixel Art Converter | Pixel Art Village",
-    "heroSubtitle": "Pixel Art Village is an image to pixel art converter for any image or PNG, JPG, GIF, and WEBP image file, with live preview, custom palettes, private browser-based image processing, and direct image export in one pixel art converter.",
-    "heroSubtitle2": "Upload an image below to start editing in the Pixel Art Village pixel art converter, compare the image live, keep the image preview visible, or explore dedicated photo, PNG, JPG, GIF, and sprite workflows lower on the page.",
+    "seoDescription": "Turn images into pixel art online with live preview, palette controls, dithering, and private browser-based processing for PNG, JPG, GIF, and WEBP files.",
+    "heroTitle": "Image to Pixel Art Converter",
+    "heroSubtitle": "Turn any image into pixel art in your browser. Upload PNG, JPG, GIF, or WEBP files, preview the result live, adjust palette and dithering, then export clean sprites, icons, or retro graphics.",
+    "heroSubtitle2": "Pixel Art Village keeps the main image to pixel art workflow on this page, with dedicated photo, PNG, JPG, GIF, and sprite routes available when you need a narrower starting point.",
     "primaryCtaLabel": "Open the full image to pixel art converter",
-    "primaryCtaHelp": "Need the complete editor right away? Start in the main converter.",
-    "primaryCalloutTitle": "Start with the main converter when you need the full workflow",
-    "primaryCalloutDescription": "Use the main converter for live preview, palette control, dithering, and export. This pixel art converter is best for general image work, while dedicated pages are better when you already know you need a photo or format-specific workflow.",
+    "primaryCtaHelp": "Need the complete editor right away? Start in the main image to pixel art converter.",
+    "primaryCalloutTitle": "Start here for the main image to pixel art workflow",
+    "primaryCalloutDescription": "Use the main converter for live preview, palette control, dithering, and export. Dedicated pages are better when you already know you need a photo or format-specific workflow.",
     "entryChooseFile": "Upload image and continue",
-    "entrySupports": "Supports PNG, JPG, GIF, and WEBP — the full pixel art converter opens on the next page.",
+    "entrySupports": "Supports PNG, JPG, GIF, and WEBP — the full image to pixel art editor opens on the next page.",
     "examplesLabel": "No image ready? Open a sample instantly",
     "examplesHint": "Click one of the sample buttons below to load it into the editor right away.",
     "examples": {
@@ -591,11 +591,11 @@
       "pixelScene": "Open pixel art sample"
     },
     "exploreHeading": "Explore Pixel Art Village workflows",
-    "exploreIntro": "Need a narrower image workflow? Stay in the main editor for general image work, or use the main pixel art converter before opening the photo, PNG, GIF, sprite, or other dedicated image converter pages.",
+    "exploreIntro": "Need a narrower image workflow? Stay in the main editor for general image work, or open a dedicated photo, PNG, GIF, sprite, or format-specific converter page.",
     "cards": {
       "mainConverter": {
         "title": "Image to Pixel Art Converter",
-        "description": "The Pixel Art Village main editor is the main converter for general PNG, JPG, GIF, and WEBP image files in one image workspace and one pixel art converter."
+        "description": "The Pixel Art Village main editor is the broadest image to pixel art converter for PNG, JPG, GIF, and WEBP files in one private browser workspace."
       },
       "photoToPixel": {
         "title": "Photo Pixel Converter",

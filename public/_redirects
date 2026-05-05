@@ -11,8 +11,24 @@
 /no/*       /nb/:splat      301
 
 # 3) Canonicalize non-localized converter pages to the English source content.
-# Keep this early: Cloudflare Pages applies only the first 100 dynamic _redirects rules.
-/:lang/converter/*      /converter/:splat      301
+# Keep these early: Cloudflare Pages applies only the first 100 dynamic _redirects rules.
+/es/converter/*      /converter/:splat      301
+/id/converter/*      /converter/:splat      301
+/de/converter/*      /converter/:splat      301
+/pl/converter/*      /converter/:splat      301
+/it/converter/*      /converter/:splat      301
+/pt/converter/*      /converter/:splat      301
+/fr/converter/*      /converter/:splat      301
+/ru/converter/*      /converter/:splat      301
+/tl/converter/*      /converter/:splat      301
+/vi/converter/*      /converter/:splat      301
+/ja/converter/*      /converter/:splat      301
+/sv/converter/*      /converter/:splat      301
+/nb/converter/*      /converter/:splat      301
+/nl/converter/*      /converter/:splat      301
+/ar/converter/*      /converter/:splat      301
+/ko/converter/*      /converter/:splat      301
+/th/converter/*      /converter/:splat      301
 
 # 4) Retired blog slug canonicalization
 /blog/best-image-to-pixel-art-converters-2025      /blog/best-pixel-art-converters-compared-2025      301

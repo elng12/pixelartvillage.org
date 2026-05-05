@@ -59,16 +59,16 @@
   },
   {
     "slug": "image-to-pixel-art",
-    "title": "Image to Pixel Art Converter | Turn Any Image Into Pixel Art",
-    "metaDescription": "Turn PNG, JPG, GIF, or WEBP files into pixel art with live preview, palette controls, dithering, and private browser-based processing.",
+    "title": "Image to Pixel Art Converter | Pixel Art Village",
+    "metaDescription": "Use the full image to pixel art converter for PNG, JPG, GIF, and WEBP files with live preview, palette controls, dithering, and private browser processing.",
     "h1": "Image to Pixel Art Converter",
     "detailsHeading": "When to use the main converter",
-    "heroSubtitle": "Upload PNG, JPG, GIF, or WEBP files and turn them into clean pixel art with live preview, palette controls, and private browser-based processing.",
-    "heroSubtitle2": "Adjust pixel size, dithering, and colors in the full editor, then download sprites, icons, UI art, and retro graphics.",
+    "heroSubtitle": "Upload PNG, JPG, GIF, or WEBP files and convert images into clean pixel art with live preview, palette controls, and private browser-based processing.",
+    "heroSubtitle2": "Use this dedicated converter when you want the full image to pixel art workflow: pixel size, dithering, color cleanup, preview, and export in one place.",
     "intro": [
-      "Use the main converter when you need the full image-to-pixel-art workflow in one place, from upload and live preview to palette control, dithering, and export.",
-      "It works best for screenshots, logos, illustrations, interface art, mixed-source graphics, and general-purpose conversions that need more than a narrow file-format landing page.",
-      "If your source is mostly a camera photo, start with Photo to Pixel Art. If you need a format-specific workflow, open the PNG, JPG, GIF, or WEBP converter pages from the homepage."
+      "Use this image to pixel art converter when you need the full workflow in one place, from upload and live preview to palette control, dithering, cleanup, and export.",
+      "It works best for screenshots, logos, illustrations, interface art, mixed-source graphics, and general-purpose conversions where you want more control than a narrow file-format landing page.",
+      "If your source is mostly a camera photo, start with Photo to Pixel Art. If you need a format-specific workflow, open the PNG, JPG, GIF, or WEBP converter pages, then return here for deeper tuning."
     ],
     "minecraftBlock": {
       "title": "Convert Image to Minecraft Pixel Art",

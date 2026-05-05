@@ -106,10 +106,20 @@ if (!fs.existsSync(redirectsPath)) {
 
   const wildcardLocalizedConverterRedirect = /^\s*\/:lang\/converter\/\*\s+\/converter\/:splat\s+301\b/m.test(redirects);
   const localizedPseoLangs = OTHER_LANGS.filter((lang) => (pseoSlugsByLang[lang]?.size || 0) > 0);
-  if (localizedPseoLangs.length && wildcardLocalizedConverterRedirect) {
-    fail(`_redirects wildcard would canonicalize real localized pSEO content: ${localizedPseoLangs.join(', ')}`);
-  } else if (!localizedPseoLangs.length && !wildcardLocalizedConverterRedirect) {
-    fail('_redirects missing wildcard fallback-English converter canonicalization: /:lang/converter/* -> /converter/:splat 301');
+  const explicitConverterRedirectLangs = OTHER_LANGS.filter((lang) => {
+    const escapedLang = lang.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(`^\\s*\\/${escapedLang}\\/converter\\/\\*\\s+\\/converter\\/:splat\\s+301\\b`, 'm').test(redirects);
+  });
+  const localizedExplicitRedirects = localizedPseoLangs.filter((lang) => explicitConverterRedirectLangs.includes(lang));
+  const fallbackOnlyLangs = OTHER_LANGS.filter((lang) => (pseoSlugsByLang[lang]?.size || 0) === 0);
+  const missingFallbackRedirects = fallbackOnlyLangs.filter((lang) => !explicitConverterRedirectLangs.includes(lang));
+
+  if (wildcardLocalizedConverterRedirect) {
+    fail('_redirects uses overbroad /:lang/converter/* fallback-English canonicalization');
+  } else if (localizedExplicitRedirects.length) {
+    fail(`_redirects would canonicalize real localized pSEO content: ${localizedExplicitRedirects.join(', ')}`);
+  } else if (missingFallbackRedirects.length) {
+    fail(`_redirects missing fallback-English converter canonicalization for: ${missingFallbackRedirects.join(', ')}`);
   } else {
     ok('_redirects localized converter canonicalization OK');
   }
