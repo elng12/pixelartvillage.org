@@ -388,6 +388,15 @@ function Footer() {
               >
                 Pinpoint Answer Today
               </a>
+              <span aria-hidden>•</span>
+              <a
+                href="https://patchesanswertoday.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white"
+              >
+                Patches Answer Today
+              </a>
             </div>
           </div>
         </div>
