@@ -1,9 +1,10 @@
 // Google Analytics gtag loader (CSP-friendly, no inline script)
-// Measurement ID: G-5RG3H97P63
+// Measurement ID: G-L5N8DGXP7F
 
 let gaLoaded = false
+const GA_MEASUREMENT_ID = 'G-L5N8DGXP7F'
 
-export function ensureGaLoaded(measurementId = 'G-5RG3H97P63') {
+export function ensureGaLoaded(measurementId = GA_MEASUREMENT_ID) {
   if (gaLoaded) return
   if (typeof window === 'undefined' || typeof document === 'undefined') return
 
@@ -14,8 +15,11 @@ export function ensureGaLoaded(measurementId = 'G-5RG3H97P63') {
   w.dataLayer = w.dataLayer || []
   function gtag(){ w.dataLayer.push(arguments) }
   w.gtag = w.gtag || gtag
-  w.gtag('js', new Date())
-  w.gtag('config', measurementId)
+  if (w.__pvGaConfigured !== measurementId) {
+    w.gtag('js', new Date())
+    w.gtag('config', measurementId)
+    w.__pvGaConfigured = measurementId
+  }
 
   // If GA script already present, do not add again
   if (d.querySelector('script[src^="https://www.googletagmanager.com/gtag/js"]')) {
