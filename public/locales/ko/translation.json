@@ -8,7 +8,17 @@
     "home": "홈",
     "about": "소개",
     "contact": "문의",
-    "feedback": "피드백 보내기"
+    "feedback": "피드백 보내기",
+    "tools": "도구",
+    "toolLinks": {
+      "image": "이미지를 픽셀 아트로",
+      "photo": "사진을 픽셀 아트로",
+      "png": "PNG를 픽셀 아트로",
+      "jpg": "JPG를 픽셀 아트로",
+      "gif": "GIF를 픽셀 아트로",
+      "eightBit": "8비트 아트 생성기",
+      "sprite": "사진을 스프라이트로"
+    }
   },
   "common": {
     "loading": "로딩 중...",

@@ -8,7 +8,17 @@
     "home": "Hjem",
     "about": "Om",
     "contact": "Kontakt",
-    "feedback": "Send tilbakemelding"
+    "feedback": "Send tilbakemelding",
+    "tools": "Verktøy",
+    "toolLinks": {
+      "image": "Bilde til pikselkunst",
+      "photo": "Foto til pikselkunst",
+      "png": "PNG til pikselkunst",
+      "jpg": "JPG til pikselkunst",
+      "gif": "GIF til pikselkunst",
+      "eightBit": "8-bit-generator",
+      "sprite": "Foto til sprite"
+    }
   },
   "cta": {
     "start": "Start nå"

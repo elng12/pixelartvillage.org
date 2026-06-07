@@ -87,6 +87,362 @@ function MainConverterCallout({ callout, testId }) {
   )
 }
 
+function PseoContentSections({ sections = [] }) {
+  const visibleSections = Array.isArray(sections)
+    ? sections.filter((section) => section?.title || section?.body?.length || section?.items?.length)
+    : []
+
+  if (!visibleSections.length) return null
+
+  return (
+    <section className="bg-white py-8">
+      <div className="container mx-auto px-4 max-w-4xl space-y-8">
+        {visibleSections.map((section, sectionIndex) => {
+          const body = Array.isArray(section.body) ? section.body : []
+          const items = Array.isArray(section.items) ? section.items : []
+
+          return (
+            <div key={sectionIndex}>
+              {section.title ? (
+                <h2 className="text-xl font-semibold text-gray-900">{section.title}</h2>
+              ) : null}
+              {body.length ? (
+                <div className="mt-3 space-y-3 text-gray-700">
+                  {body.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+                </div>
+              ) : null}
+              {items.length ? (
+                <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
+                  {items.map((item, index) => (
+                    <article key={index} className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+                      {item.title ? (
+                        <h3 className="font-semibold text-gray-900">{item.title}</h3>
+                      ) : null}
+                      {item.description ? (
+                        <p className="mt-2 text-sm text-gray-700">{item.description}</p>
+                      ) : null}
+                    </article>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
+
+const PHOTO_HERO_POINTS = [
+  {
+    title: 'Photo-first controls',
+    body: 'Built for portraits, pet photos, scenery, and camera pictures with soft detail.',
+  },
+  {
+    title: 'Private in your browser',
+    body: 'Upload and adjust the photo locally before exporting the pixel art result.',
+  },
+  {
+    title: 'Cleaner readable shapes',
+    body: 'Focus on pixel size, palette, crop, and contrast so the subject still reads clearly.',
+  },
+]
+
+function PhotoPreviewStrip({ className = '' }) {
+  return (
+    <div className={`rounded-lg border border-gray-200 bg-white p-4 shadow-sm ${className}`} aria-hidden="true">
+      <div className="mb-3 flex items-center justify-between text-xs font-semibold text-gray-500">
+        <span>Photo source</span>
+        <span>Pixel result</span>
+      </div>
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+        <div className="relative h-24 overflow-hidden rounded-lg border border-gray-200 bg-gradient-to-br from-sky-100 via-rose-100 to-emerald-100">
+          <div className="absolute left-5 top-5 h-10 w-10 rounded-full bg-white/75" />
+          <div className="absolute bottom-3 left-4 h-8 w-24 rounded-full bg-slate-700/20" />
+          <div className="absolute right-5 top-7 h-12 w-16 rounded-lg bg-white/45" />
+        </div>
+        <div className="text-xs font-semibold uppercase tracking-normal text-gray-300">to</div>
+        <div className="relative h-24 overflow-hidden rounded-lg border border-blue-200 bg-blue-50 pixel-grid-bg">
+          <div className="absolute left-5 top-5 h-10 w-10 bg-blue-500/80" />
+          <div className="absolute bottom-4 left-4 h-6 w-24 bg-slate-700/70" />
+          <div className="absolute right-6 top-8 h-10 w-14 bg-emerald-400/80" />
+          <div className="absolute right-4 bottom-4 h-4 w-8 bg-violet-400/80" />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function PhotoHeroPointGrid({ className = '' }) {
+  return (
+    <ul className={`grid gap-3 text-sm text-gray-700 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 ${className}`}>
+      {PHOTO_HERO_POINTS.map((item) => (
+        <li key={item.title} className="flex gap-3">
+          <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-600" aria-hidden="true" />
+          <span className="leading-6">
+            <span className="font-semibold text-gray-950">{item.title}</span>
+            <span className="text-gray-600">{' - '}{item.body}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function PhotoMainConverterLink({ to, label, note, className = '' }) {
+  return (
+    <p className={`max-w-2xl text-sm leading-6 text-gray-600 ${className}`}>
+      {note ? <span>{note} </span> : null}
+      <LocalizedLink
+        to={to}
+        className="font-semibold text-blue-700 underline decoration-blue-200 underline-offset-4 transition-colors hover:text-blue-800 hover:decoration-blue-500"
+      >
+        {label}
+      </LocalizedLink>
+    </p>
+  )
+}
+
+function PhotoPseoHero({ page, introParas = [], fallback, onImageUpload }) {
+  const mainConverterLabel = page.topCallout?.ctaLabel || 'Use the main image converter'
+  const mainConverterTo = page.topCallout?.ctaTo || '/converter/image-to-pixel-art/'
+  const firstIntro = introParas[0] || page.metaDescription
+  const secondIntro = page.toolSubtitle2 || introParas[1]
+
+  return (
+    <section className="bg-gradient-to-b from-white to-slate-50 py-8 md:py-10">
+      <div className="container mx-auto max-w-6xl px-4">
+        {fallback ? (
+          <p className="mb-3 text-xs text-gray-500">{'Using fallback English content.'}</p>
+        ) : null}
+        <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="order-1 lg:order-1">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-normal text-blue-700">
+              Photo to pixel art
+            </p>
+            <h1 className="text-3xl font-extrabold leading-tight text-gray-950 md:text-5xl">
+              {page.h1}
+            </h1>
+            <div className="hidden lg:block">
+              {firstIntro ? (
+                <p className="mt-4 max-w-2xl text-base leading-7 text-gray-700 md:text-lg">
+                  {firstIntro}
+                </p>
+              ) : null}
+              <PhotoHeroPointGrid className="mt-6" />
+              <PhotoMainConverterLink
+                to={mainConverterTo}
+                label={mainConverterLabel}
+                note={secondIntro}
+                className="mt-6"
+              />
+            </div>
+          </div>
+
+          <div className="order-2 space-y-4 lg:order-2">
+            <ToolSection
+              onImageUpload={onImageUpload}
+              showHeader={false}
+              instructionText="Drag and drop your photo here"
+              instructionElement="p"
+              showInlineChooseText={false}
+              chooseFileLabel="Upload photo"
+              chooseButtonClassName="font-semibold shadow-sm"
+              chooseButtonStyle={{ padding: '0.75rem 1.25rem', fontSize: '0.9375rem' }}
+              supportsText="Supports PNG, JPG, GIF, and WEBP - up to 10MB"
+              sectionClassName="bg-transparent py-0"
+              containerClassName="px-0 text-center"
+              uploadZoneClassName="max-w-none border-blue-200 shadow-lg hover:border-blue-500"
+              uploadZoneStyle={{ minHeight: '14rem', borderRadius: '0.5rem' }}
+            />
+            <PhotoPreviewStrip className="hidden lg:block" />
+          </div>
+
+          <div className="order-3 lg:hidden">
+            <PhotoHeroPointGrid />
+            <PhotoMainConverterLink
+              to={mainConverterTo}
+              label={mainConverterLabel}
+              note={secondIntro}
+              className="mt-5"
+            />
+            {firstIntro ? (
+              <p className="mt-5 max-w-2xl text-base leading-7 text-gray-700">
+                {firstIntro}
+              </p>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function PhotoContentSections({ sections = [] }) {
+  const visibleSections = Array.isArray(sections)
+    ? sections.filter((section) => section?.title || section?.body?.length || section?.items?.length)
+    : []
+  const cardSection = visibleSections.find((section) => Array.isArray(section.items) && section.items.length)
+  const settingsSection = visibleSections.find((section) => Array.isArray(section.body) && section.body.length)
+
+  return (
+    <Fragment>
+      {cardSection ? (
+        <section className="bg-white py-10">
+          <div className="container mx-auto max-w-5xl px-4">
+            <h2 className="text-2xl font-bold text-gray-950">{cardSection.title}</h2>
+            <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
+              {cardSection.items.map((item, index) => (
+                <article key={index} className="rounded-lg border border-gray-200 bg-slate-50 p-5">
+                  {item.title ? (
+                    <h3 className="text-base font-semibold text-gray-950">{item.title}</h3>
+                  ) : null}
+                  {item.description ? (
+                    <p className="mt-2 text-sm leading-6 text-gray-700">{item.description}</p>
+                  ) : null}
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {settingsSection ? (
+        <section className="bg-slate-50 py-10">
+          <div className="container mx-auto grid max-w-5xl gap-6 px-4 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-950">{settingsSection.title}</h2>
+              <p className="mt-3 text-sm leading-6 text-gray-600">
+                Start with the photo, then tune only the settings that make the subject easier to read.
+              </p>
+            </div>
+            <div className="space-y-3">
+              {settingsSection.body.map((paragraph, index) => (
+                <article key={index} className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+                  <div className="flex gap-3">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-sm font-bold text-white">
+                      {index + 1}
+                    </span>
+                    <p className="text-sm leading-6 text-gray-700">{paragraph}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+    </Fragment>
+  )
+}
+
+function PhotoHowToSection({ howItWorks }) {
+  const steps = Array.isArray(howItWorks?.steps) ? howItWorks.steps.slice(0, 3) : []
+  if (!steps.length) return null
+
+  return (
+    <section className="bg-white py-10">
+      <div className="container mx-auto max-w-5xl px-4">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-2xl font-bold text-gray-950 md:text-3xl">{howItWorks?.title}</h2>
+          {howItWorks?.description ? (
+            <p className="mt-3 text-sm leading-6 text-gray-600 md:text-base">{howItWorks.description}</p>
+          ) : null}
+        </div>
+        <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+          {steps.map((step, index) => (
+            <article key={step.title || index} className="rounded-lg border border-blue-100 bg-white p-5 shadow-sm">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-sm font-bold text-white">
+                {index + 1}
+              </span>
+              <h3 className="mt-4 text-base font-semibold text-gray-950">{step.title}</h3>
+              {step.description ? (
+                <p className="mt-2 text-sm leading-6 text-gray-700">{step.description}</p>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function PhotoFaqSection({ title, items = [] }) {
+  const visibleItems = Array.isArray(items)
+    ? items.filter((item) => item?.question && item?.answer).slice(0, 3)
+    : []
+  if (!visibleItems.length) return null
+
+  return (
+    <section id="faq" className="bg-white py-10">
+      <div className="container mx-auto max-w-3xl px-4">
+        <h2 className="text-2xl font-bold text-gray-950">{title || 'Photo to Pixel Art FAQ'}</h2>
+        <div className="mt-5 divide-y divide-gray-200 rounded-lg border border-gray-200 bg-white">
+          {visibleItems.map((item, index) => (
+            <article key={index} className="p-5">
+              <h3 className="text-base font-semibold text-gray-950">{item.question}</h3>
+              <p className="mt-2 text-sm leading-6 text-gray-700">{item.answer}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function RelatedConvertersSection({
+  heading,
+  relatedPages = [],
+  showSiteLinks = false,
+  siteLinks = [],
+  siteHeading = 'Explore',
+}) {
+  if (!relatedPages.length && !showSiteLinks) return null
+
+  return (
+    <section className="bg-gray-50 py-8">
+      <div className="container mx-auto max-w-4xl px-4">
+        {relatedPages.length ? (
+          <Fragment>
+            <h2 className="mb-4 text-xl font-semibold text-gray-900">{heading}</h2>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {relatedPages.map((related) => (
+                <LocalizedLink
+                  key={related.slug}
+                  to={`/converter/${related.slug}/`}
+                  className="block rounded-lg border border-gray-200 bg-white p-4 transition-all duration-200 hover:border-blue-300 hover:shadow-md"
+                >
+                  <h3 className="mb-2 font-medium text-gray-900">{related.displayH1 || related.h1}</h3>
+                  <p className="line-clamp-2 text-sm text-gray-600">
+                    {related.displayIntro || (Array.isArray(related.intro) ? related.intro[0] : related.intro)}
+                  </p>
+                </LocalizedLink>
+              ))}
+            </div>
+          </Fragment>
+        ) : null}
+        {showSiteLinks ? (
+          <div className="mt-8 rounded-lg border border-gray-200 bg-white p-4">
+            <h3 className="mb-3 text-lg font-semibold text-gray-900">{siteHeading}</h3>
+            <div className="flex flex-wrap gap-2">
+              {siteLinks.map((link) => (
+                <LocalizedLink
+                  key={link.to}
+                  to={link.to}
+                  className="rounded border border-gray-200 px-3 py-1.5 text-sm text-gray-700 hover:border-blue-300 hover:text-blue-600"
+                >
+                  {link.label}
+                </LocalizedLink>
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </section>
+  )
+}
+
 export default function PseoPage() {
   const { t } = useTranslation()
   const { slug } = useParams()
@@ -119,11 +475,33 @@ export default function PseoPage() {
 
   const canonical = `https://pixelartvillage.org${buildPath(`/converter/${page.slug}/`)}`
   const isPrimaryConverter = page.slug === 'image-to-pixel-art'
-  const relatedPages = pages
+  const isEnglishPhotoConverter = page.slug === 'photo-to-pixel-art' && (currentLocale || 'en') === 'en'
+  const defaultRelatedPages = pages
     .filter((entry) => entry.slug !== page.slug)
     .sort((a, b) => Number(b.slug === 'image-to-pixel-art') - Number(a.slug === 'image-to-pixel-art'))
     .slice(0, 6)
+  const photoRelatedPages = ['image-to-pixel-art', 'png-to-pixel-art', 'jpg-to-pixel-art']
+    .map((relatedSlug) => pages.find((entry) => entry.slug === relatedSlug))
+    .filter(Boolean)
+    .map((entry) => entry.slug === 'image-to-pixel-art'
+      ? {
+          ...entry,
+          displayH1: 'General image converter',
+          displayIntro: 'Use the main converter when your source is a logo, screenshot, icon, or mixed image.',
+        }
+      : entry)
+  const relatedPages = isEnglishPhotoConverter
+    ? (photoRelatedPages.length ? photoRelatedPages : defaultRelatedPages.slice(0, 3))
+    : defaultRelatedPages
   const faqItems = t('faq.items', { returnObjects: true }) || []
+  const pageFaqItems = Array.isArray(page.faq?.items)
+    ? page.faq.items.filter((item) => item?.question && item?.answer)
+    : []
+  const renderedFaqItems = pageFaqItems.length ? pageFaqItems : faqItems
+  const renderedFaqTitle = pageFaqItems.length ? page.faq?.title : undefined
+  const pageHowSteps = Array.isArray(page.howItWorks?.steps)
+    ? page.howItWorks.steps.filter((step) => step?.title)
+    : []
   const siteLinks = [
     { to: '/', label: t('nav.home') },
     { to: '/blog/', label: t('nav.blog') },
@@ -133,7 +511,7 @@ export default function PseoPage() {
     { to: '/terms/', label: t('footer.terms') },
   ]
   const introParas = Array.isArray(page.intro) ? page.intro : [page.intro]
-  const faqJsonLd = buildFaqJsonLd(faqItems)
+  const faqJsonLd = buildFaqJsonLd(renderedFaqItems)
   const howToJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
@@ -147,11 +525,13 @@ export default function PseoPage() {
     tool: [
       { '@type': 'HowToTool', name: 'Pixel Art Village Converter' },
     ],
-    step: [
-      { '@type': 'HowToStep', name: t('tool.ariaChoose', 'Upload an image') },
-      { '@type': 'HowToStep', name: t('howItWorks.steps.configure.title', 'Adjust pixel size and palette') },
-      { '@type': 'HowToStep', name: t('editor.downloadBtn', 'Download result') },
-    ],
+    step: pageHowSteps.length
+      ? pageHowSteps.map((step) => ({ '@type': 'HowToStep', name: step.title }))
+      : [
+          { '@type': 'HowToStep', name: t('tool.ariaChoose', 'Upload an image') },
+          { '@type': 'HowToStep', name: t('howItWorks.steps.configure.title', 'Adjust pixel size and palette') },
+          { '@type': 'HowToStep', name: t('editor.downloadBtn', 'Download result') },
+        ],
   }
   const softwareJsonLd = {
     '@context': 'https://schema.org',
@@ -234,6 +614,20 @@ export default function PseoPage() {
             </div>
           </section>
         </Fragment>
+      ) : isEnglishPhotoConverter ? (
+        <Fragment>
+          <PhotoPseoHero
+            page={page}
+            introParas={introParas}
+            fallback={fallback}
+            onImageUpload={setUploadedImage}
+          />
+          {uploadedImage ? (
+            <Suspense fallback={null}>
+              <Editor image={uploadedImage} />
+            </Suspense>
+          ) : null}
+        </Fragment>
       ) : (
         <Fragment>
           <section className="bg-white py-8">
@@ -268,48 +662,41 @@ export default function PseoPage() {
           ) : null}
         </Fragment>
       )}
-      <HowItWorksSection />
-      {!isPrimaryConverter && page.bottomCallout ? (
-        <section className="bg-white py-8">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <MainConverterCallout callout={page.bottomCallout} testId="primary-converter-callout-bottom" />
-          </div>
-        </section>
-      ) : null}
-      <section className="bg-gray-50 py-8">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('pseo.relatedHeading')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {relatedPages.map((related) => (
-              <LocalizedLink
-                key={related.slug}
-                to={`/converter/${related.slug}/`}
-                className="block p-4 bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-200"
-              >
-                <h3 className="font-medium text-gray-900 mb-2">{related.h1}</h3>
-                <p className="text-sm text-gray-600 line-clamp-2">
-                  {Array.isArray(related.intro) ? related.intro[0] : related.intro}
-                </p>
-              </LocalizedLink>
-            ))}
-          </div>
-          <div className="mt-8 rounded-lg border border-gray-200 bg-white p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('footer.explore')}</h3>
-            <div className="flex flex-wrap gap-2">
-              {siteLinks.map((link) => (
-                <LocalizedLink
-                  key={link.to}
-                  to={link.to}
-                  className="rounded border border-gray-200 px-3 py-1.5 text-sm text-gray-700 hover:border-blue-300 hover:text-blue-600"
-                >
-                  {link.label}
-                </LocalizedLink>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-      <FaqSection items={faqItems} />
+      {isEnglishPhotoConverter ? (
+        <Fragment>
+          <PhotoContentSections sections={page.contentSections} />
+          <PhotoHowToSection howItWorks={page.howItWorks} />
+          <RelatedConvertersSection
+            heading={t('pseo.relatedHeading')}
+            relatedPages={relatedPages}
+          />
+          <PhotoFaqSection title={renderedFaqTitle} items={renderedFaqItems} />
+        </Fragment>
+      ) : (
+        <Fragment>
+          <PseoContentSections sections={page.contentSections} />
+          <HowItWorksSection
+            title={page.howItWorks?.title}
+            description={page.howItWorks?.description}
+            steps={page.howItWorks?.steps}
+          />
+          {!isPrimaryConverter && page.bottomCallout ? (
+            <section className="bg-white py-8">
+              <div className="container mx-auto px-4 max-w-4xl">
+                <MainConverterCallout callout={page.bottomCallout} testId="primary-converter-callout-bottom" />
+              </div>
+            </section>
+          ) : null}
+          <RelatedConvertersSection
+            heading={t('pseo.relatedHeading')}
+            relatedPages={relatedPages}
+            showSiteLinks
+            siteLinks={siteLinks}
+            siteHeading={t('footer.explore')}
+          />
+          <FaqSection title={renderedFaqTitle} items={renderedFaqItems} />
+        </Fragment>
+      )}
     </Fragment>
   )
 }

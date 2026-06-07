@@ -8,7 +8,17 @@
     "home": "Início",
     "about": "Sobre",
     "contact": "Contato",
-    "feedback": "Enviar feedback"
+    "feedback": "Enviar feedback",
+    "tools": "Ferramentas",
+    "toolLinks": {
+      "image": "Imagem para pixel art",
+      "photo": "Foto para pixel art",
+      "png": "PNG para pixel art",
+      "jpg": "JPG para pixel art",
+      "gif": "GIF para pixel art",
+      "eightBit": "Gerador 8-bit",
+      "sprite": "Foto para sprite"
+    }
   },
   "cta": {
     "start": "Começar agora"

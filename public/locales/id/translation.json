@@ -8,7 +8,17 @@
     "home": "Beranda",
     "about": "Tentang",
     "contact": "Kontak",
-    "feedback": "Kirim masukan"
+    "feedback": "Kirim masukan",
+    "tools": "Alat",
+    "toolLinks": {
+      "image": "Gambar ke Pixel Art",
+      "photo": "Foto ke Pixel Art",
+      "png": "PNG ke Pixel Art",
+      "jpg": "JPG ke Pixel Art",
+      "gif": "GIF ke Pixel Art",
+      "eightBit": "Generator 8-bit",
+      "sprite": "Foto ke Sprite"
+    }
   },
   "common": {
     "loading": "Memuat...",

@@ -151,31 +151,94 @@
   },
   {
     "slug": "photo-to-pixel-art",
-    "title": "Photo to Pixel Art Converter | Pixelate Photos Online",
-    "metaDescription": "Turn photos into pixel art online with live preview, palette controls, and private browser-based processing.",
+    "title": "Photo to Pixel Art Converter | Pixelate a Photo Online",
+    "metaDescription": "Turn a photo or picture to pixel art online. Upload portraits, pet photos, or camera shots, then adjust pixel size and palette in your browser.",
     "h1": "Photo to Pixel Art Converter",
     "intro": [
-      "Use this page when the source is a camera photo and you want a narrower route than the main converter. Photos usually carry more texture and soft gradients than flat graphics, so the first goal is readability, not maximum detail.",
-      "Upload the photo, simplify the shapes, and use palette and contrast controls until the result reads clearly. If your source is already a clean illustration, logo, or interface asset, the main image to pixel art converter is the better default page."
+      "Use this photo to pixel art converter when your source is a real camera photo, portrait, selfie, pet photo, or landscape picture. It also works as a picture to pixel art converter for camera images that need a cleaner pixel result. Photos usually carry soft edges, shadows, skin tones, and background texture, so the first goal is a readable pixel art version of the photo.",
+      "Upload the photo, choose a pixel size, reduce the color palette, and keep adjusting until the main subject still reads clearly. Stay here for a focused photo to pixel art workflow; if your source is already a clean logo, icon, screenshot, or flat illustration, the main converter is the better default page."
     ],
-    "toolHeading": "Upload a photo and simplify it into readable pixel art",
-    "toolSubtitle": "A photo-first route for portraits, scenery, and camera images that need more simplification.",
-    "toolSubtitle2": "For general-purpose image to pixel art work across many source types, use the main image to pixel art converter.",
+    "toolHeading": "Upload a photo and turn it into readable pixel art",
+    "toolSubtitle": "A photo-first route for portraits, profile pictures, pet photos, scenery, and camera images that need cleaner shapes and fewer colors.",
+    "toolSubtitle2": "For logos, screenshots, icons, or mixed image types, use the main converter instead.",
     "topCallout": {
-      "title": "Need the broader converter instead of the photo-first route?",
+      "title": "Working from a photo or picture?",
       "body": [
-        "This page is tuned for photos. Use the main converter when your source might also be a screenshot, logo, illustration, or mixed graphic."
+        "Stay on this page when the source is a camera photo and you want a softer picture to pixel art workflow. It is meant for photo to pixel art and picture to pixel art work, not clean graphic assets.",
+        "Use the main converter when your source might also be a screenshot, logo, illustration, or mixed graphic."
       ],
-      "ctaLabel": "Open the full image to pixel art converter",
+      "ctaLabel": "Use the main image converter",
       "ctaTo": "/converter/image-to-pixel-art/"
     },
+    "howItWorks": {
+      "title": "How to turn a photo into pixel art",
+      "description": "Start with a clear photo or picture, simplify the detail, then export a pixel art version that still keeps the subject easy to recognize.",
+      "steps": [
+        {
+          "title": "Upload a photo",
+          "description": "Choose a portrait, profile picture, pet photo, scenery shot, or other camera image with a clear subject."
+        },
+        {
+          "title": "Simplify the photo",
+          "description": "Adjust pixel size, palette, contrast, and dithering until the face, object, or scene reads clearly."
+        },
+        {
+          "title": "Download the pixel art",
+          "description": "Export the result as a PNG and check it at the size where you plan to use it."
+        }
+      ]
+    },
+    "contentSections": [
+      {
+        "title": "Best photos for this converter",
+        "items": [
+          {
+            "title": "Portraits and profile pictures",
+            "description": "Use a face or upper-body photo with enough contrast between the subject and the background."
+          },
+          {
+            "title": "Pet photos",
+            "description": "Choose a photo where the eyes, ears, and outline are easy to see before you reduce detail."
+          },
+          {
+            "title": "Scenery and objects",
+            "description": "Pick pictures with a simple main shape. Busy backgrounds usually need stronger cropping or fewer colors."
+          }
+        ]
+      },
+      {
+        "title": "Photo settings that usually work best",
+        "body": [
+          "For photo to pixel art work, start with a larger pixel size than you would use for a logo or icon. Photos contain more texture, so bigger blocks often keep the subject cleaner.",
+          "Reduce the palette until the picture stops looking muddy. For faces and pets, a smaller palette usually works better than chasing every original color.",
+          "If the subject disappears, crop tighter or raise contrast before exporting. A clear silhouette matters more than preserving every small photo detail."
+        ]
+      }
+    ],
     "bottomCallout": {
-      "title": "Want the full editor after testing a photo?",
+      "title": "Need a general image converter instead?",
       "body": [
-        "Continue in the main converter when you need one consistent workflow for photos and non-photo sources in the same project."
+        "This page is focused on photo to pixel art and picture to pixel art workflows. Continue in the main converter when you need one consistent workflow for photos and non-photo sources in the same project."
       ],
       "ctaLabel": "Continue in the main converter",
       "ctaTo": "/converter/image-to-pixel-art/"
+    },
+    "faq": {
+      "title": "Photo to Pixel Art FAQ",
+      "items": [
+        {
+          "question": "Can I turn any photo into pixel art?",
+          "answer": "Yes. This photo to pixel art converter works for portraits, pet photos, landscapes, and other pictures when you adjust pixel size and palette until the main subject stays readable."
+        },
+        {
+          "question": "What kind of photo works best for pixel art?",
+          "answer": "A clear photo with one strong subject works best. Simple backgrounds, good contrast, and a visible outline usually create cleaner pixel art."
+        },
+        {
+          "question": "Is this page different from the main converter?",
+          "answer": "Yes. This picture to pixel art page is written for photo and picture sources. The main converter is better for logos, screenshots, icons, and mixed image types."
+        }
+      ]
     }
   },
   {

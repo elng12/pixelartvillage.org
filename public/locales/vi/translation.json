@@ -8,7 +8,17 @@
     "home": "Trang chủ",
     "about": "Giới thiệu",
     "contact": "Liên hệ",
-    "feedback": "Gửi phản hồi"
+    "feedback": "Gửi phản hồi",
+    "tools": "Công cụ",
+    "toolLinks": {
+      "image": "Ảnh sang pixel art",
+      "photo": "Ảnh chụp sang pixel art",
+      "png": "PNG sang pixel art",
+      "jpg": "JPG sang pixel art",
+      "gif": "GIF sang pixel art",
+      "eightBit": "Trình tạo 8-bit",
+      "sprite": "Ảnh sang sprite"
+    }
   },
   "cta": {
     "start": "Bắt đầu ngay"

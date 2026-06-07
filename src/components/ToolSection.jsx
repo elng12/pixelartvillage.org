@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { Fragment, useRef, useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import logger from '@/utils/logger';
 import LocalizedLink from '@/components/LocalizedLink';
@@ -41,7 +41,17 @@ function ToolSection({
   actionLabel,
   actionHint,
   chooseFileLabel,
+  chooseButtonClassName = '',
+  chooseButtonStyle = {},
   supportsText,
+  instructionText,
+  instructionElement = 'h2',
+  showHeader = true,
+  showInlineChooseText = true,
+  sectionClassName = 'bg-gray-50 py-6',
+  containerClassName = 'container mx-auto px-4 text-center',
+  uploadZoneClassName = '',
+  uploadZoneStyle = {},
   exampleImages = [],
   exampleLabel,
   exampleHint,
@@ -62,7 +72,9 @@ function ToolSection({
   const resolvedSubtitle2 = subtitleText2 || t('tool.subtitle2')
   const resolvedChooseFileLabel = chooseFileLabel || t('tool.chooseFile')
   const resolvedSupportsText = supportsText || t('tool.supports')
+  const resolvedInstructionText = instructionText || t('tool.dragOrClick')
   const hasExamples = exampleImages.length > 0
+  const InstructionTag = instructionElement === 'p' ? 'p' : 'h2'
 
   const revokeLastObjectUrl = useCallback(() => {
     if (!lastUrlRef.current || typeof lastUrlRef.current !== 'string' || !lastUrlRef.current.startsWith('blob:')) {
@@ -240,47 +252,51 @@ function ToolSection({
   }, [openFilePicker]);
 
   return (
-    <section id="tool" className="bg-gray-50 py-6">
-      <div className="container mx-auto px-4 text-center">
-        {(() => {
-          const HeadingTag = headingLevel === 'h2' ? 'h2' : 'h1';
-          return (
-            <HeadingTag
-              className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-gray-800 mb-3 text-center"
-              style={{ fontSize: 'clamp(1.5rem, 2.2vw + 1rem, 3rem)', lineHeight: 1.1, marginBottom: '0.75rem' }}
-            >
-              {resolvedTitle}
-            </HeadingTag>
-          );
-        })()}
-        <div className="mb-6 max-w-4xl md:max-w-5xl mx-auto" style={{ marginBottom: '1.5rem' }}>
-          <p className="text-sm sm:text-base text-gray-600 mb-2" style={{ lineHeight: 1.5, marginBottom: '0.5rem' }}>
-            {resolvedSubtitle}
-          </p>
-          {resolvedSubtitle2 ? (
-            <p className="text-sm sm:text-base text-gray-600" style={{ lineHeight: 1.5 }}>
-              {resolvedSubtitle2}
-            </p>
-          ) : null}
-          {actionTo && actionLabel ? (
-            <div className="mt-4 flex flex-col items-center gap-2">
-              <LocalizedLink
-                to={actionTo}
-                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700"
-              >
-                {actionLabel}
-              </LocalizedLink>
-              {actionHint ? (
-                <p className="text-xs sm:text-sm text-gray-500">
-                  {actionHint}
+    <section id="tool" className={sectionClassName}>
+      <div className={containerClassName}>
+        {showHeader ? (
+          <Fragment>
+            {(() => {
+              const HeadingTag = headingLevel === 'h2' ? 'h2' : 'h1';
+              return (
+                <HeadingTag
+                  className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-gray-800 mb-3 text-center"
+                  style={{ fontSize: 'clamp(1.5rem, 2.2vw + 1rem, 3rem)', lineHeight: 1.1, marginBottom: '0.75rem' }}
+                >
+                  {resolvedTitle}
+                </HeadingTag>
+              );
+            })()}
+            <div className="mb-6 max-w-4xl md:max-w-5xl mx-auto" style={{ marginBottom: '1.5rem' }}>
+              <p className="text-sm sm:text-base text-gray-600 mb-2" style={{ lineHeight: 1.5, marginBottom: '0.5rem' }}>
+                {resolvedSubtitle}
+              </p>
+              {resolvedSubtitle2 ? (
+                <p className="text-sm sm:text-base text-gray-600" style={{ lineHeight: 1.5 }}>
+                  {resolvedSubtitle2}
                 </p>
               ) : null}
+              {actionTo && actionLabel ? (
+                <div className="mt-4 flex flex-col items-center gap-2">
+                  <LocalizedLink
+                    to={actionTo}
+                    className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700"
+                  >
+                    {actionLabel}
+                  </LocalizedLink>
+                  {actionHint ? (
+                    <p className="text-xs sm:text-sm text-gray-500">
+                      {actionHint}
+                    </p>
+                  ) : null}
+                </div>
+              ) : null}
             </div>
-          ) : null}
-        </div>
+          </Fragment>
+        ) : null}
         <div 
-          className={`upload-zone relative max-w-3xl mx-auto bg-white p-6 md:p-8 border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50 ${isPreparing ? 'cursor-not-allowed opacity-80 ring-1 ring-blue-200' : 'cursor-pointer'}`}
-          style={{ padding: '1.5rem', minHeight: '16rem', borderWidth: '2px', borderStyle: 'dashed', borderColor: '#d1d5db', borderRadius: '0.75rem', backgroundColor: '#fff' }}
+          className={`upload-zone relative max-w-3xl mx-auto bg-white p-6 md:p-8 border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50 ${isPreparing ? 'cursor-not-allowed opacity-80 ring-1 ring-blue-200' : 'cursor-pointer'} ${uploadZoneClassName}`}
+          style={{ padding: '1.5rem', minHeight: '16rem', borderWidth: '2px', borderStyle: 'dashed', borderColor: '#d1d5db', borderRadius: '0.75rem', backgroundColor: '#fff', ...uploadZoneStyle }}
           aria-busy={isPreparing}
           onClick={handleZoneClick}
           onDragOver={(e) => e.preventDefault()}
@@ -300,9 +316,15 @@ function ToolSection({
           />
           <div className="text-center">
             <svg className="mx-auto h-12 w-12 text-gray-400" width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 16a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v5a4 4 0 01-4 4H7z" /></svg>
-            <h2 id="upload-instructions" className="mt-4 text-xl font-semibold text-gray-700" style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginTop: '1rem', marginBottom: 0 }}>
-              {t('tool.dragOrClick')}{' '}<span className="text-blue-600">{t('tool.clickToChoose')}</span>
-            </h2>
+            <InstructionTag id="upload-instructions" className="mt-4 text-xl font-semibold text-gray-700" style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginTop: '1rem', marginBottom: 0 }}>
+              {resolvedInstructionText}
+              {showInlineChooseText ? (
+                <Fragment>
+                  {' '}
+                  <span className="text-blue-600">{t('tool.clickToChoose')}</span>
+                </Fragment>
+              ) : null}
+            </InstructionTag>
             <p
               id="upload-supports"
               className="mt-1 text-sm text-gray-500"
@@ -345,8 +367,8 @@ function ToolSection({
             <div className="mt-4" style={{ marginTop: '1rem' }}>
               <button
                 type="button"
-                className={`btn-primary ${isPreparing ? 'opacity-60 cursor-not-allowed' : ''}`}
-                style={{ padding: '0.5rem 1rem', borderRadius: '0.5rem', backgroundColor: '#2563eb', color: '#fff' }}
+                className={`btn-primary ${chooseButtonClassName} ${isPreparing ? 'opacity-60 cursor-not-allowed' : ''}`}
+                style={{ padding: '0.5rem 1rem', borderRadius: '0.5rem', backgroundColor: '#2563eb', color: '#fff', ...chooseButtonStyle }}
                 data-testid="choose-file-btn"
                 aria-describedby="upload-instructions upload-supports"
                 onClick={handleChooseFileClick}

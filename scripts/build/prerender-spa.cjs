@@ -891,15 +891,43 @@ async function prerender() {
     return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${desc}</main>`
   }
 
-  const renderFaqCardsSection = ({ bundle = {}, title, count = 3 } = {}) => {
+  const renderFaqCardsSection = ({ bundle = {}, title, items, count = 3 } = {}) => {
     const faqTitle = escapeHtml(title || pick(bundle, 'faq.title') || 'Image to Pixel Art FAQ')
-    const faqItems = Array.isArray(pick(bundle, 'faq.items'))
-      ? pick(bundle, 'faq.items').filter((item) => item && item.question && item.answer).slice(0, count)
+    const sourceItems = Array.isArray(items) ? items : pick(bundle, 'faq.items')
+    const faqItems = Array.isArray(sourceItems)
+      ? sourceItems.filter((item) => item && item.question && item.answer).slice(0, count)
       : []
     if (!faqItems.length) return ''
     return `<section class="mt-8"><h2 class="text-xl font-semibold text-gray-900">${faqTitle}</h2><div class="mt-4 space-y-4">${faqItems
       .map((item) => `<article class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"><h3 class="text-base font-semibold text-gray-900">${escapeHtml(item.question)}</h3><p class="mt-2 text-gray-700">${escapeHtml(item.answer)}</p></article>`)
       .join('')}</div></section>`
+  }
+
+  const renderPseoContentSections = (page) => {
+    const sections = Array.isArray(page?.contentSections)
+      ? page.contentSections.filter((section) => section && (section.title || section.body?.length || section.items?.length))
+      : []
+
+    if (!sections.length) return ''
+
+    return `<section class="mt-8 space-y-8">${sections
+      .map((section) => {
+        const title = section.title
+          ? `<h2 class="text-xl font-semibold text-gray-900">${escapeHtml(section.title)}</h2>`
+          : ''
+        const body = Array.isArray(section.body) && section.body.length
+          ? `<div class="mt-3 space-y-3">${section.body
+              .map((paragraph) => `<p class="text-gray-700">${escapeHtml(paragraph)}</p>`)
+              .join('')}</div>`
+          : ''
+        const items = Array.isArray(section.items) && section.items.length
+          ? `<div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">${section.items
+              .map((item) => `<article class="rounded-lg border border-gray-200 bg-gray-50 p-4">${item.title ? `<h3 class="font-semibold text-gray-900">${escapeHtml(item.title)}</h3>` : ''}${item.description ? `<p class="mt-2 text-sm text-gray-700">${escapeHtml(item.description)}</p>` : ''}</article>`)
+              .join('')}</div>`
+          : ''
+        return `<div>${title}${body}${items}</div>`
+      })
+      .join('')}</section>`
   }
 
   const getPseoTopicLabel = (page) => cleanTitle(page?.h1 || page?.title || page?.slug || 'This converter')
@@ -922,8 +950,88 @@ async function prerender() {
       .join('')}</div><ol class="mt-4 space-y-3 list-decimal pl-5 text-gray-700"><li>Upload the source image with the clearest subject and silhouette.</li><li>Adjust pixel size, palette, and dithering until the shapes read cleanly.</li><li>Export a PNG and review it at the final display size before shipping or sharing.</li></ol></section>`
   }
 
+  const renderPhotoPseoVisible = (page, { lang = DEFAULT_LANG, bundle = {}, pages = [] } = {}) => {
+    const heading = escapeHtml(page.h1 || page.title || '')
+    const intro = Array.isArray(page.intro) ? page.intro : []
+    const firstIntro = intro[0] || page.metaDescription || ''
+    const secondIntro = page.toolSubtitle2 || intro[1] || ''
+    const mainConverterHref = buildLocalizedPath(lang, page.topCallout?.ctaTo || '/converter/image-to-pixel-art')
+    const mainConverterLabel = page.topCallout?.ctaLabel || 'Use the main image converter'
+    const featureItems = [
+      {
+        title: 'Photo-first controls',
+        body: 'Built for portraits, pet photos, scenery, and camera pictures with soft detail.',
+      },
+      {
+        title: 'Private in your browser',
+        body: 'Upload and adjust the photo locally before exporting the pixel art result.',
+      },
+      {
+        title: 'Cleaner readable shapes',
+        body: 'Focus on pixel size, palette, crop, and contrast so the subject still reads clearly.',
+      },
+    ]
+    const featuresHtml = `<ul class="mt-6 grid gap-3 text-sm text-gray-700 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">${featureItems
+      .map((item) => `<li class="flex gap-3"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-600" aria-hidden="true"></span><span class="leading-6"><span class="font-semibold text-gray-950">${escapeHtml(item.title)}</span><span class="text-gray-600"> - ${escapeHtml(item.body)}</span></span></li>`)
+      .join('')}</ul>`
+    const introHtml = firstIntro
+      ? `<p class="mt-4 max-w-2xl text-base leading-7 text-gray-700 md:text-lg">${escapeHtml(firstIntro)}</p>`
+      : ''
+    const uploadHtml = `<section id="tool" class="bg-transparent py-0"><div class="px-0 text-center"><div class="upload-zone relative mx-auto max-w-none rounded-lg border-2 border-dashed border-blue-200 bg-white p-6 shadow-lg"><p class="text-xl font-semibold text-gray-700">Drag and drop your photo here</p><p class="mt-1 text-sm text-gray-500">Supports PNG, JPG, GIF, and WEBP - up to 10MB</p><button class="mt-4 rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm" type="button">Upload photo</button></div></div></section>`
+    const previewHtml = `<div class="hidden rounded-lg border border-gray-200 bg-white p-4 shadow-sm lg:block" aria-hidden="true"><div class="mb-3 flex items-center justify-between text-xs font-semibold text-gray-500"><span>Photo source</span><span>Pixel result</span></div><div class="grid grid-cols-[1fr_auto_1fr] items-center gap-3"><div class="h-24 rounded-lg border border-gray-200 bg-sky-100"></div><div class="text-xs font-semibold uppercase tracking-normal text-gray-300">to</div><div class="h-24 rounded-lg border border-blue-200 bg-blue-50 pixel-grid-bg"></div></div></div>`
+    const contentSectionsHtml = renderPseoContentSections(page)
+    const howSteps = Array.isArray(page.howItWorks?.steps)
+      ? page.howItWorks.steps.filter((step) => step && step.title).slice(0, 3)
+      : []
+    const howHtml = howSteps.length
+      ? `<section class="mt-10"><div class="mx-auto max-w-3xl text-center"><h2 class="text-2xl font-bold text-gray-950">${escapeHtml(page.howItWorks?.title || 'How to turn a photo into pixel art')}</h2>${page.howItWorks?.description ? `<p class="mt-3 text-sm leading-6 text-gray-600">${escapeHtml(page.howItWorks.description)}</p>` : ''}</div><div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">${howSteps
+          .map((step, index) => `<article class="rounded-lg border border-blue-100 bg-white p-5 shadow-sm"><span class="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-sm font-bold text-white">${index + 1}</span><h3 class="mt-4 text-base font-semibold text-gray-950">${escapeHtml(step.title)}</h3>${step.description ? `<p class="mt-2 text-sm leading-6 text-gray-700">${escapeHtml(step.description)}</p>` : ''}</article>`)
+          .join('')}</div></section>`
+      : ''
+    const pageFaqItems = Array.isArray(page.faq?.items)
+      ? page.faq.items.filter((item) => item && item.question && item.answer)
+      : []
+    const faqHtml = renderFaqCardsSection({
+      bundle,
+      title: pageFaqItems.length ? page.faq?.title : undefined,
+      items: pageFaqItems.length ? pageFaqItems : undefined,
+      count: pageFaqItems.length || 2,
+    })
+    const relatedHeading = pick(bundle, 'pseo.relatedHeading') || 'Related Converters'
+    const relatedSlugs = ['image-to-pixel-art', 'png-to-pixel-art', 'jpg-to-pixel-art']
+    const relatedLinks = relatedSlugs
+      .map((slug) => Array.isArray(pages) ? pages.find((entry) => entry && entry.slug === slug) : null)
+      .filter(Boolean)
+      .map((entry) => entry.slug === 'image-to-pixel-art'
+        ? {
+            ...entry,
+            displayH1: 'General image converter',
+            displayIntro: 'Use the main converter when your source is a logo, screenshot, icon, or mixed image.',
+          }
+        : entry)
+    const relatedHtml = relatedLinks.length
+      ? `<section class="mt-10"><h2 class="text-xl font-semibold text-gray-900">${escapeHtml(relatedHeading)}</h2><ul class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">${relatedLinks
+          .map((entry) => {
+            const title = entry.displayH1 || entry.h1 || entry.title || entry.slug
+            const href = buildLocalizedPath(lang, `/converter/${entry.slug}`)
+            const description = entry.displayIntro || (Array.isArray(entry.intro) ? entry.intro[0] : entry.intro)
+            return `<li><a class="block rounded-lg border border-gray-200 bg-white p-4 hover:border-blue-300" href="${escapeHtml(href)}"><h3 class="font-medium text-gray-900">${escapeHtml(title)}</h3>${description ? `<p class="mt-2 text-sm text-gray-600">${escapeHtml(shortenText(description, 120))}</p>` : ''}</a></li>`
+          })
+          .join('')}</ul></section>`
+      : ''
+    const linkHtml = `<p class="mt-6 max-w-2xl text-sm leading-6 text-gray-600">${secondIntro ? `${escapeHtml(secondIntro)} ` : ''}<a class="font-semibold text-blue-700 underline decoration-blue-200 underline-offset-4" href="${escapeHtml(mainConverterHref)}">${escapeHtml(mainConverterLabel)}</a></p>`
+    const desktopDetailHtml = `${introHtml}${featuresHtml}${linkHtml}`
+    const mobileDetailHtml = `${featuresHtml}${linkHtml}${introHtml}`
+
+    return `<main><section class="bg-gradient-to-b from-white to-slate-50 py-10"><div class="container mx-auto max-w-6xl px-4"><div class="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]"><div class="order-1 lg:order-1"><p class="mb-3 text-sm font-semibold uppercase tracking-normal text-blue-700">Photo to pixel art</p><h1 class="text-3xl font-extrabold leading-tight text-gray-950 md:text-5xl">${heading}</h1><div class="hidden lg:block">${desktopDetailHtml}</div></div><div class="order-2 space-y-4 lg:order-2">${uploadHtml}${previewHtml}</div><div class="order-3 lg:hidden">${mobileDetailHtml}</div></div></div></section><div class="container mx-auto max-w-5xl px-4">${contentSectionsHtml}${howHtml}${relatedHtml}${faqHtml}</div></main>`
+  }
+
   const renderPseoVisible = (page, { lang = DEFAULT_LANG, bundle = {}, pages = [] } = {}) => {
     if (!page) return ''
+    if (page.slug === 'photo-to-pixel-art' && lang === DEFAULT_LANG) {
+      return renderPhotoPseoVisible(page, { lang, bundle, pages })
+    }
+
     const heading = escapeHtml(page.h1 || page.title || '')
     const intro = Array.isArray(page.intro) ? page.intro : []
     const paragraphs = intro.length
@@ -962,11 +1070,20 @@ async function prerender() {
     const siteHtml = `<section class="mt-8"><h2 class="text-lg font-semibold text-gray-900">${escapeHtml(exploreHeading)}</h2><ul class="mt-3 flex flex-wrap gap-3">${siteLinks
       .map((link) => `<li><a class="text-blue-600 hover:underline" href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a></li>`)
       .join('')}</ul></section>`
+    const contentSectionsHtml = renderPseoContentSections(page)
     const tipsHtml = renderPseoTipsSection(page)
-    const faqHtml = renderFaqCardsSection({ bundle, count: 2 })
+    const pageFaqItems = Array.isArray(page.faq?.items)
+      ? page.faq.items.filter((item) => item && item.question && item.answer)
+      : []
+    const faqHtml = renderFaqCardsSection({
+      bundle,
+      title: pageFaqItems.length ? page.faq?.title : undefined,
+      items: pageFaqItems.length ? pageFaqItems : undefined,
+      count: pageFaqItems.length || 2,
+    })
 
     if (!heading && !body && !relatedHtml) return ''
-    return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${body}${tipsHtml}${relatedHtml}${siteHtml}${faqHtml}</main>`
+    return `<main class="container mx-auto px-4 py-10 max-w-3xl"><h1 class="text-2xl font-bold text-gray-900 text-center">${heading}</h1>${body}${contentSectionsHtml}${tipsHtml}${relatedHtml}${siteHtml}${faqHtml}</main>`
   }
 
   const formatTemplate = (template, values = {}) => String(template || '').replace(/\{\{\s*([^}]+)\s*\}\}/g, (_, key) => {
@@ -1523,6 +1640,12 @@ async function prerender() {
       if (!p?.slug) continue
       const routePath = buildPseoPath(lang, p.slug)
       const description = shortenText(p.metaDescription || '')
+      const pseoHowSteps = Array.isArray(p.howItWorks?.steps)
+        ? p.howItWorks.steps.filter((step) => step && step.title)
+        : []
+      const pseoFaqItems = Array.isArray(p.faq?.items)
+        ? p.faq.items.filter((item) => item && item.question && item.answer)
+        : []
       pseoRoutes.push({
         lang,
         path: routePath,
@@ -1551,11 +1674,13 @@ async function prerender() {
             totalTime: 'PT2M',
             supply: [{ '@type': 'HowToSupply', name: 'Image file (PNG/JPG/GIF/WEBP)' }],
             tool: [{ '@type': 'HowToTool', name: 'Pixel Art Village Converter' }],
-            step: [
-              { '@type': 'HowToStep', name: 'Upload an image' },
-              { '@type': 'HowToStep', name: 'Adjust pixel size and palette settings' },
-              { '@type': 'HowToStep', name: 'Download your pixel art result' },
-            ],
+            step: pseoHowSteps.length
+              ? pseoHowSteps.map((step) => ({ '@type': 'HowToStep', name: step.title }))
+              : [
+                  { '@type': 'HowToStep', name: 'Upload an image' },
+                  { '@type': 'HowToStep', name: 'Adjust pixel size and palette settings' },
+                  { '@type': 'HowToStep', name: 'Download your pixel art result' },
+                ],
           },
           {
             '@context': 'https://schema.org',
@@ -1568,6 +1693,20 @@ async function prerender() {
             inLanguage: lang,
             offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
           },
+          ...(pseoFaqItems.length
+            ? [{
+                '@context': 'https://schema.org',
+                '@type': 'FAQPage',
+                mainEntity: pseoFaqItems.map((item) => ({
+                  '@type': 'Question',
+                  name: item.question,
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: item.answer,
+                  },
+                })),
+              }]
+            : []),
         ],
         visible: renderPseoVisible(p, { lang, bundle, pages: pagesForLang }),
         alternates: buildPseoAlternates(p.slug),

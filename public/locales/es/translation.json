@@ -8,7 +8,17 @@
     "home": "Inicio",
     "about": "Acerca de",
     "contact": "Contacto",
-    "feedback": "Enviar comentarios"
+    "feedback": "Enviar comentarios",
+    "tools": "Herramientas",
+    "toolLinks": {
+      "image": "Imagen a arte píxel",
+      "photo": "Foto a arte píxel",
+      "png": "PNG a arte píxel",
+      "jpg": "JPG a arte píxel",
+      "gif": "GIF a arte píxel",
+      "eightBit": "Generador 8-bit",
+      "sprite": "Foto a sprite"
+    }
   },
   "common": {
     "loading": "Cargando...",

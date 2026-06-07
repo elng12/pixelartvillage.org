@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Avatar from './Avatar';
 import { useTranslation } from 'react-i18next';
@@ -10,13 +10,21 @@ function Header() {
   const { t } = useTranslation()
   const [current, setCurrent] = useState('tool');
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
+  const toolsMenuRef = useRef(null);
   const location = useLocation();
   const isBlog = location.pathname.includes('/blog');
+  const isConverter = location.pathname.includes('/converter/');
+  const isHomePage = !isBlog && !isConverter && (/^\/([a-z]{2}\/?)?$/.test(location.pathname));
 
-  // 支持锚点型（id）与路由型（to）链接；直接在渲染期取文案，避免首次渲染时资源未就绪导致标签停留在 key
-  const NAV_LINKS = [
-    { id: 'tool', label: t('nav.home') },
-    { to: 'blog', label: t('nav.blog') },
+  const TOOL_LINKS = [
+    { to: '/converter/image-to-pixel-art/', label: t('nav.toolLinks.image') },
+    { to: '/converter/photo-to-pixel-art/', label: t('nav.toolLinks.photo') },
+    { to: '/converter/png-to-pixel-art/', label: t('nav.toolLinks.png') },
+    { to: '/converter/jpg-to-pixel-art/', label: t('nav.toolLinks.jpg') },
+    { to: '/converter/gif-to-pixel-art/', label: t('nav.toolLinks.gif') },
+    { to: '/converter/8-bit-art-generator/', label: t('nav.toolLinks.eightBit') },
+    { to: '/converter/photo-to-sprite-converter/', label: t('nav.toolLinks.sprite') },
   ]
 
   useEffect(() => {
@@ -40,7 +48,29 @@ function Header() {
 
   useEffect(() => {
     setMobileOpen(false);
-  }, [location.pathname]);
+    setToolsOpen(false);
+  }, [location.pathname, location.hash]);
+
+  useEffect(() => {
+    if (!toolsOpen) return undefined;
+
+    const handlePointerDown = (event) => {
+      if (toolsMenuRef.current && !toolsMenuRef.current.contains(event.target)) {
+        setToolsOpen(false);
+      }
+    };
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setToolsOpen(false);
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [toolsOpen]);
 
   return (
     <header className="sticky top-0 bg-white/80 backdrop-blur-lg z-50 border-b border-gray-200" role="banner">
@@ -82,20 +112,68 @@ function Header() {
                 </svg>
               )}
             </button>
-            <nav className="hidden md:flex items-center gap-8 order-1" aria-label={t('header.mainNav')}>
-              {NAV_LINKS.map((link) => {
-                const to = link.id ? `/#${link.id}` : `/${link.to}/`;
-                return (
-                  <LocalizedLink
-                    key={link.id || link.to}
-                    to={to}
-                    aria-current={link.id ? (current===link.id?'page':undefined) : (isBlog ? 'page' : undefined)}
-                    className="text-gray-600 hover:text-blue-600 transition-colors whitespace-nowrap"
+            <nav className="hidden md:flex items-center gap-4 lg:gap-6 order-1" aria-label={t('header.mainNav')}>
+              <LocalizedLink
+                to="/#tool"
+                aria-current={isHomePage && current === 'tool' ? 'page' : undefined}
+                className="text-gray-600 hover:text-blue-600 transition-colors whitespace-nowrap"
+              >
+                {t('nav.home')}
+              </LocalizedLink>
+              <div className="relative" ref={toolsMenuRef}>
+                <button
+                  type="button"
+                  aria-haspopup="menu"
+                  aria-expanded={toolsOpen ? 'true' : 'false'}
+                  aria-controls="header-tools-menu"
+                  onClick={() => setToolsOpen((open) => !open)}
+                  className={`inline-flex items-center gap-1 rounded-md px-2 py-2 text-sm font-medium transition-colors hover:bg-gray-50 hover:text-blue-600 ${isConverter ? 'text-blue-700' : 'text-gray-600'}`}
+                >
+                  {t('nav.tools')}
+                  <svg
+                    viewBox="0 0 20 20"
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                    className={`transition-transform ${toolsOpen ? 'rotate-180' : ''}`}
                   >
-                    {link.label}
-                  </LocalizedLink>
-                )
-              })}
+                    <path
+                      d="M5 7.5l5 5 5-5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+                {toolsOpen ? (
+                  <div
+                    id="header-tools-menu"
+                    role="menu"
+                    className="absolute left-0 top-full z-50 mt-3 w-72 rounded-lg border border-gray-200 bg-white p-2 shadow-xl"
+                  >
+                    {TOOL_LINKS.map((link) => (
+                      <LocalizedLink
+                        key={link.to}
+                        to={link.to}
+                        role="menuitem"
+                        onClick={() => setToolsOpen(false)}
+                        className="block rounded-md px-4 py-3 text-sm font-semibold text-gray-800 transition hover:bg-blue-50 hover:text-blue-700"
+                      >
+                        {link.label}
+                      </LocalizedLink>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+              <LocalizedLink
+                to="/blog/"
+                aria-current={isBlog ? 'page' : undefined}
+                className="text-gray-600 hover:text-blue-600 transition-colors whitespace-nowrap"
+              >
+                {t('nav.blog')}
+              </LocalizedLink>
               <a
                 href={FEEDBACK_FORM_URL}
                 target="_blank"
@@ -119,23 +197,39 @@ function Header() {
         {mobileOpen ? (
           <div className="md:hidden border-t border-gray-200 pb-4 pt-3">
             <nav id="mobile-nav" aria-label={t('header.mainNav')} className="grid gap-1">
-              {NAV_LINKS.map((link) => {
-                const to = link.id ? `/#${link.id}` : `/${link.to}/`;
-                const ariaCurrent = link.id
-                  ? (current===link.id?'page':undefined)
-                  : (isBlog ? 'page' : undefined);
-                return (
-                  <LocalizedLink
-                    key={link.id || link.to}
-                    to={to}
-                    aria-current={ariaCurrent}
-                    onClick={() => setMobileOpen(false)}
-                    className="rounded-md px-3 py-2 text-gray-700 hover:bg-gray-50"
-                  >
-                    {link.label}
-                  </LocalizedLink>
-                )
-              })}
+              <LocalizedLink
+                to="/#tool"
+                aria-current={isHomePage && current === 'tool' ? 'page' : undefined}
+                onClick={() => setMobileOpen(false)}
+                className="rounded-md px-3 py-2 text-gray-700 hover:bg-gray-50"
+              >
+                {t('nav.home')}
+              </LocalizedLink>
+              <div className="border-t border-gray-100 pt-2">
+                <p className="px-3 pb-1 text-xs font-semibold uppercase tracking-normal text-gray-500">
+                  {t('nav.tools')}
+                </p>
+                <div className="grid gap-1">
+                  {TOOL_LINKS.map((link) => (
+                    <LocalizedLink
+                      key={link.to}
+                      to={link.to}
+                      onClick={() => setMobileOpen(false)}
+                      className="rounded-md px-3 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                    >
+                      {link.label}
+                    </LocalizedLink>
+                  ))}
+                </div>
+              </div>
+              <LocalizedLink
+                to="/blog/"
+                aria-current={isBlog ? 'page' : undefined}
+                onClick={() => setMobileOpen(false)}
+                className="rounded-md px-3 py-2 text-gray-700 hover:bg-gray-50"
+              >
+                {t('nav.blog')}
+              </LocalizedLink>
               <a
                 href={FEEDBACK_FORM_URL}
                 target="_blank"

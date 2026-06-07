@@ -8,7 +8,17 @@
     "home": "Tahanan",
     "about": "Tungkol",
     "contact": "Makipag-ugnay",
-    "feedback": "Magpadala ng feedback"
+    "feedback": "Magpadala ng feedback",
+    "tools": "Mga Tool",
+    "toolLinks": {
+      "image": "Imahe sa Pixel Art",
+      "photo": "Larawan sa Pixel Art",
+      "png": "PNG sa Pixel Art",
+      "jpg": "JPG sa Pixel Art",
+      "gif": "GIF sa Pixel Art",
+      "eightBit": "8-bit Art Generator",
+      "sprite": "Larawan sa Sprite"
+    }
   },
   "common": {
     "loading": "Naglo-load...",

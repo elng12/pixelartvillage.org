@@ -6,9 +6,19 @@
     "faq": "FAQ",
     "blog": "Blog",
     "home": "Home",
+    "tools": "Tools",
     "about": "About",
     "contact": "Contact",
-    "feedback": "Send feedback"
+    "feedback": "Send feedback",
+    "toolLinks": {
+      "image": "Image to Pixel Art",
+      "photo": "Photo to Pixel Art",
+      "png": "PNG to Pixel Art",
+      "jpg": "JPG to Pixel Art",
+      "gif": "GIF to Pixel Art",
+      "eightBit": "8-bit Art Generator",
+      "sprite": "Photo to Sprite"
+    }
   },
   "cta": {
     "start": "Start now"
@@ -598,8 +608,8 @@
         "description": "The Pixel Art Village main editor is the broadest image to pixel art converter for PNG, JPG, GIF, and WEBP files in one private browser workspace."
       },
       "photoToPixel": {
-        "title": "Photo Pixel Converter",
-        "description": "Best when your source is a photo and you want a more photo-specific route into readable retro pixel art."
+        "title": "Photo to Pixel Art",
+        "description": "Best when your source is a photo or picture and you want a photo-specific route into readable retro pixel art."
       },
       "photoToSprite": {
         "title": "Photo to Sprite Converter",

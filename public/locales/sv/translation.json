@@ -8,7 +8,17 @@
     "home": "Hem",
     "about": "Om",
     "contact": "Kontakta",
-    "feedback": "Skicka feedback"
+    "feedback": "Skicka feedback",
+    "tools": "Verktyg",
+    "toolLinks": {
+      "image": "Bild till pixelkonst",
+      "photo": "Foto till pixelkonst",
+      "png": "PNG till pixelkonst",
+      "jpg": "JPG till pixelkonst",
+      "gif": "GIF till pixelkonst",
+      "eightBit": "8-bit-generator",
+      "sprite": "Foto till sprite"
+    }
   },
   "cta": {
     "start": "Börja nu"
