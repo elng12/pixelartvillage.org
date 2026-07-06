@@ -1,17 +1,18 @@
 # GSC SEO 讨论记录 - 2026-06-06
 
-本文档记录讨论结论、批次 A 执行记录、批次 A-UI 布局方案、UI 执行记录、关键词 / 标题结构微调记录、Product Design 小修记录和二次关键词微调记录；不代表已经提交或部署。
+本文档记录讨论结论、批次 A 执行记录、批次 A-UI 布局方案、UI 执行记录、关键词 / 标题结构微调记录、Product Design 小修记录、二次关键词微调记录、顶部导航修正记录、上线后 GSC 复查记录和批次 B 首页草案。
 
 当前 `3.2` 到 `3.7` 已完成第一轮讨论，已补阶段总审查，已整理执行清单草案，已补强批次 A 任务拆解草案，并已执行批次 A。
 
-批次 A 已完成本地构建、产物验证和代码审评，尚未提交，尚未部署。批次 A-UI 布局改版、关键词密度微调、H 标签结构清理、Product Design 小修和二次关键词微调已本地执行并完成验证，尚未提交，尚未部署。
+批次 A 和顶部导航收窄修正已提交并部署。`2026-07-05` 已完成 28 天复查点的 GSC 检查；`2026-07-06` 已新增批次 B 首页核心词 CTR 优化草案。当前仍不进入代码执行。
 
 ## 1. 数据来源
 
 - 数据来源：Google Search Console API
 - 站点：`sc-domain:pixelartvillage.org`
-- 本轮可用完整数据窗口：`2025-09-12` 到 `2026-06-01`
-- 注意：GSC 有延迟，所以 `2026-06-06` 当天不是完整数据
+- 本轮原始讨论可用完整数据窗口：`2025-09-12` 到 `2026-06-01`
+- `2026-07-05` 复查时，GSC final 数据到 `2026-07-03`
+- 注意：GSC 有延迟，当天数据不能当成最终数据
 - 用户提供的 JSON 是 Google 服务账号钥匙，不是导出的报表数据
 
 ## 2. 当前总判断
@@ -20,9 +21,11 @@
 
 真正的问题是：曝光已经起来了，但很多曝光没有变成点击。
 
-当前已经完成问题讨论阶段、阶段总审查、执行清单草案、批次 A 任务拆解、批次 A 本地执行、批次 A 代码审评、批次 A-UI 本地执行、关键词 / 标题结构微调、Product Design 小修和二次关键词微调。
+当前已经完成问题讨论阶段、阶段总审查、执行清单草案、批次 A 任务拆解、批次 A 本地执行、批次 A 代码审评、批次 A-UI 本地执行、关键词 / 标题结构微调、Product Design 小修、二次关键词微调和顶部导航收窄修正。
 
-下一步是审评批次 A 当前全部代码改动；通过后再决定是否提交和部署。
+`2026-07-05` 已完成批次 A 28 天复查点。结论是：全站和首页没有受伤，但 photo 页仍未接住 `photo to pixel art` / `picture to pixel art` 这两个核心词。
+
+`2026-07-06` 当前判断：不继续强行让 photo 页抢首页大词。photo 页转为辅助专项页；下一步优先审评批次 B：首页 `pixel art maker` / `pixel art generator` 点击理由优化草案。
 
 ## 3. 已发现的问题清单
 
@@ -3080,6 +3083,520 @@ H3 Is this page different from the main converter?
 - 首页主词继续由首页承接。
 - photo 页继续承接 `photo to pixel art` / `picture to pixel art`。
 - 后续是否继续调整首页内链，要看完整 14 到 28 天 GSC 数据。
+
+### 22.6 后续导航收窄修正
+
+后续审查发现：
+
+- `Tools` 下拉一次放入多个 converter 链接，超出了批次 A 的范围。
+- 本批次真正要增加入口的只有 `/converter/photo-to-pixel-art/`。
+- PNG、JPG、GIF、8-bit、image-to-pixel 等页面还没有进入本批次，不能借导航一起推广。
+
+最终修正：
+
+| 项目 | 修正后状态 |
+| --- | --- |
+| 桌面顶部导航 | 移除 `Tools` 下拉，只保留 `Photo to Pixel Art` 单个链接 |
+| 手机菜单 | 移除工具列表，只保留 `Photo to Pixel Art` 单个链接 |
+| 首页主词 | 不改首页 title / meta / H1 / hero / CTA |
+| 其他 converter 页面 | 不增加额外导航曝光 |
+
+最终线上导航契约：
+
+```txt
+Home | Photo to Pixel Art | Blog | Send feedback
+```
+
+部署记录：
+
+- commit：`75ce07d fix: narrow header photo page link`
+- 部署：GitHub Pages 已成功
+- 线上验证：首页和 `/converter/photo-to-pixel-art/` 都不再出现 `Tools` 下拉，并保留 `Photo to Pixel Art` 链接
+
+## 23. 2026-06-12 批次 A 上线后 GSC 复查
+
+本节只做上线后观察记录，不进入下一批代码执行。
+
+### 23.1 数据窗口
+
+批次 A 上线时间：
+
+- `2026-06-07 11:00` 左右：增强 `/converter/photo-to-pixel-art/`
+- `2026-06-07 11:11` 左右：顶部导航收窄为单个 `Photo to Pixel Art` 链接
+
+本次 GSC 可用数据：
+
+| 类型 | 最新日期 | 用途 |
+| --- | --- | --- |
+| final 数据 | `2026-06-10` | 可作为相对稳定的早期观察 |
+| all 数据 | `2026-06-11` | 新鲜数据，只能辅助参考 |
+
+注意：
+
+- 当前距离上线约 5 天。
+- 还没有达到完整 `14` 天观察窗口。
+- 不能把现在的数据当成最终成败结论。
+
+### 23.2 全站早期信号
+
+| 窗口 | 点击 | 曝光 | CTR | 平均排名 |
+| --- | ---: | ---: | ---: | ---: |
+| 上线前 7 天：`2026-05-31` 到 `2026-06-06` | 2,128 | 42,505 | 5.01% | 7.89 |
+| 上线后 all：`2026-06-07` 到 `2026-06-11` | 1,898 | 37,007 | 5.13% | 7.49 |
+
+判断：
+
+- 全站没有看到明显受伤。
+- CTR 和平均排名略好，但窗口太短，不能说是本次更新带来的增长。
+- 当前最重要的是继续看 photo 页是否开始接目标词。
+
+### 23.3 photo 页早期信号
+
+| 窗口 | 页面 | 点击 | 曝光 | CTR | 平均排名 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 上线前 7 天 | `/converter/photo-to-pixel-art/` | 3 | 255 | 1.18% | 55.69 |
+| 上线后 all | `/converter/photo-to-pixel-art/` | 1 | 148 | 0.68% | 51.16 |
+
+判断：
+
+- photo 页暂时没有明显起量。
+- 平均排名略有改善，但仍然在很靠后的位置。
+- 当前不能判断失败，因为 Google 还没有给这个页面足够展示。
+
+### 23.4 目标 query 是否转向 photo 页
+
+| Query | 当前主要展示页 | 首页上线后表现 | photo 页上线后表现 | 判断 |
+| --- | --- | --- | --- | --- |
+| `photo to pixel art` | `/` | 21 点击 / 260 曝光 / CTR 8.08% / 排名 5.20 | 0 点击 / 5 曝光 / 排名 60.00 | 仍由首页承接 |
+| `picture to pixel art` | `/` | 10 点击 / 238 曝光 / CTR 4.20% / 排名 5.32 | 0 点击 / 4 曝光 / 排名 69.25 | 仍由首页承接 |
+| `photo to pixel` | `/` | 9 点击 / 79 曝光 / CTR 11.39% / 排名 4.09 | 0 点击 / 1 曝光 / 排名 2.00 | 样本太小，不能下结论 |
+| `picture to pixel` | `/` | 0 点击 / 55 曝光 / 排名 7.09 | 0 点击 / 2 曝光 / 排名 29.50 | 样本太小，继续观察 |
+
+判断：
+
+- 目标词现在仍然主要由首页承接。
+- photo 页还没有抢回 `photo / picture` cluster。
+- 这不是继续大改的理由，因为观察窗口还不够完整。
+
+### 23.5 首页保护词是否受伤
+
+| Query | 首页上线后表现 | 判断 |
+| --- | --- | --- |
+| `image to pixel art` | 115 点击 / 1,562 曝光 / CTR 7.36% / 排名 4.02 | 没有受伤 |
+| `pixel art converter` | 41 点击 / 557 曝光 / CTR 7.36% / 排名 5.21 | 没有受伤 |
+| `pixel art maker` | 31 点击 / 1,483 曝光 / CTR 2.09% / 排名 9.28 | 可继续观察 |
+| `pixel art generator` | 26 点击 / 1,259 曝光 / CTR 2.07% / 排名 7.85 | 可继续观察 |
+
+判断：
+
+- 当前没有看到首页核心词被批次 A 伤到。
+- 这说明批次 A 边界基本安全。
+- 但这不代表可以马上开下一批。
+
+### 23.6 多 agent 审查结论
+
+本次启用两个审查角度：
+
+| 审查角度 | 结论 |
+| --- | --- |
+| GSC 数据审查 | 不应该继续下一批 SEO 代码任务，至少等到 `2026-06-21` 14 天复查 |
+| 执行风险审查 | 现在继续改会把 GSC 信号看乱，建议只做文档监控 |
+
+共同结论：
+
+- 暂停下一批 SEO 代码任务。
+- 不改首页 maker / generator / converter。
+- 不改 `/converter/8-bit-art-generator/`。
+- 不改 `/converter/image-to-pixel-art/`。
+- 不改多语言、博客、全站导航、footer、schema、sitemap。
+- 只做文档和监控。
+
+### 23.7 下一步监控安排
+
+| 日期 | 任务 | 是否改代码 |
+| --- | --- | --- |
+| `2026-06-22` | 已完成 14 天 GSC 复查 | 否，未发现硬故障 |
+| `2026-07-05` | 已完成 28 天复查点 GSC 检查 | 否，结论见第 25 节 |
+
+继续观察的重点：
+
+- `/converter/photo-to-pixel-art/` 曝光是否增加。
+- `photo to pixel art` 是否开始更多展示 photo 页。
+- `picture to pixel art` 是否开始更多展示 photo 页。
+- photo 页平均排名是否从 50-70 靠近 30、20 或更好。
+- 首页 `image to pixel art` 和 `pixel art converter` 是否保持稳定。
+
+独立监控表：
+
+- `docs/GSC_BATCH_A_MONITORING_2026-06-12.md`
+
+14 天复查后的当时安排：
+
+- 先判断 Google 是否已重新抓取 photo 页。
+- 再查目标词 SERP 类型。
+- 最后再决定是否做下一批轻改。
+- 在 `2026-07-05` 前，不进入下一批大改。
+
+当时结论：
+
+```txt
+不继续下一批代码。
+只做文档监控。
+当时目标是 2026-07-05 再做完整窗口复查。
+```
+
+当前已完成 2026-07-05 复查点检查，结论见第 25 节。
+
+## 24. 2026-06-22 正式 14 天复查结论
+
+详细数据已写入独立监控表：
+
+- `docs/GSC_BATCH_A_MONITORING_2026-06-12.md`
+
+数据窗口：
+
+- GSC final 数据到 `2026-06-20`。
+- 本次统计窗口：`2026-06-07` 到 `2026-06-20`。
+- 对照窗口：`2026-05-24` 到 `2026-06-06`。
+
+核心结论：
+
+- 全站没有受伤：点击、曝光、CTR、平均排名都比对照窗口略好。
+- 首页核心词没有受伤：`image to pixel art` 和 `pixel art converter` 表现更稳。
+- photo 页没有明显起量：点击从 6 到 8，曝光从 581 到 489，排名仍在 49 左右。
+- `photo to pixel art` 和 `picture to pixel art` 仍然主要由首页承接。
+- photo 页在这两个核心词上仍然是少量曝光、0 点击、排名 70 左右。
+
+14 天结论：
+
+```txt
+不进入下一批大改。
+继续等 2026-07-05 的 28 天窗口。
+如果提前行动，只做只读诊断，不改代码。
+```
+
+## 25. 2026-07-05 28 天复查结论
+
+详细数据已写入独立监控表：
+
+- `docs/GSC_BATCH_A_MONITORING_2026-06-12.md`
+
+数据窗口：
+
+- GSC final 数据到 `2026-07-03`。
+- GSC all 数据到 `2026-07-05`，但 `all` 只做辅助参考。
+- 本次统计窗口：`2026-06-07` 到 `2026-07-03`。
+- 这个窗口是 27 天 final 数据，严格 28 天 final 还差 1 天。
+- 对照窗口：`2026-05-11` 到 `2026-06-06`。
+
+核心结论：
+
+- 全站没有受伤：上线后 final 窗口点击 `10,978`，曝光 `206,932`，CTR `5.31%`，平均排名 `7.50`。
+- 首页没有受伤：`image to pixel art` 和 `pixel art converter` 都明显优于上线前。
+- photo 页自身略有改善：点击从 `11` 到 `23`，CTR 从 `1.05%` 到 `2.49%`。
+- GSC URL Inspection 显示 photo 页已收录，Google 最近抓取时间是 `2026-06-29T06:09:34Z`，Google canonical 和用户 canonical 都是 photo 页自身。
+- 但 photo 页没有真正接住核心词：`photo to pixel art` 和 `picture to pixel art` 仍然主要由首页承接。
+- `photo to pixel art` 在 photo 页只有 `39` 曝光、`0` 点击、平均排名 `76.97`。
+- `picture to pixel art` 在 photo 页只有 `21` 曝光、`0` 点击、平均排名 `76.19`。
+
+28 天复查点结论：
+
+```txt
+批次 A 是安全的，但没有达到“photo 页接住核心词”的目标。
+现在不进入下一批大改。
+下一步先做只读诊断和下一轮方案判断。
+```
+
+下一步判断重点：
+
+1. 人工看美国桌面端 `photo to pixel art` / `picture to pixel art` 搜索结果。
+2. 判断 photo 页是否还要抢这两个大词，还是改成主攻 `convert photo to pixel art`、`convert picture to pixel art`、`photo to pixel` 这类更长尾的词。
+3. 如果继续做 photo 页，先写“批次 A follow-up 诊断 + 方案”，不要直接改代码。
+4. 在这个判断完成前，不开 8-bit、image-to-pixel、多语言或博客的新代码批次。
+
+## 26. 2026-07-05 批次 A follow-up 只读诊断
+
+本节执行第 25 节的下一步判断，只读，不改代码。
+
+详细数据已写入独立监控表：
+
+- `docs/GSC_BATCH_A_MONITORING_2026-06-12.md`
+
+### 26.1 长尾词也没有转向 photo 页
+
+GSC final 窗口：`2026-06-07` 到 `2026-07-03`。
+
+核心发现：
+
+- `photo to pixel art` 仍由首页承接：首页 90 点击 / 1,378 曝光 / 排名 5.07；photo 页 0 点击 / 39 曝光 / 排名 76.97。
+- `picture to pixel art` 仍由首页承接：首页 76 点击 / 1,368 曝光 / 排名 5.26；photo 页 0 点击 / 21 曝光 / 排名 76.19。
+- `convert photo to pixel art` 也仍由首页承接：首页排名 5.56；photo 页排名 66.07。
+- `convert picture to pixel art` 也仍由首页承接：首页排名 5.41；photo 页排名 75.94。
+- `photo to pixel art converter` 仍由首页承接：首页排名 4.27；photo 页排名 70.56。
+- `turn picture into pixel art` 仍由首页承接：首页排名 6.47；photo 页排名 59.57。
+
+这说明问题不是“只差一点内链”。
+
+当前情况是：Google 认为首页对 photo / picture 相关词也更强。
+
+### 26.2 SERP 抽样判断
+
+公开搜索结果样本显示，这类词更像“马上上传图片并转换”的工具意图。
+
+结果里常见的是：
+
+- 综合 image-to-pixel 工具页。
+- photo/picture 专项工具页。
+- 带 grid、palette、export 的工具页。
+- 大品牌 pixel art generator / editor 页面。
+
+这支持一个判断：
+
+```txt
+用户搜 photo / picture to pixel art 时，Google 不一定要求一个独立 photo URL。
+一个完整、强势、可上传的首页工具页也能满足搜索意图。
+```
+
+### 26.3 结论
+
+photo 页当前不是硬故障：
+
+- 已收录。
+- canonical 正确。
+- Google 已重新抓取。
+- 线上新版内容存在。
+- 上传区、FAQ、HowTo 都正常。
+
+真正问题是：
+
+```txt
+photo 页没有比首页更强。
+所以 Google 继续展示首页。
+```
+
+### 26.4 下一步建议
+
+不建议继续用小修小补强行让 photo 页抢 `photo to pixel art` / `picture to pixel art`。
+
+建议采用：
+
+- 首页继续承接 `photo to pixel art` / `picture to pixel art` 这类大词。
+- photo 页保留为辅助专项页，不再硬抢首页已经能拿住的大词。
+- 如果还要继续做 photo 页，下一步改成讨论更窄的方向：`how to convert photo to pixel art`、`convert photo to pixel art online`、`photo to pixel`、`picture to pixel`。
+- 在这个结论确认前，不开 8-bit、image-to-pixel、多语言或博客的新代码批次。
+
+当前状态：
+
+```txt
+只读诊断已完成。
+不进入代码执行。
+下一步是确认 photo 页后续定位，而不是马上开新批次。
+```
+
+## 27. 2026-07-06 批次 B：首页核心词 CTR 优化草案
+
+详细草案已写入独立文档：
+
+- `docs/GSC_BATCH_B_HOMEPAGE_CORE_CTR_2026-07-06.md`
+
+### 27.1 为什么下一步看首页
+
+批次 A 复查说明：
+
+- photo 页没有伤害首页。
+- photo 页已收录，也没有技术硬故障。
+- 但 Google 仍然把 `photo to pixel art`、`picture to pixel art` 和相关长尾词主要给首页。
+
+所以当前不建议继续小修小补 photo 页。
+
+大白话说：
+
+```txt
+首页现在就是 Google 更认可的主工具页。
+与其让子页面硬抢，不如先把首页能拿到的大曝光变成更多点击。
+```
+
+### 27.2 批次 B 只看哪些词
+
+GSC final 窗口：`2026-06-07` 到 `2026-07-03`。
+
+| Query | 当前页面 | 点击 | 曝光 | CTR | 平均排名 | 批次 B 判断 |
+|---|---|---:|---:|---:|---:|---|
+| `pixel art maker` | `/` | 146 | 8,534 | 1.71% | 9.08 | 主要机会 |
+| `pixel art generator` | `/` | 157 | 8,082 | 1.94% | 8.07 | 主要机会，但不能误写 AI |
+| `pixel art converter` | `/` | 199 | 3,054 | 6.52% | 5.00 | 保护词 |
+| `image to pixel art` | `/` | 661 | 8,827 | 7.49% | 4.03 | 保护词 |
+
+### 27.3 批次 B 边界
+
+本批次只讨论首页 `/`。
+
+可以讨论：
+
+- 首页 title / meta description 小幅优化。
+- 首页首屏说明文案是否更清楚。
+- `maker` / `generator` 的点击理由是否更强。
+- 如何保护 `image to pixel art` 和 `pixel art converter`。
+
+本批次不做：
+
+- 不改 photo 页。
+- 不改 8-bit 页。
+- 不改 image-to-pixel 页。
+- 不改 PNG / JPG / GIF 页面。
+- 不改 Blog。
+- 不改多语言。
+- 不做美国或桌面专属页面。
+- 不把本站写成不存在的 AI 生成器。
+
+### 27.4 当前状态
+
+```txt
+批次 B 草案已生成。
+不进入代码执行。
+下一步先审评批次 B 草案，确认是否可以进入首页代码任务拆解。
+```
+
+## 28. 2026-07-06 批次 B 草案审评和首页任务拆解
+
+详细内容已同步到：
+
+- `docs/GSC_BATCH_B_HOMEPAGE_CORE_CTR_2026-07-06.md`
+
+### 28.1 草案审评结论
+
+结论：有条件通过。
+
+通过原因：
+
+- 批次 B 目标页面只有首页 `/`。
+- 目标词是 `pixel art maker` 和 `pixel art generator`。
+- 保护词是 `image to pixel art` 和 `pixel art converter`。
+- 没有把 photo 页、8-bit、多语言、Blog 混进来。
+- 已明确不能把本站写成不存在的 AI 生成器。
+
+不能直接改代码的原因：
+
+- 首页是全站最重要页面。
+- 需要先写清楚当前文案基线、涉及文件和允许改动范围。
+- 不能只因为“CTR 低”就大改首页。
+
+### 28.2 首页代码任务拆解
+
+当前首页关键文案：
+
+| 位置 | 当前文案 |
+|---|---|
+| SEO title | `Image to Pixel Art Converter | Pixel Art Village` |
+| meta description | `Turn images into pixel art online with live preview, palette controls, dithering, and private browser-based processing for PNG, JPG, GIF, and WEBP files.` |
+| H1 | `Image to Pixel Art Converter` |
+
+主要涉及文件：
+
+| 文件 | 批次 B 作用 |
+|---|---|
+| `public/locales/en/translation.json` | 英文文案源头，第一优先改这里 |
+| `src/locales/en.json` | 运行时英文文案备份，要和 public 英文文案保持一致 |
+| `scripts/build/prerender-spa.cjs` | 默认不改；只有构建产物不一致时，才最小同步 fallback title/meta |
+| `src/App.jsx` | 默认不改 |
+| `src/components/ToolSection.jsx` | 默认不改 |
+| `src/components/HomeBelowFold.jsx` | 默认不改 |
+
+建议第一批只改：
+
+- `home.seoTitle`
+- `home.seoDescription`
+- `home.heroSubtitle`
+- 必要时小修 `faq.items`
+
+暂不改：
+
+- 首页 H1。
+- 首页 UI 布局。
+- 上传区结构。
+- 首页下方 converter 卡片。
+- 其他语言首页。
+- 任何 converter 子页面。
+
+### 28.3 agents 审评补充
+
+本次使用了 3 个相关 agent 做只读审评：
+
+| agent 方向 | 结论 |
+|---|---|
+| SEO / GSC 审评 | 有条件通过，可以进入很小范围首页文案任务 |
+| 前端代码边界审评 | 主要改英文文案 JSON，不改首页组件结构 |
+| 首页 SEO 文案建议 | 只把首页从 `converter` 轻轻扩成 `converter & maker`，不把 `generator` 放进 title |
+
+关键补充：
+
+- 不要只改 `src/locales/en.json`，因为构建前会从 `public/locales/en/translation.json` 同步。
+- 第一优先改 `public/locales/en/translation.json`，再保持 `src/locales/en.json` 一致。
+- 默认不改 `App.jsx`、`ToolSection.jsx`、`HomeBelowFold.jsx`、`prerender-spa.cjs`。
+- 构建后必须检查 `dist/index.html` 里的 title、meta、OG、Twitter。
+
+推荐候选文案：
+
+```json
+{
+  "home.seoTitle": "Image to Pixel Art Converter & Maker | Pixel Art Village",
+  "home.seoDescription": "Turn your image into pixel art with a free online pixel art maker and converter. Upload PNG/JPG/GIF/WEBP, preview live, adjust palette and pixel size, then export in your browser.",
+  "home.heroSubtitle": "Upload PNG, JPG, GIF, or WEBP and use the browser-based pixel art maker to preview changes live, adjust pixel size, palette, and dithering, then export clean sprites, icons, or retro graphics."
+}
+```
+
+FAQ 最多小改现有 `Is this an AI pixel art generator?`，不新增一堆 FAQ。
+
+### 28.4 当前状态
+
+```txt
+批次 B 草案已通过。
+首页代码任务拆解草案已生成。
+相关 agents 已完成只读审评。
+当前可以进入很小范围首页文案执行。
+执行范围：只改英文首页文案源头，不改首页组件结构。
+```
+
+## 29. 2026-07-06 批次 B 首页标题小改执行记录
+
+本次只执行用户已确认的首页 SEO title 小改。
+
+修改内容：
+
+```txt
+旧标题：Image to Pixel Art Converter | Pixel Art Village
+新标题：Image to Pixel Art Converter & Maker | Pixel Art Village
+```
+
+涉及文件：
+
+- `public/locales/en/translation.json`
+- `src/locales/en.json`
+
+未改：
+
+- 不改首页 H1。
+- 不改 meta description。
+- 不改 heroSubtitle。
+- 不改 FAQ。
+- 不改首页布局。
+- 不改任何 converter 子页面。
+
+验证：
+
+- `npm run build` 通过。
+- `npm run sitemap:verify` 通过。
+- `npm run lint` 通过。
+- `dist/index.html` 中 title、OG title、Twitter title 已同步为新标题。
+- 本地 preview 首页 HTTP 200，title 为新标题，H1 仍是 `Image to Pixel Art Converter`。
+
+当前状态：
+
+```txt
+首页标题小改已执行并通过本地检查。
+仍保持批次 B 窄范围。
+下一步可以预览页面，确认浏览器标题和页面本身没有异常。
+```
 
 ## 附录：历史审批记录
 
