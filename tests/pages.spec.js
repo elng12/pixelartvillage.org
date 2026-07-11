@@ -12,6 +12,14 @@ test.describe('Static pages visibility', () => {
     await expect(page.getByRole('button', { name: /Open pixel art sample/i })).toHaveCount(0)
   })
 
+  test('Footer includes a crawlable ObbyList link', async ({ page }) => {
+    await page.goto('/')
+
+    const obbyListLink = page.locator('footer a[href="https://obbylist.com/"]')
+    await expect(obbyListLink).toBeVisible()
+    await expect(obbyListLink).not.toHaveAttribute('rel', /(^|\s)nofollow(\s|$)/i)
+  })
+
   test('JPG converter page still works even after homepage promotion is removed', async ({ page }) => {
     await page.goto('/converter/jpg-to-pixel-art/')
     await expect(page.getByRole('heading', { level: 1, name: /Convert JPG to Pixel Art Online/i })).toBeVisible()

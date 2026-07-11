@@ -397,6 +397,15 @@ function Footer() {
               >
                 Patches Answer Today
               </a>
+              <span aria-hidden>•</span>
+              <a
+                href="https://obbylist.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white"
+              >
+                ObbyList
+              </a>
             </div>
           </div>
         </div>
