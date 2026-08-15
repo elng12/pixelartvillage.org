@@ -12,7 +12,7 @@
 | 当前最重要目标 | 让首页继续做主工具入口，先把首页大曝光变成更多点击 |
 | 当前最大问题 | 首页 `maker` / `generator` 曝光大但 CTR 偏低；photo 页没有抢回核心词 |
 | 当前 SEO 主文档 | `docs/GSC_SEO_DISCUSSION_LOG_2026-06-06.md` |
-| 下次复查日期 | 下一轮 SEO 批次开始前 |
+| 下次复查日期 | `2026-08-10` 用 `2026-07-31` 至 `2026-08-06` 的 final 数据复查首页和 `/es/` |
 
 ## 当前 SEO 判断
 
@@ -223,6 +223,30 @@ GSC 证据：沿用批次 B 草案；`pixel art maker` 曝光大但 CTR 偏低�
 复查日期：上线后先看 2 到 3 天硬错误，正式效果看完整窗口。
 下一步：跑构建检查，确认 `dist/index.html` 的 title / OG / Twitter title 都同步为新标题。
 
+## 2026-07-06 批次 B 标题小改复查计划记录
+
+问题：用户确认先按短周期复查，不等到很久以后才看。
+GSC 证据：本次只改首页 SEO title；目标是帮 `pixel art maker` 增加点击理由，同时保护 `image to pixel art` 和 `pixel art converter`。
+目标页面：首页 `/`。
+本轮边界：只补复查计划，不改代码，不提交，不部署。
+修改：补充批次 B 标题小改后的复查节奏。
+验证：计划已写入 `docs/ITERATION.md` 和 `docs/GSC_BATCH_B_HOMEPAGE_CORE_CTR_2026-07-06.md`。
+未做：未改 meta description、H1、首页文案、photo 页、8-bit、多语言、Blog、schema、sitemap、构建脚本。
+复查日期：`2026-07-08` 或 `2026-07-09`。
+下一步：到期只做硬检查，重点看线上 title、Google 抓取、页面是否正常；不要马上继续第二刀。
+
+## 2026-07-08 批次 B 第一次硬检查记录
+
+问题：标题小改上线后到了 2 天硬检查点，需要确认有没有抓取、收录、页面或 SEO 标签硬问题。
+GSC 证据：GSC URL Inspection 显示首页 `verdict=PASS`、`Submitted and indexed`、`pageFetchState=SUCCESSFUL`、`robotsTxtState=ALLOWED`、`indexingState=INDEXING_ALLOWED`，Google 最近抓取时间为 `2026-07-07T07:20:14Z`，canonical 为 `https://pixelartvillage.org/`。
+目标页面：首页 `/`。
+本轮边界：只做线上页面、Googlebot、sitemap、robots 和 GSC URL Inspection 硬检查；不判断 SEO 成败，不改代码，不提交，不部署。
+修改：在 `docs/GSC_BATCH_B_HOMEPAGE_CORE_CTR_2026-07-06.md` 增加第 13 节硬检查结果；同步本迭代记录。
+验证：线上首页 `200`，无跳转；title 为 `Image to Pixel Art Converter & Maker | Pixel Art Village`；canonical 正确；H1 仍为 `Image to Pixel Art Converter`；无 noindex；Googlebot 访问首页和 sitemap 均为 `200`；`robots.txt` 和 `sitemap.xml` 均为 `200`。
+未做：未改 meta description、H1、heroSubtitle、FAQ、首页布局、photo 页、8-bit、多语言、Blog、schema、sitemap、构建脚本。
+复查日期：`2026-07-11` 或 `2026-07-12`。
+下一步：做早期信号检查，重点看 `pixel art maker`、`pixel art generator`、`image to pixel art`、`pixel art converter`；现在不继续第二刀。
+
 ## 2026-07-11 页脚增加 ObbyList 外链
 
 问题：需要从 Pixel Art Village 给 `https://obbylist.com/` 增加一个可被搜索引擎正常抓取的普通外链。
@@ -253,3 +277,43 @@ GSC 证据：最后完整日期为 `2026-07-11`；同星期 4 天对比中，首
 验证：`npm run build`、`npm run verify:dist`、`npm run seo:check`、`npm run sitemap:verify`、`npm run lint` 全部通过；本地 preview 首页返回 200，title、OG title 和 Twitter title 已同步恢复，canonical 和 H1 正确，上传区可见，页面没有水平溢出。
 未做：未修改其他首页文案、converter 页、Blog、schema、sitemap 或构建脚本。
 复查节奏：上线后先确认 Google 重新抓取；正式数据使用完整窗口，不立刻做第二次首页文案修改。
+
+## 2026-07-23 首页回滚和西班牙语描述复查记录
+
+问题：7 月 13 日的英文首页标题回滚和西班牙语首页描述去重都到了复查点，需要确认 Google 是否重新抓取，并判断是否已经有足够数据下结论。
+GSC 证据：本次能读取到的最新 final 数据截止 `2026-07-20`。URL Inspection 显示首页最近抓取时间为 `2026-07-23T02:36:02Z`，`/es/` 最近抓取时间为 `2026-07-21T06:04:28Z`；两页均为 `PASS`、`Submitted and indexed`、允许抓取、抓取成功，Google canonical 与页面 canonical 一致。
+目标页面：首页 `/` 和西班牙语首页 `/es/`。
+本轮边界：只读检查 GSC、URL Inspection 和线上真实页面；只更新复查文档，不改页面代码，不提交，不部署。
+首页数据：标题测试期 `2026-07-06` 至 `2026-07-12` 为 523 点击、15,989 曝光、CTR 3.27%、平均排名 11.6；回滚后 `2026-07-14` 至 `2026-07-20` 为 829 点击、27,146 曝光、CTR 3.05%、平均排名 8.5。相比标题测试期，点击增加 58.5%，曝光增加 69.8%，平均排名改善 3.1 位。
+首页判断：回滚后的时间段里，曝光和排名明显恢复，`pixel art maker` 和 `pixel art generator` 也从测试期低点恢复，但首页仍未完全回到 `2026-06-29` 至 `2026-07-05` 的原始基线。URL Inspection 只提供最近一次抓取时间，不能证明恢复全部由标题回滚造成；现有证据支持继续保留回滚后的原标题，不做第二次首页文案修改。
+西班牙语数据：`2026-07-06` 至 `2026-07-12` 为 23 点击、412 曝光、CTR 5.58%、平均排名 18.8；`2026-07-14` 至 `2026-07-20` 为 17 点击、399 曝光、CTR 4.26%、平均排名 13.8。当前唯一确认的变更后抓取时间是 `2026-07-21`，而现有 final 数据截止 `2026-07-20`，所以还不能用来判断新描述成功或失败。
+线上验证：首页和 `/es/` 均为 HTTP 200、无跳转、canonical 正确、无 noindex、上传控件可见、没有横向溢出；首页 title 已恢复为 `Image to Pixel Art Converter | Pixel Art Village`；`/es/` 的 meta、OG 和 Twitter description 均为新的西班牙语描述。
+修改：在 `docs/GSC_BATCH_B_HOMEPAGE_CORE_CTR_2026-07-06.md` 补充首页回滚复查结论，并同步本迭代记录和下次复查日期。
+未做：未改 title、meta description、H1、heroSubtitle、FAQ、首页布局、converter 页、多语言内容、Blog、schema、sitemap 或构建脚本。
+复查日期：`2026-08-02`。
+下一步：等 Google 重新抓取后的 7 个完整日期都进入 final 数据，再复查首页恢复程度和 `/es/` 新描述效果；期间不做第二次 SEO 文案修改。
+
+## 2026-08-02 首页回滚和西班牙语描述 7 天复查记录
+
+问题：到了 8 月 2 日计划复查点，需要使用 Google 重新抓取后的完整 7 天数据，判断英文首页是否继续恢复，以及西班牙语独立描述是否有效。
+GSC 证据：本次只使用 final 数据，最新完整日期为 `2026-07-30`。首页 `2026-07-24` 至 `2026-07-30` 为 978 点击、32,938 曝光、CTR 2.97%、平均排名 8.13；相比回滚早期点击增加 18.0%、曝光增加 21.3%、排名改善 0.35 位。相比原标题基线，曝光高 10.4%，但点击仍低 11.8%，主要差距是 CTR。
+首页重点词：`pixel art maker` 和 `pixel art generator` 已基本恢复；`pixel art converter` 的点击和曝光已恢复；`image to pixel art` 曝光接近基线，但 CTR 为 4.65%、排名 5.04，仍弱于基线的 6.23% 和 4.03。
+西班牙语数据：新描述抓取后的 `2026-07-22` 至 `2026-07-28` 为 16 点击、356 曝光、CTR 4.49%、平均排名 13.60；与抓取前过渡期基本持平。样本很小，不能证明明显提升，也没有硬伤证据。
+目标页面：首页 `/` 和西班牙语首页 `/es/`。
+本轮边界：只读检查 GSC final 数据、URL Inspection 和线上真实页面；只更新复查文档，不改页面代码，不提交，不部署。
+验证：首页和 `/es/` 均为 HTTP 200、无跳转；GSC 均为 `PASS`、`Submitted and indexed`、允许抓取、抓取成功，Google canonical 与页面 canonical 一致；两页均无 noindex。
+修改：在 `docs/GSC_BATCH_B_HOMEPAGE_CORE_CTR_2026-07-06.md` 增加第 15 节，并更新本迭代记录的下次复查日期。
+未做：未改 title、meta description、H1、heroSubtitle、FAQ、首页布局、converter 页、多语言内容、Blog、schema、sitemap 或构建脚本。
+复查日期：`2026-08-10`。
+下一步：等待 `2026-07-31` 至 `2026-08-06` 的 7 天 final 数据齐全，重点复查 `image to pixel art` 的 CTR 和排名；在此之前不做第二次 SEO 文案修改。
+
+## 2026-08-15 首页核心词分解和摘要正文小改记录
+
+问题：计划观察窗口已经齐全，首页总 CTR 仍未恢复；`image to pixel art` 的搜索结果摘要抽样采用了首屏第二段正文，而不是 meta description，这段正文只在介绍其他页面入口，点击理由偏弱。
+GSC 证据：`2026-07-31` 至 `2026-08-06` 首页为 959 点击、32,261 曝光、CTR 2.97%、平均排名 8.19；`image to pixel art` 为 119 点击、2,336 曝光、CTR 5.09%、平均排名 5.12，仍弱于原标题基线的 6.23% 和 4.03。设备分解显示 Desktop CTR 从基线 6.05% 降至 4.45%，Mobile 从 6.54% 变为 6.01%。
+目标页面：首页 `/`。
+本轮边界：只改英文首页 `home.heroSubtitle2`，不改 title、meta description、H1、FAQ、布局、广告页、其他 converter、多语言页面或 Blog。
+修改：把介绍站内页面分工的第二段正文，改为直接说明免费、支持格式、实时预览、像素大小、调色板、抖动和浏览器内导出。
+验证：第一次构建因本地依赖未安装而明确失败；执行 `npm ci` 后，使用项目指定的 Node `20.19.0` 重新运行，`npm run build`、`npm run verify:dist`、`npm run seo:check`、`npm run sitemap:verify`、`npm run lint` 全部通过。第一次整套 Playwright 测试因三个测试浏览器未安装而失败；安装项目锁定版本的 Chromium、Firefox 和 WebKit 后，`npm run test` 120 项全部通过。Codex App 内置浏览器确认新正文可见，title、meta description、H1 和 canonical 未变化；非图片文件会显示明确错误，真实 JPG 能打开编辑器并显示 Pixel Size、Palette 和下载按钮；390px 移动端没有横向溢出。
+复查节奏：上线并被 Google 重新抓取后，先看硬错误，再用抓取后的完整 7 天 final 数据复查 Desktop CTR 和四个首页重点词。
+下一步：本轮不提交、不推送、不部署。发布后先确认 Google 重新抓取，再用抓取后的完整 7 天 final 数据复查。
