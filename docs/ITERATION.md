@@ -328,6 +328,8 @@ GSC 证据：`2026-07-31` 至 `2026-08-06` 首页为 959 点击、32,261 曝光�
 首屏修订：首次真实页面检查发现 SEO 介绍、工具标题和上传区纵向重复，导致核心上传动作落到首屏下半部；第一版左右分栏又让标题与工具形成两个竞争焦点。最终改为单一居中 H1、一句价值说明、下方完整上传区和末尾三项关键信息。在 780 x 764 视口中上传区位于约 258-482px；390 x 844 移动端中位于约 319-543px，关键信息行底部约 657px，桌面和手机首屏都能完整看到主操作且无横向溢出。
 验证：Node `20.19.0` 下 `npm run build` 通过，预渲染生成 `dist/converter/32x32-pixel-art/index.html`，title、canonical、OG、Twitter、HowTo、FAQ 和 sitemap 均通过构建检查。Chromium 专项测试验证 32x32 精确导出、完整适配透明留白、64x64 最近邻放大和 390px 无横向溢出；现有 export、pSEO ownership 和 layout 共 6 个 Chromium 测试通过；`npm run lint` 通过。本地真实页面为 HTTP 200，上传区、内容、FAQ 和站内链接可见。
 已知测试基线：`npm run test:unit` 中新增的 32x32 纯函数和内容断言通过，但整套命令仍被仓库原有的 BMP 西班牙语显式跳转断言阻断；当前 `_redirects` 与 `HEAD` 都使用两段跳转策略，`npm run build` 的 redirect 校验通过，本轮不扩大范围修改该旧测试。
-未做：未提交 git、未推送、未部署 production、未提交 GSC；没有创建 16x16、Minecraft 或 AI 新页面。
+发布结果：实现提交为 `001f128`，已推送 `main`；GitHub Pages、CI 和 Lighthouse CI 均通过。线上目标页 HTTP 200，title 56 字符、meta description 159 字符、canonical、H1、上传区和主转换页上下文内链均已核对，线上 sitemap 已包含目标 URL。
+GSC 结果：URL Inspection API 返回 `URL is unknown to Google`，符合新页面首次上线状态。已于 `2026-08-24T14:12:38Z` 重新提交 `https://pixelartvillage.org/sitemap.xml`，接口返回 pending、0 warnings、0 errors。当前内置浏览器登录的 Google 账号没有该资源权限，无法在 GSC 界面点击“请求编入索引”；没有使用仅适用于 JobPosting / BroadcastEvent 的 Indexing API 冒充普通页面提交。
+未做：没有创建 16x16、Minecraft 或 AI 新页面；GSC 界面的单 URL“请求编入索引”仍待有权限账号完成。
 复查节奏：发布并被 Google 抓取后，先确认 URL Inspection、canonical 和 sitemap；再用抓取后的完整 7 天和 28 天 final 数据对比该页的曝光、点击、查询归属和首页是否出现自相竞争。
-下一步：完成范围准确的提交和生产发布后，再开始抓取与 GSC 监测；发布前不继续扩建第二个尺寸页。
+下一步：用有 `pixelartvillage.org` 权限的 Google 账号在 GSC 对线上目标 URL 点击一次“请求编入索引”；随后等待实际抓取，在此之前不扩建第二个尺寸页。
