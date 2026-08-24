@@ -41,7 +41,7 @@ const loadImage = (imageData, { timeoutMs = LOAD_TIMEOUT_MS } = {}) => {
  */
 import { PALETTE_MAP, getCustomPaletteByName, inferAutoPaletteSize, PREVIEW_LIMIT } from './constants.js'
 import { LOAD_TIMEOUT_MS } from './constants.js'
-import { drawContainToCanvas } from './resizeImage.js'
+import { calculateImageFit, drawContainToCanvas } from './resizeImage.js'
 import { rgbToLab } from './color-utils.js'
 import { hexToRgb, applyPaletteToCanvas, applyPaletteToCanvasDither, applyPaletteToCtx, applyPaletteToCtxDither } from './palette-helpers.js'
 import { getKMeansPalette } from './kmeans-bridge.js'
@@ -116,6 +116,9 @@ export async function processPixelArt(imageData, options, signal) {
       autoPalette = false,
       paletteSize = 16,
       colorDistance = 'rgb', // 'rgb' | 'lab'
+      outputWidth = 0,
+      outputHeight = 0,
+      outputFit = 'cover',
     } = options || {};
 
     const img = await loadImage(imageData)
@@ -139,7 +142,25 @@ export async function processPixelArt(imageData, options, signal) {
     const scaledHeight = Math.floor(height / pixelSize)
     let previewCanvas
     let pixelCanvas
-    if (pixelSize > 1 && scaledWidth > 0 && scaledHeight > 0) {
+    const fixedWidth = clampToInt(outputWidth, 0, 512)
+    const fixedHeight = clampToInt(outputHeight, 0, 512)
+    if (fixedWidth > 0 && fixedHeight > 0) {
+      pixelCanvas = await processFixedOutputPath({
+        src,
+        width,
+        height,
+        targetWidth: fixedWidth,
+        targetHeight: fixedHeight,
+        fit: outputFit === 'contain' ? 'contain' : 'cover',
+        filterString,
+        autoPalette,
+        palette,
+        paletteSize,
+        dither,
+        colorDistance,
+      }, signal)
+      previewCanvas = pixelCanvas
+    } else if (pixelSize > 1 && scaledWidth > 0 && scaledHeight > 0) {
       ({ previewCanvas, pixelCanvas } = await processPixelatePath({ src, width, height, scaledWidth, scaledHeight, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal))
     } else {
       previewCanvas = await processDirectPath({ src, width, height, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal)
@@ -158,6 +179,46 @@ export async function processPixelArt(imageData, options, signal) {
     if (import.meta.env.DEV) logger.error('Pixel art processing error:', error);
     throw error;
   }
+}
+
+async function processFixedOutputPath({
+  src,
+  width,
+  height,
+  targetWidth,
+  targetHeight,
+  fit,
+  filterString,
+  autoPalette,
+  palette,
+  paletteSize,
+  dither,
+  colorDistance,
+}, signal) {
+  const canvas = createCanvas(targetWidth, targetHeight)
+  const ctx = canvas.getContext('2d')
+  const rect = calculateImageFit(width, height, targetWidth, targetHeight, fit)
+  ctx.filter = filterString
+  ctx.drawImage(
+    src,
+    rect.sx,
+    rect.sy,
+    rect.sw,
+    rect.sh,
+    rect.dx,
+    rect.dy,
+    rect.dw,
+    rect.dh,
+  )
+
+  const paletteColors = await resolvePalette({ autoPalette, palette, paletteSize }, canvas, signal)
+  if (paletteColors) {
+    const paletteLab = colorDistance === 'lab' ? paletteColors.map((color) => rgbToLab(color[0], color[1], color[2])) : null
+    if (dither) applyPaletteToCtxDither(ctx, targetWidth, targetHeight, paletteColors, colorDistance === 'lab', paletteLab)
+    else applyPaletteToCtx(ctx, targetWidth, targetHeight, paletteColors, colorDistance === 'lab', paletteLab)
+  }
+  ctx.filter = 'none'
+  return canvas
 }
 
 async function processPixelatePath({ src, width, height, scaledWidth, scaledHeight, filterString, autoPalette, palette, paletteSize, dither, colorDistance }, signal) {

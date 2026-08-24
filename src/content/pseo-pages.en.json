@@ -89,6 +89,12 @@
       ],
       "ctaLabel": "Open the full editor",
       "ctaTo": "#tool"
+    },
+    "fixedSizeLink": {
+      "label": "Need an exact 32x32 output?",
+      "body": "Use the dedicated image to pixel art 32x32 converter for a fixed canvas, crop or contain controls, and exact-size export.",
+      "ctaLabel": "Open the 32x32 pixel art converter",
+      "ctaTo": "/converter/32x32-pixel-art/"
     }
   },
   {
@@ -355,6 +361,110 @@
       ],
       "ctaLabel": "Continue in the main converter",
       "ctaTo": "/converter/image-to-pixel-art/"
+    }
+  },
+  {
+    "slug": "32x32-pixel-art",
+    "title": "Image to Pixel Art 32x32 Online Tool | Pixel Art Village",
+    "metaDescription": "Convert any image to pixel art at an exact 32x32 size online. Crop or fit the source, adjust colors and palettes, preview the result, and download a crisp PNG.",
+    "h1": "Image to Pixel Art 32x32 Converter",
+    "heroSubtitle": "Convert an image to pixel art at an exact 32 x 32 size, then crop or fit it, adjust the colors, and download.",
+    "seo": {
+      "primaryKeyword": "image to pixel art 32x32",
+      "intent": "Convert an uploaded image into an exact 32x32 pixel art canvas and download the result.",
+      "ownerPath": "/converter/32x32-pixel-art/",
+      "supportingKeywords": [
+        "32x32 pixel art converter",
+        "convert image to 32x32 pixel art"
+      ],
+      "excludedKeywords": [
+        "image to pixel art",
+        "resize image to 32x32"
+      ]
+    },
+    "intro": [
+      "Convert an image to pixel art at exactly 32x32 pixels with a true fixed-size canvas. Unlike a visual pixel effect that keeps the original dimensions, this tool creates an actual 32 by 32 output from PNG, JPG, GIF, or WEBP files.",
+      "Choose Crop to fill for a full square result or Fit entire image to keep the whole source visible. Then adjust brightness, contrast, saturation, palette, and dithering before downloading the exact 32x32 output or a crisp enlarged copy. Files are processed in your browser and uploads are limited to 10MB."
+    ],
+    "toolHeading": "Upload an image for a true 32x32 conversion",
+    "toolSubtitle": "The editor creates a fixed 32 by 32 pixel canvas with live preview, crop or fit controls, palette adjustments, and exact-size export.",
+    "toolSubtitle2": "Download at 32x32, or choose a crisp 64x64 or 128x128 nearest-neighbor enlargement.",
+    "toolConfig": {
+      "preset": "32x32"
+    },
+    "howItWorks": {
+      "title": "How to convert an image to 32x32 pixel art",
+      "description": "Start with a clear subject, choose how it should fit the square, then refine and export the fixed-size result.",
+      "steps": [
+        {
+          "title": "Upload an image",
+          "description": "Choose a PNG, JPG, GIF, or WEBP file up to 10MB. A simple subject with a clear outline usually works best at this size."
+        },
+        {
+          "title": "Crop or fit the source",
+          "description": "Use Crop to fill for an edge-to-edge square, or Fit entire image when every part of the source must remain visible."
+        },
+        {
+          "title": "Adjust and export",
+          "description": "Tune color and palette settings, preview the 32x32 grid, then download the exact 32x32 file or a crisp enlarged version."
+        }
+      ]
+    },
+    "contentSections": [
+      {
+        "title": "What the 32x32 converter changes",
+        "items": [
+          {
+            "title": "Exact pixel dimensions",
+            "description": "The processing canvas is fixed at 32 by 32 pixels, so the first export option is a real 32x32 image."
+          },
+          {
+            "title": "Square fit control",
+            "description": "Crop to fill removes outer edges. Fit entire image preserves the complete source and uses transparent space when needed."
+          },
+          {
+            "title": "Crisp enlarged copies",
+            "description": "The 64x64 and 128x128 options use nearest-neighbor scaling so the pixel edges remain sharp."
+          }
+        ]
+      },
+      {
+        "title": "Tips for readable 32x32 pixel art",
+        "body": [
+          "Crop close to the main subject before reducing the color palette. Small details disappear quickly on a 32x32 canvas, so a strong silhouette matters more than preserving every part of the source.",
+          "Use fewer colors when the result looks noisy. Palette reduction and a small contrast adjustment can make faces, icons, items, and simple sprites easier to recognize.",
+          "Check the exact 32x32 preview before downloading. An enlarged preview is useful for editing, but the small output is the best test of whether the asset still reads clearly."
+        ]
+      }
+    ],
+    "bottomCallout": {
+      "title": "Need flexible dimensions instead?",
+      "body": [
+        "Use the main image to pixel art converter when you want to control pixel block size without forcing the final canvas to 32x32."
+      ],
+      "ctaLabel": "Open the main image converter",
+      "ctaTo": "/converter/image-to-pixel-art/"
+    },
+    "faq": {
+      "title": "32x32 Pixel Art FAQ",
+      "items": [
+        {
+          "question": "Does this tool export a real 32x32 image?",
+          "answer": "Yes. The 32x32 download option exports an image that is exactly 32 pixels wide and 32 pixels tall."
+        },
+        {
+          "question": "What is the difference between Crop to fill and Fit entire image?",
+          "answer": "Crop to fill covers the full square and trims outer edges. Fit entire image keeps the complete source visible and leaves transparent space when its aspect ratio is not square."
+        },
+        {
+          "question": "Can I download a larger copy without blurring the pixels?",
+          "answer": "Yes. The 64x64 and 128x128 export options enlarge the processed 32x32 result with nearest-neighbor scaling to preserve crisp edges."
+        },
+        {
+          "question": "Are uploaded images sent to a server?",
+          "answer": "No. The conversion and export run in your browser. Supported PNG, JPG, GIF, and WEBP uploads are limited to 10MB."
+        }
+      ]
     }
   }
 ]

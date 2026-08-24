@@ -1639,7 +1639,7 @@ async function prerender() {
     for (const p of pagesForLang) {
       if (!p?.slug) continue
       const routePath = buildPseoPath(lang, p.slug)
-      const description = shortenText(p.metaDescription || '')
+      const description = shortenText(p.metaDescription || '', p.seo ? 160 : 155)
       const pseoHowSteps = Array.isArray(p.howItWorks?.steps)
         ? p.howItWorks.steps.filter((step) => step && step.title)
         : []

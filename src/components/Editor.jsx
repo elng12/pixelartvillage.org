@@ -12,9 +12,13 @@ import { usePaletteStorage } from '../hooks/usePaletteStorage';
 import { buildCustomPaletteLibraryFilename } from '../utils/constants';
 import { clampZoom, snapZoom } from '../utils/zoom-utils';
 
-function Editor({ image }) {
+function Editor({ image, fixedOutput: requestedFixedOutput }) {
   const { t } = useTranslation()
   const IS_E2E = String(import.meta.env.VITE_E2E) === '1'
+  const fixedOutput = useMemo(() => {
+    if (requestedFixedOutput?.width !== 32 || requestedFixedOutput?.height !== 32) return null
+    return { width: 32, height: 32 }
+  }, [requestedFixedOutput?.height, requestedFixedOutput?.width])
   const initial = {
     pixelSize: 1,
     brightness: 0,
@@ -28,10 +32,11 @@ function Editor({ image }) {
     quality: 0.92,
     autoPalette: false,
     paletteSize: 16,
-    exportSize: 'source',
+    exportSize: fixedOutput ? 'pixel' : 'source',
     colorDistance: 'rgb',
     transparentBG: true,
     gridColor: '#475569',
+    outputFit: 'cover',
     // UI state managed in reducer
     compact: false,
     imgDim: { w: 0, h: 0 },
@@ -43,7 +48,7 @@ function Editor({ image }) {
       case 'SET':
         return { ...state, [action.field]: action.value };
       case 'RESET_SLIDERS':
-        return { ...state, pixelSize: 1, brightness: 0, contrast: 0, saturation: 0 };
+        return { ...state, pixelSize: 1, brightness: 0, contrast: 0, saturation: 0, outputFit: 'cover' };
       default:
         return state;
     }
@@ -77,11 +82,18 @@ function Editor({ image }) {
     autoPalette: state.autoPalette,
     paletteSize: state.paletteSize,
     colorDistance: state.colorDistance,
+    outputWidth: fixedOutput?.width || 0,
+    outputHeight: fixedOutput?.height || 0,
+    outputFit: state.outputFit,
     paletteFingerprint: JSON.stringify(customPalettes),
-  }), [state.pixelSize, state.brightness, state.contrast, state.saturation, state.palette, state.dither, state.autoPalette, state.paletteSize, state.colorDistance, customPalettes]);
+  }), [state.pixelSize, state.brightness, state.contrast, state.saturation, state.palette, state.dither, state.autoPalette, state.paletteSize, state.colorDistance, state.outputFit, fixedOutput?.width, fixedOutput?.height, customPalettes]);
 
   const { processedImage, isProcessing } = useImageProcessor(state.readySrc, imageSettings);
   const canDownload = Boolean(processedImage);
+
+  useEffect(() => {
+    dispatch({ type: 'SET', field: 'exportSize', value: fixedOutput ? 'pixel' : 'source' })
+  }, [fixedOutput])
 
   // Auto-compact based on viewport height
   useEffect(() => {
@@ -125,7 +137,10 @@ function Editor({ image }) {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
         if (state.imgDim.w && state.imgDim.h) {
-          fitToScreenDims(state.imgDim.w, state.imgDim.h);
+          fitToScreenDims(
+            fixedOutput?.width || state.imgDim.w,
+            fixedOutput?.height || state.imgDim.h,
+          );
         }
       }, 100); // 100ms防抖
     });
@@ -135,7 +150,7 @@ function Editor({ image }) {
       clearTimeout(resizeTimeout);
       ro.disconnect();
     };
-  }, [state.imgDim.w, state.imgDim.h, fitToScreenDims]);
+  }, [state.imgDim.w, state.imgDim.h, fitToScreenDims, fixedOutput?.height, fixedOutput?.width]);
 
   // 修复：只在图片首次加载时重置滚动位置，避免在处理过程中强制移动滚动
   useEffect(() => {
@@ -174,13 +189,13 @@ function Editor({ image }) {
         const ih = img.naturalHeight || 1;
         manualZoomRef.current = false
         dispatch({ type: 'SET', field: 'imgDim', value: { w: iw, h: ih } });
-        fitToScreenDims(iw, ih, { force: true });
+        fitToScreenDims(fixedOutput?.width || iw, fixedOutput?.height || ih, { force: true });
         dispatch({ type: 'SET', field: 'readySrc', value: src });
       };
       if (img.complete) onReady(); else img.onload = onReady;
     };
     reader.readAsDataURL(file);
-  }, [t, dispatch, fitToScreenDims]);
+  }, [t, dispatch, fitToScreenDims, fixedOutput?.height, fixedOutput?.width]);
 
   // 监听全局粘贴事件（仅当已进入编辑器时，避免与首页 ToolSection 重复）
   useEffect(() => {
@@ -209,12 +224,12 @@ function Editor({ image }) {
       const ih = i.naturalHeight || 1;
       manualZoomRef.current = false
       dispatch({ type: 'SET', field: 'imgDim', value: { w: iw, h: ih } });
-      fitToScreenDims(iw, ih, { force: true });
+      fitToScreenDims(fixedOutput?.width || iw, fixedOutput?.height || ih, { force: true });
       dispatch({ type: 'SET', field: 'readySrc', value: image });
     };
     if (i.complete) onReady(); else i.onload = onReady;
     return () => { i.onload = null; };
-  }, [image, fitToScreenDims]);
+  }, [image, fitToScreenDims, fixedOutput?.height, fixedOutput?.width]);
 
   // 拖拽支持：阻止默认并读取文件
   const onDragOver = (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; };
@@ -249,7 +264,10 @@ function Editor({ image }) {
     if (!blob) return
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.download = `pixel-art-${state.exportSize}.${state.exportFormat}`;
+    const multiplier = state.exportSize === 'double' ? 2 : state.exportSize === 'quad' ? 4 : 1
+    link.download = fixedOutput
+      ? `pixel-art-${fixedOutput.width * multiplier}x${fixedOutput.height * multiplier}.${state.exportFormat}`
+      : `pixel-art-${state.exportSize}.${state.exportFormat}`;
     link.href = url;
     link.style.display = 'none'
     document.body.appendChild(link)
@@ -266,6 +284,9 @@ function Editor({ image }) {
   if (!image && !IS_E2E) return null;
 
   const layout = state.compact ? LAYOUT_TOKENS.compact : LAYOUT_TOKENS.normal;
+  const previewDimensions = fixedOutput
+    ? { w: fixedOutput.width, h: fixedOutput.height }
+    : state.imgDim
 
   const handleClearAllPalettes = () => {
     const resetActivePalette = customPalettes.some((palette) => palette.name === state.palette)
@@ -302,7 +323,8 @@ function Editor({ image }) {
                   showGrid={state.showGrid}
                   gridColor={state.gridColor}
                   isProcessing={isProcessing || !state.readySrc}
-                  imgDim={state.imgDim}
+                  imgDim={previewDimensions}
+                  fixedOutput={fixedOutput}
                 />
               </div>
               <div className="flex gap-3">
@@ -345,7 +367,7 @@ function Editor({ image }) {
                 </div>
                 <div className="mt-2 h-[2px] w-full bg-gray-900/80" />
               </div>
-              <Adjustments state={state} dispatch={dispatch} customPalettes={customPalettes} onZoomChange={handleZoomChange} />
+              <Adjustments state={state} dispatch={dispatch} customPalettes={customPalettes} onZoomChange={handleZoomChange} fixedOutput={fixedOutput} />
               <ExportPanel
                 exportFormat={state.exportFormat}
                 setExportFormat={(value)=>dispatch({type:'SET', field:'exportFormat', value})}
@@ -355,6 +377,7 @@ function Editor({ image }) {
                 setTransparentBG={(v)=>dispatch({type:'SET', field:'transparentBG', value:v})}
                 quality={state.quality}
                 setQuality={(value)=>dispatch({type:'SET', field:'quality', value})}
+                fixedOutput={fixedOutput}
               />
               <PaletteManager 
                 onSavePalette={upsertPalette} 

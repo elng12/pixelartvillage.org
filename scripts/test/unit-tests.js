@@ -10,6 +10,7 @@ import { hexToRgb } from '../../src/utils/palette-helpers.js'
 import { clamp255, rgbToLab } from '../../src/utils/color-utils.js'
 import { nearestColorIndex, applyPaletteToCtx } from '../../src/utils/palette-helpers.js'
 import { getKMeansPalette } from '../../src/utils/kmeans-bridge.js'
+import { calculateImageFit } from '../../src/utils/resizeImage.js'
 import {
   extractPaletteHexColors,
   fetchLospecPalette,
@@ -67,6 +68,20 @@ test('inferAutoPaletteSize parses trailing number', () => {
 test('inferAutoPaletteSize falls back by name map', () => {
   assert.strictEqual(inferAutoPaletteSize('Hollow'), 8)
   assert.strictEqual(inferAutoPaletteSize('Lost Century'), 16)
+})
+
+test('calculateImageFit center-crops wide images for a square output', () => {
+  assert.deepStrictEqual(
+    calculateImageFit(200, 100, 32, 32, 'cover'),
+    { sx: 50, sy: 0, sw: 100, sh: 100, dx: 0, dy: 0, dw: 32, dh: 32 },
+  )
+})
+
+test('calculateImageFit contains wide images without stretching', () => {
+  assert.deepStrictEqual(
+    calculateImageFit(200, 100, 32, 32, 'contain'),
+    { sx: 0, sy: 0, sw: 200, sh: 100, dx: 0, dy: 8, dw: 32, dh: 16 },
+  )
 })
 
 // hexToRgb
@@ -234,6 +249,28 @@ test('main converter copy only lists supported upload formats', () => {
   assert.ok(!/BMP/i.test(en?.home?.cards?.mainConverter?.description || ''), 'Home copy still promises BMP')
   assert.ok(!/BMP/i.test(mainConverter.metaDescription || ''), 'pSEO meta description still promises BMP')
   assert.ok(!/BMP/i.test(mainConverter.heroSubtitle || ''), 'pSEO hero subtitle still promises BMP')
+})
+
+test('32x32 converter is backed by the fixed output preset and complete content', () => {
+  const pseoPages = loadJson('src/content/pseo-pages.en.json')
+  const page = pseoPages.find((entry) => entry.slug === '32x32-pixel-art')
+
+  assert.ok(page, 'Missing 32x32-pixel-art page config')
+  assert.strictEqual(page.toolConfig?.preset, '32x32')
+  assert.strictEqual(page.seo?.primaryKeyword, 'image to pixel art 32x32')
+  assert.strictEqual(page.seo?.ownerPath, '/converter/32x32-pixel-art/')
+  assert.ok(page.title.length >= 55 && page.title.length <= 60)
+  assert.ok(page.metaDescription.length >= 150 && page.metaDescription.length <= 160)
+  assert.ok(Array.isArray(page.howItWorks?.steps) && page.howItWorks.steps.length >= 3)
+  assert.ok(Array.isArray(page.faq?.items) && page.faq.items.length >= 3)
+})
+
+test('main converter links contextually to the 32x32 owner page', () => {
+  const pseoPages = loadJson('src/content/pseo-pages.en.json')
+  const mainPage = pseoPages.find((entry) => entry.slug === 'image-to-pixel-art')
+
+  assert.strictEqual(mainPage?.fixedSizeLink?.ctaTo, '/converter/32x32-pixel-art/')
+  assert.match(mainPage?.fixedSizeLink?.body || '', /image to pixel art 32x32/i)
 })
 
 test('retired BMP converter stays redirected to the main converter', () => {

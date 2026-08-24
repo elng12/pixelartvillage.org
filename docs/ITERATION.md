@@ -317,3 +317,17 @@ GSC 证据：`2026-07-31` 至 `2026-08-06` 首页为 959 点击、32,261 曝光�
 验证：第一次构建因本地依赖未安装而明确失败；执行 `npm ci` 后，使用项目指定的 Node `20.19.0` 重新运行，`npm run build`、`npm run verify:dist`、`npm run seo:check`、`npm run sitemap:verify`、`npm run lint` 全部通过。第一次整套 Playwright 测试因三个测试浏览器未安装而失败；安装项目锁定版本的 Chromium、Firefox 和 WebKit 后，`npm run test` 120 项全部通过。Codex App 内置浏览器确认新正文可见，title、meta description、H1 和 canonical 未变化；非图片文件会显示明确错误，真实 JPG 能打开编辑器并显示 Pixel Size、Palette 和下载按钮；390px 移动端没有横向溢出。
 复查节奏：上线并被 Google 重新抓取后，先看硬错误，再用抓取后的完整 7 天 final 数据复查 Desktop CTR 和四个首页重点词。
 下一步：本轮不提交、不推送、不部署。发布后先确认 Google 重新抓取，再用抓取后的完整 7 天 final 数据复查。
+
+## 2026-08-24 32x32 固定尺寸工具页实现记录
+
+问题：需要判断并执行 `32x32` 专项页，避免再次上线只有文案和跳转按钮、没有独立产品能力的薄页面。
+需求证据：Google Keyword Planner 使用“所有位置、所有语言、Google、过去 12 个月”查询；`image to pixel art 32x32` 和 `32x32 image converter` 均显示月搜 `100-1000`，前者同比 `+900%`、三个月变化 `0%`，精确长尾多为 `10-100`。账号没有活跃广告，因此只能看到区间，不能把 `+900%` 当成稳定增长率。GSC 最近 28 个 final 日期中，`image to pixel art 32x32` 已有 159 曝光、2 点击、平均排名约 9.14，主要由首页承接。
+目标页面：`/converter/32x32-pixel-art/`。
+本轮边界：只实现英文 32x32 固定输出功能和对应专项页；不改首页、photo 页、其他 converter 内容、多语言内容、Blog 或部署配置。
+修改：将 `image to pixel art 32x32` 定为本页唯一核心词，title 为 56 字符，meta description 为 159 字符，H1 和首屏说明自然覆盖核心词；内容源增加机器可读的关键词、意图、归属 URL、辅助词和排除词，构建前新增 55-60 / 150-160 长度及唯一归属校验。新增真实 32x32 处理路径；提供“裁剪填满 / 完整适配”两种方形适配模式；预览按 32x32 网格显示；导出提供 32x32、64x64、128x128，其中放大版本使用最近邻缩放；新增专项内容、HowTo、FAQ、SoftwareApplication、OG 和 sitemap 路由；主转换页增加指向该专项页的上下文内链；新增尺寸和透明留白的浏览器回归测试。
+首屏修订：首次真实页面检查发现 SEO 介绍、工具标题和上传区纵向重复，导致核心上传动作落到首屏下半部；第一版左右分栏又让标题与工具形成两个竞争焦点。最终改为单一居中 H1、一句价值说明、下方完整上传区和末尾三项关键信息。在 780 x 764 视口中上传区位于约 258-482px；390 x 844 移动端中位于约 319-543px，关键信息行底部约 657px，桌面和手机首屏都能完整看到主操作且无横向溢出。
+验证：Node `20.19.0` 下 `npm run build` 通过，预渲染生成 `dist/converter/32x32-pixel-art/index.html`，title、canonical、OG、Twitter、HowTo、FAQ 和 sitemap 均通过构建检查。Chromium 专项测试验证 32x32 精确导出、完整适配透明留白、64x64 最近邻放大和 390px 无横向溢出；现有 export、pSEO ownership 和 layout 共 6 个 Chromium 测试通过；`npm run lint` 通过。本地真实页面为 HTTP 200，上传区、内容、FAQ 和站内链接可见。
+已知测试基线：`npm run test:unit` 中新增的 32x32 纯函数和内容断言通过，但整套命令仍被仓库原有的 BMP 西班牙语显式跳转断言阻断；当前 `_redirects` 与 `HEAD` 都使用两段跳转策略，`npm run build` 的 redirect 校验通过，本轮不扩大范围修改该旧测试。
+未做：未提交 git、未推送、未部署 production、未提交 GSC；没有创建 16x16、Minecraft 或 AI 新页面。
+复查节奏：发布并被 Google 抓取后，先确认 URL Inspection、canonical 和 sitemap；再用抓取后的完整 7 天和 28 天 final 数据对比该页的曝光、点击、查询归属和首页是否出现自相竞争。
+下一步：完成范围准确的提交和生产发布后，再开始抓取与 GSC 监测；发布前不继续扩建第二个尺寸页。

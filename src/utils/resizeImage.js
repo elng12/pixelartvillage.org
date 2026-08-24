@@ -37,6 +37,57 @@ export function drawContainToCanvas(img, maxW, maxH, { pixelated = false } = {})
   return canvas
 }
 
+export function calculateImageFit(sourceWidth, sourceHeight, targetWidth, targetHeight, fit = 'cover') {
+  const sw = Math.max(1, Number(sourceWidth) || 1)
+  const sh = Math.max(1, Number(sourceHeight) || 1)
+  const tw = Math.max(1, Number(targetWidth) || 1)
+  const th = Math.max(1, Number(targetHeight) || 1)
+
+  if (fit === 'contain') {
+    const scale = Math.min(tw / sw, th / sh)
+    const dw = sw * scale
+    const dh = sh * scale
+    return {
+      sx: 0,
+      sy: 0,
+      sw,
+      sh,
+      dx: (tw - dw) / 2,
+      dy: (th - dh) / 2,
+      dw,
+      dh,
+    }
+  }
+
+  const sourceAspect = sw / sh
+  const targetAspect = tw / th
+  if (sourceAspect > targetAspect) {
+    const croppedWidth = sh * targetAspect
+    return {
+      sx: (sw - croppedWidth) / 2,
+      sy: 0,
+      sw: croppedWidth,
+      sh,
+      dx: 0,
+      dy: 0,
+      dw: tw,
+      dh: th,
+    }
+  }
+
+  const croppedHeight = sw / targetAspect
+  return {
+    sx: 0,
+    sy: (sh - croppedHeight) / 2,
+    sw,
+    sh: croppedHeight,
+    dx: 0,
+    dy: 0,
+    dw: tw,
+    dh: th,
+  }
+}
+
 function dataUrlToBlob(dataUrl) {
   const [header, data] = dataUrl.split(',')
   if (!header || !data) return null

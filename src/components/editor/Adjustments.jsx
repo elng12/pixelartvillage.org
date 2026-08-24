@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { PALETTES } from '../../utils/constants'
 import { clampZoom, formatZoomLabel, MAX_ZOOM, MIN_ZOOM, ZOOM_STEP } from '../../utils/zoom-utils'
 
-function Adjustments({ state, dispatch, customPalettes, onZoomChange }) {
+function Adjustments({ state, dispatch, customPalettes, onZoomChange, fixedOutput }) {
   const { t } = useTranslation()
   // Use rAF-throttled setter so slider drag is smooth; coalesce multiple events per frame
   const rafId = useRef(0)
@@ -44,18 +44,56 @@ function Adjustments({ state, dispatch, customPalettes, onZoomChange }) {
           >
             {t('adjustments.reset.all')}
           </button>
-          <button type="button" className="btn-secondary px-2 py-1 text-xs" onClick={() => dispatch({ type: 'SET', field: 'pixelSize', value: 1 })} title={t('adjustments.reset.pixelSizeBtnTitle')} aria-label={t('adjustments.reset.pixelSizeBtnTitle')}>▌ PS</button>
+          {!fixedOutput ? (
+            <button type="button" className="btn-secondary px-2 py-1 text-xs" onClick={() => dispatch({ type: 'SET', field: 'pixelSize', value: 1 })} title={t('adjustments.reset.pixelSizeBtnTitle')} aria-label={t('adjustments.reset.pixelSizeBtnTitle')}>▌ PS</button>
+          ) : null}
           <button type="button" className="btn-secondary px-2 py-1 text-xs" onClick={() => dispatch({ type: 'SET', field: 'brightness', value: 0 })} title={t('adjustments.reset.brightnessBtnTitle')} aria-label={t('adjustments.reset.brightnessBtnTitle')}>▌ BR</button>
           <button type="button" className="btn-secondary px-2 py-1 text-xs" onClick={() => dispatch({ type: 'SET', field: 'contrast', value: 0 })} title={t('adjustments.reset.contrastBtnTitle')} aria-label={t('adjustments.reset.contrastBtnTitle')}>▌ CT</button>
           <button type="button" className="btn-secondary px-2 py-1 text-xs" onClick={() => dispatch({ type: 'SET', field: 'saturation', value: 0 })} title={t('adjustments.reset.saturationBtnTitle')} aria-label={t('adjustments.reset.saturationBtnTitle')}>▌ SN</button>
         </div>
       </div>
 
-      {/* Pixel size */}
-      <div>
-        <label htmlFor="pixel-size-slider" className="block text-sm font-medium mb-2">{t('adjustments.pixelSize', { value: state.pixelSize })}</label>
-        <input id="pixel-size-slider" type="range" min="1" max="50" value={state.pixelSize} onChange={set('pixelSize')} className="w-full" />
-      </div>
+      {fixedOutput ? (
+        <div data-testid="fixed-output-controls">
+          <p className="text-sm font-medium">
+            {t('adjustments.fixedOutput.label', { defaultValue: 'Output size' })}
+          </p>
+          <p className="mt-1 text-lg font-semibold text-gray-950">
+            {fixedOutput.width} x {fixedOutput.height} px
+          </p>
+          <fieldset className="mt-3">
+            <legend className="text-sm font-medium">
+              {t('adjustments.fixedOutput.fitLabel', { defaultValue: 'Image fit' })}
+            </legend>
+            <div className="mt-2 inline-flex overflow-hidden rounded-lg border border-gray-300" role="group" aria-label={t('adjustments.fixedOutput.fitLabel', { defaultValue: 'Image fit' })}>
+              {[
+                ['cover', t('adjustments.fixedOutput.cover', { defaultValue: 'Crop to fill' })],
+                ['contain', t('adjustments.fixedOutput.contain', { defaultValue: 'Fit entire image' })],
+              ].map(([value, label]) => (
+                <button
+                  key={value}
+                  type="button"
+                  aria-pressed={state.outputFit === value}
+                  className={`px-3 py-2 text-sm font-medium transition-colors ${state.outputFit === value ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'}`}
+                  onClick={() => dispatch({ type: 'SET', field: 'outputFit', value })}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <p className="mt-2 text-xs text-gray-500">
+              {state.outputFit === 'cover'
+                ? t('adjustments.fixedOutput.coverNote', { defaultValue: 'Fills the square and crops the outer edges.' })
+                : t('adjustments.fixedOutput.containNote', { defaultValue: 'Keeps the whole image and leaves transparent space when needed.' })}
+            </p>
+          </fieldset>
+        </div>
+      ) : (
+        <div>
+          <label htmlFor="pixel-size-slider" className="block text-sm font-medium mb-2">{t('adjustments.pixelSize', { value: state.pixelSize })}</label>
+          <input id="pixel-size-slider" type="range" min="1" max="50" value={state.pixelSize} onChange={set('pixelSize')} className="w-full" />
+        </div>
+      )}
 
       {/* Color adjustments */}
       <div className="space-y-4 border-t pt-4">

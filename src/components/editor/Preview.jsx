@@ -10,7 +10,7 @@ function toGridOverlayColor(hexColor) {
   return `rgba(${r}, ${g}, ${b}, 0.28)`
 }
 
-function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, gridColor, isProcessing, imgDim, onDropFiles }) {
+function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, gridColor, isProcessing, imgDim, fixedOutput, onDropFiles }) {
   const { t } = useTranslation()
   const scaledW = imgDim?.w && imgDim?.h ? Math.max(1, Math.round(imgDim.w * zoom)) : undefined
   const scaledH = imgDim?.w && imgDim?.h ? Math.max(1, Math.round(imgDim.h * zoom)) : undefined
@@ -31,25 +31,41 @@ function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, gridCo
         if (files && files.length && onDropFiles) onDropFiles(files);
       }}
     >
-      <img
-        src={processedImage || null}
-        alt={t('preview.alt', { defaultValue: 'Pixel art preview' })}
-        className={`transition-opacity ${isProcessing ? 'opacity-50' : 'opacity-100'} max-w-none`}
+      <div
+        className="relative shrink-0"
         style={{
-          imageRendering: 'pixelated',
           width: scaledW ? `${scaledW}px` : undefined,
           height: scaledH ? `${scaledH}px` : undefined,
         }}
-      />
-      <div className="absolute -top-3 right-4 text-xs text-gray-500 bg-white/80 px-2 rounded">
-        {imgDim?.w && imgDim?.h ? t('preview.sizeBadge', { w: imgDim.w, h: imgDim.h, mp: Math.round((imgDim.w * imgDim.h) / 1000000) }) : ''}
+      >
+        <img
+          src={processedImage || null}
+          alt={t('preview.alt', { defaultValue: 'Pixel art preview' })}
+          className={`transition-opacity ${isProcessing ? 'opacity-50' : 'opacity-100'} block max-w-none`}
+          style={{
+            imageRendering: 'pixelated',
+            width: scaledW ? `${scaledW}px` : undefined,
+            height: scaledH ? `${scaledH}px` : undefined,
+          }}
+        />
+        {showGrid && (
+          <div aria-hidden className="pointer-events-none absolute inset-0" style={{
+            backgroundImage: `linear-gradient(to right, ${toGridOverlayColor(gridColor)} 1px, transparent 1px), linear-gradient(to bottom, ${toGridOverlayColor(gridColor)} 1px, transparent 1px)`,
+            backgroundSize: `${gridStepX}px ${gridStepY}px`,
+          }} />
+        )}
       </div>
-      {showGrid && (
-        <div aria-hidden className="pointer-events-none absolute inset-2 rounded" style={{
-          backgroundImage: `linear-gradient(to right, ${toGridOverlayColor(gridColor)} 1px, transparent 1px), linear-gradient(to bottom, ${toGridOverlayColor(gridColor)} 1px, transparent 1px)`,
-          backgroundSize: `${gridStepX}px ${gridStepY}px`,
-        }} />
-      )}
+      <div className="absolute -top-3 right-4 text-xs text-gray-500 bg-white/80 px-2 rounded">
+        {fixedOutput?.width && fixedOutput?.height
+          ? t('preview.fixedSizeBadge', {
+              width: fixedOutput.width,
+              height: fixedOutput.height,
+              defaultValue: '{{width}} x {{height}} output',
+            })
+          : imgDim?.w && imgDim?.h
+            ? t('preview.sizeBadge', { w: imgDim.w, h: imgDim.h, mp: Math.round((imgDim.w * imgDim.h) / 1000000) })
+            : ''}
+      </div>
       {isProcessing && (
         <div
           className="absolute inset-0 flex items-center justify-center bg-white/70 rounded-lg"

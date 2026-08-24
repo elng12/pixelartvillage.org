@@ -714,3 +714,21 @@ Blog 不应承担：
 - v1 解决了“谁该承接哪个词”
 - v2 进一步解决“主战页怎样才真的像主战页”
 - 这更符合当前赛道的真实竞争方式：工具体验、页面集中度、内链、语义结构一起发力
+
+## 17. 2026-08-24：32x32 固定尺寸页面归属补充
+
+本次只新增一个受控页面，不扩建其他尺寸页。
+
+| 字段 | 约束 |
+|---|---|
+| 核心关键词 | `image to pixel art 32x32` |
+| 唯一归属页 | `/converter/32x32-pixel-art/` |
+| 搜索意图 | 上传图片，生成真实的 32x32 像素画，并下载结果 |
+| 辅助词 | `32x32 pixel art converter`、`convert image to 32x32 pixel art` |
+| 明确不抢 | 泛词 `image to pixel art` 继续归 `/converter/image-to-pixel-art/`；`resize image to 32x32` 属于普通图片缩放意图，不作为本页主词 |
+
+页面必须先具备真实产品能力：固定 32x32 处理画布、Crop/Contain、32x32 预览、精确尺寸导出，以及 64x64/128x128 最近邻放大。只有文案和跳转按钮不算完成。
+
+核心词必须自然出现在 title、H1 和首屏说明中。该页 title 固定为 55-60 个字符，meta description 固定为 150-160 个字符；构建前由 `scripts/seo/validate-page-ownership.cjs` 阻止不符合规则的已迁移页面进入构建。
+
+主转换页 `/converter/image-to-pixel-art/` 增加指向本页的上下文内链，但主转换页继续承接泛词，不改成 32x32 页面。上线后先观察该页的收录、查询归属和首页是否出现自相竞争；在得到结果前不创建 16x16、Minecraft 或 AI 尺寸页。

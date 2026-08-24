@@ -6,7 +6,7 @@
   "scripts": {
     "predev": "node scripts/build/embed-en-locale.cjs && node scripts/build/gen-social-preview.cjs && node scripts/build/gen-showcase.cjs",
     "dev": "node scripts/build/dev.cjs",
-    "prebuild": "node scripts/build/embed-en-locale.cjs && node scripts/build/gen-social-preview.cjs && node scripts/build/gen-showcase.cjs && node scripts/seo/generate-sitemap.cjs && node scripts/build/gen-pseo-og.cjs",
+    "prebuild": "node scripts/seo/validate-page-ownership.cjs && node scripts/build/embed-en-locale.cjs && node scripts/build/gen-social-preview.cjs && node scripts/build/gen-showcase.cjs && node scripts/seo/generate-sitemap.cjs && node scripts/build/gen-pseo-og.cjs",
     "build": "vite build && node scripts/build/prerender-spa.cjs",
     "postbuild": "node scripts/build/inline-critical-css.cjs && node scripts/seo/seo-check.js && node scripts/build/verify-dist-entries.cjs && node scripts/build/verify-cache-redirects.cjs",
     "lint": "eslint .",
@@ -20,6 +20,7 @@
     "perf:lighthouse": "lhci autorun",
     "verify:dist": "node scripts/build/verify-dist-entries.cjs",
     "seo:check": "node scripts/seo/seo-check.js",
+    "seo:ownership": "node scripts/seo/validate-page-ownership.cjs",
     "seo:sitemap": "node scripts/seo/generate-sitemap.js",
     "seo:keywords": "node scripts/seo/keyword-frequency-analysis.js",
     "seo:density": "node scripts/seo/kw-density-check.js",

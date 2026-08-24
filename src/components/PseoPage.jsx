@@ -280,6 +280,63 @@ function PhotoPseoHero({ page, introParas = [], fallback, onImageUpload }) {
   )
 }
 
+function FixedOutputPseoHero({ page, introParas = [], fallback, onImageUpload }) {
+  const primaryIntro = page.heroSubtitle || introParas[0] || page.metaDescription
+
+  return (
+    <section className="border-b border-gray-200 bg-white py-7 md:py-10">
+      <div className="container mx-auto max-w-5xl px-4">
+        <div className="mx-auto max-w-3xl text-center">
+          {fallback ? (
+            <p className="mb-3 text-xs text-gray-500">{'Using fallback English content.'}</p>
+          ) : null}
+          <h1 className="text-4xl font-extrabold leading-tight text-gray-950 lg:text-5xl">
+            {page.h1}
+          </h1>
+          {primaryIntro ? (
+            <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-gray-700 md:text-lg">
+              {primaryIntro}
+            </p>
+          ) : null}
+        </div>
+
+        <div className="mx-auto mt-6 max-w-4xl">
+          <ToolSection
+            onImageUpload={onImageUpload}
+            showHeader={false}
+            showUploadIcon={false}
+            instructionText="Drop an image to make it 32 x 32"
+            instructionElement="p"
+            showInlineChooseText={false}
+            chooseFileLabel="Choose image"
+            chooseButtonClassName="font-semibold shadow-sm"
+            chooseButtonStyle={{ padding: '0.75rem 1.25rem', fontSize: '0.9375rem' }}
+            supportsText="PNG, JPG, GIF, or WEBP - up to 10MB"
+            sectionClassName="bg-transparent py-0"
+            containerClassName="px-0 text-center"
+            uploadZoneClassName="max-w-none border-blue-300 shadow-sm hover:border-blue-600"
+            uploadZoneStyle={{ minHeight: '14rem', borderRadius: '0.5rem' }}
+          />
+          <dl className="mt-5 grid grid-cols-3 border-y border-gray-200 py-4 text-center">
+            <div className="px-2">
+              <dt className="text-xs font-medium text-gray-500">Output</dt>
+              <dd className="mt-1 text-sm font-semibold text-gray-950">Exact 32 x 32</dd>
+            </div>
+            <div className="border-l border-gray-200 px-2">
+              <dt className="text-xs font-medium text-gray-500">Image fit</dt>
+              <dd className="mt-1 text-sm font-semibold text-gray-950">Crop or contain</dd>
+            </div>
+            <div className="border-l border-gray-200 px-2">
+              <dt className="text-xs font-medium text-gray-500">Processing</dt>
+              <dd className="mt-1 text-sm font-semibold text-gray-950">Private in browser</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function PhotoContentSections({ sections = [] }) {
   const visibleSections = Array.isArray(sections)
     ? sections.filter((section) => section?.title || section?.body?.length || section?.items?.length)
@@ -476,6 +533,10 @@ export default function PseoPage() {
   const canonical = `https://pixelartvillage.org${buildPath(`/converter/${page.slug}/`)}`
   const isPrimaryConverter = page.slug === 'image-to-pixel-art'
   const isEnglishPhotoConverter = page.slug === 'photo-to-pixel-art' && (currentLocale || 'en') === 'en'
+  const fixedOutput = page.toolConfig?.preset === '32x32'
+    ? { width: 32, height: 32 }
+    : null
+  const isFixed32Converter = Boolean(fixedOutput) && (currentLocale || 'en') === 'en'
   const defaultRelatedPages = pages
     .filter((entry) => entry.slug !== page.slug)
     .sort((a, b) => Number(b.slug === 'image-to-pixel-art') - Number(a.slug === 'image-to-pixel-art'))
@@ -579,7 +640,7 @@ export default function PseoPage() {
           />
           {uploadedImage ? (
             <Suspense fallback={null}>
-              <Editor image={uploadedImage} />
+              <Editor key={page.slug} image={uploadedImage} fixedOutput={fixedOutput} />
             </Suspense>
           ) : null}
           <section className="bg-white py-8">
@@ -612,6 +673,22 @@ export default function PseoPage() {
                 ctaTo={page.aiBlock?.ctaTo}
               />
             </div>
+            {page.fixedSizeLink?.ctaLabel ? (
+              <div className="container mx-auto mt-6 max-w-4xl px-4">
+                <p className="border-t border-gray-200 pt-5 text-sm leading-6 text-gray-700">
+                  {page.fixedSizeLink.label ? (
+                    <span className="font-semibold text-gray-950">{page.fixedSizeLink.label} </span>
+                  ) : null}
+                  {page.fixedSizeLink.body ? <span>{page.fixedSizeLink.body} </span> : null}
+                  <LocalizedLink
+                    to={page.fixedSizeLink.ctaTo || '/converter/32x32-pixel-art/'}
+                    className="font-semibold text-blue-700 underline decoration-blue-200 underline-offset-4 transition-colors hover:text-blue-800 hover:decoration-blue-500"
+                  >
+                    {page.fixedSizeLink.ctaLabel}
+                  </LocalizedLink>
+                </p>
+              </div>
+            ) : null}
           </section>
         </Fragment>
       ) : isEnglishPhotoConverter ? (
@@ -624,7 +701,21 @@ export default function PseoPage() {
           />
           {uploadedImage ? (
             <Suspense fallback={null}>
-              <Editor image={uploadedImage} />
+              <Editor key={page.slug} image={uploadedImage} fixedOutput={fixedOutput} />
+            </Suspense>
+          ) : null}
+        </Fragment>
+      ) : isFixed32Converter ? (
+        <Fragment>
+          <FixedOutputPseoHero
+            page={page}
+            introParas={introParas}
+            fallback={fallback}
+            onImageUpload={setUploadedImage}
+          />
+          {uploadedImage ? (
+            <Suspense fallback={null}>
+              <Editor key={page.slug} image={uploadedImage} fixedOutput={fixedOutput} />
             </Suspense>
           ) : null}
         </Fragment>
@@ -657,7 +748,7 @@ export default function PseoPage() {
           />
           {uploadedImage ? (
             <Suspense fallback={null}>
-              <Editor image={uploadedImage} />
+              <Editor key={page.slug} image={uploadedImage} fixedOutput={fixedOutput} />
             </Suspense>
           ) : null}
         </Fragment>
