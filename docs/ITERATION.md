@@ -346,5 +346,6 @@ GSC 结果：URL Inspection API 返回 `URL is unknown to Google`，符合新页
 验证：Node `20.19.0` 下 `npm run seo:ownership`、`npm run build` 和 `npm run lint` 通过；构建生成 `dist/converter/16x16-pixel-art/index.html`，title、canonical、OG、Twitter、HowTo、FAQ、图片和 sitemap 均通过 dist 校验。Chromium 专项测试验证 16x16 精确导出、32x32 最近邻放大和 390px 无横向溢出，同时确认原 32x32 导出流程未回归，2 项测试全部通过。
 已知测试基线：`npm run test:unit` 中新增的 16x16 内容与关键词归属断言通过；整套命令仍只有仓库原有的西班牙语 BMP 重定向断言失败，本轮没有扩大范围处理。
 发布结果：实现提交为 `6b4d77a`，已推送 `main`；GitHub Pages、CI 和 Lighthouse CI 均通过。生产页由 Cloudflare 发布后返回 HTTP 200，title、description、canonical、H1、上传区、HowTo 和 FAQ 均已核对；线上 sitemap 和主转换页都已包含 `/converter/16x16-pixel-art/` 链接。
-当前状态：页面已经上线，但 GSC 是否发现、抓取和收录仍未验证，不能把部署成功写成已收录。
-下一步：在 GSC 对生产 URL 做一次 URL Inspection 并请求抓取；随后用完整 final 数据观察 16x16 查询是否从首页转移到专项页。
+GSC 提交：上线后 URL Inspection 返回 `NEUTRAL / URL is unknown to Google`，没有抓取时间、Google canonical 或引用页，符合刚发布的新 URL 状态。已通过 Search Console API 重新提交 `https://pixelartvillage.org/sitemap.xml`，接口返回 HTTP 204；没有使用只适用于 JobPosting 和 BroadcastEvent 的 Indexing API 冒充普通页面提交。
+当前状态：页面已经上线并进入 sitemap，Google 仍未发现或抓取，不能把部署成功写成已收录。
+下一步：等待 Google 首次抓取；出现抓取时间后再核对 canonical，并用完整 final 数据观察 16x16 查询是否从首页转移到专项页。
