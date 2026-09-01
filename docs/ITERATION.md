@@ -333,3 +333,18 @@ GSC 结果：URL Inspection API 返回 `URL is unknown to Google`，符合新页
 未做：没有创建 16x16、Minecraft 或 AI 新页面；GSC 界面的单 URL“请求编入索引”仍待有权限账号完成。
 复查节奏：发布并被 Google 抓取后，先确认 URL Inspection、canonical 和 sitemap；再用抓取后的完整 7 天和 28 天 final 数据对比该页的曝光、点击、查询归属和首页是否出现自相竞争。
 下一步：用有 `pixelartvillage.org` 权限的 Google 账号在 GSC 对线上目标 URL 点击一次“请求编入索引”；随后等待实际抓取，在此之前不扩建第二个尺寸页。
+
+## 2026-09-01 16x16 固定尺寸工具页实现记录
+
+问题：32x32 专项页已经获得点击和稳定的查询归属，需要从 16x16、Minecraft、AI 三个方向中选择第二个真实工具页，而不是继续等待完整 14 天后才行动。
+需求证据：GSC 使用 `2026-08-02` 至 `2026-08-29` 的完整 final 数据；16x16 相关可见查询共 56 曝光、1 点击，其中 `convert image to 16x16 pixel art`、`image to 16x16 pixel art`、`image to pixel art 16x16` 的平均排名约为 7.67 至 9.25，说明 Google 已经识别本站与该需求相关。Minecraft 搜索结果要求方块映射、材料统计和蓝图等当前产品没有的能力；AI 搜索结果主要要求真正的 AI 生成，与现有规则式转换器不匹配。本轮 Keyword Planner 新查询被 Google Ads 的广告拦截提示挡住，没有用猜测数字补齐。
+目标页面：`/converter/16x16-pixel-art/`。
+关键词归属：唯一核心词为 `image to pixel art 16x16`；辅助词为 `convert image to 16x16 pixel art`、`16x16 pixel art converter` 和 `image to 16x16 pixel art`；泛词 `image to pixel art` 继续归主转换页，`image to pixel art 32x32` 继续归 32x32 页面，`16x16 pixel art generator` 不在本页承诺范围内。
+本轮边界：只新增英文 16x16 固定输出页并让现有固定尺寸组件同时支持 16 和 32；不改首页、不改 32x32 页面内容、不建 Minecraft 或 AI 页面、不新增多语言内容、不改 Blog 或部署配置。
+修改：新增真实 16x16 处理路径，支持裁剪填满、完整适配、调色和抖动、16x16 精确导出，以及 32x32、64x64 最近邻放大。新增独立 H1、正文、HowTo、FAQ、SoftwareApplication、OG 和 sitemap 路由。title 为 59 字符，meta description 为 158 字符。通过内容顺序让主转换页的“Explore other converters”自动产生到新页的普通站内链接，便于搜索引擎发现。
+首屏：沿用已经验收的固定尺寸页结构，采用居中 H1、一句价值说明、下方完整上传区和三项关键信息，不再使用左右分栏或工具前的大段 SEO 文案。1440 x 900 和 390 x 844 真实页面截图均确认标题、上传动作和关键信息清晰可见，没有横向溢出。
+验证：Node `20.19.0` 下 `npm run seo:ownership`、`npm run build` 和 `npm run lint` 通过；构建生成 `dist/converter/16x16-pixel-art/index.html`，title、canonical、OG、Twitter、HowTo、FAQ、图片和 sitemap 均通过 dist 校验。Chromium 专项测试验证 16x16 精确导出、32x32 最近邻放大和 390px 无横向溢出，同时确认原 32x32 导出流程未回归，2 项测试全部通过。
+已知测试基线：`npm run test:unit` 中新增的 16x16 内容与关键词归属断言通过；整套命令仍只有仓库原有的西班牙语 BMP 重定向断言失败，本轮没有扩大范围处理。
+发布结果：实现提交为 `6b4d77a`，已推送 `main`；GitHub Pages、CI 和 Lighthouse CI 均通过。生产页由 Cloudflare 发布后返回 HTTP 200，title、description、canonical、H1、上传区、HowTo 和 FAQ 均已核对；线上 sitemap 和主转换页都已包含 `/converter/16x16-pixel-art/` 链接。
+当前状态：页面已经上线，但 GSC 是否发现、抓取和收录仍未验证，不能把部署成功写成已收录。
+下一步：在 GSC 对生产 URL 做一次 URL Inspection 并请求抓取；随后用完整 final 数据观察 16x16 查询是否从首页转移到专项页。
