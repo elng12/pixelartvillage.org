@@ -83,3 +83,45 @@ test('32x32 converter processes and exports a true fixed-size image', async ({ p
   const hasHorizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)
   expect(hasHorizontalOverflow).toBe(false)
 })
+
+test('16x16 converter processes and exports a true fixed-size image', async ({ page }) => {
+  const buffer = await sharp({
+    create: {
+      width: 40,
+      height: 80,
+      channels: 4,
+      background: { r: 32, g: 140, b: 210, alpha: 1 },
+    },
+  }).png().toBuffer()
+
+  await page.goto('/converter/16x16-pixel-art/')
+  const pageHeading = page.getByRole('heading', { level: 1, name: 'Image to Pixel Art 16x16 Converter' })
+  await expect(pageHeading).toBeVisible()
+  await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1)
+  await expect(page.getByText('Drop an image to make it 16 x 16', { exact: true })).toBeVisible()
+
+  await page.getByTestId('file-input').setInputFiles({
+    name: 'tall-source.png',
+    mimeType: 'image/png',
+    buffer,
+  })
+  await waitForProcessing(page)
+
+  await expect(page.getByTestId('fixed-output-controls')).toContainText('16 x 16 px')
+  await expect(page.getByRole('slider', { name: /^Pixel Size:/ })).toHaveCount(0)
+  await expect(page.getByRole('button', { name: '16 x 16', exact: true })).toHaveAttribute('aria-pressed', 'true')
+
+  const exact = await downloadImage(page)
+  expect(exact.metadata.width).toBe(16)
+  expect(exact.metadata.height).toBe(16)
+
+  await page.getByRole('button', { name: '32 x 32', exact: true }).click()
+  const enlarged = await downloadImage(page)
+  expect(enlarged.metadata.width).toBe(32)
+  expect(enlarged.metadata.height).toBe(32)
+
+  await page.setViewportSize({ width: 390, height: 844 })
+  await expect(page.getByTestId('fixed-output-controls')).toBeVisible()
+  const hasHorizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)
+  expect(hasHorizontalOverflow).toBe(false)
+})

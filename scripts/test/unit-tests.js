@@ -265,6 +265,20 @@ test('32x32 converter is backed by the fixed output preset and complete content'
   assert.ok(Array.isArray(page.faq?.items) && page.faq.items.length >= 3)
 })
 
+test('16x16 converter has a unique keyword owner and a complete fixed output page', () => {
+  const pseoPages = loadJson('src/content/pseo-pages.en.json')
+  const page = pseoPages.find((entry) => entry.slug === '16x16-pixel-art')
+
+  assert.ok(page, 'Missing 16x16-pixel-art page config')
+  assert.strictEqual(page.toolConfig?.preset, '16x16')
+  assert.strictEqual(page.seo?.primaryKeyword, 'image to pixel art 16x16')
+  assert.strictEqual(page.seo?.ownerPath, '/converter/16x16-pixel-art/')
+  assert.ok(page.title.length >= 55 && page.title.length <= 60)
+  assert.ok(page.metaDescription.length >= 150 && page.metaDescription.length <= 160)
+  assert.ok(Array.isArray(page.howItWorks?.steps) && page.howItWorks.steps.length >= 3)
+  assert.ok(Array.isArray(page.faq?.items) && page.faq.items.length >= 3)
+})
+
 test('main converter links contextually to the 32x32 owner page', () => {
   const pseoPages = loadJson('src/content/pseo-pages.en.json')
   const mainPage = pseoPages.find((entry) => entry.slug === 'image-to-pixel-art')

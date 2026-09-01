@@ -98,6 +98,112 @@
     }
   },
   {
+    "slug": "16x16-pixel-art",
+    "title": "Image to Pixel Art 16x16 Converter Tool | Pixel Art Village",
+    "metaDescription": "Convert an image to pixel art at an exact 16x16 size online. Crop or fit the source, adjust colors and palettes, preview the result, and download a crisp PNG.",
+    "h1": "Image to Pixel Art 16x16 Converter",
+    "heroSubtitle": "Convert an image to pixel art at an exact 16 x 16 size, then crop or fit it, simplify the colors, and download.",
+    "seo": {
+      "primaryKeyword": "image to pixel art 16x16",
+      "intent": "Convert an uploaded image into an exact 16x16 pixel art canvas and download the result.",
+      "ownerPath": "/converter/16x16-pixel-art/",
+      "supportingKeywords": [
+        "convert image to 16x16 pixel art",
+        "16x16 pixel art converter",
+        "image to 16x16 pixel art"
+      ],
+      "excludedKeywords": [
+        "image to pixel art",
+        "image to pixel art 32x32",
+        "16x16 pixel art generator"
+      ]
+    },
+    "intro": [
+      "Convert an image to pixel art at exactly 16x16 pixels with a true fixed-size canvas. The tool processes PNG, JPG, GIF, or WEBP files into a real 16 by 16 output instead of applying a pixel effect while keeping the original dimensions.",
+      "Choose Crop to fill for an edge-to-edge square or Fit entire image to keep the complete source visible. Then simplify the palette, adjust brightness, contrast, saturation, and dithering, and download the exact 16x16 result or a crisp enlarged copy. Files stay in your browser and uploads are limited to 10MB."
+    ],
+    "toolHeading": "Upload an image for a true 16x16 conversion",
+    "toolSubtitle": "The editor creates a fixed 16 by 16 pixel canvas with live preview, crop or fit controls, palette adjustments, and exact-size export.",
+    "toolSubtitle2": "Download at 16x16, or choose a crisp 32x32 or 64x64 nearest-neighbor enlargement.",
+    "toolConfig": {
+      "preset": "16x16"
+    },
+    "howItWorks": {
+      "title": "How to convert an image to 16x16 pixel art",
+      "description": "Start with one clear subject, choose how it fits the square, then simplify and export the fixed-size result.",
+      "steps": [
+        {
+          "title": "Upload one clear image",
+          "description": "Choose a PNG, JPG, GIF, or WEBP file up to 10MB. Bold shapes and a simple background survive the 16x16 reduction best."
+        },
+        {
+          "title": "Crop or contain the source",
+          "description": "Use Crop to fill for a full square, or Fit entire image when the complete source must remain visible inside the canvas."
+        },
+        {
+          "title": "Simplify and export",
+          "description": "Reduce noisy colors, check the 16x16 preview, then download the exact file or a sharp 32x32 or 64x64 enlargement."
+        }
+      ]
+    },
+    "contentSections": [
+      {
+        "title": "What the 16x16 converter creates",
+        "items": [
+          {
+            "title": "Exact 16x16 dimensions",
+            "description": "The processing canvas is fixed at 16 by 16 pixels, so the first download option is a real 16x16 image."
+          },
+          {
+            "title": "Controlled square fit",
+            "description": "Crop to fill trims the outer edges. Fit entire image preserves the source and adds transparent space when needed."
+          },
+          {
+            "title": "Sharp larger copies",
+            "description": "The 32x32 and 64x64 options use nearest-neighbor scaling, keeping every enlarged pixel edge crisp."
+          }
+        ]
+      },
+      {
+        "title": "Make a subject readable at 16x16",
+        "body": [
+          "A 16x16 canvas has only 256 pixels, so start with a single recognizable subject. Crop away empty background and favor a strong outline over small texture or fine facial detail.",
+          "Use a smaller palette when the preview looks noisy. Clear contrast between the subject and background usually matters more than matching every color in the source.",
+          "Judge the exact-size preview before exporting. The enlarged view helps with adjustment, but the 16x16 result shows whether an icon, item, or small sprite is still readable."
+        ]
+      }
+    ],
+    "bottomCallout": {
+      "title": "Need more room for image detail?",
+      "body": [
+        "Use the 32x32 converter when the subject needs more detail, or open the main image to pixel art converter when the final canvas should not be fixed to one size."
+      ],
+      "ctaLabel": "Open the 32x32 converter",
+      "ctaTo": "/converter/32x32-pixel-art/"
+    },
+    "faq": {
+      "title": "16x16 Pixel Art FAQ",
+      "items": [
+        {
+          "question": "Does this converter export a real 16x16 image?",
+          "answer": "Yes. The first download option exports an image that is exactly 16 pixels wide and 16 pixels tall."
+        },
+        {
+          "question": "Should I crop or fit the source image?",
+          "answer": "Crop to fill works best when the main subject can occupy the whole square. Fit entire image keeps every part visible and adds transparent space when the source is not square."
+        },
+        {
+          "question": "Can I enlarge the 16x16 result without blurry edges?",
+          "answer": "Yes. The 32x32 and 64x64 options use nearest-neighbor scaling so each source pixel becomes a clean square block."
+        },
+        {
+          "question": "Are uploaded images processed privately?",
+          "answer": "Yes. Conversion and export run in your browser. Supported PNG, JPG, GIF, and WEBP uploads are limited to 10MB."
+        }
+      ]
+    }
+  },
+  {
     "slug": "gif-to-pixel-art",
     "title": "GIF to Pixel Art | Online Tool | Pixel Art Village",
     "metaDescription": "Convert GIF to pixel art online. Preview pixel size and palettes instantly, then export clean frames for sprites and icons.",

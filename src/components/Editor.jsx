@@ -16,8 +16,10 @@ function Editor({ image, fixedOutput: requestedFixedOutput }) {
   const { t } = useTranslation()
   const IS_E2E = String(import.meta.env.VITE_E2E) === '1'
   const fixedOutput = useMemo(() => {
-    if (requestedFixedOutput?.width !== 32 || requestedFixedOutput?.height !== 32) return null
-    return { width: 32, height: 32 }
+    const width = Number(requestedFixedOutput?.width)
+    const height = Number(requestedFixedOutput?.height)
+    if (width !== height || ![16, 32].includes(width)) return null
+    return { width, height }
   }, [requestedFixedOutput?.height, requestedFixedOutput?.width])
   const initial = {
     pixelSize: 1,

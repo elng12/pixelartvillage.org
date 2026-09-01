@@ -44,7 +44,11 @@ function ExportPanel({ exportFormat, setExportFormat, exportSize, setExportSize,
         </div>
         <p className="mt-2 text-xs text-gray-500">
           {fixedSizes.length
-            ? t('export.fixedNote', { defaultValue: 'The first option downloads the exact 32 x 32 pixel file. Larger options use nearest-neighbor scaling to keep edges crisp.' })
+            ? t('export.fixedNote', {
+                width: fixedWidth,
+                height: fixedHeight,
+                defaultValue: 'The first option downloads the exact {{width}} x {{height}} pixel file. Larger options use nearest-neighbor scaling to keep edges crisp.',
+              })
             : t('export.note')}
         </p>
       </div>

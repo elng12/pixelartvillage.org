@@ -280,8 +280,9 @@ function PhotoPseoHero({ page, introParas = [], fallback, onImageUpload }) {
   )
 }
 
-function FixedOutputPseoHero({ page, introParas = [], fallback, onImageUpload }) {
+function FixedOutputPseoHero({ page, introParas = [], fallback, onImageUpload, fixedOutput }) {
   const primaryIntro = page.heroSubtitle || introParas[0] || page.metaDescription
+  const outputLabel = `${fixedOutput.width} x ${fixedOutput.height}`
 
   return (
     <section className="border-b border-gray-200 bg-white py-7 md:py-10">
@@ -305,7 +306,7 @@ function FixedOutputPseoHero({ page, introParas = [], fallback, onImageUpload })
             onImageUpload={onImageUpload}
             showHeader={false}
             showUploadIcon={false}
-            instructionText="Drop an image to make it 32 x 32"
+            instructionText={`Drop an image to make it ${outputLabel}`}
             instructionElement="p"
             showInlineChooseText={false}
             chooseFileLabel="Choose image"
@@ -320,7 +321,7 @@ function FixedOutputPseoHero({ page, introParas = [], fallback, onImageUpload })
           <dl className="mt-5 grid grid-cols-3 border-y border-gray-200 py-4 text-center">
             <div className="px-2">
               <dt className="text-xs font-medium text-gray-500">Output</dt>
-              <dd className="mt-1 text-sm font-semibold text-gray-950">Exact 32 x 32</dd>
+              <dd className="mt-1 text-sm font-semibold text-gray-950">Exact {outputLabel}</dd>
             </div>
             <div className="border-l border-gray-200 px-2">
               <dt className="text-xs font-medium text-gray-500">Image fit</dt>
@@ -533,10 +534,11 @@ export default function PseoPage() {
   const canonical = `https://pixelartvillage.org${buildPath(`/converter/${page.slug}/`)}`
   const isPrimaryConverter = page.slug === 'image-to-pixel-art'
   const isEnglishPhotoConverter = page.slug === 'photo-to-pixel-art' && (currentLocale || 'en') === 'en'
-  const fixedOutput = page.toolConfig?.preset === '32x32'
-    ? { width: 32, height: 32 }
+  const fixedOutputMatch = String(page.toolConfig?.preset || '').match(/^(16|32)x\1$/)
+  const fixedOutput = fixedOutputMatch
+    ? { width: Number(fixedOutputMatch[1]), height: Number(fixedOutputMatch[1]) }
     : null
-  const isFixed32Converter = Boolean(fixedOutput) && (currentLocale || 'en') === 'en'
+  const isEnglishFixedOutputConverter = Boolean(fixedOutput) && (currentLocale || 'en') === 'en'
   const defaultRelatedPages = pages
     .filter((entry) => entry.slug !== page.slug)
     .sort((a, b) => Number(b.slug === 'image-to-pixel-art') - Number(a.slug === 'image-to-pixel-art'))
@@ -705,13 +707,14 @@ export default function PseoPage() {
             </Suspense>
           ) : null}
         </Fragment>
-      ) : isFixed32Converter ? (
+      ) : isEnglishFixedOutputConverter ? (
         <Fragment>
           <FixedOutputPseoHero
             page={page}
             introParas={introParas}
             fallback={fallback}
             onImageUpload={setUploadedImage}
+            fixedOutput={fixedOutput}
           />
           {uploadedImage ? (
             <Suspense fallback={null}>
