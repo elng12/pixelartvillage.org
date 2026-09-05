@@ -15,7 +15,7 @@ export default function About() {
     name: t('site.name'),
     url: 'https://pixelartvillage.org/',
     description: t('about.seoDesc'),
-    sameAs: ['https://github.com/pixelartvillage/pixelartvillage'],
+    sameAs: ['https://github.com/elng12/pixelartvillage.org'],
   }
   return (
     <div className="container mx-auto px-4 py-10 max-w-3xl">

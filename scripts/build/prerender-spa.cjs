@@ -1568,7 +1568,7 @@ async function prerender() {
         url: 'https://pixelartvillage.org/',
         description: pick(bundle, 'about.seoDesc') || 'A free, browser-based pixel art maker & converter.',
         inLanguage: lang,
-        sameAs: ['https://github.com/pixelartvillage/pixelartvillage'],
+        sameAs: ['https://github.com/elng12/pixelartvillage.org'],
       }),
       visible: ({ lang, bundle, title, description }) => renderAboutVisible({
         lang,

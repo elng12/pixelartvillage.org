@@ -349,3 +349,14 @@ GSC 结果：URL Inspection API 返回 `URL is unknown to Google`，符合新页
 GSC 提交：上线后 URL Inspection 返回 `NEUTRAL / URL is unknown to Google`，没有抓取时间、Google canonical 或引用页，符合刚发布的新 URL 状态。已通过 Search Console API 重新提交 `https://pixelartvillage.org/sitemap.xml`，接口返回 HTTP 204；没有使用只适用于 JobPosting 和 BroadcastEvent 的 Indexing API 冒充普通页面提交。
 当前状态：页面已经上线并进入 sitemap，Google 仍未发现或抓取，不能把部署成功写成已收录。
 下一步：等待 Google 首次抓取；出现抓取时间后再核对 canonical，并用完整 final 数据观察 16x16 查询是否从首页转移到专项页。
+
+## 2026-09-05 About 品牌身份链接修正
+
+问题：GEO 只读审评发现 About 页 Organization.sameAs 指向 `https://github.com/pixelartvillage/pixelartvillage`，公开访问返回 HTTP 404。
+证据：当前项目 origin 为 `https://github.com/elng12/pixelartvillage.org.git`；对应网页返回 HTTP 200，GitHub API 确认仓库公开且未归档。本地 HEAD 与远程 main 均为 `9cd5d2295b7084aa9d1c9a3c64e3fca8ac8be535`。
+本轮边界：只修正 About 页品牌身份链接，不改首页、converter、Blog、翻译文案或页面布局，不提交、不推送、不部署。
+修改：同步将 `src/components/About.jsx` 和 `scripts/build/prerender-spa.cjs` 的同一条 sameAs 替换为 `https://github.com/elng12/pixelartvillage.org`。共用 About 模板的语言版本随之使用正确地址，没有新增外部身份或全站 schema。
+验证：Node `20.19.0` 下在临时副本运行 `npm run build`，构建及内置 SEO、dist、重定向检查全部通过；原工作区 `npm run lint` 通过。本地 18 个语言版本 About HTML 的 Organization.sameAs 和 canonical 断言全部通过；Codex 隔离浏览器确认 `/about/` 正文正常、无横向溢出，实际 DOM 保留正确 title、canonical 和新 sameAs。
+工作区保护：构建副本为 `/tmp/pixelart-about-geo-TAdztq`，未覆盖原工作区已有的 sitemap、AGENTS.md 或其他无关改动。本轮代码差异检查通过。
+发布状态：仅本地完成，生产尚未更新。未运行全套端到端测试，未修改 llms.txt、日期、统计数字或首页尺寸声明。
+下一步：如获提交部署授权，仅发布本轮相关文件，再复查生产 About HTML 和新链接的公开可访问性。
