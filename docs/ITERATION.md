@@ -358,5 +358,13 @@ GSC 提交：上线后 URL Inspection 返回 `NEUTRAL / URL is unknown to Google
 修改：同步将 `src/components/About.jsx` 和 `scripts/build/prerender-spa.cjs` 的同一条 sameAs 替换为 `https://github.com/elng12/pixelartvillage.org`。共用 About 模板的语言版本随之使用正确地址，没有新增外部身份或全站 schema。
 验证：Node `20.19.0` 下在临时副本运行 `npm run build`，构建及内置 SEO、dist、重定向检查全部通过；原工作区 `npm run lint` 通过。本地 18 个语言版本 About HTML 的 Organization.sameAs 和 canonical 断言全部通过；Codex 隔离浏览器确认 `/about/` 正文正常、无横向溢出，实际 DOM 保留正确 title、canonical 和新 sameAs。
 工作区保护：构建副本为 `/tmp/pixelart-about-geo-TAdztq`，未覆盖原工作区已有的 sitemap、AGENTS.md 或其他无关改动。本轮代码差异检查通过。
-发布状态：仅本地完成，生产尚未更新。未运行全套端到端测试，未修改 llms.txt、日期、统计数字或首页尺寸声明。
-下一步：如获提交部署授权，仅发布本轮相关文件，再复查生产 About HTML 和新链接的公开可访问性。
+初次验证状态：仅本地完成，生产尚未更新。未运行全套端到端测试，未修改 llms.txt、日期、统计数字或首页尺寸声明。
+
+### 同日提交部署结果
+
+授权：用户随后明确要求“提交部署”；仅发布本轮两个源码文件及本迭代记录，保留其他本地改动。
+发布前验证：在基于远程 main 的干净临时 worktree `/tmp/pixelart-about-release-1fR1jk` 中，仅加入本轮变更；Node `20.19.0` 下 `npm run lint`、`npm run build`、`npm run verify:dist`、`npm run sitemap:verify` 通过，18 个 About HTML 的 sameAs 与 canonical 专项断言通过。
+实现提交：`03756c19fec4f65e4ec917a1f6998077c6d2b5cb` 已推送 main，仅包含 `src/components/About.jsx`、`scripts/build/prerender-spa.cjs` 和本记录。
+自动检查：[CI 33968334110](https://github.com/elng12/pixelartvillage.org/actions/runs/33968334110)、[GitHub Pages 33968334228](https://github.com/elng12/pixelartvillage.org/actions/runs/33968334228)、[Lighthouse CI 33968334286](https://github.com/elng12/pixelartvillage.org/actions/runs/33968334286) 均成功；该提交的 Cloudflare Pages 检查也成功，项目 `pixelartvillage1`，部署 ID `cda1bc5b-b2cb-4f12-acba-87d457c0ace9`。
+生产验收：18 个语言版本的 About 页面均返回成功响应，新 sameAs 已生效、旧地址已消失；title、canonical、OG/Twitter、正文及其余 schema 与本次已验证构建一致。新 GitHub 目标返回 HTTP 200。生产启动检查确认首页、About、西班牙语 About、robots.txt 和 sitemap 正常；sitemap 共 205 个 URL，前 50 个抽样均返回 200，唯一提示是只抽查了前 50 个，而非全量逐 URL 验收。
+当前状态：About 身份链接修正已在生产生效。本次没有重新执行 GSC 收录或 AI 引用效果检查，不把部署成功等同于 AI 引用提升。
