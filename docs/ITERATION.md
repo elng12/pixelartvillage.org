@@ -379,3 +379,10 @@ GSC 提交：上线后 URL Inspection 返回 `NEUTRAL / URL is unknown to Google
 发布隔离：从当前远程 main `7a0ed7cb9b1c8b9e18880fedf24f9be9ab2f836b` 构造干净发布副本 `/tmp/pixelart-sprite-release-chgOSO`。全部 12 个基础内容条目与该提交一致，只新增英文 Sprite 覆盖字段（含其 seo），因此较早的本地非英文回退内容修改不进入发布。对应西班牙语测试按已发布版本校验原 title、HowTo 和七条 FAQ。保留这些未发布内容、旧示例 PNG、HowItWorksSection 未使用样式、Claude 配置、AGENTS、其他文档和 sitemap 的本地改动，不一并提交。
 
 发布前：干净发布副本的 Node 20 构建及自带 SEO/dist/重定向检查、lint、typecheck 通过；Chromium 11 项回归全部通过，无重试，覆盖真实导出像素、透明度、上传错误恢复、手机滚动、尺寸与缩放和页面隔离。生产是否成功，以后续部署回执及线上验收补充为准。
+
+
+发布结果：代码提交 `eb77238678b66ee0faa291ad89bd8ee9a49db161` 已推送 main。[CI 34622499624](https://github.com/elng12/pixelartvillage.org/actions/runs/34622499624)、[GitHub Pages 34622500071](https://github.com/elng12/pixelartvillage.org/actions/runs/34622500071)、[Lighthouse 34622499666](https://github.com/elng12/pixelartvillage.org/actions/runs/34622499666) 全部成功；Cloudflare Pages 项目 pixelartvillage1 的检查成功，部署 ID `5f96b6b6-5bfc-4281-8123-fb2737a0b415`。
+
+生产验收：目标页 HTTP 200，title、description、canonical 和五条 FAQ/JSON-LD 与发布版本一致，原图和结果资源为 228x228 / 38x38。隔离 Playwright 浏览器桌面 1440x900 试用真实素材并下载 38x38 PNG；手机 390x844 调至 Pixel Size 7、Pico-8 后实际下载 32x32 PNG，两次下载四角 alpha 均为 0，页面无水平溢出。首页和 PNG 页抽查 HTTP 200。`/es/converter/photo-to-sprite-converter/` 在线仍按原有 `_redirects` 301 到英文页，不把重定向后的内容当作西班牙语独立页面验收。
+
+部署切换过程中曾短暂遇到图片/旧资源 404，部署完成后刷新恢复，重新验证图片正常加载和真实下载；未修改缓存或全站配置。本轮浏览器选择拒绝非必要 Cookie，不代表已验证允许广告后的体验。未验证用户关键词插件、Firefox/WebKit、实体手机或 Google 搜索效果。发布截图与下载证据保存在 `/tmp/pixelart-sprite-release-*`，其他未提交改动仍保留本地。
