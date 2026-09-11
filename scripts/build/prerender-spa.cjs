@@ -1636,7 +1636,10 @@ async function prerender() {
     const pagesForLang = Array.isArray(pseoPagesByLang[lang]) ? pseoPagesByLang[lang] : []
     if (!pagesForLang.length) continue
     const bundle = loadLocaleBundle(lang)
-    for (const p of pagesForLang) {
+    for (const contentPage of pagesForLang) {
+      const p = lang === 'en' && contentPage?.slug === 'photo-to-sprite-converter'
+        ? { ...contentPage, ...contentPage.englishSprite }
+        : contentPage
       if (!p?.slug) continue
       const routePath = buildPseoPath(lang, p.slug)
       const description = shortenText(p.metaDescription || '', p.seo ? 160 : 155)

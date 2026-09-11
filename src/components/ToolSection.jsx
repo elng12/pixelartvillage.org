@@ -56,6 +56,8 @@ function ToolSection({
   exampleImages = [],
   exampleLabel,
   exampleHint,
+  compact = false,
+  variant = 'default',
 }) {
   const { t } = useTranslation()
   const fileInputRef = useRef(null);
@@ -296,10 +298,21 @@ function ToolSection({
           </Fragment>
         ) : null}
         <div 
-          className={`upload-zone relative max-w-3xl mx-auto bg-white p-6 md:p-8 border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50 ${isPreparing ? 'cursor-not-allowed opacity-80 ring-1 ring-blue-200' : 'cursor-pointer'} ${uploadZoneClassName}`}
-          style={{ padding: '1.5rem', minHeight: '16rem', borderWidth: '2px', borderStyle: 'dashed', borderColor: '#d1d5db', borderRadius: '0.75rem', backgroundColor: '#fff', ...uploadZoneStyle }}
+          className={`upload-zone relative max-w-3xl mx-auto bg-white border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${isPreparing ? 'cursor-not-allowed opacity-80 ring-1 ring-blue-200' : 'cursor-pointer'} ${uploadZoneClassName}`}
+          style={{ padding: compact ? '0.75rem 1.25rem' : '1.5rem', minHeight: compact ? 'auto' : '16rem', borderWidth: '2px', borderStyle: 'dashed', borderColor: '#d1d5db', borderRadius: '0.75rem', backgroundColor: '#fff', ...uploadZoneStyle }}
           aria-busy={isPreparing}
+          role={variant === 'sprite' ? 'button' : undefined}
+          tabIndex={variant === 'sprite' ? 0 : undefined}
+          aria-label={variant === 'sprite' ? (resolvedInstructionText || resolvedChooseFileLabel) : undefined}
           onClick={handleZoneClick}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              if (e.target === e.currentTarget) {
+                e.preventDefault();
+                handleZoneClick(e);
+              }
+            }
+          }}
           onDragOver={(e) => e.preventDefault()}
           onDrop={handleDrop}
           data-testid="upload-zone"
@@ -315,63 +328,27 @@ function ToolSection({
             onChange={handleFileInputChange}
             data-testid="file-input"
           />
-          <div className="text-center">
-            {showUploadIcon ? (
-              <svg className="mx-auto h-12 w-12 text-gray-400" width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 16a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v5a4 4 0 01-4 4H7z" /></svg>
-            ) : null}
-            <InstructionTag id="upload-instructions" className={`${showUploadIcon ? 'mt-4' : ''} text-xl font-semibold text-gray-700`} style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginTop: showUploadIcon ? '1rem' : 0, marginBottom: 0 }}>
-              {resolvedInstructionText}
-              {showInlineChooseText ? (
-                <Fragment>
-                  {' '}
-                  <span className="text-blue-600">{t('tool.clickToChoose')}</span>
-                </Fragment>
-              ) : null}
-            </InstructionTag>
-            <p
-              id="upload-supports"
-              className="mt-1 text-sm text-gray-500"
-              style={{ fontSize: '0.875rem', lineHeight: '1.25rem', marginTop: '0.25rem', marginBottom: 0 }}
-            >
-              {resolvedSupportsText}
-            </p>
-            {hasExamples ? (
-              <div className="mt-4" style={{ marginTop: '1rem' }}>
-                <p className="text-sm font-medium text-gray-600">
-                  {exampleLabel}
-                </p>
-                {exampleHint ? (
-                  <p className="mt-1 text-sm text-gray-500">
-                    {exampleHint}
-                  </p>
-                ) : null}
-                <div className="mt-3 flex flex-wrap justify-center gap-2">
-                  {exampleImages.map((example) => (
-                    <button
-                      key={example.id}
-                      type="button"
-                      className="inline-flex items-center justify-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm transition-colors hover:border-blue-500 hover:bg-blue-100 hover:text-blue-700"
-                      onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        handleExampleSelect(example)
-                      }}
-                      data-testid={`example-btn-${example.id}`}
-                    >
-                      {example.label}
-                    </button>
-                  ))}
+          {compact ? (
+            <div className="flex items-center justify-between gap-3 text-left">
+              <div className="flex items-center gap-3 min-w-0">
+                <svg className="h-6 w-6 text-blue-600 shrink-0" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M20 16.5a4.5 4.5 0 0 0-1.7-8.67 6 6 0 0 0-11.6 1.64A4 4 0 0 0 6 16" />
+                  <path d="M12 16V8" />
+                  <path d="M9 11l3-3 3 3" />
+                </svg>
+                <div className="truncate">
+                  <span id="upload-instructions" className="text-sm font-semibold text-gray-800">
+                    {resolvedInstructionText}
+                  </span>
+                  <span id="upload-supports" className="hidden sm:inline text-xs text-gray-500 ml-2">
+                    {resolvedSupportsText}
+                  </span>
                 </div>
               </div>
-            ) : null}
-            {error && (
-              <p className="mt-3 text-sm text-red-600" role="alert" aria-live="polite">{error}</p>
-            )}
-            <div className="mt-4" style={{ marginTop: '1rem' }}>
               <button
                 type="button"
-                className={`btn-primary ${chooseButtonClassName} ${isPreparing ? 'opacity-60 cursor-not-allowed' : ''}`}
-                style={{ padding: '0.5rem 1rem', borderRadius: '0.5rem', backgroundColor: '#2563eb', color: '#fff', ...chooseButtonStyle }}
+                className={`btn-primary shrink-0 text-xs sm:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-3 py-1.5 transition-colors ${chooseButtonClassName} ${isPreparing ? 'opacity-60 cursor-not-allowed' : ''}`}
+                style={chooseButtonStyle}
                 data-testid="choose-file-btn"
                 aria-describedby="upload-instructions upload-supports"
                 onClick={handleChooseFileClick}
@@ -380,8 +357,83 @@ function ToolSection({
                 {resolvedChooseFileLabel}
               </button>
             </div>
-            <p ref={uploadLiveRef} className="sr-only" aria-live="polite" />
-          </div>
+          ) : (
+            <div className="text-center">
+              {showUploadIcon ? (
+                variant === 'sprite' ? (
+                <svg className="mx-auto h-12 w-12 text-blue-500" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M20 16.5a4.5 4.5 0 0 0-1.7-8.67 6 6 0 0 0-11.6 1.64A4 4 0 0 0 6 16" />
+                  <path d="M12 16V8" />
+                  <path d="M9 11l3-3 3 3" />
+                </svg>
+                ) : (
+                  <svg className="mx-auto h-12 w-12 text-gray-400" width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 16a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v5a4 4 0 01-4 4H7z" /></svg>
+                )
+              ) : null}
+              <InstructionTag id="upload-instructions" className={`${showUploadIcon ? 'mt-4' : ''} text-xl font-semibold text-gray-700`} style={{ fontSize: '1.25rem', lineHeight: '1.75rem', marginTop: showUploadIcon ? '1rem' : 0, marginBottom: 0 }}>
+                {resolvedInstructionText}
+                {showInlineChooseText ? (
+                  <Fragment>
+                    {' '}
+                    <span className="text-blue-600">{t('tool.clickToChoose')}</span>
+                  </Fragment>
+                ) : null}
+              </InstructionTag>
+              <p
+                id="upload-supports"
+                className="mt-1 text-sm text-gray-500"
+                style={{ fontSize: '0.875rem', lineHeight: '1.25rem', marginTop: '0.25rem', marginBottom: 0 }}
+              >
+                {resolvedSupportsText}
+              </p>
+              {hasExamples ? (
+                <div className="mt-4" style={{ marginTop: '1rem' }}>
+                  <p className="text-sm font-medium text-gray-600">
+                    {exampleLabel}
+                  </p>
+                  {exampleHint ? (
+                    <p className="mt-1 text-sm text-gray-500">
+                      {exampleHint}
+                    </p>
+                  ) : null}
+                  <div className="mt-3 flex flex-wrap justify-center gap-2">
+                    {exampleImages.map((example) => (
+                      <button
+                        key={example.id}
+                        type="button"
+                        className="inline-flex items-center justify-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm transition-colors hover:border-blue-500 hover:bg-blue-100 hover:text-blue-700"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          handleExampleSelect(example)
+                        }}
+                        data-testid={`example-btn-${example.id}`}
+                      >
+                        {example.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+              <div className="mt-4" style={{ marginTop: '1rem' }}>
+                <button
+                  type="button"
+                  className={`btn-primary ${chooseButtonClassName} ${isPreparing ? 'opacity-60 cursor-not-allowed' : ''}`}
+                  style={{ padding: '0.5rem 1rem', borderRadius: '0.5rem', backgroundColor: '#2563eb', color: '#fff', ...chooseButtonStyle }}
+                  data-testid="choose-file-btn"
+                  aria-describedby="upload-instructions upload-supports"
+                  onClick={handleChooseFileClick}
+                  disabled={isPreparing}
+                >
+                  {resolvedChooseFileLabel}
+                </button>
+              </div>
+            </div>
+          )}
+          {error && (
+            <p className="mt-3 text-sm text-red-600" role="alert" aria-live="polite">{error}</p>
+          )}
+          <p ref={uploadLiveRef} className="sr-only" aria-live="polite" />
           {isPreparing && (
             <div className="absolute inset-0 flex items-center justify-center rounded-xl bg-white/80" role="status" aria-live="polite" data-testid="upload-preparing">
               <div className="flex items-center gap-3 text-sm font-medium text-gray-600">

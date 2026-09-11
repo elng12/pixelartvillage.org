@@ -380,6 +380,98 @@
       ],
       "ctaLabel": "Continue in the main converter",
       "ctaTo": "/converter/image-to-pixel-art/"
+    },
+    "englishSprite": {
+      "title": "Photo to Sprite Converter - Free PNG | Pixel Art Village",
+      "metaDescription": "Photo to Sprite Converter turns photos and PNGs into single sprite-style images. Adjust pixel size and palettes, preview changes, and download PNGs for free.",
+      "heroSubtitle": "Use this photo to sprite converter to turn an existing photo or PNG into one sprite-style image, without AI redrawing.",
+      "intro": [
+        "A mana potion icon is a useful PNG to sprite example: one item, a clear outline, and no scenery competing for pixels. This source is artwork, not a photo; smaller highlights soften as the pixel grid gets coarser."
+      ],
+      "spriteGuide": {
+        "settingsIntro": "Start here, then change one setting at a time and check the smallest important detail.",
+        "settings": [
+          {
+            "name": "Pixel Size",
+            "start": "6",
+            "effect": "Try 3 for finer detail or 12 for coarser blocks. The same value gives different grid dimensions on different-sized sources."
+          },
+          {
+            "name": "Palette",
+            "start": "None",
+            "effect": "Keeps source colors. Try Pico-8 for a fixed retro palette, or generate a palette from your image."
+          },
+          {
+            "name": "Dithering",
+            "start": "Off",
+            "effect": "With a limited palette, adds dots to soften color transitions; can make small outlines noisy."
+          },
+          {
+            "name": "Brightness / Contrast / Saturation",
+            "start": "0 / 0 / 0",
+            "effect": "Change lightness, tonal separation, and color intensity. Leave at 0 to judge pixel reduction alone."
+          }
+        ],
+        "exports": [
+          {
+            "name": "Pixel size",
+            "description": "Downloads the reduced grid: 38 x 38 for this 228 x 228 example at Pixel Size 6."
+          },
+          {
+            "name": "Original size",
+            "description": "Downloads a pixelated copy at 228 x 228 for this example. A larger file does not restore lost detail."
+          }
+        ],
+        "zoomNote": "Preview zoom changes only the on-screen view, not the export dimensions. Select PNG and download after choosing the size.",
+        "transparencyNote": "With Transparent background on, PNG can preserve existing transparent areas; it cannot automatically remove an opaque background."
+      },
+      "howItWorks": {
+        "steps": [
+          {
+            "title": "Choose image"
+          },
+          {
+            "title": "Adjust the pixels"
+          },
+          {
+            "title": "Choose an export size"
+          }
+        ]
+      },
+      "faq": {
+        "title": "Photo and PNG to Sprite FAQ",
+        "items": [
+          {
+            "question": "Is the photo to sprite converter free and private?",
+            "answer": "Yes. Conversion and export run in your browser, with no payment or account required."
+          },
+          {
+            "question": "Can I use this as a PNG to sprite converter?",
+            "answer": "Yes. PNG files work directly, including those with existing transparency. There is no need to convert them to JPG first."
+          },
+          {
+            "question": "How should I prepare a photo or clean up white edges?",
+            "answer": "Crop to one clear subject and remove unwanted backgrounds in another editor before uploading. If a pale fringe remains, inspect the source on light and dark backgrounds and clean its edge pixels; a different palette alone will not remove the fringe. Small faces and fine text may need manual redrawing after conversion."
+          },
+          {
+            "question": "Does this create a sprite sheet or animation frames?",
+            "answer": "No. The output is one still image. Generating poses, animation frames, or a sprite sheet requires a separate sprite or animation editor."
+          },
+          {
+            "question": "Can I get an exact 16x16 or 32x32 sprite?",
+            "answer": "Use the dedicated 16x16 or 32x32 converter for a fixed canvas. This page reduces each dimension by Pixel Size, rounded down. Very large inputs are resized for browser processing, so check the loaded dimensions rather than assuming Original size always matches the untouched file."
+          }
+        ]
+      },
+      "seo": {
+        "primaryKeyword": "photo to sprite converter",
+        "intent": "Convert a photo or PNG into one sprite-style image with adjustable pixels and palettes.",
+        "ownerPath": "/converter/photo-to-sprite-converter/",
+        "supportingKeywords": [
+          "png to sprite converter",
+          "png to sprite"
+        ]
+      }
     }
   },
   {

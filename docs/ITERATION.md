@@ -368,3 +368,14 @@ GSC 提交：上线后 URL Inspection 返回 `NEUTRAL / URL is unknown to Google
 自动检查：[CI 33968334110](https://github.com/elng12/pixelartvillage.org/actions/runs/33968334110)、[GitHub Pages 33968334228](https://github.com/elng12/pixelartvillage.org/actions/runs/33968334228)、[Lighthouse CI 33968334286](https://github.com/elng12/pixelartvillage.org/actions/runs/33968334286) 均成功；该提交的 Cloudflare Pages 检查也成功，项目 `pixelartvillage1`，部署 ID `cda1bc5b-b2cb-4f12-acba-87d457c0ace9`。
 生产验收：18 个语言版本的 About 页面均返回成功响应，新 sameAs 已生效、旧地址已消失；title、canonical、OG/Twitter、正文及其余 schema 与本次已验证构建一致。新 GitHub 目标返回 HTTP 200。生产启动检查确认首页、About、西班牙语 About、robots.txt 和 sitemap 正常；sitemap 共 205 个 URL，前 50 个抽样均返回 200，唯一提示是只抽查了前 50 个，而非全量逐 URL 验收。
 当前状态：About 身份链接修正已在生产生效。本次没有重新执行 GSC 收录或 AI 引用效果检查，不把部署成功等同于 AI 引用提升。
+
+
+## 2026-09-12 英文 Sprite 页发布
+
+授权：用户明确要求“推送部署”。仅发布 `/converter/photo-to-sprite-converter/` 英文页及必要的页面专属展示逻辑、测试和两张透明物品 PNG。标题保留 `Photo to Sprite Converter - Free PNG | Pixel Art Village`，描述保留已确认的 Photo to Sprite Converter turns photos and PNGs 开头原文；正文保持精简参数表、导出对比、五条 FAQ 与真实案例，不恢复重复长说明。
+
+案例：[Free Health and Mana Potions by bevouliin.com](https://opengameart.org/content/free-health-and-mana-potions)，CC0；原 PNG 228x228，本站 Pixel Size 6 / Palette None / dithering off 实际下载结果 38x38，无后期加工，透明角保留。保留主关键词可见正文四词组独占第一的测试，不要求辅助词名次或固定密度；未直接验证用户截图插件。
+
+发布隔离：从当前远程 main `7a0ed7cb9b1c8b9e18880fedf24f9be9ab2f836b` 构造干净发布副本 `/tmp/pixelart-sprite-release-chgOSO`。全部 12 个基础内容条目与该提交一致，只新增英文 Sprite 覆盖字段（含其 seo），因此较早的本地非英文回退内容修改不进入发布。对应西班牙语测试按已发布版本校验原 title、HowTo 和七条 FAQ。保留这些未发布内容、旧示例 PNG、HowItWorksSection 未使用样式、Claude 配置、AGENTS、其他文档和 sitemap 的本地改动，不一并提交。
+
+发布前：干净发布副本的 Node 20 构建及自带 SEO/dist/重定向检查、lint、typecheck 通过；Chromium 11 项回归全部通过，无重试，覆盖真实导出像素、透明度、上传错误恢复、手机滚动、尺寸与缩放和页面隔离。生产是否成功，以后续部署回执及线上验收补充为准。

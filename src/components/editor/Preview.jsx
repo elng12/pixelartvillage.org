@@ -10,7 +10,7 @@ function toGridOverlayColor(hexColor) {
   return `rgba(${r}, ${g}, ${b}, 0.28)`
 }
 
-function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, gridColor, isProcessing, imgDim, fixedOutput, onDropFiles }) {
+function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, gridColor, isProcessing, imgDim, fixedOutput, onDropFiles, mobileFlow = false }) {
   const { t } = useTranslation()
   const scaledW = imgDim?.w && imgDim?.h ? Math.max(1, Math.round(imgDim.w * zoom)) : undefined
   const scaledH = imgDim?.w && imgDim?.h ? Math.max(1, Math.round(imgDim.h * zoom)) : undefined
@@ -23,7 +23,7 @@ function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, gridCo
       ref={previewRef}
       data-testid="preview-container"
       aria-busy={isProcessing}
-      className={"relative border rounded-lg p-2 bg-white h-[70vh] flex items-center justify-center shadow-sm overflow-auto"}
+      className={`relative border rounded-lg p-2 bg-white ${mobileFlow ? 'h-[40vh] min-h-[240px] lg:h-full items-start justify-start' : 'h-[70vh] items-center justify-center'} flex shadow-sm overflow-auto`}
       onDragOver={(e) => { e.preventDefault(); }}
       onDrop={(e) => {
         e.preventDefault();
@@ -32,7 +32,7 @@ function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, gridCo
       }}
     >
       <div
-        className="relative shrink-0"
+        className={`relative shrink-0 ${mobileFlow ? 'm-auto' : ''}`}
         style={{
           width: scaledW ? `${scaledW}px` : undefined,
           height: scaledH ? `${scaledH}px` : undefined,

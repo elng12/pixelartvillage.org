@@ -12,7 +12,7 @@ import { usePaletteStorage } from '../hooks/usePaletteStorage';
 import { buildCustomPaletteLibraryFilename } from '../utils/constants';
 import { clampZoom, snapZoom } from '../utils/zoom-utils';
 
-function Editor({ image, fixedOutput: requestedFixedOutput }) {
+function Editor({ image, fixedOutput: requestedFixedOutput, initialPreset = null, title, mobileFlow = false }) {
   const { t } = useTranslation()
   const IS_E2E = String(import.meta.env.VITE_E2E) === '1'
   const fixedOutput = useMemo(() => {
@@ -21,13 +21,15 @@ function Editor({ image, fixedOutput: requestedFixedOutput }) {
     if (width !== height || ![16, 32].includes(width)) return null
     return { width, height }
   }, [requestedFixedOutput?.height, requestedFixedOutput?.width])
+  const defaultPixelSize = Number(initialPreset?.pixelSize) > 0 ? Number(initialPreset.pixelSize) : 1
+  const defaultPalette = typeof initialPreset?.palette === 'string' ? initialPreset.palette : 'none'
   const initial = {
-    pixelSize: 1,
+    pixelSize: defaultPixelSize,
     brightness: 0,
     contrast: 0,
     saturation: 0,
-    palette: 'none',
-    dither: false,
+    palette: defaultPalette,
+    dither: Boolean(initialPreset?.dither),
     zoom: 1,
     showGrid: false,
     exportFormat: 'png',
@@ -50,7 +52,15 @@ function Editor({ image, fixedOutput: requestedFixedOutput }) {
       case 'SET':
         return { ...state, [action.field]: action.value };
       case 'RESET_SLIDERS':
-        return { ...state, pixelSize: 1, brightness: 0, contrast: 0, saturation: 0, outputFit: 'cover' };
+        return {
+          ...state,
+          pixelSize: defaultPixelSize,
+          ...(initialPreset ? { palette: defaultPalette, dither: Boolean(initialPreset.dither) } : {}),
+          brightness: 0,
+          contrast: 0,
+          saturation: 0,
+          outputFit: 'cover',
+        };
       default:
         return state;
     }
@@ -286,6 +296,9 @@ function Editor({ image, fixedOutput: requestedFixedOutput }) {
   if (!image && !IS_E2E) return null;
 
   const layout = state.compact ? LAYOUT_TOKENS.compact : LAYOUT_TOKENS.normal;
+  const panelHeight = mobileFlow
+    ? (state.compact ? 'h-auto lg:h-[60vh]' : 'h-auto lg:h-[70vh]')
+    : layout.height;
   const previewDimensions = fixedOutput
     ? { w: fixedOutput.width, h: fixedOutput.height }
     : state.imgDim
@@ -309,14 +322,14 @@ function Editor({ image, fixedOutput: requestedFixedOutput }) {
     <section id="editor" className="py-8 bg-white">
       <div className="container mx-auto px-4">
         <div className={`${COLORS.background} ${layout.padding} rounded-xl border ${COLORS.border}`}>
-          <h2 className={`${layout.titleSize} font-bold text-center ${layout.titleMargin}`}>{t('editor.title')}</h2>
+          <h2 className={`${layout.titleSize} font-bold text-center ${layout.titleMargin}`}>{title || t('editor.title')}</h2>
           {errorMsg && (
             <p className="mt-2 text-center text-sm text-red-600" role="alert" aria-live="polite">{errorMsg}</p>
           )}
           <div className={`grid grid-cols-1 lg:grid-cols-2 ${layout.gap}`}>
             {/* 预览区域 */}
             <div className="space-y-4">
-              <div className={`${layout.height}`} onDragOver={onDragOver} onDrop={onDrop}>
+              <div className={panelHeight} onDragOver={onDragOver} onDrop={onDrop}>
                 <Preview
                   previewRef={previewRef}
                   processedImage={processedImage || state.readySrc || ''}
@@ -327,6 +340,7 @@ function Editor({ image, fixedOutput: requestedFixedOutput }) {
                   isProcessing={isProcessing || !state.readySrc}
                   imgDim={previewDimensions}
                   fixedOutput={fixedOutput}
+                  mobileFlow={mobileFlow}
                 />
               </div>
               <div className="flex gap-3">
@@ -354,9 +368,10 @@ function Editor({ image, fixedOutput: requestedFixedOutput }) {
             </div>
 
             {/* 控制区域 */}
-            <div className={`space-y-4 ${layout.height} overflow-auto`}>
+            <div data-testid="editor-controls" className={`space-y-4 ${panelHeight} ${mobileFlow ? 'overflow-visible lg:overflow-auto' : 'overflow-auto'}`}>
               {/* Section header + download CTA */}
-              <div className="sticky top-0 z-10 bg-white/90 backdrop-blur pb-2">
+              {/* Page-scrolling controls clear the site's h-20 header and its border. */}
+              <div className={`sticky ${mobileFlow ? 'top-[calc(5rem+1px)] lg:top-0' : 'top-0'} z-10 bg-white/90 backdrop-blur pb-2`}>
                 <div className="flex items-center gap-3">
                   <span className="inline-flex items-center border rounded px-2 py-1 text-sm bg-white">{t('editor.section.general')}</span>
                   <button

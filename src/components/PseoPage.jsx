@@ -87,7 +87,7 @@ function MainConverterCallout({ callout, testId }) {
   )
 }
 
-function PseoContentSections({ sections = [] }) {
+function PseoContentSections({ sections = [], compactLayout = false }) {
   const visibleSections = Array.isArray(sections)
     ? sections.filter((section) => section?.title || section?.body?.length || section?.items?.length)
     : []
@@ -104,7 +104,7 @@ function PseoContentSections({ sections = [] }) {
           return (
             <div key={sectionIndex}>
               {section.title ? (
-                <h2 className="text-xl font-semibold text-gray-900">{section.title}</h2>
+                <h2 className={`${compactLayout ? 'text-2xl' : 'text-xl'} font-semibold text-gray-900`}>{section.title}</h2>
               ) : null}
               {body.length ? (
                 <div className="mt-3 space-y-3 text-gray-700">
@@ -172,6 +172,80 @@ function PhotoPreviewStrip({ className = '' }) {
         </div>
       </div>
     </div>
+  )
+}
+
+const SPRITE_EXAMPLE_IMAGES = [
+  {
+    id: 'demo-sprite',
+    label: 'Try demo image',
+    src: '/sprite-mana-source.png',
+  },
+]
+
+function SpritePreviewStrip({ intro, className = '' }) {
+  return (
+    <figure className={`border-t border-gray-200 py-4 ${className}`} data-testid="sprite-example">
+      <h2 className="text-2xl font-semibold text-gray-900">A transparent item, converted</h2>
+      <p className="mt-3 text-gray-700 leading-6">{intro}</p>
+      <div className="mt-4 grid grid-cols-2 gap-4">
+        <div>
+          <p className="mb-2 text-sm font-semibold text-gray-700">Source PNG<span className="block font-normal">228 x 228</span></p>
+          <div className="bg-gray-100">
+            <img src="/sprite-mana-source.png" alt="Original blue mana potion icon with transparent corners" width="228" height="228" loading="lazy" className="mx-auto h-auto w-full max-w-[228px]" />
+          </div>
+        </div>
+        <div>
+          <p className="mb-2 text-sm font-semibold text-gray-700">Downloaded PNG<span className="block font-normal">38 x 38</span></p>
+          <div className="bg-gray-100">
+            <img src="/sprite-mana-pixel6.png" alt="Mana potion reduced to a 38 by 38 sprite-style image by this converter" width="38" height="38" loading="lazy" className="mx-auto h-auto w-full max-w-[228px] [image-rendering:pixelated]" />
+          </div>
+        </div>
+      </div>
+      <figcaption className="mt-3 text-sm leading-6 text-gray-600">
+        <p>Actual conversion: Pixel Size 6; Palette None; dithering off; Brightness, Contrast, Saturation 0. PNG, Pixel size export, Transparent background on. Transparent corners remain in the downloaded file; gray is only the display background. Images shown at a matching display size.</p>
+        <p className="mt-2">Source: <a className="text-blue-700 underline underline-offset-4" href="https://opengameart.org/content/free-health-and-mana-potions">Free Health and Mana Potions by bevouliin.com</a> (<a className="text-blue-700 underline underline-offset-4" href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>). Original PNG used unchanged; result downloaded from this tool without retouching.</p>
+      </figcaption>
+    </figure>
+  )
+}
+
+function SpriteGuide({ guide, steps }) {
+  return (
+    <section className="bg-white py-6" data-testid="sprite-guide">
+      <div className="mx-auto max-w-3xl px-4 space-y-6">
+        <div>
+          <h2 className="text-2xl font-semibold text-gray-900">{steps[1].title}</h2>
+          <table className="mt-3 w-full table-fixed text-left text-sm leading-6 text-gray-700">
+            <caption className="mb-3 text-left">{guide.settingsIntro}</caption>
+            <thead className="border-b border-gray-300 text-gray-900">
+              <tr><th scope="col" className="w-1/3 py-2 pr-3">Setting / start</th><th scope="col" className="py-2">Effect</th></tr>
+            </thead>
+            <tbody>
+              {guide.settings.map((setting) => (
+                <tr key={setting.name} className="border-b border-gray-200 align-top">
+                  <th scope="row" className="py-3 pr-3 font-normal"><span className="font-semibold text-gray-900">{setting.name}</span><br />{setting.start}</th>
+                  <td className="py-3">{setting.effect}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h2 className="text-2xl font-semibold text-gray-900">{steps[2].title}</h2>
+          <dl className="mt-3 divide-y divide-gray-200 text-sm leading-6">
+            {guide.exports.map((option) => (
+              <div key={option.name} className="grid grid-cols-[1fr_2fr] gap-3 py-3">
+                <dt className="font-semibold text-gray-900">{option.name}</dt>
+                <dd className="text-gray-700">{option.description}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-2 text-sm leading-6 text-gray-700">{guide.zoomNote}</p>
+          <p className="mt-2 text-sm leading-6 text-gray-700">{guide.transparencyNote}</p>
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -518,7 +592,11 @@ export default function PseoPage() {
     )
   }
 
-  const page = pages.find((entry) => entry.slug === slug)
+  const contentPage = pages.find((entry) => entry.slug === slug)
+  const isEnglishSpriteConverter = slug === 'photo-to-sprite-converter' && (currentLocale || 'en') === 'en'
+  const page = contentPage && isEnglishSpriteConverter
+    ? { ...contentPage, ...contentPage.englishSprite }
+    : contentPage
 
   if (!page) {
     const canonical = `https://pixelartvillage.org${buildPath(`/converter/${slug || ''}/`)}`
@@ -553,9 +631,23 @@ export default function PseoPage() {
           displayIntro: 'Use the main converter when your source is a logo, screenshot, icon, or mixed image.',
         }
       : entry)
+  const spriteRelatedPages = ['image-to-pixel-art', 'photo-to-pixel-art', 'png-to-pixel-art']
+    .map((relatedSlug) => pages.find((entry) => entry.slug === relatedSlug))
+    .filter(Boolean)
+    .map((entry) => ({
+      ...entry,
+      displayH1: entry.slug === 'image-to-pixel-art' ? 'General image converter' : entry.h1,
+      displayIntro: {
+        'image-to-pixel-art': 'For logos, screenshots, and mixed images.',
+        'photo-to-pixel-art': 'For portraits and scenes with photographic detail.',
+        'png-to-pixel-art': 'For PNG icons, flat graphics, and transparent images.',
+      }[entry.slug],
+    }))
   const relatedPages = isEnglishPhotoConverter
     ? (photoRelatedPages.length ? photoRelatedPages : defaultRelatedPages.slice(0, 3))
-    : defaultRelatedPages
+    : isEnglishSpriteConverter
+      ? (spriteRelatedPages.length ? spriteRelatedPages : defaultRelatedPages.slice(0, 3))
+      : defaultRelatedPages
   const faqItems = t('faq.items', { returnObjects: true }) || []
   const pageFaqItems = Array.isArray(page.faq?.items)
     ? page.faq.items.filter((item) => item?.question && item?.answer)
@@ -707,6 +799,34 @@ export default function PseoPage() {
             </Suspense>
           ) : null}
         </Fragment>
+      ) : isEnglishSpriteConverter ? (
+        <Fragment>
+          <section className="bg-gray-50 pt-8 pb-2">
+            <div className="container mx-auto max-w-3xl px-4 text-center">
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{page.h1}</h1>
+              <p className="mt-3 text-base leading-6 text-gray-700">{page.heroSubtitle}</p>
+            </div>
+          </section>
+          <ToolSection
+            onImageUpload={setUploadedImage}
+            showHeader={false}
+            compact={Boolean(uploadedImage)}
+            variant="sprite"
+            instructionElement="p"
+            chooseFileLabel="Choose image"
+            uploadZoneStyle={{ borderRadius: '0.5rem' }}
+            exampleImages={uploadedImage ? [] : SPRITE_EXAMPLE_IMAGES}
+            exampleLabel="Want to test it first?"
+          />
+          {uploadedImage ? (
+            <Suspense fallback={null}>
+              <Editor key={page.slug} image={uploadedImage} fixedOutput={fixedOutput} initialPreset={{ pixelSize: 6 }} title={page.h1} mobileFlow />
+            </Suspense>
+          ) : null}
+          <div className="mx-auto max-w-3xl px-4 mt-4">
+            <SpritePreviewStrip intro={introParas[0]} />
+          </div>
+        </Fragment>
       ) : isEnglishFixedOutputConverter ? (
         <Fragment>
           <FixedOutputPseoHero
@@ -768,19 +888,24 @@ export default function PseoPage() {
         </Fragment>
       ) : (
         <Fragment>
-          <PseoContentSections sections={page.contentSections} />
-          <HowItWorksSection
-            title={page.howItWorks?.title}
-            description={page.howItWorks?.description}
-            steps={page.howItWorks?.steps}
-          />
-          {!isPrimaryConverter && page.bottomCallout ? (
+          {isEnglishSpriteConverter ? <SpriteGuide guide={page.spriteGuide} steps={pageHowSteps} /> : (
+            <Fragment>
+              <PseoContentSections sections={page.contentSections} />
+              <HowItWorksSection
+                title={page.howItWorks?.title}
+                description={page.howItWorks?.description}
+                steps={page.howItWorks?.steps}
+              />
+            </Fragment>
+          )}
+          {!isPrimaryConverter && !isEnglishSpriteConverter && page.bottomCallout ? (
             <section className="bg-white py-8">
               <div className="container mx-auto px-4 max-w-4xl">
                 <MainConverterCallout callout={page.bottomCallout} testId="primary-converter-callout-bottom" />
               </div>
             </section>
           ) : null}
+          {isEnglishSpriteConverter ? <FaqSection title={renderedFaqTitle} items={renderedFaqItems} compactLayout /> : null}
           <RelatedConvertersSection
             heading={t('pseo.relatedHeading')}
             relatedPages={relatedPages}
@@ -788,7 +913,7 @@ export default function PseoPage() {
             siteLinks={siteLinks}
             siteHeading={t('footer.explore')}
           />
-          <FaqSection title={renderedFaqTitle} items={renderedFaqItems} />
+          {!isEnglishSpriteConverter ? <FaqSection title={renderedFaqTitle} items={renderedFaqItems} /> : null}
         </Fragment>
       )}
     </Fragment>
