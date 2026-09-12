@@ -434,3 +434,13 @@ GSC 提交：上线后 URL Inspection 返回 `NEUTRAL / URL is unknown to Google
 发布隔离：开始时 HEAD、origin/main 与实时远程 main 均为 `ba5e0310553324a9aa99e59067281b8fd3ad6df0`。从 HEAD 导出干净副本 `/tmp/pixelart-locale-release-UDpfZM`，仅加入 13 个相关代码/翻译/测试文件；不包含 Claude 配置、AGENTS、竞品文档、未使用的 HowItWorksSection 样式、工作区 sitemap 或旧示例 PNG。本记录只暂存本批相关段落，其他历史文档修改仍保留本地。沿用仓库 Git 集成部署，不另建站点或修改云端配置。
 
 发布前检查：Node 20.19.0 下完整构建及 ownership、SEO、dist、重定向检查通过，lint、typecheck 和受影响文件 diff-check 通过。构建仅在干净副本生成产物，未覆盖工作区 sitemap；保留现有浏览器兼容性数据过期告警，没有更新依赖。完整 Chromium 73 项回归全部通过，无重试，覆盖 18 个 Sprite 入口、首页、Blog、导航、调色板管理、透明导出、固定尺寸、手机布局和 SEO；Codex 隔离浏览器复核了干净副本西语首页。13 个暂存代码/翻译/测试文件与构建输入逐字节一致。推送及生产状态待后续回执补充。
+
+### 本次发布回执
+
+代码提交 `285986090f46b0baebc55b761fd8c4afd28ab3b1` 已推送 main。[CI 34685733463](https://github.com/elng12/pixelartvillage.org/actions/runs/34685733463)、[GitHub Pages 34685733457](https://github.com/elng12/pixelartvillage.org/actions/runs/34685733457)、[Lighthouse 34685733459](https://github.com/elng12/pixelartvillage.org/actions/runs/34685733459) 全部成功。Cloudflare Pages 项目 pixelartvillage1 检查成功，部署 ID `6a48873f-102e-4142-87c0-57ca420f7285`。
+
+生产验证：正式域名运行 Chromium 9 项针对性检查全部通过，无重试；覆盖西语首页初始 HTML、已确认 title/description、桌面 1440/手机 390 布局、文案隔离、语言切换和 Cookie 文案；西语首页使用真实透明素材，Pixel Size 6 / Pico-8 实际下载 38x38 PNG，透明角保留。英文 Sprite 初始元信息、五条可见 FAQ/JSON-LD 一致；实际导出 38x38 与已有案例逐像素相同，Original size 实际下载 228x228 且透明角保留。手机再调到 Pixel Size 7 / Pico-8，预览变化，无横向溢出。证据位于 `/tmp/pixelart-locale-release-UDpfZM/production-test-results/` 和该副本的 Playwright 报告。
+
+线上边界：逐一请求全部 17 个非英语 Sprite 地址，均返回 301 到英文原页，未解除原重定向。Codex 隔离浏览器确认西语首页新文案已生效；从英文 Sprite 站内切换西语时显示新版结构及明确的英文回退提示，而非旧 HowTo/大提示卡。独立多语言全文翻译和语言页直接访问策略不在此次发布范围。
+
+上线检查：首页、西语首页、英文 Sprite 和 PNG converter 均为 HTTP 200，canonical 域名正确，robots 与 sitemap 正常；sitemap 共 205 个 URL，前 50 个抽查全部返回 200，唯一告警为未全量抽查。未修改广告设置；隔离浏览器 Sprite 页面仍可出现原有自动广告，不把此次测试等同于无广告或所有访客体验通过。Firefox/WebKit、实体手机、GSC 收录及搜索排名效果未验证。无关工作区修改仍保留本地。
