@@ -444,3 +444,5 @@ GSC 提交：上线后 URL Inspection 返回 `NEUTRAL / URL is unknown to Google
 线上边界：逐一请求全部 17 个非英语 Sprite 地址，均返回 301 到英文原页，未解除原重定向。Codex 隔离浏览器确认西语首页新文案已生效；从英文 Sprite 站内切换西语时显示新版结构及明确的英文回退提示，而非旧 HowTo/大提示卡。独立多语言全文翻译和语言页直接访问策略不在此次发布范围。
 
 上线检查：首页、西语首页、英文 Sprite 和 PNG converter 均为 HTTP 200，canonical 域名正确，robots 与 sitemap 正常；sitemap 共 205 个 URL，前 50 个抽查全部返回 200，唯一告警为未全量抽查。未修改广告设置；隔离浏览器 Sprite 页面仍可出现原有自动广告，不把此次测试等同于无广告或所有访客体验通过。Firefox/WebKit、实体手机、GSC 收录及搜索排名效果未验证。无关工作区修改仍保留本地。
+
+后续复查补记：仅文档提交 `ebb02e5` 推送后，Cloudflare 部署 `882e550d-023e-4193-be44-71eb061b3338` 及 CI/Pages/Lighthouse 全部成功，业务源码未变。再次运行相同 9 项线上测试时，8 项通过，手机 Sprite 测试有一次上传后 20 秒未出现预览而失败；保留了失败截图、视频和页面快照，没有删除失败记录或放宽断言。该项随后单独开启 trace 复测通过，再连续独立运行 3 次均通过，包含真实 38x38 下载、逐像素比对、透明角和 Pixel Size 7 / Pico-8 预览检查。失败原因未确定，不能据此认定是网络或缓存，也不能把后续通过称为已修复。该间歇现象作为本次发布的剩余风险；原失败证据在 `production-test-results/`，后续 trace 分别在 `production-sprite-recheck/` 与 `production-sprite-repeat/`，均位于上述干净副本。没有据此扩大修改共享图片处理或广告逻辑。
