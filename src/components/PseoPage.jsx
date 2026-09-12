@@ -185,7 +185,7 @@ const SPRITE_EXAMPLE_IMAGES = [
 
 function SpritePreviewStrip({ intro, className = '' }) {
   return (
-    <figure className={`border-t border-gray-200 py-4 ${className}`} data-testid="sprite-example">
+    <figure lang="en" dir="ltr" className={`border-t border-gray-200 py-4 ${className}`} data-testid="sprite-example">
       <h2 className="text-2xl font-semibold text-gray-900">A transparent item, converted</h2>
       <p className="mt-3 text-gray-700 leading-6">{intro}</p>
       <div className="mt-4 grid grid-cols-2 gap-4">
@@ -212,7 +212,7 @@ function SpritePreviewStrip({ intro, className = '' }) {
 
 function SpriteGuide({ guide, steps }) {
   return (
-    <section className="bg-white py-6" data-testid="sprite-guide">
+    <section lang="en" dir="ltr" className="bg-white py-6" data-testid="sprite-guide">
       <div className="mx-auto max-w-3xl px-4 space-y-6">
         <div>
           <h2 className="text-2xl font-semibold text-gray-900">{steps[1].title}</h2>
@@ -593,8 +593,8 @@ export default function PseoPage() {
   }
 
   const contentPage = pages.find((entry) => entry.slug === slug)
-  const isEnglishSpriteConverter = slug === 'photo-to-sprite-converter' && (currentLocale || 'en') === 'en'
-  const page = contentPage && isEnglishSpriteConverter
+  const isSpriteConverter = slug === 'photo-to-sprite-converter'
+  const page = contentPage && isSpriteConverter
     ? { ...contentPage, ...contentPage.englishSprite }
     : contentPage
 
@@ -645,7 +645,7 @@ export default function PseoPage() {
     }))
   const relatedPages = isEnglishPhotoConverter
     ? (photoRelatedPages.length ? photoRelatedPages : defaultRelatedPages.slice(0, 3))
-    : isEnglishSpriteConverter
+    : isSpriteConverter
       ? (spriteRelatedPages.length ? spriteRelatedPages : defaultRelatedPages.slice(0, 3))
       : defaultRelatedPages
   const faqItems = t('faq.items', { returnObjects: true }) || []
@@ -799,12 +799,15 @@ export default function PseoPage() {
             </Suspense>
           ) : null}
         </Fragment>
-      ) : isEnglishSpriteConverter ? (
+      ) : isSpriteConverter ? (
         <Fragment>
           <section className="bg-gray-50 pt-8 pb-2">
             <div className="container mx-auto max-w-3xl px-4 text-center">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{page.h1}</h1>
-              <p className="mt-3 text-base leading-6 text-gray-700">{page.heroSubtitle}</p>
+              <h1 lang="en" dir="ltr" className="text-3xl md:text-4xl font-bold text-gray-900">{page.h1}</h1>
+              <p lang="en" dir="ltr" className="mt-3 text-base leading-6 text-gray-700">{page.heroSubtitle}</p>
+              {fallback && currentLocale !== 'en' ? (
+                <p data-testid="sprite-fallback-notice" className="mt-2 text-xs text-gray-500">{t('content.fallbackNotice')}</p>
+              ) : null}
             </div>
           </section>
           <ToolSection
@@ -813,7 +816,7 @@ export default function PseoPage() {
             compact={Boolean(uploadedImage)}
             variant="sprite"
             instructionElement="p"
-            chooseFileLabel="Choose image"
+            chooseFileLabel={currentLocale === 'en' ? 'Choose image' : t('tool.chooseFile')}
             uploadZoneStyle={{ borderRadius: '0.5rem' }}
             exampleImages={uploadedImage ? [] : SPRITE_EXAMPLE_IMAGES}
             exampleLabel="Want to test it first?"
@@ -888,7 +891,7 @@ export default function PseoPage() {
         </Fragment>
       ) : (
         <Fragment>
-          {isEnglishSpriteConverter ? <SpriteGuide guide={page.spriteGuide} steps={pageHowSteps} /> : (
+          {isSpriteConverter ? <SpriteGuide guide={page.spriteGuide} steps={pageHowSteps} /> : (
             <Fragment>
               <PseoContentSections sections={page.contentSections} />
               <HowItWorksSection
@@ -898,14 +901,18 @@ export default function PseoPage() {
               />
             </Fragment>
           )}
-          {!isPrimaryConverter && !isEnglishSpriteConverter && page.bottomCallout ? (
+          {!isPrimaryConverter && !isSpriteConverter && page.bottomCallout ? (
             <section className="bg-white py-8">
               <div className="container mx-auto px-4 max-w-4xl">
                 <MainConverterCallout callout={page.bottomCallout} testId="primary-converter-callout-bottom" />
               </div>
             </section>
           ) : null}
-          {isEnglishSpriteConverter ? <FaqSection title={renderedFaqTitle} items={renderedFaqItems} compactLayout /> : null}
+          {isSpriteConverter ? (
+            <div lang="en" dir="ltr">
+              <FaqSection title={renderedFaqTitle} items={renderedFaqItems} compactLayout />
+            </div>
+          ) : null}
           <RelatedConvertersSection
             heading={t('pseo.relatedHeading')}
             relatedPages={relatedPages}
@@ -913,7 +920,7 @@ export default function PseoPage() {
             siteLinks={siteLinks}
             siteHeading={t('footer.explore')}
           />
-          {!isEnglishSpriteConverter ? <FaqSection title={renderedFaqTitle} items={renderedFaqItems} /> : null}
+          {!isSpriteConverter ? <FaqSection title={renderedFaqTitle} items={renderedFaqItems} /> : null}
         </Fragment>
       )}
     </Fragment>

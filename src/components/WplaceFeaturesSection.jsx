@@ -63,7 +63,7 @@ const IconImage = ({ className = 'h-6 w-6 text-amber-600' }) => (
   </svg>
 );
 
-export default function WplaceFeaturesSection() {
+export default function WplaceFeaturesSection({ iconTitles }) {
   const { t } = useTranslation();
   return (
     <section id="wplace-features" className="py-12 md:py-16 bg-white">
@@ -79,7 +79,7 @@ export default function WplaceFeaturesSection() {
         {/* 四列特性：保持等间距与卡片风格一致 */}
         <div className="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6 text-center h-full">
-            <CircleIcon bg="rgba(16,185,129,0.12)" title="100% Free">
+            <CircleIcon bg="rgba(16,185,129,0.12)" title={iconTitles?.free || '100% Free'}>
               <IconDollar />
             </CircleIcon>
             <h3 className="mt-4 text-lg font-semibold text-gray-900">{t('wplace.features.free.title')}</h3>
@@ -89,7 +89,7 @@ export default function WplaceFeaturesSection() {
           </div>
 
           <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6 text-center h-full">
-            <CircleIcon bg="rgba(59,130,246,0.12)" title="Privacy First">
+            <CircleIcon bg="rgba(59,130,246,0.12)" title={iconTitles?.privacy || 'Privacy First'}>
               <IconLock />
             </CircleIcon>
             <h3 className="mt-4 text-lg font-semibold text-gray-900">{t('wplace.features.privacy.title')}</h3>
@@ -99,7 +99,7 @@ export default function WplaceFeaturesSection() {
           </div>
 
           <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6 text-center h-full">
-            <CircleIcon bg="rgba(139,92,246,0.12)" title="Easy for All Players">
+            <CircleIcon bg="rgba(139,92,246,0.12)" title={iconTitles?.easy || 'Easy for All Players'}>
               <IconSmile />
             </CircleIcon>
             <h3 className="mt-4 text-lg font-semibold text-gray-900">{t('wplace.features.easy.title')}</h3>
@@ -109,7 +109,7 @@ export default function WplaceFeaturesSection() {
           </div>
 
           <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6 text-center h-full">
-            <CircleIcon bg="rgba(245,158,11,0.12)" title="No Size Limits">
+            <CircleIcon bg="rgba(245,158,11,0.12)" title={iconTitles?.size || 'No Size Limits'}>
               <IconImage />
             </CircleIcon>
             <h3 className="mt-4 text-lg font-semibold text-gray-900">{t('wplace.features.size.title')}</h3>

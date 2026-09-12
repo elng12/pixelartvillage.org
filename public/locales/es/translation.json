@@ -641,7 +641,66 @@
   },
   "home": {
     "seoTitle": "Convertidor de Imagen a Arte Píxel | Pixel Art Village",
-    "seoDescription": "Convierte imágenes en arte píxel gratis y online. Sube PNG, JPG, GIF o WEBP, ajusta el tamaño de píxel y la paleta, previsualiza y exporta en tu navegador."
+    "seoDescription": "Convierte imágenes en arte píxel gratis y online. Sube PNG, JPG, GIF o WEBP, ajusta el tamaño de píxel y la paleta, previsualiza y exporta en tu navegador.",
+    "heroTitle": "Convertidor de Imagen a Arte Píxel",
+    "heroSubtitle": "Convierte imágenes en arte píxel desde tu navegador. Sube un archivo PNG, JPG, GIF o WEBP, ajusta la paleta y el tramado, y previsualiza el resultado en tiempo real.",
+    "heroSubtitle2": "Crea sprites, iconos o gráficos retro gratis. Ajusta el tamaño de píxel y descarga el resultado; el procesamiento se realiza en tu dispositivo.",
+    "entrySupports": "Admite PNG, JPG, GIF y WEBP de hasta 10 MB. Al elegir una imagen, el editor se abre en esta página.",
+    "skipToMain": "Saltar al contenido principal",
+    "paletteDescription": "Elige una paleta retro, extrae colores de tu imagen o importa una paleta personalizada. Ajusta el número de colores para simplificar las formas y mantener un estilo coherente en tus sprites e iconos.",
+    "faqFormatAnswer": "Este conversor admite PNG, JPG, GIF y WEBP de hasta 10 MB. Puedes convertir estos archivos en arte píxel y descargar el resultado desde el editor.",
+    "exploreHeading": "Explora las herramientas de Pixel Art Village",
+    "exploreIntro": "Usa el editor para trabajar con imágenes en general o elige una herramienta centrada en fotos, sprites o un formato concreto.",
+    "cards": {
+      "photoToPixel": {
+        "title": "Foto a arte píxel",
+        "description": "Convierte fotos en arte píxel y ajusta el detalle y los colores para conseguir un estilo retro."
+      },
+      "photoToSprite": {
+        "title": "Convertidor de foto a sprite",
+        "description": "Transforma una foto o imagen en una sola imagen de estilo sprite, con formas simplificadas y menos colores."
+      },
+      "pngToPixel": {
+        "title": "Convertidor de PNG a arte píxel",
+        "description": "Convierte archivos PNG en arte píxel conservando las zonas que ya son transparentes."
+      },
+      "gifToPixel": {
+        "title": "Convertidor de GIF a arte píxel",
+        "description": "Abre un archivo GIF y convierte su primer fotograma en una imagen de arte píxel."
+      }
+    },
+    "consentDescription": "Usamos cookies para el funcionamiento del sitio y, si se habilitan, para mostrar anuncios de Google AdSense. Puedes aceptar o rechazar las cookies no esenciales en cualquier momento.",
+    "adsSettingsLabel": "Configuración de anuncios de Google",
+    "footer": {
+      "links": {
+        "pixelate": "Pixelar una imagen",
+        "8bit": "Generador de arte de 8 bits",
+        "retroMaker": "Creador de gráficos retro",
+        "photo2sprite": "Convertidor de foto a sprite",
+        "gif2pixel": "GIF a arte píxel",
+        "webp2pixel": "WEBP a arte píxel"
+      },
+      "mediaFeaturedIn": "Medios y directorios",
+      "badges": {
+        "acidTools": "Destacado en Acid Tools",
+        "projectHunt": "Destacado en projecthunt.me",
+        "toolFame": "Destacado en ToolFame.com",
+        "submito": "Incluido en Submito",
+        "saasFame": "Destacado en SaaSFame.com",
+        "saasToolsDir": "Destacado en SaaS Tools Dir",
+        "deepLaunch": "Destacado en DeepLaunch.io",
+        "submitAiTools": "Destacado en Submit AI Tools",
+        "findlyTools": "Destacado en Findly.tools",
+        "goodAiTools": "Destacado en Good AI Tools",
+        "promoteBusinessDirectory": "Incluido en Promote Business Directory",
+        "zImage": "Incluido en Z-Image",
+        "yoDirectory": "Destacado en yo.directory",
+        "microSaasExamples": "Destacado en Micro SaaS Examples",
+        "mossAi": "Destacado en MossAI Tools",
+        "productHunt": "Destacado en Product Hunt",
+        "justSimpleTools": "Incluido en JustSimple Tools"
+      }
+    }
   },
   "header": {
     "mainNav": "Navegación principal",

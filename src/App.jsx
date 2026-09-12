@@ -76,13 +76,16 @@ function Home() {
           <Editor image={uploadedImage} />
         </Suspense>
       ) : null}
-      <DeferredUi name="HomeBelowFold" />
+      <DeferredUi name="HomeBelowFold" spanishHome={currentLocale === 'es'} />
     </>
   )
 }
 
 function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
   const { t } = useTranslation()
+  const { pathname } = useLocation()
+  const isSpanishHome = currentLocale === 'es' && /^\/es\/?$/.test(pathname)
+  const isSpritePage = /\/converter\/photo-to-sprite-converter\/?$/.test(pathname)
   const localeValue = useMemo(
     () => ({
       currentLocale,
@@ -94,12 +97,12 @@ function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
   return (
     <LocaleProvider value={localeValue}>
       <ResourcePreloader />
-      <TranslationPreloader />
+      <TranslationPreloader localeOverride={isSpanishHome || isSpritePage ? currentLocale : undefined} />
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:text-blue-700 focus:shadow"
       >
-        {t('a11y.skipToMain', 'Skip to main content')}
+        {isSpanishHome ? t('home.skipToMain') : t('a11y.skipToMain', 'Skip to main content')}
       </a>
       <Header />
       <CompatNotice />
@@ -107,9 +110,12 @@ function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
       <main id="main-content">
         <Outlet context={{ uploadedImage, setUploadedImage, currentLocale }} />
       </main>
-      <ConsentBanner />
+      <ConsentBanner
+        description={isSpanishHome ? t('home.consentDescription') : undefined}
+        adsSettingsLabel={isSpanishHome ? t('home.adsSettingsLabel') : undefined}
+      />
       <div className="bg-gray-900" style={FOOTER_SHELL_STYLE}>
-        <DeferredUi name="Footer" />
+        <DeferredUi name="Footer" copy={isSpanishHome ? t('home.footer', { returnObjects: true }) : undefined} />
       </div>
     </LocaleProvider>
   )

@@ -1634,10 +1634,16 @@ async function prerender() {
   const pseoRoutes = []
   for (const lang of SUPPORTED_LANGS) {
     const pagesForLang = Array.isArray(pseoPagesByLang[lang]) ? pseoPagesByLang[lang] : []
-    if (!pagesForLang.length) continue
+    const fallbackSprite = lang !== DEFAULT_LANG && !pagesForLang.some((page) => page.slug === 'photo-to-sprite-converter')
+      ? pseoPagesByLang[DEFAULT_LANG]?.find((page) => page.slug === 'photo-to-sprite-converter')
+      : null
+    const routesForLang = fallbackSprite ? [...pagesForLang, fallbackSprite] : pagesForLang
+    if (!routesForLang.length) continue
     const bundle = loadLocaleBundle(lang)
-    for (const contentPage of pagesForLang) {
-      const p = lang === 'en' && contentPage?.slug === 'photo-to-sprite-converter'
+    for (const contentPage of routesForLang) {
+      const isFallback = contentPage === fallbackSprite
+      const contentLang = isFallback ? DEFAULT_LANG : lang
+      const p = contentPage?.slug === 'photo-to-sprite-converter'
         ? { ...contentPage, ...contentPage.englishSprite }
         : contentPage
       if (!p?.slug) continue
@@ -1653,6 +1659,7 @@ async function prerender() {
         lang,
         path: routePath,
         routePath,
+        canonicalPath: isFallback ? buildPseoPath(DEFAULT_LANG, p.slug) : routePath,
         basePath: ensureTrailingSlash(`/converter/${p.slug}`),
         title: p.title,
         metas: [
@@ -1673,7 +1680,7 @@ async function prerender() {
             '@type': 'HowTo',
             name: p.h1 || p.title,
             description,
-            inLanguage: lang,
+            inLanguage: contentLang,
             totalTime: 'PT2M',
             supply: [{ '@type': 'HowToSupply', name: 'Image file (PNG/JPG/GIF/WEBP)' }],
             tool: [{ '@type': 'HowToTool', name: 'Pixel Art Village Converter' }],
@@ -1693,7 +1700,7 @@ async function prerender() {
             operatingSystem: 'Web',
             url: ABS(routePath),
             description,
-            inLanguage: lang,
+            inLanguage: contentLang,
             offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
           },
           ...(pseoFaqItems.length
@@ -1715,9 +1722,9 @@ async function prerender() {
         alternates: buildPseoAlternates(p.slug),
         initialContent: {
           baseName: 'pseo-pages',
-          locale: lang,
+          locale: contentLang,
           path: routePath,
-          data: pagesForLang,
+          data: isFallback ? pseoPagesByLang[DEFAULT_LANG] : pagesForLang,
         },
       })
     }
@@ -2019,7 +2026,7 @@ async function prerender() {
   for (const route of blogRoutes) appendRoute(route)
 
   for (const r of expanded) {
-    const canonicalPath = (r.routePath === '/' ? '/' : ensureTrailingSlash(r.routePath))
+    const canonicalPath = ensureTrailingSlash(r.canonicalPath || r.routePath)
 
     const ABS = (p) => `https://pixelartvillage.org${p}`
     const alternates = Array.isArray(r.alternates) && r.alternates.length

@@ -386,3 +386,51 @@ GSC 提交：上线后 URL Inspection 返回 `NEUTRAL / URL is unknown to Google
 生产验收：目标页 HTTP 200，title、description、canonical 和五条 FAQ/JSON-LD 与发布版本一致，原图和结果资源为 228x228 / 38x38。隔离 Playwright 浏览器桌面 1440x900 试用真实素材并下载 38x38 PNG；手机 390x844 调至 Pixel Size 7、Pico-8 后实际下载 32x32 PNG，两次下载四角 alpha 均为 0，页面无水平溢出。首页和 PNG 页抽查 HTTP 200。`/es/converter/photo-to-sprite-converter/` 在线仍按原有 `_redirects` 301 到英文页，不把重定向后的内容当作西班牙语独立页面验收。
 
 部署切换过程中曾短暂遇到图片/旧资源 404，部署完成后刷新恢复，重新验证图片正常加载和真实下载；未修改缓存或全站配置。本轮浏览器选择拒绝非必要 Cookie，不代表已验证允许广告后的体验。未验证用户关键词插件、Firefox/WebKit、实体手机或 Google 搜索效果。发布截图与下载证据保存在 `/tmp/pixelart-sprite-release-*`，其他未提交改动仍保留本地。
+
+## 2026-09-12 西语首页翻译残留清理（仅本地）
+
+范围：在 On Page SEO 只读检查后，按已确认的单页范围执行 `/es/` 首页修复，不提交、不推送、不部署。开始与结束 HEAD 均为 `ba5e0310553324a9aa99e59067281b8fd3ad6df0`；保留已有 Claude 配置、AGENTS、其他文档、HowItWorksSection、pSEO 内容和测试、sitemap 以及未跟踪旧示例 PNG 的改动。
+
+内容：仅在西语 `home` 命名空间补首屏 H1/说明、上传格式提示、工具推荐、调色板介绍、格式 FAQ、Cookie 说明、跳转正文链接和页脚缺失翻译。格式 FAQ 不再显示 `English translation` / `Wait, I need to clarify` 等翻译对话。已有西语和英文 title/description 原文不变。上传提示按实际行为写为本页打开编辑器并注明 10 MB，未照搬旧英文的下一页说法。品牌、调色板专有名称和第三方徽章图片不翻改。
+
+隔离：组件新增可选文案参数，只由西语首页传入；原共享西语翻译命名空间内容逐项比对保持一致，未改变其他页面文案。测试发现既有 TranslationPreloader 从静态语言路由读取不到 `:lang`，同语言内页跳转可能切回英文。本轮仅为 `/es/` 显式传入 `es`，保障从内页返回首页时保持西语；其他内页和语言的共享同步缺陷没有扩改。
+
+验证：Node 20.19.0 下完整 `npm run build`（包含 ownership、SEO、dist、重定向检查）、`npm run lint`、`npm run typecheck`、本轮文件 diff-check 均通过。构建位于临时副本 `/tmp/pixelart-es-home-sCEA3x`，不覆盖原工作区已有 sitemap；最终 src 和西语翻译输入与工作区内容一致。构建保留生产式 Cookie 行为，未设置 VITE_E2E=1。浏览器兼容性数据过期告警未触发依赖更新。
+
+最终 Chromium 24 项通过，无自动重试：i18n 7、seo-hreflang 2、pages 8、pseo-ownership 7。覆盖无 JavaScript 初始 HTML、西语首页 1440x900/390x844、七条可见 FAQ、canonical/hreflang、Cookie 拒绝、英文已确认元信息、页面专属文案隔离与内页返回首页，以及原英文 Sprite 的真实案例、主关键词检查、错误恢复和手机导出。新增西语流程使用本站已有真实物品 PNG（228x228），经 Pixel Size 6、Pico-8、PNG Pixel size 实际下载为 38x38，四角 alpha 为 0 且保留可见图像像素，下载附在测试报告。初次测试的连续按键被现有逐帧调节合并，改为逐次等待可见数值更新，不改调参实现、不放宽最终尺寸断言。
+
+真实页面：Codex 隔离浏览器复核最终桌面首屏、手机首屏和格式 FAQ、页脚与 Cookie 布局，页面无横向溢出；手机真实上传和调参后预览正常。该浏览器的下载事件等待超时，下载文件结论以项目 Playwright 实际保存并解析的 PNG 为准。运行时 title、description、H1、canonical、OG/Twitter 已核对；现有三个 JSON-LD 均可解析，首页本来没有 FAQPage schema，本轮不新增。
+
+交付与限制：本地预览 `http://localhost:4190/es/`；最终日志为临时副本 `build-final.log`、`tests-final.log`，下载证据在 `playwright-report/`。仅完成本次首页 On Page SEO 文案范围；其他多语言页、内页语言同步、上传后共享编辑器中少量英文标签，以及原有尺寸无限制等功能承诺未扩改。Firefox/WebKit、实体手机、线上重新抓取、第三方评分和 Google 搜索效果未验证；本地结果不代表线上已更新或排名改善。
+
+## 2026-09-12 修复未提交 Sprite 内容的语言隔离回归（仅本地）
+
+授权：用户在未提交改动审查后要求修复。仅处理 Sprite 共享内容回退及相关测试，不提交、不推送、不部署。开始核对 HEAD、origin/main 和实时远程 main 均为 `ba5e0310553324a9aa99e59067281b8fd3ad6df0`，保留西语首页、其他文档、配置、sitemap 和旧示例图片等已有改动。
+
+修复：恢复 `src/content/pseo-pages.en.json` 中原有 Sprite 基础内容，把英文专项内容及 seo 保留在 `englishSprite` 内。该文件现与 HEAD 一致；英文已确认标题、描述、真实案例、参数表和五条 FAQ 不变。非英语 Sprite 不再被新增英文 HowTo/FAQ 覆盖，也不再显示与实际默认值 1 冲突的 Pixel Size 6 说明。西语隔离测试恢复原 title、西语 HowTo 和七条 FAQ，增加错误默认值文案不存在、上传后滑条默认值为 1 的断言；使用合成图片仅测试控件状态，不冒充真实案例。
+
+验证：先将恢复后的测试运行在修复前的本地构建上，按预期因西语 Sprite title 被英文专项标题覆盖而失败，确认能拦住回归。随后在已有临时副本 `/tmp/pixelart-es-home-sCEA3x` 重新完整构建，包含 ownership、SEO、dist 和重定向检查，通过；源码及测试输入与工作区一致，未覆盖工作区 sitemap。最终 lint、typecheck、受影响文件 diff-check 通过。中断恢复后重新运行 Chromium 回归，i18n 7 项及 pseo-ownership 7 项全部通过，无重试；覆盖桌面/手机、英文元信息和主关键词检查、FAQ/JSON-LD、真实案例及透明 PNG 下载、西语首页隔离、非英语 Sprite 上传默认值。构建保留已有浏览器兼容性数据过期告警，没有更新依赖。
+
+本地预览：`http://localhost:4190/es/converter/photo-to-sprite-converter/` 返回 200；英文页为 `http://localhost:4190/converter/photo-to-sprite-converter/`。本次真实页面验证通过项目 Playwright Chromium 完成，未新增人工浏览器截图检查，未验证 Firefox/WebKit、实体手机或线上页面。仅为本地修复，不改变生产部署及既有线上重定向行为。
+
+## 2026-09-12 所有语言 Sprite 入口统一新版结构（仅本地）
+
+新授权：用户明确要求“所有语言页都应采用新版结构”，因此本轮不再保留非英语 Sprite 的旧版布局。范围仅为 `/converter/photo-to-sprite-converter/` 及配置中的 17 个非英语前缀入口；不改其他 converter 内容、首页文案、Blog、翻译文件、线上重定向或 sitemap 收录范围，不提交、推送或部署，保留其余已有未提交改动。
+
+实现：Sprite 页面不再用英语条件决定布局，统一采用工具、真实物品案例、四行参数表、两项导出对比、五条 FAQ、相关工具的顺序。全部入口默认 Pixel Size 6，手机控件正常随页面滚动。沿用原有 CC0 素材及真实导出文件，英文已确认 title/description 和主关键词检查不变；没有重新生成或加工案例图片。仅对 Sprite 路径显式同步当前界面语言，防止切换语言时控件被预加载器切回英文。
+
+语言边界：目前 pSEO 专项内容只有英文，因此本轮完成的是 18 个语言入口的结构统一，不是 18 种全文翻译。上传按钮使用现有翻译，非英语正文保留本语言的英文回退提示；案例、参数表、FAQ 等英文正文标注 lang=en、dir=ltr，避免阿拉伯语页面里的标点和原图/结果顺序倒置。其他已有缺失翻译继续遵循原英文回退机制。
+
+静态页面：为原先没有独立 HTML 的非英语 Sprite 入口补齐初始新版内容及匹配的 FAQ/JSON-LD，不再返回首页 SEO 标签。英文回退页 canonical 指向英文 Sprite 原页，HowTo 的内容语言标为 en；不将这些回退入口加入 sitemap 或作为新的语言替代页。现有生产 `_redirects` 仍将非英语 converter 路径 301 到英文页，发布行为未变。
+
+验证：Node 20 完整构建及自带 ownership、SEO、dist、重定向检查通过；lint、typecheck、受影响文件 diff-check 通过。最终 Chromium 33 项通过，无重试：原 i18n 7 项、pseo-ownership 7 项，加 18 个语言入口和一项连续语言切换测试。逐一检查 1440x900 与 390x844 页面无横向溢出、初始 HTML 和运行时新版结构、canonical、五条可见 FAQ 与 schema 一致、默认值 6；每种语言真实上传 228x228 素材并下载 38x38 PNG，与案例文件逐像素相同且四角透明，再调到 7 和 Pico-8 验证预览变化。测试修正了缺失翻译键的标准英文回退、等待实际预览与导出选中状态、阿拉伯语原生滑条按键方向及切换语言时可选尾斜杠，不放宽实际尺寸或像素断言。
+
+浏览器复核：Codex 隔离浏览器检查西语桌面/手机首屏、案例和参数表，以及日语、阿拉伯语手机入口；阿拉伯语英文回退内容的阅读方向已修正。构建复用 `/tmp/pixelart-es-home-sCEA3x`，最终输入与工作区一致，未覆盖原工作区 sitemap。本地预览仍为 `http://localhost:4190/es/converter/photo-to-sprite-converter/`，可从顶部切换语言。未验证 Firefox/WebKit、实体手机、生产部署或 Google 搜索效果；本地结构通过不代表完整翻译、线上已发布或排名改善。
+
+## 2026-09-12 西语首页与多语言 Sprite 定向发布
+
+授权：用户在审查和下一步说明后明确回复“执行”，授权提交、推送、部署已验收的西语首页修复及所有语言 Sprite 新版结构，并做线上验收。保留其他已有未提交改动，不改变全文翻译范围、非英语 converter 重定向、canonical 策略或索引范围。
+
+发布隔离：开始时 HEAD、origin/main 与实时远程 main 均为 `ba5e0310553324a9aa99e59067281b8fd3ad6df0`。从 HEAD 导出干净副本 `/tmp/pixelart-locale-release-UDpfZM`，仅加入 13 个相关代码/翻译/测试文件；不包含 Claude 配置、AGENTS、竞品文档、未使用的 HowItWorksSection 样式、工作区 sitemap 或旧示例 PNG。本记录只暂存本批相关段落，其他历史文档修改仍保留本地。沿用仓库 Git 集成部署，不另建站点或修改云端配置。
+
+发布前检查：Node 20.19.0 下完整构建及 ownership、SEO、dist、重定向检查通过，lint、typecheck 和受影响文件 diff-check 通过。构建仅在干净副本生成产物，未覆盖工作区 sitemap；保留现有浏览器兼容性数据过期告警，没有更新依赖。完整 Chromium 73 项回归全部通过，无重试，覆盖 18 个 Sprite 入口、首页、Blog、导航、调色板管理、透明导出、固定尺寸、手机布局和 SEO；Codex 隔离浏览器复核了干净副本西语首页。13 个暂存代码/翻译/测试文件与构建输入逐字节一致。推送及生产状态待后续回执补充。

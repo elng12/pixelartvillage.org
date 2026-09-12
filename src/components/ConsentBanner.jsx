@@ -24,7 +24,7 @@ function pushConsentUpdate(granted) {
   }
 }
 
-export default function ConsentBanner() {
+export default function ConsentBanner({ description, adsSettingsLabel }) {
   const { t } = useTranslation()
   const [visible, setVisible] = useState(false)
 
@@ -64,7 +64,7 @@ export default function ConsentBanner() {
         <div className="text-xs text-gray-700 sm:text-sm">
           <p className="font-semibold text-gray-900">{t('consent.title')}</p>
           <p className="mt-0.5 leading-snug sm:mt-1 sm:leading-normal">
-            {t('consent.desc')}{' '}
+            {description || t('consent.desc')}{' '}
             <LocalizedLink to="/privacy" className="underline underline-offset-2">
               {t('consent.privacy')}
             </LocalizedLink>
@@ -77,7 +77,7 @@ export default function ConsentBanner() {
                 target="_blank"
                 rel="noopener noreferrer nofollow"
               >
-                Google Ads Settings
+                {adsSettingsLabel || 'Google Ads Settings'}
               </a>
               .
             </span>

@@ -11,8 +11,16 @@ const HOME_BELOW_FOLD_STYLE = {
   containIntrinsicSize: '2600px',
 }
 
-export default function HomeBelowFold() {
+export default function HomeBelowFold({ spanishHome = false }) {
   const { t } = useTranslation()
+  const faqItems = spanishHome
+    ? t('faq.items', { returnObjects: true }).map((item, index) => (
+        index === 6 ? { ...item, answer: t('home.faqFormatAnswer') } : item
+      ))
+    : undefined
+  const iconTitles = spanishHome
+    ? Object.fromEntries(['free', 'privacy', 'easy', 'size'].map((key) => [key, t(`wplace.features.${key}.title`)]))
+    : undefined
   const featuredTools = [
     {
       to: '/converter/photo-to-pixel-art/',
@@ -39,8 +47,8 @@ export default function HomeBelowFold() {
   return (
     <div style={HOME_BELOW_FOLD_STYLE}>
       <ShowcaseSection />
-      <WplaceFeaturesSection />
-      <FeaturesSection />
+      <WplaceFeaturesSection iconTitles={iconTitles} />
+      <FeaturesSection paletteDescription={spanishHome ? t('home.paletteDescription') : undefined} />
       <HowItWorksSection />
       <section className="bg-gray-50 py-8 border-y border-gray-100">
         <div className="container mx-auto px-4 max-w-5xl">
@@ -60,7 +68,7 @@ export default function HomeBelowFold() {
           </div>
         </div>
       </section>
-      <FaqSection />
+      <FaqSection items={faqItems} />
     </div>
   )
 }

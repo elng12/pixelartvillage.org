@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-export default function FeaturesSection() {
+export default function FeaturesSection({ paletteDescription }) {
   const { t } = useTranslation();
   return (
     <section id="features" className="py-12 md:py-16 bg-white">
@@ -25,7 +25,7 @@ export default function FeaturesSection() {
               <div>
                 <h3 className="text-lg md:text-xl font-semibold text-gray-900">{t('features.palette.title')}</h3>
                 <p className="mt-2 text-gray-600 leading-relaxed">
-                  {t('features.palette.desc')}
+                  {paletteDescription || t('features.palette.desc')}
                 </p>
               </div>
             </div>

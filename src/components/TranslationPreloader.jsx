@@ -12,7 +12,7 @@ import { SUPPORTED_LANGS, DEFAULT_LOCALE } from '@/i18n'
  * 2. 处理翻译资源加载失败的情况
  * 3. 确保语言切换时的状态一致性
  */
-export default function TranslationPreloader() {
+export default function TranslationPreloader({ localeOverride }) {
   const { i18n: i18nInstance } = useTranslation()
   const { lang } = useParams()
   const location = useLocation()
@@ -46,10 +46,10 @@ export default function TranslationPreloader() {
 
   // 监听路由变化，预加载翻译资源
   useEffect(() => {
-    const currentLang = lang || DEFAULT_LOCALE
+    const currentLang = localeOverride || lang || DEFAULT_LOCALE
 
     preloadTranslation(currentLang)
-  }, [lang, location.pathname, preloadTranslation])
+  }, [localeOverride, lang, location.pathname, preloadTranslation])
 
   // 预加载常用语言（在空闲时间）- 临时禁用以防止自动语言切换
   useEffect(() => {

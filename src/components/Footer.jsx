@@ -223,8 +223,10 @@ function getSafeTranslation(t, key, fallback) {
   return normalized;
 }
 
-function Footer() {
+function Footer({ copy }) {
   const { t } = useTranslation()
+  const linkLabel = (key) => copy?.links?.[key] || t(`footer.links.${key}`)
+  const mediaFeaturedIn = copy?.mediaFeaturedIn || t('footer.mediaFeaturedIn')
   return (
     <footer className="bg-gray-900 text-gray-300 footer-grid-bg">
       <div className="relative">
@@ -258,18 +260,18 @@ function Footer() {
               <ul className="space-y-2 text-sm">
                 <li><LocalizedLink to="/converter/image-to-pixel-art/" className="hover:text-white">{t('footer.links.generator')}</LocalizedLink></li>
                 <li><LocalizedLink to="/converter/photo-to-pixel-art/" className="hover:text-white">{t('footer.links.converter')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/pixelate-image-online/" className="hover:text-white">{t('footer.links.pixelate')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/8-bit-art-generator/" className="hover:text-white">{t('footer.links.8bit')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/retro-game-graphics-maker/" className="hover:text-white">{t('footer.links.retroMaker')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/photo-to-sprite-converter/" className="hover:text-white">{t('footer.links.photo2sprite')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/pixelate-image-online/" className="hover:text-white">{linkLabel('pixelate')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/8-bit-art-generator/" className="hover:text-white">{linkLabel('8bit')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/retro-game-graphics-maker/" className="hover:text-white">{linkLabel('retroMaker')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/photo-to-sprite-converter/" className="hover:text-white">{linkLabel('photo2sprite')}</LocalizedLink></li>
               </ul>
             </div>
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.formats')}</p>
               <ul className="space-y-2 text-sm">
                 <li><LocalizedLink to="/converter/png-to-pixel-art/" className="hover:text-white">{t('footer.links.png2pixel')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/gif-to-pixel-art/" className="hover:text-white">{t('footer.links.gif2pixel')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/webp-to-pixel-art/" className="hover:text-white">{t('footer.links.webp2pixel')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/gif-to-pixel-art/" className="hover:text-white">{linkLabel('gif2pixel')}</LocalizedLink></li>
+                <li><LocalizedLink to="/converter/webp-to-pixel-art/" className="hover:text-white">{linkLabel('webp2pixel')}</LocalizedLink></li>
               </ul>
             </div>
             <div>
@@ -293,9 +295,9 @@ function Footer() {
             </div>
           </div>
 
-          <section aria-label={t('footer.mediaFeaturedIn')} className="mt-10 border-t border-gray-700/60 pt-8">
+          <section aria-label={mediaFeaturedIn} className="mt-10 border-t border-gray-700/60 pt-8">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-400">
-              {t('footer.mediaFeaturedIn')}
+              {mediaFeaturedIn}
             </p>
             <div className="relative mt-4">
               <div
@@ -309,7 +311,7 @@ function Footer() {
               <div className="footer-badge-scroller -mx-4 overflow-x-auto px-4 pb-3 sm:mx-0 sm:px-0">
                 <ul className="flex snap-x snap-mandatory gap-3">
                   {footerBadges.map((badge) => {
-                    const badgeLabel = getSafeTranslation(
+                    const badgeLabel = copy?.badges?.[badge.key] || getSafeTranslation(
                       t,
                       `footer.badges.${badge.key}`,
                       footerBadgeFallbackLabels[badge.key] || 'Pixel Art Village directory badge'
