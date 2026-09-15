@@ -3,9 +3,33 @@
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-09-14 项目文件整理与 Git 归档
+
+授权：用户要求整理项目文件，将应保留的内容提交上传，删除无用文件。本轮开始时 main 与实时 origin/main 均为 `ad2b50c`，没有未上传提交。保留并归档已有项目规则、竞品优先级记录、历史迭代及发布回执、HowItWorksSection 的可选 compactLayout 参数；该参数默认 false，当前调用没有开启，不改变现有页面布局。仅清理 AGENTS.md 的行尾空白和多余末尾空行，不重写规则。
+
+Git 清理：35 个已经被现有 .gitignore 排除、却仍在 Git 跟踪中的本地文件退出跟踪，包括 Claude 本地配置、33 张 CodeBuddy 缓存图和一份 Superdesign 本地设计稿；电脑上的原文件全部保留，不改变本地权限或 hook。正式 OG 图、调色板数据、favicon 资源和历史文档保留，没有一律删除被忽略但仍受跟踪的资源，也没有改写 Git 历史。
+
+实际删除：当前源码、测试和脚本均无引用，且历史记录确认已由 mana 案例替代的 `public/sprite-demo-pixel6.png`；另删除约 16MB 的旧 `.lighthouseci/` 自动报告。保留现有失败测试证据、人工截图、依赖和其他不明用途文件。两份 sitemap 按现有脚本重新生成，确认相对 HEAD 只有日期变化，正式 sitemap 仍为 205 个 URL；不修改生成策略或 URL 集合。
+
+本地验证：Node 20.19.0 完整 build（含 SEO、dist 和重定向校验）、lint、typecheck、sitemap:verify 与差异空白检查通过。浏览器使用独立 4193 端口加载本轮真实 dist，不复用 4173 端口的旧发布副本。首次 Chromium 全套为 74 通过、1 跳过、1 失败：使用生产构建却未设置现有 EXPECT_CONSENT_BANNER 开关，Cookie 弹层挡住西班牙语页脚链接；保留失败证据，按生产弹层模式重新验证，不修改测试断言或业务代码。构建保留浏览器兼容性数据过期提示，未更新依赖。
+
+最终浏览器结果：同一生产 dist 设置现有 `EXPECT_CONSENT_BANNER=1` 后，完整 Chromium 76 项全部通过，无自动重试；包含 Cookie 弹层、西班牙语导航、Photo/Sprite 桌面手机真实导出、调色板库导入导出和其他 converter 回归。未验证 Firefox/WebKit，临时端口随测试结束关闭。
+
+上传边界：main 推送会触发现有自动部署，不修改部署配置；Git 上传、本地测试和生产验收分开记录，本轮不执行 GSC 提交或宣称搜索效果。
+
 ## 2026-09-14 Photo 页发布
 
 新授权：用户明确要求“现在部署上线”，授权提交、推送及发布前述 Photo 页内容、真实案例和 on-page 小修。发布只包含本页源码、预渲染回退、三张相关图片、测试及本批记录；不包含已有 AGENTS、Claude 配置、竞品记录、HowItWorksSection、工作区 sitemap、旧 Sprite 示例及其他历史未提交文档修改。发布前 HEAD 与实时 origin/main 同为 `71b53602f9ea5f5885928343c773f368ab64a956`，沿用现有 Git 集成部署。干净暂存副本 `/tmp/pixelart-photo-release.uT9U2s` 用于最终验证；发布结果另行补记。
+
+### Photo 发布回执
+
+[Lighthouse CI 34924845946](https://github.com/elng12/pixelartvillage.org/actions/runs/34924845946) 最终成功。GitHub Actions 保留 Node 20 action runtime 弃用提示，本轮未升级工作流或依赖。
+
+代码提交 `ad2b50c` 已推送 main。干净发布副本 Node 20 构建、lint、typecheck 通过；完整 Chromium 回归 75 项通过、1 项跳过，无重试。暂存的 8 个文件与干净构建输入逐字节一致，未混入无关工作区修改。
+
+[CI 34924845971](https://github.com/elng12/pixelartvillage.org/actions/runs/34924845971) 与 [GitHub Pages 34924845968](https://github.com/elng12/pixelartvillage.org/actions/runs/34924845968) 成功。Cloudflare Pages 项目 `pixelartvillage1` 部署 `7392776a-3d8b-4fcc-a3ce-f55f7e49a9f1` 成功，正式域名已显示新版首段、真实照片案例及缩短的相关工具描述。
+
+生产验证：Photo 初始 HTML、描述/OG/Twitter、单 H1、FAQ/schema、四词及五词主词独立第一、桌面 1440x900 和手机 390x844 真实上传/调参/下载共 3 项通过，无重试。两种尺寸下载的 80x63 PNG 与线上案例逐像素一致，无横向溢出；证据在 `/tmp/pixelart-photo-release.uT9U2s/production-test-results/`。Codex 隔离浏览器确认正式页面已更新。首页、Photo 和 PNG 页 HTTP 200/canonical 正常，robots 与 sitemap 正常，205 个 sitemap URL 抽查前 50 个全部 200，保留“未全量抽查”的警告。未修改广告设置，没有验证 Google 收录或排名提升；已有快速调参后立即下载旧结果的风险仍在范围外。此回执先保留本地，避免纯记录变更再次触发生产部署。
 
 ## 2026-09-14 Photo 页 on-page 小修（仅本地）
 
@@ -392,6 +416,110 @@ GSC 提交：上线后 URL Inspection 返回 `NEUTRAL / URL is unknown to Google
 自动检查：[CI 33968334110](https://github.com/elng12/pixelartvillage.org/actions/runs/33968334110)、[GitHub Pages 33968334228](https://github.com/elng12/pixelartvillage.org/actions/runs/33968334228)、[Lighthouse CI 33968334286](https://github.com/elng12/pixelartvillage.org/actions/runs/33968334286) 均成功；该提交的 Cloudflare Pages 检查也成功，项目 `pixelartvillage1`，部署 ID `cda1bc5b-b2cb-4f12-acba-87d457c0ace9`。
 生产验收：18 个语言版本的 About 页面均返回成功响应，新 sameAs 已生效、旧地址已消失；title、canonical、OG/Twitter、正文及其余 schema 与本次已验证构建一致。新 GitHub 目标返回 HTTP 200。生产启动检查确认首页、About、西班牙语 About、robots.txt 和 sitemap 正常；sitemap 共 205 个 URL，前 50 个抽样均返回 200，唯一提示是只抽查了前 50 个，而非全量逐 URL 验收。
 当前状态：About 身份链接修正已在生产生效。本次没有重新执行 GSC 收录或 AI 引用效果检查，不把部署成功等同于 AI 引用提升。
+
+## 2026-09-09 Photo 页自动广告单页排除
+
+问题：此前真实页面诊断发现底部锚定广告遮挡内容，且查看上传后的编辑区时出现全屏广告。本轮用户要求继续处理，只限 Photo 页，不改全站广告设置。
+目标页面：`https://pixelartvillage.org/converter/photo-to-pixel-art/`。
+账号核对：通过 Codex 隔离浏览器切换已有登录账号，确认 AdSense 发布商编号与 `src/utils/loadAdSense.js` 中的编号一致，网站列表包含 `pixelartvillage.org`；未启用或修改其他账号。
+变更前状态：全站自动广告启用，自动优化停用，意向驱动格式 1/1、重叠式格式 3/3、页内格式 0/2，排除网页数为 0。
+实际操作：在 AdSense 的“排除的网页”中添加目标精确 URL，选择“仅此网页”，未选择“此版块下的所有网页”；点击“应用到网站”，选择“立即应用”并保存。未修改任何广告格式开关。
+后台回执：北京时间约 16:36 保存成功，提示“大功告成！所做更改最多可能需要一个小时才能反映在您的网站上。”刷新后台后，全站自动广告仍启用，排除网页数为 1。
+影响：目标页停止展示自动广告后会失去该页自动广告收入；首页、其他 converter、多语言和 Blog 未加入排除范围。未估算收入损失，也不将广告调整等同于 SEO 排名提升。
+首次生产抽查：保存后重新打开目标页，使用站内公开 `showcase-before.jpg` 插画验证上传，编辑器出现；Pixel Size 从 1 调至 2、Palette 选为 Pico-8，预览更新。但页面仍出现底部锚定广告与意向广告，尚未证明排除已在前台生效。此次不是照片质量测试，未完成无广告的下载全流程及手机验收。
+当前状态：后台配置已保存并确认持久化；前台消除广告遮挡仍待验收，不能标为已解决。Google 官方说明设置最多需要一小时生效：https://support.google.com/adsense/answer/9262311?hl=en 。
+工作区边界：仅追加本记录，不改业务代码、SEO 文案、广告加载器或部署配置；保留原有四个无关修改文件。未提交、未推送、未部署；无源码变更，未运行构建或代码测试。
+下一步：北京时间 17:36 之后，用新打开的 Photo 页完成桌面和手机的“上传 -> 调参 -> 预览 -> 下载”验收；若仍出现自动广告，再核对保存的精确排除规则与实际访问路径，不扩大到全站关广告。
+
+## 2026-09-10 Sprite 页首屏上传与 PNG 需求补充（仅本地）
+
+问题：用户截图中的 Sprite 页首屏被两段介绍和跳往主转换页的大蓝色提示框占据，实际上传区被挤到下方。用户同意在原页面上调整，不新建 URL。
+GSC 证据：本次前序只读检查使用 `2026-08-10` 至 `2026-09-06` 完整窗口；目标页为 424 点击、2,270 展示、CTR 18.7%、平均排名 6.2。`png to sprite` 为 0 点击、33 展示、平均排名 14.0；`png to sprite converter` 为 2 点击、21 展示、平均排名 3.9。这是补充相同工具意图的依据，不是承诺排名提升。
+目标页面：`/converter/photo-to-sprite-converter/`，仅英文。保留原 slug、title、meta description 和 H1，不修改首页、其他 converter 内容、多语言内容、Blog、广告或部署配置。
+修改：在 `PseoPage.jsx` 增加仅匹配英文 Sprite 的首屏分支，显示 H1、一句简述和现有真实上传组件；编辑器继续复用原组件。长介绍移到工具后，原大提示框改成普通辅助内链。英文内容源补充 PNG 转单张 sprite 的说明、三步 HowTo 和三个 FAQ，明确保留已有透明区域不等于自动抠图，也不提供 sprite sheet 或动画帧生成。
+验证：Node `20.19.0` 下在临时副本 `/tmp/pixelart-sprite-preview-ISHdPZ` 运行 `npm run build`，构建及自带 SEO、dist、重定向检查通过；原工作区 `npm run lint` 通过。静态 HTML 包含 SSR 根节点、原 H1 和上传区；title、canonical、OG、Twitter、FAQ 与 HowTo 已通过构建及浏览器断言。内容对比确认其余 11 个 converter 条目未变。
+页面验收：Chromium 的 pSEO ownership、export options 和固定尺寸回归共 6 项通过，覆盖 1440 x 900 与 390 x 844 首屏上传区完整可见、无横向溢出、PNG 页原提示框保留、无效文件报错后恢复上传、Pixel Size 调整、真实下载文件尺寸与透明像素检查，以及原 16x16/32x32 导出。透明导出用合成测试图验证，不代表照片质量评测。桌面和手机截图已人工查看。
+补充真人页面检查：Codex 隔离浏览器上传站内公开 `showcase-before.jpg` 后编辑器正常出现，Pixel Size 从 1 调到 2，Palette 选择 Pico-8，预览图片正常显示，无捕获到的页面 error 日志；内置浏览器的下载事件等待超时，未将其记为人工下载成功。实际导出文件的验证以上述 Playwright 测试为准。
+工作区保护：仅改两个业务文件、一个已有测试文件，并追加本记录；未覆盖原有 AGENTS.md、sitemap 或其他无关改动。构建只在临时副本进行，未手改 dist。
+当前状态：本地完成，本地预览为 `http://localhost:4173/converter/photo-to-sprite-converter/`；未提交、未推送、未部署，生产仍为旧版。未运行全套跨浏览器测试，也未执行新的 GSC 提交。
+下一步：用户确认本地页面后再按明确授权提交发布；上线并确认 Google 重新抓取后，用完整窗口观察本页及 PNG 相关查询，不把本地验收当成 SEO 效果。
+
+## 2026-09-11 Sprite 上传后体验审评修复（仅本地）
+
+范围：用户授权修复审评中的四项问题；保留已有 Sprite 页面内容和未提交工作，不提交、不推送、不部署。
+修改：收起后的上传入口仍渲染错误和读屏通知，补回描述关联；非图片、损坏 PNG、超过 10MB 的文件均保留旧预览并显示错误，之后可重新上传。手机设置自然展开，预览保留双向滚动；放大图以可访问的左上角为起点，小图仍居中。桌面预览与父容器等高，避免压住下载按钮。
+隔离：通过显式页面参数仅让英文 Sprite 启用手机布局、标题层级、FAQ 前移和上传图标；恢复共用布局高度和其他页面原来的重置行为，首页/PNG 页 Reset 不再清除所选调色板。
+示例边界：保留 CSS 示意图，但明确标注“Illustration only, not an actual conversion result.”，去掉真实原图/8-bit 结果的误导标签；试用按钮改为 Try demo image。真实转换前后对照素材尚未补充，本轮不声称完成真实样例。
+验证：Node 20.19.0 下类型检查、受影响文件 ESLint 及 src/tests 差异空白检查通过。当前源码在临时副本 `/tmp/pixelart-sprite-fix-CwRxL2` 构建，完整 build 及自带 SEO、dist、重定向检查通过，不覆盖原工作区已有 sitemap 改动。
+浏览器测试：当前构建的 Chromium 共 9 项通过（pseo-ownership 5、export-options 1、fixed-32x32 2、zoom-controls 1），无自动重试。覆盖 1440 x 900/390 x 844、成功上传后连续错误输入及恢复、PNG 透明导出、真实 CDP 触摸手势横向滚动、放大图左上角可达、首页/PNG 布局与 Reset 隔离，以及 16x16/32x32 导出。合成测试图仅用于功能验证，不代表图片质量评估。
+人工页面检查：Codex 隔离浏览器检查当前构建的桌面/手机截图，示例可进入像素预览；手机再次选择非图片时错误可见、旧预览保留，控件 overflow 为 visible、内容自然展开。Firefox/WebKit 因本机缺少运行文件未能启动，未验证，未安装新工具。
+交付：本地预览 `http://localhost:4187/converter/photo-to-sprite-converter/`；仍未提交、未部署，无新的外部 SEO 提交。全工作区 diff-check 中 AGENTS.md 原有空白告警未改动。
+
+### 同日二次审评修复：吸顶下载栏与 Claude 配置
+
+范围：只修复本轮发现的两处问题，保留其他未提交改动，不提交、不部署。
+页面修复：英文 Sprite 的手机/平板参数区仍采用页面滚动，吸顶下载栏增加站点导航的 5rem 高度及 1px 边框偏移；lg 及以上继续使用原 top-0 和内部滚动，其他页面不变。
+回归验证：新增测试先在修复前构建复现按钮 y=0 被 81px 导航遮挡；最终测试覆盖 390x844 和 820x1180 滚动后按钮未被遮挡、真实点击下载且页面不跳动，并补验桌面及其他页面的原吸顶设置。Node 20.19.0 构建、类型检查、受影响文件 ESLint 与差异空白检查通过；Chromium 10 项通过，无自动重试。Codex 隔离浏览器手机截图确认按钮顶边与导航底边均为 81px，点击命中按钮。Firefox/WebKit 本轮未验证。
+配置修复：`.claude/settings.local.json` 使用事件数组和 command handler 结构，路径锚定 CLAUDE_PROJECT_DIR，去掉 BOM 以及无效的 Python/Node 工具名；原 Bash 权限不变。按 [Claude 官方文档链接的配置 schema](https://code.claude.com/docs/en/settings#edit-a-settings-file) 校验完整配置，并确认旧字符串 hook 会被拒绝。
+未解决的脚本依赖：用户要求自行寻找后，检查了本机可访问目录（含隐藏/忽略文件）、Spotlight 文件索引及 Git 历史，未找到 `sessions_enforce.py` 或 `post_tool_use.py`。历史只显示 2025-11-04 的 5d221b3 引入路径引用，sessions 目录没有提交记录；macOS 部分受保护目录无法读取，未绕过权限。保留原脚本引用，不删除或编造检查逻辑；配置格式通过不等于 hook 可执行，缺少脚本仍会报错，实际执行能力未恢复。
+交付：预览仍为 `http://localhost:4187/converter/photo-to-sprite-converter/`。构建只在临时副本进行，未覆盖原工作区 sitemap；脚本依赖未补齐，因此不将这部分标记为完全修复。
+
+## 2026-09-11 英文 Sprite 单页 SEO 优化（仅本地）
+
+范围：按用户目标只优化 `/converter/photo-to-sprite-converter/`，不提交、不推送、不部署、不操作 GSC 或付费工具。保留先前未提交工作；本轮不改 Claude hooks、首页、其他 converter 内容、多语言、Blog 或广告。
+内容：Title 从 45 改为 56 字符，Description 从 139 改为 157 字符；核心词 `photo to sprite converter` 前置于标题，并自然分布于 H1、首段、H2、正文和 FAQ。辅助词为 `png to sprite converter`、`png to sprite`。补充输入选择、Pixel Size 3/6/12 起点、调色板和抖动选择、输出尺寸、透明背景及后期清理限制，不承诺自动抠图、动画或直接可用游戏素材。
+真实示例：复用已有 `/showcase-before-w480.webp` 插画（480x637），通过本站编辑器完成 Pixel Size 6、Palette None、dithering off、Brightness/Contrast/Saturation 0、PNG Pixel size、Transparent background enabled 的实际导出。新增 `public/sprite-demo-pixel6.png`（80x106，21,205 字节），替换 CSS 示意图；页面说明这不是照片或手绘 sprite，原图不透明，转换不会去掉背景。回归测试将重新导出的像素数据与展示文件逐像素比较，不以示意图冒充结果。
+统计口径：对未上传时的初始 HTML，分别读取 main 主内容区与 body 全页文本；排除 head、script、style、noscript、hidden 和 aria-hidden=true 内容，不计图片 alt。英文/数字分词保留词内连字符和撇号。密度为完整四词词组次数/总词数；排名按同长度词组次数计算，并列同名次。不是第三方工具原始分数，也不是 Google 排名门槛。
+
+| 统计范围 | 本轮修改前 | 本轮修改后 |
+| --- | --- | --- |
+| 主内容区词数 | 592 | 1054 |
+| 主内容区核心词次数/密度/排名 | 1 / 0.169% / 并列12 | 6 / 0.569% / 1 |
+| 全页词数 | 760 | 1222 |
+| 全页核心词次数/密度/排名 | 2 / 0.263% / 并列7 | 7 / 0.573% / 1 |
+
+检查范围：在 Sprite 内容项补充 seo 字段，复用原 `validate-page-ownership.cjs`，使原有长度和关键词归属检查实际覆盖该页，不新增全站规则。现有 pseo-ownership 测试增加初始 HTML 的长度、前置词、H1/H2、首100词、主内容区/全页密度排名、OG/Twitter 一致性、robots/sitemap、真实示例加载及逐像素导出比对，并核对 FAQ 问答及 HowTo 步骤名与可见页面一致。
+构建与页面：在 `/tmp/pixelart-sprite-fix-CwRxL2` 使用 Node 20.19.0 构建，build 及自带 SEO/dist/重定向检查通过，类型检查与受影响文件 ESLint 通过；原工作区 sitemap 未被构建覆盖。桌面 1440x900 和手机 390x844 截图已检查，上传按钮在首屏完整可见、真实对照图加载正常、无水平溢出。Codex 隔离浏览器桌面可用，后续连接失败，手机最终截图使用项目 Playwright Chromium 补验；截图位于 `/tmp/sprite-seo-390-first.png`、`/tmp/sprite-seo-390-example.png`、`/tmp/sprite-seo-1440-example.png`。
+最终回归：当前构建的 Chromium 11 项全部通过，无自动重试（pseo-ownership 7、export-options 1、fixed-32x32 2、zoom-controls 1），覆盖 SEO、真实示例、首屏上传、错误恢复、透明导出、手机滚动下载、预览缩放及其他页面隔离。当前预览 HTTP 200；src 与已验收临时构建输入逐文件内容一致，受影响范围 diff-check 通过。
+未验证：Firefox/WebKit、生产发布、实时 GSC/搜索展示与 SEO 效果均不在本次已完成证据中。预览为 `http://localhost:4187/converter/photo-to-sprite-converter/`，生产仍为旧版。
+
+### 同日 PNG 辅助词自然布局补充
+
+用户同意不强制三词榜第一、四词榜第二，改为强化 PNG 需求承接。仅调整 Sprite 内容源及对应测试：H2 使用 PNG to sprite converter，边缘处理段说明 PNG to sprite 流程，FAQ 改为具体的输入/尺寸/PNG 下载说明，不增加重复段落、不改核心词和标题描述、不删导航。
+沿用上述统计口径，主内容区 1074 词：核心词 6 次、0.559%、四词榜第1；png to sprite converter 3 次、0.279%、并列第3；png to sprite 5 次、0.466%、并列第3。全页 1242 词：核心词 7 次、0.564%、第1；两个辅助词分别为 3 次、0.242%、并列第4，以及 5 次、0.403%、第5。排名是同长度词组频次，不是搜索排名，不为精确名次继续堆词。
+验证：Node 20.19.0 临时副本完整构建及自带校验通过，受影响测试 ESLint、diff-check 通过，pseo-ownership Chromium 7 项全部通过，覆盖手机/桌面、可见文案与结构化数据一致性、真实导出、错误恢复和手机滚动。源码与临时构建输入一致；保留已有工作区改动，无提交、部署或外部操作。
+
+## 2026-09-12 英文 Sprite 正文精简与透明物品案例（仅本地）
+
+授权与范围：按 9 月 11 日用户要求，优化 `/converter/photo-to-sprite-converter/` 英文页；跨午夜完成本地验证。不提交、不推送、不部署，不做 GSC 提交或排名承诺。开始时 HEAD、origin/main 和实时远程 main 均为 `7a0ed7cb9b1c8b9e18880fedf24f9be9ab2f836b`；保留原有全部未提交修改。
+
+内容与布局：移除英文页独立的三步操作区、三段长介绍、重复透明背景段落与底部主工具提示，流程融入上传按钮、参数表、导出选择三处。页面顺序为工具、一个真实案例、四行参数表与两项导出对比、五条可见 FAQ、相关工具。保留 Pixel Size 3/6/12、Palette None/Pico-8、dithering off 和颜色参数 0 的真实起点；导出说明区分 Pixel size 与 Original size，明确预览缩放不改变导出尺寸。正文只留一句透明背景限制，边缘清理、背景预处理、动画和固定尺寸细节集中在 FAQ。正文/FAQ 最大宽度 768px，FAQ 改为分隔线列表，不用折叠隐藏重复内容；相关工具描述同步缩短，仅影响本页显示。
+
+语言隔离：当前仅有英文 pSEO 内容文件，非英文 Sprite 路由会回退读取它。因此在同一 Sprite 条目增加 `englishSprite` 内容，只在英文目标页及该页预渲染元信息中应用；保留旧基础字段供其他语言回退。逐条比较确认全部 12 个基础条目未变，另外 11 个英文 converter 内容未变；没有改翻译文件、首页或共享图片处理逻辑。
+
+元信息与断言：英文 title 为 `Photo to Sprite Converter | Pixel Art Village`，H1 保持 `Photo to Sprite Converter`，canonical 保持原 URL；description 准确描述单张图片、本地处理和已有透明区域。删除 Sprite 测试中的密度、词频名次、硬性长度及强制 H2 重复关键词断言；ownership 脚本仅将 Sprite 的长度改为编辑参考，其他页原规则不变。保留关键词归属、非空元信息、OG/Twitter 一致性、robots/sitemap、可见 FAQ 与 JSON-LD 一致性、真实导出及错误恢复检查。
+
+案例来源与授权：[Free Health and Mana Potions](https://opengameart.org/content/free-health-and-mana-potions)，作者 bevouliin.com，页面明确标注 [CC0](https://creativecommons.org/publicdomain/zero/1.0/)，并说明提供透明 PNG。下载该条目附件 `health and mana potions.zip` 中的 `PNG/mana.png`，原样复制为 `public/sprite-mana-source.png`（228x228，12,671 字节）；源文件字节比较一致，没有抠图、裁切、重画或生成图。素材是游戏物品图标而不是照片，页面已说明。
+
+真实导出：通过本站本地页面加载该 PNG，Pixel Size 6、Palette None、dithering off、Brightness/Contrast/Saturation 0、PNG、Pixel size、Transparent background on，点击真实下载按钮生成 `public/sprite-mana-pixel6.png`（38x38，2,907 字节）。最终展示文件由项目 Playwright Chromium 141.0.7390.37 下载，未做后期处理。原图完全透明/半透明/不透明像素分别为 10,872 / 642 / 40,470；结果为 237 / 173 / 1,034，四角透明度均为 0，中心为 255。灰色只来自页面展示背景。原有未跟踪的 `sprite-demo-pixel6.png` 保留，没有删除用户已有文件。
+
+验证过程说明：初次使用另一浏览器环境下载的结果与项目 Chromium 的重采样像素不同；最终改用项目同一 Chromium 实际下载，保留严格逐像素比对，并在最终构建重新导出通过，不放宽像素断言。旧手机滚动测试依赖 End 键却没有确认缩放值改变，换用较小素材后暴露问题；改成真实点击缩放滑条并断言大于 4，再验证触摸横向滚动及导出尺寸不随缩放改变。没有扩展修改共享缩放逻辑。
+
+最终检查：Node 20.19.0 下 `npm run build`（含 ownership、SEO、dist、重定向检查）、`npm run lint`、`npm run typecheck` 和受影响文件 diff-check 均通过。构建使用临时副本 `/tmp/pixelart-sprite-content-spRTBO/build`，未覆盖原工作区已有 sitemap；最终输入文件与工作区逐文件一致。
+
+真实页面与回归：当前最终构建 Chromium 11 项全部通过，无自动重试（pseo-ownership 7、export-options 1、fixed-32x32 2、zoom-controls 1）。覆盖 1440x900、390x844 真实素材上传、Pixel Size 6 改 7、Pico-8、预览更新和实际下载 32x32；案例默认导出 38x38 与展示文件逐像素一致，Original size 为 228x228且透明角保留；还覆盖非法文件/损坏 PNG/超限文件恢复、手机触摸滚动、390/820 宽吸顶下载、首页与 PNG 页原布局及 Reset、16x16/32x32 导出、西班牙语 Sprite 回退页原 title/HowTo/四条 FAQ。初始 HTML 和客户端元信息、五条可见 FAQ 与结构化数据一致。
+
+人工检查：Codex 隔离浏览器查看桌面参数/导出区，以及手机首屏、前后图对齐、参数表；手机实际试用素材并调至 Pixel Size 7、Pico-8，预览正常且页面无横向溢出。下载文件尺寸与像素结论以上述 Playwright 实际下载检查为准。构建日志仍提示浏览器兼容性数据过期，没有因此更新依赖。
+
+交付与限制：本轮最终预览为 `http://localhost:4173/converter/photo-to-sprite-converter/`，使用上述临时副本的最终构建；此前 4187 端口预览未替换。测试日志在 `/tmp/pixelart-sprite-content-spRTBO/tests-final.log`，HTML 报告（含桌面/手机截图）在该副本 `playwright-report/`。未验证 Firefox/WebKit、实体手机浏览器、生产页面、Google 抓取或搜索效果；本地通过不等于线上更新或排名提升。
+
+### 同日恢复已确认元信息与主关键词检查（仅本地）
+
+用户指出上一轮修改标题、描述及取消主关键词首位检查不符合已确认要求，并明确要求恢复。仅修改英文 Sprite 覆盖内容及对应测试，保留精简正文、透明物品案例和其他已有未提交改动。title 恢复为 `Photo to Sprite Converter - Free PNG | Pixel Art Village`；description 恢复为 `Photo to Sprite Converter turns photos and PNGs into single sprite-style images. Adjust pixel size and palettes, preview changes, and download PNGs for free.`。首屏一句介绍自然补回主关键词，没有新增段落；恢复全页可见正文四词组中主关键词频次严格高于其他词组的测试，不要求辅助词名次或固定密度。
+
+当前验证：Node 20 临时副本完整构建及自带校验、测试文件 ESLint、Chromium 7 项受影响测试全部通过，无重试。覆盖初始 HTML 和客户端元信息、FAQ 一致性、真实素材下载与透明像素比对、桌面手机上传调参下载、错误恢复及其他页面隔离。全页 innerText 四词组统计主关键词 3 次，其余最高 2 次，独占第一；此统计不是用户截图插件的统计结果。1440x900 和 390x844 页面截图复核，均无横向溢出。Codex 隔离浏览器连接报 request-header policy 错误，本次改用项目 Playwright 浏览器截图检查，未直接复核用户插件。
+
+预览继续使用 `http://localhost:4173/converter/photo-to-sprite-converter/`，日志为 `/tmp/pixelart-sprite-content-spRTBO/build-restore.log` 和 `tests-restore.log`，截图为同目录 `restore-1440.png`、`restore-390.png`。未提交、推送或部署；线上状态未改变，也未验证搜索排名。
 
 
 ## 2026-09-12 英文 Sprite 页发布

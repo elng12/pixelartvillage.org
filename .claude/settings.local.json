@@ -1,7 +1,0 @@
-﻿{
-  "permissions": { "allow": ["bash","python","node"], "deny": [], "ask": [] },
-  "hooks": {
-    "pre_tool": "sessions/hooks/sessions_enforce.py",
-    "post_tool": "sessions/hooks/post_tool_use.py"
-  }
-}

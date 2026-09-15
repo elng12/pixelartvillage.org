@@ -74,7 +74,7 @@ function PixelStep({ n, title, children, icon }) {
   )
 }
 
-function HowItWorksSection({ title, description, steps, sectionId = 'how-it-works' }) {
+function HowItWorksSection({ title, description, steps, sectionId = 'how-it-works', compactLayout = false }) {
   const { t } = useTranslation();
   const resolvedTitle = title || t('how.title');
   const resolvedDescription = description || t('how.desc');
@@ -87,8 +87,8 @@ function HowItWorksSection({ title, description, steps, sectionId = 'how-it-work
       ];
   return (
     <section id={sectionId} className="py-12 md:py-16">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">{resolvedTitle}</h2>
+      <div className={`container mx-auto ${compactLayout ? 'max-w-4xl' : ''} px-4`}>
+        <h2 className={`${compactLayout ? 'text-2xl md:text-3xl' : 'text-3xl md:text-4xl'} font-bold text-center mb-4`}>{resolvedTitle}</h2>
         <p className="text-base md:text-lg text-gray-600 text-center max-w-3xl mx-auto mb-8">
           {resolvedDescription}
         </p>

@@ -4,9 +4,9 @@ Date: 2026-03-30
 
 ## One-line conclusion
 
-Our biggest remaining gap is onboarding and palette portability, not core editor trust or cleanup.
+Our biggest remaining gap is onboarding and guided first-use help, not core editor trust, palette portability, or cleanup.
 
-The editor already covers fixed built-in palettes, direct Lospec import, true export modes, grid export, visible support contact, a top-level feedback path, and the core custom-palette cleanup flow. The most valuable next work is to improve onboarding and help repeat users carry palette libraries across sessions or devices.
+The editor already covers fixed built-in palettes, direct Lospec import, true export modes, grid export, visible support contact, a top-level feedback path, the core custom-palette cleanup flow, and palette-library portability. The most valuable next work is to help first-time users get to a good result faster.
 
 ## Priority rules
 
@@ -54,6 +54,13 @@ The editor already covers fixed built-in palettes, direct Lospec import, true ex
 - Duplicate palette names now ask before overwrite.
 - Selected custom palettes can be renamed directly inside the manager.
 
+### Palette portability is now live
+
+- Users can export their custom palette library.
+- Users can import a previously exported library.
+- Import collisions now ask before replacing saved entries.
+- This is no longer an open P1 gap.
+
 ### Homepage example buttons are not a confirmed bug
 
 - The homepage already includes showcase/example imagery.
@@ -69,39 +76,28 @@ The editor already covers fixed built-in palettes, direct Lospec import, true ex
 
 ## P1
 
-### 1. Add palette-library export/import
+### 1. Add richer onboarding and creator presets
 
 Problem:
-- Repeat users can now clean up and rename palettes, but they still cannot back them up or move them between browsers/devices.
-- This becomes more noticeable now that the local palette workflow is actually worth keeping.
-
-Why this matters:
-- It protects creator work from feeling trapped inside one browser profile.
-- It is the clearest remaining repeat-user workflow win.
-
-What to build:
-- Let users export their custom palette library.
-- Let users import a previously exported library.
-- Keep overwrite behavior explicit when imported names collide.
-
-Acceptance:
-- User can export custom palettes from one browser and import them into another.
-- Built-in palettes remain intact.
-- Import collisions are clear and predictable.
-
-Expected impact:
-- Medium to high repeat-user workflow win.
-
-### 2. Add richer onboarding and creator presets
+- First-time users still land in a flexible editor without enough guidance about which settings fit portraits, sprites, retro UI, or general photos.
+- The upload path is now cleaner, but the product still expects users to discover good settings mostly by trial and error.
 
 What to improve:
 - Before/after examples tied to real use cases.
 - Short presets like `best for portraits`, `best for sprites`, or `best for retro UI`.
 - More guided onboarding inside the tool flow, not only in long-form content.
 
+Acceptance:
+- A first-time user can choose a starting direction without reading docs first.
+- Presets or starter paths visibly change settings in a predictable way.
+- The guidance feels additive, not blocking.
+
+Expected impact:
+- High first-session activation win.
+
 ## P2
 
-### 3. Consider advanced creator controls only after the trust layer is clean
+### 2. Consider advanced creator controls only after the onboarding layer is clearer
 
 Ideas:
 - Grid thickness.
@@ -109,7 +105,7 @@ Ideas:
 - Sprite-sheet-friendly export options.
 - Edge cleanup or outline-assist features.
 
-### 4. Treat PixilArt direct URL parity as blocked, not urgent
+### 3. Treat PixilArt direct URL parity as blocked, not urgent
 
 Why:
 - The current blocker is source-site access, not local implementation effort.
@@ -119,25 +115,24 @@ Why:
 
 ### Week 1
 
-- P1.1 add palette-library export/import
+- P1.1 add lightweight onboarding or presets
 
 ### Week 2
 
-- P1.2 add lightweight onboarding or presets
+- P2.2 evaluate advanced creator controls
 
 ### Week 3
 
-- P2.3 consider advanced creator controls
-- P2.4 keep PixilArt URL parity as blocked unless source conditions change
+- P2.3 keep PixilArt URL parity as blocked unless source conditions change
 
 ## Best next step if we only do one thing first
 
-- Add palette-library export/import
+- Add richer onboarding and creator presets
 
 Reason:
-- It is the clearest remaining workflow gap for repeat users.
-- Palette cleanup is now solid enough that portability matters more.
-- It improves trust that saved work will not get trapped in one browser.
+- It is now the clearest product gap after trust, export, support, feedback, and palette portability were closed.
+- It helps first-time users reach a good result faster.
+- It is the most visible improvement left on the homepage-to-editor journey.
 
 ## Best next step if we want the fastest visible win
 
@@ -149,8 +144,8 @@ Reason:
 
 ## Best next step if we want the strongest repeat-user workflow win
 
-- Add palette-library export/import
+- Consider advanced creator controls after onboarding ships
 
 Reason:
-- Palette import and cleanup are already good enough to justify portability.
-- This closes the most obvious remaining gap for creators who come back repeatedly.
+- Palette portability is already in place.
+- The next repeat-user gains will likely come from faster iteration and more creator-focused controls, not more library plumbing.
