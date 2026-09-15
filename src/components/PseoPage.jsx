@@ -150,28 +150,31 @@ const PHOTO_HERO_POINTS = [
   },
 ]
 
-function PhotoPreviewStrip({ className = '' }) {
+function PhotoPreviewStrip({ example }) {
+  if (!example) return null
   return (
-    <div className={`rounded-lg border border-gray-200 bg-white p-4 shadow-sm ${className}`} aria-hidden="true">
-      <div className="mb-3 flex items-center justify-between text-xs font-semibold text-gray-500">
-        <span>Photo source</span>
-        <span>Pixel result</span>
-      </div>
-      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
-        <div className="relative h-24 overflow-hidden rounded-lg border border-gray-200 bg-gradient-to-br from-sky-100 via-rose-100 to-emerald-100">
-          <div className="absolute left-5 top-5 h-10 w-10 rounded-full bg-white/75" />
-          <div className="absolute bottom-3 left-4 h-8 w-24 rounded-full bg-slate-700/20" />
-          <div className="absolute right-5 top-7 h-12 w-16 rounded-lg bg-white/45" />
+    <section className="bg-white py-8">
+      <figure className="container mx-auto max-w-4xl px-4" data-testid="photo-example">
+        <h2 className="text-2xl font-semibold text-gray-950">{example.title}</h2>
+        <p className="mt-3 text-sm leading-6 text-gray-700">{example.description}</p>
+        <div className="mt-5 grid grid-cols-2 gap-4">
+          {example.images.map((img, index) => (
+            <div key={img.src}>
+              <p className="mb-2 text-sm font-semibold text-gray-800">{img.label}</p>
+              <img src={img.src} alt={img.alt} width={img.width} height={img.height}
+                loading="lazy" className="aspect-[960/762] w-full object-contain"
+                style={index === 1 ? { imageRendering: 'pixelated' } : undefined} />
+              <p className="mt-2 text-xs text-gray-600">{img.width} x {img.height} px</p>
+            </div>
+          ))}
         </div>
-        <div className="text-xs font-semibold uppercase tracking-normal text-gray-300">to</div>
-        <div className="relative h-24 overflow-hidden rounded-lg border border-blue-200 bg-blue-50 pixel-grid-bg">
-          <div className="absolute left-5 top-5 h-10 w-10 bg-blue-500/80" />
-          <div className="absolute bottom-4 left-4 h-6 w-24 bg-slate-700/70" />
-          <div className="absolute right-6 top-8 h-10 w-14 bg-emerald-400/80" />
-          <div className="absolute right-4 bottom-4 h-4 w-8 bg-violet-400/80" />
-        </div>
-      </div>
-    </div>
+        <figcaption className="mt-4 space-y-2 text-sm leading-6 text-gray-700">
+          <p>{example.settings}</p>
+          <p>{example.exportNote}</p>
+          <p>Photo: <a href={example.sourceUrl} className="text-blue-700 underline">{example.sourceTitle}</a> by {example.author}, <a href={example.licenseUrl} className="text-blue-700 underline">CC0</a>. {example.sourceNote}</p>
+        </figcaption>
+      </figure>
+    </section>
   )
 }
 
@@ -251,7 +254,7 @@ function SpriteGuide({ guide, steps }) {
 
 function PhotoHeroPointGrid({ className = '' }) {
   return (
-    <ul className={`grid gap-3 text-sm text-gray-700 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 ${className}`}>
+    <ul className={`grid gap-3 text-sm text-gray-700 sm:grid-cols-3 ${className}`}>
       {PHOTO_HERO_POINTS.map((item) => (
         <li key={item.title} className="flex gap-3">
           <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-600" aria-hidden="true" />
@@ -286,36 +289,20 @@ function PhotoPseoHero({ page, introParas = [], fallback, onImageUpload }) {
   const secondIntro = page.toolSubtitle2 || introParas[1]
 
   return (
-    <section className="bg-gradient-to-b from-white to-slate-50 py-8 md:py-10">
-      <div className="container mx-auto max-w-6xl px-4">
+    <section className="bg-gray-50 py-6 md:py-8">
+      <div className="container mx-auto max-w-4xl px-4">
         {fallback ? (
           <p className="mb-3 text-xs text-gray-500">{'Using fallback English content.'}</p>
         ) : null}
-        <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="order-1 lg:order-1">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-normal text-blue-700">
-              Photo to pixel art
-            </p>
-            <h1 className="text-3xl font-extrabold leading-tight text-gray-950 md:text-5xl">
+        <div className="grid gap-5">
+          <div className="text-center">
+            <h1 className="text-3xl font-bold leading-tight text-gray-950 md:text-4xl">
               {page.h1}
             </h1>
-            <div className="hidden lg:block">
-              {firstIntro ? (
-                <p className="mt-4 max-w-2xl text-base leading-7 text-gray-700 md:text-lg">
-                  {firstIntro}
-                </p>
-              ) : null}
-              <PhotoHeroPointGrid className="mt-6" />
-              <PhotoMainConverterLink
-                to={mainConverterTo}
-                label={mainConverterLabel}
-                note={secondIntro}
-                className="mt-6"
-              />
-            </div>
+            {firstIntro ? <p className="mx-auto mt-3 max-w-2xl text-base leading-6 text-gray-700">{firstIntro}</p> : null}
           </div>
 
-          <div className="order-2 space-y-4 lg:order-2">
+          <div>
             <ToolSection
               onImageUpload={onImageUpload}
               showHeader={false}
@@ -331,10 +318,9 @@ function PhotoPseoHero({ page, introParas = [], fallback, onImageUpload }) {
               uploadZoneClassName="max-w-none border-blue-200 shadow-lg hover:border-blue-500"
               uploadZoneStyle={{ minHeight: '14rem', borderRadius: '0.5rem' }}
             />
-            <PhotoPreviewStrip className="hidden lg:block" />
           </div>
 
-          <div className="order-3 lg:hidden">
+          <div>
             <PhotoHeroPointGrid />
             <PhotoMainConverterLink
               to={mainConverterTo}
@@ -342,11 +328,6 @@ function PhotoPseoHero({ page, introParas = [], fallback, onImageUpload }) {
               note={secondIntro}
               className="mt-5"
             />
-            {firstIntro ? (
-              <p className="mt-5 max-w-2xl text-base leading-7 text-gray-700">
-                {firstIntro}
-              </p>
-            ) : null}
           </div>
         </div>
       </div>
@@ -624,13 +605,11 @@ export default function PseoPage() {
   const photoRelatedPages = ['image-to-pixel-art', 'png-to-pixel-art', 'jpg-to-pixel-art']
     .map((relatedSlug) => pages.find((entry) => entry.slug === relatedSlug))
     .filter(Boolean)
-    .map((entry) => entry.slug === 'image-to-pixel-art'
-      ? {
-          ...entry,
-          displayH1: 'General image converter',
-          displayIntro: 'Use the main converter when your source is a logo, screenshot, icon, or mixed image.',
-        }
-      : entry)
+    .map((entry) => ({
+      ...entry,
+      displayH1: entry.slug === 'image-to-pixel-art' ? 'General image converter' : entry.h1,
+      displayIntro: page.relatedDescriptions?.[entry.slug] || (Array.isArray(entry.intro) ? entry.intro[0] : entry.intro),
+    }))
   const spriteRelatedPages = ['image-to-pixel-art', 'photo-to-pixel-art', 'png-to-pixel-art']
     .map((relatedSlug) => pages.find((entry) => entry.slug === relatedSlug))
     .filter(Boolean)
@@ -798,6 +777,7 @@ export default function PseoPage() {
               <Editor key={page.slug} image={uploadedImage} fixedOutput={fixedOutput} />
             </Suspense>
           ) : null}
+          <PhotoPreviewStrip example={page.photoExample} />
         </Fragment>
       ) : isSpriteConverter ? (
         <Fragment>

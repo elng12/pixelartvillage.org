@@ -3,6 +3,30 @@
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-09-14 Photo 页发布
+
+新授权：用户明确要求“现在部署上线”，授权提交、推送及发布前述 Photo 页内容、真实案例和 on-page 小修。发布只包含本页源码、预渲染回退、三张相关图片、测试及本批记录；不包含已有 AGENTS、Claude 配置、竞品记录、HowItWorksSection、工作区 sitemap、旧 Sprite 示例及其他历史未提交文档修改。发布前 HEAD 与实时 origin/main 同为 `71b53602f9ea5f5885928343c773f368ab64a956`，沿用现有 Git 集成部署。干净暂存副本 `/tmp/pixelart-photo-release.uT9U2s` 用于最终验证；发布结果另行补记。
+
+## 2026-09-14 Photo 页 on-page 小修（仅本地）
+
+用户审查后授权“执行建议”。只调整英文 Photo 页首段、meta description 和本页相关工具短介绍；title、H1、URL、canonical、案例图片、工具参数及其他页面内容不变。首段自然加入完整主词，描述改为直接表达照片转换和 PNG 下载；相关工具短介绍来自 Photo 自己的 `relatedDescriptions`，React 与预渲染回退共用，不改 PNG/JPG 原页面正文。已有构建脚本同时更新 `public/pseo-og/photo-to-pixel-art.png` 中的描述文字，属于本页相关产物。
+
+最终主内容词频复核（不含导航、页脚和元标签）：`photo to pixel art` 4 次，在四词短语中独立第一；`photo to pixel art converter` 3 次，在五词短语中独立第一。新增测试固定统计范围并检查各自严格高于其他同长度短语。这是本页词频验收，不代表 Google 搜索排名第一。
+
+Node 20 完整构建及自带 SEO/dist/ownership/重定向检查、受影响文件 ESLint、typecheck 通过；最终 Chromium 6 项通过，无重试，包括新描述及 OG/Twitter 同步、词频断言、桌面/手机真实上传下载逐像素验证、首页/Sprite/PNG 回归。隔离浏览器刷新确认新文案。证据：`/tmp/pixel-photo-build.DhEAGk/onpage-acceptance/`。保留所有已有修改，构建后恢复原本 sitemap 字节；未提交、推送、部署或验证搜索效果，上一节记录的处理器风险仍未修复。
+
+## 2026-09-14 Photo 页真实案例与文案去重（仅本地）
+
+授权：用户在 Photo 页优化建议后回复“执行”。只修改 `/converter/photo-to-pixel-art/` 的英文内容、页面专属展示及对应预渲染回退；不提交、推送或部署，不改首页、其他 converter、翻译文件、Blog、广告或索引设置。保留开始时全部已有未提交修改。JSON 对比确认只改变 Photo 条目，title、description、H1 和 canonical 不变。
+
+实现：合并原先桌面/手机各一份的介绍和要点 DOM，压缩介绍，将上传入口保留在首屏。原来的 CSS 色块只是装饰示意，本轮改为一张真实照片及本站工具实际下载的结果；不是 AI 图片，也不是手工重画。重复 DOM 不等于用户同时看到两份，也没有证据证明它导致此前流量下降。
+
+素材：[Sunflower Public Domain](https://commons.wikimedia.org/wiki/File:Sunflower_Public_Domain.jpg)，Don McCulley，CC0；来源页已实时核验。使用 Wikimedia 的 960x762 JPEG 缩略图，保存为 `public/photo-sunflower-source.jpg`，下载后没有裁剪或修图。设置 Pixel Size 12、Palette None、dithering 关闭、Brightness/Contrast/Saturation 均为 0、grid 关闭、PNG、Pixel size 导出，透明背景选项保持默认开启；照片本身不透明。最终 `public/photo-sunflower-pixel12.png` 是本地构建页 Chromium 下载的 80x63 PNG，未二次加工。页面提供来源、许可、尺寸、参数与三条短建议，不宣称固定调色板适合所有肤色或所有照片。
+
+验证：Node 20.19.0 最终完整构建通过，包含 ownership、SEO、dist 和重定向检查；受影响 JS/JSX ESLint、typecheck 和 diff-check 通过。Chromium 定向 6 项最终全部通过、无重试：Photo 初始 HTML/单份要点/FAQ 与 JSON-LD 一致、1440x900 与 390x844 上传入口、非法文件后重新上传、各控件、实际 80x63 下载与案例逐像素相同、无横向溢出，以及 Sprite/PNG/首页相关回归。下载证据在 `/tmp/pixel-photo-build.DhEAGk/acceptance/`。Codex 隔离浏览器和测试截图检查了页面与图片展示。构建生成的 sitemap 已恢复为构建前原始字节，未覆盖原本的本地修改。
+
+测试过程保留的限制：初版测试错误假定导出按钮带 aria-pressed、预览图尺寸等于小尺寸导出，已按实际实现修正；调参后仅等待 aria-busy=false 也可能仍读到旧结果，最终测试等待每次预览图真正更新再下载。开发服务器首次生成的案例与构建页导出像素不一致，原因未确定，最终案例取自构建页真实下载，并在桌面和手机分别复现；没有放宽像素比较，也没有借此修改共享处理器。快速调参后立即下载的旧结果风险未修复，不将本轮内容修改说成处理器修复。未验证 Firefox/WebKit、实体手机、生产发布或搜索排名改善。预览：`http://localhost:4173/converter/photo-to-pixel-art/`。
+
 ## 当前状态
 
 | 字段 | 内容 |

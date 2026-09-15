@@ -978,7 +978,8 @@ async function prerender() {
       ? `<p class="mt-4 max-w-2xl text-base leading-7 text-gray-700 md:text-lg">${escapeHtml(firstIntro)}</p>`
       : ''
     const uploadHtml = `<section id="tool" class="bg-transparent py-0"><div class="px-0 text-center"><div class="upload-zone relative mx-auto max-w-none rounded-lg border-2 border-dashed border-blue-200 bg-white p-6 shadow-lg"><p class="text-xl font-semibold text-gray-700">Drag and drop your photo here</p><p class="mt-1 text-sm text-gray-500">Supports PNG, JPG, GIF, and WEBP - up to 10MB</p><button class="mt-4 rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm" type="button">Upload photo</button></div></div></section>`
-    const previewHtml = `<div class="hidden rounded-lg border border-gray-200 bg-white p-4 shadow-sm lg:block" aria-hidden="true"><div class="mb-3 flex items-center justify-between text-xs font-semibold text-gray-500"><span>Photo source</span><span>Pixel result</span></div><div class="grid grid-cols-[1fr_auto_1fr] items-center gap-3"><div class="h-24 rounded-lg border border-gray-200 bg-sky-100"></div><div class="text-xs font-semibold uppercase tracking-normal text-gray-300">to</div><div class="h-24 rounded-lg border border-blue-200 bg-blue-50 pixel-grid-bg"></div></div></div>`
+    const example = page.photoExample
+    const previewHtml = example ? `<section class="bg-white py-8"><figure data-testid="photo-example"><h2 class="text-2xl font-semibold text-gray-950">${escapeHtml(example.title)}</h2><p class="mt-3 text-sm leading-6 text-gray-700">${escapeHtml(example.description)}</p><div class="mt-5 grid grid-cols-2 gap-4">${example.images.map((img, index) => `<div><p class="mb-2 text-sm font-semibold">${escapeHtml(img.label)}</p><img src="${escapeHtml(img.src)}" alt="${escapeHtml(img.alt)}" width="${img.width}" height="${img.height}" loading="lazy" class="aspect-[960/762] w-full object-contain"${index === 1 ? ' style="image-rendering:pixelated"' : ''}><p class="mt-2 text-xs text-gray-600">${img.width} x ${img.height} px</p></div>`).join('')}</div><figcaption class="mt-4 space-y-2 text-sm leading-6 text-gray-700"><p>${escapeHtml(example.settings)}</p><p>${escapeHtml(example.exportNote)}</p><p>Photo: <a href="${escapeHtml(example.sourceUrl)}">${escapeHtml(example.sourceTitle)}</a> by ${escapeHtml(example.author)}, <a href="${escapeHtml(example.licenseUrl)}">CC0</a>. ${escapeHtml(example.sourceNote)}</p></figcaption></figure></section>` : ''
     const contentSectionsHtml = renderPseoContentSections(page)
     const howSteps = Array.isArray(page.howItWorks?.steps)
       ? page.howItWorks.steps.filter((step) => step && step.title).slice(0, 3)
@@ -1002,13 +1003,11 @@ async function prerender() {
     const relatedLinks = relatedSlugs
       .map((slug) => Array.isArray(pages) ? pages.find((entry) => entry && entry.slug === slug) : null)
       .filter(Boolean)
-      .map((entry) => entry.slug === 'image-to-pixel-art'
-        ? {
-            ...entry,
-            displayH1: 'General image converter',
-            displayIntro: 'Use the main converter when your source is a logo, screenshot, icon, or mixed image.',
-          }
-        : entry)
+      .map((entry) => ({
+        ...entry,
+        displayH1: entry.slug === 'image-to-pixel-art' ? 'General image converter' : entry.h1,
+        displayIntro: page.relatedDescriptions?.[entry.slug] || (Array.isArray(entry.intro) ? entry.intro[0] : entry.intro),
+      }))
     const relatedHtml = relatedLinks.length
       ? `<section class="mt-10"><h2 class="text-xl font-semibold text-gray-900">${escapeHtml(relatedHeading)}</h2><ul class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">${relatedLinks
           .map((entry) => {
@@ -1020,10 +1019,7 @@ async function prerender() {
           .join('')}</ul></section>`
       : ''
     const linkHtml = `<p class="mt-6 max-w-2xl text-sm leading-6 text-gray-600">${secondIntro ? `${escapeHtml(secondIntro)} ` : ''}<a class="font-semibold text-blue-700 underline decoration-blue-200 underline-offset-4" href="${escapeHtml(mainConverterHref)}">${escapeHtml(mainConverterLabel)}</a></p>`
-    const desktopDetailHtml = `${introHtml}${featuresHtml}${linkHtml}`
-    const mobileDetailHtml = `${featuresHtml}${linkHtml}${introHtml}`
-
-    return `<main><section class="bg-gradient-to-b from-white to-slate-50 py-10"><div class="container mx-auto max-w-6xl px-4"><div class="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]"><div class="order-1 lg:order-1"><p class="mb-3 text-sm font-semibold uppercase tracking-normal text-blue-700">Photo to pixel art</p><h1 class="text-3xl font-extrabold leading-tight text-gray-950 md:text-5xl">${heading}</h1><div class="hidden lg:block">${desktopDetailHtml}</div></div><div class="order-2 space-y-4 lg:order-2">${uploadHtml}${previewHtml}</div><div class="order-3 lg:hidden">${mobileDetailHtml}</div></div></div></section><div class="container mx-auto max-w-5xl px-4">${contentSectionsHtml}${howHtml}${relatedHtml}${faqHtml}</div></main>`
+    return `<main><section class="bg-gray-50 py-8"><div class="container mx-auto max-w-4xl px-4"><h1 class="text-3xl font-bold leading-tight text-gray-950 md:text-4xl">${heading}</h1>${introHtml}${uploadHtml}${featuresHtml}${linkHtml}</div></section><div class="container mx-auto max-w-4xl px-4">${previewHtml}${contentSectionsHtml}${howHtml}${relatedHtml}${faqHtml}</div></main>`
   }
 
   const renderPseoVisible = (page, { lang = DEFAULT_LANG, bundle = {}, pages = [] } = {}) => {
