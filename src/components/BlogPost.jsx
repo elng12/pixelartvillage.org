@@ -39,7 +39,8 @@ function buildBlogSeoTitle(title, siteName) {
   return `${normalizedTitle} | ${normalizedSiteName}`
 }
 
-function resolveBlogOgImage(slug) {
+function resolveBlogOgImage(slug, socialPreview) {
+  if (socialPreview?.image) return `https://pixelartvillage.org${socialPreview.image}`
   if (slug && BLOG_OG_IMAGE_SLUGS.has(slug)) {
     return `https://pixelartvillage.org/blog-og/${slug}.png`
   }
@@ -397,35 +398,74 @@ function renderBlogBlocks(blocks = [], editorialNoteIndex = -1) {
   })
 }
 
-function BlogPostCover({ post }) {
-  const coverImages = getBlogCoverImages()
-  const presentation = getBlogPresentationMeta(post)
+function BlogComparisonTable({ comparison }) {
+  if (!comparison) return null
 
   return (
-    <section className="blog-cover-shell mt-7" aria-label="Article cover preview">
+    <section id={comparison.id} className="mt-8 text-left" aria-labelledby={`${comparison.id}-heading`}>
+      <h2 id={`${comparison.id}-heading`} className="text-xl font-semibold leading-8 text-slate-950">
+        {comparison.heading}
+      </h2>
+      <table className="mt-4 block w-full text-left md:table md:table-fixed">
+        <caption className="sr-only">{comparison.heading}</caption>
+        <thead className="hidden md:table-header-group">
+          <tr className="border-b border-slate-300">
+            {comparison.columns.map((column) => (
+              <th key={column} scope="col" className="break-words px-3 py-3 text-sm font-semibold first:pl-0 md:last:w-[28%]">{column}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="block md:table-row-group">
+          {comparison.rows.map(([tool, ...cells]) => (
+            <tr key={tool} className="block border-b border-slate-200 py-4 md:table-row">
+              <th scope="row" className="block break-words py-1 text-sm font-semibold leading-6 md:table-cell md:py-3 md:pr-3 md:align-top">{tool}</th>
+              {cells.map((cell, index) => (
+                <td key={comparison.columns[index + 1]} className="block break-words py-1 text-sm leading-6 text-slate-700 md:table-cell md:px-3 md:py-3 md:align-top">
+                  <span className="font-medium md:hidden">{comparison.columns[index + 1]}: </span>
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="mt-3 text-sm leading-6 text-slate-600">{comparison.note}</p>
+    </section>
+  )
+}
+
+function BlogPostCover({ post }) {
+  const coverImages = getBlogCoverImages(post)
+  const presentation = getBlogPresentationMeta(post)
+  const panelClass = post.cover ? 'min-w-0' : 'blog-cover-panel'
+  const imageClass = post.cover ? 'block w-full aspect-[960/762] object-contain' : 'blog-cover-image'
+  const labelClass = post.cover ? 'mt-2 text-sm leading-6 text-slate-600' : 'blog-cover-label'
+
+  return (
+    <section className="blog-cover-shell mt-7" aria-label={presentation.coverLabel || 'Article cover preview'}>
       <div className="blog-cover-grid">
-        <figure className="blog-cover-panel">
+        <figure className={panelClass}>
           <img
             src={coverImages.before}
-            alt="Original source image preview"
-            className="blog-cover-image"
+            alt={presentation.sourceAlt || 'Original source image preview'}
+            className={imageClass}
             loading="eager"
           />
-          <figcaption className="blog-cover-label">Source image</figcaption>
+          <figcaption className={labelClass}>{presentation.sourceLabel || 'Source image'}</figcaption>
         </figure>
 
-        <figure className="blog-cover-panel">
+        <figure className={panelClass}>
           <img
             src={coverImages.after}
-            alt={`${post.title} pixel art preview`}
-            className="blog-cover-image"
+            alt={presentation.resultAlt || `${post.title} pixel art preview`}
+            className={`${imageClass}${coverImages.pixelated ? ' [image-rendering:pixelated]' : ''}`}
             loading="eager"
           />
-          <figcaption className="blog-cover-label">Pixel art result</figcaption>
+          <figcaption className={labelClass}>{presentation.resultLabel || 'Pixel art result'}</figcaption>
         </figure>
       </div>
 
-      <div className="blog-cover-note">
+      <div className={post.cover ? 'mt-4 flex flex-col gap-3' : 'blog-cover-note'}>
         <span className={`inline-flex items-center rounded-full border px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.16em] ${presentation.chipClass}`}>
           {presentation.badge}
         </span>
@@ -471,12 +511,16 @@ export default function BlogPost() {
     )
   }
 
-  const seoTitle = buildBlogSeoTitle(post.title, siteName)
-  const articleImage = resolveBlogOgImage(post.slug)
+  const seoTitle = buildBlogSeoTitle(post.seoTitle || post.title, siteName)
+  const articleImage = resolveBlogOgImage(post.slug, post.socialPreview)
+  const articleImageAlt = post.socialPreview?.alt || `${post.title} article preview`
   const renderedBody = assignHeadingIds(parseBlogBody(post.body))
   const editorialNoteIndex = getEditorialNoteIndex(renderedBody)
   const editorialNote = editorialNoteIndex >= 0 ? renderedBody[editorialNoteIndex] : null
-  const tableOfContents = getTableOfContents(renderedBody)
+  const tableOfContents = [
+    ...(post.comparison ? [{ id: post.comparison.id, label: post.comparison.heading }] : []),
+    ...getTableOfContents(renderedBody),
+  ]
   const faqItems = extractFaqItems(renderedBody)
   const relatedPosts = getRelatedPosts(posts, post.slug, 2)
   const readTime = estimateBlogReadTime(post)
@@ -488,7 +532,7 @@ export default function BlogPost() {
     headline: post.title,
     description: post.excerpt || '',
     datePublished: post.date || undefined,
-    dateModified: post.date || undefined,
+    dateModified: post.updated || post.date || undefined,
     inLanguage: resolvedLocale,
     articleSection: presentation.badge,
     keywords: Array.isArray(post.tags) && post.tags.length ? post.tags.join(', ') : undefined,
@@ -556,13 +600,13 @@ export default function BlogPost() {
           { property: 'og:title', content: seoTitle },
           { property: 'og:description', content: post.excerpt },
           { property: 'og:image', content: articleImage },
-          { property: 'og:image:alt', content: `${post.title} article preview` },
+          { property: 'og:image:alt', content: articleImageAlt },
           { property: 'og:site_name', content: siteName },
           { name: 'twitter:card', content: 'summary_large_image' },
           { name: 'twitter:title', content: seoTitle },
           { name: 'twitter:description', content: post.excerpt },
           { name: 'twitter:image', content: articleImage },
-          { name: 'twitter:image:alt', content: `${post.title} article preview` },
+          { name: 'twitter:image:alt', content: articleImageAlt },
         ]}
       />
 
@@ -580,7 +624,7 @@ export default function BlogPost() {
         <section className="blog-article-card mt-6 px-6 py-8 md:px-12 md:py-12">
           <header className="text-center">
             <div className="flex flex-wrap items-center justify-center gap-3 text-sm text-slate-500">
-              <span>{post.date}</span>
+              <span>{post.updated ? `${presentation.updatedLabel || 'Updated'}: ${post.updated}` : post.date}</span>
               <span aria-hidden="true" className="text-slate-300">•</span>
               <span>{readTime}</span>
             </div>
@@ -594,6 +638,8 @@ export default function BlogPost() {
               {post.excerpt}
             </p>
           </header>
+
+          <BlogComparisonTable comparison={post.comparison} />
 
           {fallback ? (
             <p className="mt-6 text-center text-xs text-gray-500">{t('content.fallbackNotice')}</p>
@@ -625,7 +671,7 @@ export default function BlogPost() {
 
         {relatedPosts.length ? (
           <section className="mt-12">
-            <h2 className="text-xl font-semibold tracking-tight text-slate-950">Related Articles</h2>
+            <h2 className="text-xl font-semibold tracking-tight text-slate-950">{presentation.relatedHeading || 'Related Articles'}</h2>
             <div className="mt-4 grid gap-4 md:grid-cols-2">
               {relatedPosts.map((related) => (
                 <article key={related.slug} className="blog-simple-card px-5 py-5">
@@ -640,7 +686,7 @@ export default function BlogPost() {
                       to={`/blog/${related.slug}/`}
                       className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 transition-colors hover:text-blue-800"
                     >
-                      Read more
+                      {presentation.readMoreLabel || 'Read more'}
                       <span aria-hidden="true">→</span>
                     </LocalizedLink>
                   </div>
@@ -652,7 +698,7 @@ export default function BlogPost() {
 
         <div className="mt-8 text-center">
           <LocalizedLink to="/blog/" className="btn-primary inline-flex items-center justify-center">
-            Back to Blog
+            {presentation.backLabel || 'Back to Blog'}
           </LocalizedLink>
         </div>
       </div>

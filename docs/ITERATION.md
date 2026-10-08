@@ -3,6 +3,52 @@
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-10-08 德语转换器比较文章优化（仅本地）
+
+授权：用户查看 GSC 索引报告并要求判断可恢复页面后，明确回复“执行建议”。本轮只优化 `/de/blog/best-pixel-art-converters-compared-2025/`，不发布、不请求 Google 收录、不批量修改其他未收录页面。开始时 main、HEAD `4badfb398e430333a908889d1a3ba61ca503c4a5`；AGENTS.md 和本文件已有未提交改动，全部保留。
+
+诊断依据：上一轮当前 URL Inspection 显示该德语文章已抓取但未收录，最后抓取时间为 `2026-05-31T06:14:03Z`，抓取成功且 robots 允许；当前 HTTP 页面为 200、自引用 canonical，没有发现 noindex。API 未返回该页 googleCanonical/userCanonical，不能补造其选择结果。它是值得改善的真实德语文章，不是重定向别名；尚无证据证明其流量价值或它导致了首页曝光下降。
+
+内容：`src/content/blog-posts.de.json` 只替换该文章条目，保留网址与原始发布日期 2025-11-01，另记实际修改日期 2026-10-08。原来缺少证据的“10 款实测”、星级与数字评分改为 4 款工具的用途比较，披露文章由本站团队撰写。明确本站实际验证与其他工具的官方资料不是同一种证据，不宣称横向速度/画质测试。修正本站导出为 PNG/JPEG/WEBP、10 MiB 上传及 2200px 长边处理限制，说明照片转换不能替代逐像素绘制或动画编辑。
+
+资料核对：[Aseprite 官方页](https://www.aseprite.org/)、[Piskel 官方页](https://www.piskelapp.com/) 和 [GIMP Verpixeln 文档](https://docs.gimp.org/3.0/de/gimp-filter-pixelize.html) 已实时读取；文中各工具说明附对应链接，不沿用旧价格或未经证实的注册、隐私、协作能力。采用 [Google 评测内容建议](https://developers.google.com/search/docs/specialty/ecommerce/write-high-quality-reviews) 中的证据、用途、优缺点和来源思路，不套固定字数或把改稿当成收录保证。
+
+真实案例：复用已归档的 Don McCulley/CC0 向日葵原图 `photo-sunflower-source.jpg`（960x762）及本站实际导出的 `photo-sunflower-pixel12.png`（80x63）。文章给出 Pixel Size 12、无调色板、Dithering 关闭、三项颜色调整为 0、PNG/Pixel size 导出，声明图片只展示本站，不冒充四工具同图实测。案例不裁切，结果按硬边像素放大，正文含来源及许可。
+
+展示隔离：文章条目新增可选 presentation/cover/updated 数据，React 与预渲染回退读取同一配置；只此条目启用德语封面标签、阅读时间、相关文章与返回按钮、案例和修改日期。共享模板保留旧默认值；89 个其他 Blog 条目的展示元信息、封面和阅读时间与 HEAD 逐项一致，德语其余两篇文章数据未变。德语 Blog 已有本页入口，更新的标题和摘要自然来自同一内容源，没有另改列表页或全站语言政策。保留 canonical/hreflang 规则，新增可见 FAQ 并由现有解析器同步 FAQPage；datePublished 保留原日期，dateModified 使用实际修改日期。
+
+本地验收：Node 20.19.0 完整 build（含 ownership、SEO、dist、重定向检查）、受影响文件 ESLint、typecheck、git diff --check 通过。首次内容替换缺逗号导致 JSON 构建失败，已修正并完整重建通过；没有放宽检查或更换依赖。构建日期刷新生成的两份 public sitemap 已恢复为修改前字节，不混入全站日期变更；正式 sitemap URL 集合仍为 205 个。
+
+最终 Chromium 定向 19 项全部通过，无自动重试：目标页桌面 1440x900/手机 390x844 的初始 HTML 与运行时、从德语 Blog 点击进入并刷新、单 H1、title/description/canonical/OG/Twitter、德语 hreflang、发布日期与修改日期、三项 FAQ 与可见问答一致、德语展示标签、图片自然尺寸/完整展示/像素放大、官方来源及内部入口、无横向溢出；另覆盖已有英文与韩语 Blog、西语语言切换/首页/上传/生产 Cookie 模式及 Photo 桌面手机实际导出。Photo 两次真实下载均为 80x63 PNG，并与展示结果逐像素一致。桌面与手机截图已查看。证据保留在 `/tmp/pixelart-de-comparison.SL1sn1/results/` 与 `report/`，预览为 `http://localhost:4198/de/blog/best-pixel-art-converters-compared-2025/`。
+
+边界：未提交、推送或部署；没有验证 Google 抓取新版、收录或排名恢复。未验证 Firefox/WebKit、实体手机或替代工具的实际转换流程。已有其他多语言英文回退、404、法语品牌标题及重定向问题未在本轮处理。
+
+### 德语比较页标题长度修正
+
+用户根据 AITDK 截图要求搜索标题控制在 55–60 个字符。完整 title 改为 `Pixel-Art-Konverter: 4 Tools im Vergleich | Pixel-Art-Dorf`，包含空格、分隔符与品牌共 58 个字符。只给该文章新增可选 seoTitle，正文 H1、Blog 列表标题、结构化数据 headline、描述、正文与网址保持不变；React 和初始 HTML 的 title/OG/Twitter 同步使用短标题，其他文章继续沿用旧默认规则。55–60 是此次编辑要求，不是 Google 的硬性字符限制；[Google 官方说明](https://developers.google.com/search/docs/appearance/title-link)指出标题会根据设备显示宽度截断。
+
+本次最终 Node 20 完整 build、受影响文件 ESLint、typecheck 与 diff-check 通过。当前版本 Chromium Blog 7 项全部通过、无重试，包含目标页桌面/手机初始 HTML 与运行时的短标题及长度断言、H1 不变、社交标题同步、德语 Blog 入口和已有英文/韩语 Blog 回归。报告另存 `/tmp/pixelart-de-comparison.SL1sn1/title-report/`，不以此前 19 项结果替代本次检查。生成 sitemap 再次恢复修改前字节。仍仅本地，未提交、发布或请求收录；刷新现有 4198 预览即可查看。
+
+### 德语比较页选型摘要前移与分享图
+
+授权：用户在 SEO 单页审评后回复“执行”。本轮只落实此前建议的选型摘要前移和德语分享图，不修改多语言关联策略，不提交、推送、部署或请求 Google 收录。继续使用 page-seo-workflow 与 gefei-seo-knowledge-base 的证据和单页范围要求，不套固定字数或关键词密度指标。
+
+内容与布局：四款工具的用途、运行环境、导出格式与限制改为对照表，放在文章介绍之后、目录和方法说明之前，移除正文原有重复选型列表。桌面五列，手机按工具逐项显示同一张语义表格，不复制两份内容；德语长词所在的限制列加宽。当前运行时摘要标题约在桌面 924px、手机 915px 文档位置，比审评时约 1834px/2620px 提前。明确这是功能对照，不是四款工具的同图质量实测；GIMP 导出说明补上[官方文档](https://docs.gimp.org/3.0/de/gimp-images-out.html)，区分 XCF 项目保存与 PNG/JPEG 导出。
+
+分享图：复用现有 Sharp 构建脚本，新增只由该文章启用的 socialPreview 配置和 `public/blog-og/de/best-pixel-art-converters-compared-2025.png`，尺寸 1200x630。图中为德语标题、四工具名称与真实向日葵原图/本站 PNG 结果，未修改原始案例文件，没有虚构其他工具的结果。React、初始 HTML 的 OG/Twitter 图片与德语图片说明、BlogPosting image 同步使用新图，其他文章保持原有默认图片规则。完整 title 仍为 58 字符，H1、description、canonical、hreflang 和发布日期不变；德语另外两篇文章数据与 HEAD 一致。
+
+最终版本验收：Node 20.19.0 完整 build（含 ownership、SEO、dist、重定向检查）、受影响文件 ESLint、typecheck 和 diff-check 通过。Chromium 定向 19 项全部通过，无自动重试，覆盖桌面 1440x900/手机 390x844、无 JavaScript 初始页面与运行时、表格行列与前置顺序、元信息与图片、FAQ/JSON-LD、已有英文/韩语 Blog、西语首页和语言切换，以及 Photo 桌面手机实际 PNG 导出。分享图 HTTP 200、1200x630 已确认，结果区域与真实 80x63 PNG 最近邻放大逐像素一致；Photo 实际下载仍与原案例一致。已查看最终桌面、手机比较表与分享图，无横向溢出或文字重叠。
+
+证据：最终构建日志 `/tmp/pixelart-de-comparison.SL1sn1/comparison-build-final.log`，浏览器报告 `comparison-final-report/`，截图 `selection-final-1440.png`、`selection-final-390.png` 均在同一临时目录。构建刷新生成的两个 public sitemap 及无关 pSEO OG 已恢复原状态，未混入本轮改动。预览继续为 `http://localhost:4198/de/blog/best-pixel-art-converters-compared-2025/`。仅本地完成；Firefox/WebKit、实体手机、正式发布、Google 抓取/收录与搜索效果未验证，多语言关联问题仍未处理。
+
+### 德语比较文章正式发布
+
+新授权：用户明确要求“上线部署”，授权提交、推送并部署已经完成本地验收的德语比较文章。只发布 `/de/blog/best-pixel-art-converters-compared-2025/` 的内容、58 字符标题、真实案例、前置比较表和德语分享图，以及必要的可选模板支持与测试。不修改其他语言内容、hreflang 策略、广告、索引设置，不提交 GSC。
+
+发布隔离：开始时 main、HEAD 与实时远程 main 均为 `4badfb398e430333a908889d1a3ba61ca503c4a5`。从 HEAD 导出干净副本 `/tmp/pixelart-de-release-G9NrVA`，只加入六个相关代码/测试文件和一张德语分享图；文档只暂存本篇文章及本次发布段落，保留 AGENTS.md、原有历史整理和其他发布回执的未提交修改。未混入构建生成的 sitemap 或无关 OG 图片，未新增依赖、云端配置或站点。
+
+发布前验证：Node 20.19.0 完整 build（含 ownership、SEO、dist、重定向检查）、完整 lint 和 typecheck 通过；生产式 Cookie 模式的完整 Chromium 84 项全部通过，无自动重试，覆盖 Blog 初始 HTML/运行时、德语桌面/手机、分享图真实像素、现有 converter 与 18 个 Sprite 语言入口及真实导出等回归。构建日志 `build.log`、测试日志 `tests.log`、浏览器报告 `release-report/` 位于该发布副本。沿用现有 Git 集成部署；提交、部署回执与正式页面结果待后续补记，不将本地测试当作生产验收。
+
 ## 2026-10-08 首页曝光诊断与上传限制说明（仅本地）
 
 授权：用户要求依据 SEO Skills 调查曝光损失，再明确回复“执行”。本轮只修正英文首页 `/` 的尺寸承诺，不改关键词定位、其他页面、其他语言、图片处理器、广告或索引设置，不提交、推送或部署。开始时 main、HEAD `da4aae3bb7293f7a8e7f2fcfde18914979927c36`；AGENTS.md 与本文件已有未提交改动，全部保留。

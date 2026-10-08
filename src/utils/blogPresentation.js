@@ -76,16 +76,17 @@ export function estimateBlogReadTime(post = {}) {
     : 0
   const excerptWords = countWords(post.excerpt)
   const minutes = Math.max(3, Math.ceil((bodyWords + excerptWords) / 210))
-  return `${minutes} min read`
+  return `${minutes} ${post.presentation?.readTimeLabel || 'min read'}`
 }
 
 export function getBlogPresentationMeta(post = {}) {
   return {
     ...DEFAULT_PRESENTATION,
     ...(BLOG_POST_META[post.slug] || {}),
+    ...(post.presentation || {}),
   }
 }
 
-export function getBlogCoverImages() {
-  return BLOG_COVER_IMAGES
+export function getBlogCoverImages(post = {}) {
+  return { ...BLOG_COVER_IMAGES, ...(post.cover || {}) }
 }

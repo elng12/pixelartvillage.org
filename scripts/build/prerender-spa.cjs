@@ -392,11 +392,13 @@ async function prerender() {
     whyRead: post.excerpt || 'Use this guide to improve the next conversion you run.',
     nextStep: 'Open the main converter and test the workflow on a real image.',
     ...(BLOG_POST_META[post.slug] || {}),
+    ...(post.presentation || {}),
   })
 
-  const getVisibleBlogCoverImages = () => ({
-    before: ABS('/showcase-before-w640.jpg'),
-    after: ABS('/showcase-after-w640.jpg'),
+  const getVisibleBlogCoverImages = (post = {}) => ({
+    before: ABS(post.cover?.before || '/showcase-before-w640.jpg'),
+    after: ABS(post.cover?.after || '/showcase-after-w640.jpg'),
+    pixelated: post.cover?.pixelated,
   })
 
   const countWords = (text = '') => String(text)
@@ -411,7 +413,7 @@ async function prerender() {
       ? post.body.reduce((total, line) => total + countWords(line), 0)
       : 0
     const minutes = Math.max(3, Math.ceil((excerptWords + bodyWords) / 210))
-    return `${minutes} min read`
+    return `${minutes} ${post.presentation?.readTimeLabel || 'min read'}`
   }
 
   const localizeVisibleHref = (href, prefix = '') => {
@@ -721,6 +723,26 @@ async function prerender() {
     </div>`
   }
 
+  const renderBlogComparisonVisible = (comparison) => {
+    if (!comparison) return ''
+    return `<section id="${escapeHtml(comparison.id)}" class="mt-8 text-left" aria-labelledby="${escapeHtml(comparison.id)}-heading">
+      <h2 id="${escapeHtml(comparison.id)}-heading" class="text-xl font-semibold leading-8 text-slate-950">${escapeHtml(comparison.heading)}</h2>
+      <table class="mt-4 block w-full text-left md:table md:table-fixed">
+        <caption class="sr-only">${escapeHtml(comparison.heading)}</caption>
+        <thead class="hidden md:table-header-group"><tr class="border-b border-slate-300">
+          ${comparison.columns.map((column) => `<th scope="col" class="break-words px-3 py-3 text-sm font-semibold first:pl-0 md:last:w-[28%]">${escapeHtml(column)}</th>`).join('')}
+        </tr></thead>
+        <tbody class="block md:table-row-group">
+          ${comparison.rows.map(([tool, ...cells]) => `<tr class="block border-b border-slate-200 py-4 md:table-row">
+            <th scope="row" class="block break-words py-1 text-sm font-semibold leading-6 md:table-cell md:py-3 md:pr-3 md:align-top">${escapeHtml(tool)}</th>
+            ${cells.map((cell, index) => `<td class="block break-words py-1 text-sm leading-6 text-slate-700 md:table-cell md:px-3 md:py-3 md:align-top"><span class="font-medium md:hidden">${escapeHtml(comparison.columns[index + 1])}: </span>${escapeHtml(cell)}</td>`).join('')}
+          </tr>`).join('')}
+        </tbody>
+      </table>
+      <p class="mt-3 text-sm leading-6 text-slate-600">${escapeHtml(comparison.note)}</p>
+    </section>`
+  }
+
   const renderBlogPostVisible = (post, lang = DEFAULT_LANG, bundle = {}, relatedHtml = '') => {
     if (!post || !post.slug) return ''
     const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
@@ -728,7 +750,10 @@ async function prerender() {
     const bodyBlocks = assignVisibleHeadingIds(parseVisibleBlogBody(post.body))
     const editorialNoteIndex = getVisibleEditorialNoteIndex(bodyBlocks)
     const editorialNote = editorialNoteIndex >= 0 ? bodyBlocks[editorialNoteIndex] : null
-    const tocItems = getVisibleTocItems(bodyBlocks)
+    const tocItems = [
+      ...(post.comparison ? [{ id: post.comparison.id, label: post.comparison.heading }] : []),
+      ...getVisibleTocItems(bodyBlocks),
+    ]
     const tocHtml = tocItems.length
       ? `<nav class="mt-8 flex flex-wrap justify-center gap-2">
           ${tocItems.map((item) => `<a href="#${escapeHtml(item.id)}" class="blog-anchor-chip">${escapeHtml(item.label)}</a>`).join('')}
@@ -741,19 +766,22 @@ async function prerender() {
     })
 
     const presentation = buildBlogPresentationMeta(post)
-    const coverImages = getVisibleBlogCoverImages()
-    const coverHtml = `<section class="blog-cover-shell mt-7" aria-label="Article cover preview">
+    const coverImages = getVisibleBlogCoverImages(post)
+    const panelClass = post.cover ? 'min-w-0' : 'blog-cover-panel'
+    const imageClass = post.cover ? 'block w-full aspect-[960/762] object-contain' : 'blog-cover-image'
+    const labelClass = post.cover ? 'mt-2 text-sm leading-6 text-slate-600' : 'blog-cover-label'
+    const coverHtml = `<section class="blog-cover-shell mt-7" aria-label="${escapeHtml(presentation.coverLabel || 'Article cover preview')}">
       <div class="blog-cover-grid">
-        <figure class="blog-cover-panel">
-          <img src="${escapeHtml(coverImages.before)}" alt="Original source image preview" class="blog-cover-image" loading="eager">
-          <figcaption class="blog-cover-label">Source image</figcaption>
+        <figure class="${panelClass}">
+          <img src="${escapeHtml(coverImages.before)}" alt="${escapeHtml(presentation.sourceAlt || 'Original source image preview')}" class="${imageClass}" loading="eager">
+          <figcaption class="${labelClass}">${escapeHtml(presentation.sourceLabel || 'Source image')}</figcaption>
         </figure>
-        <figure class="blog-cover-panel">
-          <img src="${escapeHtml(coverImages.after)}" alt="${escapeHtml(post.title || '')} pixel art preview" class="blog-cover-image" loading="eager">
-          <figcaption class="blog-cover-label">Pixel art result</figcaption>
+        <figure class="${panelClass}">
+          <img src="${escapeHtml(coverImages.after)}" alt="${escapeHtml(presentation.resultAlt || `${post.title || ''} pixel art preview`)}" class="${imageClass}${coverImages.pixelated ? ' [image-rendering:pixelated]' : ''}" loading="eager">
+          <figcaption class="${labelClass}">${escapeHtml(presentation.resultLabel || 'Pixel art result')}</figcaption>
         </figure>
       </div>
-      <div class="blog-cover-note">
+      <div class="${post.cover ? 'mt-4 flex flex-col gap-3' : 'blog-cover-note'}">
         <span class="inline-flex items-center rounded-full border px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.16em] ${escapeHtml(presentation.chipClass)}">${escapeHtml(presentation.badge)}</span>
         <p class="text-sm leading-7 text-slate-600 md:text-[0.98rem]">${escapeHtml(presentation.bestFor)}</p>
       </div>
@@ -768,7 +796,7 @@ async function prerender() {
         <section class="blog-article-card mt-6 px-6 py-8 md:px-12 md:py-12">
           <header class="text-center">
             <div class="flex flex-wrap items-center justify-center gap-3 text-sm text-slate-500">
-              <span>${escapeHtml(post.date || '')}</span>
+              <span>${escapeHtml(post.updated ? `${presentation.updatedLabel || 'Updated'}: ${post.updated}` : post.date || '')}</span>
               <span aria-hidden="true" class="text-slate-300">•</span>
               <span>${escapeHtml(estimateVisibleBlogReadTime(post))}</span>
             </div>
@@ -776,6 +804,8 @@ async function prerender() {
             ${coverHtml}
             <p class="mx-auto mt-7 max-w-[42rem] text-[1.05rem] leading-8 text-slate-600 md:text-[1.1rem]">${escapeHtml(post.excerpt || '')}</p>
           </header>
+
+          ${renderBlogComparisonVisible(post.comparison)}
 
           ${tocHtml}
 
@@ -788,7 +818,7 @@ async function prerender() {
         ${relatedHtml}
 
         <div class="mt-8 text-center">
-          <a href="${prefix}/blog/" class="btn-primary inline-flex items-center justify-center">Back to Blog</a>
+          <a href="${prefix}/blog/" class="btn-primary inline-flex items-center justify-center">${escapeHtml(presentation.backLabel || 'Back to Blog')}</a>
         </div>
       </div>
     </article>`
@@ -812,15 +842,16 @@ async function prerender() {
   const renderBlogPostWithRelatedVisible = (post, posts = [], lang = DEFAULT_LANG, bundle = {}) => {
     if (!post || !post.slug) return ''
     const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`
+    const presentation = buildBlogPresentationMeta(post)
     const related = getRelatedBlogPosts(posts, post.slug, 3)
     const relatedHtml = related.length
       ? `<section class="mt-12">
-          <h2 class="text-xl font-semibold tracking-tight text-slate-950">Related Articles</h2>
+          <h2 class="text-xl font-semibold tracking-tight text-slate-950">${escapeHtml(presentation.relatedHeading || 'Related Articles')}</h2>
           <div class="mt-4 grid gap-4 md:grid-cols-2">
             ${related.slice(0, 2).map((item) => `<article class="blog-simple-card px-5 py-5">
               <h3 class="text-lg font-semibold tracking-tight text-slate-950"><a href="${prefix}/blog/${escapeHtml(item.slug)}/" class="transition-colors hover:text-blue-700">${escapeHtml(item.title || item.slug)}</a></h3>
               <p class="mt-3 text-sm leading-7 text-slate-600">${escapeHtml(item.excerpt || '')}</p>
-              <div class="mt-4"><a href="${prefix}/blog/${escapeHtml(item.slug)}/" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 transition-colors hover:text-blue-800">Read more<span aria-hidden="true">→</span></a></div>
+              <div class="mt-4"><a href="${prefix}/blog/${escapeHtml(item.slug)}/" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 transition-colors hover:text-blue-800">${escapeHtml(presentation.readMoreLabel || 'Read more')}<span aria-hidden="true">→</span></a></div>
             </article>`).join('')}
           </div>
         </section>`
@@ -1839,8 +1870,11 @@ async function prerender() {
     for (const post of postsForLang) {
       if (!post?.slug) continue
       const postPath = buildBlogPath(lang, post.slug)
-      const ogImage = blogImageExists(post.slug) ? ABS(`/blog-og/${post.slug}.png`) : ABS('/blog-og/_index.png')
-      const seoTitle = formatBlogSeoTitle(post.title, siteName)
+      const ogImage = post.socialPreview?.image
+        ? ABS(post.socialPreview.image)
+        : blogImageExists(post.slug) ? ABS(`/blog-og/${post.slug}.png`) : ABS('/blog-og/_index.png')
+      const ogImageAlt = post.socialPreview?.alt || `${post.title} article preview`
+      const seoTitle = formatBlogSeoTitle(post.seoTitle || post.title, siteName)
       const seoDescription = shortenText(post.excerpt || '')
       const postMeta = buildBlogPresentationMeta(post)
       const faqItems = extractVisibleFaqItems(post.body)
@@ -1857,13 +1891,13 @@ async function prerender() {
           { property: 'og:title', content: seoTitle },
           { property: 'og:description', content: seoDescription },
           { property: 'og:image', content: ogImage },
-          { property: 'og:image:alt', content: `${post.title} article preview` },
+          { property: 'og:image:alt', content: ogImageAlt },
           { property: 'og:site_name', content: siteName },
           { name: 'twitter:card', content: 'summary_large_image' },
           { name: 'twitter:title', content: seoTitle },
           { name: 'twitter:description', content: seoDescription },
           { name: 'twitter:image', content: ogImage },
-          { name: 'twitter:image:alt', content: `${post.title} article preview` },
+          { name: 'twitter:image:alt', content: ogImageAlt },
         ],
         jsonLd: [
           {
@@ -1872,7 +1906,7 @@ async function prerender() {
             headline: post.title,
             description: seoDescription,
             datePublished: post.date || undefined,
-            dateModified: post.date || undefined,
+            dateModified: post.updated || post.date || undefined,
             inLanguage: lang,
             articleSection: postMeta.badge,
             keywords: Array.isArray(post.tags) && post.tags.length ? post.tags.join(', ') : undefined,
