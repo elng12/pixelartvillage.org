@@ -5,6 +5,7 @@ import FeaturesSection from './FeaturesSection'
 import HowItWorksSection from './HowItWorksSection'
 import FaqSection from './FaqSection'
 import LocalizedLink from '@/components/LocalizedLink'
+import { useLocaleContext } from '@/hooks/useLocaleContext'
 
 const HOME_BELOW_FOLD_STYLE = {
   contentVisibility: 'auto',
@@ -13,6 +14,8 @@ const HOME_BELOW_FOLD_STYLE = {
 
 export default function HomeBelowFold({ spanishHome = false }) {
   const { t } = useTranslation()
+  const { currentLocale } = useLocaleContext()
+  const sizeFeature = currentLocale === 'en' ? t('home.imageLimits', { returnObjects: true }) : undefined
   const faqItems = spanishHome
     ? t('faq.items', { returnObjects: true }).map((item, index) => (
         index === 6 ? { ...item, answer: t('home.faqFormatAnswer') } : item
@@ -47,7 +50,7 @@ export default function HomeBelowFold({ spanishHome = false }) {
   return (
     <div style={HOME_BELOW_FOLD_STYLE}>
       <ShowcaseSection />
-      <WplaceFeaturesSection iconTitles={iconTitles} />
+      <WplaceFeaturesSection iconTitles={iconTitles} sizeFeature={sizeFeature} />
       <FeaturesSection paletteDescription={spanishHome ? t('home.paletteDescription') : undefined} />
       <HowItWorksSection />
       <section className="bg-gray-50 py-8 border-y border-gray-100">

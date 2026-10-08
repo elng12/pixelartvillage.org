@@ -3,6 +3,65 @@
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-10-08 首页曝光诊断与上传限制说明（仅本地）
+
+授权：用户要求依据 SEO Skills 调查曝光损失，再明确回复“执行”。本轮只修正英文首页 `/` 的尺寸承诺，不改关键词定位、其他页面、其他语言、图片处理器、广告或索引设置，不提交、推送或部署。开始时 main、HEAD `da4aae3bb7293f7a8e7f2fcfde18914979927c36`；AGENTS.md 与本文件已有未提交改动，全部保留。
+
+### 诊断证据与边界
+
+通过 GSC 只读 API 查询；凭据内容没有写入代码或记录。最新 final 日期为 2026-10-04，比较完整的两个 28 天窗口 `2026-08-10..09-06` 与 `2026-09-07..10-04`，没有用 10 月 5 日之后的不完整数据判断下降。
+
+| 指标 | 前一窗口 | 当前窗口 |
+|---|---:|---:|
+| 全站点击 | 12147 | 12157 |
+| 全站曝光 | 268672 | 269116 |
+| 英文首页点击 | 3540 | 2953 |
+| 英文首页曝光 | 111658 | 95287 |
+| 首页平均排名 | 7.52 | 7.10 |
+| 首页 pixel art maker 曝光 | 4996 | 2734 |
+| 首页 pixel art maker 平均排名 | 10.19 | 11.01 |
+
+全站没有同步下降；英文首页曝光下降约 14.7%，Maker 查询曝光下降约 45.3%。尺寸页与 Sprite 没有明显承接该 Maker 查询，不能把新增页面定为抢词原因。当前首页、Photo、Sprite、16x16、32x32 的 URL Inspection 均通过，已收录、允许索引、抓取成功且 canonical 一致；当前正常不证明过去从未出现故障，也没有核查人工措施或安全问题。
+
+Google Trends 浏览器实读：Worldwide、Web Search、三个 Search term、`2026-07-01..10-04`，实际图表为日数据。按上述两个 28 天窗口计算相对热度均值：pixel art maker `46.25 -> 35.68`，image to pixel art `16.68 -> 14.18`，pixel converter `61.57 -> 54.04`。这些是归一化抽样指数，不是绝对搜索量，不能与 GSC 降幅相减来分配原因。Maker 在本站 8 月 18 日附近的曝光下降没有对应的全球热度骤降，需求走弱不是唯一已证实的解释；算法日期和 Git 修改日期的重合也不构成因果证明。
+
+初次核对的限制：隔离浏览器中的 Google 搜索结果被验证码阻断，当时没有完成当前结果页的意图核对；后续 Edge 核对见下节。印度 Trends 报错，未当作零。GSC 页面/查询细分数据与页面汇总不完全相等，没有强行凑出全部损失归因。[Google Trends 数据说明](https://support.google.com/trends/answer/4365533?hl=en)、[GSC API 明细数据限制](https://developers.google.com/webmaster-tools/v1/how-tos/all-your-data)。因此保留首页 title、description、H1，不据此改成宽泛 Maker 定位。
+
+### 后续 Maker 细分与真实搜索结果核对
+
+沿用上述完整日期窗口，以英文首页 URL 和准确查询 `pixel art maker` 同时过滤 GSC。设备明细曝光合计与该查询汇总一致：桌面 `3272 -> 2110`，手机 `1510 -> 568`，平板 `214 -> 56`。手机曝光降幅约 62.4%，但 CTR 从 2.32% 升至 3.17%；不能把手机损失统一归因于点击吸引力。国家明细中德国、泰国、芬兰等下降，巴西 `99 -> 277` 增长，并非只有美国下降。国家/设备构成变化也会影响汇总平均排名，不能把平均排名变化理解为每个地区都同幅下降。
+
+用户打开并明确指定 Edge 后，通过其 Microsoft Edge 的新标签页完成公开 Google 搜索，没有修改 GSC、浏览器设置或其他已有标签页。查询使用 `hl=en&gl=us&pws=0`，页面显示 Results are not personalized；这是当下桌面、美国参数的单次样本，不是受控美国手机排名，也不是历史结果页。未把扩展注入的流量/难度、图片包、站内子链接或仅账号可见的 Search performance 小组件计入自然结果。
+
+| 查询 | 当前样本的前四个自然结果 |
+|---|---|
+| [pixel art maker](https://www.google.com/search?q=pixel+art+maker&hl=en&gl=us&pws=0) | Pixilart、Pixel Art Maker、Piskel、Google Play Pixel Art Maker 应用 |
+| [pixel art maker from image](https://www.google.com/search?q=pixel+art+maker+from+image&hl=en&gl=us&pws=0) | pixelartvillage.com、MakeBead converter、Pixel It、本站 pixelartvillage.org 首页 |
+
+每个查询实际观察到 8 个自然结果，未凑成前十；宽泛 Maker 样本中未看到本站自然结果。`.com` 是竞品，不是本站。通过 [Pixilart](https://www.pixilart.com/draw)、[Piskel](https://www.piskelapp.com/)、[MakeBead converter](https://makebead.com/pixel-art-converter/) 和 [Pixel It](https://giventofly.github.io/pixelit/) 的实际页面核对，宽泛 Maker 前排偏绘制/编辑，from image 前排偏图片转换。本站 from image 查询 GSC 点击 `38 -> 49`、曝光 `930 -> 1171`，与图片转换定位仍有匹配的判断一致。
+
+结论与边界：现有证据不支持为了宽泛 Maker 曝光而回滚首页标题、堆词、另造重复 Maker 页或新增画板。需求走弱、部分排名变化和搜索意图匹配是需要分别考虑的因素；没有 8 月 18 日前后的历史搜索结果，不能证明当时 Google 改变了意图、某个竞品导致下降，或把本次第 4 位样本当作所有用户的固定排名。此次续查只补记录，没有进一步修改页面，也没有提交或发布。
+
+### 实际修改
+
+源码确认首页上传上限为 `10 * 1024 * 1024` 字节，超过 2200px 长边的图片会在转换前缩小。英文首页功能区原来的 No Dimension Limits 改为 Image Upload Limits，明确说明 10 MiB 上限和 2200px 长边处理限制；对应图标提示同步。没有修改这些限制本身，也不将本项准确性修正说成曝光下降的修复。
+
+内容源为 `public/locales/en/translation.json` 新增的 `home.imageLimits`，现有脚本同步 `src/locales/en.json`。HomeBelowFold 根据现有 locale context 只向英文首页传入这一项，WplaceFeaturesSection 复用可选内容覆盖方式；保留旧翻译键，避免非英文页面的英文回退内容跟随变化。其他语言的历史尺寸承诺未在本轮修正。title、description、H1、canonical、OG/Twitter、FAQ、既有结构化数据和其他功能区保持不变。
+
+### 本地验证
+
+项目开始时没有 node_modules，首次构建因 vite 缺失失败；使用 Node 20.19.0 按现有 package-lock 执行 npm ci，未新增或升级依赖、未改变锁文件。最终完整 build（含预渲染、ownership、SEO、dist 和重定向检查）、受影响文件 ESLint、typecheck、差异空白检查通过。保留浏览器数据过期及传递依赖弃用提示，未借此更新依赖。构建生成的两份 public sitemap 已恢复为构建前原始字节，不混入日期刷新。
+
+最终 Chromium 定向测试 4 项通过，无自动重试：首页 HTTP 200/初始 HTML/单 H1/SEO 标签/既有三种 JSON-LD/可见 FAQ；西语、德语和 Photo 初始 HTML 不含新限制说明，西语/德语运行时及返回英语的隔离检查；1440x900 与 390x844 展示、图标提示、上传入口和无横向溢出；10 MiB+1 字节拒绝、10 MiB 接受并恢复上传、3000x1500 合成测试图缩至 2200x1100、Pixel Size 1→2→1 等待实际结果更新、真实下载 PNG 尺寸核对。测试图只用于边界验收，不作为公开案例。
+
+测试过程：首次后台服务退出导致连接拒绝，确认 HTTP 200 后改用持久预览进程；初版误认为首页已有 FAQ/HowTo JSON-LD，并误认为默认 Pixel Size 不为 1，断言已按当前构建逻辑与编辑器源码修正。失败证据保留，未修改业务逻辑或放宽有效限制断言。桌面和手机截图已查看。证据目录 `/tmp/pixelart-home-limits-VRUP8d/`，最终结果位于 `results/`。本地预览 `http://localhost:4196/`；未验证 Firefox/WebKit、实体手机、生产发布、Google 抓取新版或曝光恢复。
+
+### 首页限制说明发布
+
+新授权：用户在下一步说明后明确回复“执行”，授权提交、推送和正式部署本轮英文首页限制说明，并做上线验收。此前“仅本地”是初始执行状态，不再代表本次发布授权。范围仍仅英文首页文案、语言隔离、对应测试和本轮记录；不改标题、其他页面、广告、索引策略或处理限制。
+
+发布隔离：开始时 main、HEAD 和实时远程 main 均为 `da4aae3bb7293f7a8e7f2fcfde18914979927c36`。从 HEAD 导出干净发布副本 `/tmp/pixelart-home-release-nGvvxv`，只加入本轮五个代码/翻译/测试文件；不包含 AGENTS.md 或本文件原有历史整理改动。Node 20.19.0 完整构建（含 SEO、ownership、dist、重定向）、lint 和 typecheck 已通过。发布式 Cookie 模式下完整 Chromium 80 项回归全部通过，无自动重试；覆盖本轮限制说明、边界上传、其他语言隔离、Photo/Sprite 真实导出及其他现有工作流。暂存五个代码/翻译/测试文件与干净构建输入逐字节一致，未混入生成 sitemap。沿用现有 Git 集成部署；提交和生产状态后续补记。
+
 ## 2026-09-14 项目文件整理与 Git 归档
 
 授权：用户要求整理项目文件，将应保留的内容提交上传，删除无用文件。本轮开始时 main 与实时 origin/main 均为 `ad2b50c`，没有未上传提交。保留并归档已有项目规则、竞品优先级记录、历史迭代及发布回执、HowItWorksSection 的可选 compactLayout 参数；该参数默认 false，当前调用没有开启，不改变现有页面布局。仅清理 AGENTS.md 的行尾空白和多余末尾空行，不重写规则。

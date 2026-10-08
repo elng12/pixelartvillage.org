@@ -588,6 +588,10 @@
     "heroTitle": "Image to Pixel Art Converter",
     "heroSubtitle": "Turn any image into pixel art in your browser. Upload PNG, JPG, GIF, or WEBP files, preview the result live, adjust palette and dithering, then export clean sprites, icons, or retro graphics.",
     "heroSubtitle2": "Upload a PNG, JPG, GIF, or WEBP and turn it into pixel art for free. Preview changes live, adjust pixel size, palette, and dithering, then export directly in your browser.",
+    "imageLimits": {
+      "title": "Image Upload Limits",
+      "desc": "Upload images up to 10 MiB. Images larger than 2200 px on their longest edge are resized before conversion."
+    },
     "primaryCtaLabel": "Open the full image to pixel art converter",
     "primaryCtaHelp": "Need the complete editor right away? Start in the main image to pixel art converter.",
     "primaryCalloutTitle": "Start here for the main image to pixel art workflow",

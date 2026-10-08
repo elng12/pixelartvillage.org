@@ -63,7 +63,7 @@ const IconImage = ({ className = 'h-6 w-6 text-amber-600' }) => (
   </svg>
 );
 
-export default function WplaceFeaturesSection({ iconTitles }) {
+export default function WplaceFeaturesSection({ iconTitles, sizeFeature }) {
   const { t } = useTranslation();
   return (
     <section id="wplace-features" className="py-12 md:py-16 bg-white">
@@ -109,12 +109,12 @@ export default function WplaceFeaturesSection({ iconTitles }) {
           </div>
 
           <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6 text-center h-full">
-            <CircleIcon bg="rgba(245,158,11,0.12)" title={iconTitles?.size || 'No Size Limits'}>
+            <CircleIcon bg="rgba(245,158,11,0.12)" title={sizeFeature?.title || iconTitles?.size || 'No Size Limits'}>
               <IconImage />
             </CircleIcon>
-            <h3 className="mt-4 text-lg font-semibold text-gray-900">{t('wplace.features.size.title')}</h3>
+            <h3 className="mt-4 text-lg font-semibold text-gray-900">{sizeFeature?.title || t('wplace.features.size.title')}</h3>
             <p className="mt-2 text-gray-600 leading-relaxed">
-              {t('wplace.features.size.desc')}
+              {sizeFeature?.desc || t('wplace.features.size.desc')}
             </p>
           </div>
         </div>
