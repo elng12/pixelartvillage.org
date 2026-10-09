@@ -85,7 +85,6 @@ function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
   const { t } = useTranslation()
   const { pathname } = useLocation()
   const isSpanishHome = currentLocale === 'es' && /^\/es\/?$/.test(pathname)
-  const isSpritePage = /\/converter\/photo-to-sprite-converter\/?$/.test(pathname)
   const localeValue = useMemo(
     () => ({
       currentLocale,
@@ -97,7 +96,7 @@ function SharedLayout({ uploadedImage, setUploadedImage, currentLocale }) {
   return (
     <LocaleProvider value={localeValue}>
       <ResourcePreloader />
-      <TranslationPreloader localeOverride={isSpanishHome || isSpritePage ? currentLocale : undefined} />
+      <TranslationPreloader localeOverride={currentLocale} />
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:text-blue-700 focus:shadow"

@@ -3,6 +3,46 @@
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-10-09 韩语 Illustrator 文章及语言导航修复正式发布
+
+授权：用户明确要求“部署上线”。发布范围为韩语 Illustrator 一个内容条目及素材、配套测试，以及此前已修正但尚未上线的 App 语言加载、Seo 站内导航同步与回归测试；不改其他文章、索引策略、重定向、广告、部署配置或 GSC。开始时 main、HEAD 与实时 origin/main 均为 `072249774b05017f3e7fb20c50c29aa9d64d6138`。用户 AGENTS.md、历史整理和旧发布回执的本地改动不混入提交。
+
+发布前验证：复用隔离构建目录 `/tmp/pixelart-ko-illustrator.403pOs/build/`，九个发布源码、测试和素材文件与工作区逐字节一致；其他四篇韩语内容与 HEAD 相同。Node 20.19.0 重新完整 build（含 ownership、SEO、dist、缓存和重定向检查）、lint、typecheck 通过；生产式 Cookie 模式的完整 Chromium 116 项全部通过、零重试。记录为 `release-build.log`、`release-lint.log`、`release-typecheck.log`、`release-tests.log`、`release-results/` 与 `release-report/`。仅暂存本次正式发布及前两轮对应记录，不暂存本文件其他已有修改；沿用现有 main Git 集成，不新建部署渠道。提交、云端部署及正式页面结果待完成后补记，未将本地通过当作线上成功。
+
+## 2026-10-09 韩语 Illustrator PNG 导出文章重写（仅本地）
+
+授权：用户在单页 SEO 审评后回复“执行”。只重写 `/ko/blog/export-from-illustrator-image-to-pixel-art/`，不扩展到其他韩语文章，不改索引、canonical、hreflang、重定向或 sitemap 策略，不提交、推送、部署或提交 GSC。分支 main、HEAD `072249774b05017f3e7fb20c50c29aa9d64d6138` 未变。已有 AGENTS.md、迭代记录及上一轮 App、Seo、seo-navigation 测试修改保留；本轮预览包含这些尚未发布的共享修复。
+
+方法与定位：使用 page-seo-workflow、seo-page、seo-content、seo-hreflang 和哥飞本地 SEO 知识库，按真实用途重写一个内容条目。主词为 `일러스트레이터 PNG 내보내기`（Illustrator PNG 导出），辅助主题为像素尺寸、透明背景和模糊排查；这是按页面意图选择，不是已验证的韩语搜索量结论。复用此前独立 URL 诊断作为背景，本轮没有查询新的 GSC 数据，也不能证明 Google 将此页归并到另一篇韩语文章的全部原因。
+
+修改：只改 `src/content/blog-posts.ko.json` 中 Illustrator 条目。标题、摘要、正文、图片说明和页面内展示文字改为韩语，完整搜索标题含品牌共 57 个字符；原发布日期 2025-10-09 保留，更新日期为 2026-10-09，增加组织署名及关于页面链接。删除不存在的 Optimizer、批量导出、Optimized PNG、社区挑战等功能和无依据的 Canva 步骤；将“全部 300 PPI／关闭抗锯齿”改为按实际像素尺寸、显示需求和边缘效果判断。区分清晰 PNG 导出与主动像素化，不宣称本站能够恢复低清图片细节。另一个韩语像素化文章仍为英文正文，相关链接明确提示，本轮不重写它。其余四个韩语文章条目与 HEAD 逐项相同，其他语言内容源未修改。
+
+依据与素材：2026-10-09 阅读 Adobe 官方韩语 artwork export、Export for Screens 文档及 pixel-perfect 文档，正文包含三个直接来源链接。本机没有 Illustrator，因此未执行 Illustrator 实机导出，正文明确披露此限制。原始自制 `size-source.svg` 在隔离 Chromium 中渲染并实际点击下载，保存为 512×512 与 64×64 PNG；实际尺寸、透明区域及不透明区域已检查。两张图片明确标为浏览器生成的尺寸演示，不冒充 Illustrator 截图、导出实验或客户案例。只复用现有构建脚本生成并复制本篇韩语 1200×630 分享图，不修改共享模板、增加依赖或复制其他生成产物。
+
+测试过程：新增 `tests/blog-ko-illustrator.spec.js` 七项测试。旧内容在原有共享修复预览中进行两项桌面测试，均按预期失败。首轮完整 116 项为 110 通过、6 失败：韩语 FAQ 标题未被现有模板的 FAQ 识别规则匹配，未生成问答结构化数据。只将本篇该标题改为 `FAQ`，保留韩语问题和答案，未改共享解析器或削弱断言。原始失败日志、报告、截图和 trace 保留。
+
+最终验收：将本篇内容、素材、测试与上一轮待发布共享修复覆盖到 HEAD 的隔离构建目录，逐文件比较与工作区一致。Node 20.19.0 完整 build（含 ownership、SEO、dist、缓存与重定向检查）、lint、typecheck、diff-check 通过；最终生产式 Cookie 模式的 Chromium 116 项全部通过、零重试。新测试覆盖 1440/390/320px 初始 HTML 与运行时、Blog 入口点击和刷新、title/description/H1/canonical/hreflang/robots/OG/Twitter、发布日期及组织署名、四组可见 FAQ 与 JSON-LD、标题层级、站内链接 HTTP 200、实际 PNG 下载及尺寸和像素一致、透明区域与分享图。另以真实隔离浏览器截图核对桌面和手机封面、导出说明、演示与问答，三个宽度无横向溢出、本站资源 HTTP 4xx/5xx 或脚本异常，刷新前后标题、正文、语言和规范网址一致。
+
+证据与边界：`/tmp/pixelart-ko-illustrator.403pOs/` 保留 `before-tests.log`、`before-results/`、首轮 `tests.log`、`results/`、最终 `final-build.log`、`final-lint.log`、`final-typecheck.log`、`final-tests.log`、`final-results/`、`final-report/`、`final-capture-results.json`、`final-*.png` 与实际演示下载记录。本地预览为 `http://localhost:4204/ko/blog/export-from-illustrator-image-to-pixel-art/`，原有预览不动。本轮仅本地完成；Illustrator 实机、韩语母语读者、Firefox/WebKit、实体手机、production、Google 规范页更新及流量效果未验证。
+
+## 2026-10-09 语言加载与站内跳转 SEO 标签修复（仅本地）
+
+授权：用户在韩语两篇文章渲染诊断后要求“修复”。本轮只修共享语言加载与站内跳转后的页面标签，不重写韩语正文，不修改索引、canonical、hreflang、重定向或 sitemap 策略，不提交、推送、部署或提交 GSC。开始与结束分支 main、HEAD `072249774b05017f3e7fb20c50c29aa9d64d6138`；已有 AGENTS.md 与本文件的修改继续保留。使用 page-seo-workflow 的预渲染规则复用与真实页面验收思路。
+
+已确认问题：韩语 Blog 点击文章时，语言预加载器因固定语言路由没有 `:lang` 参数而回到英文；点击进入与直接打开／刷新读取的内容源不一致。原 Seo 组件只更新标题、描述、语言和 noindex，canonical、hreflang、分享标签及结构化数据会停留在先前页面。此前诊断实际复现 pixelate → Blog → Illustrator 后 canonical 仍为 pixelate；这是确定的运行时信号冲突，但不能证明它是 Google 归并的唯一原因。此前 URL 诊断与本次代码验收分开，不把本地测试当作新的收录结果。
+
+修改：`src/App.jsx` 将实际路由语言明确传给 TranslationPreloader；`src/components/Seo.jsx` 在站内切页时读取目标网址已有预渲染 HTML 的标签，保持其语言列表、结构化数据和英文归并策略，不在浏览器另造规则。回到原始页面恢复原始标签；请求先清除旧页面信号，检查响应、目标路由归属、canonical 与 JSON-LD，10 秒超时，失败记录错误，快速切页取消旧请求，避免迟到结果覆盖新页。代价是站内切页增加目标 HTML 请求；读取失败时不保留旧页面 canonical，正文仍可阅读，后续跳转或刷新可恢复。未新增依赖或构建脚本。
+
+测试过程：新增 `tests/seo-navigation.spec.js`。旧版本两项韩语桌面／手机导航测试均按预期失败。首轮完整 108 项为 104 通过、4 失败，失败为测试使用隐藏的手机桌面导航及错误的德语 Cookie 按钮名称；修正定位后第二轮 107 通过、1 失败，trace 证实文章加载占位分支及正文分支可能各记录一次 503，而测试误要求仅一次。改为验证已记录目标路由的真实 503，同时保留正文、旧标签清除及恢复后的完整标签断言，没有放宽页面正确性要求。另补有效但属于错误路由的 HTML 拒绝用例。原始失败报告和 trace 全部保留，不用后续通过覆盖历史结果。
+
+最终验收：只把本轮 App、Seo 与测试覆盖到 HEAD 的隔离构建目录，逐文件 cmp 一致；完整 Node 20.19.0 build（包含 ownership、SEO、dist、缓存和重定向检查）、lint、typecheck、diff-check 通过。最终生产式 Cookie 模式的完整 Chromium 109 项全部通过、零重试。新增用例覆盖韩语两篇、德语两篇、英文两篇的 1440/390px 点击、返回、换文章及刷新，完整头部与正文逐项对照真实预渲染 HTML，确认没有新增文档导航；还验证 503、无效 HTML、错误路由 HTML 后恢复，以及迟到请求不覆盖当前文章。失败模拟仅用于隔离错误路径，不当作真实线上请求证据。
+
+真实页面：隔离浏览器在 1440/390/320px 重走 pixelate → Blog → Illustrator，刷新前后标题、正文、语言及 canonical 一致，无横向溢出、本站资源 4xx/5xx 或脚本异常。已查看最终三个宽度的封面及桌面正文截图。初次手机封面截图未等滚动与绘制稳定而为空，保留原图，等待滚动归零、字体及图片加载后重新截图；最终手机封面正常。另实际点击德语 Blog 页脚进入 `/de/converter/photo-to-sprite-converter/`，仍 canonical 到英文 Sprite，未强制自引用。
+
+证据：`/tmp/pixelart-ko-head-fix.Ntnu1q/` 的 `before-tests.log`、`before-results/`、`tests.log`、`results/`、`verified-tests.log`、`verified-results/` 保留各轮结果；最终为 `final-build.log`、`final-lint.log`、`final-typecheck.log`、`final-tests.log`、`final-report/`、`final-results/`、`capture-results.json` 与 `verified-cover-*.png`。本地构建预览为 `http://localhost:4203/ko/blog/`，原有 4200 和 4202 预览不动。
+
+边界：仅本地完成。韩语 JSON 中仍有英文正文和旧的不准确功能描述，语言源选择修复不等于翻译或内容质量修复；Google 的规范页选择是否更新必须在授权上线后再查。Firefox/WebKit、实体手机、真人阅读和 production 验收未执行；本轮没有重新查询 GSC 或请求编入索引。
+
 ## 2026-10-09 剩余问题网址诊断与英文 SNES 教程修正（仅本地）
 
 授权：用户在“检查剩余问题网址，整理需要修复／正常排除／继续观察清单，再选一个页面执行”的建议后回复“执行”。本轮只修改 `/blog/how-to-get-pixel-art-version-of-image/` 的操作准确性，不部署、不提交 Git、不请求收录、不改变 canonical、hreflang、重定向、广告或索引范围。开始与结束 HEAD 为 `ca6f7704c4f2ca9e3ccc21b1dbe61d1cf87200a8`、分支 main；用户已有 AGENTS.md 和迭代记录改动保留。
