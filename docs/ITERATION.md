@@ -3,6 +3,69 @@
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-10-09 剩余问题网址诊断与英文 SNES 教程修正（仅本地）
+
+授权：用户在“检查剩余问题网址，整理需要修复／正常排除／继续观察清单，再选一个页面执行”的建议后回复“执行”。本轮只修改 `/blog/how-to-get-pixel-art-version-of-image/` 的操作准确性，不部署、不提交 Git、不请求收录、不改变 canonical、hreflang、重定向、广告或索引范围。开始与结束 HEAD 为 `ca6f7704c4f2ca9e3ccc21b1dbe61d1cf87200a8`、分支 main；用户已有 AGENTS.md 和迭代记录改动保留。
+
+方法：使用 seo-google、seo-content、page-seo-workflow 与哥飞本地知识库的单页证据思路。复用原有服务账号，通过只读 scope 查询 Google 官方 Search Analytics、URL Inspection 和 Sitemaps API，凭据只从环境变量指定文件读取，不写入配置、源码、笔记或报告。API 凭据检查返回 Tier 1，仅核实本轮所需的 GSC 读取能力；不将自动列出的其他 API 能力视为已验证。没有接管个人浏览器或创建新服务、依赖和监控流程。
+
+日期：当前 API 的 firstIncompleteDate 为 `2026-10-07`。只比较完整 28 天窗口 `2026-08-12..09-08` 与 `2026-09-09..10-06`，查询使用 final 数据；页面汇总和 query+page 明细分开，查询明细不会覆盖匿名词，不能强行凑成页面点击总数。本轮结果是当前快照，不复用历史截图中的 279/184/50/26/6 等数量。
+
+### 当前检查范围与结果
+
+- 正式 sitemap 的 205 个网址全部实际 HTTP 检查：205 个直接 200、无重定向、每页一个 H1、自引用 canonical，HTML 与响应头未见 noindex。另查 8 个旧入口及 1 个故意不存在的控制网址；旧入口目前都能跳到 200 目标，控制网址实际 404。没有把控制网址当成需要修复的业务页面。
+- URL Inspection 检查 100 个命名网址，其中 85 个为 sitemap 内的 Blog 文章，另外 15 个为重点入口和旧路径；没有检查全站每个网址的收录，也没有枚举 GSC 索引报告全部历史排除 URL。一个意大利语页面首次 API 返回 500，原失败记录保留，仅补查一次后成功，不把接口错误当作未收录。
+- 最终 100 个状态为：66 个已收录、23 个 Google 选择其他规范网址、2 个已发现未收录、1 个已抓取未收录、4 个重定向、1 个历史 404、3 个 Google 未知。85 篇 Blog 中对应为 59 个已收录、23 个重复、2 个已发现未收录、1 个已抓取未收录。
+- sitemap API 返回 0 errors、0 warnings、205 submitted，lastDownloaded 为 `2026-09-30T12:48:05.767Z`。其中 indexed=0 不代表网站零收录，与逐 URL 返回的已收录状态分开解释。
+- 两篇德语已发布文章本次均返回 Submitted and indexed：比较页 lastCrawlTime 为 `2026-10-08T13:48:32Z`，入门教程为 `2026-10-09T07:07:34Z`。API 未提供 Google 保存的正文，不据此声称搜索标题已同步、排名恢复或全站故障消失。
+
+### 需要修复或单独决策的清单
+
+下表语言代码按 `/<语言>/blog/<slug>/` 展开为实际网址。23 个重复页不是源码漏写 canonical：页面目前自引用，但 22 个正文与 Google 选择的另一个网址正文完全相同（逐条 JSON 正文比较，不含标题等其他字段）。内容相同是已确认问题，不单独证明 Google 的全部选择原因；另一个韩语页面正文不同、目标主题也不同，必须独立诊断，不能全判为正常重复。后续先决定真实本地化还是合并，不强制把 canonical 改回自身或批量恢复旧网址。
+
+| 分类 | 网址 / slug 与语言 | 本轮判断及行动 |
+|---|---|---|
+| 已修正、本地待发布 | `/blog/how-to-get-pixel-art-version-of-image/` | 已收录且有真实点击，Pixel Size 方向错误；本轮先修操作准确性，不以改稿代替发布 |
+| 需要独立语言内容 | `best-pixel-art-converters-compared-2025`：id、it、ko、nb、nl、th、vi，共 7 个 | 均被归到 `/sv/blog/best-pixel-art-converters-compared-2025/`；正文与该页相同，本轮未翻译或改索引策略 |
+| 需要独立语言内容 | `export-from-illustrator-image-to-pixel-art`：id、pl、sv、tl，共 4 个 | 正文与 Google 选中的 nb 或 it 对应文章相同；本轮保留，不伪装独立翻译完成 |
+| 需要单独诊断 | `/ko/blog/export-from-illustrator-image-to-pixel-art/`，共 1 个 | Google 选中 `/ko/blog/how-to-pixelate-an-image/`，正文不相同；需要核对渲染、语言和页面主题，尚未证实原因 |
+| 需要独立语言内容 | `make-image-more-like-pixel`：id、it、ko、nl、pl、sv、tl、vi，共 8 个 | 正文均与 Google 选中的 nb 文章相同；不能靠重复请求收录解决内容重复 |
+| 需要独立语言内容 | `how-to-pixelate-an-image`：nl、pl、sv，共 3 个 | nl/pl 正文与 id 目标相同，sv 与 tl 目标相同；保留语言与规范策略，后续逐页决定 |
+| 需要后续内容修正 | `/ar/blog/how-to-get-pixel-art-version-of-image/` | 当前源码仍写 SNES Refiner Module、Village Export Hub 等不存在的功能；当前窗口 0 点击、1 曝光，优先级低于本轮英文页，不扩大本轮语言范围 |
+| 需评估旧新主题对应 | `/blog/turn-photo-into-pixel-art/`、`/blog/how-to-convert-image-to-pixel-art-step-by-step/`、`/blog/pixel-art-color-palette-guide/` | 当前跳到比较文章，GSC 为 URL unknown；跳转可用不等于意图匹配。本轮不改规则，不自动恢复旧页 |
+
+### 正常排除与继续观察的清单
+
+| 分类 | 实际网址 | 本轮证据与处理 |
+|---|---|---|
+| 正常重定向、无需单独收录 | `/en/`、`/no/`、`/fil/` | 当前分别 301 到 `/`、`/nb/`、`/tl/`，终点 200；GSC 同为 Page with redirect，保留 |
+| 正常英文归并入口 | `/de/converter/photo-to-pixel-art/` | 当前 301 到英文 Photo，终点 200；GSC 为 Page with redirect，不冒充独立德语内容页 |
+| 历史状态与当前 HTTP 不一致、观察 | `/converter/bmp-to-pixel-art/` | GSC 仍显示 Not found (404)，但当前实际 301 到 `/converter/image-to-pixel-art/` 且 200；不重新造一个重复 BMP 页，也不声称 Google 已更新状态 |
+| 继续逐页观察 / 内容审评 | `/es/blog/pixel-art-tutorial-complete-guide-2025/`、`/fr/blog/pixel-art-tutorial-complete-guide-2025/` | 本次为 Discovered - currently not indexed，尚无 lastCrawlTime；当前 HTTP 200、允许索引，不据此直接认定内容导致拒收或复制德语新稿 |
+| 需要后续单页内容诊断 | `/ru/blog/pixel-art-tutorial-complete-guide-2025/` | 本次为 Crawled - currently not indexed，当前 200、自引用 canonical；已有其他俄语文章有点击，不能批量排除整种语言 |
+
+### 本轮英文教程修改与验收
+
+选页依据：当前完整窗口英文 SNES 教程有 11 点击、256 曝光、平均排名约 7.88；前一窗口为 8 点击、263 曝光。真实 query+page 明细中有 snes pixel art、snes style pixel art、pixel art snes 等查询。该页当前已收录、允许抓取、抓取成功、Google/user canonical 一致，lastCrawlTime 为 `2026-10-07T18:52:42Z`。本轮不是未收录抢救，也不声称小样本排名变化来自既有改稿；选择它是因为已有读者会被确定的操作错误误导。
+
+修改：只改 `src/content/blog-posts.en.json` 中该一个条目。保留 URL、title、description、H1、关键词、发布日期 2025-10-14 与分享图；实际更新日期记为 2026-10-09。纠正 Pixel Size 越大、块越大、输出像素越少的方向；补充 Generate palette from image 与 Palette Colors、命名调色板的区别；说明 PNG / Pixel size 导出和等待预览更新，声明 SNES-style 是视觉参考而非专用硬件模式。复用现有 Photo 向日葵案例作参数说明，不新增素材或手工加工结果，不修改图片处理器。
+
+行为证据：使用真实浏览器上传原有 960×762 向日葵 JPEG，在主 Image converter 上实际逐次调参并下载 PNG。Pixel Size 8 为 120×95，Pixel Size 12 为 80×63；后者全部像素与既有 `photo-sunflower-pixel12.png` 一致。实际开启生成调色板，从 16 调到 24 色再下载，PNG 仍为 80×63，实际颜色数不超过 24。桌面与手机均通过，包含非法文本上传后正常恢复；每次等预览真实更新再下载，未将等待写成已修复共享处理器的立即下载旧结果风险。
+
+测试过程：新增 `tests/blog-snes.spec.js`。修复前六种文章视口/脚本组合按预期失败、两项真实工具测试通过，证明原操作文案与实际行为不符。首版新增原图直链被已有 LocalizedLink 加上尾斜杠，六项文章测试捕获到错误；改为链接现有 Photo 案例页，增加正文实际站内链接 HTTP 检查，没有扩大修改共享链接组件或放宽有效断言。两轮失败报告和 trace 保留。
+
+最终验收：从 HEAD 导出临时构建副本，仅复制本篇内容源和新增测试，避免刷新工作区 public sitemap 或混入无关改动。Node 20.19.0 完整 build（含 ownership、SEO、dist、缓存与重定向检查）、新增测试 ESLint、typecheck 和 diff-check 通过；生产式 Cookie 模式的 Chromium 定向 25 项全部通过、无自动重试。覆盖本篇 1440/390/320px 初始 HTML与运行时、Blog 入口点击和刷新、原标题/摘要/规范网址、发布日期与更新日期、可见 FAQ 与 JSON-LD、正文链接、真实下载尺寸和颜色数、无横向溢出，以及现有德语两篇、俄语、英文、韩语 Blog 和 Photo 实际导出回归。已查看桌面/手机参数、调色及导出说明截图，没有发现新增文字溢出或重叠；三个视口未记录到本站资源 HTTP 4xx/5xx 或脚本异常。
+
+证据与边界：`/tmp/pixelart-remaining-pages.hLxFIc/` 保留当前日期窗口、页面/查询明细、sitemap API、214 个 HTTP 结果、100 个 Inspection 原始结果及一次 500 补查、修复前与首版失败报告、`build-final.log`、`verified-tests.log`、`verified-report/`、`verified-results/`、实际下载 PNG 和截图。预览为 `http://localhost:4202/blog/how-to-get-pixel-art-version-of-image/`。所有其他 Blog 条目与 HEAD 逐项一致，本轮没有改生产；未覆盖 Firefox/WebKit、实体手机或真人阅读测试。旧 GSC 报告中的所有 404/noindex/备用网址未获得完整 URL 清单，本轮不能声称全量修完或逐项确认正常。
+
+### 英文 SNES 教程正式发布
+
+新授权：用户在只发布已修正英文 SNES 教程的建议后回复“执行”。本次只提交该英文内容条目、`tests/blog-snes.spec.js` 与本轮诊断／修正／发布前记录，不扩大到其他页面，不改 canonical、hreflang、重定向、广告或索引设置，不提交 GSC。
+
+发布隔离：开始时 main、HEAD 与实时远程 main 均为 `ca6f7704c4f2ca9e3ccc21b1dbe61d1cf87200a8`。复用从 HEAD 导出的干净副本 `/tmp/pixelart-remaining-pages.hLxFIc/build/`，两个发布源文件与工作区逐字节相同；文档只暂存本轮英文 SNES 记录，保留 AGENTS.md、历史整理和旧发布回执的本地改动，不混入构建生成的 sitemap、素材、依赖、配置或其他内容。
+
+发布前验证：Node 20.19.0 重新完整 build（含 ownership、SEO、dist、缓存与重定向检查）、完整 lint、typecheck 与 diff-check 通过；生产式 Cookie 模式的完整 Chromium 99 项全部通过，无自动重试。证据为 `release-build.log`、`release-lint.log`、`release-typecheck.log`、`release-tests.log`、`release-report/` 与 `release-results/`。沿用现有 Git 集成部署，提交、部署回执及正式页面结果待后续补记，不将本地测试当作生产验收。
+
 ## 2026-10-09 德语像素画入门教程重写（仅本地）
 
 授权：用户同意关键词研究后的单页方案。本轮只优化 `/de/blog/pixel-art-tutorial-complete-guide-2025/`，不提交、推送、部署或请求 Google 收录。开始时 main、HEAD `a3c72b4846803a151b75d1bcdee06e44f4fb3f41`；AGENTS.md 和本文件已有未提交改动，全部保留。
