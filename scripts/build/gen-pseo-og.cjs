@@ -163,14 +163,14 @@ async function genLocalizedBlogComparisons() {
         <g font-family="Arial, sans-serif" fill="#111827">
           <text x="60" y="72" font-size="48" font-weight="700">${escapeXml(preview.title)}</text>
           <text x="60" y="121" font-size="34">${escapeXml(preview.subtitle)}</text>
-          <text x="60" y="162" font-size="23" fill="#475569">${escapeXml(post.comparison.rows.map((row) => row[0]).join(' | '))}</text>
+          <text x="60" y="162" font-size="23" fill="#475569">${escapeXml(preview.summary || post.comparison.rows.map((row) => row[0]).join(' | '))}</text>
           <text x="60" y="565" font-size="23">${escapeXml(post.presentation.sourceLabel)}</text>
           <text x="660" y="565" font-size="23">${escapeXml(post.presentation.resultLabel)}</text>
           <text x="60" y="610" font-size="22" font-weight="700">Pixel Art Village</text>
           <text x="900" y="610" font-size="20" fill="#475569">pixelartvillage.org</text>
         </g>
       </svg>`;
-      const original = await sharp(source).resize(441, 350, { fit: 'contain', background: '#f8fafc' }).png().toBuffer();
+      const original = await sharp(source).resize(441, 350, { fit: 'contain', kernel: post.cover.sourcePixelated ? 'nearest' : 'lanczos3', background: '#f8fafc' }).png().toBuffer();
       const converted = await sharp(result).resize(441, 350, { fit: 'contain', kernel: 'nearest', background: '#f8fafc' }).png().toBuffer();
       const out = path.join(ROOT, 'public', expectedPath.slice(1));
       ensureDir(path.dirname(out));

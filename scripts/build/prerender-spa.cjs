@@ -46,7 +46,11 @@ function normalizeBlogPosts(value) {
       return {
         ...entry,
         tags: toStringArray(entry.tags),
-        body: toStringArray(entry.body),
+        body: toArray(entry.body).flatMap((line) => (
+          line && typeof line === 'object' && line.type === 'figure'
+            ? [line]
+            : toStringArray([line])
+        )),
       }
     })
     .filter((entry) => entry && typeof entry.slug === 'string' && entry.slug.trim())
@@ -399,9 +403,10 @@ async function prerender() {
     before: ABS(post.cover?.before || '/showcase-before-w640.jpg'),
     after: ABS(post.cover?.after || '/showcase-after-w640.jpg'),
     pixelated: post.cover?.pixelated,
+    sourcePixelated: post.cover?.sourcePixelated,
   })
 
-  const countWords = (text = '') => String(text)
+  const countWords = (text = '') => (typeof text === 'string' ? text : '')
     .trim()
     .split(/\s+/)
     .filter(Boolean)
@@ -515,6 +520,11 @@ async function prerender() {
     }
 
     for (const rawLine of Array.isArray(lines) ? lines : []) {
+      if (rawLine && typeof rawLine === 'object' && rawLine.type === 'figure') {
+        flushList()
+        blocks.push(rawLine)
+        continue
+      }
       const line = String(rawLine || '')
       const trimmed = line.trim()
 
@@ -655,6 +665,26 @@ async function prerender() {
       .map((block, index) => {
         if (hidden.has(index)) return ''
 
+        if (block.type === 'figure') {
+          const image = `<img src="${escapeHtml(block.src)}" alt="${escapeHtml(block.alt)}" width="${escapeHtml(block.width)}" height="${escapeHtml(block.height)}" loading="lazy"${block.pixelated ? '' : ` style="max-width:${escapeHtml(block.width)}px"`} class="mx-auto block h-auto w-full max-w-96${block.coordinateGuide ? '' : ' bg-gray-100'}${block.pixelated ? ' [image-rendering:pixelated]' : ''}">`
+          const guide = block.coordinateGuide
+          const figureImage = guide ? `<div class="mx-auto w-full max-w-96" role="group" aria-label="${escapeHtml(guide.label)}">
+            <p class="mb-2 text-sm leading-6 text-slate-600">${escapeHtml(guide.xLabel)} &rarr; / ${escapeHtml(guide.yLabel)} &darr;</p>
+            <div class="grid grid-cols-[1.5rem_minmax(0,1fr)] grid-rows-[1.5rem_auto] text-xs text-slate-600">
+              <span aria-hidden="true"></span>
+              <div class="relative" aria-hidden="true">${guide.ticks.map((tick) => `<span class="absolute top-0 w-0" style="left:${((tick + 0.5) / block.width) * 100}%"><span class="absolute top-0 w-5 text-center" style="left:${tick === 0 ? 0 : tick === block.width - 1 ? -20 : -10}px">${escapeHtml(tick)}</span></span>`).join('')}</div>
+              <div class="relative" aria-hidden="true">${guide.ticks.map((tick) => `<span class="absolute left-0 h-4 w-5 text-center" style="top:${((tick + 0.5) / block.height) * 100}%;margin-top:-8px">${escapeHtml(tick)}</span>`).join('')}</div>
+              <div class="bg-gray-100" style="background-image:linear-gradient(to right, rgba(71,85,105,0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(71,85,105,0.2) 1px, transparent 1px);background-size:${100 / block.width}% ${100 / block.height}%">${image}</div>
+            </div>
+          </div>` : image
+          return `<figure>
+            ${figureImage}
+            <figcaption class="mt-3 text-sm leading-6 text-slate-600">${escapeHtml(block.caption)}</figcaption>
+            ${block.fullSizeLabel ? `<a href="${escapeHtml(block.src)}" target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-sm font-medium text-blue-700 underline underline-offset-4">${escapeHtml(block.fullSizeLabel)}</a>` : ''}
+            ${block.downloadLabel ? `<a href="${escapeHtml(block.src)}" download class="mt-2 inline-block text-sm font-medium text-blue-700 underline underline-offset-4">${escapeHtml(block.downloadLabel)}</a>` : ''}
+          </figure>`
+        }
+
         if (block.type === 'heading') {
           const tag = `h${block.level}`
           const className = block.level === 2
@@ -768,12 +798,14 @@ async function prerender() {
     const presentation = buildBlogPresentationMeta(post)
     const coverImages = getVisibleBlogCoverImages(post)
     const panelClass = post.cover ? 'min-w-0' : 'blog-cover-panel'
-    const imageClass = post.cover ? 'block w-full aspect-[960/762] object-contain' : 'blog-cover-image'
+    const imageClass = post.cover
+      ? `block w-full ${post.cover.square ? 'aspect-square' : 'aspect-[960/762]'} object-contain`
+      : 'blog-cover-image'
     const labelClass = post.cover ? 'mt-2 text-sm leading-6 text-slate-600' : 'blog-cover-label'
     const coverHtml = `<section class="blog-cover-shell mt-7" aria-label="${escapeHtml(presentation.coverLabel || 'Article cover preview')}">
       <div class="blog-cover-grid">
         <figure class="${panelClass}">
-          <img src="${escapeHtml(coverImages.before)}" alt="${escapeHtml(presentation.sourceAlt || 'Original source image preview')}" class="${imageClass}" loading="eager">
+          <img src="${escapeHtml(coverImages.before)}" alt="${escapeHtml(presentation.sourceAlt || 'Original source image preview')}" class="${imageClass}${coverImages.sourcePixelated ? ' [image-rendering:pixelated]' : ''}" loading="eager">
           <figcaption class="${labelClass}">${escapeHtml(presentation.sourceLabel || 'Source image')}</figcaption>
         </figure>
         <figure class="${panelClass}">
@@ -801,6 +833,7 @@ async function prerender() {
               <span>${escapeHtml(estimateVisibleBlogReadTime(post))}</span>
             </div>
             <h1 class="mx-auto mt-4 max-w-xl text-balance text-[1.82rem] font-semibold tracking-tight text-slate-950 md:text-[2.02rem] md:leading-[1.14]">${escapeHtml(post.title || '')}</h1>
+            ${post.author?.name && post.author?.url ? `<p class="mt-3 text-sm leading-6 text-slate-600">${escapeHtml(presentation.authorLabel || 'By')} <a href="${escapeHtml(post.author.url)}" rel="author" class="text-blue-700 underline underline-offset-4">${escapeHtml(post.author.name)}</a></p>` : ''}
             ${coverHtml}
             <p class="mx-auto mt-7 max-w-[42rem] text-[1.05rem] leading-8 text-slate-600 md:text-[1.1rem]">${escapeHtml(post.excerpt || '')}</p>
           </header>
@@ -1911,7 +1944,7 @@ async function prerender() {
             articleSection: postMeta.badge,
             keywords: Array.isArray(post.tags) && post.tags.length ? post.tags.join(', ') : undefined,
             mainEntityOfPage: ABS(postPath),
-            author: { '@type': 'Organization', name: siteName },
+            author: { '@type': 'Organization', name: post.author?.name || siteName, ...(post.author?.url ? { url: new URL(post.author.url, 'https://pixelartvillage.org').href } : {}) },
             publisher: { '@type': 'Organization', name: siteName },
             image: ogImage,
           },

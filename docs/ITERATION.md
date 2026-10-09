@@ -3,6 +3,47 @@
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-10-09 德语像素画入门教程重写（仅本地）
+
+授权：用户同意关键词研究后的单页方案。本轮只优化 `/de/blog/pixel-art-tutorial-complete-guide-2025/`，不提交、推送、部署或请求 Google 收录。开始时 main、HEAD `a3c72b4846803a151b75d1bcdee06e44f4fb3f41`；AGENTS.md 和本文件已有未提交改动，全部保留。
+
+选词：主词为 `Pixel Art lernen`，辅助词为 `Pixel Art für Anfänger`、`Pixel Art Tutorial deutsch`，面向德语初学者的绘画学习需求，不把照片转换当作像素画绘制。此前读取的 Ubersuggest 德国/de 估计为主词月搜索量 20、难度 27；搜索量历史只到 2026-05，难度更新时间为 2026-04-06，不当作当前实时量或排名保证。此前 GSC 完整窗口 2026-09-08..10-05 该页没有点击与曝光，本轮没有刷新 GSC，不能据此认定它导致首页曝光损失。
+
+内容：`src/content/blog-posts.de.json` 只替换该教程条目，保留原网址和发布日期 2025-10-28，实际修改日期为 2026-10-09。完整搜索标题为 `Pixel Art lernen: Anleitung für Anfänger | Pixel-Art-Dorf`，共 57 个字符；正文标题、摘要、德语展示标签、FAQ 和分享图与教程主题一致。去掉未经证实的价格、硬件清单和尺寸定义，改为原创 32×32 宝石练习：画布、轮廓、填色、阴影与高光、PNG 导出、常见错误。说明放大展示不改变文件尺寸，保留工具比较页和本站照片转换入口，FAQ 可见并同步现有 FAQPage 结构化数据。
+
+真实练习：在隔离 Chromium 中操作 [Piskel 官方编辑器](https://www.piskelapp.com/p/create/sprite/)，通过实际画笔、油漆桶、调色和 PNG 下载界面完成四阶段原图。每张导出的 32×32 PNG 均解码检查全部 1024 个像素，与原创坐标和颜色设计一致；最终文件为五种不透明颜色及透明背景。四个下载文件位于 `public/tutorials/pixel-art-lernen/`，页面步骤图直接使用这些文件，没有用生成图片冒充编辑器结果。已核对 [Piskel 官方页](https://www.piskelapp.com/) 的使用说明，正文步骤对应本轮实际界面。复用现有 Sharp 脚本生成 1200×630 德语分享图，像素图使用最近邻放大。
+
+必要模板支持：新增可选正文 figure 图块及原生 PNG 下载链接，React、内容加载器与预渲染同步处理，阅读字数不把图块计为字符串；封面可选方形和原图像素放大标志。只有目标条目启用这些数据，其他 89 个 Blog 条目与 HEAD 逐项一致，德语比较页和俄语旧教程回归通过。第一次新增教程测试的六种视口/脚本组合失败，原因是旧加载器把图块转成 `[object Object]`；修正加载器和预渲染归一化后重新完整构建与测试，没有放宽断言。初次失败的 trace 和报告保留在证据目录。
+
+最终验收：Node 20.19.0 完整 build（含 ownership、SEO、dist 和重定向检查）、完整 lint、typecheck 通过。生产式 Cookie 模式的完整 Chromium 91 项全部通过，无自动重试；其中教程覆盖 1440、390、320px 宽度的初始 HTML（禁用 JavaScript）及运行时、从 Blog 点击与刷新、57 字符 title、canonical/OG/Twitter/hreflang、发布日期与修改日期、可见 FAQ 与 JSON-LD、四张步骤图、真实 PNG 下载及像素、分享图尺寸及实际像素、相关链接与无横向溢出。另覆盖已有 Blog、converter 和 18 个 Sprite 语言入口及实际导出。最终桌面与两种手机宽度的封面、步骤图截图已查看，未发现文章文字与图片重叠或裁切；这些隔离页面未记录到本站资源 HTTP 4xx/5xx 或页面脚本异常。构建日期刷新的两个 public sitemap 已恢复修改前内容，不混入全站日期变更。
+
+证据：`/tmp/pixelart-de-tutorial.UdX1kX/` 中保留真实 Piskel 操作截图、四个下载 PNG、原创设计坐标、`build-final.log`、`tests-final.log`、`report/`、`results/` 及 `cover-*.png`、`figure-*.png`。本地预览为 `http://localhost:4200/de/blog/pixel-art-tutorial-complete-guide-2025/`。
+
+边界：仅本地完成，未提交、推送、部署或提交 GSC，不声称 Google 已抓取新版、收录或排名恢复；Firefox/WebKit、实体手机和真人绘画验收未验证。首页、其他内容条目、全站语言及索引策略没有修改。
+
+### 审评后的新手操作补强
+
+授权：用户在 SEO 单页审评后要求“执行建议”。本轮继续只完善同一德语教程的新手操作图、坐标提示和真实署名，不修改多语言关联，不发布或提交 GSC。保留此前全部本地修改及用户已有文档改动，完整搜索标题仍为 57 字符，关键词、摘要、原网址和日期不变。
+
+素材：重新操作隔离浏览器中的真实 Piskel，绘制、填色、下载四阶段 PNG，并再次核对全部像素。新导出文件与原有四个下载 PNG 字节完全一致，没有替换原图。新增三个原生浏览器界面截图：RESIZE（281×550）、调色器（272×195）、EXPORT（328×550），分别约 14、15、38 KB；注明实际截图日期和按钮位置，未用生成图冒充界面。第一张截图因面板滑入动画裁掉左侧，已保留初次证据并重新截取完整面板；最终素材已逐张查看。页面截图不作像素化处理、不放大超过原尺寸，并提供新标签页打开原尺寸图片的链接，方便手机查看小字。
+
+轮廓说明：只在轮廓图上启用 HTML/CSS 坐标辅助，标出 x/y 方向、0–31 编号及对应网格，正文说明上边、最宽处和尖端的具体坐标。网格不是下载文件的一部分；四个原始 32×32 PNG 及透明度保持不变。截图检查发现窄屏最右坐标越出图框，已将边缘文字向内对齐，坐标锚点仍位于对应像素中心，并新增位置和文字边界断言。
+
+署名：文章标题下可见 `Von Pixel Art Village`，链接现有 `/de/about/`；BlogPosting 的组织作者名称与介绍 URL 同步。没有虚构个人身份、头像或专业资历。正文明确说明步骤通过真实浏览器自动操作和 PNG 像素比对验证，不冒充真人初学者绘画测试。作者和坐标辅助均为可选条目配置，React 与预渲染保持一致；其他 89 个 Blog 条目与 HEAD 相同，比较页和俄语旧教程没有新增署名或图块。
+
+最终验证：Node 20.19.0 完整 build、完整 lint、typecheck 和 diff-check 通过。最终版本生产式 Cookie 模式的 Chromium 91 项全部通过、无自动重试；教程覆盖 1440/390/320px 的初始 HTML和运行时、七张正文图片及真实尺寸、三个界面素材 HTTP/文件大小、原尺寸链接实际新标签页打开、十个坐标锚点与边缘文字边界、署名链接与组织作者数据、原始 PNG 下载/颜色/透明度，以及原有 SEO 标签、FAQ 和分享图检查。桌面及两种手机宽度的署名、坐标图、设置/调色/导出截图已查看，未发现目标内容裁切、文字重叠或横向溢出；隔离页面未记录到本站资源 HTTP 4xx/5xx 或脚本异常。构建自动刷新的两个 public sitemap 已恢复原内容，不混入全站日期更新。
+
+证据：`/tmp/pixelart-de-tutorial-help.ZHgvqz/` 的 `piskel-capture-final.log`、真实界面截图、四个重新导出的 PNG、`build-final.log`、`tests-final.log`、`report/`、`results/` 和桌面/手机截图。本地预览仍为 `http://localhost:4200/de/blog/pixel-art-tutorial-complete-guide-2025/`。未提交、推送、部署或请求收录；多语言内容一致性问题留待单独确认，Firefox/WebKit、实体手机、真人绘画验收和 Google 抓取/收录/排名未验证。
+
+### 德语教程正式发布
+
+新授权：用户明确要求“上线部署”，授权提交、推送并部署已经完成本地验收的德语教程。只发布 `/de/blog/pixel-art-tutorial-complete-guide-2025/` 的原创宝石练习、七张正文图片、坐标提示、真实署名、57 字符搜索标题和德语分享图，以及必要的可选模板支持与测试。不修改其他语言内容、hreflang 策略、广告、索引设置，不提交 GSC。
+
+发布隔离：开始时 main、HEAD 与实时远程 main 均为 `a3c72b4846803a151b75d1bcdee06e44f4fb3f41`。从 HEAD 导出干净副本 `/tmp/pixelart-de-tutorial-release.ZjrVrn/`，只加入七个相关代码/测试文件及八张图片；文档只暂存本篇教程及本次发布段落，保留 AGENTS.md、历史整理和旧发布回执的未提交修改。不混入构建生成的 sitemap 或无关图片，未新增依赖、云端配置或站点。
+
+发布前验证：Node 20.19.0 完整 build（含 ownership、SEO、dist 和重定向检查）、完整 lint 和 typecheck 通过；生产式 Cookie 模式的完整 Chromium 91 项全部通过，无自动重试。证据为发布副本中的 `build.log`、`tests.log`、`release-report/` 和 `release-results/`。沿用现有 Git 集成部署；提交、部署回执和正式页面结果待后续补记，不将本地测试当作生产验收。
+
+
 ## 2026-10-08 德语转换器比较文章优化（仅本地）
 
 授权：用户查看 GSC 索引报告并要求判断可恢复页面后，明确回复“执行建议”。本轮只优化 `/de/blog/best-pixel-art-converters-compared-2025/`，不发布、不请求 Google 收录、不批量修改其他未收录页面。开始时 main、HEAD `4badfb398e430333a908889d1a3ba61ca503c4a5`；AGENTS.md 和本文件已有未提交改动，全部保留。

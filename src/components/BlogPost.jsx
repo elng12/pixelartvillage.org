@@ -124,6 +124,11 @@ function parseBlogBody(lines = []) {
   }
 
   for (const rawLine of Array.isArray(lines) ? lines : []) {
+    if (rawLine && typeof rawLine === 'object' && rawLine.type === 'figure') {
+      flushList()
+      blocks.push(rawLine)
+      continue
+    }
     const line = String(rawLine || '')
     const trimmed = line.trim()
 
@@ -343,6 +348,58 @@ function renderBlogBlocks(blocks = [], editorialNoteIndex = -1) {
   return blocks.map((block, index) => {
     if (index === editorialNoteIndex) return null
 
+    if (block.type === 'figure') {
+      const image = (
+        <img
+          src={block.src}
+          alt={block.alt}
+          width={block.width}
+          height={block.height}
+          loading="lazy"
+          style={block.pixelated ? undefined : { maxWidth: block.width }}
+          className={`mx-auto block h-auto w-full max-w-96${block.coordinateGuide ? '' : ' bg-gray-100'}${block.pixelated ? ' [image-rendering:pixelated]' : ''}`}
+        />
+      )
+      return (
+        <figure key={`figure-${index}`}>
+          {block.coordinateGuide ? (
+            <div className="mx-auto w-full max-w-96" role="group" aria-label={block.coordinateGuide.label}>
+              <p className="mb-2 text-sm leading-6 text-slate-600">{block.coordinateGuide.xLabel} &rarr; / {block.coordinateGuide.yLabel} &darr;</p>
+              <div className="grid grid-cols-[1.5rem_minmax(0,1fr)] grid-rows-[1.5rem_auto] text-xs text-slate-600">
+                <span aria-hidden="true" />
+                <div className="relative" aria-hidden="true">
+                  {block.coordinateGuide.ticks.map((tick) => (
+                    <span key={`x-${tick}`} className="absolute top-0 w-0" style={{ left: `${((tick + 0.5) / block.width) * 100}%` }}>
+                      <span className="absolute top-0 w-5 text-center" style={{ left: tick === 0 ? 0 : tick === block.width - 1 ? -20 : -10 }}>{tick}</span>
+                    </span>
+                  ))}
+                </div>
+                <div className="relative" aria-hidden="true">
+                  {block.coordinateGuide.ticks.map((tick) => (
+                    <span key={`y-${tick}`} className="absolute left-0 h-4 w-5 text-center" style={{ top: `${((tick + 0.5) / block.height) * 100}%`, marginTop: '-8px' }}>{tick}</span>
+                  ))}
+                </div>
+                <div className="bg-gray-100" style={{ backgroundImage: 'linear-gradient(to right, rgba(71,85,105,0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(71,85,105,0.2) 1px, transparent 1px)', backgroundSize: `${100 / block.width}% ${100 / block.height}%` }}>
+                  {image}
+                </div>
+              </div>
+            </div>
+          ) : image}
+          <figcaption className="mt-3 text-sm leading-6 text-slate-600">{block.caption}</figcaption>
+          {block.fullSizeLabel ? (
+            <a href={block.src} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-sm font-medium text-blue-700 underline underline-offset-4">
+              {block.fullSizeLabel}
+            </a>
+          ) : null}
+          {block.downloadLabel ? (
+            <a href={block.src} download className="mt-2 inline-block text-sm font-medium text-blue-700 underline underline-offset-4">
+              {block.downloadLabel}
+            </a>
+          ) : null}
+        </figure>
+      )
+    }
+
     if (block.type === 'heading') {
       const Tag = `h${block.level}`
       const className = block.level === 2
@@ -438,7 +495,9 @@ function BlogPostCover({ post }) {
   const coverImages = getBlogCoverImages(post)
   const presentation = getBlogPresentationMeta(post)
   const panelClass = post.cover ? 'min-w-0' : 'blog-cover-panel'
-  const imageClass = post.cover ? 'block w-full aspect-[960/762] object-contain' : 'blog-cover-image'
+  const imageClass = post.cover
+    ? `block w-full ${post.cover.square ? 'aspect-square' : 'aspect-[960/762]'} object-contain`
+    : 'blog-cover-image'
   const labelClass = post.cover ? 'mt-2 text-sm leading-6 text-slate-600' : 'blog-cover-label'
 
   return (
@@ -448,7 +507,7 @@ function BlogPostCover({ post }) {
           <img
             src={coverImages.before}
             alt={presentation.sourceAlt || 'Original source image preview'}
-            className={imageClass}
+            className={`${imageClass}${coverImages.sourcePixelated ? ' [image-rendering:pixelated]' : ''}`}
             loading="eager"
           />
           <figcaption className={labelClass}>{presentation.sourceLabel || 'Source image'}</figcaption>
@@ -539,7 +598,8 @@ export default function BlogPost() {
     mainEntityOfPage: canonical,
     author: {
       '@type': 'Organization',
-      name: siteName,
+      name: post.author?.name || siteName,
+      ...(post.author?.url ? { url: new URL(post.author.url, 'https://pixelartvillage.org').href } : {}),
     },
     publisher: {
       '@type': 'Organization',
@@ -631,6 +691,12 @@ export default function BlogPost() {
             <h1 className="mx-auto mt-4 max-w-xl text-balance text-[1.82rem] font-semibold tracking-tight text-slate-950 md:text-[2.02rem] md:leading-[1.14]">
               {post.title}
             </h1>
+            {post.author?.name && post.author?.url ? (
+              <p className="mt-3 text-sm leading-6 text-slate-600">
+                {presentation.authorLabel || 'By'}{' '}
+                <a href={post.author.url} rel="author" className="text-blue-700 underline underline-offset-4">{post.author.name}</a>
+              </p>
+            ) : null}
 
             <BlogPostCover post={post} />
 

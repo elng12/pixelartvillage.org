@@ -63,6 +63,7 @@ const BLOG_COVER_IMAGES = {
 }
 
 function countWords(text = '') {
+  if (typeof text !== 'string') return 0
   return String(text)
     .trim()
     .split(/\s+/)

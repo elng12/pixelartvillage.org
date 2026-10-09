@@ -6,6 +6,168 @@ const germanComparisonTitle = 'Pixel-Art-Konverter im Vergleich: 4 Werkzeuge fü
 const germanComparisonSeoTitle = 'Pixel-Art-Konverter: 4 Tools im Vergleich | Pixel-Art-Dorf'
 const germanComparisonDescription = 'Vier Pixel-Art-Werkzeuge im Vergleich: Bildkonvertierung, Pixelbearbeitung und Animation. Mit belegten Funktionen und einem echten Fotobeispiel.'
 const germanComparisonImage = '/blog-og/de/best-pixel-art-converters-compared-2025.png'
+const germanTutorialRoute = '/de/blog/pixel-art-tutorial-complete-guide-2025/'
+const germanTutorialTitle = 'Pixel Art lernen: Schritt-für-Schritt für Anfänger'
+const germanTutorialSeoTitle = 'Pixel Art lernen: Anleitung für Anfänger | Pixel-Art-Dorf'
+const germanTutorialDescription = 'Pixel Art lernen mit einer eigenen 32×32-Übung in Piskel: Kontur, Farbpalette, Schatten und PNG-Export. Mit Schrittbildern und einer Vorlage für Anfänger.'
+const germanTutorialImage = '/blog-og/de/pixel-art-tutorial-complete-guide-2025.png'
+
+for (const javaScriptEnabled of [false, true]) {
+  test.describe(`German drawing tutorial ${javaScriptEnabled ? 'runtime' : 'initial HTML'}`, () => {
+    test.use({ javaScriptEnabled })
+
+    for (const width of [1440, 390, 320]) {
+      test(`${width}px lesson, metadata, original artwork and download`, async ({ page, request }) => {
+        await page.setViewportSize({ width, height: width <= 390 ? 844 : 900 })
+        expect((await page.goto('/de/blog/')).status()).toBe(200)
+        if (javaScriptEnabled && process.env.EXPECT_CONSENT_BANNER === '1') {
+          await page.getByRole('button', { name: 'Nicht unbedingt erforderliche Cookies ablehnen', exact: true }).click()
+        }
+        const entry = page.getByRole('link', { name: germanTutorialTitle, exact: true })
+        await expect(entry).toHaveAttribute('href', germanTutorialRoute)
+        await entry.click()
+        await page.reload()
+        await expect(page).toHaveTitle(germanTutorialSeoTitle)
+        expect(germanTutorialSeoTitle.length).toBe(57)
+        await expect(page.locator('html')).toHaveAttribute('lang', 'de')
+        await expect(page.getByRole('heading', { level: 1 })).toHaveText(germanTutorialTitle)
+        await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org${germanTutorialRoute}`)
+        for (const key of ['description', 'og:description', 'twitter:description']) {
+          await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', germanTutorialDescription)
+        }
+        for (const key of ['og:title', 'twitter:title']) {
+          await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', germanTutorialSeoTitle)
+        }
+        for (const key of ['og:image', 'twitter:image']) {
+          await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', `https://pixelartvillage.org${germanTutorialImage}`)
+        }
+        await expect(page.locator('link[rel="alternate"][hreflang="de"]')).toHaveAttribute('href', `https://pixelartvillage.org${germanTutorialRoute}`)
+        await expect(page.locator('main')).toContainText('Aktualisiert: 2026-10-09')
+        await expect(page.locator('main')).not.toContainText(/19\.99|Typischerweise|\[object Object\]|Source image|Pixel art result|min read|Related Articles|Back to Blog/)
+        await expect(page.getByRole('heading', { name: 'Schritt 5: Das PNG richtig exportieren', exact: true })).toBeVisible()
+        await expect(page.locator('main')).toContainText('Selected frame export')
+        await expect(page.locator('main')).toContainText('Er ersetzt die Zeichenwerkzeuge dieser Anleitung nicht')
+        await expect(page.locator('.blog-article-prose')).toContainText('automatisierte Bedienung im echten Browser')
+        await expect(page.locator('.blog-article-prose')).toContainText('kein Test mit menschlichen Zeichenanfängern')
+        const author = page.locator('header a[rel="author"]')
+        await expect(author).toHaveText('Pixel Art Village')
+        await expect(author).toHaveAttribute('href', '/de/about/')
+        expect((await request.get('/de/about/')).status()).toBe(200)
+        const figures = page.locator('.blog-article-prose figure')
+        await expect(figures).toHaveCount(7)
+        for (const [name, expectedSize] of [['resize', [281, 550]], ['color', [272, 195]], ['export', [328, 550]]]) {
+          const screenshot = figures.locator(`img[src="/tutorials/pixel-art-lernen/piskel-${name}-panel.png"]`)
+          await screenshot.scrollIntoViewIfNeeded()
+          await expect.poll(() => screenshot.evaluate(img => [img.naturalWidth, img.naturalHeight])).toEqual(expectedSize)
+          await expect(screenshot).toHaveAttribute('width', String(expectedSize[0]))
+          await expect(screenshot).toHaveAttribute('height', String(expectedSize[1]))
+          expect(await screenshot.evaluate(img => getComputedStyle(img).imageRendering)).toBe('auto')
+          const screenshotResponse = await request.get(`/tutorials/pixel-art-lernen/piskel-${name}-panel.png`)
+          expect(screenshotResponse.status()).toBe(200)
+          const screenshotBytes = await screenshotResponse.body()
+          expect(screenshotBytes.length).toBeLessThan(200000)
+          const metadata = await sharp(screenshotBytes).metadata()
+          expect([metadata.width, metadata.height]).toEqual(expectedSize)
+          await expect(screenshot.locator('..').getByRole('link', { name: 'Bildschirmausschnitt in Originalgröße öffnen', exact: true })).toHaveAttribute('href', `/tutorials/pixel-art-lernen/piskel-${name}-panel.png`)
+        }
+        const coordinateGuide = page.getByRole('group', { name: 'Koordinatenhilfe zur Kontur: Spalten x und Zeilen y, jeweils von 0 bis 31', exact: true })
+        await expect(coordinateGuide).toBeVisible()
+        await expect(coordinateGuide).toContainText('Spalten (x)')
+        const guidePositions = await coordinateGuide.evaluate(guide => {
+          const image = guide.querySelector('img').getBoundingClientRect()
+          const axes = [...guide.querySelectorAll('div[aria-hidden="true"]')]
+          return axes.map((axis, dimension) => [...axis.querySelectorAll(':scope > span')].map(tick => {
+            const box = tick.getBoundingClientRect()
+            const actual = dimension === 0 ? box.x + box.width / 2 : box.y + box.height / 2
+            const expected = dimension === 0 ? image.x + (Number(tick.textContent) + 0.5) / 32 * image.width : image.y + (Number(tick.textContent) + 0.5) / 32 * image.height
+            return Math.abs(actual - expected)
+          }))
+        })
+        expect(guidePositions.flat().length).toBe(10)
+        expect(guidePositions.flat().every(error => error < 1)).toBe(true)
+        expect(await coordinateGuide.evaluate(guide => {
+          const bounds = guide.getBoundingClientRect()
+          return [...guide.querySelectorAll('span')].every(tick => {
+            const box = tick.getBoundingClientRect()
+            return box.x >= bounds.x - 1 && box.right <= bounds.right + 1
+          })
+        })).toBe(true)
+        const [fullSizePage] = await Promise.all([
+          page.waitForEvent('popup'),
+          figures.getByRole('link', { name: 'Bildschirmausschnitt in Originalgröße öffnen', exact: true }).last().click(),
+        ])
+        await fullSizePage.waitForLoadState('domcontentloaded')
+        await expect(fullSizePage).toHaveURL(/\/tutorials\/pixel-art-lernen\/piskel-export-panel\.png$/)
+        await expect.poll(() => fullSizePage.locator('img').evaluate(img => [img.naturalWidth, img.naturalHeight])).toEqual([328, 550])
+        await fullSizePage.close()
+        for (const stage of ['outline', 'base', 'shadow', 'final']) {
+          const image = figures.locator(`img[src="/tutorials/pixel-art-lernen/gem-${stage}.png"]`)
+          await image.scrollIntoViewIfNeeded()
+          await expect.poll(() => image.evaluate(img => [img.naturalWidth, img.naturalHeight])).toEqual([32, 32])
+          expect(await image.evaluate(img => getComputedStyle(img).imageRendering)).toBe('pixelated')
+        }
+        await expect(figures.locator('a[download]')).toHaveCount(4)
+        await expect(figures.locator('a[download]').last()).toHaveAttribute('href', '/tutorials/pixel-art-lernen/gem-final.png')
+        const [download] = await Promise.all([
+          page.waitForEvent('download'),
+          figures.locator('a[download]').last().click(),
+        ])
+        const image = sharp(await download.path())
+        const { data, info } = await image.ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+        expect([info.width, info.height]).toEqual([32, 32])
+        const colors = new Set()
+        for (let i = 0; i < data.length; i += 4) {
+          if (data[i + 3]) colors.add([...data.subarray(i, i + 4)].join(','))
+        }
+        expect([...colors].sort()).toEqual(['41,50,65,255', '54,191,164,255', '32,117,103,255', '141,229,192,255', '244,255,232,255'].sort())
+        for (const [x, y, color] of [
+          [0, 0, [0, 0, 0, 0]], [10, 6, [41, 50, 65, 255]],
+          [16, 11, [54, 191, 164, 255]], [16, 12, [32, 117, 103, 255]],
+          [10, 8, [141, 229, 192, 255]], [12, 9, [244, 255, 232, 255]],
+        ]) {
+          expect([...data.subarray((y * 32 + x) * 4, (y * 32 + x) * 4 + 4)]).toEqual(color)
+        }
+        const originalResponse = await request.get('/tutorials/pixel-art-lernen/gem-final.png')
+        expect(originalResponse.status()).toBe(200)
+        const serverPixels = await sharp(await originalResponse.body()).ensureAlpha().raw().toBuffer()
+        expect(serverPixels.equals(data)).toBe(true)
+        const socialResponse = await request.get(germanTutorialImage)
+        expect(socialResponse.status()).toBe(200)
+        const socialMeta = await sharp(await socialResponse.body()).metadata()
+        expect([socialMeta.width, socialMeta.height]).toEqual([1200, 630])
+        const expectedPreview = await sharp(await originalResponse.body()).flatten({ background: '#f8fafc' }).resize(441, 350, { fit: 'contain', kernel: 'nearest', background: '#f8fafc' }).ensureAlpha().raw().toBuffer()
+        const actualPreview = await sharp(await socialResponse.body()).extract({ left: 660, top: 182, width: 441, height: 350 }).ensureAlpha().raw().toBuffer()
+        expect(actualPreview.equals(expectedPreview)).toBe(true)
+        const cover = page.getByRole('region', { name: 'Originale Pixel-Art-Übung: Kontur und fertiger Edelstein', exact: true })
+        await expect(cover.locator('figcaption')).toHaveText(['Kontur: 32 × 32 Pixel', 'Fertiges PNG: 32 × 32 Pixel'])
+        expect(await cover.locator('img').evaluateAll(images => images.every(img => getComputedStyle(img).imageRendering === 'pixelated'))).toBe(true)
+        const schema = await page.locator('script[type="application/ld+json"]').evaluateAll(scripts => scripts.flatMap(script => JSON.parse(script.textContent)))
+        expect(schema.find(item => item['@type'] === 'BlogPosting')).toMatchObject({ headline: germanTutorialTitle, datePublished: '2025-10-28', dateModified: '2026-10-09', inLanguage: 'de', image: `https://pixelartvillage.org${germanTutorialImage}`, author: { '@type': 'Organization', name: 'Pixel Art Village', url: 'https://pixelartvillage.org/de/about/' } })
+        const faq = schema.find(item => item['@type'] === 'FAQPage')
+        expect(faq.mainEntity).toHaveLength(3)
+        for (const item of faq.mainEntity) {
+          await expect(page.getByRole('heading', { level: 3, name: item.name, exact: true })).toBeVisible()
+          await expect(page.getByText(item.acceptedAnswer.text, { exact: true })).toBeVisible()
+        }
+        await expect(page.getByRole('link', { name: 'Vergleich der Pixel-Art-Werkzeuge', exact: true })).toHaveAttribute('href', germanComparisonRoute)
+        await expect(page.getByRole('link', { name: 'Pixel-Art-Konverter', exact: true })).toHaveAttribute('href', '/de/')
+        await expect(page.getByRole('link', { name: 'Piskel-Browsereditor', exact: true })).toHaveAttribute('href', 'https://www.piskelapp.com/p/create/sprite/')
+        await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+        await test.info().attach(`german-tutorial-${width}-${javaScriptEnabled}`, { body: await page.screenshot({ fullPage: true }), contentType: 'image/png' })
+      })
+    }
+  })
+}
+
+test('Russian beginner article retains its existing content and cover', async ({ page }) => {
+  await page.goto('/ru/blog/pixel-art-tutorial-complete-guide-2025/')
+  await expect(page).toHaveTitle('Полное руководство по пиксель-арту для начинающих (2025) - От нуля до создания | Pixel Art Village')
+  await expect(page.locator('.blog-article-prose figure')).toHaveCount(0)
+  await expect(page.locator('header a[rel="author"]')).toHaveCount(0)
+  await expect(page.locator('.blog-cover-grid img').first()).toHaveAttribute('src', '/showcase-before-w640.jpg')
+  await expect(page.locator('.blog-cover-grid img').last()).toHaveAttribute('src', '/showcase-after-w640.jpg')
+  await expect(page.locator('main')).not.toContainText('gem-final')
+})
 
 test('blog tutorial renders structured headings and main converter link', async ({ page }) => {
   await page.goto('/blog/how-to-pixelate-an-image/')
@@ -82,6 +244,7 @@ for (const javaScriptEnabled of [false, true]) {
         }
         await expect(page.locator('link[rel="alternate"][hreflang="de"]')).toHaveAttribute('href', `https://pixelartvillage.org${germanComparisonRoute}`)
         await expect(page.locator('main')).toContainText('Aktualisiert: 2026-10-08')
+        await expect(page.locator('header a[rel="author"]')).toHaveCount(0)
         await expect(page.locator('main')).toContainText('Wir haben diese drei Alternativen nicht mit demselben Foto getestet')
         await expect(page.locator('main')).not.toContainText(/Gesamtbewertung|9\.2\/10|10 beliebte|min read|Source image|Pixel art result|Related Articles|Back to Blog/)
 

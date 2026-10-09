@@ -45,7 +45,11 @@ function normalizeBlogPosts(value) {
       return {
         ...entry,
         tags: toStringArray(entry.tags),
-        body: toStringArray(entry.body),
+        body: toArray(entry.body).flatMap((line) => (
+          line && typeof line === 'object' && line.type === 'figure'
+            ? [line]
+            : toStringArray([line])
+        )),
       }
     })
     .filter((entry) => entry && typeof entry.slug === 'string' && entry.slug.trim())
