@@ -38,7 +38,7 @@ function BlogListCard({ post }) {
           to={`/blog/${post.slug}/`}
           className="inline-flex items-center gap-2 text-base font-semibold text-blue-700 transition-colors hover:text-blue-800"
         >
-          Read more
+          {presentation.readMoreLabel || 'Read more'}
           <span aria-hidden="true">→</span>
         </LocalizedLink>
       </div>

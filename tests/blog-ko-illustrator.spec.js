@@ -40,6 +40,8 @@ for (const javaScriptEnabled of [false, true]) {
           await expect(article).toContainText('Illustrator 앱에서 직접 내보내기를 실행한 검증은 하지 않았습니다')
           await expect(article).toContainText('앤티 앨리어싱 옵션별 Illustrator 결과를 비교한 실험은 아닙니다')
           await expect(article).toContainText('무조건 끄지 말고')
+          await expect(article).not.toContainText('현재 본문은 영어')
+          await expect(article.getByRole('link', { name: '한국어 이미지 픽셀화 안내', exact: true })).toHaveAttribute('href', '/ko/blog/how-to-pixelate-an-image/')
           await expect(article).not.toContainText(/Integrated Village Optimizer|Optimized PNG|batch exports|Canva|VillageExports|Resize slider|gallery integration/)
           await expect(page.locator('main')).not.toContainText(/min read|Related Articles|Source image|Pixel art result|\[object Object\]/)
           await expect(page.locator('main')).toContainText('수정: 2026-10-09')

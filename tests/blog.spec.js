@@ -1,6 +1,40 @@
 import { test, expect } from '@playwright/test'
 import sharp from 'sharp'
 
+for (const javaScriptEnabled of [false, true]) {
+  test.describe(`Blog entry labels ${javaScriptEnabled ? 'runtime' : 'initial HTML'}`, () => {
+    test.use({ javaScriptEnabled })
+
+    for (const [route, label, count, rejectLabel] of [
+      ['/blog/', 'Read more', null, 'Reject non-essential cookies'],
+      ['/de/blog/', 'Weiterlesen', 2, 'Nicht unbedingt erforderliche Cookies ablehnen'],
+      ['/ko/blog/', '글 읽기', 5, '필수적이지 않은 쿠키 거부'],
+    ]) {
+      test(`${route} uses article labels and retains the English fallback`, async ({ page }) => {
+        expect((await page.goto(route)).status()).toBe(200)
+        if (javaScriptEnabled && process.env.EXPECT_CONSENT_BANNER === '1') {
+          await page.getByRole('button', { name: rejectLabel, exact: true }).click()
+        }
+        const cards = page.locator('main .blog-simple-card')
+        await expect(cards.first()).toBeVisible()
+        const total = await cards.count()
+        const expected = count ?? total
+        await expect(cards.getByRole('link', { name: label, exact: true })).toHaveCount(expected)
+        if (label !== 'Read more') {
+          await expect(cards.getByRole('link', { name: 'Read more', exact: true })).toHaveCount(total - expected)
+        }
+        const entry = cards.getByRole('link', { name: label, exact: true }).first()
+        const target = await entry.getAttribute('href')
+        expect(target).toMatch(new RegExp(`^${route}.+/$`))
+        await Promise.all([page.waitForURL(url => url.pathname === target), entry.click()])
+        await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+        await page.reload()
+        await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org${target}`)
+      })
+    }
+  })
+}
+
 const germanComparisonRoute = '/de/blog/best-pixel-art-converters-compared-2025/'
 const germanComparisonTitle = 'Pixel-Art-Konverter im Vergleich: 4 Werkzeuge für Bilder und Sprites'
 const germanComparisonSeoTitle = 'Pixel-Art-Konverter: 4 Tools im Vergleich | Pixel-Art-Dorf'
@@ -199,12 +233,16 @@ test('comparison article keeps comparison intent and links to the main converter
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://pixelartvillage.org/blog-og/best-pixel-art-converters-compared-2025.png')
 })
 
-test('localized blog article resolves first-post placeholder to the localized beginner guide', async ({ page }) => {
+test('Korean article links to the localized beginner guide', async ({ page }) => {
   await page.goto('/ko/blog/how-to-get-pixel-art-version-of-image/')
+  if (process.env.EXPECT_CONSENT_BANNER === '1') {
+    await page.getByRole('button', { name: '필수적이지 않은 쿠키 거부', exact: true }).click()
+  }
 
-  await expect(
-    page.getByRole('link', { name: /How to Pixelate an Image: Image to Pixel Art Beginner Guide/i }).first()
-  ).toHaveAttribute('href', '/ko/blog/how-to-pixelate-an-image/')
+  const beginner = page.getByRole('link', { name: '이미지 픽셀화 안내', exact: true }).first()
+  await expect(beginner).toHaveAttribute('href', '/ko/blog/how-to-pixelate-an-image/')
+  await beginner.click()
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('이미지 픽셀화 방법: 사진 업로드부터 픽셀 크기 설정과 PNG 저장까지')
 })
 
 for (const javaScriptEnabled of [false, true]) {
