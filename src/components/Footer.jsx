@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import LocalizedLink from '@/components/LocalizedLink';
+import { useLocaleContext } from '@/hooks/useLocaleContext';
 const aiDirsBadge = '/badges/ai-dirs-badge.svg';
 const acidToolsBadge = '/badges/acidtools-badge.png';
 const deepLaunchBadge = '/badges/deeplaunch-badge-light.svg';
@@ -223,6 +225,34 @@ function getSafeTranslation(t, key, fallback) {
   return normalized;
 }
 
+const RUSSIAN_TOOL_DESTINATIONS = {
+  '/converter/image-to-pixel-art/': '/#tool',
+  '/converter/photo-to-pixel-art/': '/#tool',
+  '/converter/png-to-pixel-art/': '/#tool',
+};
+
+function FooterToolLink({ to, children }) {
+  const { currentLocale } = useLocaleContext();
+  const { t } = useTranslation();
+  const className = 'hover:text-white';
+
+  if (currentLocale !== 'ru') {
+    return <LocalizedLink to={to} className={className}>{children}</LocalizedLink>;
+  }
+
+  const russianDestination = RUSSIAN_TOOL_DESTINATIONS[to];
+  if (russianDestination) {
+    return <LocalizedLink to={russianDestination} className={className}>{children}</LocalizedLink>;
+  }
+
+  // These specialized guides have English source content, not Russian translations.
+  return (
+    <Link to={to} hrefLang="en" className={className}>
+      {children} <span className="text-gray-400">({t('footer.englishOnly')})</span>
+    </Link>
+  );
+}
+
 function Footer({ copy }) {
   const { t } = useTranslation()
   const linkLabel = (key) => copy?.links?.[key] || t(`footer.links.${key}`)
@@ -258,20 +288,20 @@ function Footer({ copy }) {
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.tools')}</p>
               <ul className="space-y-2 text-sm">
-                <li><LocalizedLink to="/converter/image-to-pixel-art/" className="hover:text-white">{t('footer.links.generator')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/photo-to-pixel-art/" className="hover:text-white">{t('footer.links.converter')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/pixelate-image-online/" className="hover:text-white">{linkLabel('pixelate')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/8-bit-art-generator/" className="hover:text-white">{linkLabel('8bit')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/retro-game-graphics-maker/" className="hover:text-white">{linkLabel('retroMaker')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/photo-to-sprite-converter/" className="hover:text-white">{linkLabel('photo2sprite')}</LocalizedLink></li>
+                <li><FooterToolLink to="/converter/image-to-pixel-art/">{t('footer.links.generator')}</FooterToolLink></li>
+                <li><FooterToolLink to="/converter/photo-to-pixel-art/">{t('footer.links.converter')}</FooterToolLink></li>
+                <li><FooterToolLink to="/converter/pixelate-image-online/">{linkLabel('pixelate')}</FooterToolLink></li>
+                <li><FooterToolLink to="/converter/8-bit-art-generator/">{linkLabel('8bit')}</FooterToolLink></li>
+                <li><FooterToolLink to="/converter/retro-game-graphics-maker/">{linkLabel('retroMaker')}</FooterToolLink></li>
+                <li><FooterToolLink to="/converter/photo-to-sprite-converter/">{linkLabel('photo2sprite')}</FooterToolLink></li>
               </ul>
             </div>
             <div>
               <p className="text-gray-200 font-semibold mb-3">{t('footer.formats')}</p>
               <ul className="space-y-2 text-sm">
-                <li><LocalizedLink to="/converter/png-to-pixel-art/" className="hover:text-white">{t('footer.links.png2pixel')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/gif-to-pixel-art/" className="hover:text-white">{linkLabel('gif2pixel')}</LocalizedLink></li>
-                <li><LocalizedLink to="/converter/webp-to-pixel-art/" className="hover:text-white">{linkLabel('webp2pixel')}</LocalizedLink></li>
+                <li><FooterToolLink to="/converter/png-to-pixel-art/">{t('footer.links.png2pixel')}</FooterToolLink></li>
+                <li><FooterToolLink to="/converter/gif-to-pixel-art/">{linkLabel('gif2pixel')}</FooterToolLink></li>
+                <li><FooterToolLink to="/converter/webp-to-pixel-art/">{linkLabel('webp2pixel')}</FooterToolLink></li>
               </ul>
             </div>
             <div>

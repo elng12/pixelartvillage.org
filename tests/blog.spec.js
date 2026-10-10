@@ -1,6 +1,124 @@
 import { test, expect } from '@playwright/test'
 import sharp from 'sharp'
 
+const russianTutorialRoute = '/ru/blog/pixel-art-tutorial-complete-guide-2025/'
+const russianTutorialTitle = 'Пиксель-арт для начинающих: рисуем камень 32×32'
+const russianTutorialSeoTitle = 'Пиксель-арт для начинающих: урок 32×32 | Pixel Art Village'
+const russianTutorialDescription = 'Урок пиксель-арта для начинающих: нарисуйте камень 32×32 в Piskel, добавьте контур, пять цветов, тень и блики. Пошаговые изображения и PNG для скачивания.'
+const russianTutorialImage = '/blog-og/ru/pixel-art-tutorial-complete-guide-2025.png'
+
+for (const javaScriptEnabled of [false, true]) {
+  test.describe(`Russian drawing tutorial ${javaScriptEnabled ? 'runtime' : 'initial HTML'}`, () => {
+    test.use({ javaScriptEnabled })
+
+    for (const width of [1440, 390, 320]) {
+      test(`${width}px localized lesson, real artwork and page identity`, async ({ page, request }) => {
+        await page.setViewportSize({ width, height: width <= 390 ? 844 : 900 })
+        expect((await page.goto('/ru/blog/')).status()).toBe(200)
+        if (javaScriptEnabled && process.env.EXPECT_CONSENT_BANNER === '1') {
+          await page.getByRole('button', { name: 'Отказаться от необязательных куки', exact: true }).click()
+        }
+        const entry = page.getByRole('link', { name: russianTutorialTitle, exact: true })
+        await expect(entry).toHaveAttribute('href', russianTutorialRoute)
+        await entry.click()
+        await page.reload()
+        await expect(page).toHaveTitle(russianTutorialSeoTitle)
+        await expect(page.locator('html')).toHaveAttribute('lang', 'ru')
+        await expect(page.getByRole('heading', { level: 1 })).toHaveText(russianTutorialTitle)
+        await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org${russianTutorialRoute}`)
+        await expect(page.locator('link[rel="alternate"][hreflang="ru"]')).toHaveAttribute('href', `https://pixelartvillage.org${russianTutorialRoute}`)
+        for (const key of ['description', 'og:description', 'twitter:description']) {
+          await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', russianTutorialDescription)
+        }
+        for (const key of ['og:title', 'twitter:title']) {
+          await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', russianTutorialSeoTitle)
+        }
+        for (const key of ['og:image', 'twitter:image']) {
+          await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', `https://pixelartvillage.org${russianTutorialImage}`)
+        }
+        const main = page.locator('main')
+        const article = page.locator('.blog-article-prose')
+        await expect(main).toContainText('Обновлено: 2026-10-10')
+        await expect(main).not.toContainText(/19\.99|Обычно 16x16|Обычно 128x128|Source image|Pixel art result|min read|Related Articles|Back to Blog|\[object Object\]/)
+        await expect(article).toContainText('а не стандарт 8-bit или 16-bit')
+        await expect(article).toContainText('Это техническая проверка, а не исследование с участием начинающих художников')
+        await expect(article).toContainText('Он не заменяет инструменты рисования из этого урока')
+        await expect(article).toContainText('Selected frame export')
+        await expect(article).toContainText('Scale равным 1.0x')
+        await expect(article.getByRole('heading', { level: 2 })).toHaveCount(9)
+        await expect(page.locator('header a[rel="author"]')).toHaveAttribute('href', '/ru/about/')
+
+        const figures = article.locator('figure')
+        await expect(figures).toHaveCount(7)
+        for (const image of await figures.locator('img').all()) {
+          await image.scrollIntoViewIfNeeded()
+          await expect.poll(() => image.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true)
+          expect(await image.getAttribute('alt')).toMatch(/[А-Яа-яЁё]/)
+          const path = await image.getAttribute('src')
+          const response = await request.get(path)
+          expect(response.status(), path).toBe(200)
+          const metadata = await sharp(await response.body()).metadata()
+          expect(metadata.width).toBe(Number(await image.getAttribute('width')))
+          expect(metadata.height).toBe(Number(await image.getAttribute('height')))
+          const pixelated = /gem-/.test(path)
+          expect(await image.evaluate(img => getComputedStyle(img).imageRendering)).toBe(pixelated ? 'pixelated' : 'auto')
+        }
+        await expect(figures.locator('a[download]')).toHaveCount(4)
+        const [download] = await Promise.all([
+          page.waitForEvent('download'),
+          figures.getByRole('link', { name: 'Скачать готовый камень PNG (32×32)', exact: true }).click(),
+        ])
+        const path = test.info().outputPath('gem-final.png')
+        await download.saveAs(path)
+        const { data, info } = await sharp(path).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+        expect([info.width, info.height]).toEqual([32, 32])
+        const colors = new Set()
+        for (let i = 0; i < data.length; i += 4) {
+          if (data[i + 3]) colors.add([...data.subarray(i, i + 4)].join(','))
+        }
+        expect([...colors].sort()).toEqual(['41,50,65,255', '54,191,164,255', '32,117,103,255', '141,229,192,255', '244,255,232,255'].sort())
+        expect([...data.subarray(0, 4)]).toEqual([0, 0, 0, 0])
+        const source = await request.get('/tutorials/pixel-art-lernen/gem-final.png')
+        expect(data.equals(await sharp(await source.body()).ensureAlpha().raw().toBuffer())).toBe(true)
+        const social = await request.get(russianTutorialImage)
+        expect(social.status()).toBe(200)
+        const socialMeta = await sharp(await social.body()).metadata()
+        expect([socialMeta.width, socialMeta.height]).toEqual([1200, 630])
+        const expectedPreview = await sharp(await source.body()).flatten({ background: '#f8fafc' }).resize(441, 350, { fit: 'contain', kernel: 'nearest', background: '#f8fafc' }).ensureAlpha().raw().toBuffer()
+        const actualPreview = await sharp(await social.body()).extract({ left: 660, top: 182, width: 441, height: 350 }).ensureAlpha().raw().toBuffer()
+        expect(actualPreview.equals(expectedPreview)).toBe(true)
+
+        const animation = article.getByRole('link', { name: 'русскому уроку покадровой анимации', exact: true })
+        await expect(animation).toHaveAttribute('href', '/ru/blog/pixel-art-animation-tutorial-frame-by-frame/')
+        await expect(article.getByRole('link', { name: 'конвертер Pixel Art Village', exact: true })).toHaveAttribute('href', '/ru/')
+        for (const href of await article.locator('a').evaluateAll(links => links.map(link => link.getAttribute('href')).filter(href => href.startsWith('/')))) {
+          expect((await request.get(href)).status(), href).toBe(200)
+        }
+        const schema = await page.locator('script[type="application/ld+json"]').evaluateAll(nodes => nodes.flatMap(node => JSON.parse(node.textContent)))
+        expect(schema.find(item => item['@type'] === 'BlogPosting')).toMatchObject({
+          headline: russianTutorialTitle, datePublished: '2025-10-28', dateModified: '2026-10-10', inLanguage: 'ru',
+          image: `https://pixelartvillage.org${russianTutorialImage}`,
+          author: { '@type': 'Organization', name: 'Pixel Art Village', url: 'https://pixelartvillage.org/ru/about/' },
+        })
+        const faq = schema.find(item => item['@type'] === 'FAQPage')
+        expect(faq.mainEntity).toHaveLength(3)
+        for (const question of faq.mainEntity) {
+          await expect(article.getByRole('heading', { name: question.name, exact: true })).toBeVisible()
+          await expect(article).toContainText(question.acceptedAnswer.text)
+        }
+        await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+        await page.getByRole('heading', { level: 1 }).scrollIntoViewIfNeeded()
+        await test.info().attach(`russian-tutorial-${width}-${javaScriptEnabled}`, { body: await page.screenshot(), contentType: 'image/png' })
+        await animation.click()
+        await expect(page).toHaveURL(/\/ru\/blog\/pixel-art-animation-tutorial-frame-by-frame\/$/)
+        await page.reload()
+        await expect(page.locator('html')).toHaveAttribute('lang', 'ru')
+        await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://pixelartvillage.org/ru/blog/pixel-art-animation-tutorial-frame-by-frame/')
+      })
+    }
+  })
+}
+
 for (const javaScriptEnabled of [false, true]) {
   test.describe(`Blog entry labels ${javaScriptEnabled ? 'runtime' : 'initial HTML'}`, () => {
     test.use({ javaScriptEnabled })
@@ -193,9 +311,9 @@ for (const javaScriptEnabled of [false, true]) {
   })
 }
 
-test('Russian beginner article retains its existing content and cover', async ({ page }) => {
-  await page.goto('/ru/blog/pixel-art-tutorial-complete-guide-2025/')
-  await expect(page).toHaveTitle('Полное руководство по пиксель-арту для начинающих (2025) - От нуля до создания | Pixel Art Village')
+test('Spanish beginner article retains its existing content and cover', async ({ page }) => {
+  await page.goto('/es/blog/pixel-art-tutorial-complete-guide-2025/')
+  await expect(page).toHaveTitle('Guía Completa de Arte Píxel para Principiantes (2025) - Desde Cero hasta Creación | Pixel Art Village')
   await expect(page.locator('.blog-article-prose figure')).toHaveCount(0)
   await expect(page.locator('header a[rel="author"]')).toHaveCount(0)
   await expect(page.locator('.blog-cover-grid img').first()).toHaveAttribute('src', '/showcase-before-w640.jpg')
