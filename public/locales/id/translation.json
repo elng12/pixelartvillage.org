@@ -103,7 +103,7 @@
   },
   "consent": {
     "title": "Privasi & Cookie",
-    "desc": "We use cookies to run this site and, if enabled, display Google AdSense ads. You can accept or reject non-essential cookies at any time.",
+    "desc": "Kami menggunakan cookie untuk menjalankan situs ini dan, jika diaktifkan, menampilkan iklan Google AdSense. Anda dapat menerima atau menolak cookie yang tidak esensial kapan saja.",
     "privacy": "Kebijakan Privasi",
     "andManage": "dan kelola personalisasi iklan di",
     "accept": "Terima semua",
@@ -162,7 +162,7 @@
       "label": "Palet",
       "none": "Tidak ada",
       "custom": "Kustom",
-      "note": "Pico‑8 adalah palet yang tetap. Nama lain tanpa warna palet internal akan menghasilkan palet secara otomatis berdasarkan ukurnya (contoh: Sunset 8 → 8 warna palet palet)."
+      "note": "Palet bawaan Pico-8, Lost Century, Sunset 8, Twilight 5, dan Hollow memakai kumpulan warna tetap. Untuk membuat palet dari gambar, aktifkan Generate palet dari gambar. Penggeser jumlah warna hanya mengatur palet yang dihasilkan, bukan palet tetap."
     },
     "colorDistance": {
       "label": "Jarak warna",

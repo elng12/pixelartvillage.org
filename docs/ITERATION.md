@@ -3,6 +3,178 @@
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-10-11 印尼语、挪威语、意大利语十五篇合并发布准备
+
+授权与范围：用户对整理十五篇提交、验证和部署的建议回复“执行”。只纳入id/nb/it各五篇、三种语言配套翻译、十五张分享图、共用透明案例、相关测试和本批记录；排除阿语实施中的正文/方向/生成器/图片/测试，AGENTS、PRD、修复统计表、俄语GSC基线及其他原有文档改动。main与实时origin/main起点均为81524cf6ee7603fc717630c0d8f13919ba971f62，暂存区为空。使用干净HEAD隔离副本，复用既有依赖；原工作区其他改动不覆盖。采用既有Cloudflare Pages Git集成，不改渠道、配置或索引规则，不执行GSC写入。
+
+最终发布版本验收：隔离副本 `/tmp/pixelart-15-release.P8MpQe/build/`，Node20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0。build（含SEO、dist、缓存/重定向检查）、lint、typecheck、sitemap:verify与暂存diff-check均通过；站图仍205项。独立4217生产式服务、EXPECT_CONSENT_BANNER=1、Chromium完整23个测试文件296项全部通过，零重试、无跳过，约5.4分钟；不是仅沿用分批结果。覆盖十五篇初始HTML/运行时三种宽度、SEO/FAQ/分享图/案例下载、语言切换、Cookie保持、真实工具正常/边界/错误输入及既有全站回归。二十二个内容/翻译/PNG与批准的工作区版本逐字节一致；测试仅保留阿语区段之前的现有辅助代码和三个批次，阿语正文和三份方向/生成器代码均维持HEAD原版。日志及浏览器证据在本目录release-build.log、release-regression.log、local-results/和local-report/。十五篇本地修复完成；正式部署和线上验收尚待回执。母语审校、Illustrator实机、Firefox/WebKit、实体手机及发布后Google表现未验证。
+
+## 2026-10-11 意大利语复查建议修正（本地完成，未发布）
+
+授权与范围：用户对意大利语复查的三项发现回复“给我修复”。按内容源顺序完成：先改 `public/locales/it/translation.json` 两个字段、构建及定向测试，通过后再同步 `src/content/blog-posts.it.json` 的B2/B3/B5正文和现有意语测试。main、HEAD仍为 `81524cf6ee7603fc717630c0d8f13919ba971f62`；保留此前各语言稿件、图片、文档及进行中的阿语正文/方向/生成器改动，不修改阿语或其他共享代码，不提交、推送、部署或GSC写入。
+
+修改：调色板说明明确Pico-8、Lost Century、Sunset 8、Twilight 5、Hollow使用固定颜色集；主动开启Genera palette da immagine才从照片提取颜色，数量滑条不改变固定调色板。数量标签由重复的 `# Palette Palette Colori` 改为 `Numero di colori: {{value}}`，保留动态数值。三篇教程同步真实控件名称，其他事实、参数与下载步骤不变。逐字段比较确认翻译只有 `adjustments.palette.note`、`adjustments.paletteSize` 改变，文章只有 `1.body`、`2.body`、`4.body` 改变；未改主词、title/seoTitle、摘要、日期、URL、canonical/hreflang、分享图或功能。
+
+测试：现有意语工具用例增加独立的固定调色板事实断言、错误自动生成说明的排除断言，以及16/24两个实际数值对应的可访问标签；不是只拿翻译JSON作为正确性依据。文章用例检查B2/B3/B5可见控件名称并排除重复/错误提示。原尺寸、限色、真实下载与预览、透明度及文件边界断言不放宽；本轮修改时意语之前部分及阿语之后部分与修改前逐字相同。收尾期间其他任务另增阿语封面数字方向断言，保留不覆盖，不纳入本轮意语通过范围。
+
+构建与验证：HEAD隔离副本 `/tmp/pixelart-it-followup.DcfRDx/build/` 覆盖采样时工作区相关代码/内容/图片，复用既有依赖，不安装包，生成产物留在副本。Node20.19.0、`VITE_E2E=0 VITE_ENABLE_ANALYTICS=0`。翻译阶段构建和6项Chromium定向测试通过；正文同步后重新构建，`npm run build`、`npm run lint`、`npm run typecheck`、`npm run verify:dist`、`npm run sitemap:verify` 和工作区 `git diff --check` 通过，站图仍205项。最终命令为 `EXPECT_CONSENT_BANNER=1 IT_FOLLOWUP_RUN=final npm run test -- --config=playwright.followup.config.ts --project=chromium tests/blog.spec.js tests/i18n.spec.js --grep='Italian batch|i18n basic|Spanish'`，在独立4216生产式服务、零重试下54项全部通过，约1.7分钟，无跳过。覆盖意语五篇初始HTML/运行时1440/390/320px、SEO/FAQ/图片下载、语言切换、Cookie保持、真实工具尺寸/颜色/迪瑟/透明下载和非法输入，并保留适用i18n回归；不是全仓库/全浏览器验收，不沿用原220项结果冒充本轮通过。
+
+页面与证据：另用本轮独立Playwright CLI浏览器实际上传照片并开启自动调色板，查看1440/320px说明与数量标签，以及B2/B3/B5修改段落；HTTP200，相关页面无横向溢出，10张相关局部截图已目视查看，文字完整可辨。证据目录 `/tmp/pixelart-it-followup.DcfRDx/` 保存修改前副本、两轮构建、6项及54项测试结果/报告、质量日志和截图。两个受影响内容文件、共享测试的意语区段及之前的导入/辅助逻辑与最终验收副本逐字节一致。第一次收尾输入比较仅见阿语正文变化；随后整测试文件比较因其他任务新增阿语封面断言而失败，定向diff确认变化只在阿语区段，差异另存 `concurrent-ar-tests.diff`，没有放宽或忽略意语变更。保留这两项并行变化，不覆盖、追改或将本轮结果用于证明阿语新版本通过。
+
+停止与预览：本轮独立浏览器已关闭，预览 `http://localhost:4216/it/blog/`、serve-dist PID65412保留，4214/4215及其他既有服务不关闭。未提交、推送、部署、重新读取GSC或请求收录；累计目标数不增加，本轮是已完成五篇的配套纠错。母语审校、Illustrator实机、Firefox/WebKit、实体手机和发布后Google表现仍未验证；其他首页/About语言问题、统计CSP告警和立即下载旧结果风险不在本轮范围。三项复查建议至此完成，不继续其他批次。
+
+## 2026-10-11 意大利语五篇修复（本地完成，未发布）
+
+授权与范围：用户在挪威语批次交付后要求“继续”，按PRD第12.3节处理 `src/content/blog-posts.it.json` 的B1–B5、五张意大利语分享图、现有Blog测试和本记录/只读GSC快照。main、HEAD `81524cf6ee7603fc717630c0d8f13919ba971f62`；开始时已存在的印尼语/挪威语稿件、资源、图片、共享测试及AGENTS/文档/基线保留。本轮不改其他语言、首页、工具、canonical、hreflang、索引覆盖，不提交、推送、部署或GSC写入。
+
+改稿前GSC：既有服务账号以 `webmasters.readonly` 范围访问官方API，实际Tier1读请求成功。技能默认auth脚本/配置未发现，使用既有已验证脚本，仅把目标语言改为it；凭据路径通过命令环境提供，未保存凭据。取数2026-10-11T11:46:34.776479Z至11:47:15.792507Z，太平洋完整28天 `2026-09-11..2026-10-08`，final/web、页/query+page分别读取，未达25000行上限。原请求/响应原样保存为 [GSC_IT_BLOG_BASELINE_2026-10-11.json](GSC_IT_BLOG_BASELINE_2026-10-11.json)，不是发布后结果或新监控系统。
+
+B1/B3页与query未返回，当前Google规范分别为sv比较篇/nb排错篇；B2当前已收录且自规范，2点击/86曝光，10条query含 `trasformare foto in pixel art`（1曝光/0点击）。B4已收录且自规范，0点击/35曝光、3条query。B5当前为重复规范到id入门篇，但本窗口仍返回0点击/51曝光、4条query，不能把当前规范状态当作历史每天状态。关联页去重读取：sv比较0/46、nb排错0/127、id入门6/804，不能将其全量当意大利语需求或未来新增流量。五页最近抓取依次为2026-10-09T01:22:13Z、10-10T04:59:05Z、08-25T16:13:16Z、10-04T19:02:57Z、10-07T04:03:47Z。
+
+### 改稿前主词与意图映射
+
+窗口均为 `2026-09-11..2026-10-08`。除了B2有一条当地语言查询，各主词是保留原任务的内容定位判断，不是已验证搜索量；这条查询也不能代表当地市场总需求。缺行记录未返回，不补零，不因缺少查询停止事实纠错。
+
+| 目标网址 | 目标语言主词 | 搜索意图 | 已返回的相关query与完整日期窗口 | 证据来源与限制 | 是否改变原定位及理由 |
+|---|---|---|---|---|---|
+| `/it/blog/best-pixel-art-converters-compared-2025/` | `convertitori pixel art` | 按用途选照片转换器或像素编辑器 | 目标未返回；关联sv含 `piskel .com`、`piskelapp .com`、`pixel art best` | 关联行不证明意大利语需求；竞品据官方说明 | 保留比较，删除十款虚构实测及排名 |
+| `/it/blog/how-to-get-pixel-art-version-of-image/` | `trasformare foto in pixel art`，限定 `stile SNES` | 照片的复古尺寸/限色静态结果 | `trasformare foto in pixel art`、`how to convert photo to pixel art`、`photo pixel art converter`；另有 `pixel art refiner` | 一条意语词仅1曝光；不为refiner虚构模块 | 保留SNES风格，明确不是硬件格式 |
+| `/it/blog/make-image-more-like-pixel/` | `migliorare la pixel art` | 转换结果的轮廓、颜色、点纹和保存排错 | 目标未返回；关联nb含 `enhance pixel art`、`make image more pixelated`、`pixel art simplifier` | 关联旧英文查询不证明意语需求；不承诺恢复 | 保留结果排错，删除AI恢复/选择编辑 |
+| `/it/blog/export-from-illustrator-image-to-pixel-art/` | `esportare PNG da Illustrator` | 准备像素尺寸/透明度正确的源图，按需转换 | `pixel art in illustrator`、`image pixelator art`、`soimages` 各1曝光 | 三条不等于页35曝光全量；Adobe意语403、英语200，读英语原文 | 保留导出和后续转换，纠正PPI误解 |
+| `/it/blog/how-to-pixelate-an-image/` | `come pixelare un’immagine` | 首次上传、调参、保存PNG | `pixelartvillage`、`pixel art village`、`pixelate iamge`、`what aesthetic is this` | 品牌/英文查询不证明意语词搜索量；规范归属可能变化 | 保留入门，不新增Resize或图库操作 |
+
+### 实施、专门复核与本地验收
+
+内容：完成五篇意大利语正文、title/seoTitle、摘要、标签、两张表、16组FAQ、13个图块的图注/下载标签、作者入口、展示标签及分享图文案；保留数字键0–4、原slug和发布日期，updated为2026-10-11。五篇分别回答工具选择、SNES风格照片、转换排错、Illustrator源PNG准备、第一次上传保存。比较篇披露本站运营者身份，按Pixel Art Village、Aseprite、Piskel、GIMP四种工具功能比较，删除虚构十款实测、旧价格与评分；排错不承诺AI恢复，SNES不承诺硬件兼容，Illustrator区分PPI、文件像素与两种导出路径。最终HTML完整title字符数55/59/59/59/59，摘要152/151/153/151/149，不触发155字符截断。批内页面链接在实际HTML和运行时保持意大利语，资源地址不加语言前缀。未改共享渲染、工具行为、canonical/hreflang、重定向或其他页面。
+
+资料与素材：重新读取Aseprite、Piskel、GIMP Pixelize/导出、Wikimedia照片与许可说明，均HTTP200；核对功能、导出格式、桌面使用建议、Don McCulley/CC0。Adobe三种意大利语文档请求403，随后相应英语官方文档200并实际读取Export for Screens、Export As/PNG和pixel-perfect相关说明；正文明确依据英语资料、菜单名称可能随语言/版本不同，未做Illustrator实机操作。失败响应和英语正文均保留，不把读取资料写成软件实测。复用八个既有输入/结果：960×762 JPEG、120×95/80×63 PNG、同会话24色迪瑟对照、浏览器512×512/64×64示意图及印尼语试点真实透明64×64下载。重新解码并核对13个图块尺寸；两张24色图实际各24种不透明RGB色，透明转换结果有1600全透明、36半透明、2460不透明像素。浏览器原生64×64和512→64本站转换明确分开，不冒充Illustrator导出或本轮新生成案例。新增 `public/blog-og/it/` 五张1200×630 PNG，实际解码、逐张目视检查，结果区域与素材逐像素相符，未覆盖其他语言图片。
+
+专门语义复核：Friday在定向测试后、交付前完整重读最终JSON，逐段检查五篇标题/摘要/正文、16组问答、两张表、13个图块、图注、标签、链接和分享文案。对照源码、真实意大利语控件及官方资料，核对动作方向、数字、条件、否定和来源：10MiB字节拒绝与2200px等比缩小分开；8/12对应120×95/80×63；24色是上限而非必定24；固定调色板不由数量滑条改变；透明保留不等于去背景；PPI不替代文件像素；SNES风格不等于硬件数据；等待新预览后下载。保留品牌、格式、英语菜单和实际Pixel size/Original size标签并解释；Genera palette da immagine、Scarica Immagine Pixel Art与现有界面相符。未发现正文尚待解决的关键技术语义矛盾；这是同一执行者的专门自查，不是独立或母语审校，未调用额外Agent、翻译服务或付费工具。
+
+构建与服务：从HEAD导出隔离副本 `/tmp/pixelart-it-batch.PKJEwC/build/`，覆盖既有id/nb验收输入及本轮it内容/测试/图片，复用node_modules，未安装或升级依赖。Node20.19.0、`VITE_E2E=0 VITE_ENABLE_ANALYTICS=0`；`npm run build`、`npm run lint`、`npm run typecheck`、`npm run verify:dist`、`npm run sitemap:verify` 和工作区 `git diff --check` 全部通过。站图仍205项，五篇实际HTML均存在；dist、生成的sitemap和其他语言分享图留在隔离目录。使用项目既有 `node scripts/build/serve-dist.cjs --port 4214 --strictPort`，临时playwright.it.config.ts关闭默认webServer、retries=0、workers=2，Cookie横幅真实交互，不关闭既有预览。
+
+测试：`tests/blog.spec.js` 新增46项意大利语用例：30个初始HTML/运行时×五篇×1440/390/320px组合、五张分享图、六项桌面/手机工具流程、四项Cookie选择保持、一项语言切换。既有downloadNorwegianResult仅新增可选下载按钮名称参数，默认挪威语行为和原断言不变；其余原测试前缀逐字核对一致。旧构建负例实际因缺少五个Leggi l’articolo列表链接按预期失败，日志/截图/trace保留；不是收集错误冒充负例。26项定向Chromium先全部通过、零重试，再执行六文件受影响回归：`EXPECT_CONSENT_BANNER=1 IT_RUN=final npx playwright test --config=playwright.it.config.ts --project=chromium --retries=0 tests/blog.spec.js tests/blog-ko-batch.spec.js tests/blog-ko-illustrator.spec.js tests/blog-snes.spec.js tests/i18n.spec.js tests/home-image-limits.spec.js`。最终220/220通过，约4.6分钟，零重试、无跳过；不是全仓库或全浏览器验收。
+
+通过范围：列表真实点击、兄弟文章/返回导航、两处返回链接、直接访问/刷新、语言切换保持同一文章、完整SEO标签和适用JSON-LD/可见FAQ、图片解码/逐项下载及字节核对；真实上传后8/12尺寸与公开PNG像素对应、自动24色上限与同会话迪瑟变化、实际下载与新预览关闭平滑后的像素一致、512→64透明PNG、非法输入、10MiB+1拒绝/10MiB边界恢复、3000×1500→2200×1100。既有英/德/俄/韩/印尼语/挪威语相关Blog、语言导航和尺寸限制回归通过。不靠重试刷通过，不删断言或跳过失败覆盖。
+
+真实页面：另外检查五篇×1440/390/320px共15组，HTTP200，正文图/封面实际解码，没有横向溢出、本站资源4xx/5xx或脚本异常。已目视查看15组首屏与封面、三视口列表、桌面/320px比较表、390px排错表、Illustrator手机源图/真实转换图和入门源图；字体、换行、图注和示例来源可辨。封面、表格、案例从真实全页裁取，避免固定页头遮挡局部截图。连续滚动拍摄的B4 320px首屏返回链接被页头遮挡，原图保留，另以新浏览器直接打开、确认scrollY=0拍摄entry-3-320-direct-check.png，实际返回链接及标题可见；不把截图定位差异当源码故障或改CSS。Chromium模拟视口不称实体手机或真人阅读验收。
+
+最终范围与证据：29个受验收输入（id/nb/it正文、id/nb翻译、共享测试、15张分享图和八个案例文件）与隔离构建逐文件一致。意大利语数字键/slug/发表日期保留，GSC项目快照与原采集文件逐字节一致，历史迭代正文未覆盖。临时一致性审计首次因脚本自行多加一个尾换行失败，精确定位为比较方法错误；去掉审计脚本附加换行后原前缀逐字相同，未改业务、测试断言或输入文件，原失败日志保留。证据目录 `/tmp/pixelart-it-batch.PKJEwC/` 保存修改前副本、GSC/官方文档响应、build/质量/负例/26项/220项日志、final-results/、final-report/、asset-audit.json、输入一致性审计及全部截图。
+
+停止与未验证：本批本地完成，预览 `http://localhost:4214/it/blog/`，serve-dist PID57393保留，独立验收浏览器已关闭。未提交、推送、部署、请求收录或读发布后GSC；不能称Google规范已改变或流量改善。累计本地修复15/91个目标URL。意大利语工具资源的固定调色板说明仍错误，本文解释正确行为，该资源和其他首页/About/页脚语言问题留到独立批次；已知立即下载旧结果风险未修，等待新预览的测试不能证明风险消除。母语措辞、当地搜索量、Illustrator/竞品实机、Firefox/WebKit、实体手机与发布后效果仍未验证。至此停止本批；PRD下一主要内容源为ar，尚未开始。
+
+## 2026-10-11 挪威语复查建议修正（本地完成，未发布）
+
+授权与范围：用户对挪威语五篇复查的三项问题回复“修复”。按内容源顺序完成：先改 `public/locales/nb/translation.json` 四个字段、构建及定向测试，通过后再同步 `src/content/blog-posts.nb.json` 的B2/B3/B5正文与现有Blog断言，最后原样保存已采集GSC基线并更新本记录。main、HEAD仍为 `81524cf6ee7603fc717630c0d8f13919ba971f62`；保留此前印尼语、挪威语稿件、图片、测试及无关文档改动，不提交、推送、部署或GSC写入。
+
+工具与教程：明确Pico-8、Lost Century、Sunset 8、Twilight 5、Hollow均采用固定颜色；自动调色板需要开启，数量滑条只控制生成的调色板。复核当前功能，不改处理器或控件行为。按钮/控件统一为 `Last ned pikselbildet`、`Generer palett fra bildet`、`Antall palettfarger: {{value}}`，去除原重复用词。B2删除工具仍有错误说明的过期提醒，B2/B3/B5引用同步后的真实名称；仍保留Pixel size/Original size真实英语标签、SNES限制和等待新预览再下载的步骤。逐字段比较确认翻译只变四个字段，文章只变 `1.body`、`2.body`、`4.body`，未改标题、日期、摘要、主词、URL、分享图或其他两篇；测试改动只在挪威语区段，不保留要求错误提醒存在的旧断言，也不放宽尺寸/颜色/实际下载断言。
+
+GSC保存：将 `/tmp/pixelart-nb-batch.krc0Ft/gsc-baseline.json` 逐字节复制为 [GSC_NB_BLOG_BASELINE_2026-10-11.json](GSC_NB_BLOG_BASELINE_2026-10-11.json)，保留原请求、响应、采集时间和关联sv页信息。JSON可解析，无凭据相关字段；完整28个连续final日期 `2026-09-11..2026-10-08`，13个数据请求及5个URL检查原响应均HTTP200。本轮没有重新取数、提交或请求收录；该文件是原采集快照，不代表修复后的Google抓取/规范选择，更不代表流量恢复。更新下方旧记录的文件入口，原采集来源及历史结果仍保留。
+
+构建与测试：HEAD隔离副本 `/tmp/pixelart-nb-followup.ocyiGC/build/` 覆盖两种语言既有试点最终输入及本轮修改，复用现有依赖，未安装包或将生成产物写回工作区。Node20.19.0、`VITE_E2E=0 VITE_ENABLE_ANALYTICS=0`。翻译阶段6项Chromium定向全部通过；正文同步后重新构建，`npm run build`、`npm run lint`、`npm run typecheck`、`npm run verify:dist`、`npm run sitemap:verify` 和 `git diff --check` 通过，站图仍205项。最终 `EXPECT_CONSENT_BANNER=1 NB_FOLLOWUP_RUN=final npm run test -- --config=playwright.followup.config.ts --project=chromium tests/blog.spec.js tests/i18n.spec.js` 在独立4213生产式服务、零重试下125项全部通过，约2.9分钟，无跳过；覆盖两语言批次、既有相关Blog和导航，包含初始HTML/运行时三视口、FAQ/元数据/图片下载、真实上传、尺寸/限色/迪瑟/透明下载、非法输入和Cookie选择保持。不是全仓库或全浏览器验收，不沿用上一批174项结果冒充本轮通过。16个受验收内容、测试、PNG输入与工作区最终文件逐文件一致。
+
+页面与证据：另用本轮独立Playwright CLI浏览器实际上传照片、开启自动调色板，查看桌面和320px的说明、数量滑条、下载文案，以及B2/B3/B5修改段落；相应页面无横向溢出，截图已目视检查。首次大段控件截图受内层滚动和固定工具栏遮挡，另补桌面滚动定位及320px说明/开关/滑条局部截图；原截图未覆盖，不将截图定位问题写成新增源码故障。证据目录 `/tmp/pixelart-nb-followup.ocyiGC/` 保存修改前副本、两轮构建、6项及125项测试报告、质量日志与各轮截图。
+
+停止与预览：独立浏览器已关闭；新预览 `http://localhost:4213/nb/blog/`，serve-dist PID27512保留，4210/4211/4212既有服务未关闭。尚未提交或部署；母语措辞、当地搜索量、Illustrator实机、Firefox/WebKit、实体手机和发布后Google表现未验证。其他首页/About/页脚翻译、立即下载旧结果风险等仍不在本轮范围；等待新预览的通过不代表旧结果风险已修复。三项复查建议至此完成，不继续意大利语批次。
+
+## 2026-10-11 印尼语试点复查建议修正（本地完成，未发布）
+
+授权与范围：用户对复查的三项建议回复“执行建议”。按两个内容源顺序完成，不同时扩写其他页面：先改 `public/locales/id/translation.json` 两个字段并构建、定向验收；通过后再改 `src/content/blog-posts.id.json` 的B2/B4两段正文，并构建、受影响回归。开始时main、HEAD为 `81524cf6ee7603fc717630c0d8f13919ba971f62`，保留原有五篇试点、测试、图片及无关文档改动，不提交、推送、部署或请求收录。
+
+工具文案：`adjustments.palette.note` 说明五种内置预设均采用固定颜色，自动调色板需主动开启，数量滑条只作用于生成的调色板；与当前 `PALETTE_MAP` 及B2/B3正文一致。`consent.desc` 翻译成印尼语，保留原有“如果启用则展示Google AdSense广告”及随时接受/拒绝非必要Cookie的含义，不改同意逻辑或法律政策。结构化比较确认仅改变这两个翻译字段。第一轮生产式构建成功，桌面/手机Cookie接受、拒绝及刷新保持，加上两种视口实际上传、调参、下载的调色板工作流，共6项Chromium定向通过，零重试。
+
+文章修正：B2删去“当前印尼语工具说明仍有错误”的临时提醒，保留固定/自动调色板区别。B4把开头的HTTP403及重复核查过程移出公开正文，保留Adobe资料核查日期2026-10-09、未运行Illustrator实机导出、浏览器示例与2026-10-11本站真实下载的来源边界。此前Adobe读取失败仍保留在上一条迭代记录及原始证据中，本轮未重新读取Adobe。与本轮修改前JSON逐字段比较，只有 `1.body`、`3.body` 不同；未改其他三篇、主词、title/seoTitle、摘要、日期、URL、canonical/hreflang、分享图或任何功能。
+
+测试与构建：沿用 `tests/blog.spec.js` 中的印尼语批次，补Cookie说明无英语回退、两视口接受/拒绝真实持久化与刷新、工具调色板文案，以及B2不再含过期提醒、B4仍保留来源和实机限制但不含HTTP403的断言。使用HEAD隔离副本 `/tmp/pixelart-id-followup.bQC1Wz/build/`，仅覆盖本次相关内容、既有试点测试及六张试点PNG，复用既有依赖，不安装或升级包，不把生成产物复制回工作区。Node20.19.0、`VITE_E2E=0 VITE_ENABLE_ANALYTICS=0`；最终 `npm run build`、`npm run lint`、`npm run typecheck`、`npm run verify:dist`、`npm run sitemap:verify` 及 `git diff --check` 通过。九个相关输入文件与最终验收副本逐文件一致。
+
+最终验收：独立4211生产式服务、`EXPECT_CONSENT_BANNER=1`，临时配置禁用默认webServer、重试为0；本次相关 `tests/blog.spec.js` 与 `tests/i18n.spec.js` 合计79项Chromium通过，耗时1.7分钟，无跳过，不是全仓库或全浏览器验收。覆盖五篇初始HTML与运行时1440/390/320px、标题/元数据、FAQ、图片与下载、站内导航/刷新/语言切换、真实工具上传/尺寸/限色/迪瑟/透明度/文件限制，以及Cookie文案和选择保持。另用独立Playwright CLI浏览器实际查看320px Cookie说明、上传后调色板说明及B4桌面/320px开头，并读取B2最终正文，无相关横向溢出或文字截断；已查看截图，不等于实体手机或母语阅读验收。
+
+过程与证据：第一次定向命令因CLI把 `--project chromium` 后的文件名同时当作项目名而退出，尚未执行用例；改为 `--project=chromium` 后运行通过，未改业务或放宽断言，首次错误日志保留。证据目录 `/tmp/pixelart-id-followup.bQC1Wz/` 包含两次构建日志、原失败命令、6项定向及79项最终测试结果、质量检查和Cookie/调色板/B4截图；前批 `/tmp/pixelart-id-pilot.nBc8If/` 的127项及各轮历史证据未覆盖。
+
+停止与预览：本地完成，独立浏览器已关闭；新版预览 `http://localhost:4211/id/blog/`，服务PID1782保留给用户查看，4210及其他既有服务不关闭。未发布、未重新查询GSC或评价搜索恢复；母语措辞、当地词搜索量、Firefox/WebKit与实体手机仍未验证。其他首页/About/Privacy语言问题、立即下载旧结果风险、统计资源与CSP均未扩改。
+
+## 2026-10-11 挪威语五篇修复（本地完成，未发布）
+
+授权与范围：用户在印尼语试点交付后要求“继续”，按PRD第12.3节处理 `src/content/blog-posts.nb.json` 的B1–B5，一个主要内容源与必要挪威语分享图、现有Blog测试和本记录；不修改其他语言、首页、工具、canonical、hreflang或索引覆盖，不提交、推送、部署或GSC写入。开始时main、HEAD `81524cf6ee7603fc717630c0d8f13919ba971f62`。检查期间发现印尼语资源、内容及共享测试有新增本地改动，它们不由本轮产生、不覆盖；共享测试只追加本批用例，构建时另核对已有改动的实际输入。
+
+改稿前GSC：以既有服务账号、`webmasters.readonly` 范围读取官方Search Analytics及URL Inspection，实际Tier1请求成功。技能提供的google_auth.py不存在，默认配置也不存在，不声称其检查已通过；复用上批已验证脚本并将目标语言改为nb，凭据路径只在命令环境提供，未保存凭据。取数时间2026-10-11T09:48:56.483313Z至09:49:36.580266Z，太平洋日期 `2026-09-11..2026-10-08`、final/web，属性日期返回完整28天，目标页page与query+page分别查询，未达到25000行上限。B1页/query均未返回，当前Google规范页为sv同主题（最近抓取2026-09-28T15:51:26Z）；该关联页同窗0点击/46曝光、5条query，不把全数当挪威语需求。B2/B3/B4/B5当前已收录、规范页为自身，分别0点击/6曝光、0/127、0/97、0/6；最近抓取分别2026-10-07T08:44:10Z、2026-09-04T04:57:55Z、2026-10-03T05:10:25Z、2026-08-13T17:32:16Z。当前规范记录不能证明窗口每天的规范选择，API未披露的query不补零。
+
+### 改稿前主词与意图映射
+
+本表窗口均为 `2026-09-11..2026-10-08`，原始请求/响应、关联sv页和采集时规范记录已原样保存到[项目内基线](GSC_NB_BLOG_BASELINE_2026-10-11.json)。原采集文件仍为 `/tmp/pixelart-nb-batch.krc0Ft/gsc-baseline.json`，日志为同目录 `gsc-read.log`；项目内副本不是新取数。当地主词均为内容定位判断，没有已验证当地搜索量；查询缺行不阻止事实修正及保留原任务的本地化。
+
+| 目标网址 | 目标语言主词 | 搜索意图 | 已返回的相关query与完整日期窗口 | 证据来源与限制 | 是否改变原定位及理由 |
+|---|---|---|---|---|---|
+| `/nb/blog/best-pixel-art-converters-compared-2025/` | `pikselkunstkonvertere`；可见标题采用同义短语 `konverterere og editorer for pikselkunst`，避免320px长词溢出 | 按用途选择照片转换器或像素编辑器 | 目标页未返回；关联sv页有 `piskel .com`、`piskelapp .com`、`pixel art best` | sv行不证明挪威语词需求；竞品核对官方来源 | 保留工具比较，删除虚构十款实测及排名 |
+| `/nb/blog/how-to-get-pixel-art-version-of-image/` | `foto til pikselkunst i SNES-stil` | 得到尺寸和颜色受限的复古照片 | 未返回 | 页面明确0/6；词组按已有任务拟定 | 保留SNES风格，明确非硬件适配 |
+| `/nb/blog/make-image-more-like-pixel/` | `forbedre pikselkunst` | 排查转换后轮廓、颜色、点纹与保存问题 | 14条中有 `enhance pixel art`、`make image more pixelated`、`pixel art simplifier`，另有葡语恢复词 | GSC旧英文稿query不证明当地语言；不为葡语词编造复原能力 | 保留结果排错，删除AI恢复/选择编辑等虚构能力 |
+| `/nb/blog/export-from-illustrator-image-to-pixel-art/` | `eksportere PNG fra Illustrator` | 先准备尺寸/透明度正确的PNG，按需转换 | 仅 `how to export pixel art`，1曝光 | 页面97曝光不等于该词全部；本轮Adobe HTTP200，步骤据文档而非实机 | 保留Illustrator栅格导出和后续转换，纠正PPI误解 |
+| `/nb/blog/how-to-pixelate-an-image/` | `pikselere et bilde` | 第一次上传、调参和保存PNG | 未返回 | 页面明确0/6；按工具真实路径本地化 | 保留入门，不新增Resize或图库流程 |
+
+### 实施、专门复核与本地验收
+
+修改：完成五篇挪威语Bokmål正文与title/seoTitle、摘要、标签、比较/排错表、图注、下载文字、作者入口、展示标签和分享图；保留数字键0–4结构、slug和原发布日期，updated为2026-10-11。五种任务保持分工，不把入门流程在五篇中整段重复。比较篇披露本站运营者身份，使用Pixel Art Village、Aseprite、Piskel、GIMP四工具功能比较，删除虚构十款实测、旧价格和评分；SNES篇明确风格不是硬件模式，排错篇不承诺恢复模糊信息，Illustrator篇区分PPI/像素尺寸和两种导出路径，入门篇按真实控件完成一次保存。所有批内页面链接保持挪威语，资源路径不加语言前缀或页面尾斜杠。未改首页、处理器、共享渲染、canonical/hreflang、重定向或站图覆盖。
+
+资料核对：11日重新读取Aseprite、Piskel、GIMP Pixelize及导出官方说明，以及Wikimedia照片来源页，全部HTTP200，核对功能、导出格式、桌面建议与Don McCulley/CC0。本次Adobe的Export for Screens、Export As/PNG、pixel-perfect三页也均HTTP200，实际读取相关菜单、Artboards/Full Document、Scale、PNG透明/抗锯齿和Snap to Pixel/Pixel Preview段落；不同于印尼语前批403，本篇可写11日重新核查成功，但仍明确没有运行Illustrator实机导出。源码与已纠错英/德/韩内容用于功能和任务复核，不把仍有问题的英文旧句原样翻译。
+
+素材：复用既有JPEG 960×762、PNG 120×95/80×63、同轮24色迪瑟对照、自制浏览器512×512/64×64演示和印尼语试点真实64×64透明转换结果，不生成冒充工具导出的图。八个输入/结果文件重新解码并与隔离输入逐文件比较；13个正文图块尺寸相符。24色两图实际各24种不透明RGB颜色；真实64×64透明结果有1600全透明、36半透明、2460不透明像素。正文区分原生64×64浏览器渲染与本站512→64转换结果，不伪称Illustrator来源。通过原分享图生成器新增 `public/blog-og/nb/` 五张1200×630 PNG，全部实际解码、逐张目视检查，结果区逐像素比较通过；没有覆盖其他语言图片。
+
+专门翻译复核：Friday在完成稿件及针对性H1修正后，单独完整读取最终JSON逐段自查，覆盖五篇标题/摘要/正文、16组问答、两张表、13个图块、图注、展示标签、分享图与批内引用。对照当前源码、Bokmål实际界面和官方资料，检查数值、方向、否定和条件、固定/自动调色板区别、操作次序与链接用途：10MiB拒绝和2200px等比缩小分开；8/12对应120×95/80×63；24色为上限而非必定24；透明保留不等于去背景；SNES风格不等于硬件数据；PPI不替代文件像素；新预览确认后再下载。品牌、软件名、格式和真实英语UI标签保留，B2/B5解释Generate palette from image、Pixel size、Original size及真实下载按钮名。未发现尚待解决的关键技术语义项；这是同一执行者的专门自查，不是独立或母语审校，也未调用其他Agent、翻译服务或付费工具。
+
+构建与服务：HEAD隔离副本 `/tmp/pixelart-nb-batch.krc0Ft/build/` 覆盖本批内容/测试与已有印尼语最终改动和素材，复用node_modules，不安装或升级包。Node20.19.0，`VITE_E2E=0 VITE_ENABLE_ANALYTICS=0` `npm run build` 两次（初稿、H1修正后最终稿）均通过，保留ownership、SEO、dist、缓存与重定向检查；最终 `npm run lint`、`npm run typecheck`、`npm run verify:dist`、`npm run sitemap:verify`、`git diff --check` 通过。站图仍205项，五篇实际HTML存在，生成的其他语言分享图、sitemap、dist留在隔离目录。最终服务采用项目既有 `node scripts/build/serve-dist.cjs --port 4212 --strictPort`，临时Playwright配置明确取消默认webServer，生产Cookie真实交互、retries=0，不复用4173、4210或4211。
+
+失败与处置：新增测试首次因norwegianCopy多余右括号，收集0项，保留test-selection.log/before-tests.log，不把它写成旧内容负例或测试通过；仅改新用例语法后实际选中46项。旧4210构建上一项负例因挪威语列表仍缺五个Les artikkelen按预期失败，保留before-fixed记录。拟用4211已被其他既有服务占用，没有接管，改用空闲4212。首轮15项定向为8通过/7失败：六项因返回博客同名链接实际有顶部/底部两个，改为明确两个均检查准确href；另一个因本轮误用Vite默认preview，其无尾斜杠HTML请求返回首页，Seo拒绝错路由head，nb/id切换英文均复现。保留switch-diagnosis日志/响应，不改业务、canonical或删除断言；只关闭本轮Vite进程21788，改用项目既有serve-dist后语言切换通过。默认Vite预览这一限制不写成生产故障或源码已修。
+
+真实内容失败：修正方法后的15项为14通过/1失败，B1初始HTML在320px的长复合词Pikselkunstkonvertere导致H1横向溢出，有原截图和trace。只将可见H1改为自然的同义短语“Konverterere og editorer for pikselkunst: foto, tegning og animasjon”，主主题与seoTitle不变，不放宽溢出阈值、不改CSS/布局。最终完整title代码点数55/58/58/56/58，摘要155/148/148/153/149，不触发155字符截断。最终稿重建后26项定向全部通过，再启动受影响回归；没有在前轮未结束或下载未核对时并行跑完整回归。
+
+最终回归：`tests/blog.spec.js` 新增46项（30个初始HTML/运行时与1440/390/320px组合、五张分享图、桌面/手机六项工具流程、四项Cookie接受/拒绝持久化、一项语言切换）。与blog-ko-batch、blog-ko-illustrator、blog-snes、i18n、home-image-limits组成六文件，实际命令为 `EXPECT_CONSENT_BANNER=1 NB_RUN=final npx playwright test --config=playwright.nb.config.ts --project=chromium --retries=0 tests/blog.spec.js tests/blog-ko-batch.spec.js tests/blog-ko-illustrator.spec.js tests/blog-snes.spec.js tests/i18n.spec.js tests/home-image-limits.spec.js`，在4212生产式服务、Chromium、零重试下174项全部通过，约3.3分钟，无跳过；不是全仓库或全浏览器验收。涵盖列表真实点击、兄弟文章跳转/返回、直接访问/刷新、完整SEO元数据、适用JSON-LD和可见FAQ、所有案例实际解码与逐项点击下载/保存文件字节、两处返回链接、真实上传、8/12尺寸与公开PNG逐像素对应、自动24色上限及同轮迪瑟变化、下载在浏览器关闭平滑放大后与同轮新预览一致、512→64透明PNG、非法输入、10MiB+1拒绝/10MiB边界恢复、3000×1500→2200×1100等比缩小。既有英/德/俄/韩/印尼语Blog、语言导航和尺寸限制相关回归通过。
+
+页面目视：最终服务另检查五篇×1440/390/320共15组，HTTP均200，无横向溢出、本站资源4xx/5xx或脚本异常。全部正文图和封面先滚动并真实解码，再归零拍首屏/全页，并从真实全页截图裁取封面、表格和案例，避免固定页头及懒加载造成的假截图。已查看15组首屏/封面、三视口列表、五张分享图、桌面/320px比较表、390px排错表、B4/B5手机案例；字体、换行与图片正常。原失败截图未覆盖，Chromium模拟视口不称实体手机或真人阅读验收。
+
+证据与交付：`/tmp/pixelart-nb-batch.krc0Ft/` 保留GSC、官方页HTTP/正文、asset-audit.json、各轮失败/定向测试、最终构建/质量与174项日志、final-results/、final-report/、capture-observations.json及截图。最终源码、测试、八个复用输入/结果与五张挪威语PNG和验收输入逐文件一致。预览 `http://localhost:4212/nb/blog/`，独立serve-dist进程26126保留给用户查看，其他服务未关闭。共享测试原有前缀及并行印尼语修正保留，本轮只增加nb用例；其他内容源未被本轮覆盖。
+
+停止与未验证：本地完成，未提交、推送、部署、请求收录或读取发布后GSC，不能称Google规范已改变或流量改善。未做Illustrator/竞品软件实机、母语读者、Firefox/WebKit或实体手机验收；Bokmål措辞不保证最优。挪威语资源的固定调色板旧说明仍错误，文章明确说明正确行为与旧提示的差别，该资源留到独立文案批次；未顺手补译首页/About/页脚。已知立即下载旧结果风险未修；等待新预览的通过不能证明风险已消除。至此停止本批，下一主要内容源按PRD为it，尚未开始。
+
+## 2026-10-11 印尼语五篇修复试点（本地完成，未发布）
+
+授权与范围：用户要求阅读并按 `docs/SEO_REPAIR_PRD_2026-10-11.md` 修复。按第12.2及19节先执行 `src/content/blog-posts.id.json` 的B1–B5，一个主要内容源及必要分享图、测试、记录；不扩展其他语言，不提交、推送、部署、请求收录或改索引/重定向。开始时main、HEAD为 `81524cf6ee7603fc717630c0d8f13919ba971f62`，原有AGENTS、迭代记录、PRD、CSV和俄语基线文件保留。
+
+改稿前GSC：本轮读取时间为2026-10-11T09:06:45.810091Z至09:07:25.130518Z。复用已有服务账号文件，仅通过命令环境提供路径，以 `webmasters.readonly` 读取官方Search Analytics与URL Inspection，Tier 1能力实际请求成功。窗口为太平洋日期 `2026-09-11..2026-10-08`，final/web，站点日期查询返回完整28天；五篇页维度与query+page分开读取，未达到25000行限制，不把匿名查询缺失补成零。B1页及搜索词均未返回；B2明确返回0点击/4曝光但搜索词未返回；B3、B4页及搜索词未返回；B5返回6点击/804曝光与25条query。B1/B2/B5当前已收录且Google规范页为自身，B3/B4当前分别归到nb同主题页，最近抓取为2026-10-11T03:35:37Z与2026-10-03T18:22:44Z。关联nb页同窗分别0点击/127曝光和0点击/97曝光，不当成印尼语流量或历史每天规范选择的证明。
+
+### 改稿前主词与意图映射
+
+本表完整日期窗口均为 `2026-09-11..2026-10-08`，原始请求/响应与当前规范记录保留在 `/tmp/pixelart-id-pilot.nBc8If/gsc-baseline.json`，查询日志为 `gsc-read.log`。以下印尼语主词均是内容定位判断，不是已验证的印尼语搜索量；没有返回当地词不阻止原任务的事实纠错和本地化。
+
+| 目标网址 | 目标语言主词 | 搜索意图 | 已返回的相关query与完整日期窗口 | 证据来源与限制 | 是否改变原定位及理由 |
+|---|---|---|---|---|---|
+| `/id/blog/best-pixel-art-converters-compared-2025/` | `konverter pixel art` | 选择照片转换器或手动编辑器 | 本窗未返回 | GSC无行；按现有比较任务定位，竞品查官方资料 | 保留用途比较；删除虚构十款实测/排名 |
+| `/id/blog/how-to-get-pixel-art-version-of-image/` | `foto menjadi pixel art gaya SNES` | 调整照片尺寸与限色，得到复古静态结果 | 本窗未返回 | GSC页面0/4；按已确认功能定位，不是硬件适配需求证据 | 保留SNES风格；明确非游戏机数据转换 |
+| `/id/blog/make-image-more-like-pixel/` | `memperbaiki hasil pixel art` | 排查转换后轮廓、颜色、点纹与保存问题 | 目标页本窗未返回；关联nb页有 `enhance pixel art`、`make image more pixelated` | nb数据不能当作id需求；不承诺恢复低清细节 | 保留转换后排错，删不存在的增强模块 |
+| `/id/blog/export-from-illustrator-image-to-pixel-art/` | `ekspor PNG Illustrator` | 准备像素尺寸/透明度正确的源图，再按需转换 | 目标页本窗未返回；关联nb页有 `how to export pixel art` | 复用已核对Adobe依据；本轮HTTP读取403，不能称新核查成功 | 保留Illustrator栅格导出与后续转换用途，不把PPI写成尺寸 |
+| `/id/blog/how-to-pixelate-an-image/` | `cara membuat gambar piksel` | 第一次上传、调参、预览与PNG保存 | 本窗有 `how to pixelate an image`、`pixelate an image`、`pixelate image for pixel art`；另有 `pixelate indie`，不猜其含义 | GSC英语query证明任务覆盖，不证明当地词搜索量；25条明细不等于804曝光全部 | 保留入门路径与PNG保存，本地化而非更换主题 |
+
+### 实施、复核与本地验收
+
+修改：只重写印尼语B1–B5五个条目，保留数字键对象结构、slug和原发布日期，更新日期为2026-10-11。正文、标题/seoTitle、摘要、标签、四工具比较/排错表、展示标签、图注、下载文字、作者入口和分享图均本地化；五篇任务分别为用途比较、SNES风格、转换后排错、Illustrator源图准备与后续转换、首次上传保存，不用同稿覆盖。完整搜索标题分别60/58/59/58/58个Unicode代码点，摘要144/149/155/154/152字符，未被现有155字符预渲染截断。批内引用均指向对应印尼语文章和本地工具首页，不再把已翻译目标称为英语；没有解除converter原有英语归并、改变canonical/hreflang或索引范围。
+
+资料与素材：重新读取Aseprite、Piskel、GIMP Pixelize及导出官方页，均HTTP200，核对功能与输出，不沿用十款实测、旧价格或质量评分。Wikimedia来源页HTTP200，复核Don McCulley向日葵与CC0；复用960×762 JPEG、120×95/80×63真实PNG和同轮24色迪瑟对照，不复制生成新的照片案例。八个被引用输入/结果文件均实际解码，24色两图实际各24种RGB颜色，照片不透明。Adobe英文页及对应语言地址本轮HTTP403，失败响应保留；B4明确以10月9日已核查官方说明为依据，不冒充新读取成功或Illustrator实机测试。
+
+新增真实结果：在HEAD生产式构建的印尼语工具中实际上传现有浏览器生成的512×512透明PNG，逐次调到Pixel Size 8、Palette None、自动调色板与迪瑟关闭、三项颜色调整0、PNG/Pixel size、透明背景开启、网格关闭，点击下载64×64 PNG。检查1600个全透明像素、2460个全不透明像素，其余为半透明；下载按浏览器关闭平滑放大后与同轮预览全部像素一致。文件为 `public/tutorials/pixel-art-id/illustrator-pixel8.png`。这是本站真实转换自制浏览器源图，不是Illustrator导出实验；正文区分原生64×64浏览器示意与本站64×64结果。五张目标语言分享图复用现有生成器，保存到 `public/blog-og/id/`，均1200×630可解码；已逐张目视核对文字及图片，没有覆盖其他语言素材。
+
+专门翻译复核：执行者Friday先按已纠错韩语/德语及英文任务写稿，再在写稿结束后单独完整读取最终印尼语JSON逐段自查，对照功能源码、实际印尼语标签和下载结果。覆盖五篇标题/摘要/正文、16组问答、两张表、13个图块、图注、标签、分享图及批内引用；重点核对增大/减小方向、10MiB与2200px两种行为、8/12尺寸、24色上限而非恰好24、固定/自动调色板、透明保留不等于去背景、SNES风格不等于硬件数据、PPI与尺寸、否定及操作顺序。品牌、格式、UI真实英语按钮及英文官方链接保留并说明用途。本次是同一执行者的专门自查，不是独立或母语审校；未发现尚待解决的关键技术语义项，不保证所有当地措辞最优，未调用额外Agent或外部翻译服务。
+
+构建与隔离：从HEAD导出 `/tmp/pixelart-id-pilot.nBc8If/build/`，仅覆盖本轮JSON、现有 `tests/blog.spec.js` 和新增PNG，复用锁定依赖，未新安装或升级包。Node20.19.0、`VITE_E2E=0 VITE_ENABLE_ANALYTICS=0` 的完整 `npm run build` 成功，保留ownership/SEO/dist/缓存与重定向检查；最终 `npm run lint`、`npm run typecheck`、`npm run verify:dist`、`npm run sitemap:verify`、`git diff --check` 通过。站图仍205项；生成的其他语言分享图、sitemap和dist均留在隔离目录，不复制回工作区。五篇实际HTML均存在。临时Playwright配置显式取消默认webServer，唯一入口为手动启动的本批4210生产式服务，不复用4173或E2E构建。
+
+测试与失败保留：在现有Blog测试中参数化新增42项。旧HEAD构建上的B1桌面运行时用例因仍是英语标题按预期失败，原结果保留。首轮少量定向14项为13通过/1失败：语言切换实际网址无尾斜杠，测试误要求必须有；只规范化测试中的pathname，保留语言、准确路由、canonical及刷新/返回检查，单项复核通过。受影响六文件回归首轮127项为126通过/1失败：透明B4分享图的预期未模拟叠在背景上；加flatten后五图定向仍4通过/1失败。定向像素检查证明Sharp单流水线会在resize前执行flatten，2092字节不同；按生成器明确先resize输出PNG，再叠背景，全部字节差异为0，原像素精确比较未放宽。该单项通过后才启动最终回归，没有改业务代码、删断言或用自动重试刷通过。
+
+最终结果：生产式Cookie模式、零重试的受影响Chromium六文件127项全部通过，耗时约2.1分钟，不是全仓库完整200项。包括印尼语五篇在1440/390/320px初始HTML与运行时、Blog真实点击、同语言文章跳转/返回、刷新、语言切换、完整标签及适用结构化数据、FAQ可见与数据一致、13个图块的实际加载/解码/逐个点击下载/文件字节、站内链接、五图尺寸与结果区像素，以及桌面/手机真实上传、8/12导出、24色与迪瑟同轮预览/下载对应、512→64透明PNG、非法文件与10MiB+1拒绝/10MiB边界恢复、3000×1500→2200×1100等比缩小。现有英/德/俄/韩Blog、Photo工具及导航标签和英文首页限制相关回归同时通过。
+
+页面目视验收：另用隔离Chromium检查五页×1440/390/320共15组合，实际HTTP200，无横向溢出、本站资源4xx/5xx或脚本异常；已查看全部15首屏与封面、五张分享图，以及桌面比较表、手机比较/排错表和B4/B5正文示例。初次详情截图包含固定页头遮挡和下一张懒加载图未加载，保留原图；只补四组针对性截图，在全部图解码后从滚动归零的真实全页截图裁取内容，确认文字与图片正常，不改页面或覆盖首次截图。自动检测与目视检查均不等于真人阅读或实体手机验收。
+
+证据与停止边界：`/tmp/pixelart-id-pilot.nBc8If/` 保留GSC原始请求/响应、官方页HTTP响应、`asset-audit.json`、真实PNG、旧版本/定向/首轮回归/透明像素诊断及最终测试报告、构建/质量日志、`capture-observations.json` 与各轮截图；最终测试为 `final-tests.log`、`final-results/`、`final-report/`。本地预览 `http://localhost:4210/id/blog/`，独立服务PID54577保留给用户查看，其他既有服务未关闭。工作区的JSON、测试和六张PNG与验收输入逐文件一致，本轮至此停止，不继续其他语言或重复构建。
+
+未做与批外问题：未提交、推送、部署、请求收录或重新查询发布后GSC，不称91页全部修复或搜索效果改善；下一内容源建议按PRD为nb，但本轮未开始。Firefox/WebKit、实体手机、母语读者及Illustrator实机未验收。印尼语资源中的固定调色板旧说明仍错误，B2正文明确指出；首页/隐私等原有语言残留保留在各自批次，不混入本次内容文件。已知立即下载旧结果风险未修，本轮按要求等待新预览，不能把等待后的通过当作处理器修复。
+
 ## 2026-10-10 俄语教程与页脚正式发布
 
 授权：用户明确要求“部署上线”。本次发布已完成本地验收的俄语教程一个条目、俄语分享图、配套 Blog 测试，以及俄语页脚链接分支和文案。不扩大到 About、其他文章、全站翻译、索引设置、重定向、广告或 GSC 写入；沿用 main 的现有 Cloudflare Pages Git 集成，不新建上传渠道，不修改 GitHub Pages、CI 或 Lighthouse 工作流。

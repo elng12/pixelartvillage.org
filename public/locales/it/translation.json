@@ -156,7 +156,7 @@
       "label": "Tavolozza",
       "none": "Nessuno",
       "custom": "Personalizzato",
-      "note": "Pico‑8 ha una palette fissa. Altri nomi senza colori di palette integrata generano automaticamente palette per dimensione (es. Sunset 8 → 8 colori di palette)."
+      "note": "Pico-8, Lost Century, Sunset 8, Twilight 5 e Hollow usano palette fisse. Attiva Genera palette da immagine per estrarre i colori dalla foto. Numero di colori controlla la palette generata, non modifica le palette fisse."
     },
     "colorDistance": {
       "label": "Distanza del colore",
@@ -164,7 +164,7 @@
       "lab": "LAB (accurato, più lento)"
     },
     "autoPalette": "Genera palette da immagine",
-    "paletteSize": "# Palette Palette Colori: {{value}}",
+    "paletteSize": "Numero di colori: {{value}}",
     "dither": "Abilita dithering (Floyd–Steinberg)",
     "zoom": "Zoom: {{value}}x",
     "grid": "Mostra griglia"

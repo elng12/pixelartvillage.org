@@ -129,7 +129,7 @@
   },
   "editor": {
     "title": "Online pikselkunst-verktøy",
-    "downloadBtn": "Last ned Pixel Art Image",
+    "downloadBtn": "Last ned pikselbildet",
     "uploadBtn": "Last opp bilde",
     "section": {
       "general": "Generelt ▾"
@@ -156,15 +156,15 @@
       "label": "Palett",
       "none": "Ingen",
       "custom": "Skikk",
-      "note": "Pico-8 er en fast palett. Andre navn uten innebygde palettpalettfarger vil automatisk generere paletter etter størrelse (f.eks. Sunset 8 → 8 palettpalettfarger)."
+      "note": "Pico-8, Lost Century, Sunset 8, Twilight 5 og Hollow bruker faste fargesett. Slå på Generer palett fra bildet for å hente farger fra bildet. Antall palettfarger styrer den genererte paletten, ikke de faste fargesettene."
     },
     "colorDistance": {
       "label": "Fargeavstand",
       "rgb": "RGB (rask)",
       "lab": "LAB (nøyaktig, langsommere)"
     },
-    "autoPalette": "Generate palette from image",
-    "paletteSize": "# Palett Palett farger: {{value}}",
+    "autoPalette": "Generer palett fra bildet",
+    "paletteSize": "Antall palettfarger: {{value}}",
     "dither": "Aktiver dithering (Floyd–Steinberg)",
     "zoom": "Zoom: {{value}}x",
     "grid": "Vis rutenett"
