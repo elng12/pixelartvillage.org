@@ -107,7 +107,7 @@ export default defineConfig(({ mode }) => {
       // 优化chunk大小警告阈值
       chunkSizeWarningLimit: 1000,
       // 目标浏览器
-      target: 'es2015',
+      target: 'es2020',
       // 启用CSS代码分割
       cssCodeSplit: true,
     },
