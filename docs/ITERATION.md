@@ -1,5 +1,15 @@
 # Pixel Art Village 迭代记录
 
+## 2026-10-12 西班牙语入门文章SEO标题修复及发布准备
+
+用户回复“执行”，授权单页 `/es/blog/pixel-art-tutorial-complete-guide-2025/` 的本地修复、定向提交发布和线上验收。完整SEO标题定为 `Guía de Arte Píxel para Principiantes | Pixel Art Village`，含品牌、空格、标点和重音字符共57字符；仅在 `src/content/blog-posts.es.json` 增加不带品牌的seoTitle，原标题继续用于H1和schema headline，正文、摘要、日期、标签及网址不变。查询明细保存643行；四个已保存记录日期中可见arte pixel（23次曝光）、pixel art tutorial（10次）及principiantes/aprender等入门意图，不是完整28天逐日窗口。正文确为概念、工具、基础技法和首幅作品步骤，未加入无关词或保证排名改善。
+
+现有Spanish beginner回归测试固定旧101字符标题，与新约定冲突；删除该单行措辞断言，不重新固定新标题，保留防止正文/封面被其他语言替换的检查。发布范围因此为内容源、测试的一行删除和本轮ITERATION章节，共三个文件，不带入已有菲律宾语测试、共享BlogPost/预渲染、站图、AGENTS或其他文档改动。
+
+基线 `f2c675ddae2d6a32b633b1b1a8d9b9f36017a50f`，独立Git归档副本排除上述未提交代码。Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0下，修改前后完整build通过；修改后lint、typecheck通过，保留的Spanish beginner测试1/1通过，零重试。225份HTML对照仅目标title/og:title/twitter:title变化，其余元信息、225份去除script后的body均不变。原工作区未执行构建，未编辑dist。独立Chromium验证桌面刷新、同文档列表往返、390×844手机及手机刷新，四阶段均为新标题，H1、es语言、canonical及既有完整摘要正确，截图已查看，手机scrollWidth=390。正文摘要原文/运行时为183字符，初始HTML沿用旧机制截为151字符；本轮明确保留摘要，不声称完整摘要已满足150–160字符规则，也不顺带改变截断机制或完成正文重新本地化。
+
+证据 `/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-es-title.fvmds5wq/`。发布前正式页仍为101字符标题，根、es首页、es Blog列表、es进阶文章和已修复英文4K文章五个对照已保存。提交ITERATION版本从基线仅插入本章节，测试提交版从基线只删除旧标题断言；使用独立index与短时共享index锁，沿用main触发Cloudflare Pages项目pixelartvillage1。当前为受验发布准备，最终部署/线上验收以发布回执为准；不发送收录请求，不声明Google或必应已重新抓取、旧警告消失或曝光提升。
+
 ## 2026-10-12 英文4K/8K文章SEO标题发布准备
 
 用户回复“继续”，授权仅发布 `/blog/how-many-pixels-is-4k-and-8k/` 的57字符完整SEO标题与本轮记录，不包含其他页面修复或收录请求。发布基线为 `8c29aa2eae1e43995f2f34ac13f7822efdd2ee17`，真实暂存区为空；保留未提交的菲律宾语内容、测试、分享图、站图、AGENTS及其他文档。发布副本从Git归档构造，仅合入目标seoTitle；Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0下，build、lint、typecheck通过，225页SEO元信息及去除script后的body均与本轮已完成真实浏览器验收的构建一致。证据 `/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-4k-release.vg4uo9ff/`。

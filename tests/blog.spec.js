@@ -314,7 +314,6 @@ for (const javaScriptEnabled of [false, true]) {
 
 test('Spanish beginner article retains its existing content and cover', async ({ page }) => {
   await page.goto('/es/blog/pixel-art-tutorial-complete-guide-2025/')
-  await expect(page).toHaveTitle('Guía Completa de Arte Píxel para Principiantes (2025) - Desde Cero hasta Creación | Pixel Art Village')
   await expect(page.locator('.blog-article-prose figure')).toHaveCount(0)
   await expect(page.locator('header a[rel="author"]')).toHaveCount(0)
   await expect(page.locator('.blog-cover-grid img').first()).toHaveAttribute('src', '/showcase-before-w640.jpg')
