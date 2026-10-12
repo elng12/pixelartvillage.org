@@ -3,6 +3,25 @@
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-10-12 葡语首页描述单页发布准备
+
+用户明确选择“提交并发布 /pt/ 修复”。仅提交 `public/locales/pt/translation.json` 的描述修改及本文件中葡语本轮记录，不包含瑞典语、AGENTS、GSC 资料、修复盘点和两份工作区站图。起点本地与远程 main 均为 `923b3911767f3ff7184369bc83edd97d6e5b316e`，暂存区为空；原有未提交内容保留，不回滚或混入发布。
+
+实际待发布副本 `/tmp/pixelart-pt-release.prWrNP/build/` 从该干净提交生成，只应用获准葡语字段和定向迭代记录。Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下，build（含 SEO、dist、缓存/重定向）、lint、typecheck 和 sitemap:verify 全部通过，站图仍 205 项。源 JSON 与基线仅 `home.seoDescription` 不同；待发布静态 HTML 的普通、OG、Twitter 描述与 146 字符新文案一致，title 保持原样，dist 葡语语言包与获准源码一致。记录补充不改变应用构建输入；构建日志为该目录上一层的 release-validation.log。
+
+发布方式沿用 main 推送触发的 Cloudflare Pages Git 集成，项目 `pixelartvillage1`；GitHub Pages、CI 和 Lighthouse 为另行运行的现有检查，不以 GitHub Pages 成功代替正式域名部署。推送后按完整提交 SHA 核对 Cloudflare check-run 和部署标识，再验收 `https://pixelartvillage.org/pt/` 的初始 HTML、浏览器加载后描述、刷新与语言切换。未更改云端配置、发布渠道或搜索引擎索引设置；正式发布结果另记回执。
+## 2026-10-12 葡语首页描述单页修复（本地完成，未发布）
+
+授权与范围：用户对仅处理 `/pt/` 的建议回复“执行”。只修改 `public/locales/pt/translation.json` 的 `home.seoDescription`，并补本条记录；不改 title、H1、首页正文、其他语言、Blog、converter、共享生成逻辑或站图。保留原有 AGENTS、瑞典语翻译、两份站图及其他工作区改动，不提交、推送、部署或请求搜索引擎收录。
+
+依据与修改：用户的必应重复描述 CSV 列出了 `/pt/`；线上抽查确认它与日语首页使用相同英文描述。已导出的页面统计在 2026-09-11、09-18、09-25、10-02 四批记录中，葡语首页合计 63 点击、722 展现，不把这四批记录当作逐日数据，也不据此证明重复描述导致流量下降。源码该字段本身为英文，不是缺键回退；沿用既有语言资源规则替换为 146 字符葡语：`Converta imagens em pixel art grátis no navegador. Ajuste o tamanho dos pixels e a paleta, veja a prévia e baixe o resultado no Pixel Art Village.` 保留图片转换、像素大小、调色板、预览和下载的真实用途，不改变页面定位。
+
+构建与验收：为避免 prebuild 覆盖原有站图或生成资源，使用隔离副本 `/tmp/pixelart-pt-meta.xynljY/work/`、既有依赖与 Node 20.19.0，分析关闭、VITE_E2E=0。改前基线与改后 `npm run build` 均通过，含 SEO、dist 和缓存/重定向检查。两次 225 个 HTML 的 title、meta、link、HTML 语言和头部 JSON-LD 对比，仅 `/pt/` 元数据变化，其他 224 页保持一致；葡语可见正文去除脚本后完全一致。普通、OG、Twitter 描述均为新文案且无截断，title、canonical、hreflang 保持原样。源 JSON 结构比较仅 `home.seoDescription` 变化；原工作区 AGENTS、sv 翻译和两份站图的校验值未变。
+
+真实页面：专用 4327 生产式本地预览 HTTP 200，独立浏览器确认初始 HTML 与加载后描述一致，刷新正确；通过真实语言选择器按英文→葡语→日语→葡语切换，未将葡语描述带入其他语言。1440×900 和 390×844 截图已查看，上传入口存在，title、canonical、lang 与 H1 均保持原样；不将该项元数据验收写成上传处理或下载全流程回归。证据为上述目录中的 build-baseline.log、build-final.log、baseline-home-metadata.json、static-verification.json、verification.json 和 runtime-verification.json。
+
+状态与边界：本地修改完成，专用浏览器和预览在收尾关闭。未发布，未验证必应新版抓取、建议消除、排名或点击率改善。葡语首屏仍有既有英文回退，其他语言描述和报告明细缺项未在本轮修复；不把本次单字段修改计为原 91 页修复计划中的完整首页补译。
+
 ## 2026-10-12 阿语五篇正式发布准备
 
 用户明确授权“部署上线”。仅发布五篇阿语正文、四个工具翻译字段、阿语分享图与排错图、必要方向/问答兼容代码和既有测试；不包含AGENTS、其他任务文档、工作区站图或下一语言。远程main与本地HEAD均为5108e1939fa96fb3ee6374f7793f0075aa5f34f8，保留已上线性能代码。最终合并版本本地344项Chromium零重试通过的记录见下；提交前另核对实际发布副本、构建、lint与typecheck，发布后核对对应提交的Cloudflare状态并验收真实线上阿语页面与工具。不请求GSC收录或承诺搜索表现。
