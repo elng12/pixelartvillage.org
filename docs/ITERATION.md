@@ -1287,3 +1287,44 @@ GSC 证据：本次前序只读检查使用 `2026-08-10` 至 `2026-09-06` 完整
 上线检查：首页、西语首页、英文 Sprite 和 PNG converter 均为 HTTP 200，canonical 域名正确，robots 与 sitemap 正常；sitemap 共 205 个 URL，前 50 个抽查全部返回 200，唯一告警为未全量抽查。未修改广告设置；隔离浏览器 Sprite 页面仍可出现原有自动广告，不把此次测试等同于无广告或所有访客体验通过。Firefox/WebKit、实体手机、GSC 收录及搜索排名效果未验证。无关工作区修改仍保留本地。
 
 后续复查补记：仅文档提交 `ebb02e5` 推送后，Cloudflare 部署 `882e550d-023e-4193-be44-71eb061b3338` 及 CI/Pages/Lighthouse 全部成功，业务源码未变。再次运行相同 9 项线上测试时，8 项通过，手机 Sprite 测试有一次上传后 20 秒未出现预览而失败；保留了失败截图、视频和页面快照，没有删除失败记录或放宽断言。该项随后单独开启 trace 复测通过，再连续独立运行 3 次均通过，包含真实 38x38 下载、逐像素比对、透明角和 Pixel Size 7 / Pico-8 预览检查。失败原因未确定，不能据此认定是网络或缓存，也不能把后续通过称为已修复。该间歇现象作为本次发布的剩余风险；原失败证据在 `production-test-results/`，后续 trace 分别在 `production-sprite-recheck/` 与 `production-sprite-repeat/`，均位于上述干净副本。没有据此扩大修改共享图片处理或广告逻辑。
+
+## 2026-10-12 泰语五篇正式发布准备
+
+恢复任务时原 `/tmp/pixelart-th-release.JnwyRM/` 证据目录已不存在，没有把中断后的测试状态推断为通过。在当前 main/origin/main `0c813ea17ff0a5e279d5c2057f01a9373d3cbe42` 上重新生成隔离发布副本 `/tmp/pixelart-th-resume.NaIfAn/build/`，仅加入上述十个泰语文件；保留最新俄语描述提交。Node 20 下 build、lint、typecheck、sitemap:verify 与 diff-check 通过；最终完整 Chromium 回归 444/444 通过，零重试、无跳过。日志与报告在新副本上层的 build.log、lint.log、typecheck.log、regression.log、results/、report/。本次结果来自实际最终应用输入，不沿用已丢失的旧临时目录结果。
+
+用户对“与最新代码合并验收、完整 Chromium 回归、只提交泰语文件并上线验收”的建议回复“执行”。本次仅发布五篇泰语正文、两个配套调色板字段、五张分享 PNG、泰语 GSC 基线、泰语测试及本文件泰语相关章节，不混入 AGENTS、俄语、两份工作区站图或其他任务记录。起点本地与 origin/main 均为 edae9c0ed421fa88970e1a79163e991a8dcc7ecf，暂存区为空；沿用 Cloudflare Pages 项目 pixelartvillage1 的 main Git 集成，不修改发布渠道、云端配置或索引设置。发布前在独立副本构建和完整回归，发布后核对同 SHA 的部署及正式页面、上传下载；不请求 GSC 收录。
+
+
+## 2026-10-12 泰语五篇修复（本地完成，未发布）
+
+用户明确要求继续修下一语言，按既定顺序处理 `src/content/blog-posts.th.json` 五篇和必要图片、测试；不提交、发布或请求收录。起点 main/HEAD 为 05178e4101c46604e67e465cec279726af56c8fc，保留瑞典语未提交内容、测试、图片、其他任务文档和两份工作区站图。泰语调色板说明同样误称除 Pico-8 外的命名调色板自动生成，只配套修正 `adjustments.palette.note`、`adjustments.paletteSize`；其他控件按真实文字解释，不扩修首页与全站翻译。
+
+改稿前使用既有 readonly 服务账号实际读取 GSC，final/web 完整窗口 2026-09-12..2026-10-09，逐日返回 28 天；五个目标及一个关联规范页的 page/query+page 无 25000 行截断。B1 被归并到 sv 比较篇，目标 page/query 未返回；B2/B3/B4/B5 已收录且自身规范。B2 为 0 点击/2 曝光，B3 page/query 未返回，B4 为 0/20，B5 为 0/5。关联 sv 比较篇为 0/43，不冒充泰语流量。源请求、响应、抓取时间保存至 GSC_TH_BLOG_BASELINE_2026-10-12.json。
+
+### 改稿前主题与查询映射
+
+目标均为 `/th/blog/<slug>/`，窗口同上。泰语主词是保留原用途的内容定位，不是已验证当地搜索量。
+
+| slug | 泰语主词 | 意图 | 返回 query 与限制 | 定位 |
+|---|---|---|---|---|
+| best-pixel-art-converters-compared-2025 | เครื่องมือพิกเซลอาร์ต | 按转换、绘制、动画选择工具 | 目标未返回；sv 关联查询不能归属 th | 保留选择工具，删虚构十款实测及评分 |
+| how-to-get-pixel-art-version-of-image | ภาพถ่ายเป็นพิกเซลอาร์ตสไตล์ SNES | 静态图视觉风格、尺寸和限色 | query 未返回，目标 page 0/2 | 保留视觉风格，不冒充硬件模式 |
+| make-image-more-like-pixel | ปรับภาพพิกเซลอาร์ต | 细线、颜色、dithering 和导出排错 | page/query 未返回，不补零 | 保留排错，删除恢复与选区能力 |
+| export-from-illustrator-image-to-pixel-art | ส่งออก PNG จาก Illustrator | 源 PNG 尺寸和透明度 | export village，0/1；目标 page 0/20，不证明泰语需求 | 保留导出准备，分开 PPI 和像素尺寸 |
+| how-to-pixelate-an-image | ทำภาพเป็นพิกเซลอาร์ต | 首次上传、调整和保存 | pixelate indie，0/2；目标 page 0/5，不证明泰语需求 | 保留入门，删除 Resize、图库和恢复承诺 |
+
+### 修改与验收
+
+五篇正文和展示字段完整改为泰语，保留原 slug、发布日期和数字键对象结构，updated 为 2026-10-12。完整 title（含品牌）依次 60/57/57/55/60 字符，摘要 134/130/128/129/113 字符。比较篇按四工具实际用途选择，不再声称十款实测、评分或不存在的隐私保证；SNES 篇明确仅视觉风格，检查轮廓、明暗和小尺寸辨识；排错篇解释细线、固定/生成调色板和同会话 dithering；Illustrator 篇区分像素尺寸、倍率与 PPI，并标明未进行 Illustrator 实机导出；入门篇删除 Resize、自动恢复和图库分享步骤。两张四行比较表、16 组泰语问答及结构化数据、15 幅真实案例和五张 1200×630 泰语分享图复用现有渲染器、生成器与资源，没有修改共享代码。
+
+官方依据在本轮重新联网读取 Aseprite、Piskel、GIMP、Adobe 与向日葵原图作者/许可资料，正文保留直接链接及来源语言。不复用过期价格，不把本站 PNG 冒充竞品同图实验或 Illustrator 原生导出。真实下载按钮使用现有 `ดาวน์โหลดรูปภาพศิลปะพิกเซล`；两字段调色板说明修正后与教程相符。已有 contrast 标签误译为 `ตรงกันข้าม`，正文说明它指คอนทราสต์，不扩改第三个字段；Pixel size/Original size 等既有英文回退按真实按钮解释。全文自审核对了操作方向、固定与自动模式、否定条件、尺寸算例、批内链接用途和图注，不冒充独立母语审校。
+
+隔离副本 `/tmp/pixelart-th-batch.0lQZZX/build/` 从干净 05178e4 生成，仅加入泰语改动和当时已有瑞典语成果，排除 AGENTS、工作区站图、其他 GSC 文档及并行越南语首页改动。验收期间另一任务提交瑞典语 `f3764cf2f9b51325edd2b709a0edd3b56f1641af`；该提交应用输入已包含在本副本，本轮未操作暂存、提交或远程。三个泰语应用/测试输入、两项瑞典语应用输入和五张泰语 PNG 与副本共十文件逐字节匹配，测试保留完整已提交瑞典语前缀，只新增泰语块。
+
+Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下，build（含 SEO、dist、缓存/重定向）、lint、typecheck、sitemap:verify 和 diff-check 通过；站图仍 205 项。少量定向检查后，最终相关 Chromium 106/106 通过，零重试、无跳过，约 3.7 分钟：泰语 50、瑞典语 50、三语言既有入口标签 6。泰语覆盖五篇初始 HTML/运行时、1440/390/320px、刷新、导航及语言切换、title/canonical/OG/Twitter/hreflang、16 组可见 FAQ 与 schema、真实图片及图例下载、五张分享图结果区域像素、Cookie 接受/拒绝持久化。
+
+1440/390px 实际上传及下载验证尺寸 8/12、自动 24 色、固定 Sunset 8、同会话 dithering、细线 128×128/32×32 与透明 64×64 PNG，严格匹配当前预览和公开资源解码像素。另验证非法文件拒绝、10MiB+1 拒绝、恰好 10MiB 接受及大图等比例降至 2200×1100 后恢复。四种导出尺寸下表格线开/关与预览缩放真实文件验证通过：Pixel size 的 1×1 单元不画线，放大输出可包含线，Zoom 不改文件。两张公开限色 PNG 均为 24 个不透明 RGB 色；透明结果包含全透明、半透明、不透明像素。等待新预览的测试不等于修复立即下载旧结果的既有风险。
+
+失败保留：首轮 3 项定向检查 2 通过、1 失败，原因是新测试链接正则仍残留 `/sv/`，页面真实链接为 `/th/`。仅修正新增泰语测试规则，未改业务或放宽同语言要求；随后针对链接假设的 3 项复测通过，再完成上述 106 项。原 focused-tests.log、focused-results/、focused-report/ 和 locale-recheck.log/results/report 均保留，最终证据为 final-tests.log、final-results/、final-report/。所有必要测试进程已结束。
+
+已逐张查看五张分享 PNG，五篇 1440/320px 首屏上下文、320px 放大细线与尺寸图例，以及 390px 工具控件；文字和图片可读，无横向溢出断言通过。首屏截图独立滚回顶部，避免将固定导航在整页截图中的位置当作截字问题。预览 `http://localhost:4221/th/blog/` 返回 HTTP 200，独立 serve-dist PID 56279 保留；原阿语、瑞典语预览未操作。累计本地修复 30/91。泰语未提交、发布或请求 GSC 收录，未开始下一语言；未跑全站整套，母语审校、Illustrator 实机、Firefox/WebKit、实体手机及 Google 新版抓取/规范/搜索效果仍未验证。

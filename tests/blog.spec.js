@@ -2241,3 +2241,397 @@ test('Swedish batch language switch retains article and returns to Swedish', asy
   await expect(page.locator('html')).toHaveAttribute('lang', 'sv')
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org/sv/blog/${post.slug}/`)
 })
+
+const thaiPosts = Object.values(JSON.parse(readFileSync(new URL('../src/content/blog-posts.th.json', import.meta.url), 'utf8')))
+const thaiCopy = JSON.parse(readFileSync(new URL('../public/locales/th/translation.json', import.meta.url), 'utf8'))
+const thaiFacts = [
+  ['เครื่องมือพิกเซลอาร์ต', 'ไม่ใช่สถาบันทดสอบอิสระ', 'ไม่ได้ทดสอบภาพเดียวกันในทั้งสี่เครื่องมือ', '10 485 760 ไบต์', 'เกิน 2200 พิกเซล'],
+  ['แปลงภาพถ่ายเป็นพิกเซลอาร์ตสไตล์ SNES', 'ไม่ใช่โหมดฮาร์ดแวร์', '120×95', '80×63', 'เลข 24 ไม่ใช่ขีดจำกัดสี', 'รอบเดียวกัน', 'ยังเห็นขอบรูปทรงหรือไม่', 'จัดบล็อกสีด้วยมือ'],
+  ['ปรับภาพพิกเซลอาร์ต', 'ไม่กู้รายละเอียดที่สูญหาย', 'เส้นแนวนอนบางสามเส้นแยกกัน', 'ตัวเลื่อนจำนวนสีไม่เปลี่ยนสีของจานสีคงที่', 'เริ่มต้นแบบสุ่ม'],
+  ['ส่งออก PNG จาก Illustrator', 'เราไม่ได้ส่งออกจริงใน Illustrator', '256×256', '512×512', '300×200', '600×400', 'ไฟล์เล็กไม่ได้แปลงจากไฟล์ใหญ่', 'ไม่ได้ยืนยันว่า Adobe ส่งออกต้นฉบับ'],
+  ['ทำภาพเป็นพิกเซลอาร์ต', '10 485 760 ไบต์', 'ไม่ใช่ตัวเลื่อน Resize', thaiCopy.editor.downloadBtn, 'รอภาพตัวอย่างใหม่จริง'],
+]
+
+async function rejectThaiCookies(page) {
+  if (process.env.EXPECT_CONSENT_BANNER === '1') {
+    const banner = page.getByRole('region', { name: thaiCopy.consent.bannerLabel, exact: true })
+    await expect(banner).toContainText('เราใช้คุกกี้')
+    await banner.getByRole('button', { name: thaiCopy.consent.rejectLabel, exact: true }).click()
+    await expect(banner).toHaveCount(0)
+  }
+}
+
+async function downloadThaiResult(page, filename, dimensions, maxColors, publishedBytes) {
+  return downloadNorwegianResult(page, filename, dimensions, maxColors, publishedBytes, thaiCopy.editor.downloadBtn)
+}
+
+for (const javaScriptEnabled of [false, true]) {
+  test.describe(`Thai batch ${javaScriptEnabled ? 'runtime' : 'initial HTML'}`, () => {
+    test.use({ javaScriptEnabled })
+    for (const width of [1440, 390, 320]) {
+      for (const [index, post] of thaiPosts.entries()) {
+        test(`${width}px ${post.slug}`, async ({ page, request }) => {
+          await page.setViewportSize({ width, height: width <= 390 ? 844 : 1000 })
+          expect((await page.goto('/th/blog/')).status()).toBe(200)
+          if (javaScriptEnabled) await rejectThaiCookies(page)
+          const route = `/th/blog/${post.slug}/`
+          const title = `${post.seoTitle} | Pixel Art Village`
+          await expect(page.locator('main .blog-simple-card').getByRole('link', { name: 'อ่านบทความ', exact: true })).toHaveCount(5)
+          const entry = page.getByRole('link', { name: post.title, exact: true })
+          await expect(entry).toHaveAttribute('href', route)
+          await entry.click()
+          const article = page.locator('.blog-article-prose')
+          const assertArticle = async () => {
+            expect([...title].length).toBeGreaterThanOrEqual(55)
+            expect([...title].length).toBeLessThanOrEqual(60)
+            expect([...post.excerpt].length).toBeLessThanOrEqual(155)
+            await expect(page).toHaveTitle(title)
+            await expect(page.locator('html')).toHaveAttribute('lang', 'th')
+            await expect(article).toHaveCSS('direction', 'ltr')
+            await expect(page.getByRole('heading', { level: 1 })).toHaveText(post.title)
+            await expect(page.locator('link[rel="canonical"]')).toHaveCount(1)
+            await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org${route}`)
+            await expect(page.locator('link[hreflang="th"]')).toHaveAttribute('href', `https://pixelartvillage.org${route}`)
+            await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0)
+            for (const key of ['description', 'og:description', 'twitter:description']) {
+              await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', post.excerpt)
+            }
+            for (const key of ['og:title', 'twitter:title']) await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', title)
+            await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', `https://pixelartvillage.org${route}`)
+            for (const key of ['og:image', 'twitter:image']) {
+              await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', `https://pixelartvillage.org${post.socialPreview.image}`)
+              await expect(page.locator(`meta[name="${key}:alt"],meta[property="${key}:alt"]`)).toHaveAttribute('content', post.socialPreview.alt)
+            }
+            await expect(article).not.toContainText(italianForbidden)
+            await expect(page.locator('main')).not.toContainText(/min read|Related Articles|Back to Blog|Source image|Pixel art result|## FAQ|__PH_\d+__|\[object Object\]/)
+            await expect(page.locator('main')).toContainText('อัปเดต: 2026-10-12')
+            const backLinks = page.locator('main').getByRole('link', { name: 'กลับไปที่บล็อก', exact: true })
+            await expect(backLinks).toHaveCount(2)
+            for (const link of await backLinks.all()) await expect(link).toHaveAttribute('href', '/th/blog/')
+            await expect(page.locator('main a[rel="author"]')).toHaveAttribute('href', '/th/about/')
+            for (const fact of thaiFacts[index]) await expect(article).toContainText(fact)
+            if ([2, 4].includes(index)) {
+              await expect(article).toContainText('Original size, 2× original หรือ 4× original เส้นตารางอาจติดไปกับไฟล์')
+              await expect(article).toContainText('กว้างและสูงอย่างน้อย 2 พิกเซล')
+              await expect(article).toContainText('เมื่อเลือก Pixel size แต่ละช่องมีขนาด 1×1 พิกเซล จึงไม่วาดเส้นตาราง')
+              await expect(article).toContainText('ปิด แสดงตาราง ก่อนดาวน์โหลด')
+              await expect(article).not.toContainText('เส้นตารางไม่มีทางติดไปกับไฟล์')
+              await expect(article).not.toContainText('ตารางใช้แสดงผลเท่านั้น ไม่เป็นเนื้อหาภาพ')
+            }
+            await expect(article.getByRole('heading', { name: 'คำถามที่พบบ่อย', exact: true })).toBeVisible()
+            if ([1, 2, 4].includes(index)) {
+              await expect(article).toContainText(thaiCopy.adjustments.autoPalette)
+              await expect(article).toContainText('จำนวนสีสูงสุดในจานสีที่สร้าง')
+              await expect(article).toContainText(thaiCopy.adjustments.dither)
+            }
+            if (index === 3) expect(await article.locator('a[href^="https://helpx.adobe.com/"]').count()).toBe(3)
+            const schema = await page.locator('script[type="application/ld+json"]').evaluateAll(nodes => nodes.flatMap(node => JSON.parse(node.textContent)))
+            expect(schema.find(item => item['@type'] === 'BlogPosting')).toMatchObject({
+              headline: post.title, description: post.excerpt, inLanguage: 'th', datePublished: post.date, dateModified: '2026-10-12',
+              mainEntityOfPage: `https://pixelartvillage.org${route}`, author: { name: 'Pixel Art Village', url: 'https://pixelartvillage.org/th/about/' }, image: `https://pixelartvillage.org${post.socialPreview.image}`,
+            })
+            expect(schema.find(item => item['@type'] === 'BreadcrumbList').itemListElement.at(-1)).toMatchObject({ name: post.title, item: `https://pixelartvillage.org${route}` })
+            const faq = schema.find(item => item['@type'] === 'FAQPage')
+            expect(faq.mainEntity).toHaveLength(index === 3 ? 4 : 3)
+            for (const question of faq.mainEntity) {
+              await expect(article.getByRole('heading', { name: question.name, exact: true })).toBeVisible()
+              await expect(article).toContainText(question.acceptedAnswer.text)
+            }
+            const headings = await article.locator('h2,h3,h4').evaluateAll(nodes => nodes.map(node => Number(node.tagName[1])))
+            expect(headings[0]).toBe(2)
+            expect(headings.every((level, i) => i === 0 || level <= headings[i - 1] + 1)).toBe(true)
+            await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+          }
+          await assertArticle()
+          await page.reload()
+          await assertArticle()
+          const figures = post.body.filter(block => block.type === 'figure')
+          await expect(article.locator('figure')).toHaveCount(figures.length)
+          let enlargedCaptured = false
+          for (const figure of figures) {
+            const element = article.locator(`figure:has(img[src="${figure.src}"])`)
+            const img = element.locator('img')
+            await img.scrollIntoViewIfNeeded()
+            await img.evaluate(image => image.decode())
+            await expect.poll(() => img.evaluate(image => [image.naturalWidth, image.naturalHeight])).toEqual([figure.width, figure.height])
+            await expect(img).toHaveAttribute('alt', figure.alt)
+            await expect(element.locator('figcaption')).toContainText(figure.caption)
+            if (figure.width < 512) {
+              expect(figure.pixelated, 'Small teaching examples must not regress to native-size thumbnails').toBe(true)
+              await expect(img).toHaveCSS('image-rendering', 'pixelated')
+              const displayWidth = await img.evaluate(image => image.getBoundingClientRect().width)
+              const availableWidth = await element.evaluate(node => node.getBoundingClientRect().width)
+              expect(displayWidth).toBeCloseTo(Math.min(384, availableWidth), 0)
+              expect(displayWidth).toBeGreaterThan(figure.width)
+              if (javaScriptEnabled && !enlargedCaptured) {
+                await test.info().attach(`thai-enlarged-${index}-${width}`, { body: await element.screenshot(), contentType: 'image/png' })
+                enlargedCaptured = true
+              }
+            }
+            const response = await request.get(figure.src)
+            expect(response.status()).toBe(200)
+            const bytes = await response.body()
+            const metadata = await sharp(bytes).metadata()
+            expect([metadata.width, metadata.height]).toEqual([figure.width, figure.height])
+            const [download] = await Promise.all([page.waitForEvent('download'), element.getByRole('link', { name: figure.downloadLabel, exact: true }).click()])
+            const path = test.info().outputPath(figure.src.split('/').pop())
+            await download.saveAs(path)
+            expect(readFileSync(path).equals(bytes)).toBe(true)
+          }
+          const cover = page.getByRole('region', { name: post.presentation.coverLabel, exact: true })
+          await cover.scrollIntoViewIfNeeded()
+          await cover.locator('img').evaluateAll(async images => { for (const image of images) await image.decode() })
+          await expect(cover.locator('figcaption')).toHaveText([post.presentation.sourceLabel, post.presentation.resultLabel])
+          if (post.comparison) {
+            const table = page.getByRole('table')
+            await expect(table.locator('tbody tr')).toHaveCount(4)
+            await expect(table).toHaveCSS('text-align', 'left')
+            for (const [rowIndex, row] of post.comparison.rows.entries()) {
+              const tableRow = table.locator('tbody tr').nth(rowIndex)
+              await expect(tableRow.locator('th')).toHaveText(row[0])
+              await expect(tableRow.locator('td')).toHaveText(row.slice(1).map((cell, column) => `${post.comparison.columns[column + 1]}: ${cell}`))
+            }
+          }
+          if (javaScriptEnabled) {
+            await test.info().attach(`thai-cover-${index}-${width}`, { body: await cover.screenshot(), contentType: 'image/png' })
+            await test.info().attach(`thai-page-${index}-${width}`, { body: await page.screenshot({ fullPage: true }), contentType: 'image/png' })
+          }
+          for (const href of await article.locator('a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')).filter(href => href.startsWith('/')))) {
+            expect(href, 'Pages stay Thai; resources retain actual paths').toMatch(/^\/th\/|^\/(photo-|tutorials\/)/)
+            expect((await request.get(href)).status(), href).toBe(200)
+          }
+          if (javaScriptEnabled) {
+            const sibling = thaiPosts.find(item => item.slug !== post.slug && post.body.some(block => typeof block === 'string' && block.includes(`/blog/${item.slug}/`)))
+            await article.locator(`a[href="/th/blog/${sibling.slug}/"]`).first().click()
+            await expect(page).toHaveTitle(`${sibling.seoTitle} | Pixel Art Village`)
+            await page.goBack()
+            await assertArticle()
+          }
+        })
+      }
+    }
+  })
+}
+
+for (const post of thaiPosts) {
+  test(`Thai batch sharing PNG ${post.slug}`, async ({ request }) => {
+    const response = await request.get(post.socialPreview.image)
+    expect(response.status()).toBe(200)
+    const bytes = await response.body()
+    const metadata = await sharp(bytes).metadata()
+    expect([metadata.format, metadata.width, metadata.height]).toEqual(['png', 1200, 630])
+    expect(bytes.length).toBeLessThan(1000000)
+    const result = await request.get(post.cover.after)
+    expect(result.status()).toBe(200)
+    const resized = await sharp(await result.body()).resize(441, 350, { fit: 'contain', kernel: 'nearest', background: '#f8fafc' }).png().toBuffer()
+    const expected = await sharp(resized).flatten({ background: '#f8fafc' }).ensureAlpha().raw().toBuffer()
+    const actual = await sharp(bytes).extract({ left: 660, top: 182, width: 441, height: 350 }).ensureAlpha().raw().toBuffer()
+    expect(actual.equals(expected)).toBe(true)
+    await test.info().attach('thai-sharing-image', { body: bytes, contentType: 'image/png' })
+  })
+}
+
+for (const width of [1440, 320]) {
+  for (const granted of [false, true]) {
+    test(`Thai batch consent ${width}px ${granted ? 'accept' : 'reject'} persists after reload`, async ({ page }) => {
+      test.skip(process.env.EXPECT_CONSENT_BANNER !== '1', 'Requires the real production-style consent banner')
+      await page.setViewportSize({ width, height: 844 })
+      await page.goto('/th/blog/export-from-illustrator-image-to-pixel-art/')
+      const banner = page.getByRole('region', { name: thaiCopy.consent.bannerLabel, exact: true })
+      await expect(banner).toContainText('เราใช้คุกกี้')
+      await expect(banner.getByRole('link', { name: thaiCopy.consent.privacy, exact: true })).toHaveAttribute('href', '/th/privacy/')
+      await banner.getByRole('button', { name: granted ? thaiCopy.consent.acceptLabel : thaiCopy.consent.rejectLabel, exact: true }).click()
+      await expect(banner).toHaveCount(0)
+      expect(await page.evaluate(() => JSON.parse(localStorage.getItem('consent.choice.v1')).granted)).toBe(granted)
+      await page.reload()
+      await expect(banner).toHaveCount(0)
+      await expect(page.locator('html')).toHaveAttribute('lang', 'th')
+      expect(await page.evaluate(() => JSON.parse(localStorage.getItem('consent.choice.v1')).granted)).toBe(granted)
+      await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    })
+  }
+}
+
+for (const width of [1440, 390]) {
+  test(`Thai batch tool ${width}px grid export and preview-only zoom`, async ({ page, request }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/th/')
+    await rejectThaiCookies(page)
+    const source = await request.get('/tutorials/illustrator-png-ko/size-512.png')
+    expect(source.status()).toBe(200)
+    await page.getByTestId('file-input').setInputFiles({ name: 'grid-source.png', mimeType: 'image/png', buffer: await source.body() })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    for (let size = 2; size <= 8; size++) {
+      await waitForIndonesianResult(page, () => page.locator('#pixel-size-slider').press('ArrowRight'))
+    }
+    await expect(page.locator('#grid-toggle')).not.toBeChecked()
+    await expect(page.locator('#format-select')).toHaveValue('png')
+
+    const captureExport = async (filename, dimensions) => {
+      const [download] = await Promise.all([
+        page.waitForEvent('download'),
+        page.getByRole('button', { name: thaiCopy.editor.downloadBtn, exact: true }).last().click(),
+      ])
+      const path = test.info().outputPath(filename)
+      await download.saveAs(path)
+      const { data, info } = await sharp(readFileSync(path)).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+      expect([info.width, info.height]).toEqual(dimensions)
+      return data
+    }
+    const modes = [
+      ['Pixel size', 64], ['Original size', 512], ['2× original', 1024], ['4× original', 2048],
+    ]
+    for (const [label, edge] of modes) {
+      await page.getByRole('button', { name: label, exact: true }).click()
+      await page.locator('#grid-toggle').uncheck()
+      const plain = await captureExport(`${edge}-grid-off.png`, [edge, edge])
+      if (label === 'Original size') {
+        await page.locator('#zoom-slider').press('ArrowRight')
+        const zoomed = await captureExport('source-zoomed.png', [edge, edge])
+        expect(zoomed.equals(plain), 'Preview zoom must not alter exported pixels or dimensions').toBe(true)
+      }
+      await page.locator('#grid-toggle').check()
+      const gridded = await captureExport(`${edge}-grid-on.png`, [edge, edge])
+      if (label === 'Pixel size') {
+        expect(gridded.equals(plain), 'One-pixel cells do not draw export grid lines').toBe(true)
+      } else {
+        expect(gridded.equals(plain), 'Expanded export must include enabled grid lines').toBe(false)
+        const cell = edge / 64
+        const pixelAt = (pixels, x, y) => [...pixels.subarray((y * edge + x) * 4, (y * edge + x + 1) * 4)]
+        const middle = cell / 2
+        expect(pixelAt(gridded, cell, middle), 'A grid boundary changes the downloaded image').not.toEqual(pixelAt(plain, cell, middle))
+        expect(pixelAt(gridded, middle, middle), 'Grid lines do not alter the cell interior').toEqual(pixelAt(plain, middle, middle))
+      }
+    }
+  })
+
+  test(`Thai batch tool ${width}px size and palette workflow`, async ({ page, request }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/th/')
+    await rejectThaiCookies(page)
+    const source = await request.get('/photo-sunflower-source.jpg')
+    expect(source.status()).toBe(200)
+    await page.getByTestId('file-input').setInputFiles({ name: 'sunflower.jpg', mimeType: 'image/jpeg', buffer: await source.body() })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    const note = page.getByText(thaiCopy.adjustments.palette.note, { exact: true })
+    await expect(note).toContainText('Sunset 8, Twilight 5 และ Hollow เป็นจานสีคงที่')
+    await expect(note).not.toContainText('# จานสี จานสี')
+    await expect(page.getByLabel(thaiCopy.adjustments.autoPalette, { exact: true })).toBeVisible()
+    await page.locator('#palette-select').selectOption('none')
+    await page.getByRole('button', { name: 'Pixel size', exact: true }).click()
+    for (let size = 2; size <= 12; size++) {
+      await waitForIndonesianResult(page, () => page.locator('#pixel-size-slider').press('ArrowRight'))
+      if ([8, 12].includes(size)) {
+        const published = await request.get(size === 8 ? '/tutorials/pixel-art-ko/sunflower-pixel8.png' : '/photo-sunflower-pixel12.png')
+        expect(published.status()).toBe(200)
+        await downloadThaiResult(page, `sunflower-pixel${size}.png`, size === 8 ? [120, 95] : [80, 63], null, await published.body())
+      }
+    }
+    await waitForIndonesianResult(page, () => page.locator('#auto-palette').check())
+    await expect(page.getByLabel('จำนวนสีสูงสุดในจานสีที่สร้าง: 16', { exact: true })).toBeVisible()
+    for (let colors = 17; colors <= 24; colors++) await waitForIndonesianResult(page, () => page.locator('#palette-size').press('ArrowRight'))
+    const plain = await downloadThaiResult(page, 'colors24.png', [80, 63], 24)
+    await waitForIndonesianResult(page, () => page.locator('#dither').check())
+    const dithered = await downloadThaiResult(page, 'colors24-dither.png', [80, 63], 24)
+    expect(dithered.equals(plain)).toBe(false)
+    await waitForIndonesianResult(page, () => page.locator('#auto-palette').uncheck())
+    await waitForIndonesianResult(page, () => page.locator('#palette-select').selectOption('Sunset 8'))
+    await expect(page.locator('#palette-size')).toHaveCount(0)
+    await downloadThaiResult(page, 'fixed-sunset8.png', [80, 63], 8)
+    await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    await test.info().attach(`thai-controls-${width}`, { body: await page.getByTestId('editor-controls').screenshot(), contentType: 'image/png' })
+  })
+
+  test(`Thai batch tool ${width}px thin-line reference downloads`, async ({ page, request }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/th/')
+    await rejectThaiCookies(page)
+    const source = await request.get('/tutorials/illustrator-png-ko/size-512.png')
+    expect(source.status()).toBe(200)
+    await page.getByTestId('file-input').setInputFiles({ name: 'lines.png', mimeType: 'image/png', buffer: await source.body() })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    await expect(page.locator('#palette-select')).toHaveValue('none')
+    await expect(page.locator('#auto-palette')).not.toBeChecked()
+    await expect(page.locator('#dither')).not.toBeChecked()
+    await page.getByRole('button', { name: 'Pixel size', exact: true }).click()
+    for (let size = 2; size <= 16; size++) {
+      await waitForIndonesianResult(page, () => page.locator('#pixel-size-slider').press('ArrowRight'))
+      if (![4, 16].includes(size)) continue
+      const published = await request.get(`/tutorials/pixel-art-ar/lines-pixel${size}.png`)
+      expect(published.status()).toBe(200)
+      const dimension = 512 / size
+      const raw = await downloadThaiResult(page, `lines-pixel${size}.png`, [dimension, dimension], null, await published.body())
+      let bands = 0
+      let inBand = false
+      for (let y = Math.floor(365 / size); y < Math.ceil(420 / size); y++) {
+        const dark = raw[(y * dimension + dimension / 2) * 4] < 220
+        if (dark && !inBand) bands++
+        inBand = dark
+      }
+      expect(bands).toBe(size === 4 ? 3 : 1)
+    }
+  })
+
+  test(`Thai batch tool ${width}px transparent import and download`, async ({ page, request }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/th/')
+    await rejectThaiCookies(page)
+    const source = await request.get('/tutorials/illustrator-png-ko/size-512.png')
+    expect(source.status()).toBe(200)
+    await page.getByTestId('file-input').setInputFiles({ name: 'browser-demo.png', mimeType: 'image/png', buffer: await source.body() })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    await page.locator('#palette-select').selectOption('none')
+    for (let size = 2; size <= 8; size++) await waitForIndonesianResult(page, () => page.locator('#pixel-size-slider').press('ArrowRight'))
+    await page.getByRole('button', { name: 'Pixel size', exact: true }).click()
+    await expect(page.getByLabel(thaiCopy.export.transparent.label, { exact: true })).toBeChecked()
+    const published = await request.get('/tutorials/pixel-art-id/illustrator-pixel8.png')
+    expect(published.status()).toBe(200)
+    const raw = await downloadThaiResult(page, 'converted-transparent.png', [64, 64], null, await published.body())
+    const alpha = []
+    for (let i = 3; i < raw.length; i += 4) alpha.push(raw[i])
+    expect(alpha).toContain(0)
+    expect(alpha).toContain(255)
+    expect(alpha.some(value => value > 0 && value < 255)).toBe(true)
+  })
+
+  test(`Thai batch tool ${width}px invalid input, limits and recovery`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/th/')
+    await rejectThaiCookies(page)
+    const input = page.getByTestId('file-input')
+    await input.setInputFiles({ name: 'invalid.txt', mimeType: 'text/plain', buffer: Buffer.from('Test input, not a public case study') })
+    await expect(page.getByText(thaiCopy.errors.onlyPngJpg, { exact: true })).toBeVisible()
+    await expect(page.getByTestId('editor-controls')).toHaveCount(0)
+    const png = await sharp({ create: { width: 3000, height: 1500, channels: 3, background: '#d64769' } }).png().toBuffer()
+    const maxBytes = 10 * 1024 * 1024
+    const overLimit = Buffer.alloc(maxBytes + 1)
+    png.copy(overLimit)
+    await input.setInputFiles({ name: 'oversized.png', mimeType: 'image/png', buffer: overLimit })
+    await expect(page.getByText(thaiCopy.errors.fileTooLarge10, { exact: true })).toBeVisible()
+    await expect(page.getByTestId('editor-controls')).toHaveCount(0)
+    const atLimit = Buffer.alloc(maxBytes)
+    png.copy(atLimit)
+    await input.setInputFiles({ name: 'at-limit.png', mimeType: 'image/png', buffer: atLimit })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    await expect(page.locator('#pixel-size-slider')).toHaveValue('1')
+    await expect(page.getByText(thaiCopy.errors.fileTooLarge10, { exact: true })).toHaveCount(0)
+    await page.getByRole('button', { name: 'Pixel size', exact: true }).click()
+    await downloadThaiResult(page, 'resized-boundary.png', [2200, 1100])
+  })
+}
+
+test('Thai batch language switch retains article and returns to Thai', async ({ page }) => {
+  const post = thaiPosts[4]
+  await page.goto(`/th/blog/${post.slug}/`)
+  await rejectThaiCookies(page)
+  await page.locator('#language-switcher').selectOption('en')
+  await expect.poll(() => new URL(page.url()).pathname.replace(/\/$/, '')).toBe(`/blog/${post.slug}`)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org/blog/${post.slug}/`)
+  await page.reload()
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+  await page.goBack()
+  await expect(page).toHaveTitle(`${post.seoTitle} | Pixel Art Village`)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'th')
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org/th/blog/${post.slug}/`)
+})
