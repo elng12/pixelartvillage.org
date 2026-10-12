@@ -3,6 +3,28 @@
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-10-12 越南语首页描述单页发布准备
+
+并行提交处理：首次提交前检测到共享暂存区已被另一任务占用，断言停止，没有提交越南语或改动对方暂存内容，短时 Git index 锁已释放。待瑞典语任务提交并推送 `f3764cf2f9b51325edd2b709a0edd3b56f1641af`、暂存区清空后，将实际发布基线更新为该提交，继承已提交的瑞典语内容，不重复提交它。新隔离副本 `/tmp/pixelart-vi-release.RY8chi/build-rebased/` 的改前/改后 build 及改后 lint、typecheck、sitemap:verify 均通过；重新对比 225 个 HTML，仅 `vi/index.html` 描述元数据变化，JSON-LD 仅描述同步，可见正文不变，dist 越南语语言包与本轮单字段源码一致。证据为 build-rebased-baseline.log、build-rebased-final.log、rebased-static-verification.json；最终提交仅包含相对新基线的越南语两文件差异，不带入并行泰语等未提交内容。
+
+用户对“下一步定向提交并发布这次修复，再验收正式页面”回复“继续”，授权发布 `/vi/` 描述修复。仅提交 `public/locales/vi/translation.json` 的 `home.seoDescription` 及本文件的越南语本轮修复、发布准备段落，不混入同一文档的瑞典语、阿语、葡语发布后记录或其他未提交内容，也不提交 AGENTS、工作区站图、瑞典语源码/测试/分享图和其他 GSC/PRD 资料。发布准备起点 main 与远程均为 `05178e4101c46604e67e465cec279726af56c8fc`，暂存区为空；共享工作区另有瑞典语发布准备，提交前重新核对 HEAD 和暂存范围，不覆盖其他任务。
+
+实际待发布副本 `/tmp/pixelart-vi-release.RY8chi/build/` 从该干净提交生成，只同步本轮越南语字段。Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下，build（含 SEO、dist、缓存/重定向）、lint、typecheck 和 sitemap:verify 全部通过，站图仍 205 项。实际发布副本 225 个生成 HTML 的完整头部元数据与此前已通过真实浏览器验收的越南语修复副本一致，dist 越南语语言包与单字段源码一致，日志为该目录上一层的 build-validation.log。当前正式站 `/vi/` 仍为旧英文描述，英文、葡语和俄语对照已保存到 production-before.json。
+
+沿用 main 推送触发的 Cloudflare Pages Git 集成，项目 `pixelartvillage1`；不另行直接上传 dist、不更改云端配置、发布渠道或索引设置。按本次完整提交 SHA 核对 Cloudflare check-run 和部署标识，再验收正式域名的初始 HTML、运行时、刷新、语言切换与桌面/手机页面；实际结果另记发布回执，不以本地通过代替正式发布成功。
+
+## 2026-10-12 越南语首页描述单页修复（本地完成，未发布）
+
+授权与范围：在“只替换 `/vi/` 首页描述，先构建和真实页面验收，暂不自动发布”的建议后，用户回复“继续”。仅修改 `public/locales/vi/translation.json` 的 `home.seoDescription`，并补本条记录；不改 title、H1、正文、其他语言、Blog、converter、共享生成代码、站图或搜索引擎设置，不提交、推送或发布。保留瑞典语、阿语、GSC 资料及其他本地任务改动。
+
+依据与文案：必应原重复描述明细包含 `/vi/`，本次 84 个报告网址的正式 HTML 只读核对确认 vi/ru/ko/ja 四个首页仍共用英文描述；葡语首页已独立。复用既有 API 导出，越南语首页在 2026-09-11、09-18、09-25、10-02 四批页面记录合计 16 点击、197 展现，不当作完整 28 天逐日统计、不据此断言重复描述造成流量损失。源码该字段本身为英文，替换为 136 字符越南语：`Chuyển ảnh thành pixel art miễn phí trên trình duyệt. Chỉnh kích thước pixel và bảng màu, xem trước và tải ảnh về với Pixel Art Village.` 保留真实图片转换、像素大小、调色板、预览和下载用途，不改页面定位。正式 HTML 核对表在 `/tmp/pixelart-bing-audit.iIbmM1/`，不是必应新版建议回执。
+
+构建与静态验收：隔离副本 `/tmp/pixelart-vi-meta.NXvxC8/work/` 从 `05178e4101c46604e67e465cec279726af56c8fc` 生成，保留已上线葡语修复，只同步本轮越南语资源；Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0。改前、改后 build 均通过，含 SEO、dist、缓存/重定向检查，最终 lint/typecheck 通过，生成站图仍 205 项。两次 225 个 HTML 的 title、meta、link、HTML 语言及头部 JSON-LD 对比，仅 `vi/index.html` 变化；普通、OG、Twitter 描述和既有 JSON-LD 两个 description 字段同步为新文案，无截断，其余 224 页头部及越南语其他元数据完全一致。越南语可见 body 去除脚本后完全一致，源 JSON 严格比较仅 `home.seoDescription` 变化；原工作区 AGENTS、葡语资源和两份站图校验值保持不变。
+
+真实页面验收：专用 4331 生产式本地预览 HTTP 200，改前浏览器确认原英文描述，改后初始 HTML 与运行时三份描述均为新文案。真实语言选择器按英文→越南语→葡语→越南语切换及越南语整页重新加载通过，未将越南语描述带入对照语言。1440×900 桌面和 390×844 手机截图已查看，上传输入存在，手机 scrollWidth=390 无横向溢出；运行时 title、canonical、lang、H1 与改前一致。本轮不宣称完成图片转换或下载全流程测试，也不宣称独立母语审校。证据在上述隔离目录上一层的 build-baseline.log、build-final.log、baseline-runtime.json、static-verification.json、runtime-verification.json。
+
+校验说明与边界：初次静态断言误将既有 JSON-LD 描述自动同步视为范围外变化；随后逐叶比较确认只有两个 description 字段变化，未追加源码修改，也未跳过其他字段检查，说明保留于 static-verification.json。越南语首屏仍有既有英文回退，本轮不补译正文；尚未发布，未请求必应/Google 重新收录，未验证必应新版抓取、警告消除或排名、点击改善。本次单字段修复不计为原 91 页计划中的完整首页补译，专用浏览器和预览在收尾关闭，不操作其他任务的预览。
+
 ## 2026-10-12 瑞典语五篇正式发布准备
 
 用户明确授权“部署上线”。仅提交瑞典语五篇正文、两项工具调色板翻译、五张瑞典语分享图、瑞典语 GSC 基线、现有瑞典语测试和本文件的瑞典语三个相关章节，共 10 个文件。保留 AGENTS、其他语言及其他文档、两份工作区站图、其他 GSC/PRD 资料，不混入越南语首页描述。当前 main 与 origin/main 均为 `05178e4101c46604e67e465cec279726af56c8fc`；沿用 main 推送触发的 Cloudflare Pages Git 集成，项目 `pixelartvillage1`，不切换发布渠道或修改索引设置。
