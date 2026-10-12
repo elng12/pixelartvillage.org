@@ -1953,7 +1953,7 @@ async function prerender() {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://pixelartvillage.org/' },
+              { '@type': 'ListItem', position: 1, name: lang === 'tl' ? pick(bundle, 'nav.home') : 'Home', item: lang === 'tl' ? ABS(buildLocalizedPath(lang, '/')) : 'https://pixelartvillage.org/' },
               { '@type': 'ListItem', position: 2, name: pick(bundle, 'blog.h1') || 'Blog', item: ABS(blogPath) },
               { '@type': 'ListItem', position: 3, name: post.title, item: ABS(postPath) },
             ],

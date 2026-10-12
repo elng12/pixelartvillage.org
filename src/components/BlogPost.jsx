@@ -629,8 +629,8 @@ export default function BlogPost() {
       {
         '@type': 'ListItem',
         position: 1,
-        name: 'Home',
-        item: 'https://pixelartvillage.org/',
+        name: resolvedLocale === 'tl' ? t('nav.home') : 'Home',
+        item: resolvedLocale === 'tl' ? `https://pixelartvillage.org${buildPath('/')}` : 'https://pixelartvillage.org/',
       },
       {
         '@type': 'ListItem',

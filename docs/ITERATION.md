@@ -1,5 +1,101 @@
 # Pixel Art Village 迭代记录
 
+## 2026-10-12 菲律宾语五篇定向发布准备
+
+用户在发布前合并验收完成、明确“可进入提交发布阶段”后回复“继续”，本轮按该范围定向提交、推送并验收正式页面，不请求收录或开始下一语言。发布基线为 a15667a4126c40f6fbca7d97ade1f3a427b79ef9，复用已受验的九份整文件及菲律宾语测试追加块；ITERATION 提交版从该基线仅加入本批菲律宾语章节，其他任务的未提交文档、站图、AGENTS 与 GSC 文件不带入。最新正常模式全量 Chromium 548/548、零跳过和重试，build/lint/typecheck/站图检查及 225 份 HTML 对照均已通过。沿用 main Git 集成触发 Cloudflare Pages，不直接上传工作区 dist 或修改云端配置。最终提交、部署身份及正式验收结果以随后回执为准；此准备记录不等于上线成功。
+
+## 2026-10-12 菲律宾语五篇发布前合并验收（本地通过，未发布）
+
+用户对“先完成菲律宾语这一批的发布前合并验收，不换下一语言”回复“执行”。本轮只做隔离合并、构建、回归和记录，没有提交、推送、部署或请求收录，也没有新增业务修改或永久验收流程。Illustrator 官方文档参考继续明确标注未实测；用户已确认没有软件或素材，此缺口不作为本轮阻碍。
+
+最初以 f2c675d 归档副本合入菲律宾语五篇、作者页文案、五张分享图、仅 tl 生效的 Breadcrumb 及现有菲律宾语测试块，正常模式 Chromium 全量 548/548 通过、零跳过、零重试，耗时约 6.6 分钟。期间其他任务将 main 更新为 a15667a4126c40f6fbca7d97ade1f3a427b79ef9，因此重新以该最新本地及远程基线构建受验版本，未用旧基线结果替代最新验收。候选共九份整文件及一个测试追加块；测试前缀使用已提交 a15667a 版本，保留该提交的西班牙语标题修复，不混入其他未提交工作。候选九份文件和菲律宾语测试块与当前工作区逐项一致。
+
+最新候选使用 Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 构建，完整 build（含 SEO/dist 检查）、lint、typecheck、sitemap:verify 均通过，站图 205 项。EXPECT_CONSENT_BANNER=1 下 Chromium 全量 548/548 通过，零跳过、零重试、零失败，耗时 321.659 秒。上一轮 21 个失败中的两项作者页描述截断已在之前修为 154 字符；其余 19 项与 E2E 模式强制显示编辑器的行为冲突，33 项跳过与该模式隐藏 consent 有关。本轮用真实正常构建验证通过，未削弱断言或覆盖历史失败记录。
+
+与同 SHA 的未修改正常构建对照 225 份 HTML：七份 tl 页面元信息及正文变化（五篇文章、Blog 列表、about），另两份 tl 页面仅因复用菲律宾语提示或文章链接发生正文变化（首页和 photo-to-sprite-converter）。其余 216 份 HTML 的元信息及去除 script 后的正文一致，没有非菲律宾语意外变化；此结论不是所有 HTML 字节相同。首次最新对照因基线构建尚未完成而缺少 404.html，待构建完成后重新执行通过，不归为页面故障。
+
+独立 Chromium 验证最新五篇各自 1440×960 和 390×960 共十个视口，HTTP 200、H1、封面加载、无横向溢出，桌面及手机截图已查看。最终预览核对 tl Blog、tl about 和西语入门文章 HTTP 200，tl about 运行时标题 58、描述 154 字符；西语入门仍为已提交的新标题 57 字符。预览保留在 http://localhost:4358/tl/blog/ 。
+
+最新证据位于 /tmp/pixelart-tl-release-check.UPWdLS-latest 及同前缀的 build.log、tests.log、results.json、report、static-comparison.json、visual.json 和截图；临时配置与证据均不加入项目。旧基线证据独立保留。最终 diff-check 通过，保留并行任务的 AGENTS、站图、GSC 记录及其他文档改动。
+
+结论：本地发布候选验收通过，可进入定向提交发布阶段，但本轮未正式发布。Firefox/WebKit 浏览器未安装，因此未验证且没有擅自安装；菲律宾语母语审校、真实 Illustrator 导出案例、Google 新版抓取/收录仍未验证。比较文章仍是资料对照，不冒充竞争工具同图实测。正式上线及线上验收须按后续明确授权执行，不把上述本地结果当作 production 成功。
+
+## 2026-10-12 菲律宾语 SEO 复查建议修正（本地完成两项，案例待补，未发布）
+
+用户授权执行上一轮三项建议。本轮补齐 `/tl/about/` 的简介、搜索描述、工具/Blog及隐私/条款提示，明确 Pixel Art Village 为作者及工具运营方，说明五篇教程的 source、参数、真实下载与官方文档来源边界，不编造个人履历、独立评测或 Illustrator 实测。保留上一轮菲律宾语五篇、工具字段、分享图与测试；不改其他语言、文章正文、索引设置或工作区站图。
+
+五篇文章的 BreadcrumbList 第一项在 React 与预渲染中均改为 Tahanan、`https://pixelartvillage.org/tl/`，仅对 tl 生效；构建产物检查确认五篇更新，其余 80 篇文章仍为原 Home/英文根入口。新增作者页初始 HTML/运行时、1440/320px及刷新断言，并在现有五篇断言中检查面包屑首页。
+
+作者页完整搜索标题保留原值，58 字符；最终搜索描述为 154 字符，源码、初始 HTML、运行时完全一致。首稿 158 字符在预渲染中被 shortenText 截断，正常构建首轮专项 52/54，两个作者页初始 HTML 测试失败；收紧原文至 154 后重新构建并验证，不放宽断言、不改全站截断机制。保留 `/tmp/pixelart-tl-followup.448vjI-normal-first-report` 与 `-normal-first-results`。
+
+验收副本从 HEAD `f2c675ddae2d6a32b633b1b1a8d9b9f36017a50f` 归档，叠加当前菲律宾语相关输入及本轮修改；最终副本 `/tmp/pixelart-tl-followup.448vjI-normal/` 的五份相关源码与工作区一致。Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下，最终 build（含 SEO/dist/缓存重定向）、lint、typecheck、diff-check 通过。EXPECT_CONSENT_BANNER=1 的最终菲律宾语 Chromium 专项 54/54，零重试、无跳过，31 秒，含四项新作者页检查及原有五篇/真实上传下载/错误边界/同意设置；不是全浏览器全站通过。1440/320px 作者页截图已查看，无正文溢出；最终 HTTP 和初始/运行时描述另行核对通过。最终报告 `-normal-report`，构建日志 `/tmp/pixelart-tl-followup.448vjI-normal-final-build.log`。
+
+另执行过修改描述前的全量 Chromium 测试模式回归，VITE_E2E=1：548 项中 494 通过、21 失败、33 跳过，零重试，16.8 分钟，报告 `/tmp/pixelart-tl-followup.448vjI-report`。其中两个作者页描述截断已由上述最终专项修复并通过；其余 19 项在空/拒绝输入后期望 editor-controls 为 0，与 App 在 IS_E2E 下仍渲染 Editor 的逻辑冲突。七种语言的 14 项在未加本轮修改的同 HEAD 基线也全部复现，报告 `/tmp/pixelart-tl-followup-baseline.KtBMV3-report`；菲律宾语两项在正常模式最终专项通过；韩语两项、英文首页一项未单独基线复跑。跳过项包含既有依赖正常同意横幅的检查，菲律宾语四项已在最终正常模式全部执行。没有把测试模式结果改写为通过，也未扩修其他语言或整套测试配置；最终描述修正后未重跑全量及 Firefox/WebKit。
+
+Illustrator 真实案例仍待补：本机应用目录与 Spotlight 未发现可用 Illustrator，无法生成真实导出面板截图及 Adobe 导出的 PNG。本轮不安装软件、不使用个人 Adobe 登录态、不拿 browser synthetic source 冒充 Illustrator 证据，原文的未实测说明保持不变。母语审校仍未完成。本轮未提交、推送、部署或请求收录；预览 `http://localhost:4355/tl/about/` 与 `/tl/blog/`，不代表线上已更新。
+
+## 2026-10-12 菲律宾语五篇审评后修正（本地完成，未发布）
+
+用户授权修复本轮审评发现的内容定位、比较维度、重复说明和上传提示问题。仍仅修改菲律宾语五篇内容源、必要 tl 语言字段、对应分享 PNG 和现有菲律宾语测试块；未修改共享组件、处理器、其他语言、站图或索引设置，未提交、推送、发布或请求收录。
+
+内容修正：B2 的 H1、seoTitle、摘要、标签、badge、相关链接和分享图统一为 retro na pixel effect，不再承诺已实现 SNES 风格；只在边界说明与 FAQ 保留硬件区别，补充花瓣与背景颜色分离的观察方法。B1 比较表增加安装方式、图片导入和可编辑项目保存，区分 .aseprite、.piskel、XCF 与普通图片输出；重新核对 Aseprite 官方下载/保存文档、Piskel 官方页面与 ImportController/SaveController 源码、GIMP 官方打开/保存文档，不声称竞品同图实测或已验证其当前线上编辑器。失败的 Piskel wiki、猜测的源码路径未当作已读取来源，后以正确官方源码路径确认。B4 明确定位为 Illustrator export 文档参考，依 Adobe Export for Screens 官方文档补四步操作：入口、Artboards/Assets、PNG/scale 与输出检查。仍明确没有 Illustrator 实机导出或面板截图，独立 browser source 与本站转换不是 Adobe 实机证明。B3/B5 压缩重复功能否定、隐私声明和全流程说明，保留细线诊断、可复现参数及必要导出边界。
+
+上传提示：修正 tl 的 tool.supports、errors.onlyPngJpg、errors.fileTooLarge10、errors.maxFile，并补实际首页使用的 home.entrySupports，统一 PNG/JPEG/GIF/WebP、10 MiB 和含等号边界。保留原键名和 maxFile 的 {{mb}} 插值，不改验证逻辑；上一轮两项 palette 字段继续保留。Cookie、首页正文、About 等批外英文回退未扩修。
+
+验收副本 `/tmp/pixelart-tl-review.ImP7ZM/` 来自任务起点 main/HEAD `ce6a8ce530c0874ee27d2b50fa4dfeb09fa07aa8`，只叠加本批 tl 输入与菲律宾语测试块，排除其他未提交工作。期间另一任务提交越南语批次 `8c29aa2eae1e43995f2f34ac13f7822efdd2ee17`；仅涉及 vi 内容/资源/分享图、测试与迭代文档，已保留，不把其成果算作本轮或声称验收最新工作区合并版本。最终两份 JSON、五张 OG PNG 与菲律宾语测试块均与受验副本一致。五篇原 slug/date 不变，16 组 FAQ 与 15 幅既有图例保留；完整 title 含品牌为 55/56/56/55/55 字符，摘要为 145/141/150/142/132 字符，不视为 Google 硬门槛。
+
+最终 Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 构建（含 SEO/dist/缓存重定向）、lint、typecheck、diff-check 通过，sitemap:verify 仍为 205 项。最终受影响 Chromium 56/56，零重试、无跳过，1.9 分钟（菲律宾语 50、既有三语言入口 6），不是全站整套回归。覆盖初始 HTML/运行时、1440/390/320px、元数据/FAQ/分享图、相关链接与语言切换；新断言覆盖标题不再承诺 SNES、完整比较表头与四步导出列表。实际 JPEG/GIF/WebP 上传及 PNG 下载均通过；首页非法格式、恰好 10 MiB、10 MiB+1、3000×1500 等比缩小及恢复保留。编辑器更换文件的非法格式与超限报错按正确 MiB 显示，拒绝后原 64×48 结果仍可下载。旧网格、palette、dithering、细线和透明度相关真实下载验证继续通过。
+
+失败证据保留：首轮 48/56，通过以外的六项是新表头断言误放在仅正文的 .blog-article-prose 范围，另两项发现首页实际使用 home.entrySupports 而非 tool.supports，截图脚本同样发现该入口遗漏。修正断言到真实 table、补首页字段后，第二轮 54/56；剩余两项因新增成功上传测试后仍把已有 editor-controls 当作应消失，新输入被拒绝时正常保留旧编辑器。改为先回到空首页再验证原超限流程，并保留有结果时拒绝错误输入仍能下载的独立验证。第三轮 56/56 后补齐编辑器 maxFile 单位和错误路径测试，以最终第四轮 56/56 为本次完成证据，不使用自动重试或覆盖旧失败。另一次 lint 误扫临时 Playwright HTML 报告中的打包第三方 JS；报告移出应用目录后实际源码 lint 通过，未删除报告、放宽规则或修改第三方打包代码。
+
+证据包括该目录中的 build.log、final-build.log、signoff-build.log、tests.log/results、final-tests.log/final-results、accepted-tests.log/accepted-results、signoff-tests.log/signoff-results、report-artifacts-lint.log、signoff-lint.log、signoff-typecheck.log、first-capture.log、capture.log 和页面截图。HTML 报告分别保留在同级 `pixelart-tl-review.ImP7ZM-first-report`、`-second-report`、`-accepted-report`、`-signoff-report`。已实际查看五篇桌面/320px 首屏、五张分享图、桌面/手机比较表与 Adobe 步骤、320px 上传提示；文字按宽度换行，截图中的表格边界裁切不当作页面截字。截图浏览器和测试已结束，最新本地预览为 `http://localhost:4346/tl/blog/`，仅预览服务保留，其他任务服务未操作。
+
+剩余边界：独立菲律宾语母语审校、真实 Illustrator 导出案例、竞品实机、Firefox/WebKit、实体手机、生产及 Google 新版抓取/规范/排名未验证。Illustrator 缺少实机证据通过收窄为文档参考避免过度承诺，不声称已补真实 Adobe 案例；发布前仍需与最新代码合并验收。已知立即下载旧结果风险未修，等待新预览的通过不能证明处理器风险消除。到此停止本批，不开始下一语言。
+
+## 2026-10-12 菲律宾语五篇修复（本地完成，未发布）
+
+用户同意跳过已被另一任务接手的越南语，继续菲律宾语（tl）五篇本地修复。仅修改 `src/content/blog-posts.tl.json` 五篇、`public/locales/tl/translation.json` 的 `adjustments.palette.note` 与 `adjustments.paletteSize`、五张 `public/blog-og/tl/` PNG、现有 `tests/blog.spec.js` 的新增菲律宾语块、GSC 基线和本记录。没有修改共享组件、处理器、站图、其他语言或索引设置；越南语正文、语言资源、测试和其他工作区记录均保留。没有提交、推送、部署或请求收录。
+
+五篇标题、摘要、标签、正文、表格、图片说明、分享图和作者入口已本地化，保留原 slug、发布日期及数字键对象结构，updated 为 2026-10-12。完整搜索 title 含品牌为 55/57/56/57/55 字符，摘要为 133/142/145/139/132 字符；这只是本项目的编辑要求，不是 Google 硬门槛。两张四行比较表、16 组可见问答及对应 FAQ schema、15 幅可下载真实案例均使用现有渲染器与图片；分享图均 1200×630。
+
+比较篇删除虚构十款实测、评分和无广告隐私承诺，明确本站运营者身份、四工具各自用途及未做竞品同图测试。SNES 篇只谈视觉风格，不保证硬件合规，区分 120×95/80×63、24 色示例与 SNES 规范。排错篇区分细线丢失、显示放大、固定/生成 palette、同 session dithering、透明度及网格导出，纠正案例 source 为 512×512、Pixel Size 4/16 对应 128×128/32×32。Illustrator 篇分开 PPI 与像素尺寸、artboard 与 asset bounds、Adobe 文档步骤与浏览器 synthetic source，没有冒充实机导出。入门篇删除 Resize、自动恢复和图库步骤，按真实控件说明先等新预览再保存。照片来源写为本地 960×762 JPEG 版本，不把它冒充 Commons 原图尺寸。
+
+语义复核：执行者在生成稿之后专门重读五篇标题、摘要和关键操作/限制段落，对照现有功能、实际 UI、数字和来源；复核固定/自动 palette、调参方向、否定条件、图注、导出尺寸与批内链接，调整两条搜索标题的自然措辞和两处重复章节 id。此为同一执行者自查，不是独立母语审校。品牌、软件名、格式、实际英文导出按钮及常用技术借词按用途保留，官方来源标明英文。两个 palette 字段修正后与教程一致；既有 Cookie 英文说明、格式错误提示写 PNG/JPG 及 `<10MB` 等批外翻译未扩修，正文按真实支持格式和含等号边界解释。
+
+最终隔离版本基于 `6a2548736c28dc148ebb5a9a6f79cd3058e14156`，只加入本批输入，排除未提交越南语内容。测试文件采用该干净提交前缀与本轮菲律宾语新增块，不把其他任务未提交测试视为本批通过。验收期间并行任务提交日语首页描述 `ce6a8ce530c0874ee27d2b50fa4dfeb09fa07aa8`，只涉及日语资源与迭代文档；本轮未回滚或覆盖它，本副本没有声称验证最新工作区全量合并结果。菲律宾语两个应用输入、五张 PNG 及新增测试块与最终受验副本一致；原 slug/date 和仅两字段翻译变化已作结构检查。
+
+Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下最终 build（含 SEO、dist、缓存/重定向）、lint、typecheck、sitemap:verify 和 diff-check 通过，站图仍 205 项。定向修正后 5/5 通过，再运行最终相关 Chromium 106/106，零重试、无跳过，3.6 分钟：菲律宾语 50、泰语 50、既有三语言入口 6。不是完整全站回归。菲律宾语覆盖五篇初始 HTML/运行时、1440/390/320px、刷新、语言切换与导航、title/canonical/OG/Twitter/hreflang、FAQ/schema、唯一章节 id、两张表、图例加载解码及点击下载、五张分享图结果区域像素、Cookie 接受/拒绝持久化。
+
+实际上传/下载覆盖 Pixel Size 8/12、生成 24 色和固定 Sunset 8、同 session dithering、细线 128×128/32×32、透明 PNG 64×64，并与当前预览或公开案例像素核对；覆盖非法输入、10MiB+1 拒绝、恰好 10MiB 接受及 3000×1500 等比缩小到 2200×1100 后恢复。四种导出大小验证网格开/关：Pixel size 的 1×1 单元不画线，放大模式网格可以写入文件；Zoom 不改变导出。两张公开限色 PNG 的不透明 RGB 均为 24 色；透明结果包含全透明、半透明及不透明像素。等待新预览的测试不代表修复立即下载旧结果的既有风险。
+
+失败保留：首次 build 因 Illustrator 结果图误写在 source 目录而失败；静态图片核对又发现细线文件名和输入/参数说明不一致，改成现有实际资源及对应参数，不伪造新图。错误构建后的测试服务启动曾被提前发起，尚未开始测试，发现后主动终止，仅保留启动日志，不算任何通过。首轮有效定向 2/3 通过，失败因页面上方资源标签为 `Bumalik sa Blog`，下方 presentation 为小写 blog；统一本批 presentation 与定位后，下一轮 3/5 通过，两项失败因机械换语言误将 HTML `th` 表头 selector 改成 `tl`。仅纠正本批 selector，保留表格内容断言；随后 5/5 与最终 106 项通过。原 build.log、static-check.log、focused-tests.log、focused-final.log/focused-results/focused-report、corrected-focused.log/corrected-focused-results 与 reviewed-focused.log/reviewed-focused-results 保留，未用重试或最终绿灯覆盖历史失败。
+
+已实际查看五张分享 PNG、五篇 1440/320px 首屏、320px 放大细线图例；标题与正文按宽度换行，横向溢出断言通过。手机导航品牌沿用既有省略显示，不声称全站所有文字无裁切。证据在 `/tmp/pixelart-tl-batch.swXdco/` 的 build-final-reviewed.log、lint-final.log、typecheck-final.log、static-corrected.log、input-consistency.log、test-selection.log、final-tests.log、final-results/、final-report/、screens-1440.png、screens-320.png、thin-line-320.png 与 og-sheet.png。相关测试和专用截图浏览器已结束，预览 `http://localhost:4345/tl/blog/` HTTP 200，独立 serve-dist PID 13262 保留；其他任务预览未操作。
+
+本批完成五个本地目标，不把并行越南语尚未交付的页计入本批成果。未跑全站整套、未与后续最新代码作发布合并验收；母语读者审校、Illustrator/竞品实机、Firefox/WebKit、实体手机及 Google 新版抓取/规范/排名未验证。未开始波兰语或下一内容源，发布须另按用户授权推进。
+
+## 2026-10-12 菲律宾语五篇修复准备（本地任务，不发布）
+
+用户同意跳过已被另一任务接手的越南语，继续 `tl` 五篇本地修复。起点 main/HEAD `6a2548736c28dc148ebb5a9a6f79cd3058e14156`；仅处理 `src/content/blog-posts.tl.json` 五篇、必要分享 PNG、现有 Blog 测试、两项误导操作的菲律宾语调色板字段和本轮 GSC 记录。不修改越南语或其他语言、首页定位、共享代码、站图、索引设置；不提交、发布或请求收录。
+
+改稿前以既有服务账号、webmasters.readonly 范围实际读取官方 REST API（Tier 1）。Skill 默认认证脚本/配置不作为已验证入口，复用已验证的读取方式，不输出凭据。final/web 完整窗口 2026-09-12..2026-10-09，逐日确认 28 天；五目标分别读取 page 与 query+page，以及两个 Google 关联规范页的相同窗口数据。原请求、响应、HTTP 状态及抓取时间保存在 `GSC_TL_BLOG_BASELINE_2026-10-12.json`。未返回不补零，关联挪威语统计不归属菲律宾语；索引记录不是实时测试或收录请求。
+
+### 改稿前主题与查询映射
+
+目标均为 `/tl/blog/<slug>/`，窗口同上。以下主词是保留原任务的内容定位，不是已验证当地搜索量。
+
+| slug | 菲律宾语主词 | 意图与修复 | GSC 证据与限制 |
+|---|---|---|---|
+| best-pixel-art-converters-compared-2025 | mga tool sa pixel art | 按转换、绘制和动画选工具；删除虚构十款排名 | 已收录、自身规范；page/query 未返回 |
+| how-to-get-pixel-art-version-of-image | pixel art na estilong SNES | 照片视觉风格、尺寸、限色和 dithering；不保证硬件合规 | 已收录、自规范；0 点击/23 曝光；pixel converter 为 0/2，不证明菲律宾语需求 |
+| make-image-more-like-pixel | ayusin ang pixel art | 细线、颜色、点纹和导出排错；不恢复丢失细节 | Google 选择 nb 同名页规范；目标 page/query 未返回 |
+| export-from-illustrator-image-to-pixel-art | PNG mula Illustrator | 像素尺寸、scale、透明度与后续转换；不冒充实机 Adobe 案例 | Google 选择 nb 同名页规范；目标 page/query 未返回 |
+| how-to-pixelate-an-image | gawing pixel art ang larawan | 第一次上传、调参、等待新预览与保存 PNG | 已收录、自规范；page/query 未返回 |
+
+复用哥飞库第三方内容教程的任务明确、案例与说明一致、自然内链方法，不把其长度、字数、密度或排名说法当 Google 规则。本批完整 title 按既定 55–60 字符编辑要求，用 seoTitle 与完整 H1 分工。竞品信息重新读取 Aseprite、Piskel 和 GIMP 官方文档；Illustrator 三份 Adobe 文档及照片作者/CC0 来源已核对。首次尝试的 Adobe 新路径不可访问，使用原有官方 using 路径成功核对，不把失败来源写成已读取。
+
+当前隔离副本 `/tmp/pixelart-tl-batch.swXdco/build/` 从上述已提交基线生成，不混入并行越南语工作区内容；预定 Node 20、生产式 Cookie 构建及本批实际页面和上传下载验收。完成结果、失败与限制另记，准备记录不表示验收已通过。
+
 ## 2026-10-12 西班牙语入门文章SEO标题修复及发布准备
 
 用户回复“执行”，授权单页 `/es/blog/pixel-art-tutorial-complete-guide-2025/` 的本地修复、定向提交发布和线上验收。完整SEO标题定为 `Guía de Arte Píxel para Principiantes | Pixel Art Village`，含品牌、空格、标点和重音字符共57字符；仅在 `src/content/blog-posts.es.json` 增加不带品牌的seoTitle，原标题继续用于H1和schema headline，正文、摘要、日期、标签及网址不变。查询明细保存643行；四个已保存记录日期中可见arte pixel（23次曝光）、pixel art tutorial（10次）及principiantes/aprender等入门意图，不是完整28天逐日窗口。正文确为概念、工具、基础技法和首幅作品步骤，未加入无关词或保证排名改善。
