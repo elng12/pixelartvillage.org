@@ -156,7 +156,7 @@
       "label": "Palett",
       "none": "Ingen",
       "custom": "Beställnings",
-      "note": "Pico-8 är en fast palett. Andra namn utan inbyggda palettpalettfärger kommer automatiskt att generera paletter efter deras storlek (t.ex. Sunset 8 → 8 palettpalettfärger)."
+      "note": "Pico-8, Lost Century, Sunset 8, Twilight 5 och Hollow är fasta paletter. Antalet färger styr bara den automatiskt genererade paletten. Ingen utan automatisk palett begränsar inte färgerna."
     },
     "colorDistance": {
       "label": "Färgavstånd",
@@ -164,7 +164,7 @@
       "lab": "LAB (exakt, långsammare)"
     },
     "autoPalette": "Create palette from the image",
-    "paletteSize": "# Palett Färger: {{value}}",
+    "paletteSize": "Högsta antal färger i genererad palett: {{value}}",
     "dither": "Aktivera dithering (Floyd–Steinberg)",
     "zoom": "Zoom: {{value}}x",
     "grid": "Visa rutnät"

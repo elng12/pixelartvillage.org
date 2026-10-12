@@ -3,6 +3,60 @@
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-10-12 瑞典语五篇正式发布准备
+
+用户明确授权“部署上线”。仅提交瑞典语五篇正文、两项工具调色板翻译、五张瑞典语分享图、瑞典语 GSC 基线、现有瑞典语测试和本文件的瑞典语三个相关章节，共 10 个文件。保留 AGENTS、其他语言及其他文档、两份工作区站图、其他 GSC/PRD 资料，不混入越南语首页描述。当前 main 与 origin/main 均为 `05178e4101c46604e67e465cec279726af56c8fc`；沿用 main 推送触发的 Cloudflare Pages Git 集成，项目 `pixelartvillage1`，不切换发布渠道或修改索引设置。
+
+以获准暂存内容和干净 HEAD 生成隔离发布副本 `/tmp/pixelart-sv-release.qtgKuy/build/`，使用既有依赖与 Node 20.19.0，关闭分析、VITE_E2E=0。build（含 SEO、dist、缓存/重定向）、lint、typecheck、sitemap:verify 和暂存 diff-check 通过，站图仍 205 项。最终 23 文件 Chromium 完整回归 394/394 通过，零重试、无跳过，约 8.4 分钟，其中瑞典语 50 项。实际暂存文件与受验副本逐字节一致，八个瑞典语应用/测试/图片输入也与前轮最终本地修复副本一致；文档仅补本轮发布准备和结果，不改变构建输入。证据为隔离目录上一层的 release-build.log、lint.log、typecheck.log、sitemap.log、release-regression.log、local-results/ 与 local-report/。发布后按完整提交 SHA 核对 Cloudflare 部署，再检查正式五篇、FAQ、图例、分享图、语言切换和实际下载。不申请 GSC 收录，不把部署成功当成 Google 新版抓取或流量改善。
+
+## 2026-10-12 瑞典语五篇审评建议修复（本地通过，未发布）
+
+授权与范围：用户对两项只读审评发现回复“执行建议”。本轮只修改 `src/content/blog-posts.sv.json`、现有 `tests/blog.spec.js` 的瑞典语部分和本条记录；不提交、部署或写入 GSC，不开始下一语言。分支 main、HEAD `05178e4101c46604e67e465cec279726af56c8fc`。保留此前瑞典语修复、首次失败证据及 AGENTS、站图、GSC/PRD 资料和并行越南语首页描述等原有或其他任务改动。
+
+内容修正：排错篇与入门篇删除“网格永远只是预览辅助、不进入导出”的错误说明。按实际导出实现写清：Zoom 只影响预览；网格不改变文件像素尺寸，但 Original size、2× original、4× original 在每格宽高均至少 2 像素时可以把开启的网格线写进下载文件；Pixel size 的每格为 1×1 像素，不画导出网格。需要无网格线的文件时，先关闭 Visa rutnät。未改变工具的网格或导出行为。
+
+例图展示：11 张原为原生小尺寸缩略图的正文例图复用已有 `pixelated` 字段，按相同可用宽度放大且不做平滑插值；连同原有两张细线结果，共 13 张小尺寸教学图。图注区分文件像素与显示放大。两张 512×512 源图保持原展示方式，下载资源、文件尺寸、透明度、alt 和来源未改。五篇非 body 字段与前轮已验收副本逐项一致，slug、发布日期、updated、标题、摘要、分享图和关键词定位保持不变。
+
+验证：隔离副本 `/tmp/pixelart-sv-followup.YtR3My/build/` 使用现有依赖、Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0，避免在原目录构建覆盖工作区站图。build（含 SEO、dist、缓存/重定向）、lint、typecheck、sitemap:verify 和 git diff --check 通过，站图仍 205 项。相关内容、瑞典语翻译、测试及 BlogPost、Editor、imageProcessor、预渲染代码与受验副本逐字节一致。
+
+增强现有页面测试：1440/390/320px 的初始 HTML 与运行时均断言小尺寸例图清晰放大、宽度匹配现有容器，并保留真实文件尺寸和下载字节检查；排错与入门两篇强制检查网格条件说明，禁止旧错误表述。新增桌面/手机真实上传下载用例，以本站已有透明 512×512 源图、pixel size 8 比较四档导出尺寸：64×64 在网格开关前后解码像素一致；512×512、1024×1024、2048×2048 的网格开启结果不同，边界像素变化、格内像素不变；Zoom 调整后原尺寸下载像素仍一致。
+
+新增两项定向测试 2/2 通过；最终相关 Chromium 56/56 通过，零重试、无跳过，约 1.9 分钟，其中瑞典语 50 项及既有三语言入口标签 6 项，不称为全站整套回归。已查看五篇新增放大例图的 1440px 与 320px 截图，图注与下载链接换行正常。证据为上述目录的 build.log、lint.log、typecheck.log、sitemap.log、focused-tests.log、final-tests.log、final-results/、final-report/ 与 screenshot-paths.json；前轮失败目录未覆盖。本次首次文档插入因另一任务新增顶部越南语记录而定位失败、未落盘；重读后仅追加本条，保留其内容。
+
+状态：累计仍为本地修复 25/91。本轮生产式本地预览 `http://localhost:4335/sv/blog/`，旧 4220 及其他任务预览未操作。未发布或申请收录，母语审校、Illustrator 实机、Firefox/WebKit、实体手机及 Google 新版抓取/规范/搜索效果仍未验证。
+
+## 2026-10-12 瑞典语五篇修复（本地完成，未发布）
+
+用户在下一步说明后回复“继续”，授权处理 `src/content/blog-posts.sv.json` 五篇、必要分享图和现有测试，完成本地验收；不提交或发布。main、HEAD为923b3911767f3ff7184369bc83edd97d6e5b316e，保留AGENTS、其他文档及两份工作区站图改动。源码发现sv工具调色板说明误称除Pico-8外的命名调色板会自动生成；只配套修正 `adjustments.palette.note` 与 `adjustments.paletteSize` 两字段，其他英语回退控件按真实标签解释，不改首页FAQ残留或全站语言。
+
+改稿前GSC：既有服务账号、webmasters.readonly实际读取；完整final/web窗口2026-09-12..2026-10-09逐日确认28天。五页及Google另选的三页规范网址分别读取page/query+page，未到25000行上限。B1/B2已收录、自规范，分别0点击43曝光及0点击8曝光；B3/B4目标page/query未返回，规范分别指向nb同名排错/Illustrator篇；B5目标0点击1曝光、query未返回，规范指向tl同名入门篇。不得以关联规范页的查询冒充sv表现。源头请求/响应及检查时间保存到GSC_SV_BLOG_BASELINE_2026-10-12.json，不是发布后效果。
+
+### 改稿前主题与查询映射
+
+下表目标均为 `/sv/blog/<slug>/`，窗口2026-09-12..2026-10-09；当地词为原任务的内容定位判断，不是已验证搜索量。
+
+| slug | 瑞典语主词 | 意图 | 原样查询与限制 | 定位 |
+|---|---|---|---|---|
+| best-pixel-art-converters-compared-2025 | pixelkonstverktyg | 按照片转换/绘制/动画选工具 | piskel .com、piskelapp .com、pixel art best、was sind die besten hochwertigen bild-pixelierer-tools, die derzeit verfügbar sind?、ビジネスで信頼できる画像からピクセルアート変換ツールは？；不证明瑞典语需求 | 保留选择工具，删虚构十款实测与评分 |
+| how-to-get-pixel-art-version-of-image | foto till pixelkonst i SNES-stil | 尺寸/限色静态图 | query未返回，page为0/8 | 保留视觉风格，非硬件模块 |
+| make-image-more-like-pixel | förbättra pixelkonst | 轮廓/颜色/点纹/保存排错 | 目标page/query未返回，nb规范查询另列 | 保留排错，删除恢复和局部编辑承诺 |
+| export-from-illustrator-image-to-pixel-art | exportera PNG från Illustrator | 正确源PNG尺寸与透明度 | 目标page/query未返回，nb规范page为0/97非sv指标 | 保留导出/按需转换，纠正PPI混淆 |
+| how-to-pixelate-an-image | pixelera en bild | 首次上传/调参/保存 | query未返回，目标page为0/1；tl规范page/query未返回 | 保留入门，不增加Resize或图库 |
+
+### 修改与本地验收
+
+五篇保留原 slug 和发布日期，updated 为 2026-10-12。正文、摘要、标签、封面说明与分享文案改为瑞典语，删除虚构十款实测、评分、图库、动画及细节恢复等本站不具备的能力。实际完整 title（含品牌后缀）依次为 59/59/57/57/57 字符，摘要为 152/140/153/150/144 字符。两张比较表、16 组可见问答及对应 FAQ 结构化数据、15 幅真实案例图均经页面断言；FAQ 使用瑞典语标题与既有 faq 章节 id，不改共享解析逻辑。五张 1200×630 瑞典语分享 PNG 使用现有生成器，逐张查看字形、标签与真实结果区域，未新增生成逻辑。
+
+图片均复用项目中真实资源，标明源图、文件尺寸、显示放大与工具输出的区别。SNES 篇说明仅为视觉风格，增加轮廓、明暗色块、小尺寸可辨性检查；排错篇以同宽放大的 128×128/32×32 下载案例说明细线丢失；Illustrator 篇区分像素尺寸、导出倍率和 PPI，给出尺寸算例但不冒充 Illustrator 实机截图或原生导出。Aseprite、Piskel、GIMP 和 Adobe 官方说明已在本轮联网读取；文章包含直接来源链接，不虚构价格或跨工具性能结论。两项 sv 调色板说明改为真实的固定/生成色数规则；仍为英文回退的实际控件标签按原样引用并解释，未借此扩修首页。
+
+隔离副本 `/tmp/pixelart-sv-batch.Hb5tEz/build/` 起于 923b391，验收期间另一任务发布葡语描述后，同步该唯一应用文件至最新 HEAD `05178e4101c46604e67e465cec279726af56c8fc` 并重新构建、验收。保留所有其他工作区改动，未在原目录构建或覆盖站图。Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0；最终 build（含 SEO、dist、缓存/重定向）、lint、typecheck、sitemap:verify 与 diff-check 通过，站图仍 205 项。三个本轮应用/测试输入、五张分享图及最新葡语资源共九个文件与隔离副本逐字节一致，既有非瑞典语测试前缀、五个 slug 与发布日期机械比对保持不变。
+
+最新副本相关 Chromium 测试 54/54 通过，零重试、无跳过，约 1.7 分钟；其中本轮瑞典语 48 项，既有三语言文章入口标签回归 6 项。覆盖初始 HTML/运行时、1440/390/320px、元数据、同语言导航与切换、16 组问答、五张分享图、Cookie 接受/拒绝与刷新持久化。1440/390px 实际上传、8/12 像素大小、自动 24 色与固定 Sunset 8、同会话 dithering、细线输出、透明 PNG 下载均验证当前预览与公开案例解码像素；非法文件、10MiB+1 拒绝、恰好 10MiB 接受与大图缩放后的恢复亦通过。测试等待新预览完成后下载，不声称修复立即下载旧结果的既有风险。最终日志与报告为 latest-tests.log、latest-results/、latest-report/；未将此 54 项称为全站整套测试。
+
+失败证据保留：初次构建引用了不存在的复用图片路径，build.log 留存，改为真实的 `/tutorials/pixel-art-id/illustrator-pixel8.png` 后构建通过。首轮相关测试因测试误将比较表首列 th 当作 td、忽略单元格内手机列标签而失败；该轮 7 通过、1 失败、1 中断、45 未运行，保留 table-selector-failure-tests.log、对应 results/report。只修正测试定位以严格核对现有全部表值，2 项定向复测通过，再完成原基线 54 项及最新基线上述 54 项验收，没有删除失败证据或放宽内容断言。
+
+已查看五篇桌面/320px 封面、手机正文上下文、手机工具控件与五张分享图；整页截图的固定导航位置受拍摄前滚动影响，不能据此当作首屏截字结论，另补回到页面顶部的桌面/手机截图。全稿自审已逐段核对真实功能、尺寸算例和来源边界，不冒充独立母语审校。预览保留 `http://localhost:4220/sv/blog/`，独立 serve-dist PID 53129；原阿语预览未操作。累计本地修复 25/91。未提交、推送、部署、请求 GSC 收录或开始下一语言；母语审校、Illustrator 实机、Firefox/WebKit、实体手机及 Google 新版抓取/规范/搜索效果仍未验证。
+
 ## 2026-10-12 葡语首页描述单页发布准备
 
 用户明确选择“提交并发布 /pt/ 修复”。仅提交 `public/locales/pt/translation.json` 的描述修改及本文件中葡语本轮记录，不包含瑞典语、AGENTS、GSC 资料、修复盘点和两份工作区站图。起点本地与远程 main 均为 `923b3911767f3ff7184369bc83edd97d6e5b316e`，暂存区为空；原有未提交内容保留，不回滚或混入发布。

@@ -1847,3 +1847,397 @@ test('Arabic batch language switch retains article and restores reading directio
   await expect(page.locator('html')).toHaveAttribute('dir', 'rtl')
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org/ar/blog/${post.slug}/`)
 })
+
+const swedishPosts = Object.values(JSON.parse(readFileSync(new URL('../src/content/blog-posts.sv.json', import.meta.url), 'utf8')))
+const swedishCopy = JSON.parse(readFileSync(new URL('../public/locales/sv/translation.json', import.meta.url), 'utf8'))
+const swedishFacts = [
+  ['Pixelkonstverktyg', 'inte av ett oberoende testinstitut', 'inte jämfört de fyra verktygens bildkvalitet', '10 485 760 byte', 'över 2200 pixlar'],
+  ['Foto till pixelkonst i SNES-stil', 'inte ett maskinvaruläge', '120×95', '80×63', 'inte en färggräns för SNES', 'samma session', 'Syns motivets kontur?', 'manuellt ordnade färgblock'],
+  ['förbättra pixelkonst', 'återställer inte förlorade detaljer', 'tre separata tunna horisontella linjer', 'ändrar inte färgerna i dessa fasta paletter', 'slumpmässig initialisering'],
+  ['exportera PNG från Illustrator', 'inte utfört exporten i Illustrator', '256×256', '512×512', '300×200', '600×400', 'inte en konvertering av den stora', 'inte att Adobe exporterat källan'],
+  ['pixelera en bild', '10 485 760 byte', 'inte ett Resize-reglage', swedishCopy.editor.downloadBtn, 'vänta tills den nya förhandsvisningen faktiskt visas'],
+]
+
+async function rejectSwedishCookies(page) {
+  if (process.env.EXPECT_CONSENT_BANNER === '1') {
+    const banner = page.getByRole('region', { name: swedishCopy.consent.bannerLabel, exact: true })
+    await expect(banner).toContainText('Vi använder cookies')
+    await banner.getByRole('button', { name: swedishCopy.consent.rejectLabel, exact: true }).click()
+    await expect(banner).toHaveCount(0)
+  }
+}
+
+async function downloadSwedishResult(page, filename, dimensions, maxColors, publishedBytes) {
+  return downloadNorwegianResult(page, filename, dimensions, maxColors, publishedBytes, swedishCopy.editor.downloadBtn)
+}
+
+for (const javaScriptEnabled of [false, true]) {
+  test.describe(`Swedish batch ${javaScriptEnabled ? 'runtime' : 'initial HTML'}`, () => {
+    test.use({ javaScriptEnabled })
+    for (const width of [1440, 390, 320]) {
+      for (const [index, post] of swedishPosts.entries()) {
+        test(`${width}px ${post.slug}`, async ({ page, request }) => {
+          await page.setViewportSize({ width, height: width <= 390 ? 844 : 1000 })
+          expect((await page.goto('/sv/blog/')).status()).toBe(200)
+          if (javaScriptEnabled) await rejectSwedishCookies(page)
+          const route = `/sv/blog/${post.slug}/`
+          const title = `${post.seoTitle} | Pixel Art Village`
+          await expect(page.locator('main .blog-simple-card').getByRole('link', { name: 'Läs artikeln', exact: true })).toHaveCount(5)
+          const entry = page.getByRole('link', { name: post.title, exact: true })
+          await expect(entry).toHaveAttribute('href', route)
+          await entry.click()
+          const article = page.locator('.blog-article-prose')
+          const assertArticle = async () => {
+            expect([...title].length).toBeGreaterThanOrEqual(55)
+            expect([...title].length).toBeLessThanOrEqual(60)
+            expect([...post.excerpt].length).toBeLessThanOrEqual(155)
+            await expect(page).toHaveTitle(title)
+            await expect(page.locator('html')).toHaveAttribute('lang', 'sv')
+            await expect(article).toHaveCSS('direction', 'ltr')
+            await expect(page.getByRole('heading', { level: 1 })).toHaveText(post.title)
+            await expect(page.locator('link[rel="canonical"]')).toHaveCount(1)
+            await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org${route}`)
+            await expect(page.locator('link[hreflang="sv"]')).toHaveAttribute('href', `https://pixelartvillage.org${route}`)
+            await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0)
+            for (const key of ['description', 'og:description', 'twitter:description']) {
+              await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', post.excerpt)
+            }
+            for (const key of ['og:title', 'twitter:title']) await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', title)
+            await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', `https://pixelartvillage.org${route}`)
+            for (const key of ['og:image', 'twitter:image']) {
+              await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', `https://pixelartvillage.org${post.socialPreview.image}`)
+              await expect(page.locator(`meta[name="${key}:alt"],meta[property="${key}:alt"]`)).toHaveAttribute('content', post.socialPreview.alt)
+            }
+            await expect(article).not.toContainText(italianForbidden)
+            await expect(page.locator('main')).not.toContainText(/min read|Related Articles|Back to Blog|Source image|Pixel art result|## FAQ|__PH_\d+__|\[object Object\]/)
+            await expect(page.locator('main')).toContainText('Uppdaterad: 2026-10-12')
+            const backLinks = page.locator('main').getByRole('link', { name: 'Tillbaka till bloggen', exact: true })
+            await expect(backLinks).toHaveCount(2)
+            for (const link of await backLinks.all()) await expect(link).toHaveAttribute('href', '/sv/blog/')
+            await expect(page.locator('main a[rel="author"]')).toHaveAttribute('href', '/sv/about/')
+            for (const fact of swedishFacts[index]) await expect(article).toContainText(fact)
+            if ([2, 4].includes(index)) {
+              await expect(article).toContainText('Original size, 2× original eller 4× original kan linjer följa med i exporten')
+              await expect(article).toContainText('minst 2 pixlar bred och hög')
+              await expect(article).toContainText('Vid Pixel size är varje ruta 1×1 pixel och inga rutnätslinjer ritas')
+              await expect(article).toContainText('Stäng av Visa rutnät före nedladdning')
+              await expect(article).not.toContainText('lägger inte linjer i exportfilen')
+              await expect(article).not.toContainText('rutnätet är en visningshjälp, inte bildinnehåll')
+            }
+            await expect(article.getByRole('heading', { name: 'Vanliga frågor', exact: true })).toBeVisible()
+            if ([1, 2, 4].includes(index)) {
+              await expect(article).toContainText(swedishCopy.adjustments.autoPalette)
+              await expect(article).toContainText('Högsta antal färger i genererad palett')
+              await expect(article).toContainText(swedishCopy.adjustments.dither)
+            }
+            if (index === 3) expect(await article.locator('a[href^="https://helpx.adobe.com/"]').count()).toBe(3)
+            const schema = await page.locator('script[type="application/ld+json"]').evaluateAll(nodes => nodes.flatMap(node => JSON.parse(node.textContent)))
+            expect(schema.find(item => item['@type'] === 'BlogPosting')).toMatchObject({
+              headline: post.title, description: post.excerpt, inLanguage: 'sv', datePublished: post.date, dateModified: '2026-10-12',
+              mainEntityOfPage: `https://pixelartvillage.org${route}`, author: { name: 'Pixel Art Village', url: 'https://pixelartvillage.org/sv/about/' }, image: `https://pixelartvillage.org${post.socialPreview.image}`,
+            })
+            expect(schema.find(item => item['@type'] === 'BreadcrumbList').itemListElement.at(-1)).toMatchObject({ name: post.title, item: `https://pixelartvillage.org${route}` })
+            const faq = schema.find(item => item['@type'] === 'FAQPage')
+            expect(faq.mainEntity).toHaveLength(index === 3 ? 4 : 3)
+            for (const question of faq.mainEntity) {
+              await expect(article.getByRole('heading', { name: question.name, exact: true })).toBeVisible()
+              await expect(article).toContainText(question.acceptedAnswer.text)
+            }
+            const headings = await article.locator('h2,h3,h4').evaluateAll(nodes => nodes.map(node => Number(node.tagName[1])))
+            expect(headings[0]).toBe(2)
+            expect(headings.every((level, i) => i === 0 || level <= headings[i - 1] + 1)).toBe(true)
+            await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+          }
+          await assertArticle()
+          await page.reload()
+          await assertArticle()
+          const figures = post.body.filter(block => block.type === 'figure')
+          await expect(article.locator('figure')).toHaveCount(figures.length)
+          let enlargedCaptured = false
+          for (const figure of figures) {
+            const element = article.locator(`figure:has(img[src="${figure.src}"])`)
+            const img = element.locator('img')
+            await img.scrollIntoViewIfNeeded()
+            await img.evaluate(image => image.decode())
+            await expect.poll(() => img.evaluate(image => [image.naturalWidth, image.naturalHeight])).toEqual([figure.width, figure.height])
+            await expect(img).toHaveAttribute('alt', figure.alt)
+            await expect(element.locator('figcaption')).toContainText(figure.caption)
+            if (figure.width < 512) {
+              expect(figure.pixelated, 'Small teaching examples must not regress to native-size thumbnails').toBe(true)
+              await expect(img).toHaveCSS('image-rendering', 'pixelated')
+              const displayWidth = await img.evaluate(image => image.getBoundingClientRect().width)
+              const availableWidth = await element.evaluate(node => node.getBoundingClientRect().width)
+              expect(displayWidth).toBeCloseTo(Math.min(384, availableWidth), 0)
+              expect(displayWidth).toBeGreaterThan(figure.width)
+              if (javaScriptEnabled && !enlargedCaptured) {
+                await test.info().attach(`swedish-enlarged-${index}-${width}`, { body: await element.screenshot(), contentType: 'image/png' })
+                enlargedCaptured = true
+              }
+            }
+            const response = await request.get(figure.src)
+            expect(response.status()).toBe(200)
+            const bytes = await response.body()
+            const metadata = await sharp(bytes).metadata()
+            expect([metadata.width, metadata.height]).toEqual([figure.width, figure.height])
+            const [download] = await Promise.all([page.waitForEvent('download'), element.getByRole('link', { name: figure.downloadLabel, exact: true }).click()])
+            const path = test.info().outputPath(figure.src.split('/').pop())
+            await download.saveAs(path)
+            expect(readFileSync(path).equals(bytes)).toBe(true)
+          }
+          const cover = page.getByRole('region', { name: post.presentation.coverLabel, exact: true })
+          await cover.scrollIntoViewIfNeeded()
+          await cover.locator('img').evaluateAll(async images => { for (const image of images) await image.decode() })
+          await expect(cover.locator('figcaption')).toHaveText([post.presentation.sourceLabel, post.presentation.resultLabel])
+          if (post.comparison) {
+            const table = page.getByRole('table')
+            await expect(table.locator('tbody tr')).toHaveCount(4)
+            await expect(table).toHaveCSS('text-align', 'left')
+            for (const [rowIndex, row] of post.comparison.rows.entries()) {
+              const tableRow = table.locator('tbody tr').nth(rowIndex)
+              await expect(tableRow.locator('th')).toHaveText(row[0])
+              await expect(tableRow.locator('td')).toHaveText(row.slice(1).map((cell, column) => `${post.comparison.columns[column + 1]}: ${cell}`))
+            }
+          }
+          if (javaScriptEnabled) {
+            await test.info().attach(`swedish-cover-${index}-${width}`, { body: await cover.screenshot(), contentType: 'image/png' })
+            await test.info().attach(`swedish-page-${index}-${width}`, { body: await page.screenshot({ fullPage: true }), contentType: 'image/png' })
+          }
+          for (const href of await article.locator('a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')).filter(href => href.startsWith('/')))) {
+            expect(href, 'Pages stay Swedish; resources retain actual paths').toMatch(/^\/sv\/|^\/(photo-|tutorials\/)/)
+            expect((await request.get(href)).status(), href).toBe(200)
+          }
+          if (javaScriptEnabled) {
+            const sibling = swedishPosts.find(item => item.slug !== post.slug && post.body.some(block => typeof block === 'string' && block.includes(`/blog/${item.slug}/`)))
+            await article.locator(`a[href="/sv/blog/${sibling.slug}/"]`).first().click()
+            await expect(page).toHaveTitle(`${sibling.seoTitle} | Pixel Art Village`)
+            await page.goBack()
+            await assertArticle()
+          }
+        })
+      }
+    }
+  })
+}
+
+for (const post of swedishPosts) {
+  test(`Swedish batch sharing PNG ${post.slug}`, async ({ request }) => {
+    const response = await request.get(post.socialPreview.image)
+    expect(response.status()).toBe(200)
+    const bytes = await response.body()
+    const metadata = await sharp(bytes).metadata()
+    expect([metadata.format, metadata.width, metadata.height]).toEqual(['png', 1200, 630])
+    expect(bytes.length).toBeLessThan(1000000)
+    const result = await request.get(post.cover.after)
+    expect(result.status()).toBe(200)
+    const resized = await sharp(await result.body()).resize(441, 350, { fit: 'contain', kernel: 'nearest', background: '#f8fafc' }).png().toBuffer()
+    const expected = await sharp(resized).flatten({ background: '#f8fafc' }).ensureAlpha().raw().toBuffer()
+    const actual = await sharp(bytes).extract({ left: 660, top: 182, width: 441, height: 350 }).ensureAlpha().raw().toBuffer()
+    expect(actual.equals(expected)).toBe(true)
+    await test.info().attach('swedish-sharing-image', { body: bytes, contentType: 'image/png' })
+  })
+}
+
+for (const width of [1440, 320]) {
+  for (const granted of [false, true]) {
+    test(`Swedish batch consent ${width}px ${granted ? 'accept' : 'reject'} persists after reload`, async ({ page }) => {
+      test.skip(process.env.EXPECT_CONSENT_BANNER !== '1', 'Requires the real production-style consent banner')
+      await page.setViewportSize({ width, height: 844 })
+      await page.goto('/sv/blog/export-from-illustrator-image-to-pixel-art/')
+      const banner = page.getByRole('region', { name: swedishCopy.consent.bannerLabel, exact: true })
+      await expect(banner).toContainText('Vi använder cookies')
+      await expect(banner.getByRole('link', { name: swedishCopy.consent.privacy, exact: true })).toHaveAttribute('href', '/sv/privacy/')
+      await banner.getByRole('button', { name: granted ? swedishCopy.consent.acceptLabel : swedishCopy.consent.rejectLabel, exact: true }).click()
+      await expect(banner).toHaveCount(0)
+      expect(await page.evaluate(() => JSON.parse(localStorage.getItem('consent.choice.v1')).granted)).toBe(granted)
+      await page.reload()
+      await expect(banner).toHaveCount(0)
+      await expect(page.locator('html')).toHaveAttribute('lang', 'sv')
+      expect(await page.evaluate(() => JSON.parse(localStorage.getItem('consent.choice.v1')).granted)).toBe(granted)
+      await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    })
+  }
+}
+
+for (const width of [1440, 390]) {
+  test(`Swedish batch tool ${width}px grid export and preview-only zoom`, async ({ page, request }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/sv/')
+    await rejectSwedishCookies(page)
+    const source = await request.get('/tutorials/illustrator-png-ko/size-512.png')
+    expect(source.status()).toBe(200)
+    await page.getByTestId('file-input').setInputFiles({ name: 'grid-source.png', mimeType: 'image/png', buffer: await source.body() })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    for (let size = 2; size <= 8; size++) {
+      await waitForIndonesianResult(page, () => page.locator('#pixel-size-slider').press('ArrowRight'))
+    }
+    await expect(page.locator('#grid-toggle')).not.toBeChecked()
+    await expect(page.locator('#format-select')).toHaveValue('png')
+
+    const captureExport = async (filename, dimensions) => {
+      const [download] = await Promise.all([
+        page.waitForEvent('download'),
+        page.getByRole('button', { name: swedishCopy.editor.downloadBtn, exact: true }).last().click(),
+      ])
+      const path = test.info().outputPath(filename)
+      await download.saveAs(path)
+      const { data, info } = await sharp(readFileSync(path)).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+      expect([info.width, info.height]).toEqual(dimensions)
+      return data
+    }
+    const modes = [
+      ['Pixel size', 64], ['Original size', 512], ['2× original', 1024], ['4× original', 2048],
+    ]
+    for (const [label, edge] of modes) {
+      await page.getByRole('button', { name: label, exact: true }).click()
+      await page.locator('#grid-toggle').uncheck()
+      const plain = await captureExport(`${edge}-grid-off.png`, [edge, edge])
+      if (label === 'Original size') {
+        await page.locator('#zoom-slider').press('ArrowRight')
+        const zoomed = await captureExport('source-zoomed.png', [edge, edge])
+        expect(zoomed.equals(plain), 'Preview zoom must not alter exported pixels or dimensions').toBe(true)
+      }
+      await page.locator('#grid-toggle').check()
+      const gridded = await captureExport(`${edge}-grid-on.png`, [edge, edge])
+      if (label === 'Pixel size') {
+        expect(gridded.equals(plain), 'One-pixel cells do not draw export grid lines').toBe(true)
+      } else {
+        expect(gridded.equals(plain), 'Expanded export must include enabled grid lines').toBe(false)
+        const cell = edge / 64
+        const pixelAt = (pixels, x, y) => [...pixels.subarray((y * edge + x) * 4, (y * edge + x + 1) * 4)]
+        const middle = cell / 2
+        expect(pixelAt(gridded, cell, middle), 'A grid boundary changes the downloaded image').not.toEqual(pixelAt(plain, cell, middle))
+        expect(pixelAt(gridded, middle, middle), 'Grid lines do not alter the cell interior').toEqual(pixelAt(plain, middle, middle))
+      }
+    }
+  })
+
+  test(`Swedish batch tool ${width}px size and palette workflow`, async ({ page, request }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/sv/')
+    await rejectSwedishCookies(page)
+    const source = await request.get('/photo-sunflower-source.jpg')
+    expect(source.status()).toBe(200)
+    await page.getByTestId('file-input').setInputFiles({ name: 'sunflower.jpg', mimeType: 'image/jpeg', buffer: await source.body() })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    const note = page.getByText(swedishCopy.adjustments.palette.note, { exact: true })
+    await expect(note).toContainText('Sunset 8, Twilight 5 och Hollow är fasta paletter')
+    await expect(note).not.toContainText('palettpalettfärger')
+    await expect(page.getByLabel(swedishCopy.adjustments.autoPalette, { exact: true })).toBeVisible()
+    await page.locator('#palette-select').selectOption('none')
+    await page.getByRole('button', { name: 'Pixel size', exact: true }).click()
+    for (let size = 2; size <= 12; size++) {
+      await waitForIndonesianResult(page, () => page.locator('#pixel-size-slider').press('ArrowRight'))
+      if ([8, 12].includes(size)) {
+        const published = await request.get(size === 8 ? '/tutorials/pixel-art-ko/sunflower-pixel8.png' : '/photo-sunflower-pixel12.png')
+        expect(published.status()).toBe(200)
+        await downloadSwedishResult(page, `sunflower-pixel${size}.png`, size === 8 ? [120, 95] : [80, 63], null, await published.body())
+      }
+    }
+    await waitForIndonesianResult(page, () => page.locator('#auto-palette').check())
+    await expect(page.getByLabel('Högsta antal färger i genererad palett: 16', { exact: true })).toBeVisible()
+    for (let colors = 17; colors <= 24; colors++) await waitForIndonesianResult(page, () => page.locator('#palette-size').press('ArrowRight'))
+    const plain = await downloadSwedishResult(page, 'colors24.png', [80, 63], 24)
+    await waitForIndonesianResult(page, () => page.locator('#dither').check())
+    const dithered = await downloadSwedishResult(page, 'colors24-dither.png', [80, 63], 24)
+    expect(dithered.equals(plain)).toBe(false)
+    await waitForIndonesianResult(page, () => page.locator('#auto-palette').uncheck())
+    await waitForIndonesianResult(page, () => page.locator('#palette-select').selectOption('Sunset 8'))
+    await expect(page.locator('#palette-size')).toHaveCount(0)
+    await downloadSwedishResult(page, 'fixed-sunset8.png', [80, 63], 8)
+    await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    await test.info().attach(`swedish-controls-${width}`, { body: await page.getByTestId('editor-controls').screenshot(), contentType: 'image/png' })
+  })
+
+  test(`Swedish batch tool ${width}px thin-line reference downloads`, async ({ page, request }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/sv/')
+    await rejectSwedishCookies(page)
+    const source = await request.get('/tutorials/illustrator-png-ko/size-512.png')
+    expect(source.status()).toBe(200)
+    await page.getByTestId('file-input').setInputFiles({ name: 'lines.png', mimeType: 'image/png', buffer: await source.body() })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    await expect(page.locator('#palette-select')).toHaveValue('none')
+    await expect(page.locator('#auto-palette')).not.toBeChecked()
+    await expect(page.locator('#dither')).not.toBeChecked()
+    await page.getByRole('button', { name: 'Pixel size', exact: true }).click()
+    for (let size = 2; size <= 16; size++) {
+      await waitForIndonesianResult(page, () => page.locator('#pixel-size-slider').press('ArrowRight'))
+      if (![4, 16].includes(size)) continue
+      const published = await request.get(`/tutorials/pixel-art-ar/lines-pixel${size}.png`)
+      expect(published.status()).toBe(200)
+      const dimension = 512 / size
+      const raw = await downloadSwedishResult(page, `lines-pixel${size}.png`, [dimension, dimension], null, await published.body())
+      let bands = 0
+      let inBand = false
+      for (let y = Math.floor(365 / size); y < Math.ceil(420 / size); y++) {
+        const dark = raw[(y * dimension + dimension / 2) * 4] < 220
+        if (dark && !inBand) bands++
+        inBand = dark
+      }
+      expect(bands).toBe(size === 4 ? 3 : 1)
+    }
+  })
+
+  test(`Swedish batch tool ${width}px transparent import and download`, async ({ page, request }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/sv/')
+    await rejectSwedishCookies(page)
+    const source = await request.get('/tutorials/illustrator-png-ko/size-512.png')
+    expect(source.status()).toBe(200)
+    await page.getByTestId('file-input').setInputFiles({ name: 'browser-demo.png', mimeType: 'image/png', buffer: await source.body() })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    await page.locator('#palette-select').selectOption('none')
+    for (let size = 2; size <= 8; size++) await waitForIndonesianResult(page, () => page.locator('#pixel-size-slider').press('ArrowRight'))
+    await page.getByRole('button', { name: 'Pixel size', exact: true }).click()
+    await expect(page.getByLabel(swedishCopy.export.transparent.label, { exact: true })).toBeChecked()
+    const published = await request.get('/tutorials/pixel-art-id/illustrator-pixel8.png')
+    expect(published.status()).toBe(200)
+    const raw = await downloadSwedishResult(page, 'converted-transparent.png', [64, 64], null, await published.body())
+    const alpha = []
+    for (let i = 3; i < raw.length; i += 4) alpha.push(raw[i])
+    expect(alpha).toContain(0)
+    expect(alpha).toContain(255)
+    expect(alpha.some(value => value > 0 && value < 255)).toBe(true)
+  })
+
+  test(`Swedish batch tool ${width}px invalid input, limits and recovery`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/sv/')
+    await rejectSwedishCookies(page)
+    const input = page.getByTestId('file-input')
+    await input.setInputFiles({ name: 'invalid.txt', mimeType: 'text/plain', buffer: Buffer.from('Test input, not a public case study') })
+    await expect(page.getByText(swedishCopy.errors.onlyPngJpg, { exact: true })).toBeVisible()
+    await expect(page.getByTestId('editor-controls')).toHaveCount(0)
+    const png = await sharp({ create: { width: 3000, height: 1500, channels: 3, background: '#d64769' } }).png().toBuffer()
+    const maxBytes = 10 * 1024 * 1024
+    const overLimit = Buffer.alloc(maxBytes + 1)
+    png.copy(overLimit)
+    await input.setInputFiles({ name: 'oversized.png', mimeType: 'image/png', buffer: overLimit })
+    await expect(page.getByText(swedishCopy.errors.fileTooLarge10, { exact: true })).toBeVisible()
+    await expect(page.getByTestId('editor-controls')).toHaveCount(0)
+    const atLimit = Buffer.alloc(maxBytes)
+    png.copy(atLimit)
+    await input.setInputFiles({ name: 'at-limit.png', mimeType: 'image/png', buffer: atLimit })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    await expect(page.locator('#pixel-size-slider')).toHaveValue('1')
+    await expect(page.getByText(swedishCopy.errors.fileTooLarge10, { exact: true })).toHaveCount(0)
+    await page.getByRole('button', { name: 'Pixel size', exact: true }).click()
+    await downloadSwedishResult(page, 'resized-boundary.png', [2200, 1100])
+  })
+}
+
+test('Swedish batch language switch retains article and returns to Swedish', async ({ page }) => {
+  const post = swedishPosts[4]
+  await page.goto(`/sv/blog/${post.slug}/`)
+  await rejectSwedishCookies(page)
+  await page.locator('#language-switcher').selectOption('en')
+  await expect.poll(() => new URL(page.url()).pathname.replace(/\/$/, '')).toBe(`/blog/${post.slug}`)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org/blog/${post.slug}/`)
+  await page.reload()
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+  await page.goBack()
+  await expect(page).toHaveTitle(`${post.seoTitle} | Pixel Art Village`)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'sv')
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org/sv/blog/${post.slug}/`)
+})
