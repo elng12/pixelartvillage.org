@@ -1,5 +1,15 @@
 # Pixel Art Village 迭代记录
 
+## 2026-10-12 西班牙语入门文章描述单页修复及发布准备
+
+用户对“继续修这页描述，控制150–160字符”回复“继续”，授权单页内容源修改、定向发布和线上验收。`/es/blog/pixel-art-tutorial-complete-guide-2025/` 的excerpt改为 `Guía de arte píxel para principiantes: elige herramientas, configura el lienzo y la paleta, dibuja líneas y aplica sombreado para crear tu primera obra.`，按源内容和浏览器完整值核算共152字符。原文实际190字符，此前183是计数错误，已向用户更正并修正本地旧记录；原初始HTML为151字符、运行时为190字符。现有生成器上限155，新152字符低于上限，无须共享代码改造或自动截断，保留已发布57字符标题、H1、body教程、日期、标签和网址。
+
+复用现有excerpt字段，不增加不存在的seoDescription机制。受验225页中，元信息仅目标description/og:description/twitter:description/BlogPosting.description及西语Blog列表对应ItemList.description变化；正文显示仅目标页首摘要、列表卡片、比较文章和进阶文章的相关文章卡片四处变化，所有body差异均可由旧摘要精确替换成新摘要解释，其余正文和所有标题均不变。这是同一内容源的引用更新，不修改这些文章自身的搜索描述。
+
+初始隔离基线为a15667a；期间菲律宾语独立发布了 `0a3bcef5dd38aa7843df3acfe6b2b00867a281d9`，故重新从最新基线构造发布副本，不使用旧提交的验收代替当前版本。最新基线修改前后build、修改后lint/typecheck及保留的Spanish beginner测试通过（1/1、零重试）；全部西语静态页面与此前真实浏览器受验版本一致，最新副本再次验证桌面刷新、同文档列表往返、390×844手机与手机刷新四阶段。普通/OG/Twitter/schema描述、页首摘要和列表卡片均为完整152字符，标题保持57，canonical/es语言正确，手机scrollWidth=390。桌面/手机截图及手机完整摘要截图已查看，未改工作区dist。
+
+发布范围仅 `src/content/blog-posts.es.json` 的一个excerpt及本轮ITERATION章节、旧标题准备记录中的字符计数更正；提交文档从最新HEAD构造，不带入其他任务未提交记录、AGENTS、站图或GSC文件，也不改永久测试。独立index与短时共享index锁核对受验字段、章节和HEAD，沿用main触发Cloudflare Pages项目pixelartvillage1。证据 `/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-es-description.6f_gkgky/`。当前为受验发布准备，最终部署及线上验收见后续回执；未发送收录请求，不声明Google/必应搜索结果已更新、旧警告消失或流量提升。
+
 ## 2026-10-12 菲律宾语五篇定向发布准备
 
 用户在发布前合并验收完成、明确“可进入提交发布阶段”后回复“继续”，本轮按该范围定向提交、推送并验收正式页面，不请求收录或开始下一语言。发布基线为 a15667a4126c40f6fbca7d97ade1f3a427b79ef9，复用已受验的九份整文件及菲律宾语测试追加块；ITERATION 提交版从该基线仅加入本批菲律宾语章节，其他任务的未提交文档、站图、AGENTS 与 GSC 文件不带入。最新正常模式全量 Chromium 548/548、零跳过和重试，build/lint/typecheck/站图检查及 225 份 HTML 对照均已通过。沿用 main Git 集成触发 Cloudflare Pages，不直接上传工作区 dist 或修改云端配置。最终提交、部署身份及正式验收结果以随后回执为准；此准备记录不等于上线成功。
@@ -102,7 +112,7 @@ Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下最终 build（含 SEO、
 
 现有Spanish beginner回归测试固定旧101字符标题，与新约定冲突；删除该单行措辞断言，不重新固定新标题，保留防止正文/封面被其他语言替换的检查。发布范围因此为内容源、测试的一行删除和本轮ITERATION章节，共三个文件，不带入已有菲律宾语测试、共享BlogPost/预渲染、站图、AGENTS或其他文档改动。
 
-基线 `f2c675ddae2d6a32b633b1b1a8d9b9f36017a50f`，独立Git归档副本排除上述未提交代码。Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0下，修改前后完整build通过；修改后lint、typecheck通过，保留的Spanish beginner测试1/1通过，零重试。225份HTML对照仅目标title/og:title/twitter:title变化，其余元信息、225份去除script后的body均不变。原工作区未执行构建，未编辑dist。独立Chromium验证桌面刷新、同文档列表往返、390×844手机及手机刷新，四阶段均为新标题，H1、es语言、canonical及既有完整摘要正确，截图已查看，手机scrollWidth=390。正文摘要原文/运行时为183字符，初始HTML沿用旧机制截为151字符；本轮明确保留摘要，不声称完整摘要已满足150–160字符规则，也不顺带改变截断机制或完成正文重新本地化。
+基线 `f2c675ddae2d6a32b633b1b1a8d9b9f36017a50f`，独立Git归档副本排除上述未提交代码。Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0下，修改前后完整build通过；修改后lint、typecheck通过，保留的Spanish beginner测试1/1通过，零重试。225份HTML对照仅目标title/og:title/twitter:title变化，其余元信息、225份去除script后的body均不变。原工作区未执行构建，未编辑dist。独立Chromium验证桌面刷新、同文档列表往返、390×844手机及手机刷新，四阶段均为新标题，H1、es语言、canonical及既有完整摘要正确，截图已查看，手机scrollWidth=390。正文摘要原文/运行时为190字符（原记录误写183，本轮描述修复前核算更正），初始HTML沿用旧机制截为151字符；该轮明确保留摘要，不声称完整摘要已满足150–160字符规则，也不顺带改变截断机制或完成正文重新本地化。
 
 证据 `/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-es-title.fvmds5wq/`。发布前正式页仍为101字符标题，根、es首页、es Blog列表、es进阶文章和已修复英文4K文章五个对照已保存。提交ITERATION版本从基线仅插入本章节，测试提交版从基线只删除旧标题断言；使用独立index与短时共享index锁，沿用main触发Cloudflare Pages项目pixelartvillage1。当前为受验发布准备，最终部署/线上验收以发布回执为准；不发送收录请求，不声明Google或必应已重新抓取、旧警告消失或曝光提升。
 
