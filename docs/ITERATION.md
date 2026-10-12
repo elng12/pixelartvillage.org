@@ -3,6 +3,26 @@
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-10-12 俄语首页描述单页发布准备
+
+用户对“下一步定向提交并发布俄语这次修复，再验收正式页面”回复“继续”，授权发布 `/ru/` 描述修复。仅提交 `public/locales/ru/translation.json` 的 `home.seoDescription` 及本文件的俄语本轮修复、发布准备段落，不混入同一文档中其他任务的未提交记录，也不提交 AGENTS、工作区站图、泰语源码/翻译/测试/分享图或 GSC/PRD 资料。准备起点本地与远程 main 均为 `edae9c0ed421fa88970e1a79163e991a8dcc7ecf`，暂存区为空；提交前在短时共享 index 锁内重新核对 HEAD 和真实暂存区，若其他任务占用则停止，不覆盖其暂存。
+
+实际待发布副本 `/tmp/pixelart-ru-release.45Jhjy/build/` 从该干净提交生成，只同步本轮俄语字段，继承已提交葡语、越南语和瑞典语内容。Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下，build（含 SEO、dist、缓存/重定向）、lint、typecheck 和 sitemap:verify 全部通过，站图仍 205 项。实际副本 225 个生成 HTML 的完整头部与此前已通过真实浏览器验收的俄语副本一致，dist 俄语语言包与单字段源码一致，日志为该目录上一层的 build-validation.log。正式域名发布前初始 HTML 和实际浏览器仍为旧英文描述，英文、葡语、越南语对照已保存至 production-before.json，俄语运行时基线为 production-runtime-before.json。
+
+沿用 main 推送触发的 Cloudflare Pages Git 集成，项目 `pixelartvillage1`；不直接上传 dist、不改云端配置、发布渠道或搜索引擎设置。按本次完整提交 SHA 核对 Cloudflare check-run 和部署标识，再验收正式域名的初始 HTML、运行时、刷新、语言切换与桌面/手机页面；发布结果另记回执，不把本地通过写成正式发布成功。
+
+## 2026-10-12 俄语首页描述单页修复（本地完成，未发布）
+
+授权与范围：用户在葡语、越南语描述发布完成后回复“继续”，本轮明确只处理 `/ru/` 首页描述，先本地验收、不自动提交或发布。仅修改 `public/locales/ru/translation.json` 的 `home.seoDescription` 及本条记录，不改 title、H1、正文、其他语言、Blog、converter、共享生成代码、工作区站图或索引设置。保留瑞典语、泰语、阿语、GSC 资料与其他任务的本地改动。
+
+依据与修改：原必应重复描述 CSV 包含 `/ru/`，此前 84 个报告网址的正式 HTML 核对确认它仍与韩语、日语首页共用英文描述；源码该字段本身也是英文，不是缺键回退。复用已有 API 导出，2026-09-11、09-18、09-25、10-02 四批俄语首页记录合计 10 点击、356 展现，不当作完整 28 天逐日统计，不证明重复描述导致流量下降。改为 148 字符俄语：`Превратите изображение в пиксель-арт бесплатно в браузере. Настройте размер пикселей и палитру, посмотрите и скачайте результат в Pixel Art Village.` 保留图片转换、像素大小、调色板、查看结果及下载的真实用途，不改页面定位，不宣称独立母语审校。
+
+构建与静态验收：隔离副本 `/tmp/pixelart-ru-meta.M9Q9Pz/work/` 从 `edae9c0ed421fa88970e1a79163e991a8dcc7ecf` 生成，继承已提交葡语、越南语和瑞典语修复，仅同步本轮俄语资源，不带入并行泰语未提交内容。Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0；改前/改后 build 均通过，含 SEO、dist、缓存/重定向检查，最终 lint、typecheck、sitemap:verify 通过，站图仍 205 项。两次 225 个 HTML 的 title、meta、link、HTML 语言和头部 JSON-LD 比对，只有 `ru/index.html` 变化：普通、OG、Twitter 描述及既有 JSON-LD 两个 description 同步为新文案，无截断；其余 224 页头部、俄语非描述元数据及去除脚本后的可见正文不变。源 JSON 严格比较仅 `home.seoDescription` 变化；原工作区 AGENTS、葡语/越南语资源、两份站图校验值未变。
+
+真实页面：专用 4339 生产式本地预览 HTTP 200，改前实际浏览器复现原英文描述，改后初始 HTML 和运行时三份描述均为新文案。真实语言选择器按英文→俄语→越南语→葡语→俄语切换及俄语整页重新加载通过，未将俄语文案带入对照语言。运行时 title、canonical、lang、H1、上传输入数量与改前一致，1440×900 桌面和 390×844 手机截图已查看，手机 scrollWidth=390 无横向溢出。证据位于上述隔离目录上一层的 build-baseline.log、build-final.log、baseline-runtime.json、static-verification.json、runtime-verification.json；不将本轮描述验收写成图片转换或下载全流程回归。
+
+边界：只完成本地修复，尚未提交、推送、发布或请求必应/Google 重新收录，正式站尚未发布本轮俄语文案。俄语首屏仍有既有英文回退，本轮不补译正文，不计为原 91 页计划中的完整首页补译。未验证必应新版抓取、建议消除或排名、点击改善；韩语、日语重复描述与报告缺失的 29 页明细未在本轮处理。专用浏览器和预览在收尾关闭，不操作其他任务的预览。
+
 ## 2026-10-12 越南语首页描述单页发布准备
 
 并行提交处理：首次提交前检测到共享暂存区已被另一任务占用，断言停止，没有提交越南语或改动对方暂存内容，短时 Git index 锁已释放。待瑞典语任务提交并推送 `f3764cf2f9b51325edd2b709a0edd3b56f1641af`、暂存区清空后，将实际发布基线更新为该提交，继承已提交的瑞典语内容，不重复提交它。新隔离副本 `/tmp/pixelart-vi-release.RY8chi/build-rebased/` 的改前/改后 build 及改后 lint、typecheck、sitemap:verify 均通过；重新对比 225 个 HTML，仅 `vi/index.html` 描述元数据变化，JSON-LD 仅描述同步，可见正文不变，dist 越南语语言包与本轮单字段源码一致。证据为 build-rebased-baseline.log、build-rebased-final.log、rebased-static-verification.json；最终提交仅包含相对新基线的越南语两文件差异，不带入并行泰语等未提交内容。
