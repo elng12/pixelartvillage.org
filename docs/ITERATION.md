@@ -1,5 +1,51 @@
 # Pixel Art Village 迭代记录
 
+## 2026-10-12 越南语五篇发布准备
+
+用户对“越南语五篇定向提交、部署并完成线上验收”回复“继续”，授权本批发布，不包含菲律宾语或 Google 收录请求。起点本地 main 与已获取的 origin/main 均为 ce6a8ce530c0874ee27d2b50fa4dfeb09fa07aa8，真实暂存区为空；保留菲律宾语、站图、AGENTS、其他 GSC/PRD 和未归属迭代记录。发布副本 /tmp/pixelart-vi-release.RMkmpo/work/ 从该提交构造，只合入越南语内容、五项配套资源字段、五张分享图、现有 Blog 测试的越南语段、只读 GSC 基线及本批记录。发布前重新构建与验收；未通过时停止，不用旧版本结果代替当前版本。沿用 main 推送触发的 Cloudflare Pages 项目 pixelartvillage1 Git 集成，不上传整个工作区 dist，不修改发布渠道、索引配置或云端账号。
+
+发布前验收：Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0；build（含 SEO、dist、缓存/重定向）、lint、typecheck、sitemap:verify 和 diff-check 均通过，站图 205 项。完整 Chromium 494/494 通过，零重试、无跳过或 flaky，约 12.1 分钟；覆盖最新已提交代码及本批新增 50 项，不含未提交菲律宾语测试。独立服务 4352 仅提供此次生产式构建，替换默认 E2E 启动命令、不复用旧服务，真实 Cookie 接受/拒绝参与验收。日志 build.log、lint.log、typecheck.log、sitemap.log、full.log、full-results.json、full-report/ 和 full-results/。独立浏览器复查五篇 1440/390/320px 首屏、两张表格与两张图例，15 次 HTTP 200，无 pageerror 或横向溢出，三张首屏拼图已查看；证据 visual/。源内容、必要字段、测试越南语段和五张 PNG 与已验收版本一致；首轮副本构造因比较器处理尾部空行不一致而停止，修正比较器后再构造，未改业务或放宽页面断言。正式发布前五个目标网址均 HTTP 200，仍为旧英文标题，保存 production-before/、production-static-before.json 及六个首页对照。母语读者审校、Illustrator 实机、Firefox/WebKit、实体手机及 Google 新版抓取/规范选择仍未验证，不据本地通过声明流量改善。
+
+## 2026-10-12 越南语五篇修复回执（本地完成，未发布）
+
+本批五篇正文、标题摘要、标签、比较表、案例图注、作者与展示文字已本地化，保留原 slug、数字键 0..4 和 date，updated 为 2026-10-12。完整搜索标题含品牌分别 57、59、56、59、56 字符，摘要分别 136、137、137、141、137 字符；保留 16 个可见 FAQ 及对应结构化数据。只改越南语内容源、五张 /blog-og/vi/ PNG、必要五项语言字段、现有 Blog 测试越南语段、只读 GSC 基线和本文件相关段落，不改共享组件、处理器、首页描述、索引设置或工作区站图。删除虚构十款实测、付费/评分与不存在的编辑器能力，复用已注明来源和尺寸的 15 张图例，其中 13 张小图放大不平滑；没有伪造 Illustrator 实机输出。
+
+受验隔离副本 /tmp/pixelart-vi-batch.gaf4Wl/work/ 从 6a2548736c28dc148ebb5a9a6f79cd3058e14156 构造，仅同步本批越南语文件与当时现有 Blog 测试，Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0。build-final.log 中 build（含 SEO、dist、缓存/重定向）通过，lint-final.log、typecheck-final.log、sitemap-final.log 通过，站图 205 项；git diff --check 通过。五张实际生成 PNG 1200×630，提交候选文件与最终副本图片字节一致，实际解码结果区与源图最近邻放大精确比较通过；五张图片均已逐张查看，越南语声调、标签完整，无截断。
+
+首轮定向错误详见下面准备记录，日志、截图、视频及 trace 保留，不冒充首轮通过。修正内容源后的定向 4/4 通过，见 focused-final.log、focused-final-report/、focused-final-results/、focused-final-results.json。其后最终受影响 Chromium 回归 72/72 通过，零重试、无跳过或 flaky，约 1.8 分钟；包括本批 50 项及其他既有 i18n、canonical/hreflang、静态页、英文上传边界与导出选项 22 项。证据 regression.log、regression-selected.log、regression-report/、regression-results/、regression-results.json。没有使用 VITE_E2E=1 隐藏真实 Cookie，也没有连接默认 4173 旧服务。
+
+页面与工具：五篇各 1440/390/320px 的初始 HTML 与运行时均检查列表进入、刷新、返回、同语言跳转、SEO 标签、schema/FAQ、案例尺寸、下载文件一致性和无横向溢出。工具实际验证像素大小 8/12、自动 24 色、固定 Sunset 8、同会话 dithering、细线 4/16、透明 PNG、非法输入、10 MiB 字节边界与 3000×1500 等比缩至 2200×1100。网格开启时 Pixel size 不绘制线，Original size/2×/4× 可绘制；预览缩放不改变下载像素。等待新预览后才下载，不据此宣称已修复既有立即下载旧结果风险。
+
+专门语义复核由本轮同一执行者完成，方式为生成后重新逐篇对照已确认功能事实、当前控件与实际文件，不称独立或母语审校。B1 核对运营方身份、比较用途而非四工具同图实测、外部官方来源与上传限制；B2 核对视觉 SNES 风格不等于硬件格式、120×95/80×63、颜色上限及随机/同会话条件；B3 核对三细线到一色带的参数方向、固定/自动调色板、透明度和网格条件，不恢复丢失数据；B4 核对 256×256→512×512、300×200→600×400、假设 PPI 算例、三个 Adobe 来源及独立浏览器输入与真实转换输出的区别；B5 核对实际越南语按钮、等待顺序、10 485 760 byte、2200 长边、静态格式及大图导出不恢复细节。标题、摘要、表格、正文、图注、封面和分享标签之间未发现未解决的关键功能语义冲突；Blog、品牌、真实英文导出模式和技术名词保留，不强行翻成与界面不同的标签。母语措辞与独立读者理解仍未验证。
+
+另用独立 Chromium 浏览器查看五篇三视口首屏、两种 320px 表格上下文和两个 320px 放大图例；见 visual/ 的 15 张 head 截图、拼图、table-context-*、figure-*、observations.json 和 visual.log。15 次 HTTP 200，无 pageerror、无横向溢出。长表格的元素截图带入固定导航覆盖，不作为首屏截字结论，另补完整视口上下文截图；没有为截图改导航或共享布局。专用浏览器已关闭，生产式静态预览 http://localhost:4347/vi/blog/ 返回 200，独立 serve-dist PID 89705 保留供用户查看，测试服务 4346 随测试退出，不操作其他任务预览。
+
+收尾期间并行任务发布日语首页描述 ce6a8ce530c0874ee27d2b50fa4dfeb09fa07aa8，并追加菲律宾语源码、资源、测试和基线；均未回滚、覆盖或带入本批构建。当前越南语 JSON、五项资源字段和本批测试段与受验副本一致，旧测试帮助函数段亦一致；整份 Blog 测试因并行追加菲律宾语段而不同，不把菲律宾语测试称为本轮已通过。本批新增五篇，按此前完成 30 篇计本地累计 35/91，不计入并行未完成验收的其他语言。
+
+停止边界：未提交、推送、部署或请求 GSC 收录；没有由本轮开始下一语言。母语审校、Illustrator/其他工具实机、Firefox/WebKit、实体手机、既有立即下载旧结果风险及 Google 新版抓取、规范选择、排名和曝光变化仍未验证。首页/页脚与 Cookie 说明的既有部分英文回退没有扩修；不能把本地通过当作流量或收录改善。后续发布须重新核对届时 HEAD、范围与发布副本，不直接把整个脏工作区部署。
+
+## 2026-10-12 越南语五篇修复准备（本地任务，不发布）
+
+用户对按 PRD 继续越南语五篇本地修复回复“继续”。起点 main/HEAD 为 0c813ea17ff0a5e279d5c2057f01a9373d3cbe42；仅处理 blog-posts.vi.json 五篇及必要分享 PNG、现有 Blog 测试、两项误导操作的越南语调色板字段、GSC 基线与本记录。保留并行泰语、韩语、站图及其他未提交记录，不提交、部署或请求收录。越南语首页描述已发布，不改该字段。
+
+改稿前使用既有服务账号只读官方 REST API，final/web 完整窗口 2026-09-12..2026-10-09；原请求、响应和最近正式抓取状态保存在 GSC_VI_BLOG_BASELINE_2026-10-12.json。不把未返回查询写成零需求，不把关联其他语言规范页的统计归属越南语，也不把静态 URL Inspection 当实时测试或收录请求。
+
+### 改稿前主题与查询映射
+
+目标均为 /vi/blog/<slug>/，下列主词是保持原用途的内容定位，不是已证明的越南语搜索量。
+
+| slug | 越南语主词 | 意图与修复 | GSC 目标证据 |
+|---|---|---|---|
+| best-pixel-art-converters-compared-2025 | công cụ pixel art | 按转换、绘制、动画选择四种工具；删除虚构十款排名与实测 | 0 点击/21 曝光，四条可见查询为 piskelapp .com、pixel art .com、pixel fine converter、pixelartvillage.com；当前 Google 选择 sv 规范 |
+| how-to-get-pixel-art-version-of-image | ảnh sang pixel art phong cách SNES | 视觉风格、尺寸、限色与同会话 dithering；不保证硬件适配 | 已收录、自身规范；page/query 未返回 |
+| make-image-more-like-pixel | cải thiện pixel art | 细线、固定/自动调色板、导出排错；不恢复丢失信息 | Google 选择 nb 规范；page/query 未返回 |
+| export-from-illustrator-image-to-pixel-art | xuất PNG từ Illustrator | 像素尺寸、导出路径、透明度；不冒充 Illustrator 实机案例 | 已收录、自身规范，0/4；query 未返回 |
+| how-to-pixelate-an-image | pixel hóa ảnh | 首次上传、调参、等待新预览与保存 PNG | Google 选择 id 规范；page/query 未返回 |
+
+沿用原 slug 和 date，用 seoTitle 区分短搜索标题与完整 H1；全标题按用户 55–60 字符要求验收，不当作 Google 的硬性长度规则。复用有来源且可下载的既有实测图片，清楚区分浏览器生成输入、实际工具结果与 Adobe 文档步骤。功能依据以当前代码、真实控件和本地处理/下载验收为准；哥飞库第三方内容教程只采用意图清晰、案例与内容一致、自然内链的参考，不采用密度、字数或流量保证。
+
+实施中发现 /vi/blog/ 列表仍有英文简介、无声调 H1 文案及英文返回字段，仅配套补译 blog.subtitle、blog.h1、blog.back；Blog 本身为常用名称，保留，不扩修首页、政策或全站翻译。首轮定向 4 项为 3 通过、1 失败：移植测试常量误读 blog-posts.sv.json，导致找瑞典语标题，部分分享图断言也实际读了瑞典语资料，不计为越南语通过。保留 /tmp/pixelart-vi-batch.gaf4Wl/focused.log、focused-report/、focused-results/ 和 focused-results.json，修正为越南语内容源后另目录重验；没有更改业务或放宽断言迎合错误定位。
+
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 

@@ -87,13 +87,13 @@
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Articles and updates about pixel art, guides and new features.",
-    "back": "Back to Blog",
+    "subtitle": "Hướng dẫn chuyển ảnh thành pixel art, chọn công cụ, điều chỉnh bảng màu và lưu PNG với ví dụ thực.",
+    "back": "Quay lại blog",
     "notFound": {
       "title": "Không tìm thấy bài viết",
       "desc": "Bài viết bạn tìm không tồn tại. Quay lại blog."
     },
-    "h1": "Huong dan va cam nang pixel art"
+    "h1": "Hướng dẫn và cẩm nang pixel art"
   },
   "consent": {
     "title": "Quyền riêng tư & Cookies",
@@ -156,7 +156,7 @@
       "label": "Bảng màu",
       "none": "Không có",
       "custom": "Tùy chỉnh",
-      "note": "Pico‑8 là một bảng màu cố định. Các tên khác không có bảng màu tích hợp sẵn sẽ tự động tạo ra các bảng màu theo kích thước của chúng (ví dụ: Sunset 8 → 8 màu bảng màu)."
+      "note": "Pico-8, Lost Century, Sunset 8, Twilight 5 và Hollow là bảng màu cố định. Bật Tạo bảng màu từ hình ảnh để lấy màu từ ảnh nguồn. Thanh số màu chỉ điều khiển bảng màu tự tạo, không thay đổi bảng màu cố định."
     },
     "colorDistance": {
       "label": "Khoảng cách màu sắc",
@@ -164,7 +164,7 @@
       "lab": "LAB (chính xác, chậm hơn)"
     },
     "autoPalette": "Tạo bảng màu từ hình ảnh",
-    "paletteSize": "# Bảng màu Bảng màu Màu sắc: {{value}}",
+    "paletteSize": "Số màu tối đa trong bảng màu tự tạo: {{value}}",
     "dither": "Bật dithering (Floyd–Steinberg)",
     "zoom": "Phóng to: {{value}}x",
     "grid": "Hiển thị lưới"
