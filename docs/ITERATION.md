@@ -3,6 +3,26 @@
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-10-12 韩语首页描述单页发布准备
+
+用户对“定向提交并发布这次韩语修复，再验收正式页面，不夹带其他任务改动”回复“继续”，授权本轮发布 `/ko/` 首页描述。只提交韩语资源的 `home.seoDescription` 及本文件的韩语本轮修复、发布准备段落；ITERATION 从已提交基线构造提交版本，不直接暂存混有并行任务记录的整份工作区文档。起点本地和远程 main 均为 `ac2056d1afc966c352b87106feffec0f8216c228`，真实暂存区为空；提交时在短时共享 index 锁内重新核对 HEAD、暂存区及受验对象，若被其他任务占用则停止，不覆盖其暂存。
+
+实际发布副本 `/tmp/pixelart-ko-release.MEq53R/build/` 从当前已提交基线重新生成，继承前轮验收后新增的已提交内容，不回退并行任务的提交。对该基线先构建原版本，再只同步韩语字段；Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下，build（含 SEO、dist、缓存/重定向）、lint、typecheck、sitemap:verify 全部通过，站图仍 205 项。两次 225 个 HTML 头部比较仅 `ko/index.html` 的三份描述及两个既有 JSON-LD description 改变；其余 224 页头部、韩语非描述头部信息和去除脚本后的正文不变，韩语头部与前轮真实浏览器已通过的本地版本一致。日志及严格比较结果在 build-baseline.log、build-validation.log 和 release-static-verification.json。
+
+正式域名发布前根首页及韩语、俄语、葡语、越南语首页均 HTTP 200，初始 HTML 元数据对照保存在 production-before.json；实际浏览器仍为韩语页原英文描述，保存 production-runtime-before.json。沿用 origin/main 推送触发的 Cloudflare Pages Git 集成，项目 `pixelartvillage1`，不直接上传 dist、不修改云端配置或索引设置。按本次完整提交 SHA 核对部署和正式页面，再记录发布回执，不把本地构建通过视为正式发布成功。
+
+## 2026-10-12 韩语首页描述单页修复（本地完成，未发布）
+
+授权与范围：用户在俄语描述发布完成后继续任务，本轮明确只处理 `/ko/` 首页描述，先完成本地验收、不自动提交或发布。仅修改 `public/locales/ko/translation.json` 的 `home.seoDescription` 及本条记录，不改 title、H1、正文、其他语言、Blog、converter、共享生成代码、工作区站图或索引设置，不带入并行任务的未提交内容。
+
+依据与修改：此前必应重复描述报告包含韩语首页，本轮改前实际浏览器确认它仍显示英文描述；源码该字段本身是英文，不是缺键回退。沿用此前 API 导出的 2026-09-11、09-18、09-25、10-02 四批记录，韩语首页合计 5 点击、289 展现，不当作完整 28 天逐日统计，不证明重复描述导致流量下降。改为 103 字符韩语：`Pixel Art Village에서 이미지를 무료로 픽셀 아트로 변환하세요. 브라우저에서 픽셀 크기와 색상 팔레트를 조절하며 결과를 미리 보고, 완성한 이미지를 다운로드할 수 있습니다.` 描述图片转换、像素大小、调色板、预览和下载的实际用途；不机械套用英文描述长度建议，不声称达到未经核实的必应最低长度标准，也不宣称独立母语审校。
+
+构建与静态验收：运行环境恢复后发现此前隔离目录不存在，重新从已提交基线 `0c813ea17ff0a5e279d5c2057f01a9373d3cbe42` 创建 `/tmp/pixelart-ko-meta.RkPqix/work/`，先构建未修改基线，再同步唯一韩语字段；没有复用已失效目录的验收结果，也不在原工作区构建。Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下，改前/改后 build 均通过，最终 lint、typecheck、sitemap:verify 通过，站图仍 205 项。两次 225 个 HTML 的 title、meta、link、HTML 语言及头部 JSON-LD 比较，仅 `ko/index.html` 变化：普通、OG、Twitter 描述与两个既有 JSON-LD description 同步为新文案，无截断；其余 224 页头部、韩语非描述头部信息及去除脚本后的正文不变。源 JSON 严格比较仅 `home.seoDescription` 变化。
+
+真实页面：专用 4343 本地生产式预览 HTTP 200，同一独立浏览器改前确认英文描述、改后整页重新加载确认三份韩语描述。真实选择器按英文→韩语→俄语→越南语→葡语→韩语切换，再次重新加载通过，未将韩语普通描述带入对照语言。韩语运行时 title、canonical、lang、H1、上传输入数量与改前一致；1440×900 桌面及 390×844 手机截图已查看，上传入口存在，手机 scrollWidth=390 无横向溢出。证据在隔离目录上一层的 build-baseline.log、build-final.log、baseline-runtime.json、static-verification.json、runtime-verification.json；本轮没有测试图片转换或下载全流程。
+
+边界：只完成本地修复，未提交、推送、发布或请求必应/Google 重新收录，不把本地通过写成正式站已更新。韩语首屏仍有既有英文回退，本轮不补译正文，不计为完整首页补译；日语首页重复描述及原报告缺失的 29 页明细未在本轮处理。未验证必应新版抓取、建议消除或排名、点击改善。收尾仅关闭本轮专用浏览器和预览，不操作其他任务会话。
+
 ## 2026-10-12 俄语首页描述单页发布准备
 
 用户对“下一步定向提交并发布俄语这次修复，再验收正式页面”回复“继续”，授权发布 `/ru/` 描述修复。仅提交 `public/locales/ru/translation.json` 的 `home.seoDescription` 及本文件的俄语本轮修复、发布准备段落，不混入同一文档中其他任务的未提交记录，也不提交 AGENTS、工作区站图、泰语源码/翻译/测试/分享图或 GSC/PRD 资料。准备起点本地与远程 main 均为 `edae9c0ed421fa88970e1a79163e991a8dcc7ecf`，暂存区为空；提交前在短时共享 index 锁内重新核对 HEAD 和真实暂存区，若其他任务占用则停止，不覆盖其暂存。
