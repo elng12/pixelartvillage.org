@@ -474,7 +474,6 @@ for (const javaScriptEnabled of [false, true]) {
   })
 }
 
-
 const indonesianPosts = Object.values(JSON.parse(readFileSync(new URL('../src/content/blog-posts.id.json', import.meta.url), 'utf8')))
 const indonesianCopy = JSON.parse(readFileSync(new URL('../public/locales/id/translation.json', import.meta.url), 'utf8'))
 const indonesianPrimaryPhrases = [
@@ -1459,4 +1458,392 @@ test('Italian batch language switch retains the article and returns to Italian',
   await expect(page).toHaveTitle(`${post.seoTitle} | Pixel Art Village`)
   await expect(page.locator('html')).toHaveAttribute('lang', 'it')
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org/it/blog/${post.slug}/`)
+})
+
+const arabicPosts = Object.values(JSON.parse(readFileSync(new URL('../src/content/blog-posts.ar.json', import.meta.url), 'utf8')))
+const arabicCopy = JSON.parse(readFileSync(new URL('../public/locales/ar/translation.json', import.meta.url), 'utf8'))
+const arabicFacts = [
+  ['محولات فن البكسل', 'لم نختبر جودة البرامج الثلاثة', '10 485 760 بايت', 'تجاوز الضلع الأطول 2200'],
+  ['تحويل الصور إلى فن بكسل', 'وليس وضعًا يطابق عتاد الجهاز', 'ولا يغير اللوحات الثابتة', 'العدد 24 ليس حدًا لعتاد SNES', 'جلسة المثال السابق نفسها', '24 لون RGB معتمًا', 'هل يبقى محيط الموضوع واضحًا', 'هل تميز كتل الضوء والظل', 'ترتيب كتل الألوان ورسم الحواف يدويًا'],
+  ['تحسين فن البكسل', 'ولا يعيد رسم حروف', 'وتغير التنقيط اللوني فقط', 'شريط العدد لا يعيد إنشاء ألوان', 'التهيئة العشوائية', 'ثلاثة خطوط أفقية رفيعة', 'لا يستعيد تفاصيل من ملف'],
+  ['تصدير PNG من Illustrator', 'لم ننفذ التصدير في تطبيق Illustrator', 'لا قيمة PPI وحدها', 'وليس ناتج تحويل الملف الأول', 'وليس إثباتًا لتصدير Illustrator', 'بوحدة px', '256×256', '512×512', '300×200', '600×400', 'المقياس مضاعف لأبعاد اللوح'],
+  ['تحويل صورة إلى بكسل', arabicCopy.editor.downloadBtn, 'انتظر ظهور المعاينة الجديدة فعلًا', 'الشريط لا يغير ألوان اللوحات الثابتة', '10 485 760 بايت'],
+]
+
+async function rejectArabicCookies(page) {
+  if (process.env.EXPECT_CONSENT_BANNER === '1') {
+    const banner = page.getByRole('region', { name: arabicCopy.consent.bannerLabel, exact: true })
+    await expect(banner).toContainText('نحن نستخدم ملفات تعريف الارتباط')
+    await banner.getByRole('button', { name: arabicCopy.consent.rejectLabel, exact: true }).click()
+    await expect(banner).toHaveCount(0)
+  }
+}
+
+async function downloadArabicResult(page, filename, dimensions, maxColors, publishedBytes) {
+  return downloadNorwegianResult(page, filename, dimensions, maxColors, publishedBytes, arabicCopy.editor.downloadBtn)
+}
+
+for (const javaScriptEnabled of [false, true]) {
+  test.describe(`Arabic batch ${javaScriptEnabled ? 'runtime' : 'initial HTML'}`, () => {
+    test.use({ javaScriptEnabled })
+    for (const width of [1440, 390, 320]) {
+      for (const [index, post] of arabicPosts.entries()) {
+        test(`${width}px ${post.slug}`, async ({ page, request }) => {
+          await page.setViewportSize({ width, height: width <= 390 ? 844 : 1000 })
+          expect((await page.goto('/ar/blog/')).status()).toBe(200)
+          if (javaScriptEnabled) await rejectArabicCookies(page)
+          await expect(page.locator('html')).toHaveAttribute('dir', 'rtl')
+          await expect(page.locator('main')).toHaveCSS('direction', 'rtl')
+          await expect(page.locator('main .blog-simple-card').getByRole('link', { name: 'اقرأ المقال', exact: true })).toHaveCount(5)
+          const route = `/ar/blog/${post.slug}/`
+          const title = `${post.seoTitle} | Pixel Art Village`
+          const entry = page.getByRole('link', { name: post.title, exact: true })
+          await expect(entry).toHaveAttribute('href', route)
+          await entry.click()
+          const assertArticle = async () => {
+            expect([...title].length).toBeGreaterThanOrEqual(55)
+            expect([...title].length).toBeLessThanOrEqual(60)
+            expect([...post.excerpt].length).toBeLessThanOrEqual(155)
+            await expect(page).toHaveTitle(title)
+            await expect(page.locator('html')).toHaveAttribute('lang', 'ar')
+            await expect(page.locator('html')).toHaveAttribute('dir', 'rtl')
+            const article = page.locator('.blog-article-prose')
+            await expect(article).toHaveCSS('direction', 'rtl')
+            const reversedDimensions = await article.evaluate(node => {
+              const wrong = []
+              const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT)
+              while (walker.nextNode()) {
+                const text = walker.currentNode
+                for (const match of text.textContent.matchAll(/\d+×\d+/g)) {
+                  const range = document.createRange()
+                  range.setStart(text, match.index)
+                  range.setEnd(text, match.index + 1)
+                  const first = range.getBoundingClientRect().x
+                  range.setStart(text, match.index + match[0].length - 1)
+                  range.setEnd(text, match.index + match[0].length)
+                  if (first >= range.getBoundingClientRect().x) wrong.push(match[0])
+                }
+              }
+              return wrong
+            })
+            expect(reversedDimensions, 'Width remains before height visually in Arabic paragraphs and captions').toEqual([])
+            await expect(page.getByRole('heading', { level: 1 })).toHaveText(post.title)
+            await expect(page.locator('link[rel="canonical"]')).toHaveCount(1)
+            await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org${route}`)
+            await expect(page.locator('link[hreflang="ar"]')).toHaveAttribute('href', `https://pixelartvillage.org${route}`)
+            await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0)
+            for (const key of ['description', 'og:description', 'twitter:description']) {
+              await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', post.excerpt)
+            }
+            for (const key of ['og:title', 'twitter:title']) await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', title)
+            await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', `https://pixelartvillage.org${route}`)
+            for (const key of ['og:image', 'twitter:image']) {
+              await expect(page.locator(`meta[name="${key}"],meta[property="${key}"]`)).toHaveAttribute('content', `https://pixelartvillage.org${post.socialPreview.image}`)
+              await expect(page.locator(`meta[name="${key}:alt"],meta[property="${key}:alt"]`)).toHaveAttribute('content', post.socialPreview.alt)
+            }
+            await expect(article).not.toContainText(italianForbidden)
+            await expect(page.locator('main')).not.toContainText(/min read|Related Articles|Back to Blog|Source image|Pixel art result/)
+            await expect(page.locator('main')).toContainText('آخر تحديث: 2026-10-11')
+            const backLinks = page.locator('main').getByRole('link', { name: 'العودة إلى المدونة', exact: true })
+            await expect(backLinks).toHaveCount(2)
+            for (const link of await backLinks.all()) await expect(link).toHaveAttribute('href', '/ar/blog/')
+            await expect(page.locator('main a[rel="author"]')).toHaveAttribute('href', '/ar/about/')
+            for (const fact of arabicFacts[index]) await expect(article).toContainText(fact)
+            await expect(article.getByRole('heading', { name: 'الأسئلة الشائعة', exact: true })).toBeVisible()
+            await expect(article).not.toContainText(/FAQ|لا أحد|تمكين التردد|بعض شرح اللوحات في الواجهة الحالية غير دقيق|خلافًا لبعض الشرح القديم/)
+            if ([1, 2, 4].includes(index)) await expect(article).toContainText('تفعيل التنقيط اللوني (فلويد – شتاينبرغ)')
+            if ([1, 2, 4].includes(index)) await expect(article).toContainText(arabicCopy.adjustments.autoPalette)
+            if (index === 3) expect(await article.locator('a[href^="https://helpx.adobe.com/"]').count()).toBe(3)
+            const schema = await page.locator('script[type="application/ld+json"]').evaluateAll(nodes => nodes.flatMap(node => JSON.parse(node.textContent)))
+            expect(schema.find(item => item['@type'] === 'BlogPosting')).toMatchObject({
+              headline: post.title, description: post.excerpt, inLanguage: 'ar', datePublished: post.date, dateModified: '2026-10-11',
+              mainEntityOfPage: `https://pixelartvillage.org${route}`, author: { name: 'Pixel Art Village', url: 'https://pixelartvillage.org/ar/about/' }, image: `https://pixelartvillage.org${post.socialPreview.image}`,
+            })
+            expect(schema.find(item => item['@type'] === 'BreadcrumbList').itemListElement.at(-1)).toMatchObject({ name: post.title, item: `https://pixelartvillage.org${route}` })
+            const faq = schema.find(item => item['@type'] === 'FAQPage')
+            expect(faq.mainEntity).toHaveLength(index === 3 ? 4 : 3)
+            for (const question of faq.mainEntity) {
+              await expect(article.getByRole('heading', { name: question.name, exact: true })).toBeVisible()
+              await expect(article).toContainText(question.acceptedAnswer.text)
+            }
+            const headings = await article.locator('h2,h3,h4').evaluateAll(nodes => nodes.map(node => Number(node.tagName[1])))
+            expect(headings[0]).toBe(2)
+            expect(headings.every((level, i) => i === 0 || level <= headings[i - 1] + 1)).toBe(true)
+            await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+            if (post.comparison) {
+              const table = page.getByRole('table')
+              await expect(table).toHaveCSS('direction', 'rtl')
+              await expect(table).toHaveCSS('text-align', 'right')
+              await expect(table.locator('tbody tr')).toHaveCount(4)
+              if (width === 1440) {
+                const positions = await table.locator('thead th').evaluateAll(nodes => nodes.map(node => node.getBoundingClientRect().x))
+                expect(positions.every((x, i) => i === 0 || x < positions[i - 1])).toBe(true)
+              }
+            }
+          }
+          await assertArticle()
+          await page.reload()
+          await assertArticle()
+          const article = page.locator('.blog-article-prose')
+          const figures = post.body.filter(block => block.type === 'figure')
+          await expect(article.locator('figure')).toHaveCount(figures.length)
+          for (const figure of figures) {
+            const element = article.locator(`figure:has(img[src="${figure.src}"])`)
+            const img = element.locator('img')
+            await img.scrollIntoViewIfNeeded()
+            await img.evaluate(image => image.decode())
+            expect(await img.evaluate(image => [image.naturalWidth, image.naturalHeight])).toEqual([figure.width, figure.height])
+            await expect(img).toHaveAttribute('alt', figure.alt)
+            await expect(element.locator('figcaption')).toContainText(figure.caption)
+            const response = await request.get(figure.src)
+            expect(response.status()).toBe(200)
+            const bytes = await response.body()
+            const metadata = await sharp(bytes).metadata()
+            expect([metadata.width, metadata.height]).toEqual([figure.width, figure.height])
+            const [download] = await Promise.all([page.waitForEvent('download'), element.getByRole('link', { name: figure.downloadLabel, exact: true }).click()])
+            const path = test.info().outputPath(figure.src.split('/').pop())
+            await download.saveAs(path)
+            expect(readFileSync(path).equals(bytes)).toBe(true)
+          }
+          const cover = page.getByRole('region', { name: post.presentation.coverLabel, exact: true })
+          await cover.scrollIntoViewIfNeeded()
+          await cover.locator('img').evaluateAll(async images => { for (const image of images) await image.decode() })
+          await expect(cover.locator('figcaption')).toHaveText([post.presentation.sourceLabel, post.presentation.resultLabel])
+          const splitOrReversedCoverDimensions = await cover.locator('figcaption').evaluateAll(nodes => nodes.flatMap(node => {
+            const wrong = []
+            const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT)
+            while (walker.nextNode()) {
+              const text = walker.currentNode
+              for (const match of text.textContent.matchAll(/\d+\s*×\s*\d+/g)) {
+                const range = document.createRange()
+                range.setStart(text, match.index)
+                range.setEnd(text, match.index + 1)
+                const first = range.getBoundingClientRect()
+                range.setStart(text, match.index + match[0].length - 1)
+                range.setEnd(text, match.index + match[0].length)
+                const last = range.getBoundingClientRect()
+                if (first.x >= last.x || first.y !== last.y) wrong.push(match[0])
+              }
+            }
+            return wrong
+          }))
+          expect(splitOrReversedCoverDimensions, 'Cover width and height form one correctly ordered line').toEqual([])
+          const panels = await cover.locator('figure').evaluateAll(nodes => nodes.map(node => node.getBoundingClientRect().x))
+          expect(panels[0]).toBeGreaterThan(panels[1])
+          if (javaScriptEnabled) await test.info().attach(`arabic-cover-${index}-${width}`, { body: await cover.screenshot(), contentType: 'image/png' })
+          if (javaScriptEnabled) {
+            for (const figure of figures.filter(block => block.src.startsWith('/tutorials/pixel-art-ar/'))) {
+              const element = article.locator(`figure:has(img[src="${figure.src}"])`)
+              await expect(element.locator('img')).toHaveCSS('image-rendering', 'pixelated')
+              await test.info().attach(`arabic-lines-${figure.width}-${width}`, { body: await element.screenshot(), contentType: 'image/png' })
+            }
+          }
+          for (const href of await article.locator('a').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')).filter(href => href.startsWith('/')))) {
+            expect(href, 'Pages stay Arabic; resources retain actual paths').toMatch(/^\/ar\/|^\/(photo-|tutorials\/)/)
+            expect((await request.get(href)).status(), href).toBe(200)
+          }
+          if (javaScriptEnabled) {
+            const sibling = arabicPosts.find(item => item.slug !== post.slug && post.body.some(block => typeof block === 'string' && block.includes(`/blog/${item.slug}/`)))
+            await article.locator(`a[href="/ar/blog/${sibling.slug}/"]`).first().click()
+            await expect(page).toHaveTitle(`${sibling.seoTitle} | Pixel Art Village`)
+            await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org/ar/blog/${sibling.slug}/`)
+            await page.goBack()
+            await assertArticle()
+          }
+        })
+      }
+    }
+  })
+}
+
+for (const post of arabicPosts) {
+  test(`Arabic batch sharing PNG ${post.slug}`, async ({ request }) => {
+    const response = await request.get(post.socialPreview.image)
+    expect(response.status()).toBe(200)
+    const bytes = await response.body()
+    const metadata = await sharp(bytes).metadata()
+    expect([metadata.format, metadata.width, metadata.height]).toEqual(['png', 1200, 630])
+    expect(bytes.length).toBeLessThan(1000000)
+    const result = await request.get(post.cover.after)
+    expect(result.status()).toBe(200)
+    const resized = await sharp(await result.body()).resize(441, 350, { fit: 'contain', kernel: 'nearest', background: '#f8fafc' }).png().toBuffer()
+    const expected = await sharp(resized).flatten({ background: '#f8fafc' }).ensureAlpha().raw().toBuffer()
+    const actual = await sharp(bytes).extract({ left: 660, top: 182, width: 441, height: 350 }).ensureAlpha().raw().toBuffer()
+    expect(actual.equals(expected)).toBe(true)
+    await test.info().attach('arabic-sharing-image', { body: bytes, contentType: 'image/png' })
+  })
+}
+
+for (const width of [1440, 320]) {
+  for (const granted of [false, true]) {
+    test(`Arabic batch consent ${width}px ${granted ? 'accept' : 'reject'} persists after reload`, async ({ page }) => {
+      test.skip(process.env.EXPECT_CONSENT_BANNER !== '1', 'Requires the real production-style consent banner')
+      await page.setViewportSize({ width, height: 844 })
+      expect((await page.goto('/ar/blog/export-from-illustrator-image-to-pixel-art/')).status()).toBe(200)
+      const banner = page.getByRole('region', { name: arabicCopy.consent.bannerLabel, exact: true })
+      await expect(banner).toContainText('نحن نستخدم ملفات تعريف الارتباط')
+      await expect(banner).toContainText('في حالة تمكينها')
+      await expect(banner.getByRole('link', { name: arabicCopy.consent.privacy, exact: true })).toHaveAttribute('href', '/ar/privacy/')
+      await banner.getByRole('button', { name: granted ? arabicCopy.consent.acceptLabel : arabicCopy.consent.rejectLabel, exact: true }).click()
+      await expect(banner).toHaveCount(0)
+      const choice = await page.evaluate(() => JSON.parse(localStorage.getItem('consent.choice.v1')))
+      expect(choice.granted).toBe(granted)
+      expect(choice.ts).toBeGreaterThan(0)
+      await page.reload()
+      await expect(banner).toHaveCount(0)
+      expect(await page.evaluate(() => JSON.parse(localStorage.getItem('consent.choice.v1')).granted)).toBe(granted)
+      await expect(page.locator('html')).toHaveAttribute('dir', 'rtl')
+      await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    })
+  }
+}
+
+for (const width of [1440, 390]) {
+  test(`Arabic batch tool ${width}px size and palette workflow`, async ({ page, request }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/ar/')
+    await rejectArabicCookies(page)
+    const source = await request.get('/photo-sunflower-source.jpg')
+    expect(source.status()).toBe(200)
+    await page.getByTestId('file-input').setInputFiles({ name: 'sunflower.jpg', mimeType: 'image/jpeg', buffer: await source.body() })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    await expect(page.getByLabel(arabicCopy.adjustments.autoPalette, { exact: true })).toBeVisible()
+    await expect(page.locator('#palette-select option[value="none"]')).toHaveText('بلا لوحة')
+    const paletteNote = page.getByText(arabicCopy.adjustments.palette.note, { exact: true })
+    await expect(paletteNote).toContainText('Hollow لوحات ثابتة')
+    await expect(paletteNote).toContainText('يؤثر فقط عند تفعيل توليد لوحة من الصورة')
+    await expect(paletteNote).not.toContainText(/تلقائيًا|Sunset 8 → 8/)
+    await expect(page.getByLabel('تفعيل التنقيط اللوني (فلويد – شتاينبرغ)', { exact: true })).toBeVisible()
+    await expect(page.getByRole('button', { name: arabicCopy.editor.downloadBtn, exact: true }).last()).toBeVisible()
+    await page.locator('#palette-select').selectOption('none')
+    await page.getByRole('button', { name: 'Pixel size', exact: true }).click()
+    for (let size = 2; size <= 12; size++) {
+      // ArrowUp increases a native range in either LTR or RTL layouts.
+      await waitForIndonesianResult(page, () => page.locator('#pixel-size-slider').press('ArrowUp'))
+      await expect(page.locator('#pixel-size-slider')).toHaveValue(String(size))
+      if (size === 8 || size === 12) {
+        const published = await request.get(size === 8 ? '/tutorials/pixel-art-ko/sunflower-pixel8.png' : '/photo-sunflower-pixel12.png')
+        expect(published.status()).toBe(200)
+        await downloadArabicResult(page, `sunflower-pixel${size}.png`, size === 8 ? [120, 95] : [80, 63], null, await published.body())
+      }
+    }
+    await waitForIndonesianResult(page, () => page.locator('#auto-palette').check())
+    await expect(page.locator('#palette-size')).toHaveValue('16')
+    for (let colors = 17; colors <= 24; colors++) await waitForIndonesianResult(page, () => page.locator('#palette-size').press('ArrowUp'))
+    await expect(page.locator('#palette-size')).toHaveValue('24')
+    await expect(page.getByLabel('الحد الأقصى لألوان اللوحة المولدة: 24', { exact: true })).toBeVisible()
+    const plain = await downloadArabicResult(page, 'sunflower-colors24.png', [80, 63], 24)
+    await waitForIndonesianResult(page, () => page.locator('#dither').check())
+    const dithered = await downloadArabicResult(page, 'sunflower-colors24-dither.png', [80, 63], 24)
+    expect(dithered.equals(plain)).toBe(false)
+    await waitForIndonesianResult(page, () => page.locator('#auto-palette').uncheck())
+    await waitForIndonesianResult(page, () => page.locator('#palette-select').selectOption('Sunset 8'))
+    await expect(page.locator('#palette-size')).toHaveCount(0)
+    await downloadArabicResult(page, 'sunflower-fixed-sunset8.png', [80, 63], 8)
+  })
+
+  test(`Arabic batch tool ${width}px thin-line reference downloads`, async ({ page, request }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/ar/')
+    await rejectArabicCookies(page)
+    const source = await request.get('/tutorials/illustrator-png-ko/size-512.png')
+    expect(source.status()).toBe(200)
+    await page.getByTestId('file-input').setInputFiles({ name: 'lines-source.png', mimeType: 'image/png', buffer: await source.body() })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    await expect(page.locator('#pixel-size-slider')).toHaveValue('1')
+    await expect(page.locator('#palette-select')).toHaveValue('none')
+    await expect(page.locator('#auto-palette')).not.toBeChecked()
+    await expect(page.locator('#dither')).not.toBeChecked()
+    await expect(page.getByLabel(arabicCopy.export.transparent.label, { exact: true })).toBeChecked()
+    await page.getByRole('button', { name: 'Pixel size', exact: true }).click()
+    const references = []
+    for (let size = 2; size <= 16; size++) {
+      await waitForIndonesianResult(page, () => page.locator('#pixel-size-slider').press('ArrowUp'))
+      if (![4, 16].includes(size)) continue
+      const published = await request.get(`/tutorials/pixel-art-ar/lines-pixel${size}.png`)
+      expect(published.status()).toBe(200)
+      const dimension = 512 / size
+      const raw = await downloadArabicResult(page, `lines-pixel${size}.png`, [dimension, dimension])
+      references.push({ size, raw, published: await published.body() })
+      // Count distinct dark row bands across the source's three thin lines.
+      let bands = 0
+      let inBand = false
+      for (let y = Math.floor(365 / size); y < Math.ceil(420 / size); y++) {
+        const dark = raw[(y * dimension + dimension / 2) * 4] < 220
+        if (dark && !inBand) bands++
+        inBand = dark
+      }
+      expect(bands, 'Pixel Size 4 preserves three separated lines; 16 retains one band').toBe(size === 4 ? 3 : 1)
+    }
+    for (const { size, raw, published } of references) {
+      expect(raw.equals(await sharp(published).ensureAlpha().raw().toBuffer()), `Published Pixel Size ${size} matches the actual download`).toBe(true)
+    }
+  })
+
+  test(`Arabic batch tool ${width}px transparent import and download`, async ({ page, request }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/ar/')
+    await rejectArabicCookies(page)
+    const source = await request.get('/tutorials/illustrator-png-ko/size-512.png')
+    expect(source.status()).toBe(200)
+    await page.getByTestId('file-input').setInputFiles({ name: 'browser-demo.png', mimeType: 'image/png', buffer: await source.body() })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    await page.locator('#palette-select').selectOption('none')
+    for (let size = 2; size <= 8; size++) await waitForIndonesianResult(page, () => page.locator('#pixel-size-slider').press('ArrowUp'))
+    await page.getByRole('button', { name: 'Pixel size', exact: true }).click()
+    await expect(page.locator('#transparent-bg')).toBeChecked()
+    const published = await request.get('/tutorials/pixel-art-id/illustrator-pixel8.png')
+    expect(published.status()).toBe(200)
+    const raw = await downloadArabicResult(page, 'converted-transparent.png', [64, 64], null, await published.body())
+    const alpha = []
+    for (let i = 3; i < raw.length; i += 4) alpha.push(raw[i])
+    expect(alpha).toContain(0)
+    expect(alpha).toContain(255)
+    await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  })
+
+  test(`Arabic batch tool ${width}px invalid input, limits and recovery`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/ar/')
+    await rejectArabicCookies(page)
+    const input = page.getByTestId('file-input')
+    await input.setInputFiles({ name: 'invalid.txt', mimeType: 'text/plain', buffer: Buffer.from('Synthetic test input, not a published case study') })
+    await expect(page.getByText(arabicCopy.errors.onlyPngJpg, { exact: true })).toBeVisible()
+    await expect(page.getByTestId('editor-controls')).toHaveCount(0)
+    const png = await sharp({ create: { width: 3000, height: 1500, channels: 3, background: '#d64769' } }).png().toBuffer()
+    const maxBytes = 10 * 1024 * 1024
+    const oversized = Buffer.alloc(maxBytes + 1)
+    png.copy(oversized)
+    await input.setInputFiles({ name: 'oversized.png', mimeType: 'image/png', buffer: oversized })
+    await expect(page.getByText(arabicCopy.errors.fileTooLarge10, { exact: true })).toBeVisible()
+    await expect(page.getByTestId('editor-controls')).toHaveCount(0)
+    const atLimit = Buffer.alloc(maxBytes)
+    png.copy(atLimit)
+    await input.setInputFiles({ name: 'at-limit.png', mimeType: 'image/png', buffer: atLimit })
+    await expect(page.getByTestId('preview-container').locator('img')).toHaveAttribute('src', /^data:image\/png/)
+    await expect(page.locator('#pixel-size-slider')).toHaveValue('1')
+    await expect(page.getByText(arabicCopy.errors.fileTooLarge10, { exact: true })).toHaveCount(0)
+    await page.getByRole('button', { name: 'Pixel size', exact: true }).click()
+    await downloadArabicResult(page, 'resized-boundary.png', [2200, 1100])
+  })
+}
+
+test('Arabic batch language switch retains article and restores reading direction', async ({ page }) => {
+  const post = arabicPosts[4]
+  await page.goto(`/ar/blog/${post.slug}/`)
+  await rejectArabicCookies(page)
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl')
+  await page.locator('#language-switcher').selectOption('en')
+  await expect.poll(() => new URL(page.url()).pathname.replace(/\/$/, '')).toBe(`/blog/${post.slug}`)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr')
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org/blog/${post.slug}/`)
+  await page.reload()
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr')
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org/blog/${post.slug}/`)
+  await page.goBack()
+  await expect(page).toHaveTitle(`${post.seoTitle} | Pixel Art Village`)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ar')
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl')
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://pixelartvillage.org/ar/blog/${post.slug}/`)
 })

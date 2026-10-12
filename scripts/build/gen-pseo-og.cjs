@@ -158,14 +158,17 @@ async function genLocalizedBlogComparisons() {
       }
       const source = path.resolve(ROOT, 'public', post.cover.before.replace(/^\//, ''));
       const result = path.resolve(ROOT, 'public', post.cover.after.replace(/^\//, ''));
+      const rtl = locale === 'ar';
       const svg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
         <rect width="1200" height="630" fill="#f8fafc"/>
         <g font-family="Arial, sans-serif" fill="#111827">
-          <text x="60" y="72" font-size="48" font-weight="700">${escapeXml(preview.title)}</text>
-          <text x="60" y="121" font-size="34">${escapeXml(preview.subtitle)}</text>
-          <text x="60" y="162" font-size="23" fill="#475569">${escapeXml(preview.summary || post.comparison.rows.map((row) => row[0]).join(' | '))}</text>
-          <text x="60" y="565" font-size="23">${escapeXml(post.presentation.sourceLabel)}</text>
-          <text x="660" y="565" font-size="23">${escapeXml(post.presentation.resultLabel)}</text>
+          <g${rtl ? ' direction="rtl" unicode-bidi="embed"' : ''}>
+            <text x="${rtl ? 1140 : 60}" y="72" font-size="48" font-weight="700">${escapeXml(preview.title)}</text>
+            <text x="${rtl ? 1140 : 60}" y="121" font-size="34">${escapeXml(preview.subtitle)}</text>
+            <text x="${rtl ? 1140 : 60}" y="162" font-size="23" fill="#475569">${escapeXml(preview.summary || post.comparison.rows.map((row) => row[0]).join(' | '))}</text>
+            <text x="${rtl ? 501 : 60}" y="565" font-size="23">${escapeXml(post.presentation.sourceLabel)}</text>
+            <text x="${rtl ? 1101 : 660}" y="565" font-size="23">${escapeXml(post.presentation.resultLabel)}</text>
+          </g>
           <text x="60" y="610" font-size="22" font-weight="700">Pixel Art Village</text>
           <text x="900" y="610" font-size="20" fill="#475569">pixelartvillage.org</text>
         </g>

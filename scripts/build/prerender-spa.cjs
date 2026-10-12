@@ -623,7 +623,7 @@ async function prerender() {
     for (const block of blocks) {
       if (block.type === 'heading' && block.level === 2) {
         if (inFaqSection) pushActiveItem()
-        inFaqSection = /^faq$/i.test(String(block.content || '').trim())
+        inFaqSection = block.id === 'faq' || /^faq$/i.test(String(block.content || '').trim())
         activeQuestion = null
         answerParts = []
         continue
@@ -753,11 +753,12 @@ async function prerender() {
     </div>`
   }
 
-  const renderBlogComparisonVisible = (comparison) => {
+  const renderBlogComparisonVisible = (comparison, lang = DEFAULT_LANG) => {
     if (!comparison) return ''
-    return `<section id="${escapeHtml(comparison.id)}" class="mt-8 text-left" aria-labelledby="${escapeHtml(comparison.id)}-heading">
+    const alignment = lang === 'ar' ? 'text-right' : 'text-left'
+    return `<section id="${escapeHtml(comparison.id)}" class="mt-8 ${alignment}" aria-labelledby="${escapeHtml(comparison.id)}-heading">
       <h2 id="${escapeHtml(comparison.id)}-heading" class="text-xl font-semibold leading-8 text-slate-950">${escapeHtml(comparison.heading)}</h2>
-      <table class="mt-4 block w-full text-left md:table md:table-fixed">
+      <table class="mt-4 block w-full ${alignment} md:table md:table-fixed">
         <caption class="sr-only">${escapeHtml(comparison.heading)}</caption>
         <thead class="hidden md:table-header-group"><tr class="border-b border-slate-300">
           ${comparison.columns.map((column) => `<th scope="col" class="break-words px-3 py-3 text-sm font-semibold first:pl-0 md:last:w-[28%]">${escapeHtml(column)}</th>`).join('')}
@@ -838,7 +839,7 @@ async function prerender() {
             <p class="mx-auto mt-7 max-w-[42rem] text-[1.05rem] leading-8 text-slate-600 md:text-[1.1rem]">${escapeHtml(post.excerpt || '')}</p>
           </header>
 
-          ${renderBlogComparisonVisible(post.comparison)}
+          ${renderBlogComparisonVisible(post.comparison, lang)}
 
           ${tocHtml}
 
@@ -2108,6 +2109,10 @@ async function prerender() {
       jsonLd: r.jsonLd,
     })
 
+    // Match the existing client-side Arabic direction only on Blog routes.
+    if (r.lang === 'ar' && r.path.startsWith('/ar/blog/')) {
+      out = out.replace(/<html\b([^>]*)>/i, (_, attrs) => `<html${attrs.replace(/\sdir=["'][^"']*["']/i, '')} dir="rtl">`)
+    }
     out = injectHreflang(out, alternates)
     let appHtml = ''
     try {

@@ -235,7 +235,7 @@ function extractFaqItems(blocks = []) {
   for (const block of blocks) {
     if (block.type === 'heading' && block.level === 2) {
       if (inFaqSection) pushActiveItem()
-      inFaqSection = /^faq$/i.test(String(block.content || '').trim())
+      inFaqSection = block.id === 'faq' || /^faq$/i.test(String(block.content || '').trim())
       activeQuestion = null
       answerParts = []
       continue
@@ -455,15 +455,16 @@ function renderBlogBlocks(blocks = [], editorialNoteIndex = -1) {
   })
 }
 
-function BlogComparisonTable({ comparison }) {
+function BlogComparisonTable({ comparison, locale }) {
   if (!comparison) return null
+  const alignment = locale === 'ar' ? 'text-right' : 'text-left'
 
   return (
-    <section id={comparison.id} className="mt-8 text-left" aria-labelledby={`${comparison.id}-heading`}>
+    <section id={comparison.id} className={`mt-8 ${alignment}`} aria-labelledby={`${comparison.id}-heading`}>
       <h2 id={`${comparison.id}-heading`} className="text-xl font-semibold leading-8 text-slate-950">
         {comparison.heading}
       </h2>
-      <table className="mt-4 block w-full text-left md:table md:table-fixed">
+      <table className={`mt-4 block w-full ${alignment} md:table md:table-fixed`}>
         <caption className="sr-only">{comparison.heading}</caption>
         <thead className="hidden md:table-header-group">
           <tr className="border-b border-slate-300">
@@ -705,7 +706,7 @@ export default function BlogPost() {
             </p>
           </header>
 
-          <BlogComparisonTable comparison={post.comparison} />
+          <BlogComparisonTable comparison={post.comparison} locale={resolvedLocale} />
 
           {fallback ? (
             <p className="mt-6 text-center text-xs text-gray-500">{t('content.fallbackNotice')}</p>
