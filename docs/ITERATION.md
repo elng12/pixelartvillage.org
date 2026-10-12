@@ -1,5 +1,21 @@
 # Pixel Art Village 迭代记录
 
+## 2026-10-12 英文4K/8K文章SEO标题发布准备
+
+用户回复“继续”，授权仅发布 `/blog/how-many-pixels-is-4k-and-8k/` 的57字符完整SEO标题与本轮记录，不包含其他页面修复或收录请求。发布基线为 `8c29aa2eae1e43995f2f34ac13f7822efdd2ee17`，真实暂存区为空；保留未提交的菲律宾语内容、测试、分享图、站图、AGENTS及其他文档。发布副本从Git归档构造，仅合入目标seoTitle；Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0下，build、lint、typecheck通过，225页SEO元信息及去除script后的body均与本轮已完成真实浏览器验收的构建一致。证据 `/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-4k-release.vg4uo9ff/`。
+
+提交版ITERATION从上述基线只加入本轮单页修复和发布准备章节，不暂存混有其他任务记录的整份工作区文档。使用独立index定向提交两个文件，提交前在短时index锁内核对HEAD、暂存区、受验源内容和章节一致；沿用main推送触发的Cloudflare Pages项目pixelartvillage1，不直接上传工作区dist或切换发布渠道。当前为发布准备，最终部署及线上验收结果以之后的发布回执为准；不声明Google/必应已重新抓取或旧警告消失。
+
+## 2026-10-12 英文4K/8K文章SEO标题单页修复（本地完成，未发布）
+
+用户同意完整搜索标题使用 `4K vs 8K Resolution: How Many Pixels? | Pixel Art Village`，含品牌、空格和标点共57字符，符合本轮约定的55–60字符范围。唯一目标为 `/blog/how-many-pixels-is-4k-and-8k/`；`src/content/blog-posts.en.json` 仅为该文章增加 `seoTitle: "4K vs 8K Resolution: How Many Pixels?"`，复用既有品牌追加机制，不重复写入品牌。原标题 `How Many Pixels Is 4K and 8K? A Simple Resolution Guide` 继续用于可见H1和既有schema headline；正文、摘要、日期、标签、网址及其他文章字段保持不变。未扩大为全站标题规则修改，也不据关键词数量或字符长度保证排名、权重和曝光改善。
+
+本地验收从提交 `8c29aa2eae1e43995f2f34ac13f7822efdd2ee17` 构造隔离副本；源内容修改前与该提交相同，JSON比较确认仅增加目标字段。Node 20.19.0、`VITE_E2E=0`、`VITE_ENABLE_ANALYTICS=0` 下，修改前后完整 `npm run build` 均通过，包含既有SEO、dist及缓存/重定向检查。225份HTML的SEO元信息对照仅目标页的title、og:title、twitter:title变化；其description、canonical、lang、JSON-LD均不变，其余224页元信息及225页去除script后的body均不变。英文文章共享的initialContent数据和构建脚本资源可能随新增字段变化，不声明只有一份HTML或资源文件字节改变；未在原工作区执行构建或手改dist。
+
+独立Chromium验收初次加载、Blog列表进入文章、文章返回列表后再进入、桌面刷新、390×844手机和手机刷新，六阶段均为57字符新搜索标题，H1、摘要、canonical与en语言正确。返回列表及再进入通过同一文档标记确认SPA导航，列表保留自己的标题。1440×900桌面和手机截图已查看，手机scrollWidth=390，无横向溢出。新HTTP请求为200并匹配受验构建；正常浏览器缓存刷新为304。临时验收最初把304误判为失败，并在列表标题更新、链接渲染完成前读取或点击；调整为等待实际页面状态并接受正常缓存响应后完成验收，未因此修改业务代码、放宽元信息断言或增加永久测试。
+
+证据：`/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-4k-title.fwzod43z/`，含scope、修改前后源内容、静态及HTTP对照、运行时六阶段记录、桌面/手机截图和local-receipt；构建完整输出为 `artifact://294` 与 `artifact://297`。本轮未提交、推送、部署、发送收录请求或访问个人登录态；未核实Google/必应重新抓取或必应旧警告消失，不能将本地通过称为线上已修复。
+
 ## 2026-10-12 越南语五篇发布准备
 
 用户对“越南语五篇定向提交、部署并完成线上验收”回复“继续”，授权本批发布，不包含菲律宾语或 Google 收录请求。起点本地 main 与已获取的 origin/main 均为 ce6a8ce530c0874ee27d2b50fa4dfeb09fa07aa8，真实暂存区为空；保留菲律宾语、站图、AGENTS、其他 GSC/PRD 和未归属迭代记录。发布副本 /tmp/pixelart-vi-release.RMkmpo/work/ 从该提交构造，只合入越南语内容、五项配套资源字段、五张分享图、现有 Blog 测试的越南语段、只读 GSC 基线及本批记录。发布前重新构建与验收；未通过时停止，不用旧版本结果代替当前版本。沿用 main 推送触发的 Cloudflare Pages 项目 pixelartvillage1 Git 集成，不上传整个工作区 dist，不修改发布渠道、索引配置或云端账号。
