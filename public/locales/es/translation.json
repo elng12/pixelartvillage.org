@@ -166,14 +166,27 @@
   },
   "consent": {
     "title": "Privacidad y cookies",
-    "desc": "We use cookies to operate this site and, if enabled, to display Google AdSense ads. You can accept or reject non-essential cookies at any time.",
+    "desc": "Usamos cookies esenciales para el funcionamiento del sitio. Con tu permiso, las cookies de análisis nos ayudan a conocer su uso y las publicitarias permiten Google AdSense y anuncios personalizados. Puedes elegirlas por separado.",
     "privacy": "Política de privacidad",
     "andManage": "y administrar la personalización de anuncios en",
     "accept": "Aceptar todo",
     "reject": "Rechazar no esenciales",
     "bannerLabel": "Diálogo de consentimiento de cookies",
     "acceptLabel": "Aceptar todas las cookies",
-    "rejectLabel": "Rechazar cookies no esenciales"
+    "rejectLabel": "Rechazar cookies no esenciales",
+    "customize": "Personalizar",
+    "settings": "Configuración de cookies",
+    "preferencesDesc": "Las cookies esenciales permanecen activas. Elige si permites cookies de análisis o publicidad.",
+    "analytics": "Estadísticas de uso",
+    "analyticsDesc": "Permite que Google Analytics y Microsoft Clarity mida visitas e interacciones para mejorar el sitio.",
+    "advertising": "Publicidad y personalización",
+    "advertisingDesc": "Permite cookies publicitarias y el uso de datos para Google AdSense y anuncios personalizados.",
+    "save": "Guardar preferencias",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "storageWarning": "Tus opciones se aplican ahora, pero este navegador no pudo guardarlas para futuras visitas.",
+    "managerUnavailable": "El gestor de consentimiento del sitio no pudo abrir su configuración. Inténtalo más tarde.",
+    "saveError": "No se pudieron aplicar tus preferencias. Inténtalo de nuevo."
   },
   "tool": {
     "title": "Convertidor de Imagen a Arte Píxel con Paleta Personalizada",
@@ -669,7 +682,7 @@
         "description": "Abre un archivo GIF y convierte su primer fotograma en una imagen de arte píxel."
       }
     },
-    "consentDescription": "Usamos cookies para el funcionamiento del sitio y, si se habilitan, para mostrar anuncios de Google AdSense. Puedes aceptar o rechazar las cookies no esenciales en cualquier momento.",
+    "consentDescription": "Usamos cookies esenciales para el funcionamiento del sitio. Con tu permiso, las cookies de análisis nos ayudan a conocer su uso y las publicitarias permiten Google AdSense y anuncios personalizados. Puedes elegirlas por separado.",
     "adsSettingsLabel": "Configuración de anuncios de Google",
     "footer": {
       "links": {

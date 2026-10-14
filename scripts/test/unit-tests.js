@@ -3,6 +3,7 @@
 import assert from 'node:assert'
 import fs from 'node:fs'
 import path from 'node:path'
+import { registerConsentTests } from './consent-tests.js'
 
 import { inferAutoPaletteSize } from '../../src/utils/palette-utils.js'
 import { clampZoom, formatZoomLabel, snapZoom } from '../../src/utils/zoom-utils.js'
@@ -356,6 +357,8 @@ test('applyPaletteToCtx quantizes to given palette', () => {
 test('getKMeansPalette exists (smoke)', () => {
   assert.strictEqual(typeof getKMeansPalette, 'function')
 })
+
+registerConsentTests(test)
 
 for (const { name, fn } of tests) {
   try {

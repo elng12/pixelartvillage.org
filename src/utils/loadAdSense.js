@@ -1,6 +1,12 @@
 // 动态加载 Google AdSense Auto Ads 脚本（基于同意后）
 // 幂等：若已加载则不重复注入
 
+let cancelScheduledLoad = null
+
+export function cancelAdSenseLoad() {
+  cancelScheduledLoad?.()
+}
+
 export function ensureAdSenseLoaded() {
   try {
     if (window.__adsenseLoaded) return
@@ -59,8 +65,16 @@ export function scheduleAdSenseLoad({ delayMs = 4000 } = {}) {
       if (settled) return
       settled = true
       cleanup()
+      cancelScheduledLoad = null
       window.__adsenseLoadScheduled = false
       ensureAdSenseLoaded()
+    }
+    cancelScheduledLoad = () => {
+      if (settled) return
+      settled = true
+      cleanup()
+      cancelScheduledLoad = null
+      window.__adsenseLoadScheduled = false
     }
     const scheduleInteractionLoad = () => {
       if (settled) return
@@ -103,6 +117,7 @@ export function scheduleAdSenseLoad({ delayMs = 4000 } = {}) {
       window.addEventListener('load', loadListener, { once: true })
     }
   } catch {
+    cancelScheduledLoad?.()
     window.__adsenseLoadScheduled = false
   }
 }

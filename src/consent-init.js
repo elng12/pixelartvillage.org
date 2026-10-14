@@ -2,20 +2,17 @@
 // - Applies stored user choice if exists (only when CMP is not present)
 // - Watches consent updates to load optional scripts after consent
 
-import { scheduleAdSenseLoad } from './utils/loadAdSense.js'
+import { cancelAdSenseLoad, scheduleAdSenseLoad } from './utils/loadAdSense.js'
 import { ensureClarityLoaded } from './clarity-init.js'
 import { ensureGaLoaded } from './ga-init.js'
 import { ensureGtmLoaded, insertGtmNoScript } from './gtm-init.js'
+import { createConsentUpdate, hasConsentManager, readConsentChoice } from './utils/consent.js'
+import logger from './utils/logger.js'
 
-const STORAGE_KEY = 'consent.choice.v1'
 const CONSENT_KEYS = ['ad_storage', 'analytics_storage', 'ad_user_data', 'ad_personalization']
 const consentState = Object.fromEntries(CONSENT_KEYS.map((key) => [key, 'denied']))
 const ENABLE_ANALYTICS = Boolean(import.meta.env.PROD) && String(import.meta.env.VITE_ENABLE_ANALYTICS) === '1'
 const CONSENT_EVENT_NAME = 'pv:analytics-consent'
-
-function hasCmp() {
-  return typeof window.__tcfapi === 'function' || typeof window.__gpp === 'function' || typeof window.__cmp === 'function'
-}
 
 function ensureConsentDefaults() {
   try {
@@ -44,6 +41,10 @@ function syncAnalyticsConsentFlag(granted) {
 
 function applyConsentUpdate(update) {
   if (!update || typeof update !== 'object') return
+  if (CONSENT_KEYS.some((key) => key in update && !['granted', 'denied'].includes(update[key]))) {
+    logger.warn('[consent] Ignoring an invalid consent update.')
+    return
+  }
   let changed = false
   for (const key of CONSENT_KEYS) {
     if (key in update && update[key] !== consentState[key]) {
@@ -56,6 +57,8 @@ function applyConsentUpdate(update) {
   syncAnalyticsConsentFlag(analyticsGranted)
   if (consentState.ad_storage === 'granted') {
     try { scheduleAdSenseLoad({ delayMs: 8000 }) } catch { /* no-op */ }
+  } else {
+    cancelAdSenseLoad()
   }
   if (analyticsGranted && ENABLE_ANALYTICS) {
     try { ensureGaLoaded() } catch { /* no-op */ }
@@ -82,12 +85,14 @@ function watchConsentUpdates() {
     const dl = window.dataLayer
     const originalPush = dl.push.bind(dl)
     dl.push = (...args) => {
+      // Queue Google's consent update before listeners can emit dependent events.
+      const result = originalPush(...args)
       for (const arg of args) {
         if (arg && arg[0] === 'consent' && arg[1] === 'update') {
           applyConsentUpdate(arg[2] || {})
         }
       }
-      return originalPush(...args)
+      return result
     }
   } catch { /* no-op */ }
 }
@@ -99,17 +104,10 @@ scanExistingDataLayer()
 
 // Apply stored choice (only if no CMP is detected)
 try {
-  if (!hasCmp()) {
-    const saved = localStorage.getItem(STORAGE_KEY)
+  if (!hasConsentManager()) {
+    const saved = readConsentChoice()
     if (saved) {
-      const c = JSON.parse(saved)
-      const granted = c?.granted === true
-      const update = {
-        ad_storage: granted ? 'granted' : 'denied',
-        analytics_storage: granted ? 'granted' : 'denied',
-        ad_user_data: granted ? 'granted' : 'denied',
-        ad_personalization: granted ? 'granted' : 'denied',
-      }
+      const update = createConsentUpdate(saved)
       try {
         const gtag = window.gtag || (function(){ window.dataLayer = window.dataLayer || []; return function(){ window.dataLayer.push(arguments) } })()
         gtag('consent', 'update', update)

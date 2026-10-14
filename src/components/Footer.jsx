@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import LocalizedLink from '@/components/LocalizedLink';
 import { useLocaleContext } from '@/hooks/useLocaleContext';
+import { openConsentSettings } from '@/utils/consent.js';
 const aiDirsBadge = '/badges/ai-dirs-badge.svg';
 const acidToolsBadge = '/badges/acidtools-badge.png';
 const deepLaunchBadge = '/badges/deeplaunch-badge-light.svg';
@@ -321,6 +322,7 @@ function Footer({ copy }) {
                 <li><LocalizedLink to="/#tool" className="hover:text-white">{t('footer.links.start')}</LocalizedLink></li>
                 <li><LocalizedLink to="/#features" className="hover:text-white">{t('footer.links.tips')}</LocalizedLink></li>
                 <li><LocalizedLink to="/privacy/" className="hover:text-white">{t('footer.links.privacyLocal')}</LocalizedLink></li>
+                <li><button type="button" onClick={openConsentSettings} className="text-left hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4" data-testid="cookie-settings">{t('consent.settings')}</button></li>
               </ul>
             </div>
           </div>
