@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Post-build verification for SPA:
 // - index.html includes built assets
-// - 404.html exists (GitHub Pages SPA fallback)
+// - 404.html exists (prerendered Cloudflare Pages error document)
 // - Social images exist
 // - Route pages (privacy/terms/about/contact/blog and blog posts) contain SEO-critical tags
 const fs = require('fs');

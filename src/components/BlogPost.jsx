@@ -5,6 +5,7 @@ import { useLocaleContext } from '@/hooks/useLocaleContext'
 import { estimateBlogReadTime, getBlogCoverImages, getBlogPresentationMeta } from '@/utils/blogPresentation'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
+import blogArticleLocales from 'virtual:blog-article-locales'
 
 const BLOG_OG_IMAGE_SLUGS = new Set([
   'best-pixel-art-converters-compared-2025',
@@ -537,12 +538,9 @@ function BlogPostCover({ post }) {
   )
 }
 
-export default function BlogPost() {
+function BlogPostContent({ slug, resolvedLocale, buildPath }) {
   const { t } = useTranslation()
-  const { slug, lang: urlLang } = useParams()
-  const { currentLocale, buildPath } = useLocaleContext()
   const { data: posts, fallback } = useLocalizedContent('blog-posts')
-  const resolvedLocale = currentLocale || urlLang || 'en'
   const canonicalBase = slug ? `/blog/${slug}` : '/blog/'
 
   if (!posts) {
@@ -559,17 +557,7 @@ export default function BlogPost() {
   const canonical = `https://pixelartvillage.org${buildPath(canonicalBase)}`
   const siteName = t('site.name')
 
-  if (!post) {
-    return (
-      <div className="container mx-auto max-w-4xl px-4 py-12">
-        <Seo title={`${t('blog.notFound.title')} | ${siteName}`} canonical={canonical} lang={resolvedLocale} />
-        <h1 className="text-center text-3xl font-semibold text-slate-950">{t('blog.notFound.title')}</h1>
-        <p className="mt-4 text-center text-slate-600">
-          {t('blog.notFound.desc')}
-        </p>
-      </div>
-    )
-  }
+  if (!post) return <BlogPostNotFound locale={resolvedLocale} />
 
   const seoTitle = buildBlogSeoTitle(post.seoTitle || post.title, siteName)
   const articleImage = resolveBlogOgImage(post.slug, post.socialPreview)
@@ -771,4 +759,35 @@ export default function BlogPost() {
       </div>
     </article>
   )
+}
+
+function BlogPostNotFound({ locale }) {
+  const { t } = useTranslation()
+  return (
+    <div className="container mx-auto max-w-4xl px-4 py-12">
+      <Seo
+        title={`${t('blog.notFound.title')} | ${t('site.name')}`}
+        description={t('blog.notFound.desc')}
+        noindex
+        lang={locale}
+      />
+      <h1 className="text-center text-3xl font-semibold text-slate-950">{t('blog.notFound.title')}</h1>
+      <p className="mt-4 text-center text-slate-600">{t('blog.notFound.desc')}</p>
+      <div className="mt-8 text-center">
+        <LocalizedLink to="/blog/" className="btn-primary inline-flex items-center justify-center">
+          {t('blog.back')}
+        </LocalizedLink>
+      </div>
+    </div>
+  )
+}
+
+export default function BlogPost() {
+  const { slug, lang: urlLang } = useParams()
+  const { currentLocale, buildPath } = useLocaleContext()
+  const resolvedLocale = currentLocale || urlLang || 'en'
+  if (!blogArticleLocales.get(slug)?.includes(resolvedLocale)) {
+    return <BlogPostNotFound locale={resolvedLocale} />
+  }
+  return <BlogPostContent key={resolvedLocale} slug={slug} resolvedLocale={resolvedLocale} buildPath={buildPath} />
 }

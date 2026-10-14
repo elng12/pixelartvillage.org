@@ -104,7 +104,7 @@
   "consent": {
     "title": "Prywatność i pliki cookie",
     "desc": "Używamy plików cookie do działania tej witryny oraz — jeśli włączone — do wyświetlania reklam Google AdSense. Możesz w każdej chwili zaakceptować lub odrzucić nieistotne pliki cookie.",
-    "privacy": "Privacy Policy",
+    "privacy": "Polityka prywatności",
     "andManage": "oraz zarządzaj personalizacją reklam na",
     "accept": "Akceptuj wszystko",
     "reject": "Odrzuć nieistotne",
@@ -117,7 +117,7 @@
     "subtitle": "Pikselizuj obrazy w przeglądarce — zamieniaj PNG/JPG w czysty, przyjazny siatce pixel art. Dostosuj rozmiar pikseli i palety z podglądem na żywo, a następnie eksportuj ostre wyniki do sprite’ów, ikon lub grafiki retro. Szybko, prywatnie i za darmo z pixel art Village.",
     "dragOrClick": "Przeciągnij obraz tutaj lub",
     "clickToChoose": "kliknij, aby wybrać",
-    "supports": "Obsługuje PNG, JPG, GIF — do 10MB",
+    "supports": "Obsługuje PNG, JPEG, GIF i WebP — do 10 MiB.",
     "chooseFile": "Wybierz plik",
     "preparing": "Przygotowywanie obrazu…",
     "ariaUpload": "Prześlij obraz (przeciągnij i upuść lub kliknij, aby wybrać)",
@@ -128,10 +128,10 @@
     "selected": "Wybrano plik: {{name}}"
   },
   "errors": {
-    "fileTooLarge10": "Plik jest zbyt duży. Prześlij obraz mniejszy niż 10MB.",
+    "fileTooLarge10": "Plik przekracza limit 10 MiB (10 485 760 bajtów). Wybierz mniejszy plik.",
     "prepareFail": "Nie udało się przygotować obrazu. Spróbuj innego pliku.",
-    "onlyPngJpg": "Wybierz obraz PNG lub JPG.",
-    "maxFile": "Plik jest zbyt duży. Maksymalny rozmiar: {{mb}}MB."
+    "onlyPngJpg": "Wybierz obraz PNG, JPEG, GIF lub WebP.",
+    "maxFile": "Plik jest zbyt duży. Maksymalny rozmiar: {{mb}} MiB."
   },
   "editor": {
     "title": "Generator sztuki pikselowej online",
@@ -198,7 +198,7 @@
       "label": "Paleta",
       "none": "Brak",
       "custom": "Niestandardowy",
-      "note": "Pico‑8 to stała paleta. Inne nazwy bez wbudowanych kolorów palety będą automatycznie generować palety według swojego rozmiaru (np. Sunset 8 → 8 kolorów palety)."
+      "note": "Pico-8, Sunset 8, Twilight 5 i Hollow to stałe palety. Opcja „Wygeneruj paletę z obrazu” tworzy paletę automatyczną; limit kolorów dotyczy tylko tej opcji."
     },
     "colorDistance": {
       "label": "odległość kolorów",
@@ -206,7 +206,7 @@
       "lab": "LAB (dokładny, wolniejszy)"
     },
     "autoPalette": "Wygeneruj paletę z obrazu",
-    "paletteSize": "# Paleta Kolorów: {{value}}",
+    "paletteSize": "Maksymalna liczba kolorów palety automatycznej: {{value}}",
     "dither": "Włącz dithering (Floyd–Steinberg)",
     "zoom": "Zoom: {{value}}x",
     "grid": "Pokaż siatkę"
@@ -588,8 +588,8 @@
     "importLibraryCanceled": "Import anulowano."
   },
   "preview": {
-    "alt": "Pixel art preview",
+    "alt": "Podgląd pixel artu",
     "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
-    "processing": "Processing image…"
+    "processing": "Przetwarzanie obrazu…"
   }
 }

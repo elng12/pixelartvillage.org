@@ -205,11 +205,11 @@ function injectHeadTags(html, tags = []) {
   return html.replace(/<\/head>/i, `  ${tags.join('\n  ')}\n</head>`)
 }
 
-function injectAppContent(html, appHtml) {
+function injectAppContent(html, appHtml, hydratable = true) {
   if (!appHtml) return html
   const placeholder = /<div id="root"><\/div>/
   if (!placeholder.test(html)) return html
-  return html.replace(placeholder, `<div id="root" data-ssr-root="1">${appHtml}</div>`)
+  return html.replace(placeholder, `<div id="root"${hydratable ? ' data-ssr-root="1"' : ''}>${appHtml}</div>`)
 }
 
 function extractHydrationUnsafeHeadTags(appHtml) {
@@ -2138,6 +2138,55 @@ async function prerender() {
     const file = path.join(DIST, r.path.replace(/^\//, '').replace(/\/$/, ''), 'index.html')
     write(file, out)
     console.log('[prerender]', r.path, '→', path.relative(DIST, file))
+  }
+
+  // Shared Pages error documents must mount against the actual request URL,
+  // not hydrate the reserved pathname used to render their readable fallback.
+  const errorBase = base
+    .replace(/\n?\s*<link\b(?=[^>]*\brel=["']canonical["'])[^>]*>\s*/ig, '')
+    .replace(/\n?\s*<link\b(?=[^>]*\bhreflang=)[^>]*>\s*/ig, '')
+    .replace(/\n?\s*<meta\b(?=[^>]*\bname=["'](?:robots|googlebot)["'])[^>]*>\s*/ig, '')
+    .replace(/\n?\s*<script\b(?=[^>]*\bid=["']pv-initial-content["'])[^>]*>[\s\S]*?<\/script>\s*/ig, '')
+  if (!/<div id="root"><\/div>/.test(errorBase)) {
+    throw new Error('Error page base is missing the application root placeholder')
+  }
+  const fallbackBundle = loadLocaleBundle('en')
+  const errorRoutes = [
+    { lang: DEFAULT_LANG, path: '/404', file: '404.html', blog: false },
+    ...SUPPORTED_LANGS.map((lang) => {
+      const routePath = `${buildLocalizedPath(lang, '/blog/')}404.html`
+      return { lang, path: routePath, file: routePath.slice(1), blog: true }
+    }),
+  ]
+  for (const route of errorRoutes) {
+    const bundle = loadLocaleBundle(route.lang)
+    const translated = (key) => pick(bundle, key) ?? pick(fallbackBundle, key)
+    const title = route.blog
+      ? `${translated('blog.notFound.title')} | ${translated('site.name')}`
+      : translated('notFound.seoTitle')
+    const description = translated(route.blog ? 'blog.notFound.desc' : 'notFound.desc')
+    let out = buildHtml(errorBase, {
+      title: escapeHtml(title),
+      metas: [
+        { name: 'description', content: escapeHtml(description) },
+        { name: 'robots', content: 'noindex' },
+      ],
+      lang: route.lang,
+    })
+    if (route.blog && route.lang === 'ar') {
+      out = out.replace(/<html\b([^>]*)>/i, (_, attrs) => `<html${attrs.replace(/\sdir=["'][^"']*["']/i, '')} dir="rtl">`)
+    }
+    const appHtml = await ssr.renderApp(route.path, { lang: route.lang, initialContent: null })
+    const normalizedSsr = extractHydrationUnsafeHeadTags(appHtml)
+    if (!normalizedSsr.appHtml.trim()) {
+      throw new Error(`SSR produced no error page content for ${route.path}`)
+    }
+    out = injectHeadTags(out, normalizedSsr.headTags)
+    out = injectAppContent(out, normalizedSsr.appHtml, false)
+    out = injectInitialI18n(out, buildInitialI18nPayload(route.lang))
+    const file = path.join(DIST, route.file)
+    write(file, out)
+    console.log('[prerender]', route.path, '→', path.relative(DIST, file))
   }
   } finally {
     await ssr.close()

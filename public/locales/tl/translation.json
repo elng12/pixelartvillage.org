@@ -97,7 +97,7 @@
     "back": "Bumalik sa Blog",
     "notFound": {
       "title": "Hindi natagpuan ang post",
-      "desc": "Walang ganitong artikulo. Bumalik sa <a href=\"/\">{{ TERM_0 }}</a>"
+      "desc": "Hindi makita ang artikulo sa wikang ito. Suriin ang URL o bumalik sa blog para maghanap ng ibang gabay. Maaari kang pumili ng ibang wika kung may katumbas."
     },
     "h1": "Mga tutorial at gabay sa pixel art"
   },

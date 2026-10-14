@@ -122,10 +122,10 @@
     "selected": "File selezionato: {{name}}"
   },
   "errors": {
-    "fileTooLarge10": "File troppo grande. Carica un'immagine inferiore a 10MB.",
+    "fileTooLarge10": "File troppo grande. Dimensione massima accettata: 10 MiB (10 485 760 byte inclusi).",
     "prepareFail": "Impossibile preparare l’immagine. Prova un altro file.",
-    "onlyPngJpg": "Seleziona un'immagine PNG o JPG.",
-    "maxFile": "File troppo grande. Dimensione massima consentita: {{mb}}MB."
+    "onlyPngJpg": "Seleziona un’immagine PNG, JPEG, GIF o WebP.",
+    "maxFile": "File troppo grande. Dimensione massima consentita: {{mb}} MiB."
   },
   "editor": {
     "title": "Generatore di pixel art online",
@@ -167,7 +167,8 @@
     "paletteSize": "Numero di colori: {{value}}",
     "dither": "Abilita dithering (Floyd–Steinberg)",
     "zoom": "Zoom: {{value}}x",
-    "grid": "Mostra griglia"
+    "grid": "Mostra griglia",
+    "gridColor": "Colore della griglia"
   },
   "export": {
     "label": {
@@ -185,8 +186,9 @@
       "lg": "Grande (2×)",
       "xl": "XL (4×)"
     },
+    "note": "Pixel size salva la griglia piccola; Original size ingrandisce il risultato alle dimensioni dell’immagine elaborata in ingresso. I nomi dei pulsanti delle dimensioni restano in inglese.",
     "transparent": {
-      "label": "Sfondo trasparente (PNG/WebP)"
+      "label": "Sfondo trasparente (PNG)"
     },
     "quality": {
       "label": "Qualità: {{percent}}%"
@@ -226,7 +228,7 @@
   },
   "lang": {
     "label": "Lingua",
-    "title": "Select language"
+    "title": "Seleziona la lingua"
   },
   "wplace": {
     "title": "Perfetto strumento per gli utenti di pixel art Village",
@@ -588,8 +590,8 @@
     "fallbackNotice": "Il contenuto per questa lingua sarà disponibile a breve. Per ora mostriamo l’inglese."
   },
   "preview": {
-    "alt": "Pixel art preview",
+    "alt": "Anteprima della pixel art",
     "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
-    "processing": "Processing image…"
+    "processing": "Elaborazione dell’immagine…"
   }
 }

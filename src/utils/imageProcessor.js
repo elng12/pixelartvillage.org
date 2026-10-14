@@ -315,7 +315,6 @@ export async function exportProcessedBlob(
 
   const out = document.createElement('canvas');
   const ctx = out.getContext('2d');
-  ctx.imageSmoothingEnabled = false;
 
   async function toBlobAsync(canvas, mime, q) {
     return new Promise((resolve) => canvas.toBlob((b) => resolve(b), mime, q))
@@ -327,6 +326,8 @@ export async function exportProcessedBlob(
   if (resolved?.canvas?.width && resolved?.canvas?.height) {
     out.width = Math.max(1, Math.round(resolved.canvas.width * resolved.multiplier))
     out.height = Math.max(1, Math.round(resolved.canvas.height * resolved.multiplier))
+    // Canvas dimensions reset drawing state, including smoothing.
+    ctx.imageSmoothingEnabled = false;
     if (mime !== 'image/png' || !transparentBG) {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, out.width, out.height);
@@ -348,6 +349,7 @@ export async function exportProcessedBlob(
   const img = await loadImage(processedDataUrl);
   out.width = Math.max(1, Math.round(img.naturalWidth || img.width));
   out.height = Math.max(1, Math.round(img.naturalHeight || img.height));
+  ctx.imageSmoothingEnabled = false;
   if (mime !== 'image/png' || !transparentBG) {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, out.width, out.height);

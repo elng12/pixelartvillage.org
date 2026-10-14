@@ -10,7 +10,7 @@
     "build": "vite build && node scripts/build/prerender-spa.cjs",
     "postbuild": "node scripts/build/inline-critical-css.cjs && node scripts/seo/seo-check.js && node scripts/build/verify-dist-entries.cjs && node scripts/build/verify-cache-redirects.cjs",
     "lint": "eslint .",
-    "preview": "vite preview",
+    "preview": "node scripts/build/serve-dist.cjs",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "lint:ci": "eslint src scripts --max-warnings=0",

@@ -1,0 +1,702 @@
+{
+  "property": "sc-domain:pixelartvillage.org",
+  "locale": "pl",
+  "method": "official REST API, readonly service account",
+  "window": {
+    "startDate": "2026-09-12",
+    "endDate": "2026-10-09",
+    "dataState": "final"
+  },
+  "records": [
+    {
+      "endpoint": "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
+      "request": {
+        "inspectionUrl": "https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/",
+        "siteUrl": "sc-domain:pixelartvillage.org",
+        "languageCode": "en-US"
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:57:52.711038+00:00",
+      "response": {
+        "inspectionResult": {
+          "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:pixelartvillage.org&id=cYakfwMrleQSu2pcoL_gDQ&utm_medium=link&utm_source=api",
+          "indexStatusResult": {
+            "verdict": "PASS",
+            "coverageState": "Submitted and indexed",
+            "robotsTxtState": "ALLOWED",
+            "indexingState": "INDEXING_ALLOWED",
+            "lastCrawlTime": "2026-10-09T04:56:14Z",
+            "pageFetchState": "SUCCESSFUL",
+            "googleCanonical": "https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/",
+            "userCanonical": "https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/",
+            "sitemap": [
+              "https://pixelartvillage.org/sitemap.xml"
+            ],
+            "referringUrls": [
+              "https://pixelartvillage.org/sv/blog/best-pixel-art-converters-compared-2025/",
+              "https://pixelartvillage.org/ar/blog/best-pixel-art-converters-compared-2025/",
+              "https://pixelartvillage.org/pl/blog/"
+            ],
+            "crawledAs": "MOBILE"
+          },
+          "mobileUsabilityResult": {
+            "verdict": "VERDICT_UNSPECIFIED"
+          },
+          "richResultsResult": {
+            "verdict": "PASS",
+            "detectedItems": [
+              {
+                "richResultType": "Breadcrumbs",
+                "items": [
+                  {
+                    "name": "Unnamed item"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "endpoint": "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Apixelartvillage.org/searchAnalytics/query",
+      "request": {
+        "startDate": "2026-09-12",
+        "endDate": "2026-10-09",
+        "type": "web",
+        "dataState": "final",
+        "rowLimit": 25000,
+        "dimensions": [
+          "page"
+        ],
+        "dimensionFilterGroups": [
+          {
+            "filters": [
+              {
+                "dimension": "page",
+                "operator": "equals",
+                "expression": "https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/"
+              }
+            ]
+          }
+        ]
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:57:53.174892+00:00",
+      "response": {
+        "rows": [
+          {
+            "keys": [
+              "https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 5
+          }
+        ],
+        "responseAggregationType": "byPage"
+      }
+    },
+    {
+      "endpoint": "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Apixelartvillage.org/searchAnalytics/query",
+      "request": {
+        "startDate": "2026-09-12",
+        "endDate": "2026-10-09",
+        "type": "web",
+        "dataState": "final",
+        "rowLimit": 25000,
+        "dimensions": [
+          "query",
+          "page"
+        ],
+        "dimensionFilterGroups": [
+          {
+            "filters": [
+              {
+                "dimension": "page",
+                "operator": "equals",
+                "expression": "https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/"
+              }
+            ]
+          }
+        ]
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:57:53.337637+00:00",
+      "response": {
+        "responseAggregationType": "byPage"
+      }
+    },
+    {
+      "endpoint": "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
+      "request": {
+        "inspectionUrl": "https://pixelartvillage.org/pl/blog/how-to-get-pixel-art-version-of-image/",
+        "siteUrl": "sc-domain:pixelartvillage.org",
+        "languageCode": "en-US"
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:58:00.828099+00:00",
+      "response": {
+        "inspectionResult": {
+          "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:pixelartvillage.org&id=7eZ7qyKAqsFHPcKKgNqWGw&utm_medium=link&utm_source=api",
+          "indexStatusResult": {
+            "verdict": "PASS",
+            "coverageState": "Submitted and indexed",
+            "robotsTxtState": "ALLOWED",
+            "indexingState": "INDEXING_ALLOWED",
+            "lastCrawlTime": "2026-10-03T08:05:04Z",
+            "pageFetchState": "SUCCESSFUL",
+            "googleCanonical": "https://pixelartvillage.org/pl/blog/how-to-get-pixel-art-version-of-image/",
+            "userCanonical": "https://pixelartvillage.org/pl/blog/how-to-get-pixel-art-version-of-image/",
+            "sitemap": [
+              "https://pixelartvillage.org/sitemap.xml"
+            ],
+            "referringUrls": [
+              "https://pixelartvillage.org/id/blog/how-to-get-pixel-art-version-of-image/",
+              "https://pixelartvillage.org/blog/how-to-get-pixel-art-version-of-image/"
+            ],
+            "crawledAs": "MOBILE"
+          },
+          "mobileUsabilityResult": {
+            "verdict": "VERDICT_UNSPECIFIED"
+          },
+          "richResultsResult": {
+            "verdict": "PASS",
+            "detectedItems": [
+              {
+                "richResultType": "Breadcrumbs",
+                "items": [
+                  {
+                    "name": "Unnamed item"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "endpoint": "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Apixelartvillage.org/searchAnalytics/query",
+      "request": {
+        "startDate": "2026-09-12",
+        "endDate": "2026-10-09",
+        "type": "web",
+        "dataState": "final",
+        "rowLimit": 25000,
+        "dimensions": [
+          "page"
+        ],
+        "dimensionFilterGroups": [
+          {
+            "filters": [
+              {
+                "dimension": "page",
+                "operator": "equals",
+                "expression": "https://pixelartvillage.org/pl/blog/how-to-get-pixel-art-version-of-image/"
+              }
+            ]
+          }
+        ]
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:58:01.241612+00:00",
+      "response": {
+        "rows": [
+          {
+            "keys": [
+              "https://pixelartvillage.org/pl/blog/how-to-get-pixel-art-version-of-image/"
+            ],
+            "clicks": 0,
+            "impressions": 2,
+            "ctr": 0,
+            "position": 6
+          }
+        ],
+        "responseAggregationType": "byPage"
+      }
+    },
+    {
+      "endpoint": "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Apixelartvillage.org/searchAnalytics/query",
+      "request": {
+        "startDate": "2026-09-12",
+        "endDate": "2026-10-09",
+        "type": "web",
+        "dataState": "final",
+        "rowLimit": 25000,
+        "dimensions": [
+          "query",
+          "page"
+        ],
+        "dimensionFilterGroups": [
+          {
+            "filters": [
+              {
+                "dimension": "page",
+                "operator": "equals",
+                "expression": "https://pixelartvillage.org/pl/blog/how-to-get-pixel-art-version-of-image/"
+              }
+            ]
+          }
+        ]
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:58:01.584510+00:00",
+      "response": {
+        "responseAggregationType": "byPage"
+      }
+    },
+    {
+      "endpoint": "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
+      "request": {
+        "inspectionUrl": "https://pixelartvillage.org/pl/blog/make-image-more-like-pixel/",
+        "siteUrl": "sc-domain:pixelartvillage.org",
+        "languageCode": "en-US"
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:58:08.601753+00:00",
+      "response": {
+        "inspectionResult": {
+          "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:pixelartvillage.org&id=R0XKs7OLuQrEN6TZ0Zfj5g&utm_medium=link&utm_source=api",
+          "indexStatusResult": {
+            "verdict": "NEUTRAL",
+            "coverageState": "Duplicate, Google chose different canonical than user",
+            "robotsTxtState": "ALLOWED",
+            "indexingState": "INDEXING_ALLOWED",
+            "lastCrawlTime": "2026-08-26T03:53:30Z",
+            "pageFetchState": "SUCCESSFUL",
+            "googleCanonical": "https://pixelartvillage.org/nb/blog/make-image-more-like-pixel/",
+            "userCanonical": "https://pixelartvillage.org/pl/blog/make-image-more-like-pixel/",
+            "sitemap": [
+              "https://pixelartvillage.org/sitemap.xml"
+            ],
+            "referringUrls": [
+              "https://pixelartvillage.org/blog/make-image-more-like-pixel/",
+              "https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/"
+            ],
+            "crawledAs": "MOBILE"
+          },
+          "mobileUsabilityResult": {
+            "verdict": "VERDICT_UNSPECIFIED"
+          }
+        }
+      }
+    },
+    {
+      "endpoint": "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Apixelartvillage.org/searchAnalytics/query",
+      "request": {
+        "startDate": "2026-09-12",
+        "endDate": "2026-10-09",
+        "type": "web",
+        "dataState": "final",
+        "rowLimit": 25000,
+        "dimensions": [
+          "page"
+        ],
+        "dimensionFilterGroups": [
+          {
+            "filters": [
+              {
+                "dimension": "page",
+                "operator": "equals",
+                "expression": "https://pixelartvillage.org/pl/blog/make-image-more-like-pixel/"
+              }
+            ]
+          }
+        ]
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:58:09.076276+00:00",
+      "response": {
+        "responseAggregationType": "byPage"
+      }
+    },
+    {
+      "endpoint": "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Apixelartvillage.org/searchAnalytics/query",
+      "request": {
+        "startDate": "2026-09-12",
+        "endDate": "2026-10-09",
+        "type": "web",
+        "dataState": "final",
+        "rowLimit": 25000,
+        "dimensions": [
+          "query",
+          "page"
+        ],
+        "dimensionFilterGroups": [
+          {
+            "filters": [
+              {
+                "dimension": "page",
+                "operator": "equals",
+                "expression": "https://pixelartvillage.org/pl/blog/make-image-more-like-pixel/"
+              }
+            ]
+          }
+        ]
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:58:09.245817+00:00",
+      "response": {
+        "responseAggregationType": "byPage"
+      }
+    },
+    {
+      "endpoint": "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
+      "request": {
+        "inspectionUrl": "https://pixelartvillage.org/pl/blog/export-from-illustrator-image-to-pixel-art/",
+        "siteUrl": "sc-domain:pixelartvillage.org",
+        "languageCode": "en-US"
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:58:16.555491+00:00",
+      "response": {
+        "inspectionResult": {
+          "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:pixelartvillage.org&id=OtKmGHB_Zw973l_EcDw-FA&utm_medium=link&utm_source=api",
+          "indexStatusResult": {
+            "verdict": "NEUTRAL",
+            "coverageState": "Duplicate, Google chose different canonical than user",
+            "robotsTxtState": "ALLOWED",
+            "indexingState": "INDEXING_ALLOWED",
+            "lastCrawlTime": "2026-10-10T09:14:39Z",
+            "pageFetchState": "SUCCESSFUL",
+            "googleCanonical": "https://pixelartvillage.org/it/blog/export-from-illustrator-image-to-pixel-art/",
+            "userCanonical": "https://pixelartvillage.org/pl/blog/export-from-illustrator-image-to-pixel-art/",
+            "referringUrls": [
+              "https://pixelartvillage.org/it/blog/export-from-illustrator-image-to-pixel-art/",
+              "https://pixelartvillage.org/ar/blog/export-from-illustrator-image-to-pixel-art/",
+              "https://pixelartvillage.org/blog/export-from-illustrator-image-to-pixel-art"
+            ],
+            "crawledAs": "MOBILE"
+          },
+          "mobileUsabilityResult": {
+            "verdict": "VERDICT_UNSPECIFIED"
+          }
+        }
+      }
+    },
+    {
+      "endpoint": "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Apixelartvillage.org/searchAnalytics/query",
+      "request": {
+        "startDate": "2026-09-12",
+        "endDate": "2026-10-09",
+        "type": "web",
+        "dataState": "final",
+        "rowLimit": 25000,
+        "dimensions": [
+          "page"
+        ],
+        "dimensionFilterGroups": [
+          {
+            "filters": [
+              {
+                "dimension": "page",
+                "operator": "equals",
+                "expression": "https://pixelartvillage.org/pl/blog/export-from-illustrator-image-to-pixel-art/"
+              }
+            ]
+          }
+        ]
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:58:16.701325+00:00",
+      "response": {
+        "rows": [
+          {
+            "keys": [
+              "https://pixelartvillage.org/pl/blog/export-from-illustrator-image-to-pixel-art/"
+            ],
+            "clicks": 0,
+            "impressions": 1,
+            "ctr": 0,
+            "position": 10
+          }
+        ],
+        "responseAggregationType": "byPage"
+      }
+    },
+    {
+      "endpoint": "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Apixelartvillage.org/searchAnalytics/query",
+      "request": {
+        "startDate": "2026-09-12",
+        "endDate": "2026-10-09",
+        "type": "web",
+        "dataState": "final",
+        "rowLimit": 25000,
+        "dimensions": [
+          "query",
+          "page"
+        ],
+        "dimensionFilterGroups": [
+          {
+            "filters": [
+              {
+                "dimension": "page",
+                "operator": "equals",
+                "expression": "https://pixelartvillage.org/pl/blog/export-from-illustrator-image-to-pixel-art/"
+              }
+            ]
+          }
+        ]
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:58:16.853599+00:00",
+      "response": {
+        "responseAggregationType": "byPage"
+      }
+    },
+    {
+      "endpoint": "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
+      "request": {
+        "inspectionUrl": "https://pixelartvillage.org/pl/blog/how-to-pixelate-an-image/",
+        "siteUrl": "sc-domain:pixelartvillage.org",
+        "languageCode": "en-US"
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:58:23.899368+00:00",
+      "response": {
+        "inspectionResult": {
+          "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:pixelartvillage.org&id=VXdgeACE6tR5U1INo_pJNA&utm_medium=link&utm_source=api",
+          "indexStatusResult": {
+            "verdict": "NEUTRAL",
+            "coverageState": "Duplicate, Google chose different canonical than user",
+            "robotsTxtState": "ALLOWED",
+            "indexingState": "INDEXING_ALLOWED",
+            "lastCrawlTime": "2026-10-10T05:03:37Z",
+            "pageFetchState": "SUCCESSFUL",
+            "googleCanonical": "https://pixelartvillage.org/id/blog/how-to-pixelate-an-image/",
+            "userCanonical": "https://pixelartvillage.org/pl/blog/how-to-pixelate-an-image/",
+            "sitemap": [
+              "https://pixelartvillage.org/sitemap.xml"
+            ],
+            "referringUrls": [
+              "https://pixelartvillage.org/id/blog/how-to-pixelate-an-image/",
+              "https://pixelartvillage.org/it/blog/how-to-pixelate-an-image/",
+              "https://pixelartvillage.org/blog/how-to-pixelate-an-image/"
+            ],
+            "crawledAs": "MOBILE"
+          },
+          "mobileUsabilityResult": {
+            "verdict": "VERDICT_UNSPECIFIED"
+          }
+        }
+      }
+    },
+    {
+      "endpoint": "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Apixelartvillage.org/searchAnalytics/query",
+      "request": {
+        "startDate": "2026-09-12",
+        "endDate": "2026-10-09",
+        "type": "web",
+        "dataState": "final",
+        "rowLimit": 25000,
+        "dimensions": [
+          "page"
+        ],
+        "dimensionFilterGroups": [
+          {
+            "filters": [
+              {
+                "dimension": "page",
+                "operator": "equals",
+                "expression": "https://pixelartvillage.org/pl/blog/how-to-pixelate-an-image/"
+              }
+            ]
+          }
+        ]
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:58:24.086971+00:00",
+      "response": {
+        "responseAggregationType": "byPage"
+      }
+    },
+    {
+      "endpoint": "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Apixelartvillage.org/searchAnalytics/query",
+      "request": {
+        "startDate": "2026-09-12",
+        "endDate": "2026-10-09",
+        "type": "web",
+        "dataState": "final",
+        "rowLimit": 25000,
+        "dimensions": [
+          "query",
+          "page"
+        ],
+        "dimensionFilterGroups": [
+          {
+            "filters": [
+              {
+                "dimension": "page",
+                "operator": "equals",
+                "expression": "https://pixelartvillage.org/pl/blog/how-to-pixelate-an-image/"
+              }
+            ]
+          }
+        ]
+      },
+      "status": 200,
+      "fetchedAt": "2026-10-12T12:58:24.221057+00:00",
+      "response": {
+        "responseAggregationType": "byPage"
+      }
+    }
+  ],
+  "summary": [
+    {
+      "url": "https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/",
+      "indexStatus": {
+        "verdict": "PASS",
+        "coverageState": "Submitted and indexed",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "lastCrawlTime": "2026-10-09T04:56:14Z",
+        "pageFetchState": "SUCCESSFUL",
+        "googleCanonical": "https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/",
+        "userCanonical": "https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/",
+        "sitemap": [
+          "https://pixelartvillage.org/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://pixelartvillage.org/sv/blog/best-pixel-art-converters-compared-2025/",
+          "https://pixelartvillage.org/ar/blog/best-pixel-art-converters-compared-2025/",
+          "https://pixelartvillage.org/pl/blog/"
+        ],
+        "crawledAs": "MOBILE"
+      },
+      "pageRows": [
+        {
+          "keys": [
+            "https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 5
+        }
+      ],
+      "queryRows": [],
+      "truncated": false
+    },
+    {
+      "url": "https://pixelartvillage.org/pl/blog/how-to-get-pixel-art-version-of-image/",
+      "indexStatus": {
+        "verdict": "PASS",
+        "coverageState": "Submitted and indexed",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "lastCrawlTime": "2026-10-03T08:05:04Z",
+        "pageFetchState": "SUCCESSFUL",
+        "googleCanonical": "https://pixelartvillage.org/pl/blog/how-to-get-pixel-art-version-of-image/",
+        "userCanonical": "https://pixelartvillage.org/pl/blog/how-to-get-pixel-art-version-of-image/",
+        "sitemap": [
+          "https://pixelartvillage.org/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://pixelartvillage.org/id/blog/how-to-get-pixel-art-version-of-image/",
+          "https://pixelartvillage.org/blog/how-to-get-pixel-art-version-of-image/"
+        ],
+        "crawledAs": "MOBILE"
+      },
+      "pageRows": [
+        {
+          "keys": [
+            "https://pixelartvillage.org/pl/blog/how-to-get-pixel-art-version-of-image/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 6
+        }
+      ],
+      "queryRows": [],
+      "truncated": false
+    },
+    {
+      "url": "https://pixelartvillage.org/pl/blog/make-image-more-like-pixel/",
+      "indexStatus": {
+        "verdict": "NEUTRAL",
+        "coverageState": "Duplicate, Google chose different canonical than user",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "lastCrawlTime": "2026-08-26T03:53:30Z",
+        "pageFetchState": "SUCCESSFUL",
+        "googleCanonical": "https://pixelartvillage.org/nb/blog/make-image-more-like-pixel/",
+        "userCanonical": "https://pixelartvillage.org/pl/blog/make-image-more-like-pixel/",
+        "sitemap": [
+          "https://pixelartvillage.org/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://pixelartvillage.org/blog/make-image-more-like-pixel/",
+          "https://pixelartvillage.org/pl/blog/best-pixel-art-converters-compared-2025/"
+        ],
+        "crawledAs": "MOBILE"
+      },
+      "pageRows": [],
+      "queryRows": [],
+      "truncated": false
+    },
+    {
+      "url": "https://pixelartvillage.org/pl/blog/export-from-illustrator-image-to-pixel-art/",
+      "indexStatus": {
+        "verdict": "NEUTRAL",
+        "coverageState": "Duplicate, Google chose different canonical than user",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "lastCrawlTime": "2026-10-10T09:14:39Z",
+        "pageFetchState": "SUCCESSFUL",
+        "googleCanonical": "https://pixelartvillage.org/it/blog/export-from-illustrator-image-to-pixel-art/",
+        "userCanonical": "https://pixelartvillage.org/pl/blog/export-from-illustrator-image-to-pixel-art/",
+        "referringUrls": [
+          "https://pixelartvillage.org/it/blog/export-from-illustrator-image-to-pixel-art/",
+          "https://pixelartvillage.org/ar/blog/export-from-illustrator-image-to-pixel-art/",
+          "https://pixelartvillage.org/blog/export-from-illustrator-image-to-pixel-art"
+        ],
+        "crawledAs": "MOBILE"
+      },
+      "pageRows": [
+        {
+          "keys": [
+            "https://pixelartvillage.org/pl/blog/export-from-illustrator-image-to-pixel-art/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 10
+        }
+      ],
+      "queryRows": [],
+      "truncated": false
+    },
+    {
+      "url": "https://pixelartvillage.org/pl/blog/how-to-pixelate-an-image/",
+      "indexStatus": {
+        "verdict": "NEUTRAL",
+        "coverageState": "Duplicate, Google chose different canonical than user",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "lastCrawlTime": "2026-10-10T05:03:37Z",
+        "pageFetchState": "SUCCESSFUL",
+        "googleCanonical": "https://pixelartvillage.org/id/blog/how-to-pixelate-an-image/",
+        "userCanonical": "https://pixelartvillage.org/pl/blog/how-to-pixelate-an-image/",
+        "sitemap": [
+          "https://pixelartvillage.org/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://pixelartvillage.org/id/blog/how-to-pixelate-an-image/",
+          "https://pixelartvillage.org/it/blog/how-to-pixelate-an-image/",
+          "https://pixelartvillage.org/blog/how-to-pixelate-an-image/"
+        ],
+        "crawledAs": "MOBILE"
+      },
+      "pageRows": [],
+      "queryRows": [],
+      "truncated": false
+    }
+  ],
+  "windowDateEvidence": "docs/GSC_TL_BLOG_BASELINE_2026-10-12.json records[0], fetched 2026-10-12",
+  "returnedDateCount": 28,
+  "relatedCanonicalMetrics": [],
+  "relatedCanonicalMetricsFetched": false
+}

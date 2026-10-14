@@ -31,6 +31,10 @@ export default function Seo({ title, lang = 'en', description, noindex }) {
   const { pathname } = useLocation()
 
   useEffect(() => {
+    if (noindex === true) {
+      document.head.querySelectorAll(PAGE_HEAD_SELECTOR).forEach(node => node.remove())
+      return undefined
+    }
     if (!INITIAL_PAGE_HEAD) return undefined
     if (pathname === INITIAL_PAGE_HEAD.pathname) {
       replacePageHead(INITIAL_PAGE_HEAD)
@@ -90,7 +94,7 @@ export default function Seo({ title, lang = 'en', description, noindex }) {
       controller.abort()
       window.clearTimeout(timeout)
     }
-  }, [pathname])
+  }, [pathname, noindex])
 
   useEffect(() => {
     if (typeof document === 'undefined') return
@@ -139,7 +143,7 @@ export default function Seo({ title, lang = 'en', description, noindex }) {
     } catch {
       // Ignore unsupported environments.
     }
-  }, [description, lang, noindex, title])
+  }, [description, lang, noindex, pathname, title])
 
   return null
 }

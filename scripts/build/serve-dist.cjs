@@ -107,7 +107,7 @@ function resolveDistFile(distDir, urlPathname) {
 
   for (const candidate of candidates) {
     const abs = path.join(distDir, candidate);
-    if (!abs.startsWith(distDir)) continue;
+    if (!isWithinDist(distDir, abs)) continue;
     try {
       const stat = fs.statSync(abs);
       if (stat.isFile()) return abs;
@@ -116,6 +116,34 @@ function resolveDistFile(distDir, urlPathname) {
     }
   }
 
+  return null;
+}
+
+function isWithinDist(distDir, filePath) {
+  return filePath === distDir || filePath.startsWith(`${distDir}${path.sep}`);
+}
+
+function resolveDist404(distDir, urlPathname) {
+  let pathname;
+  try {
+    pathname = decodeURIComponent(urlPathname || '/');
+  } catch {
+    return null;
+  }
+  const requestedPath = path.resolve(distDir, pathname.replace(/^\/+/, ''));
+  if (!isWithinDist(distDir, requestedPath)) return null;
+  let directory = pathname.endsWith('/') ? requestedPath : path.dirname(requestedPath);
+  // Cloudflare Pages uses the closest ancestor 404.html for a missing file.
+  while (isWithinDist(distDir, directory)) {
+    const candidate = path.join(directory, '404.html');
+    try {
+      if (fs.statSync(candidate).isFile()) return candidate;
+    } catch {
+      // Continue to the parent directory.
+    }
+    if (directory === distDir) break;
+    directory = path.dirname(directory);
+  }
   return null;
 }
 
@@ -130,16 +158,28 @@ const server = http.createServer((req, res) => {
 
   let filePath = resolveDistFile(distDir, url.pathname);
   if (!filePath) {
-    filePath = path.join(distDir, 'index.html');
+    res.statusCode = 404;
+    filePath = resolveDist404(distDir, url.pathname);
   }
 
   for (const [key, value] of Object.entries(globalHeaders)) {
     res.setHeader(key, value);
   }
 
+  if (!filePath) {
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.end(req.method === 'HEAD' ? undefined : 'Not Found');
+    return;
+  }
+
   const contentType = getContentType(path.extname(filePath).toLowerCase());
   if (contentType) {
     res.setHeader('Content-Type', contentType);
+  }
+
+  if (req.method === 'HEAD') {
+    res.end();
+    return;
   }
 
   const stream = fs.createReadStream(filePath);

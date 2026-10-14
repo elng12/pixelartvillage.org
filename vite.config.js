@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'node:url'
 import { execSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 
 function readPreviewHeaders() {
   try {
@@ -35,6 +35,52 @@ function readPreviewHeaders() {
   }
 }
 
+function blogArticleLocales() {
+  const publicId = 'virtual:blog-article-locales'
+  const moduleId = `\0${publicId}`
+  const contentDir = fileURLToPath(new URL('./src/content/', import.meta.url))
+  const filePattern = /^blog-posts\.([a-z0-9-]+)\.json$/i
+
+  return {
+    name: 'blog-article-locales',
+    resolveId(id) {
+      if (id === publicId) return moduleId
+    },
+    load(id) {
+      if (id !== moduleId) return
+      const localesBySlug = new Map()
+      for (const filename of readdirSync(contentDir)) {
+        const match = filename.match(filePattern)
+        if (!match) continue
+        const file = `${contentDir}${filename}`
+        this.addWatchFile(file)
+        const data = JSON.parse(readFileSync(file, 'utf8'))
+        const posts = data && typeof data === 'object' ? Object.values(data) : []
+        for (const post of posts) {
+          if (typeof post?.slug !== 'string' || !post.slug.trim()) continue
+          let locales = localesBySlug.get(post.slug)
+          if (!locales) {
+            locales = new Set()
+            localesBySlug.set(post.slug, locales)
+          }
+          locales.add(match[1].toLowerCase())
+        }
+      }
+      const entries = Array.from(localesBySlug, ([slug, locales]) => [slug, [...locales]])
+      return `export default new Map(${JSON.stringify(entries)})`
+    },
+    hotUpdate({ file, modules, timestamp }) {
+      if (!file.startsWith(contentDir) || !filePattern.test(file.slice(contentDir.length))) return
+      const graph = this.environment.moduleGraph
+      const module = graph.getModuleById(moduleId)
+      if (!module) return
+      graph.invalidateModule(module, new Set(), timestamp, true)
+      return modules.includes(module) ? modules : [...modules, module]
+    },
+  }
+}
+
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   let gitHash = ''
@@ -46,7 +92,7 @@ export default defineConfig(({ mode }) => {
     ? (process.env.GIT_COMMIT || gitHash || new Date().toISOString().replace(/[:.]/g, '-'))
     : 'dev'
   return {
-    plugins: [react()],
+    plugins: [react(), blogArticleLocales()],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),

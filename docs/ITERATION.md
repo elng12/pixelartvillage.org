@@ -1,5 +1,444 @@
 # Pixel Art Village 迭代记录
 
+## 2026-10-14 已完成文章与共享功能发布准备（本地通过，待部署）
+
+用户对本轮上线清单回复“执行”。本次拟合并发布12个已完成本地批次：波兰语5篇、荷兰语5篇、意大利语3篇增量、西班牙语比较篇、日语比较/动画/入门篇纠错，以及共享2×/4×最近邻下载、文章语言菜单、缺失文章404和测试变量修复。对应17个文章网址、12张新分享PNG；Aseprite条目只是第三方软件售价说明，不新增本站收费或支付。葡萄牙语/越南语/俄语/韩语/日语首页再次SEO优化、日语步骤编号和旧描述扩写仍暂缓。
+
+- 沿用`origin/main`触发Cloudflare Pages项目`pixelartvillage1`，不直接上传本地dist、不改云端环境变量。发布前父提交与远端均为`007c27e24302dda78a00ad2bc0195ebf6ce9d0a1`。
+- Node20.19.0、`NODE_ENV=production VITE_E2E=0 npm run build`生成正常生产构建，9.76秒通过；未显式设置analytics，不将本地取值推断成云端配置。构建链SEO/dist/缓存及64条重定向、全项目lint、typecheck、sitemap:verify均通过。站图仍205网址，hreflang参考177网址，网址集合未变。
+- 17篇实际HTTP200；5种缺失路径均404/noindex，HEAD404且0字节正文。根及上述五种暂缓语言首页共6页，搜索元信息和去script静态正文与发布前正式站逐项一致。
+- 正常生产构建的8项既有下载/网格/Zoom、PL语言往返、文章菜单和404回归通过，零重试。完整Chromium首轮553项中513通过、33跳过、7失败；误设`EXPECT_CONSENT_BANNER=0`，实际本地生产页有Cookie弹窗，其中西语导航日志明确记录弹窗拦截，意语下载trace记录点击超时。保留所有失败截图、视频、trace及原报告。
+- 只改临时验收配置为真实弹窗`EXPECT_CONSENT_BANNER=1`，用2 workers精确复核7失败及33跳过项；40/40通过、零跳过、零重试，31.2秒。未改业务代码、断言或超时；两轮合计553个不同项目均取得通过证据，不称首轮553/553或单次全绿。正式站发布前实际DOM没有弹窗，线上专项仍须按部署后实际表面选配置。
+- 17篇最终标题55–60字符，除仅正文纠错的日语入门旧描述70字符外，其余16篇描述151–155字符。逐页完整计数保留`article-final-character-counts.json`，不把70字符描述称为达标。
+- 提交仅选本轮源码/测试/12图/6份GSC基线及相关记录。AGENTS只提交五条SEO规则，ITERATION从父提交加入本轮12个章节、规则章节和本条，不混入旧批次记录；其他历史GSC、PRD/inventory、旧批次A说明及工作区站图改动保留。不执行收录申请。
+
+证据目录`/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-production-release-tPEKiG/`保存发布清单、正式站前快照、生产构建保护对照、8项专项、首轮完整报告、40项纠正配置复核、合并覆盖证明和手机截图。此时尚未提交、推送或部署；最终结果另补发布回执。
+
+## 2026-10-14 日语入门篇画布尺寸与位深纠错（本地验收完成，未发布）
+
+本轮按授权只处理`/ja/blog/pixel-art-tutorial-complete-guide-2025/`的尺寸、颜色数量和位深相关说明。改动内容源仍为`src/content/blog-posts.ja.json`第二个对象；不改搜索标题/描述、其他文章、首页或共享模板，不提交、推送、部署或请求收录。
+
+- 全文核对发现两处互相强化的错误分类：基本概念把8-bit/16-bit分别绑定固定画布范围，后面的画布设置又把尺寸绑定初级/中级/高级。两处都已纠正，不只删除一句。
+- 依据[Aseprite新建精灵说明](https://www.aseprite.org/docs/new-sprite/)，宽高像素数与色彩模式独立设置；依据[Aseprite色彩模式](https://www.aseprite.org/docs/color-mode/)，该软件Indexed模式的256色是调色板上限，不是画布尺寸或必须使用的颜色数；[GIMP3图像编码说明](https://docs.gimp.org/3.0/en/gimp-image-encoding.html)说明位深与色彩数据精度。初次两个旧文档地址404后改读真实对应页面，未把失败链接写进文章。日语路径的GIMP对应页正文仍大量英文，因此文章明确链接英文资料，不误标为已完整日语化。
+- 正文现在区分像素宽高、实际使用色数、色彩模式与RGB每通道位深；“8-bit风/16-bit风”不定义固定尺寸或颜色数量，针对具体游戏机时需单独核对约束，不把所有8-bit概括为同一个硬件标准。
+- 保留16×16、32×32、64×64、128×128、256×256作为图标/瓦片、角色/单独物体、背景的自拟练习例，明确不是硬件或格式标准、不是水平等级。实际步骤从本练习32×32开始，必要时考虑64×64，背景可选择更大尺寸；配色的8～16色也标为练习起点，可按需要调整。
+- 只修改上述三个相关小节中的四段正文区间及`updated`日期，原2025-10-28发布日期、Aseprite价格条目与其确认日期保留。比较篇与动画篇的原始字节未变，其他608个保护文件未变，前轮语言菜单、404与测试修复保留。
+- Node20隔离构建通过，用时13.01秒，构建链SEO/dist/缓存及64条重定向检查通过，输出`artifact://412`；根`dist/`未重新生成。
+- 真实浏览器1440/390宽、JavaScript开启/关闭四组均HTTP200，三个相关小节、用途示例、位深说明、练习配色和三个正确官方外链真实存在；旧固定尺寸/水平分类未显示，已核实价格保持一致。canonical、日语、可收录状态、发布日期正确，四组无横向溢出，未出现pageerror。已查看并保留手机尺寸说明、桌面色彩段落及桌面练习步骤截图，没有新增固定文案的永久测试或声称全套测试通过。
+- 对比243份构建HTML元信息，242份未变；目标head按语义逐项检查，唯一变化是BlogPosting的实际`dateModified`。搜索标题仍为`初心者のための完全ピクセルアートガイド (2025) - ゼロから作成まで | Pixel Art Village`，57字符；描述仍为`初心者のための完全ガイドでゼロからピクセルアートを学びましょう。基本技術をマスターし、適切なツールを選択し、最初のピクセル傑作を作成します。`，70字符。源值、构建和真实页面一致。未改描述，70字符仍不符合未来修改时150–160的目标，不能把本轮正文验收称为描述达标。
+
+证据保留于`/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-missing-blog-1dKA55/japanese-intro-canvas/`，包括`source-proof.json`、`runtime-proof.json`、`metadata-proof.json`、`verification-result.json`与三张实际修改区域截图。本轮托管浏览器及专用预览已关闭，没有新增临时执行脚本或依赖。
+
+本轮不是整篇教程或全站审查。截图还显示该页步骤内分段有序列表重新从1编号，未在本轮扩大修改共享列表渲染；影响范围需另行定位。搜索描述扩写、五种语言首页SEO优化、旧公共语言资源与其他无关正文问题仍未处理。
+
+## 2026-10-13 日语入门篇Aseprite价格条件核对（本地验收完成，未发布）
+
+本轮仅处理`/ja/blog/pixel-art-tutorial-complete-guide-2025/`、`src/content/blog-posts.ja.json`第二个对象的Aseprite价格条目，不重写入门教程、不改其他工具或首页SEO，不提交、推送、部署或请求收录。
+
+- 核对纠正了历史记录的前提：`$19.99`并非已证实过时。[Aseprite官方购买页的itch.io入口](https://www.aseprite.org/buy/?itch)嵌入[商品23045](https://itch.io/embed/23045?border_width=2)，指向[David Capello/Igara的实际商店](https://dacap.itch.io/aseprite)。2026-10-13两处都显示`$19.99 USD or more`，商品页明确最低19.99 USD。普通官方购买页为动态结算，静态读取没有可核对金额；不能把itch.io报价推广为所有渠道、币种或付款总额。
+- 保留19.99这个已核实数字，改为日语说明“官方所指itch.io商店显示的最低19.99 USD”，加官方销售链接和2026-10-13确认日期，并要求其他渠道价格、付款总额按相应销售页核对。不编造税费、汇率、月费/年费、终身更新或试用条件；把同一条未获依据的“行业标准”改成官方可证实的像素画与动画编辑器用途。
+- 原2025-10-28发布日期、标题、excerpt、tags、其他正文段落保留。仅改`[1].body[41]`并按现有内容惯例加入`updated: 2026-10-13`，使资源的实际修改日期正确；这个日期不代表全文重新审校。其余两个日语对象逐字节保留，前轮动画篇、比较篇、语言菜单、404及测试修复未回退。
+- 最终Node20隔离构建通过，用时12.48秒，SEO/dist/缓存与64条重定向检查通过，输出`artifact://401`。一次早期值比较误把JSON属性插入顺序当成内容差异；改用深值比较后通过。未复制新内容前启动的旧源构建不作为本轮价格修改验收证据。
+- 真实浏览器1440宽、JavaScript关闭，以及390宽、JavaScript开启两组均HTTP200；价格条件、官方外链、日语、canonical、可收录状态及修改日期正确。手机未出现横向溢出，已查看两组价格段落截图；开启JavaScript的一组未出现pageerror。没有运行竞品或进入支付流程，没有新增永久文案断言或声称跑过完整测试套件。
+- 最终完整搜索标题仍为`初心者のための完全ピクセルアートガイド (2025) - ゼロから作成まで | Pixel Art Village`，57字符；完整描述仍为`初心者のための完全ガイドでゼロからピクセルアートを学びましょう。基本技術をマスターし、適切なツールを選択し、最初のピクセル傑作を作成します。`，70字符。源值、构建与实际页面一致。本轮未修改搜索文案；旧描述未达到150–160字符规则，不能称为达标，留待另行授权该页SEO修改，不在价格核对中自动扩写。
+- 对比243份HTML元信息，242份完全未变，唯一变化页为本篇；按语义逐项核对，目标head只改变BlogPosting的`dateModified`，发布日期、title/description、canonical、hreflang、OG/Twitter等不变。其余608个保护文件未变，上一轮菲律宾语错误文案保留，根`dist/`未重新生成。
+- 本地SEO资料入口已读取，但内容指南文件受EPERM限制，不能声称读过该指南或以空搜索证明没有资料。本轮价格采用上述实际读取的官方/发布者来源，未据此保证收录、曝光或排名变化。
+
+证据为`/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-missing-blog-1dKA55/japanese-intro-price/`中的`source-proof.json`、`runtime-proof.json`、`scope-proof.json`及桌面/手机截图。本轮托管浏览器和专用预览已关闭，没有新增临时执行脚本或依赖。
+
+“日语入门篇价格未核实”现已解决，但不等于整篇已纠错。正文仍有把8-bit/16-bit对应固定画布范围的旧说明，本轮保留；五种语言首页SEO优化和日语公共语言资源等其他事项仍未处理。旧迭代记录作为当时状态保留，以本条为本轮价格核对结论。
+
+## 2026-10-13 博客测试未定义变量修复（定向验收完成，未发布）
+
+本轮只修`tests/blog.spec.js`中已记录的5处`italianForbidden`未定义错误，并补本条记录。不改网页、文章、语言资源、分享图、首页SEO或前轮404实现，不提交、推送、部署或请求收录。
+
+- 5处错误实际位于阿拉伯语、瑞典语、泰语、越南语和菲律宾语测试，不是5个意大利语页面；原文件不存在`italianForbidden`定义。按已记录错误直接修复，未重跑旧lint来确认已知报错。
+- 印尼语和挪威语原有两份完全相同的旧虚构产品、无依据承诺及模板残留检查。通过语言服务器迁移为文件顶部唯一的`legacyBlogContent`，复用原正则内容、不降低检查范围；5处错误引用接入同一规则，原两处消费者保留，没有删除断言、定义空规则或增加例外。语言服务器确认1处定义与7处消费者。
+- 整个`tests/blog.spec.js`的ESLint通过，用时1.02秒；历史记录中的这5处未定义变量不再属于当前未处理项。没有据此声称全项目lint通过。
+- 复用上一轮隔离候选，Node20构建通过，用时12.25秒，构建链dist/SEO/缓存及64条重定向检查通过，输出`artifact://389`；根`dist/`未重新生成。
+- Chromium定向运行7种受影响语言的比较文章，390宽度、JavaScript开启/关闭，共14项通过，0失败、0跳过、0重试，用时14.6秒。新修的5个测试分支及原印尼语、挪威语消费者都实际执行；未运行完整博客测试矩阵或全站Playwright套件。
+- 609个既有保护文件未变，上一轮菲律宾语404错误文案单字段修复保留；无页面内容或SEO修改，五种语言首页SEO优化继续暂缓，日语入门篇旧价格等其他事项未处理。
+
+本轮自建预览已停止，临时Playwright配置已删除。证据为`/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-missing-blog-1dKA55/legacy-guard-checks/verification.json`。永久改动只有博客测试与本条迭代记录。
+
+## 2026-10-13 缺失博客文章404链路修复（本地验收完成，未发布）
+
+本轮承接上一轮记录的缺失英语动画篇及未知`constructor`文章直达问题，只修错误页、构建和预览响应，不创建文章译文、不改有效文章内容或首页SEO。五种语言首页SEO优化仍暂缓；没有提交、推送、部署或请求收录。
+
+### 修改与边界
+
+- Cloudflare Pages原本已有`public/404.html`，且`_redirects`中的SPA200兜底只是注释。因此，不能把本地预览的“首页HTML+200”认定为线上当前行为。按[Pages官方就近404规则](https://developers.cloudflare.com/pages/configuration/serving-pages/)，由预渲染统一生成根`dist/404.html`与18种配置语言的共享博客`404.html`，删除旧独立`public/404.html`，不创建假文章网址、不增加重定向规则或sitemap网址。
+- 根错误页复用现有通用NotFound界面；博客错误页复用现有文章错误标题、描述与真实博客返回链接。错误head只有相应标题、描述和`robots=noindex`，没有首页或有效文章的canonical、hreflang、OG/Twitter与JSON-LD。共享模板没有`data-ssr-root`，现有`createRoot`按真实请求网址挂载，不把保留的模板网址冒充当前页面做hydration。有效页面继续原有SSR/hydration。
+- `BlogPost.jsx`复用上一轮的`virtual:blog-article-locales`精确Map，在加载正文前同步判断当前语言是否真有该slug；不再借英语fallback把缺失译文当有效文章。有效正文组件按语言重新挂载，保留原正文加载器和文章内容。缺失页有实际`LocalizedLink`返回博客，并允许通过既有菜单切到确实存在的译文。
+- `Seo.jsx`的显式noindex分支先清旧head、停止有效页head获取；路由变化同时更新错误页标题、描述和robots。连续两个缺失网址不会丢失noindex，回到有效页后恢复完整页面信息；旧异步请求不能覆盖新页。
+- `serve-dist.cjs`保留真实文件/index优先，缺失时就近选择404文件并返回HTTP404，HEAD无响应正文；无错误文件时也不回首页200。`npm run preview`改用同一服务，避免标准预览命令仍走Vite首页兜底。构建验证只更正旧404注释，保留根404产物必需检查。
+- 唯一文案修改为`public/locales/tl/translation.json`的`blog.notFound.desc`：删除会原样显示的HTML/`{{ TERM_0 }}`模板词，改成完整错误提示。最终描述为155字符，源码、构建与实际页面一致；标题字段未改，其他菲律宾语字段逐项一致。没有批量润色其余语言的旧错误文案。
+
+### 实际验收
+
+- Node20隔离构建通过，候选`npm run build`用时14.41秒，构建链SEO、dist、缓存与64条重定向检查通过。TypeScript检查和两个改动组件、错误页测试的定向ESLint通过；没有声称全项目lint通过。
+- Chromium本轮5项错误页/既有通用404检查通过；上一轮菜单回归及英语、德语、韩语桌面/手机SEO导航、失败恢复、取消旧请求共11项通过。首轮误设`EXPECT_CONSENT_BANNER=1`，而构建关闭了统计，11项停在不存在的Cookie弹窗等待；保留失败输出，纠正为0后11项通过，未放宽断言或修改这些既有测试。
+- 实际HTTP检查：缺失英语动画篇、日语`constructor`（含无尾斜线/查询参数）、未知通用页和缺失博客内图片都为404；对应真实日语动画文章与首页为200。缺失页HEAD为404且0字节正文。标准`npm run preview -- --port 4412 --strictPort`另行启动并验证缺失页404、首页200。
+- JavaScript关闭时，缺失英语文章仍有可见错误提示、noindex和博客返回链接。JavaScript开启后，日语未知文章干净挂载，没有React418或Seo同步错误，返回日语博客后恢复可用菜单及canonical、删除noindex。连续缺失SPA网址保留noindex，返回最初首页恢复原title、canonical和OG；真实从英语缺失页菜单切到日语动画文章后，正文、日语canonical与可收录状态恢复。
+- 已查看1440宽英语及390宽日语错误页真实截图；日语手机页无横向溢出，错误提示和返回按钮可见。沿用现有语言文案不等于对全部语言重新完成文案审校。
+- 基线225份HTML、候选243份：224份有效页面的title、description、canonical、hreflang、OG/Twitter和JSON-LD逐页一致；根404刻意替换，新增18份博客共享错误模板，19份错误文件均为干净head、非hydration模板。sitemap网址/内容及hreflang参考未变，文件只差构建时的生成时间注释；`_redirects`、`_headers`一致。
+- 610个保护文件核验没有额外变化，唯一许可例外是上述菲律宾语单字段；根`dist/`、文章JSON、分享图、首页SEO及上一轮菜单四个文件保留。构建与运行位于隔离副本，没有手改根构建产物。
+
+证据保留在`/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-missing-blog-1dKA55/`，包括隔离构建、`runtime-proof.json`、`command-proof.json`及英/日真实截图。构建输出为`artifact://369`，初轮测试失败输出为`artifact://378`。临时预览和浏览器已关闭，临时执行配置已移除，源码回归测试保留。
+
+### 未扩大处理
+
+- 本地证明不等于线上已更新；Pages的线上404行为须在授权发布后再检查。[Google对HTTP状态的说明](https://developers.google.com/crawling/docs/troubleshooting/http-status-codes)也不保证索引变化立即发生。未修改其他托管平台的历史配置。
+- 五种语言首页SEO、5处旧`italianForbidden`测试变量错误、日语入门篇旧价格及其余旧语言文案不在本轮处理范围，未宣称修复。
+
+## 2026-10-13 博客文章语言菜单可用性修复（本地验收完成，未发布）
+
+本轮只处理公共语言菜单把用户带到缺失文章的问题，不创建译文、不改文章内容、首页SEO或语言文案，不提交、推送、部署或请求收录。前轮已经记录日语动画篇没有英语对应文章；本轮直接据此修复，不把重看“Post not found”当成定位工作。
+
+### 根因与修改范围
+
+- `LanguageSwitcherBalanced.jsx`原来固定展示全部运行时语言；文章组件只在所选语言的数据中按slug找文章，不能据“支持该语言”推断“该文章有此译文”。
+- `vite.config.js`新增`virtual:blog-article-locales`，在构建/开发服务中读取实际语言数据，生成仅含slug与语言代码的紧凑Map。沿用数组/数字键对象及有效slug的现有内容规则，不加载正文到语言菜单，不维护手写例外或译文清单，不更改文章加载器的fallback语义。
+- `useLanguageSync.js`识别实际博客文章路径，按现有语言配置顺序计算`availableLangs`，并在写入语言偏好、改变i18n及导航之前拦截不可用目标。`LanguageSwitcherBalanced.jsx`使用同一清单，避免菜单与处理器判断不同。
+- 当前语言没有文章时，保留不可选的当前语言占位，允许选择真实存在的其他译文；所有语言都没有该文章时禁用菜单，不自动跳到首页、博客索引或其他文章。首页、博客索引、About及converter不走文章过滤，保留原完整语言菜单；保留现有URL、历史、查询参数与hash处理规则。
+- 代码审查发现旧`handleHotUpdate`只覆盖文件更新，不能覆盖新增/恢复的数据文件；依据安装的Vite7源码及[官方Environment API](https://vite.dev/guide/api-environment-plugins#the-hotupdate-hook)，改用环境级`hotUpdate`及moduleGraph，覆盖create/update/delete并保留已有受影响模块。隔离开发实验使用原ES文章数据，未造假译文；更新、删除及恢复后均实际验证菜单变化。
+- 永久代码改动为`vite.config.js`、`src/hooks/useLanguageSync.js`、`src/components/LanguageSwitcherBalanced.jsx`及`tests/blog.spec.js`的一条行为回归测试；本条为配套记录，无新源码数据文件、图片、语言文案或依赖。
+
+### 本地验收与范围证据
+
+- Node20隔离基线与最终候选构建通过；最终`VITE_E2E=0 VITE_ENABLE_ANALYTICS=0 npm run build`用时12.47秒，构建链`verify-dist`及缓存/重定向检查通过。候选四个修改文件与项目根文件字节一致，根`dist/`和sitemap未重新生成。
+- 桌面1440与手机320宽度、JavaScript开/关，共4个文章场景及刷新通过。日语动画篇菜单准确保留`es/de/pt/fr/ru/ja`，没有英语选项；已查看真实桌面、手机截图与浏览器可访问性中的6个选项，未出现横向溢出。
+- 实际切到西班牙语、德语、葡萄牙语、法语、俄语，均为同slug、正确语言正文及canonical，没有整页重载；查询参数保留，前进/后退通过。动画篇→日语比较篇会恢复英语，比较篇英语切换通过，后退回动画篇再次移除英语。
+- 实际注入一个过时的英语选择事件，确认URL、已存语言及页面语言未变。直接打开缺失英语文章时，英语占位不可选而真实日语译文可选择；未知`constructor`文章路径无可用目标、菜单禁用且不重定向。显式网址语言优先于预存偏好通过。
+- `/ja/blog/`、`/ja/`、`/ja/about/`和实际存在的`/ja/converter/photo-to-sprite-converter/`保持配置中的全部语言。初始实验误用无预渲染的`/ja/converter/image-to-pixel-art/`，随后按构建清单改用真实converter路径，保留失败诊断，不把该假设路径当成有效译文页。
+- Chromium定向运行新文章菜单回归、既有波兰语文章英语往返和首页无重载切换，共3项通过、0跳过、0失败、0重试。最终三个生产源码文件ESLint通过。整个`tests/blog.spec.js`仍有5处旧`italianForbidden`未定义错误，基线和候选同位置、同错误，不能宣称全文件或全项目lint通过。
+- 开发服务真实验证：移除ES数据中的动画文章后菜单去掉ES，恢复文章后恢复ES；删除整个ES数据文件后去掉ES，重新创建原文件后恢复ES。原文件最终逐字节还原。首次隔离开发环境的优化依赖请求HTTP504、页面未启动；为临时开发副本配置独立缓存后实验通过，缓存配置未写进项目根源码。
+- 对比225份构建HTML，搜索title、description、canonical、OG/Twitter、hreflang与结构化数据均未变；67个文章页的菜单因实际译文覆盖不同而变化，不代表批量改稿。610个保护文件哈希未变，包括全部文章内容、语言资源、既有分享图、根构建产物、sitemap及共享图片处理代码。
+- 临时证据目录为`/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-blog-languages-qOcYWi/`，包括`runtime-menu-proof.json`、`development-hmr-proof.json`、`regression-proof.json`、`scope-proof.json`、真实截图与初始失败诊断。本地通过不等于线上已更新。
+
+### 已知批外问题
+
+- 本轮解决菜单通往不存在译文的入口，不改变直接输入不存在文章网址时的HTTP、未找到页面或SEO处理。基线和最终候选在缺失英语动画篇、未知文章`constructor`这两个无预渲染地址上均各有一次React418恢复渲染错误；首个不一致可能为HTML或text，完整消息分别保留，不能称为消除了该错误。有效文章与有效非文章路径没有新增运行时错误。
+- `tests/blog.spec.js`的5处旧未定义变量、上述缺失文章直达处理及日语入门篇旧价格等问题仍未修改。五种语言首页SEO优化继续暂缓。
+
+### 本轮清理
+
+已停止本轮独占的候选预览、基线诊断及开发服务，释放两个托管浏览器；删除`menu-smoke.cjs`、`hmr-smoke.cjs`和临时Playwright配置，撤销仅开发副本使用的缓存配置并删除其独占缓存。保留构建副本、截图、回归结果及失败诊断，清理证据为上述临时目录的`cleanup-proof.json`。清理只针对本轮临时目录；未停止其他服务或改动个人浏览器。
+
+
+## 2026-10-13 日语动画教程必要纠错（本地验收完成，未发布）
+
+本轮只处理`/ja/blog/pixel-art-animation-tutorial-frame-by-frame/`，主要内容源为`src/content/blog-posts.ja.json`的第三个对象。保留原逐帧制作、瞬き与歩行主题和有用步骤，不改成照片转换教程、不开发本站动画功能。全文核对发现本站“基础动画”虚构能力、必须重复首尾帧的过强指令、瞬き示例时长计算不一致和混入中文等问题；均属于本篇必要纠错。前两个日语对象、首页、语言资源、其他语言及前轮修改保留，不提交、不发布、不请求收录。
+
+### 改稿前搜索映射与依据
+
+|目标网址|目标语言主词|搜索意图|返回query与完整日期窗口|证据与限制|是否改变原定位|
+|---|---|---|---|---|---|
+|`/ja/blog/pixel-art-animation-tutorial-frame-by-frame/`|`ピクセルアート アニメーション`；辅助`ピクセルアニメーション`、`フレーム`、`瞬き`|用动画编辑器制作手绘帧、设置时间并检查循环|2026-09-12至2026-10-09，web/final：`ピクセルアート アニメーション`为1点击/5曝光；`ピクセルアニメーション`为0点击/7曝光|`docs/GSC_JA_ANIMATION_BASELINE_2026-10-13.json`：目标page3点击/68曝光，平均位置7.2206；已收录、Google canonical为自身。query行不等于完整page汇总，不补造遗漏项；辅助词为具体教学内容判断，不称为已观测搜索量|保留原动画教学定位，纠正工具和时间说明，不转换为本站照片转换指南|
+
+本篇Inspection、page、query/page三次只读请求均HTTP200；复用此前已保存的28个完整日期证据。Inspection最后抓取2026-10-12，不证明本轮未发布修改已抓取。原最终搜索标题59字符，已符合现有规则，优先保持；原完整描述88字符，需改为准确完整的150–160字符文案。
+
+2026-10-13已读取Aseprite官方Animation、Frame Duration和Exporting，Piskel官网及GIMP3.0的GIF导出说明。GIMP首次旧文档地址返回404，随后定位到实际`file-gif-export.html`；不使用失败页面作为依据。Aseprite/Piskel/GIMP的步骤依据官方说明，未运行这些编辑器，不声称已有共同实验或动画导出实测。封面如复用静止图，必须明确不是本文动画实测结果；不生成假GIF冒充本站输出。
+
+### 本篇修改与准确边界
+
+- 删除本站支持“基础动画”的说法，明确本站是静止图转换工具，没有像素画笔、图层、时间轴或逐帧编辑。上传GIF不等于导出动画；实际可下载PNG、JPEG、WebP，不写GIF/SVG导出。
+- 保留逐帧基础、瞬き和8帧歩行练习。帧率、画布尺寸与步行动作为练习示例，不写成通用标准或质量保证；循环检查最后一帧到第一帧的动作衔接，不要求两帧内容相同。
+- 瞬き示例统一为5张图：第一张显示2个时间单位，其余各1个，共6个时间单位；以12FPS等效计算约0.5秒。167毫秒加4×83毫秒为499毫秒，说明这是取整近似；固定帧率编辑器需重复第一张图，得到6个时间轴帧。
+- 补充官方编辑器入口、保存原项目、GIF/PNG连番导出及3条可见FAQ。Aseprite/Piskel/GIMP未实际运行，不称为编辑器共同测试、现成动画成品或本站动画导出实验。
+- 沿用原静止图装饰封面，日语标签和正文说明其不是瞬き/歩行成品或动画GIF。沿用本站既有`/blog-og/_index.png`分享图，不新造动画图或本篇OG；下载实验的双帧GIF仅为临时验证输入，不写进文章或发布资源。
+
+### 最终搜索标题与描述
+
+- H1和原标题字段保持不变；最终完整标题59字符，包含程序追加品牌：`ピクセルアートアニメーションチュートリアル - 初心者向けフレームバイフレーム | Pixel Art Village`。
+- 最终完整描述155字符：`ピクセルアートアニメーションをフレームごとに作る入門ガイド。瞬きの5つの状態と表示時間、8フレームの歩行例で、動きとループのつながりを考えます。AsepriteやPiskelなどの外部エディターが必要な理由、保存とGIF・PNG連番の書き出しも紹介。公式情報と練習例を分け、当サイトの静止画変換との違いも説明。`。
+- 初版158字符描述在预渲染时被截断，手机端“加粗内嵌链接”又显示原始网址并溢出。实际重现后，仅调整本篇完整描述和3条普通Markdown链接；未改共享SEO、预渲染脚本、正文解析器或CSS。最终静态HTML、禁用JavaScript和运行时的完整描述一致，没有以自动截断充数。
+
+### 构建、真实页面与范围证明
+
+- 使用Node20，在临时基线与候选目录运行`VITE_E2E=0 VITE_ENABLE_ANALYTICS=0 npm run build`；最终候选构建12.61秒完成，包含构建链`verify-dist`通过。不在项目根目录重新生成`dist/`或sitemap。
+- 实际浏览器覆盖1440/390/320宽度×JavaScript开/关，共6个页面场景；目标页HTTP200，博客列表入口、刷新、最终title/description、canonical、自身hreflang、OG/Twitter、文章与FAQ结构化数据、静态封面及官方链接通过。320宽度页面和正文均无横向溢出；已查看桌面、手机标题封面与正文链接的可读截图。
+- 使用真实双帧32×32GIF作为临时输入，在1440与390宽度各下载PNG/JPEG/WebP，6个文件均实际解码为32×32、单帧静态图。证明本轮对本站静态输出的说明；不判断固定取得GIF哪一帧，不当作动画编辑器性能或成品实验。
+- 日语→实际存在的西班牙语同篇→刷新→返回日语通过；缺失英语对应页的失败另列批外问题，不冒充英语切换通过。分享图实际HTTP200，可解码为1200×630PNG，与基线字节一致。
+- 225份构建HTML对比：元信息变化仅本篇及日语博客索引；正文变化为本篇、索引和另外两篇日语页的相关文章卡片。前两个日语源码对象逐字节不变；17个保护文件均未变，含首页构建产物、相关语言资源、其他语言内容、已有测试、前轮ES/JA分享图和根目录sitemap。隔离候选内容源与项目根源码一致；无公共组件修改、无新图、无永久测试新增。
+- 永久记录为本篇内容源、本条迭代记录和`docs/GSC_JA_ANIMATION_BASELINE_2026-10-13.json`。临时证据位于`/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-ja-animation-naPtGY/`，含`runtime-smoke-proof.json`、`scope-and-build-proof.json`、`visual-2-pages.json`、初始失败证据、截图和6个真实下载文件。未提交、推送、部署或请求收录；本地验收不等于线上已更新。
+
+### 批外问题与后续边界
+
+- 前轮记录的日语动画篇虚构本站动画功能问题，本轮已纠正。日语入门篇旧价格、日语语言资源中的能力说明及英文`Select language`无障碍名称仍未改动。
+- 已重现公共语言菜单允许本篇切到不存在的英语对应文章：界面显示`Post not found`，本地服务器仍HTTP200，运行时canonical指向首页，而非有效英语文章。证据为`missing-english-counterpart.json`和截图；本轮不创建假译文、不改公共切换器或其他语言，不能把该场景记作通过。后续应单独处理不存在对应文章时的语言菜单与路径行为。
+
+### 验收清理
+
+本轮独占预览`ja-animation-final-naptgy`已停止，托管浏览器`ja-animation`已释放；删除自建临时脚本`smoke.cjs`与`gsc-ja-animation.py`，保留截图、下载文件、失败重现与结果JSON，清理记录为临时证据目录的`cleanup-proof.json`。未向仓库增加永久测试、临时脚本或验证用GIF。
+
+
+## 2026-10-13 日语工具比较篇纠错（本地验收完成，未发布）
+
+本轮仅处理`/ja/blog/best-pixel-art-converters-compared-2025/`及`src/content/blog-posts.ja.json`的B1。改稿前源码、隔离构建及真实页面确认：旧文声称测试十款工具，给出无证据的分数和排名，把本站导出写成PNG/GIF/SVG，并推荐无IT审批的企业使用。已删除这些无法证明或越权的结论。日语文件实际只有三篇，其余两篇、日语语言资源、首页、前轮ES/PL/NL/IT和共享图片处理均保留，不提交、不发布、不请求收录。
+
+### 改稿前搜索映射与事实依据
+
+|目标网址|目标语言主词|搜索意图|已返回query与完整日期窗口|证据与限制|是否改变原定位|
+|---|---|---|---|---|---|
+|`/ja/blog/best-pixel-art-converters-compared-2025/`|`ピクセルアート変換ツール比較`；辅助`無料`、`オンライン`、`ドット絵`|比较照片转换、手绘像素与动画工具，说明免费在线工具的适用任务|2026-09-12至2026-10-09，web/final：`ピクセルアート作成のオンラインツールを比較したい`（26曝光）、`最新の画像からピクセルアート変換を比較したい`（4）、`無料ピクセルアートのオンラインツールを比較したい`（43）、`画像からピクセルアート変換のオンラインツールを比較したい`（2）；这些query均为0点击|`docs/GSC_JA_COMPARISON_BASELINE_2026-10-13.json`：目标page为1点击/82曝光，平均位置5.1341；已收录、Google canonical为自身。返回query行曝光之和75不等于page曝光82，不补造遗漏行。主词及辅助词为保持该比较任务的编辑选择，不宣称精确搜索量|保留工具比较定位和已观察到的免费在线比较意图；仅修事实，不改成其他主题|
+
+只执行本篇URL Inspection、page、query/page三次只读请求，全部HTTP200；完整28日期证据复用既有TL保存响应，没有读取其他canonical流量或请求收录。检查时最后抓取时间为2026-09-11，不能用既有收录状态证明本地新稿已发布或重新抓取。
+
+2026-10-13已重新读取Aseprite、Piskel官网及GIMP Pixelize和Save/Export官方文档，复用已验收四工具模型。本站案例复用有出处的向日葵工作JPEG960×762和真实PNG80×63；竞品只核对官方功能，不做或声称同图质量/速度测试。新日语分享图沿用既有生成器，必须目视核对日文字形、换行与1200×630图片。文章参数名称以当前日语控件为准，不重写其他页面。
+
+### 本轮交付与验收
+
+- B1现为Pixel Art Village、Aseprite、Piskel、GIMP四工具的用途、功能和限制比较。保留“免费在线工具比较”的已观察搜索意图，明确本站用于照片转换、Piskel用于手绘和动画，不把四款都称为免费在线转换器。披露本站运营者身份；竞品只核对官方资料，没有共同照片质量/速度实验，不提供臆造评分、排名或旧价格。
+- 原网址及2025-11-01发布日期保持不变，更新时间为2026-10-13。全文、表格、作者入口、展示标签、三条FAQ、案例参数和相关文章文字均在这一对象内完成日语化；保留必要名称、格式缩写、原样控件名，以及明确注明语言的官方资料。未修改共享模板、语言资源或测试源。
+- 最终完整搜索标题为`ピクセルアート変換ツール比較：写真のドット絵化・手描き・アニメ制作の選び方 | Pixel Art Village`，57字符（含品牌、空格和标点）。完整描述为`ピクセルアート変換ツール比較：写真のドット絵化、手描き、アニメ制作に使う4ツールを目的別に紹介。無料のオンライン変換と描画ソフトの違い、対応形式や制限を確認できます。Pixel Art Villageの実際の設定とダウンロードできるひまわりのPNGも掲載。同条件で品質や速度を試したランキングではありません。`，154字符。源码、构建HTML、运行及刷新后的description/OG/Twitter值一致，没有依赖描述截断。
+- 向日葵工作JPEG960×762、真实PNG80×63及Don McCulley/Commons/CC0出处保留，区分Commons原始5040×4000照片与工作图片尺寸。只新增`public/blog-og/ja/best-pixel-art-converters-compared-2025.png`；沿用既有生成器，1200×630，HTTP200且可解码。结果图441×350区域与实际PNG最近邻放大逐像素相同，已目视检查日文字形、完整文字及图片，无缺字方框或截字。
+- 首轮实际点击暴露正文Markdown预先带`/ja/`会在客户端成为`/ja/ja/`，而原图Markdown链接会变成`/ja/photo-sunflower-source.jpg/`。只按既有内容模型纠正本篇：页面Markdown使用`/`、`/blog/.../`，交给既有组件加语言前缀；工作JPEG沿用西语比较篇的纯文字说明和原生封面展示，结果PNG保留已有结构化figure原生下载。不改链接组件、预渲染器或资源规则，不以HTTP200的首页回退充当正确目的页。
+- 最终Node20隔离`npm run build`通过，包含自带`verify-dist`及缓存/重定向检查，完整输出`artifact://274`。使用现有`scripts/build/serve-dist.cjs`预览，未在根目录构建。前后225个HTML的SEO标签/JSON-LD差异仅本篇和日语Blog列表；正文差异在本篇、列表和两篇日语教程，后两者来自既有相关文章卡片传播，不是教程正文重写。其余两篇源对象按字节不变；16个受保护文件按字节无变化，含规则、首页构建、ES/PL/NL/IT源、日语等语言资源、原有测试、共享图片处理、根目录sitemap和ES分享图。所有首页SEO保持不变。
+- 临时Playwright Chromium141真实烟测最终通过：1440/390/320屏宽，各自JavaScript关闭/开启，共六组。覆盖列表进入、直接打开、刷新、标题与完整描述、唯一canonical、自身日语hreflang、无noindex、四工具表、三条可见FAQ与对应FAQPage、BlogPosting/Breadcrumbs、作者、封面原图/结果图地址及尺寸、两张资源的MIME和实际字节、作例PNG点击下载字节一致，以及横向不溢出。内链检查限定真实地址并核对目的页canonical/语言，不只看状态码。
+- 开启JavaScript的三种屏宽均实际点击两篇日语教程和日语工具首页后返回，标题/目的canonical/语言及上传控件符合目标；另对两篇教程直接打开和刷新。日语本篇切到英语同slug、刷新及返回通过。独立托管Chromium另验1440/320实际页面和截图，日文字形、比较表移动端排列、canonical、三条FAQ及无横向溢出通过。
+- 1440和390屏宽下实际上传工作JPEG，像素尺寸12、无调色板、关闭自动调色板/抖动/网格，以PNG原生像素尺寸下载；两次均80×63，完整解码RGBA与展示PNG一致。该结果限受验Chromium141会话，不保证各浏览器原生像素相同；未执行Firefox/WebKit或竞品共同实验，没有新增永久测试或声称运行整个测试套件。
+- 证据保留在`/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-ja-comparison-UocvUv/`：`before-fix.json`、`initial-link-failure.json`、`initial-visual-2-pages.json`、`runtime-smoke-proof.json`、`scope-and-build-proof.json`、`final-body-links.json`、`visual-2-pages.json`、真实下载和截图。初次链接失败及最终成功均保留，不放宽断言掩盖问题。未提交、推送、部署、请求收录或报告新稿搜索增长。
+- 收尾已关闭本轮专用浏览器和前后两个预览服务，删除临时GSC和运行烟测脚本。隔离构建副本、初次链接失败诊断、最终成功报告、真实下载及截图保留，供后续发布前复查。
+
+### 批外问题记录
+
+- `src/content/blog-posts.ja.json`入门篇（当前139行）仍写Aseprite旧价格`$19.99`，本轮未核实为当前价格；动画篇（当前326行）仍将本站列为“変換と基本アニメーション”，与现有无动画能力冲突。两篇源保留，已知问题待单独授权范围处理；本轮链接验收不等于已审查并纠正它们的全部正文。
+- `public/locales/ja/translation.json`的`adjustments.palette.note`仍有重复文字及将非Pico-8命名预设概括为自动生成的旧说明；语言选择控件实际aria-label仍为`Select language`。记录为日语公共语言资源的后续事项，不为本篇扩大修改首页或其他页面。
+
+
+## 2026-10-13 西班牙语工具比较篇纠错（本地验收完成，未发布）
+
+本轮只处理`/es/blog/best-pixel-art-converters-compared-2025/`，主要内容源为`src/content/blog-posts.es.json`中的B1。改稿前已核对源码及隔离构建真实HTML：旧文仍声称测试十款工具、给出无实测依据的评分，错误列出本站PNG/GIF/SVG导出。旧源描述253字符，旧构建描述被自动截断；不能用截断结果代替合格完整文案。西班牙语其余四篇、首页、语言资源、前轮PL/NL/IT与共享导出修改均保留，不提交、不发布、不请求收录。
+
+### 改稿前搜索映射与事实依据
+
+|目标网址|目标语言主词|搜索意图|返回query与完整日期窗口|证据与限制|定位是否改变|
+|---|---|---|---|---|---|
+|`/es/blog/best-pixel-art-converters-compared-2025/`|`convertidores de pixel art`，辅助`editor de píxeles`、`animar sprites`|按照片转换、手绘像素和动画用途选择工具|2026-09-12至2026-10-09，web/final；query/page未返回行|`docs/GSC_ES_COMPARISON_BASELINE_2026-10-13.json`：目标page为0点击/9曝光；Inspection已收录且Google canonical为自身。主词为内容编辑判断，不是已返回搜索词或搜索量|保留工具比较任务；去除无法证明的质量排名与十工具测试，不改变为其他页面主题|
+
+只对本篇做URL Inspection、page、query/page三次只读请求，全部HTTP200；28个完整日期证据复用既有已保存响应，不查询其他canonical流量。窗口早于本轮修改，不能作为修复效果。
+
+按已验收比较篇的四工具模型复用Pixel Art Village、Aseprite、Piskel和GIMP；2026-10-13重新读取Aseprite及Piskel官网、GIMP的Pixelize与Save/Export官方说明。官方功能说明不当作共同照片实测。本站案例复用有出处的向日葵JPEG960×762及真实PNG80×63，保留参数、许可和单会话边界；需要的新西班牙语分享图沿用现有生成器，不开发或更改共享逻辑。
+
+### 本轮交付与验收
+
+- 只重写西班牙语B1：比较四款工具的功能和用途，不再声称共同照片测试、十工具实测、质量排名或未经证明的评分；标明本站作者身份和2026-10-13官方来源核对时间。本站格式更正为PNG/JPEG/WebP，并说明不提供动画GIF或SVG导出。其他三款工具只有官方资料核对，没有运行或做效果、速度对比。
+- 保留原网址及2025-11-01发布日期，更新时间为2026-10-13。正文、比较表、三条FAQ、案例参数、作者链接、案例下载及同语言相关文章链接已补齐；文章展示字段保留在这一内容对象，不修改语言资源或共享模板。向日葵案例说明工作JPEG为960×762、实际PNG为80×63，不把工作图片尺寸误写成Commons原始图片尺寸。
+- 最终完整搜索标题为`Convertidores de pixel art: comparativa | Pixel Art Village`，59字符（含程序追加品牌、空格和标点）。完整描述为`Compara cuatro herramientas de pixel art para fotos, dibujo y animación. Revisa funciones, límites y un PNG real; no es una prueba de calidad conjunta.`，151字符。源码完整文案、构建HTML、运行后及刷新后的description/OG/Twitter描述均一致，没有依赖截断凑长度。
+- 只新增`public/blog-og/es/best-pixel-art-converters-compared-2025.png`，1200×630；由既有生成器生成。HTTP200、图片解码及441×350的结果图区域逐像素核对通过，确为本文80×63 PNG的最近邻放大；已查看实际西班牙语文字和两张向日葵图片，没有改生成器或复制其他语言生成资源。
+- 修改前隔离构建与浏览器确认旧标题、正文“Probamos 10”及错误的PNG/GIF/SVG说明仍存在。修改后Node20隔离运行`npm run build`通过，包括构建自带`verify-dist`与缓存/重定向检查。使用现有`scripts/build/serve-dist.cjs`预览，不改根目录`dist/`或sitemap。
+- 临时真实浏览器验收通过六组：1440/390/320像素屏宽，各自JavaScript关闭/开启。覆盖Blog列表进入文章、刷新、标题/完整描述、唯一canonical、自身西语hreflang、无noindex、四工具比较表、可见三条FAQ及对应FAQPage、BlogPosting、作者、原图/结果图尺寸、示例PNG实际下载、同语言链接HTTP200和横向不溢出。开启JavaScript时进一步点击相关文章再返回本篇。英文同slug切换、刷新与返回西班牙语另行通过。
+- 1440和390像素屏宽下，实际上传工作JPEG，设置像素尺寸12、无调色板、关闭自动调色板/抖动/网格，以PNG原生像素尺寸下载；两次均为80×63，解码完整RGBA与已展示PNG一致。该结果来自已安装Playwright Chromium会话，不承诺其他浏览器原生处理逐像素相同。没有做Firefox/WebKit或其他工具的共同实测，也没有新增永久测试。
+- 既有“Spanish beginner article retains its existing content and cover”回归用例1项通过，重试为0，测试源未修改。独立托管Chromium另验1440/320像素实际页面、HTTP200、语言、三条FAQ、SEO值和不溢出，并保存截图。首次复用临时意大利语截图函数时仍带`/it/blog/`路径，错误等待西班牙语标题而超时；只纠正临时函数路径与语言条件后通过，没有据此修改产品代码或放宽断言。
+- 两次构建的225个HTML逐页对比：SEO标签/JSON-LD差异仅出现在本篇及`/es/blog/`列表。本篇标题、摘要等经既有相关文章展示传播，使西语颜色理论篇、技巧篇和列表正文出现差异；不是重写其他文章。西班牙语其余四篇内容源按字节保持一致；13个受保护文件按字节核对无变化，包括首页规则、语言资源、PL/NL/IT文章、共享图片处理、原有测试、根目录sitemap和`dist/index.html`。所有首页SEO保持不变。
+- 验收资料保留在`/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-es-comparison-OqVWfk/`：`before-fix.json`、`runtime-smoke-proof.json`、`scope-and-build-proof.json`、`visual-2-pages.json`、既有回归JSON报告、下载PNG及截图。构建完整输出为`artifact://239`。本轮只形成本地修改；没有git提交、推送、部署、请求收录或声称获得修复后的搜索增长。
+
+
+- 收尾已关闭本轮独立浏览器和前后两个预览服务；删除三个临时执行文件（GSC脚本、运行验收脚本、临时Playwright配置）。前后构建副本、失败路径诊断、成功报告、下载和截图保留，供后续发布前复查。
+
+## 2026-10-13 意大利语已发布五篇的必要复查（本轮本地修改已验收，未发布）
+
+用户在暂缓五个首页再次优化之后，选择“继续修意大利语五篇”。先核对历史：这五篇及五张分享图已随2026-10-11的`e733f09`正式发布，后面的部署回执优先于较早的“本地完成”阶段记录。本轮不重写、不重复计算为新增五篇修复；主内容源仍为`src/content/blog-posts.it.json`，只修现存问题，保留其他未提交工作。
+
+### 本轮修改与保留
+
+- B1工具比较、B2复古限色：正文、搜索标题、描述及更新时间均未修改；原有四工具说明、来源与固定/自动调色板纠错保留。
+- B3效果排错：透明控件名改为`Sfondo trasparente (PNG)`，说明当前JPEG/WebP输出使用白底；补充PNG放大不平滑、缩放只影响显示、启用网格后仅在放大导出且两边单元尺寸均至少2像素时写入网格。补充已发布下载只代表受验会话，不保证各浏览器的原生像素完全一致。
+- B4 Illustrator：只同步PNG透明控件名，保留“依据Adobe文档、浏览器单独绘制尺寸图、实际转换器下载”的区别及10月11日来源日期，不声称本轮运行过Illustrator。
+- B5入门：描述从149字符改为153字符；明确最大10 MiB，即10 485 760字节本身允许上传，保留长边超过2200像素的等比预处理，不再笼统声称所有界面都写10MB。
+- B3/B4/B5的更新时间改为2026-10-13。五篇标题、原发布日期、slug、封面、分享文案和图像路径均保留。五张1200×630意大利语分享图与候选构建逐文件相同，无需重新修改。
+- `public/locales/it/translation.json`只改九项直接涉及操作的叶子：三个输入错误、条件网格颜色、导出说明、PNG透明控件、语言选择、预览替代文字及处理中状态。已完成的固定调色板说明和`Numero di colori`标签不重做；尺寸按钮英文名按现有控件保留，教程与新增说明注明这一点。
+- 只调整`tests/blog.spec.js`的意大利语段：删除固定日期、任意正文句子、调色板字面文案和默认值断言；保留实际路由、SEO、FAQ、图片下载、同意选择、字节边界、色数上限及透明像素检查。标题和三种描述的长度断言读取真实页面值；自动调色板按当前滑块值操作到24，不依赖默认16。
+
+### 最终完整搜索标题与描述长度
+
+以下包含品牌、空格及标点，构建HTML与真实浏览器的对应值均核对。未修改标题字段，不重复追加品牌。
+
+|文章|完整标题字符数|完整描述字符数|
+|---|---:|---:|
+|B1 工具比较|55|152|
+|B2 复古限色|59|151|
+|B3 效果排错|59|153|
+|B4 Illustrator|59|151|
+|B5 图片像素化入门|59|153|
+
+B5最终完整标题：`Come pixelare un’immagine e salvare PNG | Pixel Art Village`。最终完整描述：`Impara a caricare una foto, regolare Dimensione pixel e salvare PNG dopo la nuova anteprima. File PNG reali 120×95 e 80×63 distinguono dimensioni e zoom.`。
+
+### GSC只读复查
+
+保存`docs/GSC_IT_BLOG_BASELINE_2026-10-13.json`，保留10月11日旧基线。只查询五个意大利语URL，各做一次URL Inspection、page维度和query/page维度，共15次请求，全部HTTP200；没有请求收录，没有查询其他语种或把其他canonical流量归入意大利语。Search Analytics使用2026-09-12至2026-10-09的28个完整日期、web/final；完整日期证据复用10月12日已保存的全站日期响应。
+
+最新Inspection五篇均为`Submitted and indexed`，Google canonical均为本篇意大利语网址。B1/B3在该统计窗口没有返回page/query行，不将空结果写成精确零流量。B2为2点击/85曝光、9条query行；B4为0/33、3条；B5为0/51、4条。此窗口早于10月11日发布，且与旧窗口不同，不能据此评价发布后增长。B2最后抓取仍为10月10日，也不能把“已收录”视为五篇都已读取新正文。本轮修改尚未上线，当前索引状态不是本轮修改的效果。
+
+### 本地验收、失败定位与范围
+
+隔离目录为`/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-it-local-FYCvWD/`。基线与候选均用Node20、`VITE_E2E=0`、分析关闭执行正常`npm run build`，包括预渲染和构建产物检查，通过；真实工作树的`dist/`和两份sitemap未重建或修改。
+
+入门描述回归在旧构建准确失败：要求至少150，实际149；候选真实值153。最终使用项目`playwright.config.ts`指定的`scripts/build/serve-dist.cjs`验收服务器，既有意大利语46项全部通过，0重试、0跳过，涵盖五篇×1440/390/320像素×初始HTML/运行态、五张OG、六个工具流程、四个同意选择流程和语言切换。另用独立Chrome150保存五篇桌面/手机共十张真实整页截图，HTTP200、正确语言与元数据、图片可读，无横向溢出；目视核对导出说明及条件网格控件。
+
+最初误用Vite preview时，45项通过，语言切换一项失败。实际HTTP定位证明：无尾斜杠的英文/意大利语文章路径被返回为首页HTML，SEO组件按现有规则拒绝错误页面，因此canonical缺失。改用既有项目静态服务器后，同一测试不改断言、不加等待、不加重试即通过；两种路径均返回正确文章，独立桌面/手机切换、刷新、返回也保持正确canonical，无SEO错误。原失败报告、截图、视频及两种服务器的HTTP证据保留；未据此修改共享SEO代码或误报为生产业务修复。
+
+Chrome150实际上传、调参、下载共52份文件：尺寸、四种输入、三种静态输出、色数上限、PNG透明像素、JPEG/WebP不透明白底、显示缩放、网格、10 MiB含边界及2200长边处理均受验。六个同会话PNG放大文件与原生文件的纯像素重复逐RGBA通道完全一致。JPEG/WebP为有损编码，解码白区有轻微通道变化，不把JPEG角点必须精确255作为契约。与既有Chromium141原生参考的十项像素差异另行记录，不称完全复现；Chromium141既有实际参考下载比较通过。未确定差异根因，不归因于palette worker，也不改共享处理器掩盖差异。
+
+225页构建对比：SEO标签/JSON-LD只变化三篇实际修改文章及意大利语Blog列表；首页SEO和其他语种不变。共享意大利语语言控件属性使十二个意大利语页面的正文HTML有变化，其余页面未变。B1/B2源对象、五张OG、PL/NL前轮源与控件、共享导出处理器、项目规则、真实工作树sitemap/dist及意大利语以外的测试内容均保持原样。
+
+证据保留于上述目录的`delivery-proof.json`、`before-regression-report.json`、`final-existing-test-report.json`、`52-download-pixel-proof.json`、`225-page-scope.json`、`visual-10-pages.json`、`navigation-proof.json`、截图和下载文件；原失败另在`existing-test-report.json`及相应结果目录。临时执行脚本、配置和自建预览进程在验收后清理，保留证据。没有人类母语审校、Adobe应用运行、Firefox/WebKit或实体设备验收；没有提交、推送、部署或索引申请。五个首页重新优化仍暂缓。
+
+## 2026-10-13 荷兰语五篇文章纠错与本地化（本地受验，未发布）
+
+用户在波兰语与共享导出修复之后，明确选择“继续修荷兰语五篇”，没有选择提交发布。本轮主内容源仅为 `src/content/blog-posts.nl.json`，另改十一项直接涉及教程操作的荷兰语控件文案，生成五张荷兰语分享图，并保存只读 GSC 基线。保留原五个 slug、发布日期和前轮未提交修改，更新时间为2026-10-13。没有重写首页 SEO、其他语言内容、About、共享处理器、渲染器、构建脚本或测试；没有提交、推送、部署、请求收录。
+
+### 内容范围与搜索依据
+
+开始前在独立 Chromium 读取正式荷兰语比较篇：HTML语言为nl，但标题、H1及正文是英语，且实际出现 `We tested 10`。现在五篇正文、FAQ、图注、下载标签、相关文章、作者和分享文案均为荷兰语。比较篇按 Pixel Art Village、Aseprite、Piskel、GIMP 的不同任务说明，删除虚构十工具测试、评分和排名，披露网站运营方身份。SNES仅表示视觉风格，不承诺硬件兼容；Illustrator篇区分官方文档、尺寸算例、单独绘制的浏览器几何图和真正的转换器下载，不声称实际运行过Adobe。
+
+| 保留的slug | 荷兰语主题词（编辑判断，不是GSC返回query） | 页面任务 |
+|---|---|---|
+| best-pixel-art-converters-compared-2025 | pixelart-converter / pixeleditor / tools vergelijken | 按转换、手绘、动画需求选工具 |
+| how-to-get-pixel-art-version-of-image | pixel art in SNES-stijl / kleurenpalet / dithering | 图片的复古视觉、尺寸和限色 |
+| make-image-more-like-pixel | pixel art verbeteren / dunne lijnen / exportproblemen | 按丢线、颜色、点纹和导出症状排查 |
+| export-from-illustrator-image-to-pixel-art | PNG uit Illustrator / pixelafmetingen / transparantie | 先准备正确源PNG，再决定是否像素化 |
+| how-to-pixelate-an-image | afbeelding pixeleren / pixelgrootte / PNG downloaden | 从上传、调参、等待预览到保存PNG |
+
+沿用已验证的只读服务账号Tier1，通过官方Search Analytics与URL Inspection API查询上述五个荷兰语URL，共15次请求、全部HTTP200。窗口为2026-09-12至10-09、web/final；28个完整日期证据复用 `docs/GSC_TL_BLOG_BASELINE_2026-10-12.json`，不冒充新取的最新窗口。五页的page和query+page均未返回行，不写成零点击或零曝光，也不据此制造热门词。复古篇与Illustrator篇已收录且Google规范网址为自身；比较篇选择sv同slug、排错篇选择nb同slug、入门篇选择id同slug。声明canonical仍保留各自nl网址，没有请求其他语言规范页的流量数据，没有改canonical或发送收录请求。完整请求、状态、时间和响应保存在 `docs/GSC_NL_BLOG_BASELINE_2026-10-13.json`；这些状态反映正式旧页面，不是本地新稿的索引结果。
+
+比较工具和Adobe说明复用此前核实的官方来源；本轮又读取Aseprite、Piskel首页、GIMP Pixelize及Adobe导出文档。文章保留既有12日来源核对日期，不冒充四工具同图实测，也不使用旧价格、广告或绝对隐私承诺。素材复用真实向日葵JPEG960×762、Pixel8/12输出、同会话24色dithering对照、浏览器几何图512/64，以及真实细线4/16和透明Pixel8下载；没有新增假图或把64浏览器源图说成512缩小副本。
+
+### 最终SEO文案与长度
+
+以下标题包含程序追加的 ` | Pixel Art Village`，按Unicode字符计数；描述为完整excerpt，未靠155字符截断达标。构建HTML和真实浏览器的title、description、OG与Twitter均逐项核对一致。
+
+| 页面 | 最终完整搜索标题 | 字符数 | 最终完整描述 | 字符数 |
+|---|---|---:|---|---:|
+| 工具比较 | Pixelart-converter of editor kiezen \| Pixel Art Village | 55 | Kies uit vier pixelart-tools voor fotoconversie, tekenen of animatie. Bekijk functies, beperkingen en een echt PNG-voorbeeld, zonder ranglijst of scores. | 153 |
+| 复古限色 | Pixel art in SNES-stijl: kleur en maat \| Pixel Art Village | 58 | Maak pixel art in SNES-stijl met minder kleuren en duidelijke blokken. Vergelijk echte PNG-bestanden, pixelgrootte en dithering, zonder consolegaranties. | 153 |
+| 效果排错 | Pixel art verbeteren: lijnen en kleuren \| Pixel Art Village | 59 | Verbeter pixel art door verdwenen lijnen, samenvallende kleuren en storende stippen te onderzoeken. Vergelijk echte PNG-bestanden en pas instellingen aan. | 154 |
+| Illustrator导出 | PNG uit Illustrator: formaat en export \| Pixel Art Village | 58 | Bereid een PNG uit Illustrator voor met de juiste afmetingen, schaal en transparantie. Leer wat PPI doet en wanneer je de afbeelding verder wilt pixeleren. | 155 |
+| 入门 | Afbeelding pixeleren: je eerste PNG \| Pixel Art Village | 55 | Pixeleer je afbeelding stap voor stap: kies een bestand, stel pixelgrootte en palet in en download PNG. Bekijk echte voorbeelden en de grenzen van de tool. | 155 |
+
+### 控件、构建与真实页面
+
+`public/locales/nl/translation.json`仅九个已有值及两个缺失叶子变化：三项格式/大小错误、固定与自动调色板说明、自动颜色上限、预览alt与处理中状态、仅PNG的透明度标签、语言选择器，以及新增Rasterkleur和export.note。准确写明PNG/JPEG/GIF/WebP输入、10MiB的含边界限制，颜色数为上限而非必定达到。保留 `Toon raster` 和现有英文导出尺寸按钮名。首页实际覆盖tool.supports，所以没有借未使用字段扩成首页补译；首页英文hero、About和其他语言问题继续按原授权边界暂缓。
+
+使用已安装Node20.19.0，在隔离基线/候选副本按 `VITE_E2E=0`、`VITE_ENABLE_ANALYTICS=0`完整构建；末次正文边界补充后再次build，ownership、SEO、verify-dist、cache/redirect检查均通过。本轮lint/typecheck通过。真实页面矩阵为五篇×1440/390/320宽度×开关JavaScript，共30组合：HTTP200、单H1、nl语言、canonical/hreflang、无noindex、完整SEO/社交值、BlogPosting/可见FAQ对应、作者与内部nl链接、图片/下载资源及无整页横向溢出均核对。15个启用JS场景刷新后保留页面身份和拒绝Cookie选择；末次排错说明另重验该页六组合及三次刷新。已查看五篇桌面、手机标题封面、窄屏FAQ、手机比较表卡片、末次排错说明及五张1200×630分享图。
+
+1440/390两种宽度完成荷兰语入门→英语→刷新→历史返回荷兰语→Blog列表→同篇→刷新的真实交互。320/390额外检查自动颜色上限长标签、处理中荷兰语状态、导出说明与PNG透明标签的实际可见性，标签边界均在控件面板内。复用已有 `tests/sprite-locales.spec.js` 的nl真实上传/38×38透明PNG导出用例，1/1通过、零重试；没有复制另一套永久语言测试。
+
+### 下载证据与浏览器边界
+
+Chromium150.0.7871.24在1440/390完成48次真实按钮下载：几何细线/透明输出、PNG四种尺寸、Zoom、开关网格、白底、照片Pixel8/12、自动24色与dithering、Sunset8，以及四种输入和PNG/JPEG/WebP输出。核对实际格式/尺寸、透明与半透明像素、颜色数上限、同会话dithering差异、网格边界与格内像素。六份放大PNG全图RGBA等于同会话原生像素的精确扩展；Zoom下载一致、Pixel size不写网格。准确10,485,760字节输入成功，+1字节和SVG被拒绝并显示荷兰语错误；2300×1150输入在处理前变为2200×1100。
+
+没有将跨浏览器例图差异算成逐像素通过：Chromium150的十份原生下载与既有PNG样例不完全相同，细线4在旧阈值220下可见带数为2而非样例的3。另用已安装Playwright Chromium141.0.7390.37，在1440/390实际下载五种原生案例，共十份，完整RGBA均与公开样例一致。输入文件在工作区与候选副本字节相同。只读源码旁查确认原生缩小在主线程canvas，K-Means worker仅生成颜色中心；共享导出平滑修复不修改原生缓存。浏览器结果差异的具体原因未确定，不能只凭版本相关性声称解码或canvas回归。排错篇已明确既有样例不保证每个浏览器逐像素相同，要求检查自己的PNG；本轮没有为此修改共享算法。
+
+一次性验收脚本首轮等待未滚到的懒加载图片、要求无调色板的dithering关闭后像素改变、以及在SPA列表尚未替换文章时数到相关文章卡片，均是等待条件错误。后续改为对应的资源/状态/完整页面身份条件才取得上述完成记录。跨浏览器像素与旧带数阈值的不一致仍原样保留，没有用色差容差或改阈值伪造通过。
+
+### 修改边界与交付状态
+
+末次225份HTML对照：元信息/JSON-LD只变nl五篇及其Blog列表ItemList；其他语言与所有首页SEO不变。正文变化除nl五篇和列表外，nl首页/About/Contact/Privacy/Terms/Sprite仅为共用语言选择器的 `Select language`→`Kies een taal` 属性替换，逐页归一后完全一致。前轮波兰语源、locale、共享导出源、tests/blog及AGENTS逐字节保留。工作区dist/index和两个站图时间仍为10月11日，早于本轮开始；隔离构建没有覆盖它们，交付源码与受验候选一致，五张分享图已复制到工作区并与最终构建一致、对应本地HTTP200。
+
+未进行荷兰语母语人工审校、实际Illustrator会话、Firefox/WebKit、实体手机、广告开启、正式发布或新稿索引效果验证。不能据本地验收承诺曝光恢复或排名提升。五个首页再次优化继续暂缓，波兰语与共享导出修复仍保留为本地未发布改动。
+
+证据目录 `/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-nl-local-E9nDep/` 保存隔离源码、最终交付JSON、30组合与末次复验、导航、48次下载和像素结果、Chromium141十份样例核对、已有测试报告、条件控件截图、分享图及225页范围记录。已清理本轮六个一次性执行脚本/测试配置，关闭自有浏览器并停止 `nl-candidate-e9ndep` 预览服务；报告、截图、下载与隔离副本保留，没有操作其他会话或个人登录浏览器。
+
+## 2026-10-13 共享2×/4×导出平滑问题修复（本地受验，未发布）
+
+用户在波兰语五篇完成后，对“优先修共享放大导出问题”回复“继续”。本轮只改 `src/utils/imageProcessor.js` 的导出画布状态顺序、增强 `tests/blog.spec.js` 两个已有桌面/手机网格导出用例、更新波兰语效果排错与入门正文各一段，以及本记录。不新开语言批次，不重新优化五个首页，不提交、推送、部署或请求收录；保留前轮和其他任务的未提交修改。
+
+根因是 `exportProcessedBlob` 在赋 `out.width/out.height` 之前设置 `imageSmoothingEnabled=false`，尺寸赋值将绘图状态重置，后续放大又使用默认平滑。现已删除过早设置，在正常缓存分支和无缓存解码分支中，都先定尺寸，再关闭平滑，再填背景/绘图。API 参数、缓存来源选择、尺寸倍率、格式、质量、背景、网格和 Zoom 逻辑不变，没有增加特殊图片判断或额外画布。修改前通过 LSP references 核对唯一实际调用方为 Editor 的下载逻辑，调用接口保持兼容。
+
+### 修复前后证据
+
+复用现有真实透明几何图512×512、Pixel Size8，原生 PNG64×64同时包含不透明、透明及半透明像素。已有网格用例增加无网格下载的完整 RGBA 最近邻比较，覆盖 Original size512×512、2×1024×1024、4×2048×2048，同时保留网格边界/格内像素、Pixel size不画网格、Zoom不影响导出的原断言。预期直接重复原生 PNG 的 RGBA 字节，不允许颜色或 alpha 误差，没有新增重复永久测试。
+
+同一测试在隔离旧代码基线的2×下载处失败，零重试；修复代码的1440与390宽度两项均通过，2/2、零重试。实际下载全图对照：旧2×有41669像素不等于最近邻扩展，修复后2×和4×分别为0。已查看真实下载的同位置高对比边缘图，左侧旧版有平滑过渡，右侧修复版是清晰色块；不是只验证 setter 或源码字符串。两个用例共18次实际 PNG 下载，包含有/无网格和 Zoom 对照。
+
+另用真实上传/下载 smoke 完成16次下载：透明几何图 PNG 四种尺寸，以及960×762向日葵的 PNG/JPEG/WebP 各四种尺寸。原生输出与已有公开例图逐像素一致；透明图2×/4×及非正方形照片2×1920×1524、4×3840×3048的 PNG，全图 RGBA 均等于 Original size的精确最近邻扩展。JPEG/WebP 验证实际格式与尺寸，不承诺有损编码的逐像素颜色相等。合计34次修复版真实下载；没有把失败基线下载计入通过数量。
+
+首轮测试参照使用 Sharp 的 nearest resize，半透明RGB因预乘处理降低1，导致本来正确的512输出也失败；探针确认实际下载相对原生扩展为0差异，而参照有2176像素差异，例如alpha127的 `[237,253,245]` 被参照改成 `[236,252,244]`。保留首轮失败截图、视频、trace与报告，改为精确复制 RGBA 字节后，才取得上述真实的旧版2×失败/修复版通过证据。没有放宽断言或将源缺陷归为参照错误。
+
+### 文案、构建与范围
+
+功能证明后，撤去波兰语效果排错和入门两段“2×/4×可能平滑”的临时限制，改为明确 PNG 使用最近邻放大、不恢复丢失细节。没有改其他正文、标题、excerpt、slug、日期、FAQ或分享图。最终两篇手机真实页面均HTTP200，标题分别55/56字符、描述均153字符，正确说明可见、旧警告不再出现、scrollWidth390；最终工具实际上传透明图并查看 Pixel Size8预览和控件。
+
+使用已安装 Node20.19.0，生产式 `VITE_E2E=0`、`VITE_ENABLE_ANALYTICS=0`，在隔离副本完成修复版构建与文案清理后的最终构建；build内 ownership/SEO/verify-dist/cache/redirect 检查、最终 lint/typecheck 均通过。工作区dist和两个原有站图未被构建脚本覆盖。225份最终 HTML 与本轮基线对照，所检查的元信息/JSON-LD无差异，去script正文仅上述两篇变化；首页和其他语言内容不变。共享下载功能的改变通过实际转换下载验证，而不是期待其出现在静态HTML中。
+
+Chrome/Chromium已验证；本机缺少 Playwright Firefox/WebKit，未安装、未运行，不声称三浏览器通过。手机为390宽度模拟，不是实体设备。正常缓存下载路径已覆盖，无缓存路径按相同顺序修正但未单独强制调用；未验证广告开启、正式上线、新版索引或排名。
+
+证据目录 `/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-export-fix-LAiVkL/` 保留旧/新源码副本、首轮参照失败、真正失败基线与通过报告、16次额外下载及结果、全图像素差异、真实边缘对照和225页内容范围记录。验收后删除临时执行脚本/测试配置并停止本轮自有预览，不删除结果，不接管个人登录浏览器或其他预览。上一节的共享导出待修项现已本地修复；正式站点仍未发布这项修复，五个首页再次优化继续暂缓。
+
+## 2026-10-12 波兰语五篇文章纠错与本地化（本地受验，未发布）
+
+用户暂缓五个首页的再次优化，随后对“先修波兰语五篇文章”回复“执行”。本轮只修改 `src/content/blog-posts.pl.json` 的原五篇、九项必要波兰语控件文案、五张波兰语分享图，以及一条语言导航回归测试；保留原 slug 和发布日期，更新时间为2026-10-12。没有重写首页、其他语言、About 或 converter 的内容源，没有修改共享转换、渲染或构建代码，没有提交、推送、部署或发送收录请求。
+
+### 范围、依据与搜索意图
+
+开始前独立 Chromium 读取正式波兰语比较页，实际看到 `lang=pl` 但标题和正文为英语，正文包含 `We tested 10`。本轮不是仅替换标题：删除虚构工具、评分、测试经历、导出能力及操作步骤，按已核实功能重写完整波兰语正文、FAQ、图注、下载标签、相关文章和作者链接。比较篇改为 Pixel Art Village、Aseprite、Piskel、GIMP 四种不同任务的工具说明，披露网站运营方身份，不冒充四工具同图实测或独立排名。SNES 只表示视觉风格，不声称生成可直接用于主机的资源。
+
+| 原 slug | 本轮波兰语主题词（编辑判断，不是已返回 query） | 保留的搜索意图 |
+|---|---|---|
+| best-pixel-art-converters-compared-2025 | narzędzia pixel art / porównanie | 按转换、手绘、动画任务选择工具 |
+| how-to-get-pixel-art-version-of-image | pixel art w stylu SNES | 图片的复古风格、尺寸、限色与 dithering |
+| make-image-more-like-pixel | poprawa pixel art / kontury i kolory | 排查细线丢失、颜色合并、点状噪声和导出问题 |
+| export-from-illustrator-image-to-pixel-art | eksport PNG z Illustratora | 区分 Adobe 导出尺寸、PPI、透明度与后续像素化 |
+| how-to-pixelate-an-image | jak pikselizować obraz | 从上传、等待预览到下载 PNG 的入门流程 |
+
+修复前以既有只读服务账号和环境变量引用凭据，uv 离线复用依赖，限定这五个 URL 的 URL Inspection、page、query/page 共15次官方 API 请求，全部 HTTP200。原始请求和响应在 `docs/GSC_PL_BLOG_BASELINE_2026-10-12.json`。窗口为2026-09-12至2026-10-09、final、28个完整日期；日期完整性复用当天同资源同窗口已有响应，不新增全站查询。五篇 query/page 均未返回行，不能写成零搜索需求或已验证关键词量；没有把 Google 关联的其他语言规范页统计归入波兰语。
+
+| 文章 slug | 旧版索引记录 / Google 规范页 | page 统计（点击 / 展示 / 平均位置） |
+|---|---|---|
+| best-pixel-art-converters-compared-2025 | 已收录，本篇 pl | 0 / 2 / 5 |
+| how-to-get-pixel-art-version-of-image | 已收录，本篇 pl | 0 / 2 / 6 |
+| make-image-more-like-pixel | 重复，同 slug 的 nb | 未返回行 |
+| export-from-illustrator-image-to-pixel-art | 重复，同 slug 的 it | 0 / 1 / 10 |
+| how-to-pixelate-an-image | 重复，同 slug 的 id | 未返回行 |
+
+这些是修改前线上旧版的记录，不是新版抓取、规范改选或效果评估。凭据缺失环境变量导致的第一次脚本启动错误已纠正，没有据此更改账号或站点权限，也没有将秘密字段写入记录。
+
+核对了 [Aseprite 官方文档](https://www.aseprite.org/docs/save/)、[Piskel 官方页面](https://www.piskelapp.com/)及项目导入/保存源码、[GIMP Pixelize 文档](https://docs.gimp.org/3.0/en/gimp-filter-pixelize.html)、[Adobe 导出说明](https://helpx.adobe.com/illustrator/using/exporting-artwork.html)、[Export for Screens](https://helpx.adobe.com/illustrator/using/collect-assets-export-for-screens.html)与像素对齐说明。Illustrator 部分是官方文档参考和明确标注的尺寸计算，没有实际运行 Adobe。向日葵来源为 [Don McCulley 的 CC0 图片](https://commons.wikimedia.org/wiki/File:Sunflower_Public_Domain.jpg)；960×762 本地版本、尺寸8/12输出、同会话24色 dithering 对照、浏览器生成的512/64透明几何图与细线输出均复用已有真实文件，不将浏览器图标成 Adobe 导出。
+
+### 完整搜索标题与描述
+
+下表为包含自动追加品牌的最终完整标题，以及完整 excerpt。标题55–60字符、描述150–155字符，均位于本项目150–160描述范围内；未借助构建截断满足规则。最终 HTML 和 JavaScript 运行时的普通、OG、Twitter 描述均与源文案一致。
+
+| 文章 | 最终完整搜索标题 | 标题字符数 | 最终完整搜索描述 | 描述字符数 |
+|---|---|---:|---|---:|
+| 比较 | Narzędzia pixel art: porównanie 4 opcji \| Pixel Art Village | 59 | Porównaj cztery narzędzia do konwersji zdjęć, rysowania pikseli i animacji. Poznaj ograniczenia, oficjalne źródła oraz prawdziwy przykład PNG z konwertera. | 155 |
+| 复古限色 | Pixel art w stylu SNES: rozmiar i kolory \| Pixel Art Village | 60 | Zamień zdjęcie w pixel art inspirowany SNES. Porównaj PNG 120×95 i 80×63, paletę 24 kolorów oraz dithering. To styl wizualny, nie dane gotowe dla konsoli. | 154 |
+| 效果排错 | Poprawa pixel art: kontury i kolory \| Pixel Art Village | 55 | Znajdź przyczynę znikających linii, zlewających się kolorów i nadmiaru kropek. Porównaj prawdziwe PNG i popraw ustawienia bez obietnic odzyskania detali. | 153 |
+| Illustrator | Eksport PNG z Illustratora: poradnik \| Pixel Art Village | 56 | Przygotuj PNG z Illustratora: sprawdź wymiary w pikselach, skalę i przezroczystość. Odróżnij PPI od rozmiaru pliku oraz eksport źródła od pikselizacji. | 151 |
+| 图片入门 | Jak pikselizować obraz i zapisać PNG \| Pixel Art Village | 56 | Pikselizuj obraz od podstaw: wczytaj plik, ustaw rozmiar piksela i paletę, zaczekaj na podgląd i zapisz PNG. Poznaj limity oraz wymiary pobranego wyniku. | 153 |
+
+### 配套修改和本地验收
+
+`public/locales/pl/translation.json` 仅九个现有叶字段变化：`consent.privacy`、`tool.supports`、`errors.fileTooLarge10`、`errors.onlyPngJpg`、`errors.maxFile`、`adjustments.palette.note`、`adjustments.paletteSize`、`preview.alt`、`preview.processing`。说明 PNG/JPEG/GIF/WebP 输入、10MiB 边界、固定与自动调色板区别、自动色数上限，而非承诺精确色数。没有扩修首页上传提示、调色板导入对话框、About 等已有残留，也没有将真实控件的英文导出模式名伪装成不存在的波兰语标签。五张 `/blog-og/pl/<slug>.png` 均1200×630，已查看文字与源/结果图，无裁切；完整生成器只在隔离副本运行，仅复制这五张图回工作区。
+
+使用已安装 Node20.19.0，在独立基线和最终副本构建；生产式 `VITE_E2E=0`、`VITE_ENABLE_ANALYTICS=0`，未操作工作区 `dist`。最终 build（含 ownership、SEO、verify-dist、cache/redirect 检查）、lint、typecheck 通过，站图检查通过，205项包含真实多语言入口。225份 HTML 范围对照中，元信息/JSON-LD 仅五篇与 pl Blog 列表引用变化；去 script 正文仅上述六页及 pl sprite converter 的上传说明变化，后者可由旧 `tool.supports` 精确替换成新文案解释。非波兰语页面无此类差异，波兰语首页 SEO 不变，原有 AGENTS 和两个站图工作区文件逐字节保留。
+
+最终独立 Chromium smoke 完成30个文章场景：五篇 × 1440/390/320宽度 × 有/无 JavaScript；有 JS 的15个场景还刷新复查并保留真实 Cookie 拒绝选择。检查 HTTP200、H1、完整标题/描述、pl语言、canonical/hreflang、OG/Twitter图片、无 noindex、作者链接、可见 FAQ 与 FAQPage/BlogPosting、图片载入、文章内语言链接和横向溢出，且确认两篇新加的放大导出限制实际显示。另直接打开真实本地浏览器，查看五篇桌面/手机首屏、正文图、手机限制说明和分享图；不是仅依据构建脚本推断页面正确。
+
+完成58次真实下载：16次文章资源字节对照，42次桌面/390宽度转换下载。图片尺寸8/12、细线4/16及透明8的 Pixel size 输出与已有公开例图逐像素一致；实际验证固定/自动调色板上限、dithering、透明与半透明像素、网格在放大下载中的边界/格内像素、Pixel size不画网格、Zoom不改变下载、JPEG/GIF/WebP静态输入、入口与编辑器拒绝非法/超限输入、恰好10MiB允许、3000×1500输入缩至2200×1100。合成图片仅用于格式和边界，不冒充教程实际照片。新增的 Polish beginner pl→en→刷新→返回pl→列表往返→刷新回归1/1通过、零重试；没有复制整批永久测试，也不声称此测试在旧版必然失败。
+
+早期 smoke 保留失败记录：错误假设重新上传会将尺寸12重置为1；连续上传未等待结果更新；将含网格或二次放大的文件按无网格原始预览比较。修正上传同步和比较对象后，继续检查真实导出字节，发现下述共享问题，没有把全部失败归为脚本错误或删除证据。最终 smoke 的通过表示上述文章、边界及已说明的实际导出行为通过，不表示2×/4×最近邻承诺已修复。
+
+### 已确认的范围外问题与交接
+
+透明几何图512×512、Pixel Size8得到64×64后，Original size的512×512下载与最近邻展开完全一致；但2×的1024×1024有41669像素、4×的2048×2048有165777像素不等于最近邻展开，桌面和390宽度结果相同，差异包含不透明、透明及半透明边界，不只是颜色舍入。格中心颜色仍一致，额外网格与 Zoom 行为按各自下载对象检查。
+
+根因在 `src/utils/imageProcessor.js` 的 `exportProcessedBlob`：318行先设 `ctx.imageSmoothingEnabled=false`，328–329行再赋 `out.width/out.height`，334行才 `drawImage`。设置画布尺寸会重置绘图状态，见 [MDN 说明](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/width)。共享导出面板的最近邻提示因此不能当作已实现的保证。本轮没有扩改这个所有语言共用的工具；仅在波兰语效果排错和入门正文如实说明2×/4×可能平滑，并建议需要硬边放大文件时下载 Pixel size 后使用最近邻缩放。下一项工具修复应在画布定尺寸之后、绘图之前设置 smoothing，并用真实放大 PNG 边缘/透明像素保留回归，不靠隐藏提示修复。
+
+文案由模型辅助起草，主代理另行核对功能、来源、语义与实际页面；不是母语人工审校。没有验证真实 Illustrator、Firefox/WebKit、实体手机、广告开启状态、正式上线的新版本或 Google/必应重新抓取与排名改善。GSC 所示两篇自身规范、三篇异语言规范仍是旧版基线，不能据此判断本批已改善或无效。五个首页再次优化继续暂缓。
+
+证据保留在 `/var/folders/ls/pbrjlnw91yl_5dbm46j0n22h0000gn/T/pixelart-pl-local-T8mmD9/`：修改前运行时摘录、隔离基线/最终构建、225页范围对照、最终SEO字段、早期失败与最终 smoke JSON、真实下载、页面/分享图截图及导航测试报告。临时执行脚本和测试配置在验收后移除，结果证据保留；没有使用个人浏览器登录态，没有创建调度。当前交付是本地修改与受验内容，不是已提交或已发布。
+
+## 2026-10-12 搜索标题与描述长度规则（仅文档，未发布）
+
+用户规定：以后本项目修改 SEO 搜索标题时控制在 55–60 字符，搜索描述控制在 150–160 字符，并尽可能利用空间放入更多相关关键词。规则已写入 `AGENTS.md` 的 SEO / GSC 规则，对所有语言适用，区间包含两端；标题按最终完整值计数，包含自动追加的品牌、空格和标点，描述包含空格和标点，不按字节计数，也不以自动截断后的长度代替完整文案长度。
+
+关键词必须符合页面主题、搜索意图和实际内容，优先核心词及相关词，保持各语言自然、准确、可读，不重复堆词、不加无关词、不用空话凑长度；不据字符长度或关键词数量保证曝光、权重或排名提升。这是用户确定的项目标准，不是 Google 官方固定字符上限。后续逐页修改时记录最终字符数，并核对构建产物和真实页面；正文 H1 不受搜索标题长度要求约束。
+
+本轮只追加项目规则及本条迭代记录，不修改已发布的五个首页描述、英文 4K/8K 文章或其他页面，不批量补齐长度，不更改业务代码、生成器或站图，也不提交、推送或发布。仅文档修改，验证新增规则及原有内容保留，不运行构建或页面验收。
+
 ## 2026-10-12 西班牙语入门文章描述单页修复及发布准备
 
 用户对“继续修这页描述，控制150–160字符”回复“继续”，授权单页内容源修改、定向发布和线上验收。`/es/blog/pixel-art-tutorial-complete-guide-2025/` 的excerpt改为 `Guía de arte píxel para principiantes: elige herramientas, configura el lienzo y la paleta, dibuja líneas y aplica sombreado para crear tu primera obra.`，按源内容和浏览器完整值核算共152字符。原文实际190字符，此前183是计数错误，已向用户更正并修正本地旧记录；原初始HTML为151字符、运行时为190字符。现有生成器上限155，新152字符低于上限，无须共享代码改造或自动截断，保留已发布57字符标题、H1、body教程、日期、标签和网址。

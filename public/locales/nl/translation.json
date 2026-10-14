@@ -122,10 +122,10 @@
     "selected": "Geselecteerd bestand: {{name}}"
   },
   "errors": {
-    "fileTooLarge10": "Bestand is te groot. Upload een afbeelding kleiner dan 10 MB.",
+    "fileTooLarge10": "Het bestand is te groot. Upload een afbeelding van maximaal 10 MiB (10.485.760 bytes).",
     "prepareFail": "Kan afbeelding niet voorbereiden. Probeer een ander bestand.",
-    "onlyPngJpg": "Selecteer een PNG- of JPG-afbeelding.",
-    "maxFile": "Bestand is te groot. De maximaal toegestane grootte is {{mb}}MB."
+    "onlyPngJpg": "Selecteer een PNG-, JPEG-, GIF- of WebP-afbeelding.",
+    "maxFile": "Het bestand is te groot. De maximaal toegestane bestandsgrootte is {{mb}} MiB."
   },
   "editor": {
     "title": "Online pixelkunstmaker",
@@ -156,7 +156,7 @@
       "label": "palet",
       "none": "Geen",
       "custom": "Aangepast",
-      "note": "Pico‑8 is een vast palet. Andere namen zonder ingebouwde paletkleuren genereren automatisch paletten op basis van hun grootte (bijvoorbeeld Zonsondergang 8 → 8 paletpaletkleuren)."
+      "note": "Pico-8, Lost Century, Sunset 8, Twilight 5 en Hollow zijn vaste paletten. Alleen ‘Genereer palet uit afbeelding’ maakt automatisch een palet; het maximale aantal kleuren geldt voor dat palet."
     },
     "colorDistance": {
       "label": "Kleur afstand",
@@ -164,12 +164,14 @@
       "lab": "LAB (nauwkeurig, langzamer)"
     },
     "autoPalette": "Genereer palet uit afbeelding",
-    "paletteSize": "# Palet Paletkleuren: {{value}}",
+    "paletteSize": "Maximaal aantal kleuren in het automatische palet: {{value}}",
     "dither": "Dithering inschakelen (Floyd-Steinberg)",
     "zoom": "Zoomen: {{value}}x",
+    "gridColor": "Rasterkleur",
     "grid": "Toon raster"
   },
   "export": {
+    "note": "Pixel size exporteert de werkelijke pixelafmetingen. Original size schaalt het resultaat terug naar de afmetingen van de verwerkte bronafbeelding.",
     "label": {
       "format": "Exporteer formaat",
       "size": "Grootte exporteren"
@@ -186,7 +188,7 @@
       "xl": "XL (4×)"
     },
     "transparent": {
-      "label": "Transparante achtergrond (PNG/WebP)"
+      "label": "Transparante achtergrond (PNG)"
     },
     "quality": {
       "label": "Kwaliteit: {{percent}}%"
@@ -226,7 +228,7 @@
   },
   "lang": {
     "label": "Taal",
-    "title": "Select language"
+    "title": "Kies een taal"
   },
   "wplace": {
     "title": "Perfect hulpmiddel voor pixelart Village-gebruikers",
@@ -588,8 +590,8 @@
     "fallbackNotice": "De content voor deze taal komt binnenkort. Nu wordt Engels weergegeven."
   },
   "preview": {
-    "alt": "Pixel art preview",
+    "alt": "Voorbeeld van pixelart",
     "sizeBadge": "{{w}}×{{h}} px ({{mp}} MP)",
-    "processing": "Processing image…"
+    "processing": "Afbeelding verwerken…"
   }
 }

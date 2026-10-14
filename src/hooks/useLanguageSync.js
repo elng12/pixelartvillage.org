@@ -1,10 +1,11 @@
 // 语言同步Hook - 封装语言切换逻辑
 import { useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useMatch, useNavigate, useParams } from 'react-router-dom'
 import { languageManager } from '@/utils/languageManager'
 import { CANONICAL_LOCALE, SUPPORTED_LANGS } from '@/i18n'
 import logger from '@/utils/logger'
+import blogArticleLocales from 'virtual:blog-article-locales'
 
 export function useLanguageSync() {
   const { i18n } = useTranslation()
@@ -39,6 +40,16 @@ export function useLanguageSync() {
     return CANONICAL_LOCALE
   }, [params.lang, location.pathname])
 
+  const blogMatch = useMatch('/:lang?/blog/:slug')
+  const articleSlug = blogMatch && (
+    !blogMatch.params.lang || SUPPORTED_LANGS.includes(blogMatch.params.lang.toLowerCase())
+  ) ? blogMatch.params.slug : null
+  const availableLangs = useMemo(() => (
+    articleSlug
+      ? SUPPORTED_LANGS.filter((lang) => blogArticleLocales.get(articleSlug)?.includes(lang))
+      : SUPPORTED_LANGS
+  ), [articleSlug])
+
   // 语言切换处理
   const handleLanguageChange = useCallback(async (targetLang) => {
     const lang = (targetLang || '').toLowerCase()
@@ -48,10 +59,10 @@ export function useLanguageSync() {
       console.log('[useLanguageSync] 当前语言:', currentLang)
     }
 
-    if (!SUPPORTED_LANGS.includes(lang) || lang === currentLang) {
+    if (!availableLangs.includes(lang) || lang === currentLang) {
       if (import.meta.env.DEV) {
         console.log('[useLanguageSync] 切换被阻止:',
-          !SUPPORTED_LANGS.includes(lang) ? '语言不支持' : '语言相同')
+          !availableLangs.includes(lang) ? '当前页面语言不可用' : '语言相同')
       }
       return false
     }
@@ -104,7 +115,7 @@ export function useLanguageSync() {
       logger.error('[useLanguageSync] 语言切换失败:', error)
       return false
     }
-  }, [currentLang, i18n, location.pathname, location.search, location.hash, navigate])
+  }, [currentLang, availableLangs, i18n, location.pathname, location.search, location.hash, navigate])
 
   // 重定向到本地化路径 - 禁用自动重定向，由App.jsx统一处理
   const redirectToLocalizedPath = useCallback(() => {
@@ -119,6 +130,7 @@ export function useLanguageSync() {
 
   return {
     currentLang,
+    availableLangs,
     handleLanguageChange,
     redirectToLocalizedPath,
     isChanging: i18n.isChanging

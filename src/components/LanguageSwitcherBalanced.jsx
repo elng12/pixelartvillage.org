@@ -1,6 +1,5 @@
 import { useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { SUPPORTED_LANGS as RUNTIME_LANGS } from '@/i18n'
 import useLanguageSync from '@/hooks/useLanguageSync'
 
 const LANGUAGE_LABELS = {
@@ -41,7 +40,7 @@ function getLanguageLabel(code) {
 
 export default function LanguageSwitcherBalanced() {
   const { t } = useTranslation()
-  const { currentLang, handleLanguageChange } = useLanguageSync()
+  const { currentLang, availableLangs, handleLanguageChange } = useLanguageSync()
 
   const handleChange = useCallback(async (event) => {
     const nextLang = event?.target?.value || ''
@@ -49,11 +48,11 @@ export default function LanguageSwitcherBalanced() {
   }, [handleLanguageChange])
 
   const options = useMemo(() => {
-    return RUNTIME_LANGS.map((code) => ({
+    return availableLangs.map((code) => ({
       code,
       label: getLanguageLabel(code),
     }))
-  }, [])
+  }, [availableLangs])
 
   return (
     <div
@@ -73,8 +72,12 @@ export default function LanguageSwitcherBalanced() {
         aria-label={t('lang.title', 'Select language')}
         value={currentLang}
         onChange={handleChange}
+        disabled={!availableLangs.length}
         className="w-[120px] h-7 px-2 py-1 border border-gray-300 rounded bg-white text-gray-700 text-sm font-medium cursor-pointer outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 sm:w-[150px] md:w-[170px]"
       >
+        {!availableLangs.includes(currentLang) && (
+          <option value={currentLang} disabled>{getLanguageLabel(currentLang)}</option>
+        )}
         {options.map(({ code, label }) => (
           <option key={code} value={code}>
             {label}
