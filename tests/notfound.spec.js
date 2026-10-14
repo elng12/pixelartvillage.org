@@ -76,3 +76,34 @@ test('successive client-side missing routes retain noindex and restore the origi
   await expect(page).toHaveTitle(homeTitle)
   await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', 'https://pixelartvillage.org/')
 })
+
+test('static gzip negotiation preserves readable 404s, binary assets and HEAD', async ({ request }) => {
+  const pathname = '/ja/blog/constructor/'
+  const identity = await request.get(pathname, { headers: { 'Accept-Encoding': 'identity' } })
+  expect(identity.status()).toBe(404)
+  expect(await identity.text()).toContain('content="noindex"')
+  const expectedBody = await identity.body()
+
+  const compressed = await request.get(pathname, { headers: { 'Accept-Encoding': 'br;q=1, GZip;Q=0.5' } })
+  expect(compressed.status()).toBe(404)
+  expect(compressed.headers()['content-encoding']).toBe('gzip')
+  expect(compressed.headers().vary.toLowerCase().split(/\s*,\s*/)).toContain('accept-encoding')
+  expect(await compressed.body()).toEqual(expectedBody)
+
+  const excluded = await request.get(pathname, { headers: { 'Accept-Encoding': 'gzip;q=0, *;q=1' } })
+  expect(excluded.status()).toBe(404)
+  expect(excluded.headers()['content-encoding']).toBeUndefined()
+  expect(excluded.headers().vary.toLowerCase().split(/\s*,\s*/)).toContain('accept-encoding')
+  expect(await excluded.body()).toEqual(expectedBody)
+
+  const image = await request.get('/sprite-mana-source.png', { headers: { 'Accept-Encoding': 'gzip' } })
+  expect(image.status()).toBe(200)
+  expect(image.headers()['content-type']).toBe('image/png')
+  expect(image.headers()['content-encoding']).toBeUndefined()
+  expect((await image.body()).subarray(0, 8)).toEqual(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
+
+  const head = await request.head(pathname, { headers: { 'Accept-Encoding': 'gzip' } })
+  expect(head.status()).toBe(404)
+  expect(head.headers()['content-encoding']).toBe('gzip')
+  expect(await head.body()).toHaveLength(0)
+})

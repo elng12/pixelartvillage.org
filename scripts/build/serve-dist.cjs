@@ -5,6 +5,11 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { createGzip } = require('zlib');
+
+const COMPRESSIBLE_CONTENT_TYPE = /^(?:text\/|application\/(?:javascript|json|xml)(?:;|$)|image\/svg\+xml(?:;|$))/i;
+const QUALITY_PARAMETER = /^\s*q\s*=/i;
+const VALID_QUALITY = /^(?:0(?:\.\d{0,3})?|1(?:\.0{0,3})?)$/;
 
 function getArgValue(name, fallback) {
   const idx = process.argv.indexOf(name);
@@ -16,6 +21,21 @@ function getArgValue(name, fallback) {
 
 function hasFlag(name) {
   return process.argv.includes(name);
+}
+
+function acceptsGzip(header) {
+  let acceptsWildcard = false;
+  for (const part of String(header || '').split(',')) {
+    const [name, ...parameters] = part.trim().split(';');
+    const coding = name.trim().toLowerCase();
+    if (coding !== 'gzip' && coding !== '*') continue;
+    const parameter = parameters.find(value => QUALITY_PARAMETER.test(value));
+    const quality = parameter ? parameter.slice(parameter.indexOf('=') + 1).trim() : '1';
+    const accepted = VALID_QUALITY.test(quality) && Number(quality) > 0;
+    if (coding === 'gzip') return accepted;
+    acceptsWildcard = accepted;
+  }
+  return acceptsWildcard;
 }
 
 function parseHeadersFile(text) {
@@ -110,7 +130,7 @@ function resolveDistFile(distDir, urlPathname) {
     if (!isWithinDist(distDir, abs)) continue;
     try {
       const stat = fs.statSync(abs);
-      if (stat.isFile()) return abs;
+      if (stat.isFile()) return { filePath: abs, size: stat.size };
     } catch {
       // ignore
     }
@@ -137,7 +157,8 @@ function resolveDist404(distDir, urlPathname) {
   while (isWithinDist(distDir, directory)) {
     const candidate = path.join(directory, '404.html');
     try {
-      if (fs.statSync(candidate).isFile()) return candidate;
+      const stat = fs.statSync(candidate);
+      if (stat.isFile()) return { filePath: candidate, size: stat.size };
     } catch {
       // Continue to the parent directory.
     }
@@ -156,25 +177,41 @@ const server = http.createServer((req, res) => {
   const host = req.headers.host || `localhost:${port}`;
   const url = new URL(req.url || '/', `http://${host}`);
 
-  let filePath = resolveDistFile(distDir, url.pathname);
-  if (!filePath) {
+  let resolvedFile = resolveDistFile(distDir, url.pathname);
+  if (!resolvedFile) {
     res.statusCode = 404;
-    filePath = resolveDist404(distDir, url.pathname);
+    resolvedFile = resolveDist404(distDir, url.pathname);
   }
 
   for (const [key, value] of Object.entries(globalHeaders)) {
     res.setHeader(key, value);
   }
 
-  if (!filePath) {
+  if (!resolvedFile) {
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     res.end(req.method === 'HEAD' ? undefined : 'Not Found');
     return;
   }
 
-  const contentType = getContentType(path.extname(filePath).toLowerCase());
+  const contentType = getContentType(path.extname(resolvedFile.filePath).toLowerCase());
   if (contentType) {
     res.setHeader('Content-Type', contentType);
+  }
+
+  const canCompress = resolvedFile.size >= 1024 && contentType && COMPRESSIBLE_CONTENT_TYPE.test(contentType)
+    && !res.hasHeader('Content-Encoding') && !/\bno-transform\b/i.test(String(res.getHeader('Cache-Control') || ''));
+  if (canCompress) {
+    const vary = String(res.getHeader('Vary') || '');
+    const variesByEncoding = vary.split(',').some(token => {
+      const name = token.trim().toLowerCase();
+      return name === 'accept-encoding' || name === '*';
+    });
+    if (!variesByEncoding) res.setHeader('Vary', vary ? `${vary}, Accept-Encoding` : 'Accept-Encoding');
+  }
+  const useGzip = canCompress && acceptsGzip(req.headers['accept-encoding']);
+  if (useGzip) {
+    res.setHeader('Content-Encoding', 'gzip');
+    res.removeHeader('Content-Length');
   }
 
   if (req.method === 'HEAD') {
@@ -182,12 +219,33 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  const stream = fs.createReadStream(filePath);
-  stream.on('error', () => {
+  const stream = fs.createReadStream(resolvedFile.filePath);
+  const compressor = useGzip ? createGzip() : null;
+  const closeStreams = () => {
+    stream.destroy();
+    compressor?.destroy();
+  };
+  const respondWithError = () => {
+    closeStreams();
+    if (res.destroyed || res.writableEnded) return;
+    if (res.headersSent) {
+      res.destroy();
+      return;
+    }
     res.statusCode = 500;
+    res.removeHeader('Content-Encoding');
+    res.removeHeader('Content-Length');
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     res.end('Internal Server Error');
-  });
-  stream.pipe(res);
+  };
+  stream.on('error', respondWithError);
+  res.on('close', closeStreams);
+  if (compressor) {
+    compressor.on('error', respondWithError);
+    stream.pipe(compressor).pipe(res);
+  } else {
+    stream.pipe(res);
+  }
 });
 
 server.on('error', (err) => {
