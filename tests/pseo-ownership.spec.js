@@ -116,6 +116,63 @@ test('format page keeps two clear routes back to the main converter', async ({ p
   ).toBeVisible()
 })
 
+test('8-bit page leads with its H1 hero and keeps the upload area in the first viewport', async ({ page }) => {
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
+    await page.setViewportSize(viewport)
+    await page.goto('/converter/8-bit-art-generator/')
+
+    await expect(page).toHaveTitle('8-Bit Art Generator & Image Converter | Pixel Art Village')
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href', 'https://pixelartvillage.org/converter/8-bit-art-generator/'
+    )
+    const h1 = page.getByRole('heading', { level: 1 })
+    await expect(h1).toHaveCount(1)
+    await expect(h1).toHaveText('8-Bit Art Generator (Online)')
+    await expect(page.getByTestId('primary-converter-callout-top')).toHaveCount(0)
+    await expect(page.getByTestId('primary-converter-callout-bottom')).toBeVisible()
+
+    const heading = await h1.boundingBox()
+    const upload = await page.getByTestId('upload-zone').boundingBox()
+    const details = await page.getByRole('heading', { level: 2, name: 'What this 8-bit art generator does' }).boundingBox()
+    expect(upload.y).toBeGreaterThan(heading.y + heading.height)
+    expect(details.y).toBeGreaterThan(upload.y + upload.height)
+    expect(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false)
+
+    if (viewport.width >= 1280) {
+      // The compact layout used to make the H1 (24px) smaller than the tool H2 (about 48px).
+      expect(upload.y + upload.height).toBeLessThan(viewport.height)
+      const sizes = await page.evaluate(() => ({
+        h1: parseFloat(getComputedStyle(document.querySelector('main h1')).fontSize),
+        h2: Math.max(...[...document.querySelectorAll('main h2')].map((el) => parseFloat(getComputedStyle(el).fontSize))),
+      }))
+      expect(sizes.h1).toBeGreaterThanOrEqual(sizes.h2)
+    }
+
+    const structuredData = await page.locator('script[type="application/ld+json"]').evaluateAll(
+      (scripts) => scripts.flatMap((script) => {
+        const value = JSON.parse(script.textContent)
+        return Array.isArray(value) ? value : [value]
+      })
+    )
+    expect(structuredData.find((entry) => entry['@type'] === 'FAQPage').mainEntity).toHaveLength(6)
+    expect(structuredData.find((entry) => entry['@type'] === 'HowTo').step).toHaveLength(3)
+    await expect(page.getByRole('heading', { level: 3, name: 'What is 8-bit art?', exact: true })).toBeVisible()
+    await test.info().attach(`8-bit-page-${viewport.width}`, { body: await page.screenshot(), contentType: 'image/png' })
+
+    if (viewport.width >= 1280) {
+      // The new hero layout must still drive the real editor.
+      const buffer = await sharp({
+        create: { width: 64, height: 48, channels: 3, background: { r: 80, g: 140, b: 220 } },
+      }).png().toBuffer()
+      await page.getByTestId('file-input').setInputFiles({ name: 'blue.png', mimeType: 'image/png', buffer })
+      const preview = page.getByTestId('preview-container')
+      await expect(preview).toHaveAttribute('aria-busy', 'false')
+      await expect(preview.locator('img')).toHaveAttribute('src', /^data:image\/png/)
+      await expect(page.getByRole('slider', { name: /^Pixel Size:/ })).toBeVisible()
+    }
+  }
+})
+
 test('sprite page keeps the complete upload area ahead of supporting content', async ({ page }) => {
   for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
     await page.setViewportSize(viewport)

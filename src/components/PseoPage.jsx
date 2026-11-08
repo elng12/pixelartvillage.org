@@ -598,6 +598,11 @@ export default function PseoPage() {
     ? { width: Number(fixedOutputMatch[1]), height: Number(fixedOutputMatch[1]) }
     : null
   const isEnglishFixedOutputConverter = Boolean(fixedOutput) && (currentLocale || 'en') === 'en'
+  // Generic converter pages that provide a heroSubtitle lead with their H1 as the hero (like the main converter)
+  // instead of the compact H1 plus tool H2 layout: the intro paragraphs move into the content sections below the
+  // tool (under detailsHeading) and topCallout is not rendered. Pages without heroSubtitle keep the compact layout.
+  const isEnglishHeroConverter = Boolean(page.heroSubtitle) && (currentLocale || 'en') === 'en'
+    && !isPrimaryConverter && !isSpriteConverter && !isEnglishPhotoConverter && !isEnglishFixedOutputConverter
   const defaultRelatedPages = pages
     .filter((entry) => entry.slug !== page.slug)
     .sort((a, b) => Number(b.slug === 'image-to-pixel-art') - Number(a.slug === 'image-to-pixel-art'))
@@ -825,6 +830,21 @@ export default function PseoPage() {
             </Suspense>
           ) : null}
         </Fragment>
+      ) : isEnglishHeroConverter ? (
+        <Fragment>
+          <ToolSection
+            onImageUpload={setUploadedImage}
+            headingLevel="h1"
+            titleText={page.h1}
+            subtitleText={page.heroSubtitle}
+            subtitleText2={page.heroSubtitle2 || page.toolSubtitle}
+          />
+          {uploadedImage ? (
+            <Suspense fallback={null}>
+              <Editor key={page.slug} image={uploadedImage} fixedOutput={fixedOutput} />
+            </Suspense>
+          ) : null}
+        </Fragment>
       ) : (
         <Fragment>
           <section className="bg-white py-8">
@@ -873,7 +893,11 @@ export default function PseoPage() {
         <Fragment>
           {isSpriteConverter ? <SpriteGuide guide={page.spriteGuide} steps={pageHowSteps} /> : (
             <Fragment>
-              <PseoContentSections sections={page.contentSections} />
+              <PseoContentSections
+                sections={isEnglishHeroConverter
+                  ? [{ title: page.detailsHeading, body: introParas }, ...(page.contentSections || [])]
+                  : page.contentSections}
+              />
               <HowItWorksSection
                 title={page.howItWorks?.title}
                 description={page.howItWorks?.description}

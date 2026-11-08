@@ -524,31 +524,119 @@
   },
   {
     "slug": "8-bit-art-generator",
-    "title": "8-bit Art Generator | Pixel Art Village",
-    "metaDescription": "Create authentic 8‑bit pixel art online instantly. Control pixel size and color palettes with live preview, then export crisp PNG results.",
-    "h1": "8‑bit Art Generator (Online)",
-    "intro": [
-      "Use this page when you already know you want an 8-bit style direction. It is a themed entry point for pushing an image toward simpler palettes, chunkier shapes, and a more classic low-resolution feel.",
-      "Upload the image, tune the pixel look, and export a cleaner retro result. If you want the full image-to-pixel-art workflow without locking yourself into an 8-bit framing first, use the main converter."
-    ],
-    "toolHeading": "Upload an image and steer it toward an 8-bit look",
-    "toolSubtitle": "A theme-first route for classic low-resolution aesthetics and simple retro treatments.",
-    "toolSubtitle2": "For the broadest image-to-pixel-art workflow, use the main image to pixel art converter.",
-    "topCallout": {
-      "title": "Need the broader converter instead of an 8-bit-first route?",
-      "body": [
-        "This page is for a specific visual direction. The main converter is the better page when you want to start neutral and decide on style later."
+    "title": "8-Bit Art Generator & Image Converter | Pixel Art Village",
+    "metaDescription": "Turn any image into 8-bit art online for free. Pick a small color palette, set the pixel size, preview live, and download your 8-bit style image as a PNG.",
+    "h1": "8-Bit Art Generator (Online)",
+    "heroSubtitle": "Turn any image into 8-bit style art with chunky pixels and a small color palette.",
+    "detailsHeading": "What this 8-bit art generator does",
+    "seo": {
+      "primaryKeyword": "8-bit art generator",
+      "intent": "Convert an uploaded image into an 8-bit style picture with large pixels and a small color palette, then download it.",
+      "ownerPath": "/converter/8-bit-art-generator/",
+      "supportingKeywords": [
+        "8 bit generator",
+        "8-bit image converter",
+        "make 8 bit art"
       ],
-      "ctaLabel": "Open the full image to pixel art converter",
+      "excludedKeywords": [
+        "image to pixel art",
+        "retro game graphics maker"
+      ]
+    },
+    "intro": [
+      "8-bit art is defined by large, visible pixels and a very small color palette. This generator recreates that look from any picture by turning it into bigger pixel blocks and limiting the colors, the way classic 8-bit games did.",
+      "It creates an 8-bit style, not a hardware-accurate copy. The result looks 8-bit, but it does not enforce the exact color list, sprite size, or tile rules of a specific console."
+    ],
+    "toolHeading": "Upload an image to make 8-bit art",
+    "toolSubtitle": "Choose a PNG, JPG, GIF, or WEBP file up to 10MB, then raise Pixel Size and limit the palette while you watch the live preview.",
+    "toolSubtitle2": "Try a built-in palette such as Pico-8, or generate a palette from your image and keep it to about 8 to 16 colors.",
+    "howItWorks": {
+      "title": "How to make 8-bit art from an image",
+      "description": "Three settings create the 8-bit look: pixel size, palette, and dithering.",
+      "steps": [
+        {
+          "title": "Upload an image",
+          "description": "Choose a PNG, JPG, GIF, or WEBP file up to 10MB. A clear subject with strong shapes works best, because small details disappear at 8-bit sizes."
+        },
+        {
+          "title": "Raise the pixel size",
+          "description": "Increase Pixel Size until details turn into chunky blocks. Larger values give a coarser, more 8-bit look, while smaller values keep more detail."
+        },
+        {
+          "title": "Limit the palette and download",
+          "description": "Pick a built-in palette such as Pico-8, or generate one from your image with a small number of colors. Turn on dithering if you want shading, then download the result as a PNG, JPEG, or WebP file."
+        }
+      ]
+    },
+    "contentSections": [
+      {
+        "title": "What gives an image the 8-bit look",
+        "items": [
+          {
+            "title": "Chunky pixels",
+            "description": "Each visible block is one pixel of the final image, so edges look stepped and small details vanish."
+          },
+          {
+            "title": "A very small palette",
+            "description": "Classic 8-bit games used a small number of colors at a time. Keeping your palette to roughly 8 to 16 colors gives a similar flat look."
+          },
+          {
+            "title": "Optional dithering",
+            "description": "Dithering mixes two palette colors in a pattern to suggest shading. Leave it off for solid color areas, or turn it on to keep gradients readable."
+          }
+        ]
+      },
+      {
+        "title": "8-bit style vs 16-bit style",
+        "body": [
+          "8-bit art uses very few colors and very coarse pixels. 16-bit art allows more colors and finer detail.",
+          "To move toward a 16-bit look, use a smaller Pixel Size and raise the palette size, which goes up to 64 colors."
+        ]
+      },
+      {
+        "title": "Tips for better 8-bit results",
+        "body": [
+          "Start with a simple, high-contrast picture and crop close to the subject. Busy backgrounds turn into noise at large pixel sizes.",
+          "Raise contrast or saturation slightly before limiting the palette so the main colors stay distinct. If colors look off, try the LAB color distance option, which matches colors more accurately but runs slower."
+        ]
+      }
+    ],
+    "bottomCallout": {
+      "title": "Want a different pixel art look?",
+      "body": [
+        "The main converter page walks through the general image to pixel art workflow, with more examples and answers to common questions."
+      ],
+      "ctaLabel": "Open the main image converter",
       "ctaTo": "/converter/image-to-pixel-art/"
     },
-    "bottomCallout": {
-      "title": "Want the full editor after testing an 8-bit look?",
-      "body": [
-        "Continue in the main converter when you want the same workflow to handle 8-bit experiments, cleaner sprites, and general-purpose pixel art in one place."
-      ],
-      "ctaLabel": "Continue in the main converter",
-      "ctaTo": "/converter/image-to-pixel-art/"
+    "faq": {
+      "title": "8-Bit Art Generator FAQ",
+      "items": [
+        {
+          "question": "What is 8-bit art?",
+          "answer": "8-bit art, also written 8 bit or 8bit, is a retro style built from large visible pixels and a very small color palette, like the graphics of early video games."
+        },
+        {
+          "question": "Is this a real NES or console-accurate 8-bit converter?",
+          "answer": "No. It creates an 8-bit style look with large pixels and a limited palette. It does not enforce the exact colors, sprite size, or tile rules of NES or any other console."
+        },
+        {
+          "question": "How many colors should I use for 8-bit art?",
+          "answer": "About 8 to 16 colors gives a classic look. Use a built-in palette such as Pico-8 or generate a palette from your image, and raise the count if the picture looks too flat."
+        },
+        {
+          "question": "Why does my 8-bit result look messy or noisy?",
+          "answer": "Very small pixel sizes keep too much detail, and busy photos create noise. Raise Pixel Size, simplify the palette, and start from a high-contrast image."
+        },
+        {
+          "question": "Which files can I use and download?",
+          "answer": "Upload PNG, JPG, GIF, or WEBP files up to 10MB and download PNG, JPEG, or WebP. The tool exports a still image, not an animated GIF."
+        },
+        {
+          "question": "Is it free, and are images uploaded to a server?",
+          "answer": "It is free to use. The conversion and export run in your browser, so images are not uploaded to a server for processing."
+        }
+      ]
     }
   },
   {
