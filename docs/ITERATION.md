@@ -1,5 +1,16 @@
 # Pixel Art Village 迭代记录
 
+## 2026-11-11 暂停 PVUV 与既有标识清理（本地验收通过，待发布）
+
+- 用户明确选择暂停 PVUV，不维护本地 SDK、不强制刷新编辑器。此前真实浏览器已复现拒绝非必要 Cookie 后仍上报；查读当时的官方 `https://www.pvuv.ai/f.js` 未发现可靠停用接口，移除标签不能卸载已执行实例，故不把这些做法称为完整撤回。
+- 发布候选直接接远端正式基线 `acff27d20b194c476d04f9ab9fefbb510dc3a2d9`，不包含本地未推送的 `e900a73` 或其他未提交工作。三个 HTML 入口及 CSP 在正式基线中已没有 PVUV 加载；本轮提交仅包含 `public/consent-default.js`、`tests/pvuv-paused.spec.js` 与本节，不带独立 HTML 的纯换行差异、PNG 页面内容、站图、AGENTS 或其他历史文档修改。
+- 共用默认脚本仅清理 PVUV 已知 Cookie `_pv_id`、`_pv_sid`、`_pv_ft`、`_pv_v`、`_pv_uid`、`_pv_t`，覆盖根路径的 host-only 与可操作父域；仅删除 localStorage 的 `_pv_id`。不清空整个储存、不重置同意选择、不修改其他统计/广告逻辑，不导航或刷新编辑器。
+- 精确发布输入的隔离副本使用 Node `20.19.0`：全项目 `npm run lint`、`NODE_ENV=production VITE_E2E=0 npm run build` 及 postbuild 检查通过。全部 243 个构建 HTML 均无 PVUV 加载标签，产物 CSP 无 PVUV 来源，产物清理脚本与候选源码一致。构建未覆盖原工作区的站图或 dist。
+- 新增一项定向 Chromium 回归，覆盖已有分析同意、三个入口、站内跳转、旧标识清理以及无关 Cookie/储存保留；使用已安装 Chrome 和临时配置通过，不新增依赖、不修改永久配置，未运行完整 E2E。
+- 此前本轮独立 Chrome 实测 host-only 与父域旧标识均清除，撤回/重新允许分析 Cookie 不刷新、不丢失已上传预览且没有 PVUV 请求，并实际导出 `960 × 762` PNG。正式域名验收与同 SHA Cloudflare/CI/Pages/Lighthouse 回执在发布完成后另补本地，不预先宣称上线。
+- 本仓库没有注册或付款业务，未新增对应接口或模拟转化。当前会话未挂载 pvuv MCP，指定工具未调用；已读官方 tracking/server-events 文档。本次按用户选择暂停，不冒充原统计接入已全部完成。
+- 仅新版本页面加载后生效，不能远程卸载用户已打开旧页中的 SDK；不会强制刷新，应先导出作品再由用户刷新。发布沿用 `pixelartvillage1` 的 main Git 集成，不上传本地 dist。
+
 ## 2026-10-14 预览服务 gzip 回归修复（本地验证通过）
 
 本轮只修复预览服务的传输压缩，范围为 `scripts/build/serve-dist.cjs`、`tests/notfound.spec.js` 的一项新增 API 回归，以及本节记录。首页、Blog、converter 内容、SEO 标题/描述、Cookie/广告代码、语言文案、依赖和 Lighthouse 阈值均未修改。
