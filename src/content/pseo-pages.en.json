@@ -29,6 +29,29 @@
       "Use this page when your source file is already a PNG and you want a format-specific start. PNG files usually keep edges, flat color areas, and transparency cleaner than lossy formats, which makes them a strong input for pixel art.",
       "Set Pixel Size and choose a palette to simplify your PNG, then compare the live preview before downloading. If your PNG has transparent areas, read the notes on transparent PNGs below before you export."
     ],
+    "transparentExample": {
+      "title": "A transparent PNG icon, converted",
+      "description": "This before-and-after example uses a 256 x 256 transparent PNG icon. The checkerboard below is only a display backdrop so you can see where transparent areas remain in both files.",
+      "images": [
+        {
+          "label": "Source PNG",
+          "src": "/png-example-source.png",
+          "alt": "Original 256 by 256 flat mushroom icon PNG on a transparent background",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "label": "Downloaded PNG",
+          "src": "/png-example-pixel8.png",
+          "alt": "The same mushroom icon converted into a 32 by 32 transparent pixel art PNG",
+          "width": 32,
+          "height": 32
+        }
+      ],
+      "settings": "Actual conversion: Pixel Size 8; Palette None; dithering off; Brightness, Contrast, and Saturation all 0.",
+      "exportNote": "Export: PNG, Pixel size (32 x 32 px), Transparent background (PNG only) on, grid off. Original size exports a 256 x 256 px PNG with the same pixel blocks and transparency. The 32 x 32 result is enlarged here without smoothing; the live editor preview still uses a white backdrop.",
+      "sourceNote": "Original flat icon created for this example. Converted and downloaded directly from this tool without retouching."
+    },
     "toolHeading": "Upload a PNG and adjust the pixel effect",
     "toolSubtitle": "Upload a PNG up to 10MB. Adjust the settings and preview the result before you download.",
     "howItWorks": {

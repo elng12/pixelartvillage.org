@@ -98,7 +98,7 @@ test('sprite SEO is present in initial HTML and its example matches a real expor
   expect((await original.ensureAlpha().raw().toBuffer())[3]).toBe(0)
 })
 
-test('PNG page leads with its H1 hero and exports the processed transparency', async ({ page, request }) => {
+test('PNG page leads with its H1 hero and exports the processed transparency', async ({ page, request, browserName }) => {
   const route = '/converter/png-to-pixel-art/'
   let initialMetadata
   const canonical = `https://pixelartvillage.org${route}`
@@ -122,17 +122,24 @@ test('PNG page leads with its H1 hero and exports the processed transparency', a
 
     // Check the server HTML and the hydrated page, not just the content source.
     for (const html of [initialHtml, null]) {
-      const metadata = await page.evaluate((markup) => {
+      const { metadata, exampleImages } = await page.evaluate((markup) => {
         const doc = markup === null ? document : new DOMParser().parseFromString(markup, 'text/html')
         const meta = (selector) => doc.querySelector(selector)?.getAttribute('content')
         return {
-          title: doc.title,
-          description: meta('meta[name="description"]'),
-          canonical: doc.querySelector('link[rel="canonical"]')?.getAttribute('href'),
-          ogTitle: meta('meta[property="og:title"]'),
-          ogDescription: meta('meta[property="og:description"]'),
-          twitterTitle: meta('meta[name="twitter:title"]'),
-          twitterDescription: meta('meta[name="twitter:description"]'),
+          metadata: {
+            title: doc.title,
+            description: meta('meta[name="description"]'),
+            canonical: doc.querySelector('link[rel="canonical"]')?.getAttribute('href'),
+            ogTitle: meta('meta[property="og:title"]'),
+            ogDescription: meta('meta[property="og:description"]'),
+            twitterTitle: meta('meta[name="twitter:title"]'),
+            twitterDescription: meta('meta[name="twitter:description"]'),
+          },
+          exampleImages: [...doc.querySelectorAll('[data-testid="png-example"] img')].map((img) => ({
+            src: img.getAttribute('src'),
+            width: img.getAttribute('width'),
+            height: img.getAttribute('height'),
+          })),
         }
       }, html)
       if (!initialMetadata) {
@@ -153,13 +160,24 @@ test('PNG page leads with its H1 hero and exports the processed transparency', a
         twitterTitle: initialMetadata.title,
         twitterDescription: initialMetadata.description,
       })
+      expect(exampleImages).toEqual([
+        { src: '/png-example-source.png', width: '256', height: '256' },
+        { src: '/png-example-pixel8.png', width: '32', height: '32' },
+      ])
     }
 
     const heading = await h1.boundingBox()
     const upload = await page.getByTestId('upload-zone').boundingBox()
+    const example = page.getByTestId('png-example')
+    await expect(example).toBeVisible()
+    const exampleBox = await example.boundingBox()
     const details = await page.getByRole('heading', { level: 2, name: 'Working with PNG files in this converter', exact: true }).boundingBox()
     expect(upload.y).toBeGreaterThan(heading.y + heading.height)
-    expect(details.y).toBeGreaterThan(upload.y + upload.height)
+    expect(exampleBox.y).toBeGreaterThan(upload.y + upload.height)
+    expect(details.y).toBeGreaterThan(exampleBox.y + exampleBox.height)
+    await expect(example.locator('img')).toHaveCount(2)
+    await example.scrollIntoViewIfNeeded()
+    await expect.poll(() => example.locator('img').evaluateAll((images) => images.every((img) => img.complete && img.naturalWidth > 0))).toBe(true)
     expect(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false)
     if (viewport.width >= 1280) {
       expect(upload.y + upload.height).toBeLessThanOrEqual(viewport.height)
@@ -195,6 +213,62 @@ test('PNG page leads with its H1 hero and exports the processed transparency', a
     if (viewport.width >= 1280) {
       const rejectCookies = page.getByRole('button', { name: 'Reject non-essential cookies', exact: true })
       if (await rejectCookies.isVisible()) await rejectCookies.click()
+      await expect(page.getByTestId('choose-file-btn')).toBeEnabled()
+
+      const sourceAsset = await request.get('/png-example-source.png')
+      const resultAsset = await request.get('/png-example-pixel8.png')
+      expect(sourceAsset.status()).toBe(200)
+      expect(resultAsset.status()).toBe(200)
+      const storedSourceBuffer = await sourceAsset.body()
+      const storedResult = sharp(await resultAsset.body())
+      const storedSourceMeta = await sharp(storedSourceBuffer).metadata()
+      const storedResultMeta = await storedResult.metadata()
+      expect([storedSourceMeta.width, storedSourceMeta.height]).toEqual([256, 256])
+      expect([storedResultMeta.width, storedResultMeta.height]).toEqual([32, 32])
+      const storedResultRaw = await storedResult.ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+      for (const index of [0, 31, 31 * 32, 32 * 32 - 1]) {
+        expect(storedResultRaw.data[index * 4 + 3]).toBe(0)
+      }
+      expect(storedResultRaw.data[(16 * 32 + 16) * 4 + 3]).toBe(255)
+
+      // Verify the published 32x32 transparent example matches a fresh browser conversion.
+      await page.getByTestId('file-input').setInputFiles({ name: 'png-example-source.png', mimeType: 'image/png', buffer: storedSourceBuffer })
+      const preview = page.getByTestId('preview-container')
+      const previewImage = preview.locator('img')
+      await expect(previewImage).toHaveAttribute('src', /^data:image\/png/)
+      await expect(preview).toHaveAttribute('aria-busy', 'false')
+      const pixelSize = page.getByRole('slider', { name: /^Pixel Size:/ })
+      await expect(pixelSize).toBeVisible()
+      let previousPreview = await previewImage.getAttribute('src')
+      await pixelSize.evaluate((input) => {
+        const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(input), 'value')
+        const previousValue = input.value
+        descriptor.set.call(input, '8')
+        if (input._valueTracker) input._valueTracker.setValue(previousValue)
+        input.dispatchEvent(new Event('input', { bubbles: true }))
+        input.dispatchEvent(new Event('change', { bubbles: true }))
+      })
+      await expect(pixelSize).toHaveValue('8')
+      await expect(previewImage).not.toHaveAttribute('src', previousPreview)
+      await expect(preview).toHaveAttribute('aria-busy', 'false')
+      await page.locator('#format-select').selectOption('png')
+      await page.locator('#transparent-bg').check()
+      await page.locator('#grid-toggle').uncheck()
+      await page.getByRole('button', { name: 'Pixel size', exact: true }).click()
+      const examplePending = page.waitForEvent('download')
+      await page.getByRole('button', { name: 'Download Pixel Art Image', exact: true }).last().click()
+      const exampleDownloadedImage = sharp(await (await examplePending).path())
+      const exampleDownloadedMeta = await exampleDownloadedImage.metadata()
+      const exampleDownloaded = await exampleDownloadedImage.ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+      expect(exampleDownloadedMeta.format).toBe('png')
+      expect([exampleDownloaded.info.width, exampleDownloaded.info.height]).toEqual([32, 32])
+      for (const index of [0, 31, 31 * 32, 32 * 32 - 1]) {
+        expect(exampleDownloaded.data[index * 4 + 3]).toBe(0)
+      }
+      expect(exampleDownloaded.data[(16 * 32 + 16) * 4 + 3]).toBe(255)
+      if (browserName === 'chromium') {
+        expect(exampleDownloaded.data.equals(storedResultRaw.data), 'PNG example pixels match a fresh Chromium export').toBe(true)
+      }
 
       // Broad alpha regions and a gradient expose flattening and real processing changes.
       const raw = Buffer.alloc(64 * 48 * 4)
@@ -208,14 +282,12 @@ test('PNG page leads with its H1 hero and exports the processed transparency', a
         }
       }
       const buffer = await sharp(raw, { raw: { width: 64, height: 48, channels: 4 } }).png().toBuffer()
+      previousPreview = await previewImage.getAttribute('src')
       await page.getByTestId('file-input').setInputFiles({ name: 'transparent-gradient.png', mimeType: 'image/png', buffer })
-      const preview = page.getByTestId('preview-container')
-      const previewImage = preview.locator('img')
+      await expect(previewImage).not.toHaveAttribute('src', previousPreview)
       await expect(previewImage).toHaveAttribute('src', /^data:image\/png/)
       await expect(preview).toHaveAttribute('aria-busy', 'false')
-      const pixelSize = page.getByRole('slider', { name: /^Pixel Size:/ })
-      await expect(pixelSize).toBeVisible()
-      let previousPreview = await previewImage.getAttribute('src')
+      previousPreview = await previewImage.getAttribute('src')
       await pixelSize.evaluate((input) => {
         const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(input), 'value')
         const previousValue = input.value

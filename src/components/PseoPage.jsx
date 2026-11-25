@@ -178,6 +178,61 @@ function PhotoPreviewStrip({ example }) {
   )
 }
 
+const CHECKERBOARD_STYLE = {
+  backgroundColor: '#ffffff',
+  backgroundImage:
+    'linear-gradient(45deg, #e5e7eb 25%, transparent 25%), ' +
+    'linear-gradient(-45deg, #e5e7eb 25%, transparent 25%), ' +
+    'linear-gradient(45deg, transparent 75%, #e5e7eb 75%), ' +
+    'linear-gradient(-45deg, transparent 75%, #e5e7eb 75%)',
+  backgroundSize: '16px 16px',
+  backgroundPosition: '0 0, 0 8px, 8px -8px, -8px 0',
+}
+
+function TransparentExampleStrip({ example }) {
+  if (!example || !Array.isArray(example.images) || !example.images.length) return null
+
+  return (
+    <section className="bg-white pt-8 pb-2">
+      <figure className="container mx-auto max-w-4xl px-4" data-testid="png-example">
+        {example.title ? (
+          <h2 className="text-xl font-semibold text-gray-900">{example.title}</h2>
+        ) : null}
+        {example.description ? (
+          <p className="mt-3 text-gray-700 leading-6">{example.description}</p>
+        ) : null}
+        <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-4">
+          {example.images.map((img, index) => (
+            <div key={img.src}>
+              <p className="mb-2 text-sm font-semibold text-gray-800">{img.label}</p>
+              <div
+                className="flex items-center justify-center rounded-lg border border-gray-200 p-3 sm:p-4"
+                style={CHECKERBOARD_STYLE}
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  width={img.width}
+                  height={img.height}
+                  loading="lazy"
+                  className="aspect-square w-full max-w-[256px] object-contain"
+                  style={index === 1 ? { imageRendering: 'pixelated' } : undefined}
+                />
+              </div>
+              <p className="mt-2 text-xs text-gray-600">{img.width} x {img.height} px</p>
+            </div>
+          ))}
+        </div>
+        <figcaption className="mt-4 space-y-2 text-sm leading-6 text-gray-700">
+          {example.settings ? <p>{example.settings}</p> : null}
+          {example.exportNote ? <p>{example.exportNote}</p> : null}
+          {example.sourceNote ? <p className="text-gray-600">{example.sourceNote}</p> : null}
+        </figcaption>
+      </figure>
+    </section>
+  )
+}
+
 const SPRITE_EXAMPLE_IMAGES = [
   {
     id: 'demo-sprite',
@@ -843,6 +898,9 @@ export default function PseoPage() {
             <Suspense fallback={null}>
               <Editor key={page.slug} image={uploadedImage} fixedOutput={fixedOutput} />
             </Suspense>
+          ) : null}
+          {page.transparentExample ? (
+            <TransparentExampleStrip example={page.transparentExample} />
           ) : null}
         </Fragment>
       ) : (

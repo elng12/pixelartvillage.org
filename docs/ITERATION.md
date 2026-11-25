@@ -673,6 +673,12 @@ Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下最终 build（含 SEO、
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-11-25 PNG 转换器页补充透明背景前后对比案例（发布候选）
+
+- 仅针对 `/converter/png-to-pixel-art/` 补充一组真实的透明背景转换前后对比案例。改动 5 个产品/测试文件及本记录：新增原创 256×256 透明图标 `public/png-example-source.png` 与本站真实转换导出的 32×32 透明结果 `public/png-example-pixel8.png`；在 `src/content/pseo-pages.en.json` 仅给 `png-to-pixel-art` 新增 `transparentExample`；在 `src/components/PseoPage.jsx` 新增 `TransparentExampleStrip`（灰白棋盘格底色，仅在 `isEnglishHeroConverter && page.transparentExample` 时渲染）；在 `tests/pseo-ownership.spec.js` 补充初始 SSR HTML 与水合后案例图片校验及浏览器转换验证（逐像素比对限定在 Chromium，其他浏览器校验尺寸与透明度）。
+- 不修改 PNG 搜索标题（60 字符）、描述（153 字符）、H1、首段、6 条 FAQ、3 步 HowTo、转换/导出逻辑、首页或其他语言页面。
+- 经双模型（Gemini + Codex `gpt-6.2-sol high`）只读复核，补齐测试中的初始 SSR 校验、图片 `src`/尺寸核对与跨浏览器像素比对边界。
+
 ## 2026-11-25 上传入口交互就绪修复发布
 
 - 用户明确授权正式发布。从最新远端 `0545fce24e2cd6f72ab37cdab4f5a1f01508545d` 单独带入共用 `src/components/ToolSection.jsx` 和新 `tests/upload-readiness.spec.js`，不直接发布混有其他改动的原工作区。
