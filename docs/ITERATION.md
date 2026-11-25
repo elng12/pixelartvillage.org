@@ -673,6 +673,17 @@ Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下最终 build（含 SEO、
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-11-25 俄语 FAQ 错误品牌名与生硬表述清理（本地验收通过，未提交、未发布）
+
+- 用户批准执行推荐任务：单独清理俄语 FAQ 中的错误品牌名与生硬机翻堆词。仅修改 `public/locales/ru/translation.json` 中的 `faq` 区块（`faq.title` 与 7 条 `faq.items`），未改动俄语首页首屏（`home.*`）、上传限制说明（`wplace.features.size.*`）、俄语搜索标题（55 字符）与描述（148 字符）、`canonical`、`hreflang`、其他语言、英文页面或工具逻辑。
+- 主要修改：将直译标题 `Пиксельная деревня: Часто задаваемые вопросы` 改为 `Pixel Art Village: часто задаваемые вопросы`（遵守先前评审意见，保留 `часто задаваемые вопросы` 句式）；将答案中 2 处 `Image Village` 和 1 处 `pixel Village` 统一改为 `Pixel Art Village`；清理“цифровой генератор изображений с палитрой управления”“с расширенными палитрами”等机翻堆词；隐私条按浏览器本地处理、不上传不存储到己方服务器如实表述（不宣称整站零网络请求）；精灵图条对齐真实俄语界面开关 `«Прозрачный фон (PNG/WebP)»` 并限定为带透明背景的 PNG 源图（因长边超 2200 像素缩放预处理时仅 PNG 保留透明通道）；网格条与调参条分别对齐真实俄语标签 `«Показать сетку»` 和 `«Размер пикселя»`；商业权利条保留原核心意思并与服务条款第三方权利边界一致；格式条删去不准确的“任意图片格式”，改为准确的输入支持 `PNG, JPG, GIF и WEBP`（上限 `10 МиБ`）与导出格式 `PNG, JPEG или WebP`。
+- 在基于 `origin/main`（`8ebd776e691a07623c0c47f03cf2b2809bc20c04`）且仅覆盖 `public/locales/ru/translation.json` 的干净隔离副本中，Node 20.19.0 完整 `lint`、`typecheck` 与生产式 `NODE_ENV=production VITE_E2E=0 VITE_ENABLE_ANALYTICS=0 npm run build`（含 `verify:dist`、`validate-page-ownership`、`verify-cache-redirects`）全部退出 0。未覆盖原工作区 `dist/`、`sitemap` 或其他已有本地改动。
+- 逐份解析比对基线与候选的全部 243 个构建 HTML：全部 243 页的 `title`、`meta`、`canonical`、`hreflang`、`og:*`、`twitter:*` 及静态 `JSON-LD` 零变化；静态可见 DOM 发生变化仅 `ru/index.html`（`#faq` 区块已更新为新标题与 7 条新问答，错误品牌名清零）；其余 10 个俄语预渲染页（`ru/about/`、`ru/contact/`、`ru/privacy/`、`ru/terms/`、`ru/blog/`、3 篇俄语博客、`ru/blog/404.html`、`ru/converter/photo-to-sprite-converter/`）静态可见正文零变化，仅底部内联初始翻译数据随 `ru/translation.json` 同步更新。
+- 真实浏览器独立 Chrome 验收：桌面 1440×900 与手机 390×844（mobile/touch 模拟）访问 `/ru/` 均 HTTP 200，零页面脚本错误、零 React hydration 警告、零横向溢出（`scrollWidth` 分别为 1440、390），首屏俄语文案与 10 MiB 限制卡片未受影响，FAQ 标题与 7 条问答与 `dist/locales/ru/translation.json` 100% 一致；桌面端上传 `png-example-source.png` 验证 `Показать сетку` 与 `Прозрачный фон (PNG/WebP)` 真实可见，并点击导出真实下载可解码 256×256 PNG（23,551 字节）。
+- 站内影响边界（区分源码确认与浏览器实测）：浏览器实测从 `/ru/` 点击站内卡片进入 `/ru/converter/gif-to-pixel-art/` 时，客户端 SPA 会回退读取新版俄语 FAQ 标题与 7 条问答（且不注入冲突的 `FAQPage` JSON-LD）；源码确认其余 5 个同样无自定义 `page.faq.items` 的俄语客户端 SPA 转换器路由（`/ru/converter/jpg-to-pixel-art/`、`/ru/converter/image-to-pixel-art/`、`/ru/converter/webp-to-pixel-art/`、`/ru/converter/pixelate-image-online/`、`/ru/converter/retro-game-graphics-maker/`）也会回退读取新版俄语 FAQ；浏览器实测本地静态服务直接访问未预渲染的 `/ru/converter/image-to-pixel-art/` 返回 HTTP 404；俄语唯一预渲染转换器页 `/ru/converter/photo-to-sprite-converter/` 仍使用其自带的 5 条英文 `Photo and PNG to Sprite FAQ`（未受影响）。
+- 干净候选上运行 `tests/upload-readiness.spec.js`（零重试，系统 Chrome）：17/17 全部通过（含 `/ru/` 1440 与 390）。已目视检查桌面 1440 与手机 390 两张俄语 FAQ 截图。
+- 证据、双尺寸截图、243 页比对报告与浏览器验收记录保存于 `/Users/elng/Downloads/PixelArtVillage-RU-FAQ-2026-11-25/`。未做 Firefox/Safari 或真人手机验收。
+
 ## 2026-11-25 PNG 转换器页补充透明背景前后对比案例（发布候选）
 
 - 仅针对 `/converter/png-to-pixel-art/` 补充一组真实的透明背景转换前后对比案例。改动 5 个产品/测试文件及本记录：新增原创 256×256 透明图标 `public/png-example-source.png` 与本站真实转换导出的 32×32 透明结果 `public/png-example-pixel8.png`；在 `src/content/pseo-pages.en.json` 仅给 `png-to-pixel-art` 新增 `transparentExample`；在 `src/components/PseoPage.jsx` 新增 `TransparentExampleStrip`（灰白棋盘格底色，仅在 `isEnglishHeroConverter && page.transparentExample` 时渲染）；在 `tests/pseo-ownership.spec.js` 补充初始 SSR HTML 与水合后案例图片校验及浏览器转换验证（逐像素比对限定在 Chromium，其他浏览器校验尺寸与透明度）。
