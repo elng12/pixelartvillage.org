@@ -673,6 +673,18 @@ Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下最终 build（含 SEO、
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-11-25 俄语首页 Explore 区块补译与透明导出提示修正（本地验收通过，未提交、未发布）
+
+- 用户批准执行推荐项 1：仅修改 `public/locales/ru/translation.json`（+27/-3），未改动 SEO 搜索标题/描述（55/148 字符）、`canonical`、`hreflang`、其他语言、英文页面或业务代码。
+- 主要修改：
+  1. 在 `home` 对象补齐 `exploreHeading`（`Специализированные конвертеры Pixel Art Village`）、`exploreIntro` 及 `cards`（`mainConverter`、`photoToPixel`、`photoToSprite`、`pngToPixel`、`gifToPixel`），消除俄语首页中下部 Explore 区块的整块英文回退；
+  2. 将俄语编辑器透明背景选项 `export.transparent.label` 从 `Прозрачный фон (PNG/WebP)` 修正为 `Прозрачный фон (только PNG)`（与 `src/utils/imageProcessor.js:331,353` 仅 PNG 保留透明通道的真实行为一致），并同步更新 `faq.items[2].answer` 中对该开关名称的引用。
+- 在基于最新远端 `origin/main`（`63a97aa038844da0bec784cefda9a29eaa748a21`）且仅覆盖 `public/locales/ru/translation.json` 的干净隔离目录 `/tmp/pav-ru-explore-work/candidate` 中，Node 20.19.0 完整 `lint`、`typecheck` 与生产式 `NODE_ENV=production VITE_E2E=0 VITE_ENABLE_ANALYTICS=0 npm run build`（含 `verify:dist`、`validate-page-ownership`、`verify-cache-redirects`）全部退出 0。未覆盖原工作区 `dist/`、`sitemap` 或其他已有本地改动。
+- 逐份解析比对基线与候选的全部 243 个构建 HTML：全部 243 页的 `title`、`meta`、`canonical`、`hreflang`、`og:*`、`twitter:*` 及静态 `JSON-LD` 零变化；静态可见 DOM 发生变化仅 `ru/index.html`（已包含俄语 Explore 标题、4 张卡片及同步后的 `«Прозрачный фон (только PNG)»`，旧英文回退与 `PNG/WebP` 清零）；其余 10 个俄语预渲染页静态可见正文零变化，仅底部内联初始翻译数据随 `ru/translation.json` 同步更新。
+- 真实浏览器独立 Chrome 验收：桌面 1440×900 与手机 390×844（mobile/touch 模拟）访问 `/ru/` 均 HTTP 200，零页面脚本错误、零 React hydration 警告、零横向溢出（`scrollWidth` 分别为 1440、390），Explore 区块标题、引导与 4 张卡片均与翻译文件 100% 一致；桌面端上传 `png-example-source.png` 核实编辑器复选框标签为 `Прозрачный фон (только PNG)`（旧 `PNG/WebP` 出现次数为 0），实测导出 PNG（256×256，左上角 alpha=0 透明）与 WebP（256×256，左上角 alpha=255 不透明）；同步验证 `/ru/converter/photo-to-sprite-converter/` 共用编辑器亦显示 `Прозрачный фон (только PNG)`（源码确认俄语下其余客户端 SPA 编辑器页也会同步生效）。
+- 干净候选上运行 `tests/upload-readiness.spec.js`（零重试，系统 Chrome）：17/17 全部通过（含 `/ru/` 1440 与 390）。已目视检查桌面/手机 Explore 区块截图及俄语导出面板截图。
+- 证据、三张截图、243 页比对报告、PNG/WebP 导出样本及浏览器验收记录保存于 `/Users/elng/Downloads/PixelArtVillage-RU-Explore-2026-11-25/`。未提交、未推送、未部署、未操作 GSC；未做 Firefox/Safari 或真人手机验收。
+
 ## 2026-11-25 俄语 FAQ 错误品牌名与生硬表述清理（本地验收通过，未提交、未发布）
 
 - 用户批准执行推荐任务：单独清理俄语 FAQ 中的错误品牌名与生硬机翻堆词。仅修改 `public/locales/ru/translation.json` 中的 `faq` 区块（`faq.title` 与 7 条 `faq.items`），未改动俄语首页首屏（`home.*`）、上传限制说明（`wplace.features.size.*`）、俄语搜索标题（55 字符）与描述（148 字符）、`canonical`、`hreflang`、其他语言、英文页面或工具逻辑。
