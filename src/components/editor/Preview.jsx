@@ -23,7 +23,7 @@ function Preview({ previewRef, processedImage, zoom, pixelSize, showGrid, gridCo
       ref={previewRef}
       data-testid="preview-container"
       aria-busy={isProcessing}
-      className={`relative border rounded-lg p-2 bg-white ${mobileFlow ? 'h-[40vh] min-h-[240px] lg:h-full items-start justify-start' : 'h-[70vh] items-center justify-center'} flex shadow-sm overflow-auto`}
+      className={`relative border rounded-lg p-2 bg-white ${mobileFlow ? 'h-[40vh] min-h-[240px] lg:h-full items-start justify-start' : 'h-full items-center justify-center'} flex shadow-sm overflow-auto`}
       onDragOver={(e) => { e.preventDefault(); }}
       onDrop={(e) => {
         e.preventDefault();
