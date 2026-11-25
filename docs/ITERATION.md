@@ -673,6 +673,18 @@ Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下最终 build（含 SEO、
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-11-25 俄语编辑器剩余英文补齐与标题拼写修正
+
+- 用户批准补齐俄语编辑器剩余缺失英文，并顺手修正截图里发现的 `editor.title` 明显拼写错误后一起干净发布：仅修改 `public/locales/ru/translation.json`（新增 19 键并修正 1 键，diff +23/-4），未改动 SEO 搜索标题/描述（55/148 字符）、`canonical`、`hreflang`、其他语言、英文页面或业务 JSX 代码。
+- 修改范围：
+  1. 编辑器标题拼写修正：`editor.title` 由 `Онлайн‑генератор пиксельная графикаа` 改为 `Онлайн-генератор пиксель-арта`；
+  2. 上传提示：`upload.selectedExample`（`Загружено демонстрационное изображение: {{name}}`）；
+  3. 调参网格色：`adjustments.gridColor`（`Цвет сетки`）；
+  4. 导出面板 4 个尺寸按钮与说明句：`export.size.pixel`（`Пиксельный размер`）、`export.size.source`（`Исходный размер`）、`export.size.double`（`2× исходного`）、`export.size.quad`（`4× исходного`）与 `export.note`；
+  5. Lospec 调色板选择器 12 键：`paletteManager.searchLabel`、`searchPlaceholder`、`clearSearch`、`sourceBadge`、`copyColor`、`copied`、`copyFailed`、`emptyState`、`viewOnLospec`、`importAgain`、`curatedTip`、`paletteListLink`。
+- 保持边界说明：`LospecPalettePicker.jsx` 中的 `{filter} colors` / `{palette.colorCount} colors` 为 JSX 硬编码英文，未使用的 `importDescSuffix` 与其余既有键均保持原样。
+- 精确发布候选验证：Node 20.19.0 完整 `lint`、`typecheck`、生产式 `NODE_ENV=production VITE_E2E=0 VITE_ENABLE_ANALYTICS=0 npm run build`（含 `verify:dist`、`validate-page-ownership`、`verify-cache-redirects`）全部退出 0；243 页静态 HTML 的 `title`/`meta`/`canonical`/`hreflang`/`JSON-LD` 与静态可见 DOM 零变化，归一化资产哈希后仅 11 个俄语预渲染 HTML 底部内联翻译同步更新；独立 Chrome 桌面 1440×900 与手机 390×844（mobile/touch 模拟）核验新标题 `Онлайн-генератор пиксель-арта`、`Цвет сетки`、导出 4 按钮/说明句、PNG 导出及 Lospec 选择器全部通过；`tests/upload-readiness.spec.js` 17/17 零重试通过。
+
 ## 2026-11-25 俄语首页 Explore 区块补译与透明导出提示修正（本地验收通过，未提交、未发布）
 
 - 用户批准执行推荐项 1：仅修改 `public/locales/ru/translation.json`（+27/-3），未改动 SEO 搜索标题/描述（55/148 字符）、`canonical`、`hreflang`、其他语言、英文页面或业务代码。
