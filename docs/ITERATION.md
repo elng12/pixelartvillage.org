@@ -1,5 +1,13 @@
 # Pixel Art Village 迭代记录
 
+## 2026-11-25 俄语首页最小改稿（独立发布候选）
+
+- 用户明确批准仅提交并上线本批俄语首页改稿。候选基于最新远端 `8d6720445ff402e3ca25b7b1917dd8f379378d2d`，不带原工作区PNG草稿、未推送提交、站图或其他本地改动；仅修改俄语locale及本节。
+- `public/locales/ru/translation.json` 只改8个字符串：新增home.heroTitle/heroSubtitle/heroSubtitle2/entrySupports，修改wplace.title/desc及wplace.features.size.title/desc。修正英文回退、错误的下一页提示、无大小限制和首页功能区品牌名。FAQ及JSON-LD、SEO标题/描述、其他语言/页面文案、工具逻辑不改；Explore英文和共用错误提示仍按评审边界保留。
+- 独立候选Node20.19.0完整lint、typecheck、生产式build/postbuild通过。正式基线与候选分别构建，解析243份HTML，仅ru/index.html可见文字变化；所有页面title/meta/canonical/hreflang及JSON-LD均不变，不把内嵌数据/资源哈希变化说成HTML原始字节不变。
+- 候选生产式页面1440×900、390×844实际截图已查看，俄语首屏和限制说明正常，无横向溢出。10 MiB包含上限，多1字节拒绝；2201×1100缩为2200×1099，2200×1100不缩；公开向日葵实际导出960×762 PNG并完整解码，缩放0.60→0.65后预览宽624px。手机为视口模拟，未称真机或完整跨浏览器通过。
+- 候选与基线构建、脚本及日志在 `/tmp/pav-ru-release.5UzoE3/`，截图及结果在 Downloads 的 `PixelArtVillage-RU-Release-2026-11-25/`。只在上述验证通过后推送，沿用main Git部署，不上传本地dist；正式部署及页面验收回执在成功后补本地记录，不预先宣称已上线。
+
 ## 2026-11-25 下载入口遮挡修复（独立发布候选）
 
 - 用户明确授权单独提交、发布并线上验收。候选基于远端 main `4d257bb83e3e0719d261637a97bce1cf813c73c1`，不带原工作区的 PNG 草稿、未推送提交、站图或其他未提交工作；仅包含 Preview 布局修复、download-layout 回归测试及本节。
