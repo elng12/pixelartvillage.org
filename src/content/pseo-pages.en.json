@@ -1,31 +1,113 @@
 [
   {
     "slug": "png-to-pixel-art",
-    "title": "PNG to Pixel Art | Image to Pixel Art Converter",
-    "metaDescription": "Convert PNG to pixel art online. Adjust pixel size and palettes with instant preview, then export crisp results — free and private.",
+    "title": "PNG to Pixel Art Converter - Free Online | Pixel Art Village",
+    "metaDescription": "Convert PNG to pixel art for free in your browser. Adjust pixel size, try palettes and dithering, preview your changes, and download the result as a PNG.",
     "h1": "Convert PNG to Pixel Art Online",
+    "heroSubtitle": "Turn PNG icons and artwork into pixel art with adjustable pixel size and color palettes.",
+    "detailsHeading": "Working with PNG files in this converter",
+    "seo": {
+      "primaryKeyword": "png to pixel art",
+      "intent": "Convert a PNG into pixel art, adjust pixel size and colors, and download the processed image.",
+      "ownerPath": "/converter/png-to-pixel-art/",
+      "supportingKeywords": [
+        "png to pixel",
+        "png to pixel converter",
+        "png pixel converter",
+        "pixel converter png"
+      ],
+      "excludedKeywords": [
+        "image to pixel art",
+        "photo to pixel art",
+        "8-bit art generator",
+        "photo to sprite converter",
+        "png to pixil",
+        "png to .pixil"
+      ]
+    },
     "intro": [
       "Use this page when your source file is already a PNG and you want a format-specific start. PNG files usually keep edges, flat color areas, and transparency cleaner than lossy formats, which makes them a strong input for pixel art.",
-      "Upload the PNG, tune pixel size and palette, and export a clean result for sprites, icons, tiles, or UI art. If you need the broadest control set for mixed file types or general-purpose work, use the main image to pixel art converter."
+      "Set Pixel Size and choose a palette to simplify your PNG, then compare the live preview before downloading. If your PNG has transparent areas, read the notes on transparent PNGs below before you export."
     ],
-    "toolHeading": "Upload a PNG and tune the pixel conversion",
-    "toolSubtitle": "Best when your source already has clean edges, transparency, or interface-style artwork.",
-    "toolSubtitle2": "Need the broadest workflow for mixed sources or deeper cleanup? Open the main image to pixel art converter.",
-    "topCallout": {
-      "title": "Need the full image to pixel art workflow?",
+    "toolHeading": "Upload a PNG and adjust the pixel effect",
+    "toolSubtitle": "Upload a PNG up to 10MB. Adjust the settings and preview the result before you download.",
+    "howItWorks": {
+      "title": "How to convert PNG to pixel art",
+      "description": "Upload your PNG, adjust the pixel effect, and choose a download size.",
+      "steps": [
+        {
+          "title": "Upload a PNG",
+          "description": "Choose a PNG up to 10MB with clear shapes. The image is processed in your browser, and files with a side longer than 2200 pixels are scaled down."
+        },
+        {
+          "title": "Adjust pixels and colors",
+          "description": "Increase Pixel Size from 1 until you like the size of the blocks, then try a palette. Turn on dithering with the palette for patterned shading rather than solid color areas."
+        },
+        {
+          "title": "Choose the PNG download settings",
+          "description": "Choose a download size. For transparent output, select PNG, keep Transparent background on and turn the grid off."
+        }
+      ]
+    },
+    "contentSections": [
+      {
+        "title": "Starting with PNG icons and flat artwork",
+        "body": [
+          "PNG is a useful starting point for icons, interface graphics and artwork with clear shapes. Start with a file that already has the background and edges you want.",
+          "Begin with Pixel Size at 1, then increase it until small details give way to visible blocks. Try a palette for flat colors, and add dithering when you want patterned shading."
+        ]
+      },
+      {
+        "title": "Transparent PNGs: preview and export",
+        "body": [
+          "The preview has a white backdrop, so transparent areas can look white. The transparency setting controls the download, not the preview backdrop. This converter does not remove an opaque background.",
+          "For a transparent download, choose PNG, leave Transparent background turned on and keep the grid off. This retains transparency in the processed result, not an exact copy of the original outline: pixelation changes edges and fine detail."
+        ]
+      },
+      {
+        "title": "Choosing the size of your PNG download",
+        "body": [
+          "The Pixel size button exports the small pixel grid itself. For example, a 64 by 48 PNG with Pixel Size 7 gives a 9 by 6 grid. Original size exports the processed image at its full size (64 by 48 in this example), and the remaining buttons make that image two or four times larger.",
+          "Images with a side longer than 2200 pixels are scaled down before conversion. For these files, Original size refers to the resized image, not the uploaded file's full dimensions. Zoom only changes how large the preview looks on screen."
+        ]
+      }
+    ],
+    "bottomCallout": {
+      "title": "Want the general-purpose converter?",
       "body": [
-        "This PNG page is a focused starting point, but the main converter is the better destination when you want the complete set of palette, dithering, preview, and export controls."
+        "The main image to pixel art converter works the same way for photos, screenshots and other image types."
       ],
-      "ctaLabel": "Open the full image to pixel art converter",
+      "ctaLabel": "Open the image to pixel art converter",
       "ctaTo": "/converter/image-to-pixel-art/"
     },
-    "bottomCallout": {
-      "title": "Finished testing the PNG workflow?",
-      "body": [
-        "Move into the main converter when you want to compare palette options, refine mixed-source artwork, or keep one consistent workflow across multiple file types."
-      ],
-      "ctaLabel": "Continue in the main converter",
-      "ctaTo": "/converter/image-to-pixel-art/"
+    "faq": {
+      "title": "PNG to Pixel Art FAQ",
+      "items": [
+        {
+          "question": "Will my PNG keep its transparent background?",
+          "answer": "Yes, with PNG export. Keep Transparent background on and leave the grid off to retain transparency in the processed image. Pixelation can change edges and fine detail. JPEG and WebP downloads use a white background."
+        },
+        {
+          "question": "Why do transparent areas look white in the preview?",
+          "answer": "The preview is displayed against white, not a checkerboard. The transparency setting controls the downloaded file, not this backdrop."
+        },
+        {
+          "question": "Which input formats and file sizes are supported?",
+          "answer": "Upload PNG, JPG, GIF or WebP files up to 10MB (10,485,760 bytes). Images with a side longer than 2200 pixels are scaled down before conversion."
+        },
+        {
+          "question": "How do Pixel Size, palettes, and dithering change my PNG?",
+          "answer": "Pixel Size ranges from 1 to 50, with higher values usually giving larger blocks and less detail. A palette limits the colors, while Floyd-Steinberg dithering uses patterns to suggest shading when a palette is selected."
+        },
+        {
+          "question": "Which download format and size should I choose?",
+          "answer": "Download PNG, JPEG or WebP still images. Choose Pixel size for the small grid, or Original size for the processed image at its full size; the remaining buttons make that image two or four times larger. Zoom only changes your on-screen view."
+        },
+        {
+          "question": "Can I convert a PNG to a .pixil file here?",
+          "answer": "No. This converter exports PNG, JPEG and WebP images, not .pixil project files."
+        }
+      ]
     }
   },
   {

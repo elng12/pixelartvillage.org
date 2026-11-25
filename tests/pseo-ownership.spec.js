@@ -98,22 +98,164 @@ test('sprite SEO is present in initial HTML and its example matches a real expor
   expect((await original.ensureAlpha().raw().toBuffer())[3]).toBe(0)
 })
 
-test('format page keeps two clear routes back to the main converter', async ({ page }) => {
-  await page.goto('/converter/png-to-pixel-art/')
+test('PNG page leads with its H1 hero and exports the processed transparency', async ({ page, request }) => {
+  const route = '/converter/png-to-pixel-art/'
+  let initialMetadata
+  const canonical = `https://pixelartvillage.org${route}`
+  const response = await request.get(route)
+  expect(response.status()).toBe(200)
+  const initialHtml = await response.text()
+  const pageErrors = []
+  page.on('pageerror', (error) => pageErrors.push(error.message))
 
-  await expect(page.getByTestId('primary-converter-callout-top')).toBeVisible()
-  await expect(page.getByTestId('primary-converter-callout-bottom')).toBeVisible()
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
+    await page.setViewportSize(viewport)
+    await page.goto(route)
+    await expect(page).toHaveTitle('PNG to Pixel Art Converter - Free Online | Pixel Art Village')
+    const h1 = page.getByRole('heading', { level: 1 })
+    await expect(h1).toHaveCount(1)
+    await expect(h1).toHaveText(/PNG to Pixel Art/)
+    await expect(page.getByTestId('primary-converter-callout-top')).toHaveCount(0)
+    await expect(page.getByTestId('primary-converter-callout-bottom')).toBeVisible()
+    await expect.poll(() => page.locator('a[href="/converter/image-to-pixel-art/"]').count()).toBeGreaterThanOrEqual(2)
+    await expect(page.getByRole('heading', { name: 'Explore other converters', exact: true })).toBeVisible()
 
-  const converterLinks = page.locator('a[href="/converter/image-to-pixel-art/"]')
-  await expect.poll(async () => converterLinks.count()).toBeGreaterThanOrEqual(2)
+    // Check the server HTML and the hydrated page, not just the content source.
+    for (const html of [initialHtml, null]) {
+      const metadata = await page.evaluate((markup) => {
+        const doc = markup === null ? document : new DOMParser().parseFromString(markup, 'text/html')
+        const meta = (selector) => doc.querySelector(selector)?.getAttribute('content')
+        return {
+          title: doc.title,
+          description: meta('meta[name="description"]'),
+          canonical: doc.querySelector('link[rel="canonical"]')?.getAttribute('href'),
+          ogTitle: meta('meta[property="og:title"]'),
+          ogDescription: meta('meta[property="og:description"]'),
+          twitterTitle: meta('meta[name="twitter:title"]'),
+          twitterDescription: meta('meta[name="twitter:description"]'),
+        }
+      }, html)
+      if (!initialMetadata) {
+        initialMetadata = metadata
+        expect(Array.from(metadata.title).length).toBeGreaterThanOrEqual(55)
+        expect(Array.from(metadata.title).length).toBeLessThanOrEqual(60)
+        expect(metadata.title.match(/Pixel Art Village/g)).toHaveLength(1)
+        expect(Array.from(metadata.description).length).toBeGreaterThanOrEqual(150)
+        expect(Array.from(metadata.description).length).toBeLessThanOrEqual(160)
+        expect(metadata.description).toMatch(/png to pixel/i)
+      }
+      expect(metadata).toEqual({
+        title: initialMetadata.title,
+        description: initialMetadata.description,
+        canonical,
+        ogTitle: initialMetadata.title,
+        ogDescription: initialMetadata.description,
+        twitterTitle: initialMetadata.title,
+        twitterDescription: initialMetadata.description,
+      })
+    }
 
-  await expect(
-    page.getByRole('heading', { level: 2, name: 'Upload a PNG and tune the pixel conversion' })
-  ).toBeVisible()
+    const heading = await h1.boundingBox()
+    const upload = await page.getByTestId('upload-zone').boundingBox()
+    const details = await page.getByRole('heading', { level: 2, name: 'Working with PNG files in this converter', exact: true }).boundingBox()
+    expect(upload.y).toBeGreaterThan(heading.y + heading.height)
+    expect(details.y).toBeGreaterThan(upload.y + upload.height)
+    expect(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false)
+    if (viewport.width >= 1280) {
+      expect(upload.y + upload.height).toBeLessThanOrEqual(viewport.height)
+      const sizes = await page.evaluate(() => ({
+        h1: parseFloat(getComputedStyle(document.querySelector('main h1')).fontSize),
+        h2: Math.max(...[...document.querySelectorAll('main h2')].map((el) => parseFloat(getComputedStyle(el).fontSize))),
+        alignment: getComputedStyle(document.querySelector('main h1')).textAlign,
+      }))
+      expect(sizes.h1).toBeGreaterThanOrEqual(sizes.h2)
+      expect(sizes.alignment).toBe('center')
+    }
 
-  await expect(
-    page.getByRole('heading', { level: 2, name: 'Need the full image to pixel art workflow?' })
-  ).toBeVisible()
+    const structuredData = await page.locator('script[type="application/ld+json"]').evaluateAll(
+      (scripts) => scripts.flatMap((script) => {
+        const value = JSON.parse(script.textContent)
+        return Array.isArray(value) ? value : [value]
+      })
+    )
+    const visibleFaq = await page.locator('#faq article').evaluateAll((articles) => articles.map((article) => ({
+      question: article.querySelector('h3').textContent.trim(),
+      answer: article.querySelector('p').textContent.trim(),
+    })))
+    const faqSchema = structuredData.find((entry) => entry['@type'] === 'FAQPage')
+    expect(visibleFaq).toHaveLength(6)
+    expect(faqSchema.mainEntity.map((entry) => ({
+      question: entry.name,
+      answer: entry.acceptedAnswer.text,
+    }))).toEqual(visibleFaq)
+    expect(structuredData.find((entry) => entry['@type'] === 'HowTo').step).toHaveLength(3)
+    await expect(page.locator('#faq article').first()).toBeVisible()
+    await test.info().attach(`png-page-${viewport.width}`, { body: await page.screenshot(), contentType: 'image/png' })
+
+    if (viewport.width >= 1280) {
+      const rejectCookies = page.getByRole('button', { name: 'Reject non-essential cookies', exact: true })
+      if (await rejectCookies.isVisible()) await rejectCookies.click()
+
+      // Broad alpha regions and a gradient expose flattening and real processing changes.
+      const raw = Buffer.alloc(64 * 48 * 4)
+      for (let y = 8; y < 40; y++) {
+        for (let x = 8; x < 56; x++) {
+          const offset = (y * 64 + x) * 4
+          raw[offset] = 30 + 3 * x
+          raw[offset + 1] = 30 + 4 * y
+          raw[offset + 2] = 200 - 2 * x
+          raw[offset + 3] = x < 24 ? 255 : x < 40 ? 128 : 64
+        }
+      }
+      const buffer = await sharp(raw, { raw: { width: 64, height: 48, channels: 4 } }).png().toBuffer()
+      await page.getByTestId('file-input').setInputFiles({ name: 'transparent-gradient.png', mimeType: 'image/png', buffer })
+      const preview = page.getByTestId('preview-container')
+      const previewImage = preview.locator('img')
+      await expect(previewImage).toHaveAttribute('src', /^data:image\/png/)
+      await expect(preview).toHaveAttribute('aria-busy', 'false')
+      const pixelSize = page.getByRole('slider', { name: /^Pixel Size:/ })
+      await expect(pixelSize).toBeVisible()
+      let previousPreview = await previewImage.getAttribute('src')
+      await pixelSize.evaluate((input) => {
+        const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(input), 'value')
+        const previousValue = input.value
+        descriptor.set.call(input, '7')
+        if (input._valueTracker) input._valueTracker.setValue(previousValue)
+        input.dispatchEvent(new Event('input', { bubbles: true }))
+        input.dispatchEvent(new Event('change', { bubbles: true }))
+      })
+      // Slider state is committed on rAF; processing starts after a separate debounce.
+      await expect(pixelSize).toHaveValue('7')
+      await expect(previewImage).not.toHaveAttribute('src', previousPreview)
+      await expect(preview).toHaveAttribute('aria-busy', 'false')
+      previousPreview = await previewImage.getAttribute('src')
+      await page.getByLabel('Palette', { exact: true }).selectOption('Pico-8')
+      await expect(page.getByLabel('Palette', { exact: true })).toHaveValue('Pico-8')
+      await expect(previewImage).not.toHaveAttribute('src', previousPreview)
+      await expect(previewImage).toHaveAttribute('src', /^data:image\/png/)
+      await expect(preview).toHaveAttribute('aria-busy', 'false')
+
+      await page.locator('#format-select').selectOption('png')
+      await page.locator('#transparent-bg').check()
+      await page.locator('#grid-toggle').uncheck()
+      await page.getByRole('button', { name: 'Original size', exact: true }).click()
+      const previewSource = await previewImage.getAttribute('src')
+      const expectedImage = await sharp(Buffer.from(previewSource.split(',')[1], 'base64'))
+        .ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+      const expectedAlpha = expectedImage.data.filter((_, index) => index % 4 === 3)
+      for (const alpha of [0, 128, 255]) expect(expectedAlpha.includes(alpha)).toBe(true)
+      const pending = page.waitForEvent('download')
+      await page.getByRole('button', { name: 'Download Pixel Art Image', exact: true }).last().click()
+      const downloaded = sharp(await (await pending).path())
+      const metadata = await downloaded.metadata()
+      const actual = await downloaded.ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+      expect(metadata.format).toBe('png')
+      expect([actual.info.width, actual.info.height]).toEqual([64, 48])
+      const actualAlpha = actual.data.filter((_, index) => index % 4 === 3)
+      expect(actualAlpha.equals(expectedAlpha), 'PNG export keeps the processed preview alpha').toBe(true)
+    }
+  }
+  expect(pageErrors).toEqual([])
 })
 
 test('8-bit page leads with its H1 hero and keeps the upload area in the first viewport', async ({ page }) => {
