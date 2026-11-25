@@ -237,6 +237,8 @@ test('PNG page leads with its H1 hero and exports the processed transparency', a
 
       await page.locator('#format-select').selectOption('png')
       await page.locator('#transparent-bg').check()
+      await expect(page.getByLabel('Transparent background (PNG only)', { exact: true })).toBeChecked()
+      await expect(page.getByText('Transparent background (PNG/WebP)', { exact: true })).toHaveCount(0)
       await page.locator('#grid-toggle').uncheck()
       await page.getByRole('button', { name: 'Original size', exact: true }).click()
       const previewSource = await previewImage.getAttribute('src')

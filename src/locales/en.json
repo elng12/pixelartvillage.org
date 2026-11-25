@@ -272,7 +272,7 @@
     },
     "note": "Pixel size exports the true pixel-grid dimensions. Original size scales the result back to your source image size.",
     "transparent": {
-      "label": "Transparent background (PNG/WebP)"
+      "label": "Transparent background (PNG only)"
     },
     "quality": {
       "label": "Quality: {{percent}}%"

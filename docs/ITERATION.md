@@ -673,6 +673,12 @@ Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下最终 build（含 SEO、
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-11-25 英文透明导出提示发布
+
+- 用户明确授权发布。仅将英文 `export.transparent.label` 改为 `Transparent background (PNG only)`，包括public内容源及现有embed脚本生成的src副本，并给现有PNG测试增加新标签关联和旧标签消失的断言。不改转换/导出逻辑、SEO、Blog或其他语言；所有使用该英文标签的编辑器页面及英文回退界面共享此修正。
+- 从远端正式 `0450310bdc1db3c545f8b8ebff40a78c43d053aa` 单独构建，保留原工作区及其他改动，不直接发布原工作区。证据保存到 `~/Downloads/PixelArtVillage-Transparency-Release-2026-11-25/`。发布回执本地补记，不为纯回执重复部署；未做GSC、DNS或索引设置修改。
+- 精确发布副本Node20.19.0完整lint、typecheck、build/postbuild通过；PNG专项1项通过、零重试。独立Chrome桌面和390px mobile/touch模拟各核对PNG/JPEG/WebP的标签关联，并实际下载两尺寸PNG、JPEG、WebP共8份；全部可解码、PNG透明度与处理预览一致，JPEG/WebP仍不透明，没有修改导出行为。未运行完整跨浏览器或真人手机验收。
+
 ## 2026-11-25 PNG 草稿发布裁决与实施
 
 - 用户同意发布 PNG 草稿，接受历史新版独有 context 清理超时尚未查明的剩余风险，以本轮正式基线上的定向验收作为发布依据。不把历史每侧482项的83个失败或未重现超时改写为已修复、全部通过；透明PNG对比案例作为后续内容改进，本次不新增图片或改写已批准英文。
