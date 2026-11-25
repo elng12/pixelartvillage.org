@@ -64,6 +64,14 @@ function ToolSection({
   const uploadLiveRef = useRef(null); // 替代getElementById
   const [error, setError] = useState('');
   const [isPreparing, setIsPreparing] = useState(false);
+  const [isInteractive, setIsInteractive] = useState(false);
+  const isUploadDisabled = !isInteractive || isPreparing;
+
+  // SSR controls stay disabled until hydration has committed their handlers.
+  useEffect(() => {
+    setIsInteractive(true);
+  }, []);
+
   const lastUrlRef = useRef(null);
   const pasteGuardRef = useRef(0);
   const log = useCallback((event, payload = {}) => {
@@ -95,7 +103,7 @@ function ToolSection({
   }, [log])
 
   const handleFileSelect = useCallback(async (file) => {
-    if (isPreparing) return;
+    if (isUploadDisabled) return;
     setError(''); // Reset stale error when starting a new interaction
     log('handleFileSelect:start', {
       hasFile: !!file,
@@ -179,10 +187,10 @@ function ToolSection({
       setIsPreparing(false);
       log('handleFileSelect:complete', { name: file?.name });
     }
-  }, [isPreparing, log, onImageUpload, revokeLastObjectUrl, t]);
+  }, [isUploadDisabled, log, onImageUpload, revokeLastObjectUrl, t]);
 
   const handleExampleSelect = useCallback((example) => {
-    if (isPreparing || !example?.src) return
+    if (isUploadDisabled || !example?.src) return
     setError('')
     revokeLastObjectUrl()
     onImageUpload(example.src)
@@ -190,11 +198,11 @@ function ToolSection({
     if (uploadLiveRef.current) {
       uploadLiveRef.current.textContent = t('upload.selectedExample', { name: example.label })
     }
-  }, [isPreparing, log, onImageUpload, revokeLastObjectUrl, t])
+  }, [isUploadDisabled, log, onImageUpload, revokeLastObjectUrl, t])
 
   const handleDrop = useCallback((e) => {
     e.preventDefault();
-    if (isPreparing) return;
+    if (isUploadDisabled) return;
     setError('');
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const file = e.dataTransfer.files[0];
@@ -202,11 +210,11 @@ function ToolSection({
       handleFileSelect(file);
       e.dataTransfer.clearData();
     }
-  }, [handleFileSelect, isPreparing, log]);
+  }, [handleFileSelect, isUploadDisabled, log]);
 
   // Only enable global paste upload on the landing view to avoid double-binding the Editor listeners
   useEffect(() => {
-    if (!enablePaste) return;
+    if (!enablePaste || !isInteractive) return;
     const onPaste = (e) => {
       // Prevent duplicate paste handling within a short interval
       const now = Date.now();
@@ -222,17 +230,17 @@ function ToolSection({
     };
     window.addEventListener('paste', onPaste);
     return () => window.removeEventListener('paste', onPaste);
-  }, [handleFileSelect, enablePaste, log]);
+  }, [handleFileSelect, enablePaste, isInteractive, log]);
 
   const openFilePicker = useCallback(() => {
-    if (isPreparing) return;
+    if (isUploadDisabled) return;
     setError('');
     fileInputRef.current?.click();
     log('click-open');
-  }, [isPreparing, log]);
+  }, [isUploadDisabled, log]);
 
   const handleFileInputChange = useCallback((e) => {
-    if (isPreparing) return;
+    if (isUploadDisabled) return;
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       log('input-change', { name: file?.name, size: file?.size });
@@ -240,13 +248,13 @@ function ToolSection({
       // 重置文件输入，允许重复选择同一文件
       e.target.value = '';
     }
-  }, [handleFileSelect, isPreparing, log]);
+  }, [handleFileSelect, isUploadDisabled, log]);
 
   const handleZoneClick = useCallback((e) => {
-    if (isPreparing) return;
+    if (isUploadDisabled) return;
     if (e.target instanceof Element && e.target.closest('button')) return;
     openFilePicker();
-  }, [isPreparing, openFilePicker]);
+  }, [isUploadDisabled, openFilePicker]);
 
   const handleChooseFileClick = useCallback((e) => {
     e.preventDefault();
@@ -298,14 +306,16 @@ function ToolSection({
           </Fragment>
         ) : null}
         <div 
-          className={`upload-zone relative max-w-3xl mx-auto bg-white border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${isPreparing ? 'cursor-not-allowed opacity-80 ring-1 ring-blue-200' : 'cursor-pointer'} ${uploadZoneClassName}`}
+          className={`upload-zone relative max-w-3xl mx-auto bg-white border-2 border-dashed border-gray-300 rounded-xl transition-all hover:border-blue-500 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${isUploadDisabled ? 'cursor-not-allowed opacity-80 ring-1 ring-blue-200' : 'cursor-pointer'} ${uploadZoneClassName}`}
           style={{ padding: compact ? '0.75rem 1.25rem' : '1.5rem', minHeight: compact ? 'auto' : '16rem', borderWidth: '2px', borderStyle: 'dashed', borderColor: '#d1d5db', borderRadius: '0.75rem', backgroundColor: '#fff', ...uploadZoneStyle }}
-          aria-busy={isPreparing}
+          aria-busy={isUploadDisabled}
+          aria-disabled={isUploadDisabled}
           role={variant === 'sprite' ? 'button' : undefined}
-          tabIndex={variant === 'sprite' ? 0 : undefined}
+          tabIndex={variant === 'sprite' ? (isUploadDisabled ? -1 : 0) : undefined}
           aria-label={variant === 'sprite' ? (resolvedInstructionText || resolvedChooseFileLabel) : undefined}
           onClick={handleZoneClick}
           onKeyDown={(e) => {
+            if (isUploadDisabled) return;
             if (e.key === 'Enter' || e.key === ' ') {
               if (e.target === e.currentTarget) {
                 e.preventDefault();
@@ -324,7 +334,7 @@ function ToolSection({
             className="hidden"
             accept="image/png,image/jpeg,image/gif,image/webp"
             aria-label={t('tool.ariaChoose')}
-            disabled={isPreparing}
+            disabled={isUploadDisabled}
             onChange={handleFileInputChange}
             data-testid="file-input"
           />
@@ -347,12 +357,12 @@ function ToolSection({
               </div>
               <button
                 type="button"
-                className={`btn-primary shrink-0 text-xs sm:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-3 py-1.5 transition-colors ${chooseButtonClassName} ${isPreparing ? 'opacity-60 cursor-not-allowed' : ''}`}
+                className={`btn-primary shrink-0 text-xs sm:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-3 py-1.5 transition-colors ${chooseButtonClassName} ${isUploadDisabled ? 'opacity-60 cursor-not-allowed' : ''}`}
                 style={chooseButtonStyle}
                 data-testid="choose-file-btn"
                 aria-describedby="upload-instructions upload-supports"
                 onClick={handleChooseFileClick}
-                disabled={isPreparing}
+                disabled={isUploadDisabled}
               >
                 {resolvedChooseFileLabel}
               </button>
@@ -408,6 +418,7 @@ function ToolSection({
                           handleExampleSelect(example)
                         }}
                         data-testid={`example-btn-${example.id}`}
+                        disabled={isUploadDisabled}
                       >
                         {example.label}
                       </button>
@@ -418,12 +429,12 @@ function ToolSection({
               <div className="mt-4" style={{ marginTop: '1rem' }}>
                 <button
                   type="button"
-                  className={`btn-primary ${chooseButtonClassName} ${isPreparing ? 'opacity-60 cursor-not-allowed' : ''}`}
+                  className={`btn-primary ${chooseButtonClassName} ${isUploadDisabled ? 'opacity-60 cursor-not-allowed' : ''}`}
                   style={{ padding: '0.5rem 1rem', borderRadius: '0.5rem', backgroundColor: '#2563eb', color: '#fff', ...chooseButtonStyle }}
                   data-testid="choose-file-btn"
                   aria-describedby="upload-instructions upload-supports"
                   onClick={handleChooseFileClick}
-                  disabled={isPreparing}
+                  disabled={isUploadDisabled}
                 >
                   {resolvedChooseFileLabel}
                 </button>

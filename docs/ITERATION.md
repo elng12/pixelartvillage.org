@@ -673,6 +673,15 @@ Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下最终 build（含 SEO、
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-11-25 上传入口交互就绪修复发布
+
+- 用户明确授权正式发布。从最新远端 `0545fce24e2cd6f72ab37cdab4f5a1f01508545d` 单独带入共用 `src/components/ToolSection.jsx` 和新 `tests/upload-readiness.spec.js`，不直接发布混有其他改动的原工作区。
+- 上传按钮、文件输入、示例按钮在初始SSR/客户端渲染保持禁用，React提交处理器后开放；ARIA、禁用样式及点击/键盘/拖拽/粘贴等路径保持一致门禁。不改变图片验证、缩小、像素处理、导出算法、SEO文字、语言数据或编辑器；共享组件作用于首页及复用它的转换器，不称仅PNG页独占。
+- 发布前已完成Sol与Astra独立审查，未发现已证实代码阻断；两Agent因工具宿主故障亲自执行0项，主环境两个新进程分别17/17通过，不冒称两模型各自实跑。未实测键盘/拖放/粘贴/示例，重复错误提示断言强度有限，这些非阻断缺口保留，详见 `~/Downloads/PixelArtVillage-Dual-Review-2026-11-25/`。
+- sprite示例像素对照在修改前后同一断言失败，保留为既有问题，不放松断言或替换参考图。本轮只发布已审修复，不顺手修历史失败或追加新功能。
+- 本次精确发布候选及正式验收证据在 `~/Downloads/PixelArtVillage-Upload-Release-2026-11-25/`，最终回执本地补记，不为纯回执重复部署。未操作GSC、DNS或索引设置；未做完整跨浏览器、真人手机或Google排名验收。
+- 精确候选Node20.19.0完整lint/typecheck/build/postbuild重新通过；17项关键回归全部通过、零重试/跳过。独立Chrome1440×900和390×844 mobile/touch模拟经正常按钮/filechooser选图，共8份实际下载全部解码，PNG透明度与处理预览逐字节一致，JPEG/WebP仍不透明。候选不包含原工作区其他未发布修改。
+
 ## 2026-11-25 英文透明导出提示发布
 
 - 用户明确授权发布。仅将英文 `export.transparent.label` 改为 `Transparent background (PNG only)`，包括public内容源及现有embed脚本生成的src副本，并给现有PNG测试增加新标签关联和旧标签消失的断言。不改转换/导出逻辑、SEO、Blog或其他语言；所有使用该英文标签的编辑器页面及英文回退界面共享此修正。
