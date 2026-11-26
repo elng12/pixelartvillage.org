@@ -673,6 +673,17 @@ Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下最终 build（含 SEO、
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-11-26 韩语首页最小改稿
+
+- 基于 2026-11-25 只读 GSC 28 天数据（`2026-10-27..2026-11-23`，`web`、`final`，`/ko/` 为全站非英文点击第 1：`1,270` 点击 `+430`，`14,189` 曝光，CTR `8.95%`，平均排名 `6.37`），用户批准优先执行韩语 `/ko/` 首页最小改稿并干净发布上线。
+- 仅修改 `public/locales/ko/translation.json` 中的 8 个字符串（新增 `home.heroTitle`、`home.heroSubtitle`、`home.heroSubtitle2`、`home.entrySupports` 共 4 键；修改 `wplace.title`、`wplace.desc`、`wplace.features.size.title`、`wplace.features.size.desc` 共 4 键），完全不动 `home.seoTitle`（32 字符）与 `home.seoDescription`（103 字符）、`canonical`、`hreflang`、FAQ、Explore、编辑器、其他语言、英文页面或业务 JSX 代码。
+- 主要修正：
+  1. 消除 `/ko/` 首屏 H1、两段副标题与上传区支持格式提示的英文回退，去掉英文默认句里不准确的 `opens on the next page`；
+  2. 将 `wplace` 标题与副标题中直译的品牌名（`픽셀아트 마을` / `픽셀 아트 빌리지`）统一为 `Pixel Art Village`；
+  3. 将不实的 `크기 제한 없음`（无大小限制）改为如实的 `업로드 크기 제한`（`10 MiB(10,485,760바이트)`，长边超 `2200` 像素按比例缩小预处理）。
+- 保持边界说明：韩语 FAQ 错品牌名、HowItWorks/页脚既有品牌直译、Explore 英文回退及导出面板 `PNG/WebP` 错标留待后续单轮处理。
+- 精确发布候选验证：Node 20.19.0 完整 `lint`、`typecheck` 与生产式 `NODE_ENV=production VITE_E2E=0 VITE_ENABLE_ANALYTICS=0 npm run build`（含 `verify:dist`、`validate-page-ownership`、`verify-cache-redirects`）全部通过；243 页 HTML 中所有页面 `title`/`meta`/`canonical`/`hreflang`/`JSON-LD` 零变化，静态可见 DOM 仅 `ko/index.html` 变化，归一化资产哈希后其余 12 个韩语预渲染页仅底部内联初始翻译 JSON 同步更新；独立 Chrome 桌面 1440×900 与手机 390×844（mobile/touch 模拟）访问 `/ko/` 均 HTTP 200、零脚本错误、零 hydration 警告、零横向溢出（桌面端核验全部 8 条译文与透明 PNG 导出 `256×256`、`topLeftAlpha: 0`；手机端核验首屏 H1、`home.entrySupports` 与 `업로드 크기 제한`），`tests/upload-readiness.spec.js` 17/17 零重试通过。
+
 ## 2026-11-25 俄语编辑器剩余英文补齐与标题拼写修正
 
 - 用户批准补齐俄语编辑器剩余缺失英文，并顺手修正截图里发现的 `editor.title` 明显拼写错误后一起干净发布：仅修改 `public/locales/ru/translation.json`（新增 19 键并修正 1 键，diff +23/-4），未改动 SEO 搜索标题/描述（55/148 字符）、`canonical`、`hreflang`、其他语言、英文页面或业务 JSX 代码。
