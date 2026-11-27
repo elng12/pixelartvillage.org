@@ -673,6 +673,14 @@ Node 20.19.0、VITE_E2E=0、VITE_ENABLE_ANALYTICS=0 下最终 build（含 SEO、
 这个文件是 `pixel-art-v2` 的长期优化记录。
 以后每次改 SEO、converter 页面、工具 UI、构建脚本、sitemap、Blog、外链或部署，都要在这里留下记录。
 
+## 2026-11-27 印尼语首页最小改稿、英文搜索描述修正与上传提示补译
+
+- 基于 2026-11-25 只读 GSC 28 天数据（`2026-10-27..2026-11-23`，`web`、`final`，`/id/` 为全站非英文曝光第 1：`29,899` 曝光、`883` 点击 `+33`，平均排名 `5.36`，但 CTR 仅 `2.95%`）及源码实证（`home.seoDescription` 整段为纯英文），用户批准执行印尼语 `/id/` 首页最小改稿，并在目视验收后批准一并修正首屏上传框内未翻译的 `upload.clickToChoose` 后干净发布上线。
+- 仅修改 `public/locales/id/translation.json` 中的 10 个字符串（修改 `upload.clickToChoose`、`wplace.title`、`wplace.desc`、`wplace.features.size.title`、`wplace.features.size.desc`、`home.seoDescription` 共 6 键；新增 `home.heroTitle`、`home.heroSubtitle`、`home.heroSubtitle2`、`home.entrySupports` 共 4 键），完全不动 `home.seoTitle`（49 字符）、`canonical`、`hreflang`、`FAQPage` JSON-LD、FAQ、Explore、编辑器、其他语言、英文页面或业务 JSX 代码。
+- 字符数核对（按字符计数）：最终 `title` 为 `Konverter Gambar ke Pixel Art | Pixel Art Village`（49 字符，未修改）；最终 `meta[name="description"]` 为 `Konverter gambar ke pixel art gratis di Pixel Art Village. Ubah PNG, JPG, GIF, atau WEBP di browser, atur ukuran piksel dan palet, lalu unduh hasilnya.`（151 字符，符合 150–160 字符规则且低于构建 155 字符截断阈值，无截断/省略号）。
+- 保持边界说明：印尼语 FAQ、Explore 英文回退及导出面板 `PNG/WebP` 错标留待后续单轮处理。
+- 精确发布候选验证：Node 20.19.0 完整 `lint`、`typecheck` 与生产式 `NODE_ENV=production VITE_E2E=0 VITE_ENABLE_ANALYTICS=0 npm run build`（含 `verify:dist`、`validate-page-ownership`、`verify-cache-redirects`）全部通过；243 页 HTML 中仅 `id/index.html` 的描述标签（`meta`/`og`/`twitter` 均 151 字符一致）与 `SoftwareApplication` JSON-LD 描述变化，静态可见正文仅 `id/index.html`（全 9 条新文案命中）与 `id/converter/photo-to-sprite-converter/index.html`（同步更新 `klik untuk memilih`）随本改动变化（其余 241 页仅跨日构建的隐私/条款页日期随当天变化，SEO 与结构化数据零变化），13 个印尼语预渲染页底部内联翻译同步更新；独立 Chrome 桌面 1440×900 与手机 390×844（mobile/touch 模拟）双端核验 `title`（49 字符）、`meta[name="description"]`（151 字符）及全部 9 条可见文案 100% 匹配，桌面端实测上传并导出透明 PNG（`256×256`，`topLeftAlpha: 0`）；`tests/upload-readiness.spec.js` 17/17 零重试通过（23.4s）。
+
 ## 2026-11-26 韩语首页最小改稿
 
 - 基于 2026-11-25 只读 GSC 28 天数据（`2026-10-27..2026-11-23`，`web`、`final`，`/ko/` 为全站非英文点击第 1：`1,270` 点击 `+430`，`14,189` 曝光，CTR `8.95%`，平均排名 `6.37`），用户批准优先执行韩语 `/ko/` 首页最小改稿并干净发布上线。

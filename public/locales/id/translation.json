@@ -130,7 +130,7 @@
     "subtitle2": "ukuran piksel yang dapat disesuaikan dan palet khusus. Sempurna untuk sprite, ikon, dan seni permainan retro dengan opsi palet lanjutan.",
     "subtitle": "Pixelasikan gambar di browser — ubah PNG/JPG menjadi pixel art bersih ramah‑grid. Atur ukuran piksel dan palet dengan pratinjau instan, lalu ekspor hasil tajam untuk sprite, ikon, atau grafis retro. Cepat, privat, dan gratis dengan pixel art Village.",
     "dragOrClick": "Seret gambar Anda ke sini atau",
-    "clickToChoose": "click to select",
+    "clickToChoose": "klik untuk memilih",
     "supports": "Mendukung PNG, JPG, GIF — hingga 10MB",
     "chooseFile": "Pilih berkas",
     "preparing": "Menyiapkan gambar…",
@@ -248,8 +248,8 @@
     "title": "Select language"
   },
   "wplace": {
-    "title": "Alat Sempurna untuk Pengguna Pixel Art Village",
-    "desc": "Kawan utama untuk pixel art Village — mengubah gambar apa pun menjadi visual pixel yang bersih dengan pratinjau waktu nyata, palet pintar, dan ekspor instan. Buat pixel art dengan alat gambar kami.",
+    "title": "Keunggulan Utama Pixel Art Village",
+    "desc": "Ubah gambar menjadi pixel art yang bersih di Pixel Art Village dengan pratinjau langsung, palet kustom, dan ekspor instan.",
     "features": {
       "free": {
         "title": "100% Gratis",
@@ -264,8 +264,8 @@
         "desc": "Antarmuka yang intuitif dan umpan balik cepat. Mengubah gambar apa pun menjadi visual piksel yang dapat dilukis hanya dalam beberapa klik dengan opsi palet kustom."
       },
       "size": {
-        "title": "Tanpa Batasan Ukuran",
-        "desc": "Unggah gambar dengan ukuran apa pun — dari ikon kecil hingga grafik besar — dengan penskalaan yang halus dan pratinjau gambar responsif menggunakan palet lanjutan."
+        "title": "Batas Ukuran Unggahan",
+        "desc": "Ukuran berkas maksimum: 10 MiB (10.485.760 byte). Gambar dengan sisi terpanjang di atas 2200 piksel diperkecil secara proporsional sebelum diproses."
       }
     }
   },
@@ -591,7 +591,11 @@
   },
   "home": {
     "seoTitle": "Konverter Gambar ke Pixel Art | Pixel Art Village",
-    "seoDescription": "Image to pixel art online with Pixel Art Village. Adjust pixel size and palettes, preview live, and export crisp sprites, icons, or retro graphics in seconds."
+    "seoDescription": "Konverter gambar ke pixel art gratis di Pixel Art Village. Ubah PNG, JPG, GIF, atau WEBP di browser, atur ukuran piksel dan palet, lalu unduh hasilnya.",
+    "heroTitle": "Konverter Gambar ke Pixel Art",
+    "heroSubtitle": "Ubah gambar PNG, JPG, GIF, dan WEBP menjadi pixel art langsung di browser Anda. Atur ukuran piksel, palet, dan dithering, lalu unduh hasilnya.",
+    "heroSubtitle2": "Unggah gambar dan lihat perubahannya lewat pratinjau langsung. Semua pemrosesan berjalan secara lokal di browser pada perangkat Anda.",
+    "entrySupports": "Mendukung PNG, JPG, GIF, dan WEBP. Batas ukuran berkas 10 MiB, dan gambar dengan sisi terpanjang di atas 2200 piksel diperkecil secara proporsional sebelum diproses."
   },
   "header": {
     "mainNav": "Navigasi utama",
